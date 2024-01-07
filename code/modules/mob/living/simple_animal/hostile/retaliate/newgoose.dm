@@ -248,10 +248,21 @@
 	var/turf/currentTurf = get_turf(consumed)
 	currentTurf.add_vomit_floor(owner)
 	playsound(currentTurf, 'sound/effects/splat.ogg', 50, TRUE)
+	if(istype(caller,/mob/living/simple_animal/hostile/retaliate/newgoose))		
+		vomitanim(caller)
 	caller.visible_message(span_notice("[caller] projectile vomits \the [consumed]!"))
 
 	StartCooldown()
 	return TRUE
+
+/datum/action/cooldown/mob_cooldown/vomitGoose/proc/vomitanim(mob/living/caller)
+	//caller.icon_state = "vomit_start"
+	//sleep(13)
+	caller.icon_state = "vomit"
+	sleep(25)
+	caller.icon_state = "vomit_end"
+	sleep(13)
+	caller.icon_state = "goose"
 
 /datum/action/cooldown/mob_cooldown/vomitGoose/proc/eat(mob/living/caller, atom/cast_on)
 	caller.visible_message(span_notice("[caller] hungrily gobbles up \the [cast_on]!"))
