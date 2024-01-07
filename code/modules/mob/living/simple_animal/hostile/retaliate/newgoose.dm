@@ -76,7 +76,7 @@
 			return 0
 		var/target_distance = get_dist(target_from,target)
 		//whenever we try to move to attack an enemy, try to vomit at them first
-
+		
 		call(controller, "VomitCall")(target)
 		if(ranged) //We ranged? Shoot at em
 			if(!target.Adjacent(target_from) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
@@ -116,9 +116,10 @@
 
 // Please do not add one-off mob AIs here, but override this function for your mob
 /mob/living/simple_animal/hostile/retaliate/newgoose/CanAttack(atom/the_target)//Can we actually attack a possible target?
-	if(seeking_food = 1) //don't try to attack while trying to eat something
+	if(seeking_food == 1) //don't try to attack while trying to eat something
+		//src.visible_message(span_notice("DEBUG: [src] wanted to attack, but it was looking for food!"))
 		return FALSE
-
+	
 	if(!isatom(the_target))
 		stack_trace("Invalid target in CanAttack(): [the_target]")
 		return FALSE
@@ -277,6 +278,7 @@
 				vom(caller, cast_on)
 				//caller.visible_message(span_notice("DEBUG: [caller] AI is trying to vomit at [cast_on]!"))
 				return TRUE
+		//caller.visible_message(span_notice("DEBUG: [caller] stopped looking for food!"))
 		caller.seeking_food = 0 //if we aren't vomiting at an enemy, we're trying to get food. stop seeking whether we manage to eat it or not
 		if(caller.Adjacent(cast_on)) //check we're adjacent to item
 			eat(caller, cast_on) //if it is anything but a mob, then eat it. no atom check needed; ai will only target objs
