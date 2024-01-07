@@ -4,6 +4,11 @@
 #define BB_BILEWORM_RESURFACE "BB_bileworm_resurface"
 #define BB_BILEWORM_DEVOUR "BB_bileworm_devour"
 
+// GOOSE AI keys
+
+#define BB_VOMIT_ABILITY "BB_vomit_ability" //stores our vomit ability
+#define	BB_GOOSE_PICKUPTARGET "BB_goose_pickuptarget" //stores the item we're trying to eat
+
 // Meteor Heart AI keys
 /// Key where we keep the spike trail ability
 #define BB_METEOR_HEART_GROUND_SPIKES "BB_meteor_ground_spikes"
