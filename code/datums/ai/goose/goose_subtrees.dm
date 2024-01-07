@@ -10,9 +10,16 @@
 	for(var/thing in caller.actions)
 		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
 			vom = thing
-	
+
 	if(vom.eaten_items.len>0 && vom.eaten_items.len > (rand(0,9)))
 		call(controller, "VomitCall")(null)
+
+/datum/ai_planning_subtree/amusing
+
+/datum/ai_planning_subtree/amusing/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	. = ..()
+	if((rand(0,20))>14)
+		call(controller.pawn, "amuse")()
 
 /// just calls TryFindVomit() in the controller regularly
 /datum/ai_planning_subtree/find_vomit
