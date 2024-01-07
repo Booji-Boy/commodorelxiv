@@ -75,7 +75,7 @@
 	return TRUE
 
 /mob/living/simple_animal/hostile/retaliate/newgoose/proc/amuse()
-	playsound(src, 'sound/creatures/amusing.ogg', 50, TRUE)
+	playsound(src, 'sound/creatures/amusing.ogg', S, 50, FALSE, FALSE)
 	src.visible_message(span_notice("[src] makes an amusing noise!"))
 
 /mob/living/simple_animal/hostile/retaliate/newgoose/MoveToTarget(list/possible_targets)//Step 5, handle movement between us and our target
