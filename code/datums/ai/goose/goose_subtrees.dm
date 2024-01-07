@@ -1,10 +1,11 @@
  //if we have anything in belly, keep rolling odds to vomit
 /datum/ai_planning_subtree/random_vomit
 
-/datum/ai_planning_subtree/random_vomit/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/ai_planning_subtree/random_vomit/SelectBehaviors(datum/ai_controller/basic_controller/goose/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/caller = controller.pawn
 	var/datum/action/cooldown/mob_cooldown/vomitGoose/vom = null
+	//var/amuse_chance = controller.amuse_chance
 
 	//search actions for vomit ability and assign it as vom
 	for(var/thing in caller.actions)
@@ -16,15 +17,15 @@
 
 /datum/ai_planning_subtree/amusing
 
-/datum/ai_planning_subtree/amusing/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/ai_planning_subtree/amusing/SelectBehaviors(datum/ai_controller/basic_controller/goose/controller, seconds_per_tick)
 	. = ..()
-	if((rand(0,20))>14)
+	if((rand(0,controller.amuse_chance))==1)
 		call(controller.pawn, "amuse")()
 
 /// just calls TryFindVomit() in the controller regularly
 /datum/ai_planning_subtree/find_vomit
 
-/datum/ai_planning_subtree/find_vomit/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+/datum/ai_planning_subtree/find_vomit/SelectBehaviors(datum/ai_controller/basic_controller/goose/controller, seconds_per_tick)
 	. = ..()
 	call(controller, "TryFindVomit")()
 
