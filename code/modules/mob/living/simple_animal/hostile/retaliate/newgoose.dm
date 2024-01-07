@@ -1,5 +1,5 @@
 /mob/living/simple_animal/hostile/retaliate/newgoose
-	name = "Not-So-Amusing Duck"
+	name = "Not-So-Amusing Goose"
 	desc = "Lay egg is not true."
 	icon_state = "goose" // sprites by cogwerks from goonstation, used with permission
 	icon_living = "goose"
