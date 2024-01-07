@@ -11,8 +11,9 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
-		// /datum/ai_planning_subtree/target_retaliate,
+		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/find_vomit,
+		/datum/ai_planning_subtree/random_vomit
 		// /datum/ai_planning_subtree/vomit_melee_attack_subtree,
 	)
 
@@ -41,7 +42,12 @@
 	for(var/thing in caller.actions)
 		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
 			vom = thing
-
+	
+	if(target==null)
+		//if we don't have a target, gets a random target nearby
+		//var/turf/currentTurf = get_turf(caller)
+		target = get_edge_target_turf((get_turf(caller)), pick(GLOB.alldirs))
+		
 	//caller.visible_message(span_notice("DEBUG: [caller] controller has called vomit against [target]!"))
 	//this directly calls the vomit function from within the ability, passing through the target provided
 	//because the game won't let me queue abilities in the ai controller from within the hostile ai functions
@@ -70,7 +76,7 @@
 
 	if(weapon.throwforce < 6) // don't bother eating anything with less than 6 throw damage
 		return FALSE
-	
+
 	//caller.visible_message(span_notice("DEBUG: [caller] is trying to eat [weapon]!"))
 	caller.seeking_food = 1 //if we managed to find something to eat, set our owner seeking_food to 1 so that we don't try to attack anything until we've finished eating
 	set_blackboard_key(BB_MONKEY_PICKUPTARGET, weapon)
