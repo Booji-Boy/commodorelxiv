@@ -15,7 +15,8 @@
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/find_vomit,
-		/datum/ai_planning_subtree/random_vomit
+		/datum/ai_planning_subtree/random_vomit,
+		/datum/ai_planning_subtree/amusing
 		// /datum/ai_planning_subtree/vomit_melee_attack_subtree,
 	)
 
@@ -46,12 +47,12 @@
 	for(var/thing in caller.actions)
 		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
 			vom = thing
-	
+
 	if(target==null)
 		//if we don't have a target, gets a random target nearby
 		//var/turf/currentTurf = get_turf(caller)
 		target = get_edge_target_turf((get_turf(caller)), pick(GLOB.alldirs))
-		
+
 	//caller.visible_message(span_notice("DEBUG: [caller] controller has called vomit against [target]!"))
 	//this directly calls the vomit function from within the ability, passing through the target provided
 	//because the game won't let me queue abilities in the ai controller from within the hostile ai functions
