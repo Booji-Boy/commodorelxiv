@@ -2,7 +2,8 @@
 	movement_delay = 0.4 SECONDS
 
 /datum/ai_controller/basic_controller/TryPossessPawn(atom/new_pawn)
-	if(!isbasicmob(new_pawn))
+	//i can't override this from the goose ai controller so i am adding a special exception here
+	if(!isbasicmob(new_pawn) && !(istype(new_pawn,/mob/living/simple_animal/hostile/retaliate/newgoose)))
 		return AI_CONTROLLER_INCOMPATIBLE
 	var/mob/living/basic/basic_mob = new_pawn
 
