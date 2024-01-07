@@ -1,5 +1,3 @@
-
-
 /mob/living/simple_animal/hostile/retaliate/newgoose
 	name = "Birdboat II"
 	desc = "This goose has an aggressive look in his eye. Best not anger him."
@@ -34,7 +32,7 @@
 	faction = list(FACTION_NEUTRAL)
 	attack_same = TRUE
 	gold_core_spawnable = HOSTILE_SPAWN
-	//var/random_retaliate = TRUE
+	var/random_retaliate = TRUE
 	var/icon_vomit_start = "vomit_start"
 	var/icon_vomit = "vomit"
 	var/icon_vomit_end = "vomit_end"
@@ -62,6 +60,39 @@
 */
 
 
+
+/mob/living/simple_animal/hostile/retaliate/newgoose/proc/feed(obj/item/food/tasty)
+	//. = ..()
+//	if(. || !istype(tasty))
+	//	return FALSE
+		
+	var/datum/action/cooldown/mob_cooldown/vomitGoose/vom = null
+
+	//search actions for vomit ability and assign it as vom
+	for(var/thing in src.actions)
+		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
+			vom = thing	
+	
+	//max 15 items when feeding goose by hand
+	if (vom.eaten_items.len > 15)
+		if(message_cooldown < world.time)
+			visible_message(span_notice("[src] looks too full to eat \the [tasty]!"))
+			message_cooldown = world.time + 5 SECONDS
+		return FALSE
+	
+	visible_message(span_notice("[src] hungrily gobbles up \the [tasty]!"))
+	tasty.forceMove(src)
+	vom.eaten_items += tasty
+	playsound(src,'sound/items/eatfood.ogg', 70, TRUE)
+	return TRUE
+
+/mob/living/simple_animal/hostile/retaliate/newgoose/attackby(obj/item/O, mob/living/user)
+	. = ..()
+	if(user.combat_mode)
+		return FALSE
+	feed(O)
+	return TRUE
+
 /mob/living/simple_animal/hostile/retaliate/newgoose/MoveToTarget(list/possible_targets)//Step 5, handle movement between us and our target
 	stop_automated_movement = 1
 	var/datum/ai_controller/controller = src.ai_controller
@@ -76,7 +107,7 @@
 			return 0
 		var/target_distance = get_dist(target_from,target)
 		//whenever we try to move to attack an enemy, try to vomit at them first
-		
+
 		call(controller, "VomitCall")(target)
 		if(ranged) //We ranged? Shoot at em
 			if(!target.Adjacent(target_from) && ranged_cooldown <= world.time) //But make sure they're not in range for a melee attack and our range attack is off cooldown
@@ -119,7 +150,7 @@
 	if(seeking_food == 1) //don't try to attack while trying to eat something
 		//src.visible_message(span_notice("DEBUG: [src] wanted to attack, but it was looking for food!"))
 		return FALSE
-	
+
 	if(!isatom(the_target))
 		stack_trace("Invalid target in CanAttack(): [the_target]")
 		return FALSE
@@ -248,7 +279,7 @@
 	var/turf/currentTurf = get_turf(consumed)
 	currentTurf.add_vomit_floor(owner)
 	playsound(currentTurf, 'sound/effects/splat.ogg', 50, TRUE)
-	if(istype(caller,/mob/living/simple_animal/hostile/retaliate/newgoose))		
+	if(istype(caller,/mob/living/simple_animal/hostile/retaliate/newgoose))
 		vomitanim(caller)
 	caller.visible_message(span_notice("[caller] projectile vomits \the [consumed]!"))
 
