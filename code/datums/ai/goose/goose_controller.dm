@@ -2,8 +2,10 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
 		//why define my own keys when i can just steal other people's that sound vaguely similar?
-		BB_GLARE_ABILITY = "BB_vomitGoose", //stores our vomit ability
-		BB_MONKEY_PICKUPTARGET = null, //stores the item we're trying to eat
+		//BB_VOMIT_ABILITY = "BB_vomitGoose", //stores our vomit ability
+		//BB_GOOSE_PICKUPTARGET = null, //stores the item we're trying to eat
+		BB_VOMIT_ABILITY = "BB_vomitGoose", //stores our vomit ability
+		BB_GOOSE_PICKUPTARGET = null, //stores the item we're trying to eat
 	)
 
 	ai_traits = STOP_MOVING_WHEN_PULLED
@@ -16,6 +18,8 @@
 		/datum/ai_planning_subtree/random_vomit
 		// /datum/ai_planning_subtree/vomit_melee_attack_subtree,
 	)
+
+
 
 //looks at given items, gets best throw force
 /proc/GetBestThrow(datum/ai_controller/controller, list/choices)
@@ -79,8 +83,8 @@
 
 	//caller.visible_message(span_notice("DEBUG: [caller] is trying to eat [weapon]!"))
 	caller.seeking_food = 1 //if we managed to find something to eat, set our owner seeking_food to 1 so that we don't try to attack anything until we've finished eating
-	set_blackboard_key(BB_MONKEY_PICKUPTARGET, weapon)
+	set_blackboard_key(BB_GOOSE_PICKUPTARGET, weapon)
 	set_movement_target(type, weapon)
-	src.queue_behavior(/datum/ai_behavior/targeted_mob_ability/vomit, BB_GLARE_ABILITY, BB_MONKEY_PICKUPTARGET)
+	src.queue_behavior(/datum/ai_behavior/targeted_mob_ability/vomit, BB_VOMIT_ABILITY, BB_GOOSE_PICKUPTARGET)
 
 	return TRUE
