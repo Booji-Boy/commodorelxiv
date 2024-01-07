@@ -71,6 +71,8 @@
 	. = ..()
 	if(user.combat_mode)
 		return FALSE
+	if(stat == DEAD)
+		return FALSE
 	feed(O)
 	return TRUE
 
