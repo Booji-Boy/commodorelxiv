@@ -7,7 +7,7 @@
 		BB_VOMIT_ABILITY = "BB_vomitGoose", //stores our vomit ability
 		BB_GOOSE_PICKUPTARGET = null, //stores the item we're trying to eat
 	)
-
+	var/amuse_chance = 16
 	ai_traits = STOP_MOVING_WHEN_PULLED
 	ai_movement = /datum/ai_movement/basic_avoidance
 	idle_behavior = /datum/idle_behavior/idle_random_walk
