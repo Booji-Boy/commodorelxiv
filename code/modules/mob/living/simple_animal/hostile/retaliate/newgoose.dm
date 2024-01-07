@@ -231,7 +231,7 @@
 	. = ..()
 	var/datum/action/cooldown/mob_cooldown/vomitGoose/vomit = new(src)
 	vomit.Grant(src)
-	ai_controller.set_blackboard_key(BB_GLARE_ABILITY, vomit)
+	ai_controller.set_blackboard_key(BB_VOMIT_ABILITY, vomit)
 
 
 /datum/action/cooldown/mob_cooldown/vomitGoose
