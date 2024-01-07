@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/newgoose
-	name = "Birdboat II"
-	desc = "This goose has an aggressive look in his eye. Best not anger him."
+	name = "Not-So-Amusing Duck"
+	desc = "Lay egg is not true."
 	icon_state = "goose" // sprites by cogwerks from goonstation, used with permission
 	icon_living = "goose"
 	icon_dead = "goose_dead"
@@ -41,45 +41,26 @@
 	var/seeking_food = 0 //if 1, don't try to attack
 	ai_controller = /datum/ai_controller/basic_controller/goose
 
-/*
-/mob/living/simple_animal/hostile/retaliate/newgoose/PickTarget(list/Targets)//Step 3, pick amongst the possible, attackable targets
-	if(seeking_food = 1)
-		return
-	if(target != null)//If we already have a target, but are told to pick again, calculate the lowest distance between all possible, and pick from the lowest distance targets
-		var/atom/target_from = GET_TARGETS_FROM(src)
-		for(var/pos_targ in Targets)
-			var/atom/A = pos_targ
-			var/target_dist = get_dist(target_from, target)
-			var/possible_target_distance = get_dist(target_from, A)
-			if(target_dist < possible_target_distance)
-				Targets -= A
-	if(!Targets.len)//We didnt find nothin!
-		return
-	var/chosen_target = pick(Targets)//Pick the remaining targets (if any) at random
-	return chosen_target
-*/
-
-
 
 /mob/living/simple_animal/hostile/retaliate/newgoose/proc/feed(obj/item/food/tasty)
 	//. = ..()
 //	if(. || !istype(tasty))
 	//	return FALSE
-		
+
 	var/datum/action/cooldown/mob_cooldown/vomitGoose/vom = null
 
 	//search actions for vomit ability and assign it as vom
 	for(var/thing in src.actions)
 		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
-			vom = thing	
-	
+			vom = thing
+
 	//max 15 items when feeding goose by hand
 	if (vom.eaten_items.len > 15)
 		if(message_cooldown < world.time)
 			visible_message(span_notice("[src] looks too full to eat \the [tasty]!"))
 			message_cooldown = world.time + 5 SECONDS
 		return FALSE
-	
+
 	visible_message(span_notice("[src] hungrily gobbles up \the [tasty]!"))
 	tasty.forceMove(src)
 	vom.eaten_items += tasty
@@ -92,6 +73,10 @@
 		return FALSE
 	feed(O)
 	return TRUE
+
+/mob/living/simple_animal/hostile/retaliate/newgoose/proc/amuse()
+	playsound(src, 'sound/creatures/amusing.ogg', 50, TRUE)
+	src.visible_message(span_notice("[src] makes an amusing noise!"))
 
 /mob/living/simple_animal/hostile/retaliate/newgoose/MoveToTarget(list/possible_targets)//Step 5, handle movement between us and our target
 	stop_automated_movement = 1
@@ -203,30 +188,6 @@
 
 	return FALSE
 
-
-
-
-
-
-
-
-/*
-//this will make it try to vomit whenever making a melee attack
-//this makes it useless as a ranged ability but works as proof of concept for now
-/mob/living/simple_animal/hostile/retaliate/newgoose/AttackingTarget(atom/attacked_target)
-	var/datum/ai_controller/controller = src.ai_controller
-	in_melee = TRUE
-	if(SEND_SIGNAL(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, target) & COMPONENT_HOSTILE_NO_ATTACK)
-		return FALSE //but more importantly return before attack_animal called
-	call(controller, "VomitCall")(target)
-	//src.visible_message(span_notice("DEBUG: [src] has attempted to call vomit during attacking [attacked_target]!"))
-	var/result = target.attack_animal(src)
-	SEND_SIGNAL(src, COMSIG_HOSTILE_POST_ATTACKINGTARGET, target, result)
-	return result
-*/
-
-
-
 /mob/living/simple_animal/hostile/retaliate/newgoose/Initialize(mapload)
 	. = ..()
 	var/datum/action/cooldown/mob_cooldown/vomitGoose/vomit = new(src)
@@ -302,7 +263,6 @@
 	eaten_items += cast_on
 	StartCooldown()
 	return
-
 
 /datum/action/cooldown/mob_cooldown/vomitGoose/InterceptClickOn(mob/living/simple_animal/hostile/retaliate/newgoose/caller, params, atom/cast_on)
 	//var/turf/currentTurf = get_turf(caller)
