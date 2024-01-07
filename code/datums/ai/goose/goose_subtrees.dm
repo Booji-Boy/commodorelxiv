@@ -1,3 +1,19 @@
+ //if we have anything in belly, keep rolling odds to vomit
+/datum/ai_planning_subtree/random_vomit
+
+/datum/ai_planning_subtree/random_vomit/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	. = ..()
+	var/mob/living/caller = controller.pawn
+	var/datum/action/cooldown/mob_cooldown/vomitGoose/vom = null
+
+	//search actions for vomit ability and assign it as vom
+	for(var/thing in caller.actions)
+		if(istype(thing, /datum/action/cooldown/mob_cooldown/vomitGoose))
+			vom = thing
+	
+	if(vom.eaten_items.len>0 && vom.eaten_items.len > (rand(0,9)))
+		call(controller, "VomitCall")(null)
+
 /// just calls TryFindVomit() in the controller regularly
 /datum/ai_planning_subtree/find_vomit
 
@@ -18,7 +34,7 @@
 	if(!controller.blackboard_key_exists(BB_BASIC_MOB_CURRENT_TARGET))
 		return
 	//controller.pawn.visible_message(span_notice("[controller.pawn] subtree is attempting to vomit at hostile!"))
-	//controller.queue_behavior(/datum/ai_behavior/targeted_mob_ability/vomit, BB_GLARE_ABILITY, BB_BASIC_MOB_CURRENT_TARGET)
+	//controller.queue_behavior(/datum/ai_behavior/targeted_mob_ability/vomit, BB_VOMIT_ABILITY, BB_BASIC_MOB_CURRENT_TARGET)
 	controller.queue_behavior(melee_attack_behavior, BB_BASIC_MOB_CURRENT_TARGET, BB_TARGETING_STRATEGY, BB_BASIC_MOB_CURRENT_TARGET_HIDING_LOCATION)
 	if (end_planning)
 		return SUBTREE_RETURN_FINISH_PLANNING //we are going into battle...no distractions.
