@@ -70,7 +70,8 @@
 
 	if(weapon.throwforce < 6) // don't bother eating anything with less than 6 throw damage
 		return FALSE
-
+	
+	//caller.visible_message(span_notice("DEBUG: [caller] is trying to eat [weapon]!"))
 	caller.seeking_food = 1 //if we managed to find something to eat, set our owner seeking_food to 1 so that we don't try to attack anything until we've finished eating
 	set_blackboard_key(BB_MONKEY_PICKUPTARGET, weapon)
 	set_movement_target(type, weapon)
