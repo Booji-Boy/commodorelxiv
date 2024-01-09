@@ -99,6 +99,26 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 
+/obj/item/food/poo
+	name = "Poop"
+	desc = "That's poop, I don't know whether to be more concerned that it's there or that you are examining it."
+	icon_state = "poo1"
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/impurity/ipecacide = 10,
+	)
+	tastes = list("shit" = 2, "peanuts" = 1)
+	foodtypes = GROSS
+	w_class = WEIGHT_CLASS_SMALL
+	throwforce = 6
+	preserved_food = FALSE //Can't decompose any more than this
+	var/stink_particles
+	/// Variable that holds the reference to the stink lines we get when we're moldy, yucky yuck
+
+/obj/item/food/poo/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/slippery, 80, (NO_SLIP_WHEN_WALKING | SLIDE))
+
 /obj/item/food/badrecipe
 	name = "burned mess"
 	desc = "Someone should be demoted from cook for this."
