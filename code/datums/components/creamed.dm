@@ -17,6 +17,8 @@ GLOBAL_LIST_INIT(creamable, typecacheof(list(
 	/// Cached head for carbons, to ensure proper removal of the creampie overlay
 	var/obj/item/bodypart/my_head
 
+/datum/component/creamed/poo
+
 /datum/component/creamed/Initialize()
 	if(!is_type_in_typecache(parent, GLOB.creamable))
 		return COMPONENT_INCOMPATIBLE
@@ -53,6 +55,42 @@ GLOBAL_LIST_INIT(creamable, typecacheof(list(
 		normal_overlay = mutable_appearance('icons/effects/creampie.dmi', "creampie_corgi")
 	else if(isAI(parent))
 		normal_overlay = mutable_appearance('icons/effects/creampie.dmi', "creampie_ai")
+
+	RegisterSignals(parent, list(
+		COMSIG_COMPONENT_CLEAN_ACT,
+		COMSIG_COMPONENT_CLEAN_FACE_ACT),
+		PROC_REF(clean_up)
+	)
+	if(normal_overlay)
+		var/atom/atom_parent = parent
+		RegisterSignal(atom_parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(update_overlays))
+		atom_parent.update_appearance()
+
+/datum/component/creamed/poo/RegisterWithParent()
+	if(iscarbon(parent))
+		var/mob/living/carbon/human/carbon_parent = parent
+		my_head = carbon_parent.get_bodypart(BODY_ZONE_HEAD)
+		if(!my_head) //just to be sure
+			qdel(src)
+			return
+		bodypart_overlay = new()
+		if(carbon_parent.bodytype & BODYTYPE_SNOUTED) //stupid, but external organ bodytypes are not stored on the limb
+			bodypart_overlay.icon_state = "creampie_lizard"
+			bodypart_overlay.icon = 'icons/effects/poofaic.dmi'
+		else if(my_head.bodytype & BODYTYPE_MONKEY)
+			bodypart_overlay.icon_state = "creampie_monkey"
+			bodypart_overlay.icon = 'icons/effects/poofaic.dmi'
+		else
+			bodypart_overlay.icon_state = "creampie_human"
+			bodypart_overlay.icon = 'icons/effects/poofaic.dmi'
+		my_head.add_bodypart_overlay(bodypart_overlay)
+		RegisterSignals(my_head, list(COMSIG_BODYPART_REMOVED, COMSIG_QDELETING), PROC_REF(lost_head))
+		carbon_parent.add_mood_event("creampie", /datum/mood_event/creampie)
+		carbon_parent.update_body_parts()
+	else if(iscorgi(parent))
+		normal_overlay = mutable_appearance('icons/effects/poofaic.dmi', "creampie_corgi")
+	else if(isAI(parent))
+		normal_overlay = mutable_appearance('icons/effects/poofaic.dmi', "creampie_ai")
 
 	RegisterSignals(parent, list(
 		COMSIG_COMPONENT_CLEAN_ACT,
@@ -108,3 +146,4 @@ GLOBAL_LIST_INIT(creamable, typecacheof(list(
 	SIGNAL_HANDLER
 
 	qdel(src)
+

@@ -26,6 +26,12 @@
 	desc = "It's pie cream from a cream pie."
 	icon_state = "smashed_pie"
 
+/obj/effect/decal/cleanable/food/poo //honk
+	name = "poo smudge"
+	desc = "Feces smeared across the floor."
+	icon_state = "poo1"
+	random_icon_states = list("poo1", "poo2", "poo3")
+
 /obj/effect/decal/cleanable/food/salt
 	name = "salt pile"
 	desc = "A sizable pile of table salt. Someone must be upset."

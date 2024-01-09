@@ -119,6 +119,33 @@
 	. = ..()
 	AddComponent(/datum/component/slippery, 80, (NO_SLIP_WHEN_WALKING | SLIDE))
 
+/obj/item/food/poo/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
+    . = ..()
+    if(!.) //if we're not being caught
+        splat(hit_atom)
+
+/obj/item/food/poo/proc/splat(atom/movable/hit_atom)
+    if(isliving(loc)) //someone caught us!
+        return
+    var/turf/hit_turf = get_turf(hit_atom)
+    new/obj/effect/decal/cleanable/food/poo(hit_turf)
+    if(reagents?.total_volume)
+        reagents.expose(hit_atom, TOUCH)
+    var/is_creamable = TRUE
+    if(isliving(hit_atom))
+        var/mob/living/living_target_getting_hit = hit_atom
+        //if(stunning)
+        //    living_target_getting_hit.Paralyze(2 SECONDS) //splat!
+        if(iscarbon(living_target_getting_hit))
+            is_creamable = !!(living_target_getting_hit.get_bodypart(BODY_ZONE_HEAD))
+        if(is_creamable)
+            living_target_getting_hit.adjust_eye_blur(2 SECONDS)
+        living_target_getting_hit.visible_message(span_warning("[living_target_getting_hit] is poo'd by [src]!"), span_userdanger("You've been poo'd by [src]!"))
+        playsound(living_target_getting_hit, SFX_DESECRATION, 50, TRUE)
+    if(is_creamable && is_type_in_typecache(hit_atom, GLOB.creamable))
+        hit_atom.AddComponent(/datum/component/creamed/poo, src) //TO-DO: make cream sprite brown
+    qdel(src)
+
 /obj/item/food/badrecipe
 	name = "burned mess"
 	desc = "Someone should be demoted from cook for this."
