@@ -103,6 +103,44 @@
 				span_notice("You stumble a bit from still being off balance from your last flip.")
 			)
 
+// poo fart
+
+/datum/emote/poo
+	key = "poo"
+	key_third_person = "shits"
+	hands_use_check = TRUE
+	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
+	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
+
+/datum/emote/poo/run_emote(mob/user, params , type_override, intentional)
+	//. = ..()
+	//if(!can_run_emote(user, intentional=intentional))
+	//	return
+	//if(isliving(user))
+	. = ..()
+	var/mob/living/flippy_mcgee = user
+	if(.)
+		if(prob(1))
+			flippy_mcgee.visible_message(
+				span_notice("[flippy_mcgee] hunches over and shits out a living pile of feces."),
+				span_notice("You hunch over and shit out a living pile of feces.")
+			)
+			playsound(flippy_mcgee.loc, 'sound/misc/wetfart.ogg', 50, 1)
+			playsound(flippy_mcgee.loc, 'sound/misc/fartmassive.ogg', 50, 1)
+			playsound(flippy_mcgee.loc, 'sound/effects/splat.ogg', 50, 1)
+			new /mob/living/basic/poo(flippy_mcgee.loc)
+		else
+			var/list/poos = list("drops their pants and shits.","sprays diarrhea down their leg.","takes a dump on the floor.","casually lifts his pant leg, and a turd falls out.","tries to fart, and accidentally sharts..")
+			var/poo = pick(poos)
+			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [poo]"))
+			playsound(flippy_mcgee.loc, 'sound/misc/wetfart.ogg', 50, 1)
+			playsound(flippy_mcgee.loc, 'sound/misc/fartmassive.ogg', 50, 1)
+			playsound(flippy_mcgee.loc, 'sound/effects/splat.ogg', 50, 1)
+			new /obj/item/food/poo(flippy_mcgee.loc)
+
+
+// poo fart end
+
 /datum/emote/spin
 	key = "spin"
 	key_third_person = "spins"
