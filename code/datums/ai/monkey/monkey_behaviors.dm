@@ -135,7 +135,6 @@
 
 /datum/ai_behavior/monkey_poop/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
-	var/mob/living/living_pawn = controller.pawn
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now beginning poo throw behaviour!"))
 
 	if(controller.blackboard[BB_MONKEY_POOPING]) //We are taking a shit, don't do ANYTHING!!!!
