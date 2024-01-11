@@ -152,7 +152,9 @@
 	if(!(target == null)) //the monkey vision code always fucks up, so it got nixed. we don't check if we can see the enemy, just throw poo at them
 		living_pawn.visible_message(span_notice("[living_pawn] grunts and squeezes out a huge turd!"))
 		new /obj/item/food/poo(living_pawn.loc)
-		//TO-DO: add shitting noises
+		playsound(living_pawn.loc, 'sound/misc/wetfart.ogg', 50, 1)
+		playsound(living_pawn.loc, 'sound/misc/fartmassive.ogg', 50, 1)
+		playsound(living_pawn.loc, 'sound/effects/splat.ogg', 50, 1)
 
 		var/list/nearby_items = list() //these three lines search for any poo within a one tile radius
 		for(var/obj/item/food/poo/item in oview(1, living_pawn))
