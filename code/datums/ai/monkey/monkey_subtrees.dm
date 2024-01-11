@@ -44,6 +44,9 @@
 		return
 
 	if(!selected_enemy.stat) //He's up, get him!
+		//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] throwing poo as part of combat!"))
+		controller.queue_behavior(/datum/ai_behavior/monkey_poop) //always start combat by throwing your shit
+
 		if(living_pawn.health < MONKEY_FLEE_HEALTH) //Time to skeddadle
 			controller.queue_behavior(/datum/ai_behavior/monkey_flee)
 			return SUBTREE_RETURN_FINISH_PLANNING //I'm running fuck you guys

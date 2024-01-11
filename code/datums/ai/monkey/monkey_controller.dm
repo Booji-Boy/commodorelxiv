@@ -27,6 +27,7 @@ have ways of interacting with a specific mob and control it.
 		BB_MONKEY_GUN_WORKED = TRUE,
 		BB_SONG_LINES = MONKEY_SONG,
 		BB_RESISTING = FALSE,
+		BB_MONKEY_POOPING = FALSE,
 	)
 	idle_behavior = /datum/idle_behavior/idle_monkey
 
@@ -61,6 +62,8 @@ have ways of interacting with a specific mob and control it.
 	idle_behavior = /datum/idle_behavior/idle_monkey/pun_pun
 
 /datum/ai_controller/monkey/angry
+
+// /datum/ai_controller/monkey/angry/pooping
 
 /datum/ai_controller/monkey/angry/TryPossessPawn(atom/new_pawn)
 	. = ..()

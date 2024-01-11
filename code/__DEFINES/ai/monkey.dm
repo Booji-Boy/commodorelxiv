@@ -16,3 +16,4 @@
 #define BB_MONKEY_DISPOSING "BB_monkey_disposing"
 #define BB_MONKEY_RECRUIT_COOLDOWN "BB_monkey_recruit_cooldown"
 #define BB_RESISTING "BB_resisting"
+#define BB_MONKEY_POOPING "BB_monkey_pooping"

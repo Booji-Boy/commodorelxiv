@@ -131,6 +131,44 @@
 	else
 		finish_action(controller, TRUE)
 
+/datum/ai_behavior/monkey_poop
+
+/datum/ai_behavior/monkey_poop/perform(seconds_per_tick, datum/ai_controller/controller)
+	. = ..()
+	var/mob/living/living_pawn = controller.pawn
+	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now beginning poo throw behaviour!"))
+
+	if(controller.blackboard[BB_MONKEY_POOPING]) //We are taking a shit, don't do ANYTHING!!!!
+		//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is already pooping!"))
+		return
+	INVOKE_ASYNC(src, PROC_REF(pooping), controller)
+
+/datum/ai_behavior/monkey_poop/proc/pooping(datum/ai_controller/controller)
+	controller.set_blackboard_key(BB_MONKEY_POOPING, TRUE)
+	var/mob/living/target = controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET]
+	var/mob/living/living_pawn = controller.pawn
+	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] has called async poo throw proc!"))
+
+	if(!(target == null)) //the monkey vision code always fucks up, so it got nixed. we don't check if we can see the enemy, just throw poo at them
+		living_pawn.visible_message(span_notice("[living_pawn] grunts and squeezes out a huge turd!"))
+		new /obj/item/food/poo(living_pawn.loc)
+		//TO-DO: add shitting noises
+
+		var/list/nearby_items = list() //these three lines search for any poo within a one tile radius
+		for(var/obj/item/food/poo/item in oview(1, living_pawn))
+			nearby_items += item
+
+		if(nearby_items[1]) //if there is a poo
+			for(var/obj/item/itemHeld in living_pawn.held_items) //drop anything in our hands
+				living_pawn.dropItemToGround(itemHeld)
+			living_pawn.put_in_hands(nearby_items[1]) //grab a poo
+			living_pawn.throw_item(target) //and throw it at the target
+
+	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now properly ending pooping proc!"))
+	controller.set_blackboard_key(BB_MONKEY_POOPING, FALSE)
+	finish_action(controller, TRUE)
+	return
+
 /datum/ai_behavior/monkey_attack_mob
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_MOVE_AND_PERFORM //performs to increase frustration
 
@@ -188,6 +226,10 @@
 
 	if(isnull(controller.blackboard[BB_MONKEY_GUN_WORKED]))
 		controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, TRUE)
+
+	if(prob(10)) //ten percent chance to throw poop at the enemy. there is definitely a better way to call the behaviour than this
+		var/datum/ai_behavior/monkey_poop/test = new /datum/ai_behavior/monkey_poop()
+		call(test, "pooping")(controller)
 
 	// attack with weapon if we have one
 	if(living_pawn.CanReach(target, weapon))
