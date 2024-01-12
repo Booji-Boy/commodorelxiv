@@ -143,6 +143,7 @@
 				span_notice("[flippy_mcgee] hunches over and shits out a living pile of feces."),
 				span_notice("You hunch over and shit out a living pile of feces.")
 			)
+			flippy_mcgee.nutrition -= 80
 			playsound(flippy_mcgee.loc, 'sound/misc/wetfart.ogg', 50, 1)
 			playsound(flippy_mcgee.loc, 'sound/misc/fartmassive.ogg', 50, 1)
 			playsound(flippy_mcgee.loc, 'sound/effects/splat.ogg', 50, 1)
@@ -152,6 +153,7 @@
 			var/poo = pick(poos)
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [poo]"))
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
+			flippy_mcgee.nutrition -= 50
 			new /obj/item/food/poo(flippy_mcgee.loc)
 
 
