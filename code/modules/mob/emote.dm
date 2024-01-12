@@ -105,6 +105,33 @@
 
 // poo fart
 
+
+/datum/emote/fart
+	key = "fart"
+	key_third_person = "farts"
+	hands_use_check = TRUE
+	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
+	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
+
+/datum/emote/fart/run_emote(mob/user, params , type_override, intentional)
+	. = ..()
+	var/mob/living/flippy_mcgee = user
+	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+
+	if(.)
+		if(prob(4))
+			flippy_mcgee.visible_message(
+				span_notice("[flippy_mcgee] tries to fart, but accidentally sharts."),
+				span_notice("You try to fart, but it's wetter than you thought it would be!")
+			)
+			playsound(flippy_mcgee.loc, 'sound/misc/wetfart.ogg', 50, 1)
+			new /mob/living/basic/poo(flippy_mcgee.loc)
+		else
+			var/list/farts = list("farts.","passes wind.","toots.","farts [pick("lightly", "tenderly", "softly", "with care")].","farts with the force of one thousand suns.")
+			var/fart = pick(farts)
+			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [fart]"))
+			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
+
 /datum/emote/poo
 	key = "poo"
 	key_third_person = "shits"
@@ -149,7 +176,7 @@
 			playsound(flippy_mcgee.loc, 'sound/effects/splat.ogg', 50, 1)
 			new /mob/living/basic/poo(flippy_mcgee.loc)
 		else
-			var/list/poos = list("drops their pants and shits.","sprays diarrhea down their leg.","takes a dump on the floor.","casually lifts his pant leg, and a turd falls out.","tries to fart, and accidentally sharts..")
+			var/list/poos = list("drops their pants and shits.","sprays diarrhea down their leg.","takes a dump on the floor.","casually lifts his pant leg, and a turd falls out.")
 			var/poo = pick(poos)
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [poo]"))
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)

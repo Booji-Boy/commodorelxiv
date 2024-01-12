@@ -855,3 +855,31 @@
 	)
 	new /obj/structure/bouncy_castle(gored.loc, gored)
 	gored.gib()
+
+
+/datum/reagent/drug/vitaminf
+	name = "Vitamin F"
+	description = "A chemical compound that promotes concentrated production of methane gases in the stomach and intestines, as well as weakening the sphincter."
+	reagent_state = SOLID
+	color = "#3B240B"
+	taste_description = "beff and horsemeat"
+	ph = 5
+	overdose_threshold = 30
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
+/datum/reagent/drug/vitaminf/on_mob_life(mob/living/carbon/dancer, seconds_per_tick)
+	. = ..()
+
+	if(SPT_PROB(0.2 * volume, seconds_per_tick))
+		dancer.emote("poo")
+
+	if(SPT_PROB(0.5 * volume, seconds_per_tick))
+		dancer.emote("fart")
+
+/*
+/datum/reagent/drug/vitaminf/overdose_process(mob/living/dancer, seconds_per_tick, times_fired)
+	. = ..()
+
+	if(SPT_PROB(0.1 * volume, seconds_per_tick))
+		dancer.emote("superfart")
+*/
