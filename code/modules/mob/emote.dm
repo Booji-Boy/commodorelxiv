@@ -118,6 +118,11 @@
 	var/mob/living/flippy_mcgee = user
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
 
+	if(!(flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT))) //if we don't have a butt, fart does not work
+		to_chat(flippy_mcgee, span_notice("You try to fart, then remember you don't have a butt."))
+		SEND_SOUND(flippy_mcgee, 'sound/misc/wronghorn.ogg')
+		return
+
 	if(.)
 		if(prob(4))
 			flippy_mcgee.visible_message(
@@ -148,20 +153,20 @@
 	var/mob/living/flippy_mcgee = user
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
 
-	if(intentional && flippy_mcgee.nutrition < 81) // no pooping if you are hungry
-		to_chat(flippy_mcgee, span_notice("You don't need to go right now."))
-		return
-
-	if(!intentional && flippy_mcgee.nutrition < 81) //if you are forced to poop while hungry, shit blood + 5 brute dmg
+	if((!intentional && flippy_mcgee.nutrition < 81)||(!(flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT)))) //if you are forced to poop while hungry or poop with no butt, shit blood + 5 brute dmg
 		//span_notice("[flippy_mcgee] screams and squirts blood out their asshole!"),
 		//span_notice("Your empty bowels clench painfully as you try to shit, and blood squirts out your asshole!")
 		user.visible_message(span_notice("[flippy_mcgee] screams and squirts blood out their asshole!"))
-		to_chat(user, span_warning("Your empty bowels clench painfully as you try to shit, and blood squirts out your asshole!"))
+		to_chat(user, span_warning("Your bowels clench painfully as you try to shit, and blood squirts out your asshole!"))
 
 		playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 		flippy_mcgee.emote("scream")
 		new /obj/effect/decal/cleanable/blood(flippy_mcgee.loc)
 		flippy_mcgee.adjustBruteLoss(5)
+		return
+
+	if(intentional && flippy_mcgee.nutrition < 81) // no pooping if you are hungry
+		to_chat(flippy_mcgee, span_notice("You don't need to go right now."))
 		return
 
 	if(.)

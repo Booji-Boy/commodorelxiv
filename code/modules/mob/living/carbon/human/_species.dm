@@ -98,6 +98,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	var/obj/item/organ/internal/stomach/mutantstomach = /obj/item/organ/internal/stomach
 	///Replaces default appendix with a different organ.
 	var/obj/item/organ/internal/appendix/mutantappendix = /obj/item/organ/internal/appendix
+	///Replaces default butt with a different organ.
+	var/obj/item/organ/internal/butt/mutantbutt = /obj/item/organ/internal/butt
 
 	/// Flat modifier on all damage taken via [apply_damage][/mob/living/proc/apply_damage] (so being punched, shot, etc.)
 	/// IE: 10 = 10% less damage taken.
@@ -298,6 +300,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 			return mutantlungs
 		if(ORGAN_SLOT_APPENDIX)
 			return mutantappendix
+		if(ORGAN_SLOT_BUTT)
+			return mutantbutt
 		if(ORGAN_SLOT_EYES)
 			return mutanteyes
 		if(ORGAN_SLOT_EARS)
@@ -331,6 +335,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		ORGAN_SLOT_HEART,
 		ORGAN_SLOT_LUNGS,
 		ORGAN_SLOT_APPENDIX,
+		ORGAN_SLOT_BUTT,
 		ORGAN_SLOT_EYES,
 		ORGAN_SLOT_EARS,
 		ORGAN_SLOT_TONGUE,
@@ -1666,6 +1671,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 	to_store += mutantliver
 	to_store += mutantstomach
 	to_store += mutantappendix
+	to_store += mutantbutt
 	//We don't cache mutant hands because it's not constrained enough, too high a potential for failure
 	return to_store
 

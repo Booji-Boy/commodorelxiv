@@ -5721,6 +5721,7 @@
 #include "code\modules\surgery\organs\internal\_internal_organ.dm"
 #include "code\modules\surgery\organs\internal\appendix\_appendix.dm"
 #include "code\modules\surgery\organs\internal\appendix\appendix_golem.dm"
+#include "code\modules\surgery\organs\internal\butt\butt.dm"
 #include "code\modules\surgery\organs\internal\cyberimp\augments_arms.dm"
 #include "code\modules\surgery\organs\internal\cyberimp\augments_chest.dm"
 #include "code\modules\surgery\organs\internal\cyberimp\augments_eyes.dm"
