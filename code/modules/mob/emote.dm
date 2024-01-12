@@ -149,7 +149,7 @@
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
 
 	if(intentional && flippy_mcgee.nutrition < 81) // no pooping if you are hungry
-		to_chat(src, span_notice("You don't need to go right now."))
+		to_chat(flippy_mcgee, span_notice("You don't need to go right now."))
 		return
 
 	if(!intentional && flippy_mcgee.nutrition < 81) //if you are forced to poop while hungry, shit blood + 5 brute dmg

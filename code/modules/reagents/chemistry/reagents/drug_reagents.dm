@@ -870,10 +870,10 @@
 /datum/reagent/drug/vitaminf/on_mob_life(mob/living/carbon/dancer, seconds_per_tick)
 	. = ..()
 
-	if(SPT_PROB(0.2 * volume, seconds_per_tick))
+	if(prob(11))
 		dancer.emote("poo")
 
-	if(SPT_PROB(0.5 * volume, seconds_per_tick))
+	if(prob(33))
 		dancer.emote("fart")
 
 /*
