@@ -144,9 +144,14 @@
 	INVOKE_ASYNC(src, PROC_REF(pooping), controller)
 
 /datum/ai_behavior/monkey_poop/proc/pooping(datum/ai_controller/controller)
-	controller.set_blackboard_key(BB_MONKEY_POOPING, TRUE)
 	var/mob/living/target = controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET]
 	var/mob/living/living_pawn = controller.pawn
+
+	if((get_path_to(living_pawn, target)) == list()) //if we don't have a path to the target, give up on throwing poo
+		finish_action(controller, TRUE)
+		return
+
+	controller.set_blackboard_key(BB_MONKEY_POOPING, TRUE)
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] has called async poo throw proc!"))
 
 	if(!(target == null)) //the monkey vision code always fucks up, so it got nixed. we don't check if we can see the enemy, just throw poo at them
@@ -173,7 +178,7 @@
 				living_pawn.dropItemToGround(itemHeld)
 			living_pawn.put_in_hands(nearby_items[1]) //grab a poo
 			living_pawn.throw_item(target) //and throw it at the target
-		
+
 		set_movement_target(controller, target) //resume chasing target
 
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now properly ending pooping proc!"))
