@@ -135,6 +135,7 @@
 
 /datum/ai_behavior/monkey_poop/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
+	//var/mob/living/living_pawn = controller.pawn
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now beginning poo throw behaviour!"))
 
 	if(controller.blackboard[BB_MONKEY_POOPING]) //We are taking a shit, don't do ANYTHING!!!!
@@ -149,11 +150,19 @@
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] has called async poo throw proc!"))
 
 	if(!(target == null)) //the monkey vision code always fucks up, so it got nixed. we don't check if we can see the enemy, just throw poo at them
-		living_pawn.visible_message(span_notice("[living_pawn] grunts and squeezes out a huge turd!"))
-		new /obj/item/food/poo(living_pawn.loc)
-		playsound(living_pawn.loc, 'sound/misc/wetfart.ogg', 50, 1)
-		playsound(living_pawn.loc, 'sound/misc/fartmassive.ogg', 50, 1)
+		living_pawn.visible_message(span_notice("[living_pawn] starts grunting and moaning!"))
+		playsound(living_pawn.loc, 'sound/creatures/monkeymoan.ogg', 50, 1)
+		set_movement_target(controller, living_pawn) //sets movement target to self, so that we don't try to chase in the middle of shitting
+		SSmove_manager.stop_looping(living_pawn) //stop any current movements
+
+		sleep(30) //three seconds to force out a turd
+
+		living_pawn.visible_message(span_notice("[living_pawn] squeezes out a huge turd into their own hand!"))
 		playsound(living_pawn.loc, 'sound/effects/splat.ogg', 50, 1)
+		var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+		playsound(living_pawn.loc, pick(fartsounds), 50, 1)
+		new /obj/item/food/poo(living_pawn.loc)
+
 
 		var/list/nearby_items = list() //these three lines search for any poo within a one tile radius
 		for(var/obj/item/food/poo/item in oview(1, living_pawn))
@@ -164,6 +173,8 @@
 				living_pawn.dropItemToGround(itemHeld)
 			living_pawn.put_in_hands(nearby_items[1]) //grab a poo
 			living_pawn.throw_item(target) //and throw it at the target
+		
+		set_movement_target(controller, target) //resume chasing target
 
 	//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is now properly ending pooping proc!"))
 	controller.set_blackboard_key(BB_MONKEY_POOPING, FALSE)
@@ -214,6 +225,10 @@
 /datum/ai_behavior/monkey_attack_mob/proc/monkey_attack(datum/ai_controller/controller, mob/living/target, seconds_per_tick, disarm)
 	var/mob/living/living_pawn = controller.pawn
 
+	if(controller.blackboard[BB_MONKEY_POOPING]) //We are taking a shit, don't do ANYTHING!!!!
+		//living_pawn.visible_message(span_notice("DEBUG: [living_pawn] is already pooping!"))
+		return
+
 	if(living_pawn.next_move > world.time)
 		return
 
@@ -228,7 +243,7 @@
 	if(isnull(controller.blackboard[BB_MONKEY_GUN_WORKED]))
 		controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, TRUE)
 
-	if(prob(10)) //ten percent chance to throw poop at the enemy. there is definitely a better way to call the behaviour than this
+	if(prob(5)) //five percent chance to throw poop at the enemy. there is definitely a better way to call the behaviour than this
 		var/datum/ai_behavior/monkey_poop/test = new /datum/ai_behavior/monkey_poop()
 		call(test, "pooping")(controller)
 
