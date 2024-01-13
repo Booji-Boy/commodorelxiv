@@ -146,6 +146,20 @@
         hit_atom.AddComponent(/datum/component/creamed/poo, src) //TO-DO: make cream sprite brown
     qdel(src)
 
+/obj/item/food/poo/microwave_act(obj/machinery/microwave/microwave_source, mob/microwaver, randomize_pixel_offset)
+
+	var/turf/location = get_turf(microwave_source)
+
+	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
+
+	reagents = src.reagents
+	smoke.attach(location)
+	smoke.set_up(1, holder = microwave_source, location = location, carry = reagents, silent = TRUE)
+	smoke.start()
+	qdel(src)
+
+	return ..() | COMPONENT_MICROWAVE_SUCCESS
+
 /obj/item/food/badrecipe
 	name = "burned mess"
 	desc = "Someone should be demoted from cook for this."

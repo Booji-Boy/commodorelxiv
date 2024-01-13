@@ -10,6 +10,7 @@
 	decay_factor = STANDARD_ORGAN_DECAY
 	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/drug/vitaminf = 5)
 	grind_results = list(/datum/reagent/drug/vitaminf = 5)
+	throwforce = 8
 
 //clothing specific code
 
