@@ -18,9 +18,9 @@
 	max_integrity = 200
 	integrity_failure = 0.4
 	var/damaged_clothes = CLOTHING_PRISTINE //similar to machine's BROKEN stat and structure's broken var
-	worn_icon = 'icons/mob/clothing/head/default.dmi'
-	lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/clothing/hats_righthand.dmi'
+	worn_icon = 'icons/mob/clothing/head/butt.dmi'
+	//lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
+	//righthand_file = 'icons/mob/inhands/clothing/hats_righthand.dmi'
 	body_parts_covered = HEAD
 	slot_flags = ITEM_SLOT_HEAD
 
