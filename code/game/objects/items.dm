@@ -946,6 +946,8 @@
 
 	return SEND_SIGNAL(src, COMSIG_ITEM_MICROWAVE_ACT, microwave_source, microwaver, randomize_pixel_offset)
 
+/obj/item/proc/griddle_process(obj/machinery/griddle/griddle_source) //an empty proc to add stuff to if you want it to have custom reactions when placed on a griddle
+	return TRUE
 
 /obj/item/proc/grind_requirements(obj/machinery/reagentgrinder/R) //Used to check for extra requirements for grinding an object
 	return TRUE
