@@ -1002,6 +1002,15 @@
 	inverse_chem_val = 0.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+/datum/reagent/consumable/shit
+	name = "Shit"
+	nutriment_factor = 2
+	color = "#D98736"
+	taste_mult = 100
+	taste_description = "shit"
+	reagent_state = SOLID
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+
 /datum/reagent/consumable/caramel
 	name = "Caramel"
 	description = "Who would have guessed that heated sugar could be so delicious?"
