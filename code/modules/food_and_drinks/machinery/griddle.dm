@@ -172,6 +172,7 @@
 
 /obj/machinery/griddle/process(seconds_per_tick)
 	for(var/obj/item/griddled_item as anything in griddled_objects)
+		griddled_item.griddle_process(src) //call custom griddle process function in item. does nothing unless set by item
 		if(SEND_SIGNAL(griddled_item, COMSIG_ITEM_GRILL_PROCESS, src, seconds_per_tick) & COMPONENT_HANDLED_GRILLING)
 			continue
 		griddled_item.fire_act(1000) //Hot hot hot!
