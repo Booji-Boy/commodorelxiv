@@ -160,12 +160,12 @@
 	qdel(src)
 
 	return ..() | COMPONENT_MICROWAVE_SUCCESS
-	
+
 
 /obj/item/food/poo/griddle_process(obj/machinery/griddle/griddle_source)
 	var/datum/component/grillable/grillable = src.GetComponent(/datum/component/grillable)
-	
-	if(grillable.current_cook_time > 40) 
+
+	if(grillable.current_cook_time > 40)
 		var/turf/location = get_turf(griddle_source)
 
 		var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
@@ -175,8 +175,10 @@
 		smoke.set_up(1, holder = griddle_source, location = location, carry = reagents, silent = TRUE)
 		smoke.start()
 		qdel(src)
+		var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+		griddle_source.visible_message(span_bolddanger("You're disgusting. Why the fuck would you put poop on the griddle? You deserve whatever happens."))
+		playsound(griddle_source.loc, pick(fartsounds), 50, 1)
 	return
-
 
 /obj/item/food/badrecipe
 	name = "burned mess"
