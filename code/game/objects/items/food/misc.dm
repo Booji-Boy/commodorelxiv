@@ -148,14 +148,14 @@
     qdel(src)
 
 /obj/item/food/poo/microwave_act(obj/machinery/microwave/microwave_source, mob/microwaver, randomize_pixel_offset)
-
+	microwaver.visible_message(span_bolddanger("Some asshole just put poop in the microwave. Gross!"))
+	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+	playsound(microwaver.loc, pick(fartsounds), 50, 1)
 	var/turf/location = get_turf(microwave_source)
-
 	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
-
 	reagents = src.reagents
 	smoke.attach(location)
-	smoke.set_up(1, holder = microwave_source, location = location, carry = reagents, silent = TRUE)
+	smoke.set_up(2, holder = microwave_source, location = location, carry = reagents, silent = FALSE)
 	smoke.start()
 	qdel(src)
 
