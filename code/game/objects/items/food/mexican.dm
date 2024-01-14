@@ -311,6 +311,23 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 
+/obj/item/food/refried_poop
+	name = "refried shit"
+	desc = "A steaming bowl of rancid grilled poop, a common staple in Mexican cuisine. I probably wouldn't eat that if I were you."
+	icon = 'icons/obj/food/mexican.dmi'
+	icon_state = "refried_beans"
+	food_reagents = list(
+		/datum/reagent/toxin/spewium = 5,
+		/datum/reagent/impurity/ipecacide = 10,
+		/datum/reagent/consumable/shit = 10,
+	)
+	trash_type = /obj/item/reagent_containers/cup/bowl
+	tastes = list("shit" = 1, "poop" = 3,)
+	foodtypes = VEGETABLES | FRIED
+	w_class = WEIGHT_CLASS_SMALL
+	crafting_complexity = FOOD_COMPLEXITY_2
+
+
 /obj/item/food/spanish_rice
 	name = "spanish rice"
 	desc = "A bowl of delicious spanish rice, cooked in a tomato sauce which gives it the orange color."
