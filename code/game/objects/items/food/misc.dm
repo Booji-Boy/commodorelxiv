@@ -104,10 +104,11 @@
 	desc = "That's poop, I don't know whether to be more concerned that it's there or that you are examining it."
 	icon_state = "poo1"
 	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/toxin/spewium = 5,
 		/datum/reagent/impurity/ipecacide = 10,
+		/datum/reagent/consumable/shit = 10,
 	)
-	tastes = list("shit" = 2, "peanuts" = 1)
+	tastes = list("shit" = 10, "ass" = 3)
 	foodtypes = GROSS
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 6
@@ -118,6 +119,35 @@
 /obj/item/food/poo/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/slippery, 80, (NO_SLIP_WHEN_WALKING | SLIDE))
+
+/obj/item/food/poo/make_grillable(obj/machinery/griddle_source, mob/griller)
+	AddComponent(/datum/component/grillable, /obj/item/food/refried_poop, rand(25 SECONDS, 35 SECONDS), TRUE, TRUE)
+
+///obj/item/food/poo/proc/addtogrill(obj/machinery/griddle_source, mob/griller)
+//	griller.visible_message(span_bolddanger("You're disgusting. Why the fuck would you put poop on the griddle? You deserve whatever happens."))
+//	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+//	playsound(griller.loc, pick(fartsounds), 50, 1)
+//	var/turf/location = get_turf(griddle_source)
+//	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
+//	reagents = src.reagents
+//	smoke.attach(location)
+//	smoke.set_up(2, holder = griddle_source, location = location, carry = reagents, silent = FALSE)
+//	smoke.start()
+//	qdel(src)
+
+/obj/item/food/poo/microwave_act(obj/machinery/microwave/microwave_source, mob/microwaver, randomize_pixel_offset)
+	microwaver.visible_message(span_bolddanger("Some asshole just put poop in the microwave. Gross!"))
+	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+	playsound(microwaver.loc, pick(fartsounds), 50, 1)
+	var/turf/location = get_turf(microwave_source)
+	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
+	reagents = src.reagents
+	smoke.attach(location)
+	smoke.set_up(2, holder = microwave_source, location = location, carry = reagents, silent = FALSE)
+	smoke.start()
+	qdel(src)
+
+	return ..() | COMPONENT_MICROWAVE_SUCCESS
 
 /obj/item/food/poo/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
     . = ..()
@@ -145,20 +175,6 @@
     if(is_creamable && is_type_in_typecache(hit_atom, GLOB.creamable))
         hit_atom.AddComponent(/datum/component/creamed/poo, src) //TO-DO: make cream sprite brown
     qdel(src)
-
-/obj/item/food/poo/microwave_act(obj/machinery/microwave/microwave_source, mob/microwaver, randomize_pixel_offset)
-
-	var/turf/location = get_turf(microwave_source)
-
-	var/datum/effect_system/fluid_spread/smoke/chem/smoke = new
-
-	reagents = src.reagents
-	smoke.attach(location)
-	smoke.set_up(1, holder = microwave_source, location = location, carry = reagents, silent = TRUE)
-	smoke.start()
-	qdel(src)
-
-	return ..() | COMPONENT_MICROWAVE_SUCCESS
 
 /obj/item/food/badrecipe
 	name = "burned mess"
