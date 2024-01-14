@@ -104,10 +104,11 @@
 	desc = "That's poop, I don't know whether to be more concerned that it's there or that you are examining it."
 	icon_state = "poo1"
 	food_reagents = list(
-		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/toxin/spewium = 5,
 		/datum/reagent/impurity/ipecacide = 10,
+		/datum/reagent/consumable/shit = 10,
 	)
-	tastes = list("shit" = 2, "peanuts" = 1)
+	tastes = list("shit" = 10, "ass" = 3)
 	foodtypes = GROSS
 	w_class = WEIGHT_CLASS_SMALL
 	throwforce = 6
