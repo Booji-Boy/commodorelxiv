@@ -317,3 +317,26 @@
 		return
 
 	go_for_a_walk(push_target)
+
+/obj/effect/immovablerod/butt
+	name = "enormous ass"
+	desc = "godDAMN that ass is well rounded"
+	icon = 'icons/obj/medical/organs/organs.dmi'
+	icon_state = "butt"
+
+/obj/effect/immovablerod/butt/Initialize(mapload, force_looping = FALSE)
+	. = ..()
+	SSaugury.register_doom(src, 2000)
+
+	destination_turf = get_random_station_turf()
+
+	loopy_rod ||= force_looping
+
+	ADD_TRAIT(src, TRAIT_FREE_HYPERSPACE_MOVEMENT, INNATE_TRAIT)
+
+	SSpoints_of_interest.make_point_of_interest(src)
+
+	RegisterSignal(src, COMSIG_ATOM_ENTERING, PROC_REF(on_entering_atom))
+
+	SSmove_manager.move_towards(src, destination_turf)
+	SpinAnimation(24,-1)

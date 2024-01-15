@@ -122,7 +122,6 @@
 /datum/emote/fart
 	key = "fart"
 	key_third_person = "farts"
-	hands_use_check = TRUE
 	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
 
@@ -152,23 +151,34 @@
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [fart]"))
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 
+/proc/debuttuser(mob/user)
+	var/turf/fartturf = get_turf(user)
+	var/obj/item/butt = user.get_organ_slot(ORGAN_SLOT_BUTT)
+	user.visible_message("<span class='warning'><b>[user]</b> blows their ass off!</span>", "<span class='warning'>Holy shit, your butt flies off in an arc!</span>")
+
+	butt.forceMove(fartturf)
+	butt.forceMove(fartturf) //for some reason it only works if you do it twice
 
 /datum/emote/superfart
 	key = "superfart"
 	key_third_person = "superfarts"
-	hands_use_check = TRUE
 	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
 
-/datum/emote/superfart/run_emote(mob/user, )
+/datum/emote/superfart/run_emote(mob/living/user, params , type_override, intentional)
+	var/obj/item/butt = user.get_organ_slot(ORGAN_SLOT_BUTT)
+
 	if(!ishuman(user))
 		to_chat(user, "<span class='warning'>You lack that ability!</span>")
 		return
-	var/obj/item/organ/internal/butt/B = (/obj/item/organ/internal/butt)
-	if(!B)
-		to_chat(user, "<span class='danger'>You don't have a butt!</span>")
+	if(!butt) //if we don't have a butt, fart does not work
+		to_chat(user, span_notice("You try to fart, then remember you don't have a butt."))
+		SEND_SOUND(user, 'sound/misc/wronghorn.ogg')
 		return
-	var/fart_type = 1 //Put this outside probability check just in case. There were cases where superfart did a normal fart.
+	if(intentional && user.nutrition < 81) // no superfart if you are hungry
+		to_chat(user, span_notice("You are too hungry to superfart."))
+		return
+
 	user.nutrition = max(user.nutrition - 500, NUTRITION_LEVEL_STARVING)
 	new /obj/effect/decal/cleanable/blood(user.loc)
 	playsound(user, 'sound/misc/fart.ogg', 100, 1, 5)
@@ -176,39 +186,39 @@
 	sleep(1)
 	playsound(user, 'sound/misc/fartmassive.ogg', 75, 1, 5)
 	spawnfartgas(user, 1)
-	switch(fart_type)
-		if(1)
-			for(var/mob/living/M in range(0))
-				if(M != user)
-					user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
-					M.apply_damage(50,"brute","head")
-					log_combat(user, M, "superfarted")
+	if(prob(25)) //25 percent chance to blow your ass off
+		debuttuser(user)
+	if(prob(1)) //1 percent chance to explode
+		user.visible_message("<span class='warning'><b>[user]</b> blows their ass off with such force, they explode!</span>", "<span class='warning'>Holy shit, your butt flies off into the galaxy!</span>")
+		playsound(user, 'sound/misc/superfart.ogg', 75, extrarange = 255, pressure_affected = FALSE)
+		new /obj/effect/immovablerod/butt(user.loc)
+		user.gib()
+		priority_announce("What the fuck was that?!", "General Alert")
+		qdel(butt)
+		return
+	for(var/mob/living/M in range(0))
+		if(M != user)
+			user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
+			M.apply_damage(50,"brute","head")
+			log_combat(user, M, "superfarted")
 
-				user.visible_message("<span class='warning'><b>[user]</b> blows their ass off!</span>", "<span class='warning'>Holy shit, your butt flies off in an arc!</span>")
-				if(!user.has_gravity())
-					var/atom/target = get_edge_target_turf(user, user.dir)
-					user.throw_at(target, 1000, 20)
-					user.visible_message("<span class='warning'>[user] goes flying off into the distance!</span>", "<span class='warning'>You fly off into the distance!</span>")
+		if(!user.has_gravity())
+			var/atom/target = get_edge_target_turf(user, user.dir)
+			user.throw_at(target, 1000, 20)
+			user.visible_message("<span class='warning'>[user] goes flying off into the distance!</span>", "<span class='warning'>You fly off into the distance!</span>")
+	return
 
 /datum/emote/poo
 	key = "poo"
 	key_third_person = "shits"
-	hands_use_check = TRUE
 	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
 
 /datum/emote/poo/run_emote(mob/user, params , type_override, intentional)
-	//. = ..()
-	//if(!can_run_emote(user, intentional=intentional))
-	//	return
-	//if(isliving(user))
-	. = ..()
 	var/mob/living/flippy_mcgee = user
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
 
 	if((!intentional && flippy_mcgee.nutrition < 81)||(!(flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT)))) //if you are forced to poop while hungry or poop with no butt, shit blood + 5 brute dmg
-		//span_notice("[flippy_mcgee] screams and squirts blood out their asshole!"),
-		//span_notice("Your empty bowels clench painfully as you try to shit, and blood squirts out your asshole!")
 		user.visible_message(span_notice("[flippy_mcgee] screams and squirts blood out their asshole!"))
 		to_chat(user, span_warning("Your bowels clench painfully as you try to shit, and blood squirts out your asshole!"))
 
