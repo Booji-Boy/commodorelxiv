@@ -155,7 +155,7 @@
 	var/turf/fartturf = get_turf(user)
 	var/obj/item/butt = user.get_organ_slot(ORGAN_SLOT_BUTT)
 	user.visible_message("<span class='warning'><b>[user]</b> blows their ass off!</span>", "<span class='warning'>Holy shit, your butt flies off in an arc!</span>")
-
+	new /obj/effect/decal/cleanable/blood(user.loc)
 	butt.forceMove(fartturf)
 	butt.forceMove(fartturf) //for some reason it only works if you do it twice
 
@@ -164,8 +164,10 @@
 	key_third_person = "superfarts"
 	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
+	cooldown = 10 SECONDS
 
 /datum/emote/superfart/run_emote(mob/living/user, params , type_override, intentional)
+	. = ..()
 	var/obj/item/butt = user.get_organ_slot(ORGAN_SLOT_BUTT)
 
 	if(!ishuman(user))
@@ -179,12 +181,14 @@
 		to_chat(user, span_notice("You are too hungry to superfart."))
 		return
 
-	user.nutrition = max(user.nutrition - 500, NUTRITION_LEVEL_STARVING)
-	new /obj/effect/decal/cleanable/blood(user.loc)
-	playsound(user, 'sound/misc/fart.ogg', 100, 1, 5)
+	user.nutrition = max(user.nutrition - 200, 1)
+
+	playsound(user, 'sound/misc/fartmulti.ogg', 75, 1, 5)
 	spawnfartgas(user, 0)
-	sleep(1)
-	playsound(user, 'sound/misc/fartmassive.ogg', 75, 1, 5)
+	user.Stun(12)
+	sleep(12)
+
+	playsound(user, 'sound/misc/fartmassive.ogg', 100, 1, 5)
 	spawnfartgas(user, 1)
 	if(prob(25)) //25 percent chance to blow your ass off
 		debuttuser(user)
@@ -201,7 +205,7 @@
 			user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
 			M.apply_damage(50,"brute","head")
 			log_combat(user, M, "superfarted")
-
+			new /obj/effect/decal/cleanable/blood(user.loc)
 		if(!user.has_gravity())
 			var/atom/target = get_edge_target_turf(user, user.dir)
 			user.throw_at(target, 1000, 20)
