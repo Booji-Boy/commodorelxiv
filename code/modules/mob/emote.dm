@@ -105,6 +105,19 @@
 
 // poo fart
 
+/proc/spawnfartgas(mob/user, is_super_fart)
+	var/turf/fartturf = get_turf(user)
+	var/datum/gas_mixture/stank = new
+	var/amount
+	if(is_super_fart)
+		amount = pick(20, 21, 22, 23, 24, 25)
+	else
+		amount = pick(1, 2, 3, 4, 5)
+	ADD_GAS(/datum/gas/miasma, stank.gases)
+	stank.gases[/datum/gas/miasma][MOLES] = amount //amount of gas spawned
+	stank.temperature = BODYTEMP_NORMAL  //otherwise we have gas below 2.7K which will break our lag generator
+	fartturf.assume_air(stank)
+	fartturf.air_update_turf()
 
 /datum/emote/fart
 	key = "fart"
@@ -125,6 +138,7 @@
 
 	if(.)
 		if(prob(4))
+			spawnfartgas(user, 1)
 			flippy_mcgee.visible_message(
 				span_notice("[flippy_mcgee] tries to fart, but accidentally sharts."),
 				span_notice("You try to fart, but it's wetter than you thought it would be!")
@@ -134,8 +148,47 @@
 		else
 			var/list/farts = list("farts.","passes wind.","toots.","farts [pick("lightly", "tenderly", "softly", "with care")].","farts with the force of one thousand suns.")
 			var/fart = pick(farts)
+			spawnfartgas(user, 1)
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [fart]"))
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
+
+
+/datum/emote/superfart
+	key = "superfart"
+	key_third_person = "superfarts"
+	hands_use_check = TRUE
+	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
+	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
+
+/datum/emote/superfart/run_emote(mob/user, )
+	if(!ishuman(user))
+		to_chat(user, "<span class='warning'>You lack that ability!</span>")
+		return
+	var/obj/item/organ/internal/butt/B = (/obj/item/organ/internal/butt)
+	if(!B)
+		to_chat(user, "<span class='danger'>You don't have a butt!</span>")
+		return
+	var/fart_type = 1 //Put this outside probability check just in case. There were cases where superfart did a normal fart.
+	user.nutrition = max(user.nutrition - 500, NUTRITION_LEVEL_STARVING)
+	new /obj/effect/decal/cleanable/blood(user.loc)
+	playsound(user, 'sound/misc/fart.ogg', 100, 1, 5)
+	spawnfartgas(user, 0)
+	sleep(1)
+	playsound(user, 'sound/misc/fartmassive.ogg', 75, 1, 5)
+	spawnfartgas(user, 1)
+	switch(fart_type)
+		if(1)
+			for(var/mob/living/M in range(0))
+				if(M != user)
+					user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
+					M.apply_damage(50,"brute","head")
+					log_combat(user, M, "superfarted")
+
+				user.visible_message("<span class='warning'><b>[user]</b> blows their ass off!</span>", "<span class='warning'>Holy shit, your butt flies off in an arc!</span>")
+				if(!user.has_gravity())
+					var/atom/target = get_edge_target_turf(user, user.dir)
+					user.throw_at(target, 1000, 20)
+					user.visible_message("<span class='warning'>[user] goes flying off into the distance!</span>", "<span class='warning'>You fly off into the distance!</span>")
 
 /datum/emote/poo
 	key = "poo"
