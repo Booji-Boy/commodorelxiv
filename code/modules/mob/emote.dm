@@ -144,11 +144,18 @@
 			)
 			playsound(flippy_mcgee.loc, 'sound/misc/wetfart.ogg', 50, 1)
 			new /mob/living/basic/poo(flippy_mcgee.loc)
+
 		else
 			var/list/farts = list("farts.","passes wind.","toots.","farts [pick("lightly", "tenderly", "softly", "with care")].","farts with the force of one thousand suns.")
 			var/fart = pick(farts)
 			spawnfartgas(user, 1)
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [fart]"))
+			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
+
+	for(var/mob/living/M in range(0))
+		if(M != user)
+			user.visible_message("<span class='warning'><b>[user]</b> farted on <b>[M]</b>! What an asshole!</span>", "<span class='warning'>You fart on <b>[M]</b>!</span>")
+			spawnfartgas(user, 1)
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 
 /proc/debuttuser(mob/user)
@@ -158,13 +165,19 @@
 	new /obj/effect/decal/cleanable/blood(user.loc)
 	butt.forceMove(fartturf)
 	butt.forceMove(fartturf) //for some reason it only works if you do it twice
+	for(var/mob/living/M in range(0))
+		if(M != user)
+			user.visible_message("<span class='warning'><b>[user]</b>'s ass flies off and hits<b>[M]</b> in the face!</span>", "<span class='warning'>Your ass just blew off and hit <b>[M]</b>!</span>")
+			M.apply_damage(65,"brute","head")
+			log_combat(user, M, "superfarted")
+			new /obj/effect/decal/cleanable/blood(user.loc)
 
 /datum/emote/superfart
 	key = "superfart"
 	key_third_person = "superfarts"
 	mob_type_allowed_typecache = list(/mob/living, /mob/camera/imaginary_friend)
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
-	cooldown = 10 SECONDS
+	cooldown = 5 SECONDS
 
 /datum/emote/superfart/run_emote(mob/living/user, params , type_override, intentional)
 	. = ..()
@@ -192,7 +205,7 @@
 	spawnfartgas(user, 1)
 	if(prob(25)) //25 percent chance to blow your ass off
 		debuttuser(user)
-	if(prob(1)) //1 percent chance to explode
+	if(prob(5)) //1 percent chance to explode
 		user.visible_message("<span class='warning'><b>[user]</b> blows their ass off with such force, they explode!</span>", "<span class='warning'>Holy shit, your butt flies off into the galaxy!</span>")
 		playsound(user, 'sound/misc/superfart.ogg', 75, extrarange = 255, pressure_affected = FALSE)
 		new /obj/effect/immovablerod/butt(user.loc)
@@ -203,7 +216,7 @@
 	for(var/mob/living/M in range(0))
 		if(M != user)
 			user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
-			M.apply_damage(50,"brute","head")
+			M.apply_damage(30,"brute","head")
 			log_combat(user, M, "superfarted")
 			new /obj/effect/decal/cleanable/blood(user.loc)
 		if(!user.has_gravity())
@@ -219,17 +232,26 @@
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
 
 /datum/emote/poo/run_emote(mob/user, params , type_override, intentional)
+	. = ..()
 	var/mob/living/flippy_mcgee = user
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
 
-	if((!intentional && flippy_mcgee.nutrition < 81)||(!(flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT)))) //if you are forced to poop while hungry or poop with no butt, shit blood + 5 brute dmg
-		user.visible_message(span_notice("[flippy_mcgee] screams and squirts blood out their asshole!"))
-		to_chat(user, span_warning("Your bowels clench painfully as you try to shit, and blood squirts out your asshole!"))
-
+	if(!intentional && flippy_mcgee.nutrition < 81) //if you are forced to poop while hungry or poop with no butt, shit blood + 5 brute dmg
+		user.visible_message(span_notice("[flippy_mcgee] screams in pain as blood suddenly squirts out of their asshole!"))
+		to_chat(user, span_warning("Pain overwhelms you as you lose control of your bowels on an empty stomach and blood starts squirting out of your asshole!"))
 		playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 		flippy_mcgee.emote("scream")
 		new /obj/effect/decal/cleanable/blood(flippy_mcgee.loc)
 		flippy_mcgee.adjustBruteLoss(5)
+		return
+
+	if(!flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT))
+		user.visible_message(span_notice("[flippy_mcgee] screams and blood squirts out of the void where their ass used to be!"))
+		to_chat(user, span_warning("You attempt to take a shit and realize you no longer have an ass right as the blood painfully starts squirting out from where your ass used to be!"))
+		playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
+		flippy_mcgee.emote("scream")
+		new /obj/effect/decal/cleanable/blood(flippy_mcgee.loc)
+		flippy_mcgee.adjustBruteLoss(10)
 		return
 
 	if(intentional && flippy_mcgee.nutrition < 81) // no pooping if you are hungry
