@@ -110,9 +110,9 @@
 	var/datum/gas_mixture/stank = new
 	var/amount
 	if(is_super_fart)
-		amount = pick(20, 21, 22, 23, 24, 25)
+		amount = pick(20, 30, 34, 40, 45, 50)
 	else
-		amount = pick(1, 2, 3, 4, 5)
+		amount = pick(3, 4, 5)
 	ADD_GAS(/datum/gas/miasma, stank.gases)
 	stank.gases[/datum/gas/miasma][MOLES] = amount //amount of gas spawned
 	stank.temperature = BODYTEMP_NORMAL  //otherwise we have gas below 2.7K which will break our lag generator
@@ -129,15 +129,21 @@
 	. = ..()
 	var/mob/living/flippy_mcgee = user
 	var/list/fartsounds = list('sound/misc/wetfart.ogg', 'sound/misc/fartmassive.ogg', 'sound/misc/fart.ogg')
+	var/obj/item/butt = flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT)
 
-	if(!(flippy_mcgee.get_organ_slot(ORGAN_SLOT_BUTT))) //if we don't have a butt, fart does not work
+	if(!butt && !intentional) //if we don't have a butt, fart does not work,but sometimes we eat arby's and can't help it.
+		to_chat(flippy_mcgee, span_notice("Your body is filled with gases , but you have no butt to fart with!"))
+		//SEND_SOUND(flippy_mcgee, 'sound/misc/wronghorn.ogg')
+		return
+
+	if(!butt && intentional) //if we don't have a butt, fart does not work
 		to_chat(flippy_mcgee, span_notice("You try to fart, then remember you don't have a butt."))
 		SEND_SOUND(flippy_mcgee, 'sound/misc/wronghorn.ogg')
 		return
 
-	if(.)
+	if(butt && intentional)
 		if(prob(4))
-			spawnfartgas(user, 1)
+			spawnfartgas(user, 10)
 			flippy_mcgee.visible_message(
 				span_notice("[flippy_mcgee] tries to fart, but accidentally sharts."),
 				span_notice("You try to fart, but it's wetter than you thought it would be!")
@@ -148,14 +154,15 @@
 		else
 			var/list/farts = list("farts.","passes wind.","toots.","farts [pick("lightly", "tenderly", "softly", "with care")].","farts with the force of one thousand suns.")
 			var/fart = pick(farts)
-			spawnfartgas(user, 1)
+			spawnfartgas(user, 10)
 			flippy_mcgee.visible_message(span_notice("[flippy_mcgee] [fart]"))
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 
 	for(var/mob/living/M in range(0))
 		if(M != user)
 			user.visible_message("<span class='warning'><b>[user]</b> farted on <b>[M]</b>! What an asshole!</span>", "<span class='warning'>You fart on <b>[M]</b>!</span>")
-			spawnfartgas(user, 1)
+			spawnfartgas(user, 10)
+			M.apply_damage(2, "toxin")
 			playsound(flippy_mcgee.loc, pick(fartsounds), 50, 1)
 
 /proc/debuttuser(mob/user)
@@ -179,17 +186,23 @@
 	mob_type_ignore_stat_typecache = list(/mob/dead/observer, /mob/living/silicon/ai, /mob/camera/imaginary_friend)
 	cooldown = 5 SECONDS
 
-/datum/emote/superfart/run_emote(mob/living/user, params , type_override, intentional)
+/datum/emote/superfart/run_emote(mob/living/user, params , type_override, intentional, is_super_fart)
 	. = ..()
 	var/obj/item/butt = user.get_organ_slot(ORGAN_SLOT_BUTT)
 
 	if(!ishuman(user))
 		to_chat(user, "<span class='warning'>You lack that ability!</span>")
 		return
-	if(!butt) //if we don't have a butt, fart does not work
+
+	if(!butt && !intentional) //if we already lost our butt but something like arby's is still making us fart
+		to_chat(user, span_notice("Your body is desperately trying to expel the gases building up in your intestines, but you no longer have an ass."))
+		return
+
+	if(!butt && intentional) //if we don't have a butt, fart does not work
 		to_chat(user, span_notice("You try to fart, then remember you don't have a butt."))
 		SEND_SOUND(user, 'sound/misc/wronghorn.ogg')
 		return
+
 	if(intentional && user.nutrition < 81) // no superfart if you are hungry
 		to_chat(user, span_notice("You are too hungry to superfart."))
 		return
@@ -197,17 +210,18 @@
 	user.nutrition = max(user.nutrition - 200, 1)
 
 	playsound(user, 'sound/misc/fartmulti.ogg', 75, 1, 5)
-	spawnfartgas(user, 0)
+	spawnfartgas(user, 5)
 	user.Stun(12)
 	sleep(12)
 
 	playsound(user, 'sound/misc/fartmassive.ogg', 100, 1, 5)
-	spawnfartgas(user, 1)
+	spawnfartgas(user, 50)
 	if(prob(25)) //25 percent chance to blow your ass off
 		debuttuser(user)
 	if(prob(5)) //1 percent chance to explode
 		user.visible_message("<span class='warning'><b>[user]</b> blows their ass off with such force, they explode!</span>", "<span class='warning'>Holy shit, your butt flies off into the galaxy!</span>")
 		playsound(user, 'sound/misc/superfart.ogg', 75, extrarange = 255, pressure_affected = FALSE)
+		spawnfartgas(user, 200)
 		new /obj/effect/immovablerod/butt(user.loc)
 		user.gib()
 		priority_announce("What the fuck was that?!", "General Alert")
@@ -217,6 +231,7 @@
 		if(M != user)
 			user.visible_message("<span class='warning'><b>[user]</b>'s ass blasts <b>[M]</b> in the face!</span>", "<span class='warning'>You ass blast <b>[M]</b>!</span>")
 			M.apply_damage(30,"brute","head")
+			M.apply_damage(10, "toxin")
 			log_combat(user, M, "superfarted")
 			new /obj/effect/decal/cleanable/blood(user.loc)
 		if(!user.has_gravity())

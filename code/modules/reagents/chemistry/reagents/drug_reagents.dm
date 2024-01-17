@@ -869,17 +869,15 @@
 
 /datum/reagent/drug/vitaminf/on_mob_life(mob/living/carbon/dancer, seconds_per_tick)
 	. = ..()
-
+	dancer.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
 	if(prob(11))
 		dancer.emote("poo")
 
 	if(prob(33))
 		dancer.emote("fart")
 
-/*
 /datum/reagent/drug/vitaminf/overdose_process(mob/living/dancer, seconds_per_tick, times_fired)
 	. = ..()
 
 	if(SPT_PROB(0.1 * volume, seconds_per_tick))
 		dancer.emote("superfart")
-*/
