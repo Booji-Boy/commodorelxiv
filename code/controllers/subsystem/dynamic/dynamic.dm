@@ -6,6 +6,8 @@
 
 // Are HIGH_IMPACT_RULESETs allowed to stack?
 GLOBAL_VAR_INIT(dynamic_no_stacking, TRUE)
+// If enabled, disables all rulesets, allows use of sandbox-panel for all mobs.
+GLOBAL_VAR_INIT(dynamic_sandbox, TRUE)
 // If enabled does not accept or execute any rulesets.
 GLOBAL_VAR_INIT(dynamic_forced_extended, FALSE)
 // How high threat is required for HIGH_IMPACT_RULESETs stacking.
@@ -209,6 +211,7 @@ SUBSYSTEM_DEF(dynamic)
 	dat += "Split parameters: centre = [roundstart_split_curve_centre] ; width = [roundstart_split_curve_width].<br/>"
 	dat += "<i>On average, <b>[clamp(peaceful_percentage, 1, 99)]</b>% of the rounds are more peaceful.</i><br/>"
 	dat += "Forced extended: <a href='?src=[text_ref(src)];[HrefToken()];forced_extended=1'><b>[GLOB.dynamic_forced_extended ? "On" : "Off"]</b></a><br/>"
+	dat += "Sandbox mode: <a href='?src=[text_ref(src)];[HrefToken()];sandbox_mode=1'><b>[GLOB.dynamic_sandbox ? "On" : "Off"]</b></a><br/>"
 	dat += "No stacking (only one round-ender): <a href='?src=[text_ref(src)];[HrefToken()];no_stacking=1'><b>[GLOB.dynamic_no_stacking ? "On" : "Off"]</b></a><br/>"
 	dat += "Stacking limit: [GLOB.dynamic_stacking_limit] <a href='?src=[text_ref(src)];[HrefToken()];stacking_limit=1'>\[Adjust\]</A>"
 	dat += "<br/>"
@@ -244,6 +247,8 @@ SUBSYSTEM_DEF(dynamic)
 		return
 	if (href_list["forced_extended"])
 		GLOB.dynamic_forced_extended = !GLOB.dynamic_forced_extended
+	else if (href_list["sandbox_mode"])
+		GLOB.dynamic_sandbox = !GLOB.dynamic_sandbox
 	else if (href_list["no_stacking"])
 		GLOB.dynamic_no_stacking = !GLOB.dynamic_no_stacking
 	else if (href_list["adjustthreat"])
@@ -329,7 +334,7 @@ SUBSYSTEM_DEF(dynamic)
 		if(ruleset.weight <= 0 || ruleset.cost <= 0)
 			continue
 		min_threat = min(ruleset.cost, min_threat)
-	var/greenshift = GLOB.dynamic_forced_extended || (threat_level < min_threat && shown_threat < min_threat) //if both shown and real threat are below any ruleset, its extended time
+	var/greenshift = GLOB.dynamic_forced_extended || GLOB.dynamic_sandbox || (threat_level < min_threat && shown_threat < min_threat) //if both shown and real threat are below any ruleset, its extended time
 
 	generate_station_goals(greenshift ? INFINITY : CONFIG_GET(number/station_goal_budget))
 
@@ -456,7 +461,7 @@ SUBSYSTEM_DEF(dynamic)
 
 /datum/controller/subsystem/dynamic/proc/setup_parameters()
 	log_dynamic("Dynamic mode parameters for the round:")
-	log_dynamic("Centre is [threat_curve_centre], Width is [threat_curve_width], Forced extended is [GLOB.dynamic_forced_extended ? "Enabled" : "Disabled"], No stacking is [GLOB.dynamic_no_stacking ? "Enabled" : "Disabled"].")
+	log_dynamic("Centre is [threat_curve_centre], Width is [threat_curve_width], Forced extended is [GLOB.dynamic_forced_extended ? "Enabled" : "Disabled"], Sandbox mode is [GLOB.dynamic_sandbox ? "Enabled" : "Disabled"], No stacking is [GLOB.dynamic_no_stacking ? "Enabled" : "Disabled"].")
 	log_dynamic("Stacking limit is [GLOB.dynamic_stacking_limit].")
 	if(GLOB.dynamic_forced_threat_level >= 0)
 		threat_level = round(GLOB.dynamic_forced_threat_level, 0.1)
@@ -480,6 +485,7 @@ SUBSYSTEM_DEF(dynamic)
 				"threat_curve_centre" = threat_curve_centre,
 				"threat_curve_width" = threat_curve_width,
 				"forced_extended" = GLOB.dynamic_forced_extended,
+				"sandbox_mode" = GLOB.dynamic_sandbox,
 				"no_stacking" = GLOB.dynamic_no_stacking,
 				"stacking_limit" = GLOB.dynamic_stacking_limit,
 			),
@@ -689,7 +695,15 @@ SUBSYSTEM_DEF(dynamic)
 /datum/controller/subsystem/dynamic/proc/roundstart(list/roundstart_rules)
 	if (GLOB.dynamic_forced_extended)
 		log_dynamic("Starting a round of forced extended.")
-		return TRUE
+	if (GLOB.dynamic_sandbox)
+		log_dynamic("Starting a round of sandbox.")
+		to_chat(world, "<B>The current game mode is - Sandbox!</B>", confidential = FALSE)
+		//to_chat(world, "<B>Build your own station with the sandbox-panel command!</B>", confidential = FALSE)
+						
+		//INSERT SANDBOX STUFF HERE
+		//for(var/mob/M in GLOB.joined_player_list)
+		//	M.CanBuild()
+		//	return TRUE
 	var/list/drafted_rules = list()
 	for (var/datum/dynamic_ruleset/roundstart/rule in roundstart_rules)
 		if (!rule.weight)
@@ -855,7 +869,7 @@ SUBSYSTEM_DEF(dynamic)
 
 /// Handles late-join antag assignments
 /datum/controller/subsystem/dynamic/proc/make_antag_chance(mob/living/carbon/human/newPlayer)
-	if (GLOB.dynamic_forced_extended)
+	if (GLOB.dynamic_forced_extended || GLOB.dynamic_sandbox)
 		return
 	if(EMERGENCY_ESCAPED_OR_ENDGAMED) // No more rules after the shuttle has left
 		return
