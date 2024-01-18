@@ -16,6 +16,7 @@
 	update_fov()
 	gravity_setup()
 	ADD_TRAIT(src, TRAIT_UNIQUE_IMMERSE, INNATE_TRAIT)
+	src.CanBuild() //all sandbox checks handled in this proc and not here b/c i don't want to touch living.dm too much
 
 /mob/living/prepare_huds()
 	..()
