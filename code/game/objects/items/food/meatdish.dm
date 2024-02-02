@@ -889,6 +889,16 @@
 	if(prob(50))
 		icon_state = "fried_chicken2"
 
+/obj/item/food/fried_chicken/special
+	name = "special fried chicken"
+	desc = "A juicy hunk of chicken meat, fried to perfection. Juicier than usual."
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 6,
+		/datum/reagent/consumable/nutriment/vitamin = 2,
+		/datum/reagent/drug/spf = 10
+	)
+	junkiness = 5
+
 /obj/item/food/beef_stroganoff
 	name = "beef stroganoff"
 	desc = "A russian dish that consists of beef and sauce. Really popular in japan, or at least that's what my animes would allude to."

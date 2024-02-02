@@ -881,3 +881,90 @@
 
 	if(SPT_PROB(0.1 * volume, seconds_per_tick))
 		dancer.emote("superfart")
+
+
+
+
+
+
+
+
+var/spflist = list()
+
+/datum/reagent/drug/spf
+	name = "strattylcholate polytriarchal fluxamote"
+	description = "An incredibly complex biological compound, currently under study for its ability to poison not only the body, but the soul, actively attacking any future forms the victim may come to take via pod cloning or other resurrection methods."
+	reagent_state = SOLID
+	color = "#d9ce95"
+	taste_description = "medium-rare chicken"
+	ph = 7
+	//overdose_threshold = 30
+	self_consuming = TRUE //No pesky liver shenanigans
+	chemical_flags = REAGENT_DEAD_PROCESS | REAGENT_CAN_BE_SYNTHESIZED
+	metabolization_rate = 0 //lingers eternally in the body
+
+/datum/reagent/drug/spf/on_mob_life(mob/living/carbon/dancer, seconds_per_tick)
+	. = ..()
+
+	//for some reason bodies sometimes keep farting and vomiting after death, even though this should only be called when the mob is alive
+	//but that's funny so i'll leave it
+
+	if(!(dancer.ckey in spflist) ) //if there is a ckey attached to victim not in list, add to list
+		//to_chat(world, "DEBUG: added [dancer.ckey] to spflist", confidential = FALSE)
+		spflist += dancer.ckey
+
+	if(current_cycle<15 && prob(12)) //at first only messages
+		var/list/messages = list("You feel queasy.","You feel unwell.","Your stomach feels weird.","Your guts make a weird noise.")
+		to_chat(dancer, span_notice(pick(messages)))
+
+	if(current_cycle>15 && prob(33)) //then spam emotes, and apply dmg of all types scaling with cycle
+		dancer.emote("superfart")
+		dancer.emote("fart")
+		dancer.emote("poo")
+		dancer.emote("scream")
+		dancer.vomit(VOMIT_CATEGORY_BLOOD, lost_nutrition = 20)
+
+		to_chat(dancer, span_danger("Something is very wrong with your body."))
+
+		dancer.adjustToxLoss(current_cycle/2, updating_health = FALSE)
+		dancer.adjustOxyLoss(current_cycle/2, updating_health = FALSE)
+		dancer.adjustFireLoss(current_cycle/2, updating_health = FALSE)
+		dancer.adjustBruteLoss(current_cycle/2, updating_health = FALSE)
+
+	if(current_cycle>80)
+		to_chat(dancer, span_danger("Death."))
+		dancer.death()
+
+//as long as spf is present in a corpse, go through the list of keys that have ever had spf inside them and roll for effects
+/datum/reagent/drug/spf/on_mob_dead(mob/living/carbon/dancer, seconds_per_tick)
+	. = ..()
+	//to_chat(world, "DEBUG: running spf on_mob_dead proc from [dancer]", confidential = FALSE)
+
+	for(var/spfkey in spflist)
+		//to_chat(world, "DEBUG: currently checking for [spfkey] for spf purposes", confidential = FALSE)
+
+		var/mob/getmob = get_mob_by_ckey(spfkey)
+
+		if(!(istype(getmob, /mob/living))) //if not a living mob, give up
+			//to_chat(world, "DEBUG: gave up on [spfkey]!", confidential = FALSE)
+			return
+		var/mob/living/newmob = getmob
+
+		//probabilities to be adjusted once functionality confirmed
+		if(istype(newmob,/mob/living/carbon))
+			if(prob(3)) //3% chance per tick of spf spawning in body if you've respawned as a carbon mob
+				//to_chat(world, "DEBUG: applied spf reagent to [spfkey]!", confidential = FALSE)
+				newmob.reagents.add_reagent(/datum/reagent/drug/spf, 5)
+			return
+		if(istype(newmob,/mob/living/silicon))
+			if(prob(1)) //1% chance per tick of pop up ad if silicon mob
+				to_chat(world, "DEBUG: applied popup to [spfkey]!", confidential = FALSE)
+				to_chat(newmob, span_notice("A pop-up ad for fried chicken briefly flickers across your interface."))
+			return
+		if(istype(newmob,/mob/living))
+			if(prob(3)) //3% chance per tick of instant death if any living mob but carbon or silicon
+				//to_chat(world, "DEBUG: applied death to [spfkey]!", confidential = FALSE)
+				to_chat(newmob, span_danger("You catch a whiff of chicken on the breeze, then die instantly."))
+				newmob.death()
+			return
+

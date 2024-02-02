@@ -232,6 +232,17 @@
 	result = /obj/item/food/fried_chicken
 	category = CAT_MEAT
 
+/datum/crafting_recipe/food/special_fried_chicken
+	name = "Special Fried Chicken"
+	reqs = list(
+		/obj/item/food/meat/slab/chicken = 1,
+		/datum/reagent/consumable/flour = 5,
+		/datum/reagent/consumable/corn_starch = 5,
+		/obj/item/food/poo = 1
+	)
+	result = /obj/item/food/fried_chicken/special
+	category = CAT_MEAT
+
 /datum/crafting_recipe/food/beef_stroganoff
 	name = "Beef Stroganoff"
 	reqs = list(
