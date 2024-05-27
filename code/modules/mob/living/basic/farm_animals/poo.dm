@@ -1,7 +1,7 @@
 //poo
 /mob/living/basic/poo
 	name = "poo"
-	desc = "I AM THE GREAT MIGHTY POO"
+	desc = "A fat poo."
 	icon_state = "poostand"
 	icon_living = "poostand"
 	icon_dead = "poolie"
@@ -37,9 +37,9 @@
 
 ///wrapper for the tameable component addition so you can have non tamable cow subtypes
 /mob/living/basic/poo/proc/make_tameable()
-	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/poo), tame_chance = 25, bonus_tame_chance = 15, after_tame = CALLBACK(src, PROC_REF(tamed)))
+	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/poo), tame_chance = 25, bonus_tame_chance = 15)
 
-/mob/living/basic/poo/proc/tamed(mob/living/tamer)
+/mob/living/basic/poo/tamed(mob/living/tamer, atom/food)
 	can_buckle = TRUE
 	buckle_lying = 0
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/pig)
@@ -59,5 +59,5 @@
 		/datum/ai_planning_subtree/flee_target,
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
-		///datum/ai_planning_subtree/random_speech/poo,
+		// /datum/ai_planning_subtree/random_speech/poo,
 	)
