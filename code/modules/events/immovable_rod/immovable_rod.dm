@@ -339,5 +339,5 @@
 
 	RegisterSignal(src, COMSIG_ATOM_ENTERING, PROC_REF(on_entering_atom))
 
-	SSmove_manager.move_towards(src, destination_turf)
+	GLOB.move_manager.move_towards(src, destination_turf)
 	SpinAnimation(24,-1)

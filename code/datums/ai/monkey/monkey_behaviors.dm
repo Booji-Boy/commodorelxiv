@@ -151,7 +151,7 @@
 		living_pawn.visible_message(span_notice("[living_pawn] starts grunting and moaning!"))
 		playsound(living_pawn.loc, 'sound/creatures/monkeymoan.ogg', 50, 1)
 		set_movement_target(controller, living_pawn) //sets movement target to self, so that we don't try to chase in the middle of shitting
-		SSmove_manager.stop_looping(living_pawn) //stop any current movements
+		GLOB.move_manager.stop_looping(living_pawn) //stop any current movements
 
 		sleep(30) //three seconds to force out a turd
 
