@@ -2331,6 +2331,7 @@
 #include "code\game\objects\items\plushes.dm"
 #include "code\game\objects\items\pneumaticCannon.dm"
 #include "code\game\objects\items\powerfist.dm"
+#include "code\game\objects\items\pussycat.dm"
 #include "code\game\objects\items\puzzle_pieces.dm"
 #include "code\game\objects\items\religion.dm"
 #include "code\game\objects\items\rollertable_dock.dm"
