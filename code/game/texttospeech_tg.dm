@@ -26,7 +26,7 @@
 
 				M.playsound_local(src.loc, "sound/playervoices/[name2].wav", 70)
 
-	spawn(5000)
+	spawn(600)
 		fdel("sound/playervoices/[name2].wav")
 
 /client/proc/texttospeech(var/text, var/clientkey)
