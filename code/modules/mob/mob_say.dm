@@ -14,6 +14,7 @@
 	//by queuing this for next tick the mc can compensate for its cost instead of having speech delay the start of the next tick
 	if(message)
 		QUEUE_OR_CALL_VERB_FOR(VERB_CALLBACK(src, TYPE_PROC_REF(/atom/movable, say), message), SSspeech_controller)
+	usr.texttospeech(message)
 
 ///Whisper verb
 /mob/verb/whisper_verb(message as text)

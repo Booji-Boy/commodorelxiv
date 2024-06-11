@@ -1,0 +1,17 @@
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\obj\Debug\Speak.csproj.AssemblyReference.cache
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\obj\Debug\Speak.csproj.CoreCompileInputs.cache
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\FonixTalk.dll
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\ftalk_us.dll
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\ftalk_us.dic
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\lib\FonixTalk.dll
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\lib\ftalk_us.dll
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\lib\ftalk_us.dic
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\Speak.exe.config
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\Speak.exe
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\Speak.pdb
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\SharpTalk.dll
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\SharpTalk.pdb
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\bin\Debug\SharpTalk.xml
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\obj\Debug\Speak.csproj.CopyComplete
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\obj\Debug\Speak.exe
+C:\Users\Electric-Abacus\Documents\GitHub\commodorelxiv\aeiou\Speak\obj\Debug\Speak.pdb

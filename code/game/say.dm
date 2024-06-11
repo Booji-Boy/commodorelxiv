@@ -51,6 +51,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	datum/saymode/saymode,
 	list/message_mods = list(),
 )
+	src.texttospeech(message)
 	if(!try_speak(message, ignore_spam, forced, filterproof))
 		return
 	if(sanitize)
@@ -62,6 +63,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		language = get_selected_language()
 	message_mods[SAY_MOD_VERB] = say_mod(message, message_mods)
 	send_speech(message, message_range, src, bubble_type, spans, language, message_mods, forced = forced)
+
 
 /// Called when this movable hears a message from a source.
 /// Returns TRUE if the message was received and understood.
@@ -112,6 +114,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/found_client = FALSE
 	var/list/listeners = get_hearers_in_view(range, source)
 	var/list/listened = list()
+	//src.texttospeech(message)
 	for(var/atom/movable/hearing_movable as anything in listeners)
 		if(!hearing_movable)//theoretically this should use as anything because it shouldnt be able to get nulls but there are reports that it does.
 			stack_trace("somehow theres a null returned from get_hearers_in_view() in send_speech!")
