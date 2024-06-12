@@ -213,7 +213,8 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 			return TRUE
 		if(src.last_message_count >= SPAM_TRIGGER_WARNING)
 			//"auto-ban" sends the message that the cold and uncaring gamecode has been designed to quiash you like a bug in short measure should you continue, and it's quite intentional that the user isn't told exactly what that entails.
-			to_chat(src, span_danger("You are nearing the auto-ban limit for identical messages."))
+			to_chat(src, span_userdanger("You are nearing the auto-ban limit for identical messages."))
+			mob.balloon_alert(mob, "stop spamming!")
 			return FALSE
 	else
 		last_message = message
@@ -601,6 +602,9 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	QDEL_NULL(void)
 	QDEL_NULL(tooltips)
 	QDEL_NULL(loot_panel)
+	QDEL_NULL(parallax_rock)
+	QDEL_LIST(parallax_layers_cached)
+	parallax_layers = null
 	seen_messages = null
 	Master.UpdateTickRate()
 	..() //Even though we're going to be hard deleted there are still some things that want to know the destroy is happening
