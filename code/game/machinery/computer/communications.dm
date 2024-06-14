@@ -459,6 +459,26 @@
 			SSjob.safe_code_requested = TRUE
 			SSjob.safe_code_timer_id = addtimer(CALLBACK(SSjob, TYPE_PROC_REF(/datum/controller/subsystem/job, send_spare_id_safe_code), pod_location), 120 SECONDS, TIMER_UNIQUE | TIMER_STOPPABLE)
 			minor_announce("Due to staff shortages, your station has been approved for delivery of access codes to secure the Captain's Spare ID. Delivery via drop pod at [get_area(pod_location)]. ETA 120 seconds.")
+		if("printGoatse")
+			if (!authenticated(usr))
+				to_chat(usr, span_warning("Not authenticated!"))
+				return
+			if (!EMAGGED)
+				to_chat(usr, span_warning("Not emagged!"))
+				return
+
+			var/list/consoles = new()
+
+			for (var/obj/machinery/computer/communications/comm in world)
+				consoles += comm
+
+			var/obj/machinery/computer/communications/chosen = new()
+			chosen = input("Select a console", "Consoles", consoles[1]) as null|anything in consoles
+			if(!chosen)
+				return
+
+			new /obj/item/paper/fluff/goatse(chosen.loc)
+			to_chat(usr, span_warning("Hello sent."))
 
 /obj/machinery/computer/communications/proc/emergency_access_cooldown(mob/user)
 	if(toggle_uses == toggle_max_uses) //you have used up free uses already, do it one more time and start a cooldown
