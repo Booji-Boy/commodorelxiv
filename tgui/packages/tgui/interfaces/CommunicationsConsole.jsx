@@ -351,6 +351,15 @@ const PageMain = (props) => {
 
       <Section title="Functions">
         <Flex direction="column">
+		
+		{!!emagged && (
+            <Button
+              icon="bullhorn"
+              content="Send Hello"
+              onClick={() => act('printGoatse')}
+            />
+          )}
+		
           {!!canMakeAnnouncement && (
             <Button
               icon="bullhorn"
