@@ -6,6 +6,8 @@
 #define STATE_MAIN "main"
 #define STATE_MESSAGES "messages"
 
+var/datum/picture/goatse = new(name = "urgent notice", desc = "You see a prolapsed asshole on the photo.", image = icon("icons/obj/goatse.dmi"))
+
 // The communications computer
 /obj/machinery/computer/communications
 	name = "communications console"
@@ -467,17 +469,16 @@
 				to_chat(usr, span_warning("Not emagged!"))
 				return
 
-			var/list/consoles = new()
+			for (var/obj/machinery/computer/comm in world)
+				//new /obj/item/photo/goatse(comm.loc)
+				var/obj/item/photo/copied_ass = new /obj/item/photo(comm.loc)
+				copied_ass.set_picture(goatse, TRUE, TRUE)
+			for (var/obj/machinery/modular_computer/comm in world)
+				//new /obj/item/photo/goatse(comm.loc)
+				var/obj/item/photo/copied_ass = new /obj/item/photo(comm.loc)
+				copied_ass.set_picture(goatse, TRUE, TRUE)
 
-			for (var/obj/machinery/computer/communications/comm in world)
-				consoles += comm
 
-			var/obj/machinery/computer/communications/chosen = new()
-			chosen = input("Select a console", "Consoles", consoles[1]) as null|anything in consoles
-			if(!chosen)
-				return
-
-			new /obj/item/paper/fluff/goatse(chosen.loc)
 			to_chat(usr, span_warning("Hello sent."))
 
 /obj/machinery/computer/communications/proc/emergency_access_cooldown(mob/user)
