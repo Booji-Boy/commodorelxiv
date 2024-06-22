@@ -360,6 +360,11 @@
 			///handles any special interactions objects could have with the lift/tram, handled on the item itself
 			SEND_SIGNAL(dest_turf, COMSIG_TURF_INDUSTRIAL_LIFT_ENTER, things_to_move)
 
+			//indestructible turf collision == instant tram stop
+			if(istype(dest_turf,/turf/closed/indestructible))
+				explosion(dest_turf, devastation_range = rand(2, 3), heavy_impact_range = 4, light_impact_range = 6)
+				call(transport_controller_datum, "halt_and_catch_fire")(null)
+
 			if(iswallturf(dest_turf))
 				var/turf/closed/wall/collided_wall = dest_turf
 				do_sparks(2, FALSE, collided_wall)
