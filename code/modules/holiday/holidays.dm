@@ -20,6 +20,8 @@
 	var/list/timezones = list(TIMEZONE_LINT, TIMEZONE_UTC, TIMEZONE_ANYWHERE_ON_EARTH)
 	///If this is defined, drones/assistants without a default hat will spawn with this item in their head clothing slot.
 	var/obj/item/holiday_hat
+	//This adds a special item to survival boxes if defined
+	var/obj/item/holiday_boxitem
 	///When this holiday is active, does this prevent mail from arriving to cargo? Try not to use this for longer holidays.
 	var/mail_holiday = FALSE
 	var/poster_name = "generic celebration poster"
@@ -384,6 +386,7 @@
 	name = PRIDE_WEEK
 	begin_month = JUNE
 	// Stonewall was June 28th, this captures its week.
+	holiday_boxitem = /obj/item/slimepotion/genderchange/pride
 	begin_day = 23
 	end_day = 29
 	holiday_colors = list(
@@ -394,6 +397,9 @@
 		COLOR_PRIDE_ORANGE,
 		COLOR_PRIDE_RED,
 	)
+
+/datum/holiday/pride_week/getStationPrefix()
+	return pick("Pride","LGBTQIAPP++","Alphabet","Fudge Packer","Gaylord", "Faggot", "Rainbow", "Dyke", "Homo")
 
 // JULY
 

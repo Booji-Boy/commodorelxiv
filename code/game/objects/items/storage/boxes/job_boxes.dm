@@ -40,6 +40,12 @@
 		new /obj/item/flashlight/flare(src)
 		new /obj/item/radio/off(src)
 
+	for(var/holiday_name in GLOB.holidays)
+		var/datum/holiday/holiday_today = GLOB.holidays[holiday_name]
+		var/obj/item/boxitem = holiday_today.holiday_boxitem
+		if(!isnull(boxitem))
+			new boxitem(src)
+
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_RADIOACTIVE_NEBULA))
 		new /obj/item/storage/pill_bottle/potassiodide(src)
 
