@@ -1,5 +1,16 @@
 // IT IS FINALLY TIME.  IT IS HERE.  Converted to HTML5 <audio>  - Leshana
-var/const/PLAYER_HTML5_HTML={"<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+var/const/PLAYER_HTML5_HTML=@{"
+
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=11">
@@ -11,12 +22,19 @@ function SetMusic(url, time, volume, balance) {
 	// IE can't handle us setting the time before it loads, so we must wait for asychronous load
 	var setTime = function () {
 		player.removeEventListener("canplay", setTime);  // One time only!
-		player.volume = volume;
+		player.volume = Math.min(Math.max((volume/100), 0), 1); //clamped to prevent indexsizeerror
 		player.currentTime = time;
+		//if (balance != null){player.pan.value = Math.min(Math.max((balance), -1), 1);} //ie11 has no webaudio support :(
 		player.play();
 	}
 	if(url != "") player.addEventListener("canplay", setTime, false);
 	player.src = url;
+}
+function SetVolume(volume, balance) {
+
+	var player = document.getElementById('player');
+	player.volume = Math.min(Math.max((volume/100), 0), 1); //clamped to prevent indexsizeerror
+	//if (balance != null){player.pan.value = Math.min(Math.max((balance), -1), 1);} //ie11 has no webaudio support :(
 }
 </script>
 </head>
@@ -24,7 +42,15 @@ function SetMusic(url, time, volume, balance) {
 	<audio id="player"></audio>
 </body>
 </html>
+
 "}
+
+
+
+
+
+
+
 
 // Legacy player using Windows Media Player OLE object.
 // I guess it will work in IE on windows, and BYOND uses IE on windows, so alright!
@@ -46,3 +72,5 @@ function SetVolume(volume, balance) {
 	player.Settings.balance = +balance;
 }
 	</script>"}
+
+

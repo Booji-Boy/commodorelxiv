@@ -121,7 +121,7 @@
 
 // Actually pop open the player in the background.
 /datum/media_manager/proc/open()
-	playerstyle = PLAYER_WMP_HTML
+	playerstyle = PLAYER_HTML5_HTML
 	owner << browse(null, "window=[WINDOW_ID]")
 	owner << browse(playerstyle, "window=[WINDOW_ID]")
 	send_update()
