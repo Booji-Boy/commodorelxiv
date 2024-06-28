@@ -77,3 +77,9 @@
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_ship_ambience"
 	savefile_identifier = PREFERENCE_PLAYER
+
+/// Controls hearing ship ambience
+/datum/preference/toggle/sound_use_html5
+	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
+	savefile_key = "sound_use_html5"
+	savefile_identifier = PREFERENCE_PLAYER

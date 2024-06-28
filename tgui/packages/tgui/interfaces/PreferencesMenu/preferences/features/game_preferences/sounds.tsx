@@ -80,3 +80,9 @@ export const sound_vox: FeatureToggle = {
   component: CheckboxInput,
 };
 // monke edit end
+
+export const sound_use_html5: FeatureToggle = {
+  name: 'Use HTML5 media player',
+  category: 'SOUND',
+  component: CheckboxInput,
+};
