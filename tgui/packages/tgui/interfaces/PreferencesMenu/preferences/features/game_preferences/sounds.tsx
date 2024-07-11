@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import {
-  CheckboxInput,
-  Feature,
-  FeatureChoiced,
-  FeatureSliderInput,
-  FeatureToggle,
-} from '../base';
-import { FeatureDropdownInput } from '../dropdowns';
-=======
 import { multiline } from 'common/string';
 import {
   CheckboxInput,
@@ -15,12 +5,10 @@ import {
   FeatureDropdownInput,
   FeatureToggle,
 } from '../base';
->>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const sound_ambience: FeatureToggle = {
   name: 'Enable ambience',
   category: 'SOUND',
-  description: `Ambience refers to the more noticeable ambient sounds that play on occasion.`,
   component: CheckboxInput,
 };
 
@@ -52,23 +40,6 @@ export const sound_instruments: FeatureToggle = {
   component: CheckboxInput,
 };
 
-export const sound_tts: FeatureChoiced = {
-  name: 'Enable TTS',
-  category: 'SOUND',
-  description: `
-    When enabled, be able to hear text-to-speech sounds in game.
-    When set to "Blips", text to speech will be replaced with blip sounds based on the voice.
-  `,
-  component: FeatureDropdownInput,
-};
-
-export const sound_tts_volume: Feature<number> = {
-  name: 'TTS Volume',
-  category: 'SOUND',
-  description: 'The volume that the text-to-speech sounds will play at.',
-  component: FeatureSliderInput,
-};
-
 export const sound_jukebox: FeatureToggle = {
   name: 'Enable jukebox music',
   category: 'SOUND',
@@ -92,34 +63,18 @@ export const sound_midi: FeatureToggle = {
 export const sound_ship_ambience: FeatureToggle = {
   name: 'Enable ship ambience',
   category: 'SOUND',
-  description: `Ship ambience refers to the low ambient buzz that plays on loop.`,
   component: CheckboxInput,
 };
 
-<<<<<<< HEAD
-export const sound_elevator: FeatureToggle = {
-  name: 'Enable elevator music',
-  category: 'SOUND',
-  component: CheckboxInput,
-};
-
-export const sound_achievement: FeatureChoiced = {
-  name: 'Achievement unlock sound',
-  category: 'SOUND',
-  description: `
-=======
 export const sound_achievement: FeatureChoiced = {
   name: 'Achievement unlock sound',
   category: 'SOUND',
   description: multiline`
->>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     The sound that's played when unlocking an achievement.
     If disabled, no sound will be played.
   `,
   component: FeatureDropdownInput,
 };
-<<<<<<< HEAD
-=======
 
 // monke edit start - AI vox announcement toggle
 export const sound_vox: FeatureToggle = {
@@ -130,4 +85,8 @@ export const sound_vox: FeatureToggle = {
   component: CheckboxInput,
 };
 // monke edit end
->>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+export const sound_use_html5: FeatureToggle = {
+  name: 'Use WMP media player',
+  category: 'SOUND',
+  component: CheckboxInput,
+};
