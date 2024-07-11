@@ -51,6 +51,7 @@
 /// key that holds items we arent interested in hoarding
 #define BB_IGNORE_ITEMS "ignore_items"
 
+<<<<<<< HEAD
 // Cultist pet keys
 ///our ability to summon runes
 #define BB_RUNE_ABILITY "rune_ability"
@@ -82,3 +83,5 @@
 #define BB_TRICK_NAME "trick_name"
 ///the sequence of our trick
 #define BB_TRICK_SEQUENCE "trick_sequence"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

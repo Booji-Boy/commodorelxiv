@@ -31,6 +31,7 @@
 	savefile_key = "sound_instruments"
 	savefile_identifier = PREFERENCE_PLAYER
 
+<<<<<<< HEAD
 /datum/preference/choiced/sound_tts
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_tts"
@@ -53,6 +54,8 @@
 /datum/preference/numeric/sound_tts_volume/create_default_value()
 	return maximum
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/preference/choiced/sound_achievement
 	category = PREFERENCE_CATEGORY_GAME_PREFERENCES
 	savefile_key = "sound_achievement"
@@ -89,7 +92,7 @@
 	if (value && isnewplayer(client.mob))
 		client.playtitlemusic()
 	else
-		client.mob.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+		client.media.stop_music()
 
 /// Controls hearing admin music
 /datum/preference/toggle/sound_midi

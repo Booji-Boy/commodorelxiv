@@ -9,7 +9,11 @@
 	desc = "Tell a coder if you're seeing this."
 	icon_state = "nothing"
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+=======
+	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_WHITE
 	blocks_emissive = EMISSIVE_BLOCK_NONE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -36,8 +40,12 @@
 /obj/effect/dummy/lighting_obj/moblight/fire
 	name = "mob fire lighting"
 	light_color = LIGHT_COLOR_FIRE
+<<<<<<< HEAD
 	light_range = LIGHT_RANGE_FIRE
 	light_power = 2
+=======
+	light_outer_range = LIGHT_RANGE_FIRE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/dummy/lighting_obj/moblight/species
 	name = "species lighting"

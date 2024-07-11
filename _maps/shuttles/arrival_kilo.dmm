@@ -133,6 +133,17 @@
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/arrival)
+<<<<<<< HEAD
+=======
+"ax" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/plastitanium,
+/area/shuttle/arrival)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ay" = (
 /obj/machinery/requests_console{
 	department = "Arrival shuttle";
@@ -321,6 +332,11 @@
 /obj/effect/turf_decal/tile/blue/opposingcorners,
 /turf/open/floor/mineral/titanium/white,
 /area/shuttle/arrival)
+"NS" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/obj/structure/fans/tiny/invisible,
+/turf/open/floor/plating,
+/area/shuttle/arrival)
 
 (1,1,1) = {"
 aa
@@ -356,7 +372,11 @@ aX
 aW
 aQ
 aY
+<<<<<<< HEAD
 lA
+=======
+NS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (5,1,1) = {"
 ae
@@ -374,7 +394,11 @@ rV
 ay
 aV
 aN
+<<<<<<< HEAD
 lA
+=======
+NS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (7,1,1) = {"
 af
@@ -383,7 +407,11 @@ rV
 az
 aV
 aN
+<<<<<<< HEAD
 lA
+=======
+NS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (8,1,1) = {"
 af
@@ -392,7 +420,11 @@ rV
 ab
 aV
 aN
+<<<<<<< HEAD
 lA
+=======
+NS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (9,1,1) = {"
 ac
@@ -442,9 +474,15 @@ ag
 (14,1,1) = {"
 ag
 ac
+<<<<<<< HEAD
 lA
 lA
 lA
+=======
+NS
+NS
+NS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ac
 ag
 "}

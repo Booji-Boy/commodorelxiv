@@ -14,11 +14,19 @@ import { selectChatPages, selectCurrentChatPage } from './selectors';
 const UnreadCountWidget = ({ value }) => (
   <Box
     style={{
+<<<<<<< HEAD
       fontSize: '0.7em',
       borderRadius: '0.25em',
       width: '1.7em',
       lineHeight: '1.55em',
       backgroundColor: 'crimson',
+=======
+      'font-size': '0.7em',
+      'border-radius': '0.25em',
+      width: '1.7em',
+      'line-height': '1.55em',
+      'background-color': 'crimson',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       color: '#fff',
     }}
   >

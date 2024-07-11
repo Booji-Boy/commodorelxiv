@@ -9,8 +9,17 @@
 	circuit = /obj/item/circuitboard/machine/reagentgrinder
 	pass_flags = PASSTABLE
 	resistance_flags = ACID_PROOF
+<<<<<<< HEAD
 	interaction_flags_machine = parent_type::interaction_flags_machine | INTERACT_MACHINE_OFFLINE
 	anchored_tabletop_offset = 8
+=======
+	anchored_tabletop_offset = 8
+	var/operating = FALSE
+	var/obj/item/reagent_containers/beaker = null
+	var/limit = 10
+	var/speed = 1
+	var/list/holdingitems
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// The maximum weight of items this grinder can hold
 	var/maximum_weight = WEIGHT_CLASS_BULKY
@@ -333,7 +342,97 @@
 /obj/machinery/reagentgrinder/attack_ai_secondary(mob/user, list/modifiers)
 	return attack_hand_secondary(user, modifiers)
 
+<<<<<<< HEAD
 /obj/machinery/reagentgrinder/ui_interact(mob/user)
+=======
+/obj/machinery/reagentgrinder/handle_atom_del(atom/A)
+	. = ..()
+	if(A == beaker)
+		beaker = null
+		update_appearance()
+	if(holdingitems[A])
+		holdingitems -= A
+
+/obj/machinery/reagentgrinder/proc/drop_all_items()
+	for(var/i in holdingitems)
+		var/atom/movable/AM = i
+		AM.forceMove(drop_location())
+	holdingitems = list()
+
+/obj/machinery/reagentgrinder/update_icon_state()
+	icon_state = "[base_icon_state][beaker ? 1 : 0]"
+	return ..()
+
+/obj/machinery/reagentgrinder/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
+	if(!user)
+		return FALSE
+	if(beaker)
+		try_put_in_hand(beaker, user)
+		beaker = null
+	if(new_beaker)
+		beaker = new_beaker
+	update_appearance()
+	return TRUE
+
+/obj/machinery/reagentgrinder/wrench_act(mob/living/user, obj/item/tool)
+	. = ..()
+	default_unfasten_wrench(user, tool)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/reagentgrinder/attackby(obj/item/I, mob/living/user, params)
+	//You can only screw open empty grinder
+	if(!beaker && !length(holdingitems) && default_deconstruction_screwdriver(user, icon_state, icon_state, I))
+		return
+
+	if(default_deconstruction_crowbar(I))
+		return
+
+	if(panel_open) //Can't insert objects when its screwed open
+		return TRUE
+
+	if (is_reagent_container(I) && !(I.item_flags & ABSTRACT) && I.is_open_container())
+		var/obj/item/reagent_containers/B = I
+		. = TRUE //no afterattack
+		if(!user.transferItemToLoc(B, src))
+			return
+		replace_beaker(user, B)
+		to_chat(user, span_notice("You add [B] to [src]."))
+		update_appearance()
+		return TRUE //no afterattack
+
+	if(holdingitems.len >= limit)
+		to_chat(user, span_warning("[src] is filled to capacity!"))
+		return TRUE
+
+	//Fill machine with a bag!
+	if(istype(I, /obj/item/storage/bag))
+		var/list/inserted = list()
+		if(I.atom_storage.remove_type(/obj/item/food/grown, src, limit - length(holdingitems), TRUE, FALSE, user, inserted))
+			for(var/i in inserted)
+				holdingitems[i] = TRUE
+			if(!I.contents.len)
+				to_chat(user, span_notice("You empty [I] into [src]."))
+			else
+				to_chat(user, span_notice("You fill [src] to the brim."))
+		return TRUE
+
+	if(!I.grind_results && !I.juice_results)
+		if((user.istate & ISTATE_HARM))
+			return ..()
+		else
+			to_chat(user, span_warning("You cannot grind [I] into reagents!"))
+			return TRUE
+
+	if(!I.grind_requirements(src)) //Error messages should be in the objects' definitions
+		return
+
+	if(user.transferItemToLoc(I, src))
+		to_chat(user, span_notice("You add [I] to [src]."))
+		holdingitems[I] = TRUE
+		return FALSE
+
+/obj/machinery/reagentgrinder/ui_interact(mob/user) // The microwave Menu //I am reasonably certain that this is not a microwave
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 
 	//some interaction sanity checks

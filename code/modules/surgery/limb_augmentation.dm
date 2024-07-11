@@ -44,7 +44,7 @@
 
 /datum/surgery/augmentation
 	name = "Augmentation"
-	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
+	surgery_flags = SURGERY_SELF_OPERABLE | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
 	possible_locs = list(
 		BODY_ZONE_R_ARM,
 		BODY_ZONE_L_ARM,
@@ -59,6 +59,9 @@
 		/datum/surgery_step/clamp_bleeders,
 		/datum/surgery_step/replace_limb,
 	)
+
+/datum/surgery/augmentation/can_start(mob/user, mob/living/carbon/target)
+	return ..() && !isoozeling(target)
 
 //SURGERY STEP SUCCESSES
 
@@ -89,8 +92,13 @@
 			span_notice("[user] successfully augments [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully augments [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
+<<<<<<< HEAD
 		display_pain(target, "Your [target.parse_zone_with_bodypart(target_zone)] comes awash with synthetic sensation!", mechanical_surgery = TRUE)
 		log_combat(user, target, "augmented", addition="by giving him new [target.parse_zone_with_bodypart(target_zone)] COMBAT MODE: [uppertext(user.combat_mode)]")
+=======
+		display_pain(target, "Your [parse_zone(target_zone)] comes awash with synthetic sensation!", mechanical_surgery = TRUE)
+		log_combat(user, target, "augmented", addition="by giving him new [parse_zone(target_zone)] COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		to_chat(user, span_warning("[target] has no organic [target.parse_zone_with_bodypart(target_zone)] there!"))
 	return ..()

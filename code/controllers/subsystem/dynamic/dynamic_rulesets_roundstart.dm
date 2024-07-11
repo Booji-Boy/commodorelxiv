@@ -13,6 +13,10 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	minimum_required_age = 0
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
@@ -27,8 +31,10 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	weight = 5
 	cost = 8 // Avoid raising traitor threat above this, as it is the default low cost ruleset.
 	scaling_cost = 9
-	requirements = list(8,8,8,8,8,8,8,8,8,8)
+	minimum_players = 10
+	requirements = list(20,16,10,8,8,8,8,8,8,8)
 	antag_cap = list("denominator" = 38)
+
 	var/autotraitor_cooldown = (15 MINUTES)
 
 /datum/dynamic_ruleset/roundstart/traitor/pre_execute(population)
@@ -58,7 +64,8 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	required_candidates = 1
 	weight = 3
 	cost = 18
-	requirements = list(101,101,101,80,60,50,30,20,10,10)
+	minimum_players = 25
+	requirements = list(90,80,80,70,60,40,30,20,10,10)
 	antag_cap = 1
 	flags = HIGH_IMPACT_RULESET
 
@@ -106,6 +113,7 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
 		JOB_WARDEN,
+		JOB_SECURITY_ASSISTANT,
 	)
 	restricted_roles = list(
 		JOB_AI,
@@ -120,7 +128,11 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 /datum/dynamic_ruleset/roundstart/traitorbro/pre_execute(population)
 	. = ..()
 
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic_rulesets_roundstart.dm
 	for (var/i in 1 to get_antag_cap_scaling_included(population))
+=======
+	for (var/_ in 1 to get_antag_cap(population) * (scaled_times + 1))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic_rulesets_roundstart.dm
 		var/mob/candidate = pick_n_take(candidates)
 		if (isnull(candidate))
 			break
@@ -134,7 +146,14 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 
 /datum/dynamic_ruleset/roundstart/traitorbro/execute()
 	for (var/datum/mind/mind in assigned)
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic_rulesets_roundstart.dm
 		new /datum/team/brother_team(mind)
+=======
+		var/datum/team/brother_team/team = new
+		team.add_member(mind)
+		team.forge_brother_objectives()
+		mind.add_antag_datum(/datum/antagonist/brother, team)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic_rulesets_roundstart.dm
 		GLOB.pre_setup_antags -= mind
 
 	return TRUE
@@ -151,11 +170,16 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	antag_datum = /datum/antagonist/changeling
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
 		JOB_WARDEN,
+		JOB_SECURITY_ASSISTANT,
 	)
 	restricted_roles = list(
 		JOB_AI,
@@ -165,6 +189,9 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	weight = 3
 	cost = 16
 	scaling_cost = 10
+
+	minimum_players = 20
+
 	requirements = list(70,70,60,50,40,20,20,10,10,10)
 	antag_cap = list("denominator" = 29)
 
@@ -199,21 +226,29 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	antag_datum = /datum/antagonist/heretic
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
 		JOB_WARDEN,
+		JOB_SECURITY_ASSISTANT,
 	)
 	restricted_roles = list(
 		JOB_AI,
 		JOB_CYBORG,
 	)
 	required_candidates = 1
-	weight = 3
+	weight = 4
 	cost = 10
+
+	minimum_players = 20
+
 	scaling_cost = 9
-	requirements = list(101,101,60,30,30,25,20,15,10,10)
+	requirements = list(101,101,50,20,20,10,10,10,10,10)
 	antag_cap = list("denominator" = 24)
 	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_HERETIC_SACRIFICE)
 
@@ -266,6 +301,9 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	cost = 20
 	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_WIZARDDEN)
+
+	minimum_players = 30
+
 
 /datum/dynamic_ruleset/roundstart/wizard/ready(forced = FALSE)
 	if(!check_candidates())
@@ -337,6 +375,8 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	flags = HIGH_IMPACT_RULESET
 	antag_cap = list("denominator" = 20, "offset" = 1)
 	var/datum/team/cult/main_cult
+
+	minimum_players = 30
 
 /datum/dynamic_ruleset/roundstart/bloodcult/ready(population, forced = FALSE)
 	required_candidates = get_antag_cap(population)
@@ -410,11 +450,12 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	requirements = list(90,90,90,80,60,40,30,20,10,10)
 	flags = HIGH_IMPACT_RULESET
 	antag_cap = list("denominator" = 18, "offset" = 1)
-	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE)
 	var/required_role = ROLE_NUCLEAR_OPERATIVE
 	var/datum/team/nuclear/nuke_team
 	///The job type to dress up our nuclear operative as.
 	var/datum/job/job_type = /datum/job/nuclear_operative
+
+	minimum_players = 30
 
 /datum/dynamic_ruleset/roundstart/nuclear/ready(population, forced = FALSE)
 	required_candidates = get_antag_cap(population)
@@ -503,15 +544,14 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 		JOB_HEAD_OF_PERSONNEL,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
-		JOB_QUARTERMASTER,
 		JOB_RESEARCH_DIRECTOR,
 		JOB_SECURITY_OFFICER,
 		JOB_WARDEN,
 	)
 	required_candidates = 3
-	weight = 3
+	weight = 1
 	delay = 7 MINUTES
-	cost = 20
+	cost = 40
 	requirements = list(101,101,70,40,30,20,10,10,10,10)
 	antag_cap = 3
 	flags = HIGH_IMPACT_RULESET
@@ -625,6 +665,9 @@ GLOBAL_VAR_INIT(revolutionary_win, FALSE)
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	required_role = ROLE_CLOWN_OPERATIVE
 	job_type = /datum/job/clown_operative
+
+	minimum_players = 30
+
 
 /datum/dynamic_ruleset/roundstart/nuclear/clown_ops/pre_execute()
 	. = ..()

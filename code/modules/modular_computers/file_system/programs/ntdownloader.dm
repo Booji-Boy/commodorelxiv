@@ -105,7 +105,10 @@
 		download_completion += download_netspeed
 
 /datum/computer_file/program/ntnetdownload/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("PRG_downloadfile")
 			if(!downloaded_file)
@@ -149,16 +152,34 @@
 			"installed" = !!computer.find_file_by_name(programs.filename),
 			"compatible" = check_compatibility(programs),
 			"size" = programs.size,
+<<<<<<< HEAD
 			"access" = programs.can_run(user, downloading = TRUE, access = access),
 			"verifiedsource" = !!(programs.program_flags & PROGRAM_ON_NTNET_STORE),
+=======
+			"access" = (computer.obj_flags & EMAGGED) && programs.available_on_syndinet ? TRUE : programs.can_run(user, transfer = TRUE, access = access),
+			"verifiedsource" = programs.available_on_ntnet,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		))
 
 	data["categories"] = show_categories
 
 	return data
 
+<<<<<<< HEAD
 ///Checks if a provided `program_to_check` is compatible to be downloaded on our computer.
 /datum/computer_file/program/ntnetdownload/proc/check_compatibility(datum/computer_file/program/program_to_check)
 	if(!program_to_check || !program_to_check.is_supported_by_hardware(hardware_flag = computer.hardware_flag, loud = FALSE))
 		return FALSE
 	return TRUE
+=======
+/datum/computer_file/program/ntnetdownload/proc/check_compatibility(datum/computer_file/program/P)
+	var/hardflag = computer.hardware_flag
+
+	if(P?.is_supported_by_hardware(hardware_flag = hardflag, loud = FALSE))
+		return TRUE
+	return FALSE
+
+/datum/computer_file/program/ntnetdownload/kill_program(mob/user)
+	abort_file_download()
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

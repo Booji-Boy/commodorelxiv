@@ -18,7 +18,11 @@ type ComponentPrinterData = {
 
 export const ComponentPrinter = (props) => {
   const { act, data } = useBackend<ComponentPrinterData>();
+<<<<<<< HEAD
   const { materials, designs, SHEET_MATERIAL_AMOUNT } = data;
+=======
+  const { designs, materials } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   // Reduce the material count array to a map of actually available materials.
   const availableMaterials: MaterialMap = {};
@@ -39,6 +43,7 @@ export const ComponentPrinter = (props) => {
                 design,
                 availableMaterials,
                 _onPrintDesign,
+<<<<<<< HEAD
               ) => (
                 <Recipe
                   design={design}
@@ -46,6 +51,9 @@ export const ComponentPrinter = (props) => {
                   SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
                 />
               )}
+=======
+              ) => <Recipe design={design} available={availableMaterials} />}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             />
           </Stack.Item>
           <Stack.Item>
@@ -65,6 +73,7 @@ export const ComponentPrinter = (props) => {
   );
 };
 
+<<<<<<< HEAD
 type RecipeProps = {
   design: Design;
   available: MaterialMap;
@@ -74,6 +83,11 @@ type RecipeProps = {
 const Recipe = (props: RecipeProps) => {
   const { act } = useBackend<ComponentPrinterData>();
   const { design, available, SHEET_MATERIAL_AMOUNT } = props;
+=======
+const Recipe = (props: { design: Design; available: MaterialMap }) => {
+  const { act, data } = useBackend<ComponentPrinterData>();
+  const { design, available } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const canPrint = !Object.entries(design.cost).some(
     ([material, amount]) =>
@@ -108,9 +122,13 @@ const Recipe = (props: RecipeProps) => {
             'FabricatorRecipe__Title',
             !canPrint && 'FabricatorRecipe__Title--disabled',
           ])}
+<<<<<<< HEAD
           onClick={() =>
             canPrint && act('print', { designId: design.id, amount: 1 })
           }
+=======
+          onClick={() => act('print', { designId: design.id, amount: 1 })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <div className="FabricatorRecipe__Icon">
             <Box

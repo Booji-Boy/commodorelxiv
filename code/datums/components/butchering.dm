@@ -34,14 +34,18 @@
 	if(isitem(parent))
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK, PROC_REF(onItemAttack))
 
+<<<<<<< HEAD
 /datum/component/butchering/Destroy(force)
+=======
+/datum/component/butchering/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	butcher_callback = null
 	return ..()
 
 /datum/component/butchering/proc/onItemAttack(obj/item/source, mob/living/M, mob/living/user)
 	SIGNAL_HANDLER
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		return
 	if(M.stat == DEAD && (M.butcher_results || M.guaranteed_butcher_results)) //can we butcher it?
 		if(butchering_enabled && (can_be_blunt || source.get_sharpness()))

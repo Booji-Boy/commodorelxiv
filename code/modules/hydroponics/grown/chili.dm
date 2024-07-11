@@ -7,18 +7,23 @@
 	plantname = "Chili Plants"
 	product = /obj/item/food/grown/chili
 	lifespan = 20
-	maturation = 5
-	production = 5
-	yield = 4
+	maturation = 20
+	production = 20
+	yield = 40
 	potency = 20
+<<<<<<< HEAD
 	instability = 30
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
+=======
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "chili-grow" // Uses one growth icons set for all the subtypes
 	icon_dead = "chili-dead" // Same for the dead icon
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/chili/ice, /obj/item/seeds/chili/ghost)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/ghost_chili)
+	infusion_mutations = list(/datum/hydroponics/plant_mutation/infusion/chilly_pepper)
 	reagents_add = list(/datum/reagent/consumable/capsaicin = 0.25, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.04)
-
+	harvest_age = 100
 /obj/item/food/grown/chili
 	seed = /obj/item/seeds/chili
 	name = "chili"
@@ -37,11 +42,13 @@
 	plantname = "Chilly Pepper Plants"
 	product = /obj/item/food/grown/icepepper
 	lifespan = 25
-	maturation = 4
+	maturation = 12
 	production = 4
 	rarity = PLANT_MODERATELY_RARE
 	genes = list(/datum/plant_gene/trait/chem_cooling)
-	mutatelist = null
+	possible_mutations = list()
+	infusion_mutations = list()
+	harvest_age = 80
 	reagents_add = list(/datum/reagent/consumable/frostoil = 0.25, /datum/reagent/consumable/nutriment/vitamin = 0.02, /datum/reagent/consumable/nutriment = 0.02)
 	graft_gene = /datum/plant_gene/trait/chem_cooling
 
@@ -65,10 +72,17 @@
 	endurance = 10
 	maturation = 10
 	production = 10
+<<<<<<< HEAD
 	yield = 3
 	rarity = PLANT_MODERATELY_RARE
+=======
+	yield = 30
+	rarity = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	genes = list(/datum/plant_gene/trait/chem_heating, /datum/plant_gene/trait/backfire/chili_heat)
-	mutatelist = null
+	possible_mutations = list()
+	infusion_mutations = list()
+	harvest_age = 100
 	reagents_add = list(/datum/reagent/consumable/condensedcapsaicin = 0.3, /datum/reagent/consumable/capsaicin = 0.55, /datum/reagent/consumable/nutriment = 0.04)
 	graft_gene = /datum/plant_gene/trait/chem_heating
 
@@ -92,10 +106,15 @@
 	endurance = 10
 	maturation = 10
 	production = 10
+<<<<<<< HEAD
 	yield = 3
 	rarity = PLANT_MODERATELY_RARE
+=======
+	yield = 30
+	rarity = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.08, /datum/reagent/consumable/nutriment = 0.04)
 
 /obj/item/food/grown/bell_pepper

@@ -17,13 +17,21 @@
 	mood_change = 5
 	timeout = 3 MINUTES
 
+<<<<<<< HEAD
 /datum/mood_event/eldritch_painting/weeping_withdrawal
+=======
+/datum/mood_event/eldritch_painting/weeping_withdrawl
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	description = "My mind is clear from his influence."
 	mood_change = 1
 	timeout = 3 MINUTES
 
 /datum/mood_event/eldritch_painting/desire_heretic
+<<<<<<< HEAD
 	description = "A part gained, the mansus takes and gives. What did it take from me?"
+=======
+	description = "A part gained, the manus takes and gives. What did it take from me?"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mood_change = -2
 	timeout = 3 MINUTES
 

@@ -444,12 +444,15 @@
 	icon_state = "nog2"
 	drink_type = FRUIT
 
+<<<<<<< HEAD
 /datum/glass_style/has_foodtype/drinking_glass/dreadnog
 	required_drink_type = /datum/reagent/consumable/ethanol/dreadnog
 	name = "eggnog"
 	desc = "For suffering during the best time of the year."
 	drink_type = FRUIT | GROSS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/glass_style/drinking_glass/narsour
 	required_drink_type = /datum/reagent/consumable/ethanol/narsour
 	name = "Nar'Sour"

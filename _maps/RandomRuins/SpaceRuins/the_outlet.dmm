@@ -1478,7 +1478,13 @@
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-110"
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/crayon/rune2,
+=======
+/obj/effect/decal/cleanable/crayon{
+	icon_state = "rune2"
+	},
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/construct/proteon/hostile,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/the_outlet/researchrooms)
@@ -1572,7 +1578,13 @@
 /area/template_noop)
 "LL" = (
 /mob/living/basic/construct/proteon/hostile,
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/crayon/rune2,
+=======
+/obj/effect/decal/cleanable/crayon{
+	icon_state = "rune2"
+	},
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/gibspawner/human,
 /turf/open/floor/iron/freezer,
 /area/ruin/space/has_grav/the_outlet/researchrooms)

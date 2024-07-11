@@ -12,8 +12,13 @@
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/operative/spawn_role()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_OPERATIVE, role = ROLE_LONE_OPERATIVE, alert_pic = /obj/machinery/nuclearbomb, amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_OPERATIVE, role = ROLE_LONE_OPERATIVE, pic_source = /obj/machinery/nuclearbomb)
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/spawn_location = find_space_spawn()
 	if(isnull(spawn_location))

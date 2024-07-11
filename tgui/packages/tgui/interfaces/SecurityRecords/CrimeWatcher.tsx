@@ -18,7 +18,26 @@ import {
 } from 'tgui/components';
 
 import { getSecurityRecord } from './helpers';
+<<<<<<< HEAD
 import { Crime, SECURETAB, SecurityRecordsData } from './types';
+=======
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Collapsible,
+  Icon,
+  Input,
+  LabeledList,
+  NoticeBox,
+  RestrictedInput,
+  Section,
+  Stack,
+  Tabs,
+  TextArea,
+  Tooltip,
+} from 'tgui/components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /** Displays a list of crimes and allows to add new ones. */
 export const CrimeWatcher = (props) => {
@@ -211,9 +230,15 @@ const CrimeAuthor = (props) => {
   const { crew_ref } = foundRecord;
   const { act } = useBackend<SecurityRecordsData>();
 
+<<<<<<< HEAD
   const [crimeName, setCrimeName] = useState('');
   const [crimeDetails, setCrimeDetails] = useState('');
   const [crimeFine, setCrimeFine] = useState(0);
+=======
+  const [crimeName, setCrimeName] = useLocalState('crimeName', '');
+  const [crimeDetails, setCrimeDetails] = useLocalState('crimeDetails', '');
+  const [crimeFine, setCrimeFine] = useLocalState('crimeFine', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [selectedTab, setSelectedTab] = useLocalState<SECURETAB>(
     'selectedTab',
     SECURETAB.Crimes,

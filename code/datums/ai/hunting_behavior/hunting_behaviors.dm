@@ -58,8 +58,13 @@
 		if(!valid_dinner(living_mob, possible_dinner, hunt_range, controller, seconds_per_tick))
 			continue
 		controller.set_blackboard_key(hunting_target_key, possible_dinner)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, TRUE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/find_hunt_target/proc/valid_dinner(mob/living/source, atom/dinner, radius, datum/ai_controller/controller, seconds_per_tick)
 	if(isliving(dinner))
@@ -90,9 +95,18 @@
 	var/atom/hunted = controller.blackboard[hunting_target_key]
 
 	if(QDELETED(hunted))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 	target_caught(hunter, hunted)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+		//Target is gone for some reason. forget about this task!
+		controller[hunting_target_key] = null
+		finish_action(controller, FALSE, hunting_target_key)
+	else
+		target_caught(hunter, hunted)
+		finish_action(controller, TRUE, hunting_target_key, hunting_cooldown_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/hunt_target/proc/target_caught(mob/living/hunter, atom/hunted)
 	if(isliving(hunted)) // Are we hunting a living mob?
@@ -131,7 +145,11 @@
 	if(!switch_combat_mode)
 		return
 	var/mob/living/living_pawn = controller.pawn
+<<<<<<< HEAD
 	living_pawn.combat_mode = initial(living_pawn.combat_mode)
+=======
+	living_pawn.istate = initial(living_pawn.istate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/hunt_target/unarmed_attack_target/switch_combat_mode
 	switch_combat_mode = TRUE
@@ -147,13 +165,18 @@
 /datum/ai_behavior/hunt_target/use_ability_on_target/perform(seconds_per_tick, datum/ai_controller/controller, hunting_target_key, hunting_cooldown_key)
 	var/datum/action/cooldown/ability = controller.blackboard[ability_key]
 	if(!ability?.IsAvailable())
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, hunting_target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/ai_behavior/hunt_target/use_ability_on_target/target_caught(mob/living/hunter, atom/hunted)
 	var/datum/action/cooldown/ability = hunter.ai_controller.blackboard[ability_key]
 	ability.InterceptClickOn(hunter, null, hunted)
 
+<<<<<<< HEAD
 
 /datum/ai_behavior/hunt_target/latch_onto
 
@@ -170,3 +193,5 @@
 		return FALSE
 	hunted.visible_message(span_notice("[hunted] has been latched onto by [hunter]!"))
 	return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

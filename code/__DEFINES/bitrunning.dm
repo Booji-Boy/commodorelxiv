@@ -4,6 +4,7 @@
 #define BITRUNNER_COST_HIGH 3
 #define BITRUNNER_COST_EXTREME 20
 
+<<<<<<< HEAD
 /// Yay you did it
 #define BITRUNNER_REWARD_MIN 1
 /// You faced some decent odds
@@ -26,3 +27,19 @@
 
 /// Camera network bitrunner bodycams are on
 #define BITRUNNER_CAMERA_NET "bitrunner"
+=======
+#define BITRUNNER_REWARD_MIN 1
+#define BITRUNNER_REWARD_LOW 3
+#define BITRUNNER_REWARD_MEDIUM 4
+#define BITRUNNER_REWARD_HIGH 5
+#define BITRUNNER_REWARD_EXTREME 6
+
+/// Blue in ui
+#define BITRUNNER_DIFFICULTY_NONE 0
+/// Yellow
+#define BITRUNNER_DIFFICULTY_LOW 1
+/// Orange
+#define BITRUNNER_DIFFICULTY_MEDIUM 2
+/// Red with skull
+#define BITRUNNER_DIFFICULTY_HIGH 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -7,14 +7,22 @@
 import {
   addChatPage,
   changeChatPage,
+<<<<<<< HEAD
   changeScrollTracking,
   loadChat,
   moveChatPageLeft,
   moveChatPageRight,
+=======
+  loadChat,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   removeChatPage,
   toggleAcceptedType,
   updateChatPage,
   updateMessageCount,
+<<<<<<< HEAD
+=======
+  changeScrollTracking,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from './actions';
 import { canPageAcceptType, createMainPage } from './model';
 

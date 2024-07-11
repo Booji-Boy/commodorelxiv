@@ -103,7 +103,7 @@
 	. = ..()
 	if(.)
 		return
-	if(!check_rights_for(usr.client, R_DEBUG))
+	if(!check_rights_for(usr.client, R_ADMIN))
 		return
 	if(action == "runCodeFile")
 		params["code"] = file2text(input(usr, "Input File") as null|file)
@@ -233,6 +233,16 @@
 	. = ..()
 	qdel(src)
 
+<<<<<<< HEAD
 ADMIN_VERB(lua_editor, R_DEBUG, "Open Lua Editor", "Its codin' time.", ADMIN_CATEGORY_DEBUG)
 	var/datum/lua_editor/editor = new
 	editor.ui_interact(user.mob)
+=======
+/client/proc/open_lua_editor()
+	set name = "Open Lua Editor"
+	set category = "Debug"
+	if(!check_rights_for(src, R_ADMIN))
+		return
+	var/datum/lua_editor/editor = new()
+	editor.ui_interact(usr)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

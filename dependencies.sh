@@ -8,7 +8,11 @@ export BYOND_MAJOR=515
 export BYOND_MINOR=1637
 
 #rust_g git tag
+<<<<<<< HEAD
 export RUST_G_VERSION=3.3.0
+=======
+export RUST_G_VERSION=3.1.0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #node version
 export NODE_VERSION_LTS=20.13.0
@@ -26,9 +30,12 @@ export AUXLUA_REPO=tgstation/auxlua
 
 #auxlua git tag
 export AUXLUA_VERSION=1.4.4
+<<<<<<< HEAD
 
 #hypnagogic repo
 export CUTTER_REPO=spacestation13/hypnagogic
 
 #hypnagogic git tag
 export CUTTER_VERSION=v3.1.0
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

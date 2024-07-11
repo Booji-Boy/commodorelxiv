@@ -138,6 +138,7 @@
 
 	/// If this fish type counts towards the Fish Species Scanning experiments
 	var/experisci_scannable = TRUE
+<<<<<<< HEAD
 	/// cooldown on creating tesla zaps
 	COOLDOWN_DECLARE(electrogenesis_cooldown)
 	/// power of the tesla zap created by the fish in a bioelectric generator
@@ -146,6 +147,12 @@
 /obj/item/fish/Initialize(mapload, apply_qualities = TRUE)
 	. = ..()
 	AddComponent(/datum/component/aquarium_content, icon, PROC_REF(get_aquarium_animation), list(COMSIG_FISH_STATUS_CHANGED,COMSIG_FISH_STIRRED))
+=======
+
+/obj/item/fish/Initialize(mapload, apply_qualities = TRUE)
+	. = ..()
+	AddComponent(/datum/component/aquarium_content, PROC_REF(get_aquarium_animation), list(COMSIG_FISH_STATUS_CHANGED,COMSIG_FISH_STIRRED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	RegisterSignal(src, COMSIG_ATOM_ON_LAZARUS_INJECTOR, PROC_REF(use_lazarus))
 	if(do_flop_animation)
@@ -208,6 +215,7 @@
 	size = new_size
 	switch(size)
 		if(0 to FISH_SIZE_TINY_MAX)
+<<<<<<< HEAD
 			update_weight_class(WEIGHT_CLASS_TINY)
 			inhand_icon_state = "fish_small"
 		if(FISH_SIZE_TINY_MAX to FISH_SIZE_SMALL_MAX)
@@ -222,6 +230,22 @@
 		if(FISH_SIZE_BULKY_MAX to INFINITY)
 			inhand_icon_state = "fish_huge"
 			update_weight_class(WEIGHT_CLASS_HUGE)
+=======
+			w_class = WEIGHT_CLASS_TINY
+			inhand_icon_state = "fish_small"
+		if(FISH_SIZE_TINY_MAX to FISH_SIZE_SMALL_MAX)
+			inhand_icon_state = "fish_small"
+			w_class = WEIGHT_CLASS_SMALL
+		if(FISH_SIZE_SMALL_MAX to FISH_SIZE_NORMAL_MAX)
+			inhand_icon_state = "fish_normal"
+			w_class = WEIGHT_CLASS_NORMAL
+		if(FISH_SIZE_NORMAL_MAX to FISH_SIZE_BULKY_MAX)
+			inhand_icon_state = "fish_bulky"
+			w_class = WEIGHT_CLASS_BULKY
+		if(FISH_SIZE_BULKY_MAX to INFINITY)
+			inhand_icon_state = "fish_huge"
+			w_class = WEIGHT_CLASS_HUGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(fillet_type)
 		var/init_fillets = initial(num_fillets)
 		var/amount = max(round(init_fillets * size / FISH_FILLET_NUMBER_SIZE_DIVISOR, 1), 1)
@@ -318,8 +342,11 @@
 		last_feeding = world.time
 	else
 		var/datum/reagent/wrong_reagent = pick(fed_reagents.reagent_list)
+<<<<<<< HEAD
 		if(!wrong_reagent)
 			return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		fed_reagent_type = wrong_reagent.type
 		fed_reagents.remove_reagent(fed_reagent_type, 0.1)
 	SEND_SIGNAL(src, COMSIG_FISH_FED, fed_reagents, fed_reagent_type)
@@ -355,9 +382,12 @@
 	if(ready_to_reproduce())
 		try_to_reproduce()
 
+<<<<<<< HEAD
 	if(HAS_TRAIT(src, TRAIT_FISH_ELECTROGENESIS) && COOLDOWN_FINISHED(src, electrogenesis_cooldown))
 		try_electrogenesis()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(src, COMSIG_FISH_LIFE, seconds_per_tick)
 
 /obj/item/fish/proc/set_status(new_status)
@@ -611,6 +641,7 @@
 /obj/item/fish/proc/refresh_flopping()
 	if(flopping)
 		flop_animation()
+<<<<<<< HEAD
 
 /obj/item/fish/proc/try_electrogenesis()
 	if(status == FISH_DEAD || is_hungry())
@@ -624,6 +655,8 @@
 		fish_zap_power = electrogenesis_power
 		fish_zap_flags |= (ZAP_GENERATES_POWER | ZAP_MOB_STUN)
 	tesla_zap(source = get_turf(src), zap_range = fish_zap_range, power = fish_zap_power, cutoff = 1 MEGA JOULES, zap_flags = fish_zap_flags)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns random fish, using random_case_rarity probabilities.
 /proc/random_fish_type(required_fluid)

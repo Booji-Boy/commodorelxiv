@@ -280,21 +280,27 @@
 		/obj/item/mod/module/jump_jet,
 	)
 
+<<<<<<< HEAD
 /obj/item/mod/control/pre_equipped/nuclear/no_jetpack
 
 /obj/item/mod/control/pre_equipped/nuclear/no_jetpack/Initialize(mapload, new_theme, new_skin, new_core)
 	applied_modules -= list(/obj/item/mod/module/jetpack/advanced, /obj/item/mod/module/jump_jet)
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/mod/control/pre_equipped/nuclear/plasmaman
 
 /obj/item/mod/control/pre_equipped/nuclear/plasmaman/Initialize(mapload, new_theme, new_skin, new_core)
 	applied_modules += /obj/item/mod/module/plasma_stabilizer
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/mod/control/pre_equipped/nuclear/unrestricted
 	req_access = null
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/mod/control/pre_equipped/elite
 	theme = /datum/mod_theme/elite
 	starting_frequency = MODLINK_FREQ_SYNDICATE

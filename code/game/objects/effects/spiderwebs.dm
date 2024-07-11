@@ -80,11 +80,19 @@
 		return FALSE
 	if(isliving(mover))
 		if(HAS_TRAIT(mover, TRAIT_WEB_SURFER))
+<<<<<<< HEAD
 			return TRUE
 		if(mover.pulledby && HAS_TRAIT(mover.pulledby, TRAIT_WEB_SURFER))
 			return TRUE
 		if(prob(stuck_chance))
 			stuck_react(mover)
+=======
+			return TRUE
+		if(mover.pulledby && HAS_TRAIT(mover.pulledby, TRAIT_WEB_SURFER))
+			return TRUE
+		if(prob(50))
+			loc.balloon_alert(mover, "stuck in web!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return FALSE
 		return .
 	if(isprojectile(mover))
@@ -96,8 +104,16 @@
 	loc.balloon_alert(stuck_guy, "stuck in web!")
 	stuck_guy.Shake(duration = 0.1 SECONDS)
 
+<<<<<<< HEAD
 /// Web made by geneticists, needs special handling to allow them to pass through their own webs
 /obj/structure/spider/stickyweb/genetic
+=======
+/obj/structure/spider/stickyweb/sealed/Initialize(mapload)
+	. = ..()
+	air_update_turf(TRUE, TRUE)
+
+/obj/structure/spider/stickyweb/genetic //for the spider genes in genetics
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	genetic = TRUE
 	desc = "It's stringy, sticky, and came out of your coworker."
 	/// Mob with special permission to cross this web
@@ -120,12 +136,17 @@
 		if(mover.pulledby == allowed_mob)
 			return TRUE
 		if(prob(50))
+<<<<<<< HEAD
 			stuck_react(mover)
+=======
+			loc.balloon_alert(mover, "stuck in web!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return FALSE
 	else if(isprojectile(mover))
 		return prob(30)
 	return .
 
+<<<<<<< HEAD
 /// Web with a 100% chance to intercept movement
 /obj/structure/spider/stickyweb/very_sticky
 	max_integrity = 20
@@ -215,6 +236,39 @@
 	pixel_y = -9
 	air_update_turf(TRUE, TRUE)
 	add_filter(SPIDER_WEB_TINT, 10, list("type" = "outline", "color" = "#ffffffff", "alpha" = 0.8, "size" = 0.1))
+=======
+/obj/structure/spider/solid
+	name = "solid web"
+	icon = 'icons/effects/effects.dmi'
+	desc = "A solid wall of web, thick enough to block air flow."
+	icon_state = "solidweb"
+	can_atmos_pass = ATMOS_PASS_NO
+	opacity = TRUE
+	density = TRUE
+	max_integrity = 90
+	plane = GAME_PLANE_UPPER
+	resistance_flags = FIRE_PROOF | FREEZE_PROOF
+
+/obj/structure/spider/solid/Initialize(mapload)
+	. = ..()
+	air_update_turf(TRUE, TRUE)
+
+/obj/structure/spider/passage
+	name = "web passage"
+	icon = 'icons/effects/effects.dmi'
+	desc = "A messy connection of webs blocking the other side, but not solid enough to prevent passage."
+	icon_state = "webpassage"
+	can_atmos_pass = ATMOS_PASS_NO
+	opacity = TRUE
+	max_integrity = 60
+	alpha = 200
+	plane = GAME_PLANE_UPPER
+	resistance_flags = FIRE_PROOF | FREEZE_PROOF
+
+/obj/structure/spider/passage/Initialize(mapload)
+	. = ..()
+	air_update_turf(TRUE, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/spider/cocoon
 	name = "cocoon"
@@ -244,6 +298,7 @@
 		A.forceMove(T)
 	return ..()
 
+<<<<<<< HEAD
 /// Web caltrops
 /obj/structure/spider/spikes
 	name = "web spikes"
@@ -256,19 +311,53 @@
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_SPIDER_WEB
 	canSmoothWith = SMOOTH_GROUP_SPIDER_WEB + SMOOTH_GROUP_WALLS
+=======
+/obj/structure/spider/sticky
+	name = "sticky web"
+	icon = 'icons/effects/effects.dmi'
+	desc = "Extremely soft and sticky silk."
+	icon_state = "verystickyweb"
+	max_integrity = 20
+
+/obj/structure/spider/sticky/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
+	if(isspider(mover))
+		return TRUE
+	if(!isliving(mover))
+		return
+	if(!isnull(mover.pulledby) && isspider(mover.pulledby))
+		return TRUE
+	loc.balloon_alert(mover, "stuck in web!")
+	return FALSE
+
+/obj/structure/spider/spikes
+	name = "web spikes"
+	icon = 'icons/effects/effects.dmi'
+	desc = "Silk hardened into small yet deadly spikes."
+	icon_state = "webspikes1"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	max_integrity = 40
 
 /obj/structure/spider/spikes/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	pixel_x = -9
 	pixel_y = -9
 	add_filter(SPIDER_WEB_TINT, 10, list("type" = "outline", "color" = "#ac0000ff", "size" = 0.1))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(/datum/component/caltrop, min_damage = 20, max_damage = 30, flags = CALTROP_NOSTUN | CALTROP_BYPASS_SHOES)
 
 /obj/structure/spider/effigy
 	name = "web effigy"
+<<<<<<< HEAD
 	desc = "A giant spider! Fortunately, this one is just a statue of hardened webbing."
 	icon_state = "effigy"
+=======
+	icon = 'icons/effects/effects.dmi'
+	desc = "A giant spider! Fortunately, this one is just a statue of hardened webbing."
+	icon_state = "webcarcass"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	max_integrity = 125
 	density = TRUE
 	anchored = FALSE
@@ -276,5 +365,8 @@
 /obj/structure/spider/effigy/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/temporary_atom, 1 MINUTES)
+<<<<<<< HEAD
 
 #undef SPIDER_WEB_TINT
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

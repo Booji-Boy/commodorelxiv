@@ -18,11 +18,15 @@
 	spell_type = /datum/action/cooldown/spell/rod_form
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
 
-/datum/spellbook_entry/disintegrate
+/*/datum/spellbook_entry/disintegrate //monkestation edit: replaced with a pointed version with a different effect
 	name = "Smite"
 	desc = "Charges your hand with an unholy energy that can be used to cause a touched victim to violently explode."
 	spell_type = /datum/action/cooldown/spell/touch/smite
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
+=======
+	category = "Offensive"*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/summon_simians
 	name = "Summon Simians"
@@ -30,7 +34,11 @@
 		summons primal monkeys and lesser gorillas that will promptly flip out and attack everything in sight. Fun! \
 		Their lesser, easily manipulable minds will be convinced you are one of their allies, but only for a minute. Unless you also are a monkey."
 	spell_type = /datum/action/cooldown/spell/conjure/simian
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
+=======
+	category = "Offensive"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/blind
 	name = "Blind"
@@ -84,7 +92,12 @@
 	name = "Barnyard Curse"
 	desc = "This spell dooms an unlucky soul to possess the speech and facial attributes of a barnyard animal."
 	spell_type = /datum/action/cooldown/spell/pointed/barnyardcurse
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
+=======
+	category = "Offensive"
+	cost = 1 //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/splattercasting
 	name = "Splattercasting"
@@ -119,11 +132,15 @@
 	item_path = /obj/item/gun/magic/staff/change
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
 
-/datum/spellbook_entry/item/mjolnir
+/*/datum/spellbook_entry/item/mjolnir //monkestation edit: replaced with the spell summon mjollnir
 	name = "Mjolnir"
 	desc = "A mighty hammer on loan from Thor, God of Thunder. It crackles with barely contained power."
 	item_path = /obj/item/mjollnir
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_OFFENSIVE
+=======
+	category = "Offensive"*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/item/singularity_hammer
 	name = "Singularity Hammer"

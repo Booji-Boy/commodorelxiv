@@ -1,7 +1,129 @@
 // This file contains all of the "static" define strings that tie to a trait.
 // WARNING: The sections here actually matter in this file as it's tested by CI. Please do not toy with the sections."
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 // BEGIN TRAIT DEFINES
+=======
+// trait accessor defines
+#define ADD_TRAIT(target, trait, source) \
+	do { \
+		var/list/_L; \
+		if (!target._status_traits) { \
+			target._status_traits = list(); \
+			_L = target._status_traits; \
+			_L[trait] = list(source); \
+			SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
+		} else { \
+			_L = target._status_traits; \
+			if (_L[trait]) { \
+				_L[trait] |= list(source); \
+			} else { \
+				_L[trait] = list(source); \
+				SEND_SIGNAL(target, SIGNAL_ADDTRAIT(trait), trait); \
+			} \
+		} \
+	} while (0)
+#define REMOVE_TRAIT(target, trait, sources) \
+	do { \
+		var/list/_L = target._status_traits; \
+		var/list/_S; \
+		if (sources && !islist(sources)) { \
+			_S = list(sources); \
+		} else { \
+			_S = sources\
+		}; \
+		if (_L?[trait]) { \
+			for (var/_T in _L[trait]) { \
+				if ((!_S && (_T != ROUNDSTART_TRAIT)) || (_T in _S)) { \
+					_L[trait] -= _T \
+				} \
+			};\
+			if (!length(_L[trait])) { \
+				_L -= trait; \
+				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
+			}; \
+			if (!length(_L)) { \
+				target._status_traits = null \
+			}; \
+		} \
+	} while (0)
+#define REMOVE_TRAIT_NOT_FROM(target, trait, sources) \
+	do { \
+		var/list/_traits_list = target._status_traits; \
+		var/list/_sources_list; \
+		if (sources && !islist(sources)) { \
+			_sources_list = list(sources); \
+		} else { \
+			_sources_list = sources\
+		}; \
+		if (_traits_list?[trait]) { \
+			for (var/_trait_source in _traits_list[trait]) { \
+				if (!(_trait_source in _sources_list)) { \
+					_traits_list[trait] -= _trait_source \
+				} \
+			};\
+			if (!length(_traits_list[trait])) { \
+				_traits_list -= trait; \
+				SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(trait), trait); \
+			}; \
+			if (!length(_traits_list)) { \
+				target._status_traits = null \
+			}; \
+		} \
+	} while (0)
+#define REMOVE_TRAITS_NOT_IN(target, sources) \
+	do { \
+		var/list/_L = target._status_traits; \
+		var/list/_S = sources; \
+		if (_L) { \
+			for (var/_T in _L) { \
+				_L[_T] &= _S;\
+				if (!length(_L[_T])) { \
+					_L -= _T; \
+					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T), _T); \
+					}; \
+				};\
+			if (!length(_L)) { \
+				target._status_traits = null\
+			};\
+		}\
+	} while (0)
+
+#define REMOVE_TRAITS_IN(target, sources) \
+	do { \
+		var/list/_L = target._status_traits; \
+		var/list/_S = sources; \
+		if (sources && !islist(sources)) { \
+			_S = list(sources); \
+		} else { \
+			_S = sources\
+		}; \
+		if (_L) { \
+			for (var/_T in _L) { \
+				_L[_T] -= _S;\
+				if (!length(_L[_T])) { \
+					_L -= _T; \
+					SEND_SIGNAL(target, SIGNAL_REMOVETRAIT(_T)); \
+					}; \
+				};\
+			if (!length(_L)) { \
+				target._status_traits = null\
+			};\
+		}\
+	} while (0)
+
+#define HAS_TRAIT(target, trait) (target?._status_traits?[trait] ? TRUE : FALSE)
+#define HAS_TRAIT_FROM(target, trait, source) (HAS_TRAIT(target, trait) && (source in target?._status_traits[trait]))
+#define HAS_TRAIT_FROM_ONLY(target, trait, source) (HAS_TRAIT(target, trait) && (source in target._status_traits[trait]) && (length(target._status_traits[trait]) == 1))
+#define HAS_TRAIT_NOT_FROM(target, trait, source) (HAS_TRAIT(target, trait) && (length(target._status_traits[trait] - source) > 0))
+/// Returns a list of trait sources for this trait. Only useful for wacko cases and internal futzing
+/// You should not be using this
+#define GET_TRAIT_SOURCES(target, trait) target?._status_traits?[trait] || list()
+/// Returns the amount of sources for a trait. useful if you don't want to have a "thing counter" stuck around all the time
+#define COUNT_TRAIT_SOURCES(target, trait) length(GET_TRAIT_SOURCES(target, trait))
+/// A simple helper for checking traits in a mob's mind
+#define HAS_MIND_TRAIT(target, trait) (HAS_TRAIT(target, trait) || HAS_TRAIT(target?.mind, trait))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /*
 Remember to update _globalvars/traits.dm if you're adding/removing/renaming traits.
@@ -14,6 +136,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_IMMOBILIZED "immobilized"
 /// Prevents voluntary standing or staying up on its own.
 #define TRAIT_FLOORED "floored"
+///Slows the user, with additional effects based on the source.
+#define TRAIT_DISORIENTED "disoriented"
 /// Forces user to stay standing
 #define TRAIT_FORCED_STANDING "forcedstanding"
 /// Prevents usage of manipulation appendages (picking, holding or using items, manipulating storage).
@@ -33,6 +157,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 ///Recolored by item/greentext
 #define TRAIT_GREENTEXT_CURSED "greentext_curse"
 #define TRAIT_INCAPACITATED "incapacitated"
+///User's stamina is over the STAMINA_EXHAUSTION_THRESHOLD
+#define TRAIT_EXHAUSTED "exhausted"
+///User is sprinting, full speed ahead
+#define TRAIT_SPRINTING "sprinting"
+///User cannot sprint
+#define TRAIT_NO_SPRINT "no_sprint"
 /// In some kind of critical condition. Is able to succumb.
 #define TRAIT_CRITICAL_CONDITION "critical-condition"
 /// Whitelist for mobs that can read or write
@@ -61,8 +191,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// means that you can't use weapons with normal trigger guards.
 #define TRAIT_CHUNKYFINGERS "chunkyfingers"
 #define TRAIT_CHUNKYFINGERS_IGNORE_BATON "chunkyfingers_ignore_baton"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Allows you to mine with your bare hands
 #define TRAIT_FIST_MINING "fist_mining"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 #define TRAIT_DUMB "dumb"
 /// Whether a mob is dexterous enough to use machines and certain items or not.
 #define TRAIT_ADVANCEDTOOLUSER "advancedtooluser"
@@ -158,18 +291,32 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHUNGER "no_hunger"
 /// This carbon doesn't bleed
 #define TRAIT_NOBLOOD "noblood"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// This just means that the carbon will always have functional liverless metabolism
 #define TRAIT_LIVERLESS_METABOLISM "liverless_metabolism"
 /// This carbon can't be overdosed by chems
 #define TRAIT_OVERDOSEIMMUNE "overdose_immune"
+=======
+#define TRAIT_NOMETABOLISM "no_metabolism"
+// Use when you want a mob to be able to metabolize plasma temporarily (e.g. plasma fixation disease symptom)
+/// This just means that the carbon will always have functional liverless metabolism
+#define TRAIT_LIVERLESS_METABOLISM "liverless_metabolism"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// Humans with this trait cannot be turned into zombies
 #define TRAIT_NO_ZOMBIFY "no_zombify"
 /// Carbons with this trait can't have their DNA copied by diseases nor changelings
 #define TRAIT_NO_DNA_COPY "no_dna_copy"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Carbons with this trait cant have their dna scrambled by genetics or a disease retrovirus.
 #define TRAIT_NO_DNA_SCRAMBLE "no_dna_scramble"
 /// Carbons with this trait can eat blood to regenerate their own blood volume, instead of injecting it
 #define TRAIT_DRINKS_BLOOD "drinks_blood"
+=======
+/// Carbons with this trait can eat blood to regenerate their own blood volume, instead of injecting it
+#define TRAIT_DRINKS_BLOOD "drinks_blood"
+/// Mob is immune to clone (cellular) damage
+#define TRAIT_NOCLONELOSS "no_cloneloss"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// Mob is immune to toxin damage
 #define TRAIT_TOXIMMUNE "toxin_immune"
 /// Mob is immune to oxygen damage, does not need to breathe
@@ -191,14 +338,21 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOCRITOVERLAY "no_crit_overlay"
 /// reduces the use time of syringes, pills, patches and medigels but only when using on someone
 #define TRAIT_FASTMED "fast_med_use"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// The mob is holy and resistance to cult magic
+=======
+#define TRAIT_ANTIMAGIC "anti_magic"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 #define TRAIT_HOLY "holy"
 /// This mob is antimagic, and immune to spells / cannot cast spells
 #define TRAIT_ANTIMAGIC "anti_magic"
 /// This allows a person who has antimagic to cast spells without getting blocked
 #define TRAIT_ANTIMAGIC_NO_SELFBLOCK "anti_magic_no_selfblock"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// This mob recently blocked magic with some form of antimagic
 #define TRAIT_RECENTLY_BLOCKED_MAGIC "recently_blocked_magic"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// The user can do things like use magic staffs without penalty
 #define TRAIT_MAGICALLY_GIFTED "magically_gifted"
 /// This object innately spawns with fantasy variables already applied (the magical component is given to it on initialize), and thus we never want to give it the component again.
@@ -206,6 +360,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEPRESSION "depression"
 #define TRAIT_JOLLY "jolly"
 #define TRAIT_NOCRITDAMAGE "no_crit"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Prevents shovies and some strong blows such as unarmed punches and (unreliably) tackles the owner down
 #define TRAIT_BRAWLING_KNOCKDOWN_BLOCKED "brawling_knockdown_blocked"
 /// Applies tackling defense bonus to any mob that has it
@@ -234,6 +389,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Added to a mob, allows that mob to experience flavour-based moodlets when examining food
 #define TRAIT_REMOTE_TASTING "remote_tasting"
+=======
+///Added to mob or mind, changes the icons of the fish shown in the minigame UI depending on the possible reward.
+#define TRAIT_REVEAL_FISH "reveal_fish"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /// Stops the mob from slipping on water, or banana peels, or pretty much anything that doesn't have [GALOSHES_DONT_HELP] set
 #define TRAIT_NO_SLIP_WATER "noslip_water"
@@ -248,9 +407,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Unlinks gliding from movement speed, meaning that there will be a delay between movements rather than a single move movement between tiles
 #define TRAIT_NO_GLIDE "no_glide"
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Applied into wounds when they're scanned with the wound analyzer, halves time to treat them manually.
 #define TRAIT_WOUND_SCANNED "wound_scanned"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 #define TRAIT_NODEATH "nodeath"
 #define TRAIT_NOHARDCRIT "nohardcrit"
 #define TRAIT_NOSOFTCRIT "nosoftcrit"
@@ -309,10 +471,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SPINNING_WEB_TURF "spinning_web_turf"
 #define TRAIT_ABDUCTOR_TRAINING "abductor-training"
 #define TRAIT_ABDUCTOR_SCIENTIST_TRAINING "abductor-scientist-training"
-#define TRAIT_SURGEON "surgeon"
+//#define TRAIT_SURGEON "surgeon"  // monke edit: replace with TRAIT_ALL_SURGERIES and TRAIT_PERFECT_SURGEON
 #define TRAIT_STRONG_GRABBER "strong_grabber"
 #define TRAIT_SOOTHED_THROAT "soothed-throat"
 #define TRAIT_BOOZE_SLIDER "booze-slider"
+#define TRAIT_MONKEYFRIEND 	"monkeyfriend"
 /// We place people into a fireman carry quicker than standard
 #define TRAIT_QUICK_CARRY "quick-carry"
 /// We place people into a fireman carry especially quickly compared to quick_carry
@@ -358,8 +521,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEL_ON_SPACE_DUMP "del_on_hyperspace_leave"
 /// We can walk up or around cliffs, or at least we don't fall off of it
 #define TRAIT_CLIFF_WALKER "cliff_walker"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// This means the user is currently holding/wearing a "tactical camouflage" item (like a potted plant).
 #define TRAIT_TACTICALLY_CAMOUFLAGED "tactically_camouflaged"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// Gets double arcade prizes
 #define TRAIT_GAMERGOD "gamer-god"
 #define TRAIT_GIANT "giant"
@@ -378,9 +544,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_EXTINGUISH "no_extinguish"
 /// Indicates if the mob is currently speaking with sign language
 #define TRAIT_SIGN_LANG "sign_language"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Trait given to mobs to indicate that they can catch papers thrown at them midair without trying,
 /// and make syndicate airplanes when folding paper up.
 #define TRAIT_PAPER_MASTER "paper_master"
+=======
+/// The mob's nanites are sending a monitoring signal visible on diag HUD
+#define TRAIT_NANITE_MONITORING "nanite_monitoring"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// This mob is able to use sign language over the radio.
 #define TRAIT_CAN_SIGN_ON_COMMS "can_sign_on_comms"
 /// nobody can use martial arts on this mob
@@ -453,6 +624,19 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_USER_SCOPED "user_scoped"
 /// Mob is unable to feel pain
 #define TRAIT_ANALGESIA "analgesia"
+
+/// Trait added when a revenant is visible.
+#define TRAIT_REVENANT_REVEALED "revenant_revealed"
+/// Trait added when a revenant has been inhibited (typically by the bane of a holy weapon)
+#define TRAIT_REVENANT_INHIBITED "revenant_inhibited"
+
+/// Trait which prevents you from becoming overweight
+#define TRAIT_NOFAT "cant_get_fat"
+
+/// Trait which allows you to eat rocks
+#define TRAIT_ROCK_EATER "rock_eater"
+/// Trait which allows you to gain bonuses from consuming rocks
+#define TRAIT_ROCK_METAMORPHIC "rock_metamorphic"
 
 /// Trait added when a revenant is visible.
 #define TRAIT_REVENANT_REVEALED "revenant_revealed"
@@ -556,6 +740,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 ///Makes the player appear as their respective job in Binary Talk rather than being a 'Default Cyborg'.
 #define DISPLAYS_JOB_IN_BINARY "display_job_in_binary"
 
+/// Mob is unable to feel pain
+#define TRAIT_ANALGESIA "analgesia"
+
+/// Is the mob standing on an elevated surface? This prevents them from dropping down if not elevated first.
+#define TRAIT_ON_ELEVATED_SURFACE "on_elevated_surface"
+/// Does the mob ignore elevation? (e.g. xeno larvas & cortical borers on hiding)
+#define TRAIT_IGNORE_ELEVATION "ignore_elevation"
+
 // METABOLISMS
 // Various jobs on the station have historically had better reactions
 // to various drinks and foodstuffs. Security liking donuts is a classic
@@ -651,6 +843,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_LAVA_STOPPED "lava_stopped"
 ///Chasms will be safe to cross while they've this trait.
 #define TRAIT_CHASM_STOPPED "chasm_stopped"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 ///Chasms will be safe to cross if there is something with this trait on it
 #define TRAIT_CHASM_STOPPER "chasm_stopper"
 ///The effects of the immerse element will be halted while this trait is present.
@@ -658,6 +851,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The effects of hyperspace drift are blocked when the tile has this trait
 #define TRAIT_HYPERSPACE_STOPPED "hyperspace_stopped"
 
+=======
+/// The effects of hyperspace drift are blocked when the tile has this trait
+#define TRAIT_HYPERSPACE_STOPPED "hyperspace_stopped"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 ///Turf slowdown will be ignored when this trait is added to a turf.
 #define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
 ///Mobs won't slip on a wet turf while it has this trait
@@ -726,7 +923,11 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_GOOD_QUALITY_BAIT "good_quality_bait"
 #define TRAIT_GREAT_QUALITY_BAIT "great_quality_bait"
 /// Baits with this trait will ignore bait preferences and related fish traits.
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 #define TRAIT_OMNI_BAIT "omni_bait"
+=======
+#define OMNI_BAIT_TRAIT "omni_bait"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// Plants that were mutated as a result of passive instability, not a mutation threshold.
 #define TRAIT_PLANT_WILDMUTATE "wildmutation"
 /// If you hit an APC with exposed internals with this item it will try to shock you
@@ -766,6 +967,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CLOWN_ENJOYER "clown_enjoyer"
 #define TRAIT_MIME_FAN "mime_fan"
 #define TRAIT_VORACIOUS "voracious"
+#define TRAIT_GOURMAND "gourmand"
 #define TRAIT_SELF_AWARE "self_aware"
 #define TRAIT_FREERUNNING "freerunning"
 #define TRAIT_SKITTISH "skittish"
@@ -800,11 +1002,29 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has light debugging tools attached to it
 #define TRAIT_LIGHTING_DEBUGGED "lighting_debugged"
 
+///if the atom has a sticker attached to it
+#define TRAIT_STICKERED "stickered"
+
+#define TRAIT_JAILBIRD			"jailbird"
+#define TRAIT_STOWAWAY			"stowaway"
+#define TRAIT_LOUD_ASS			"loud_ass"
+#define TRAIT_UNSTABLE_ASS		"unstable_ass"
+#define TRAIT_STABLE_ASS		"stable_ass"
+#define TRAIT_KLEPTOMANIAC		"kleptomaniac"
+#define TRAIT_ANIME				"anime"
+#define TRAIT_CAT				"cat"
+#define TRAIT_HIDDEN_IMAGE		"generic-hidden-image"
+#define TRAIT_HIDDEN_CLOWN		"clown_disbelief"
+#define TRAIT_MINING_CALLOUTS	"miner_callouts"
+
 /// Gives you the Shifty Eyes quirk, rarely making people who examine you think you examined them back even when you didn't
 #define TRAIT_SHIFTY_EYES "shifty_eyes"
 
 ///Trait for the gamer quirk.
 #define TRAIT_GAMER "gamer"
+
+/// Trait for the Extra-Sensory Paranoia quirk
+#define TRAIT_PARANOIA "paranoia"
 
 ///Trait for dryable items
 #define TRAIT_DRYABLE "trait_dryable"
@@ -885,6 +1105,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Trait given to a living mob to prevent wizards from making it immortal
 #define TRAIT_PERMANENTLY_MORTAL "permanently_mortal"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 
 ///Trait given to a mob with a ckey currently in a temporary body, allowing people to know someone will re-enter the round later.
 #define TRAIT_MIND_TEMPORARILY_GONE "temporarily_gone"
@@ -925,6 +1146,122 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Whether bots will salute this mob.
 #define TRAIT_COMMISSIONED "commissioned"
+=======
+
+///Trait given to a mob with a ckey currently in a temporary body, allowing people to know someone will re-enter the round later.
+#define TRAIT_MIND_TEMPORARILY_GONE "temporarily_gone"
+
+/// Similar trait given to temporary bodies inhabited by players
+#define TRAIT_TEMPORARY_BODY "temporary_body"
+
+/// Trait given to mechs that can have orebox functionality on movement
+#define TRAIT_OREBOX_FUNCTIONAL "orebox_functional"
+
+///fish traits
+#define TRAIT_RESIST_EMULSIFY "resist_emulsify"
+#define TRAIT_FISH_SELF_REPRODUCE "fish_self_reproduce"
+#define TRAIT_FISH_NO_MATING "fish_no_mating"
+#define TRAIT_YUCKY_FISH "yucky_fish"
+#define TRAIT_FISH_TOXIN_IMMUNE "fish_toxin_immune"
+#define TRAIT_FISH_CROSSBREEDER "fish_crossbreeder"
+#define TRAIT_FISH_AMPHIBIOUS "fish_amphibious"
+///Trait needed for the lubefish evolution
+#define TRAIT_FISH_FED_LUBE "fish_fed_lube"
+#define TRAIT_FISH_NO_HUNGER "fish_no_hunger"
+
+/// Trait given to angelic constructs to let them purge cult runes
+#define TRAIT_ANGELIC "angelic"
+
+// common trait sources
+#define TRAIT_GENERIC "generic"
+#define UNCONSCIOUS_TRAIT "unconscious"
+#define EYE_DAMAGE "eye_damage"
+#define EAR_DAMAGE "ear_damage"
+#define GENETIC_MUTATION "genetic"
+#define OBESITY "obesity"
+#define MAGIC_TRAIT "magic"
+#define TRAUMA_TRAIT "trauma"
+#define FLIGHTPOTION_TRAIT "flightpotion"
+/// Trait inherited by experimental surgeries
+#define EXPERIMENTAL_SURGERY_TRAIT "experimental_surgery"
+#define DISEASE_TRAIT "disease"
+#define SPECIES_TRAIT "species"
+#define ORGAN_TRAIT "organ"
+/// Trait given by organ gained via abductor surgery
+#define ABDUCTOR_GLAND_TRAIT "abductor_gland"
+/// cannot be removed without admin intervention
+#define ROUNDSTART_TRAIT "roundstart"
+#define JOB_TRAIT "job"
+#define CYBORG_ITEM_TRAIT "cyborg-item"
+/// Any traits granted by quirks.
+#define QUIRK_TRAIT "quirk_trait"
+/// (B)admins only.
+#define ADMIN_TRAIT "admin"
+/// Any traits given through a smite.
+#define SMITE_TRAIT "smite"
+#define CHANGELING_TRAIT "changeling"
+#define CULT_TRAIT "cult"
+#define LICH_TRAIT "lich"
+
+/// From [/datum/element/elevation] for purpose of registering/removing signals and detaching the elevation_core when the trait is absent.
+#define TRAIT_TURF_HAS_ELEVATED_OBJ(z) "turf_has_elevated_obj_[z]"
+/// The item is magically cursed
+#define CURSED_ITEM_TRAIT(item_type) "cursed_item_[item_type]"
+#define ABSTRACT_ITEM_TRAIT "abstract-item"
+/// A trait given by any status effect
+#define STATUS_EFFECT_TRAIT "status-effect"
+/// A trait given by a specific status effect (not sure why we need both but whatever!)
+#define TRAIT_STATUS_EFFECT(effect_id) "[effect_id]-trait"
+
+#define CLOTHING_TRAIT "clothing"
+#define HELMET_TRAIT "helmet"
+/// inherited from the mask
+#define MASK_TRAIT "mask"
+/// inherited from your sweet kicks
+#define SHOES_TRAIT "shoes"
+/// Trait inherited by implants
+#define IMPLANT_TRAIT "implant"
+#define GLASSES_TRAIT "glasses"
+/// inherited from riding vehicles
+#define VEHICLE_TRAIT "vehicle"
+#define INNATE_TRAIT "innate"
+#define CRIT_HEALTH_TRAIT "crit_health"
+#define OXYLOSS_TRAIT "oxyloss"
+/// Trait sorce for "was recently shocked by something"
+#define WAS_SHOCKED "was_shocked"
+#define TURF_TRAIT "turf"
+/// trait associated to being buckled
+#define BUCKLED_TRAIT "buckled"
+/// trait associated to being held in a chokehold
+#define CHOKEHOLD_TRAIT "chokehold"
+/// trait associated to resting
+#define RESTING_TRAIT "resting"
+/// trait associated to a stat value or range of
+#define STAT_TRAIT "stat"
+#define STATION_TRAIT "station-trait"
+/// obtained from mapping helper
+#define MAPPING_HELPER_TRAIT "mapping-helper"
+/// Trait associated to wearing a suit
+#define SUIT_TRAIT "suit"
+/// Trait associated to lying down (having a [lying_angle] of a different value than zero).
+#define LYING_DOWN_TRAIT "lying-down"
+/// A trait gained by leaning against a wall
+#define LEANING_TRAIT "leaning"
+/// Trait associated to lacking electrical power.
+#define POWER_LACK_TRAIT "power-lack"
+/// Trait associated to lacking motor movement
+#define MOTOR_LACK_TRAIT "motor-lack"
+/// Trait associated with mafia
+#define MAFIA_TRAIT "mafia"
+/// Trait associated with ctf
+#define CTF_TRAIT "ctf"
+/// Trait associated with highlander
+#define HIGHLANDER_TRAIT "highlander"
+/// Trait given from playing pretend with baguettes
+#define SWORDPLAY_TRAIT "swordplay"
+/// Trait given by being recruited as a nuclear operative
+#define NUKE_OP_MINION_TRAIT "nuke-op-minion"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 ///generic atom traits
 /// Trait from [/datum/element/rust]. Its rusty and should be applying a special overlay to denote this.
@@ -937,12 +1274,148 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CHASM_DESTROYED "chasm_destroyed"
 /// Trait from being under the floor in some manner
 #define TRAIT_UNDERFLOOR "underfloor"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// If the movable shouldn't be reflected by mirrors.
 #define TRAIT_NO_MIRROR_REFLECTION "no_mirror_reflection"
 /// If this movable is currently treading in a turf with the immerse element.
 #define TRAIT_IMMERSED "immersed"
 /// From [/datum/element/elevation_core] for purpose of checking if the turf has the trait from an instance of the element
 #define TRAIT_ELEVATED_TURF "elevated_turf"
+=======
+/// From [/datum/element/elevation_core] for purpose of checking if the turf has the trait from an instance of the element
+#define TRAIT_ELEVATED_TURF "elevated_turf"
+/// If the movable shouldn't be reflected by mirrors.
+#define TRAIT_NO_MIRROR_REFLECTION "no_mirror_reflection"
+
+// unique trait sources, still defines
+#define CLONING_POD_TRAIT "cloning-pod"
+#define STATUE_MUTE "statue"
+#define CHANGELING_DRAIN "drain"
+/// changelings with this trait can no longer talk over the hivemind
+#define CHANGELING_HIVEMIND_MUTE "ling_mute"
+#define TRAIT_HULK "hulk"
+#define STASIS_MUTE "stasis"
+#define GENETICS_SPELL "genetics_spell"
+#define EYES_COVERED "eyes_covered"
+#define NO_EYES "no_eyes"
+#define HYPNOCHAIR_TRAIT "hypnochair"
+#define NANITES_TRAIT "nanites"
+#define FLASHLIGHT_EYES "flashlight_eyes"
+#define IMPURE_OCULINE "impure_oculine"
+#define HAUNTIUM_REAGENT_TRAIT "hauntium_reagent_trait"
+#define TRAIT_SANTA "santa"
+#define SCRYING_ORB "scrying-orb"
+#define ABDUCTOR_ANTAGONIST "abductor-antagonist"
+#define JUNGLE_FEVER_TRAIT "jungle_fever"
+#define MEGAFAUNA_TRAIT "megafauna"
+#define CLOWN_NUKE_TRAIT "clown-nuke"
+#define STICKY_MOUSTACHE_TRAIT "sticky-moustache"
+#define CHAINSAW_FRENZY_TRAIT "chainsaw-frenzy"
+#define CHRONO_GUN_TRAIT "chrono-gun"
+#define REVERSE_BEAR_TRAP_TRAIT "reverse-bear-trap"
+#define CURSED_MASK_TRAIT "cursed-mask"
+#define HIS_GRACE_TRAIT "his-grace"
+#define HAND_REPLACEMENT_TRAIT "magic-hand"
+#define HOT_POTATO_TRAIT "hot-potato"
+#define SABRE_SUICIDE_TRAIT "sabre-suicide"
+#define ABDUCTOR_VEST_TRAIT "abductor-vest"
+#define CAPTURE_THE_FLAG_TRAIT "capture-the-flag"
+#define BASKETBALL_MINIGAME_TRAIT "basketball-minigame"
+#define EYE_OF_GOD_TRAIT "eye-of-god"
+#define SHAMEBRERO_TRAIT "shamebrero"
+#define CHRONOSUIT_TRAIT "chronosuit"
+#define LOCKED_HELMET_TRAIT "locked-helmet"
+#define NINJA_SUIT_TRAIT "ninja-suit"
+#define SLEEPING_CARP_TRAIT "sleeping_carp"
+#define MADE_UNCLONEABLE "made-uncloneable"
+#define TIMESTOP_TRAIT "timestop"
+#define LIFECANDLE_TRAIT "lifecandle"
+#define VENTCRAWLING_TRAIT "ventcrawling"
+#define SPECIES_FLIGHT_TRAIT "species-flight"
+#define FROSTMINER_ENRAGE_TRAIT "frostminer-enrage"
+#define NO_GRAVITY_TRAIT "no-gravity"
+/// A trait gained from a mob's leap action, like the leaper
+#define LEAPING_TRAIT "leaping"
+/// A trait gained from a mob's vanish action, like the herophant
+#define VANISHING_TRAIT "vanishing"
+/// A trait gained from a mob's swoop action, like the ash drake
+#define SWOOPING_TRAIT "swooping"
+/// A trait gained from a mob's mimic ability, like the mimic
+#define MIMIC_TRAIT "mimic"
+#define SHRUNKEN_TRAIT "shrunken"
+#define LEAPER_BUBBLE_TRAIT "leaper-bubble"
+#define DNA_VAULT_TRAIT "dna_vault"
+/// sticky nodrop sounds like a bad soundcloud rapper's name
+#define STICKY_NODROP "sticky-nodrop"
+#define SKILLCHIP_TRAIT "skillchip"
+#define SKILL_TRAIT "skill"
+#define BUSY_FLOORBOT_TRAIT "busy-floorbot"
+#define PULLED_WHILE_SOFTCRIT_TRAIT "pulled-while-softcrit"
+#define LOCKED_BORG_TRAIT "locked-borg"
+#define TRAIT_VAULTING "vaulting" //simian trait
+/// trait associated to not having locomotion appendages nor the ability to fly or float
+#define LACKING_LOCOMOTION_APPENDAGES_TRAIT "lacking-locomotion-appengades"
+#define CRYO_TRAIT "cryo"
+/// trait associated to not having fine manipulation appendages such as hands
+#define LACKING_MANIPULATION_APPENDAGES_TRAIT "lacking-manipulation-appengades"
+#define HANDCUFFED_TRAIT "handcuffed"
+/// Trait granted by [/obj/item/warp_whistle]
+#define WARPWHISTLE_TRAIT "warpwhistle"
+///Turf trait for when a turf is transparent
+#define TURF_Z_TRANSPARENT_TRAIT "turf_z_transparent"
+/// Trait applied by [/datum/component/soulstoned]
+#define SOULSTONE_TRAIT "soulstone"
+/// Trait applied to slimes by low temperature
+#define SLIME_COLD "slime-cold"
+/// Trait applied to mobs by being tipped over
+#define TIPPED_OVER "tipped-over"
+/// Trait applied to PAIs by being folded
+#define PAI_FOLDED "pai-folded"
+/// Trait applied to brain mobs when they lack external aid for locomotion, such as being inside a mech.
+#define BRAIN_UNAIDED "brain-unaided"
+/// Trait applied to a mob when it gets a required "operational datum" (components/elements). Sends out the source as the type of the element.
+#define TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM "element-required"
+/// Trait applied by MODsuits.
+#define MOD_TRAIT "mod"
+/// Trait applied by element
+#define ELEMENT_TRAIT(source) "element_trait_[source]"
+/// Trait granted by the berserker hood.
+#define BERSERK_TRAIT "berserk_trait"
+/// Trait granted by [/obj/item/rod_of_asclepius]
+#define HIPPOCRATIC_OATH_TRAIT "hippocratic_oath"
+/// Trait granted by [/datum/status_effect/blooddrunk]
+#define BLOODDRUNK_TRAIT "blooddrunk"
+/// Trait granted by lipstick
+#define LIPSTICK_TRAIT "lipstick_trait"
+/// Self-explainatory.
+#define BEAUTY_ELEMENT_TRAIT "beauty_element"
+#define MOOD_DATUM_TRAIT "mood_datum"
+#define DRONE_SHY_TRAIT "drone_shy"
+/// Pacifism trait given by stabilized light pink extracts.
+#define STABILIZED_LIGHT_PINK_TRAIT "stabilized_light_pink"
+/// Given by the multiple_lives component to the previous body of the mob upon death.
+#define EXPIRED_LIFE_TRAIT "expired_life"
+/// Trait given to an atom/movable when they orbit something.
+#define ORBITING_TRAIT "orbiting"
+/// From the item_scaling element
+#define ITEM_SCALING_TRAIT "item_scaling"
+#define MECH_TRAIT "mech_trait"
+/// Trait given by choking
+#define CHOKING_TRAIT "choking_trait"
+/// Trait given by hallucinations
+#define HALLUCINATION_TRAIT "hallucination_trait"
+/// Trait given by simple/basic mob death
+#define BASIC_MOB_DEATH_TRAIT "basic_mob_death"
+/// Trait given by your current speed
+#define SPEED_TRAIT "speed_trait"
+/// Trait given to mobs that have been autopsied
+#define AUTOPSY_TRAIT "autopsy_trait"
+/// Trait given by [/datum/status_effect/blessing_of_insanity]
+#define MAD_WIZARD_TRAIT "mad_wizard_trait"
+/// Isn't attacked harmfully by blob structures
+#define TRAIT_BLOB_ALLY "blob_ally"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /**
  * With this, the immerse overlay will give the atom its own submersion visual overlay
  * instead of one that's also shared with other movables, thus making editing its appearance possible.
@@ -980,12 +1453,18 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define STATION_TRAIT_RADIOACTIVE_NEBULA "station_trait_radioactive_nebula"
 #define STATION_TRAIT_RANDOM_ARRIVALS "station_trait_random_arrivals"
 #define STATION_TRAIT_REVOLUTIONARY_TRASHING "station_trait_revolutionary_trashing"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 #define STATION_TRAIT_SHUTTLE_SALE "station_trait_shuttle_sale"
 #define STATION_TRAIT_SMALLER_PODS "station_trait_smaller_pods"
 #define STATION_TRAIT_SPIDER_INFESTATION "station_trait_spider_infestation"
 #define STATION_TRAIT_UNIQUE_AI "station_trait_unique_ai"
 #define STATION_TRAIT_UNNATURAL_ATMOSPHERE "station_trait_unnatural_atmosphere"
 #define STATION_TRAIT_VENDING_SHORTAGE "station_trait_vending_shortage"
+=======
+#define STATION_TRAIT_MEDBOT_MANIA "station_trait_medbot_mania"
+#define STATION_TRAIT_LOANER_SHUTTLE "station_trait_loaner_shuttle"
+#define STATION_TRAIT_SHUTTLE_SALE "station_trait_shuttle_sale"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 ///Deathmatch traits
 #define TRAIT_DEATHMATCH_EXPLOSIVE_IMPLANTS "deathmath_explosive_implants"
@@ -1004,8 +1483,16 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MAGNETIC_ID_CARD "magnetic_id_card"
 /// ID cards with this trait have special appraisal text.
 #define TRAIT_TASTEFULLY_THICK_ID_CARD "impressive_very_nice"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// things with this trait are treated as having no access in /atom/movable/proc/check_access(obj/item)
 #define TRAIT_ALWAYS_NO_ACCESS "alwaysnoaccess"
+=======
+/// things with this trait are treated as having no access in /obj/proc/check_access(obj/item)
+#define TRAIT_ALWAYS_NO_ACCESS "alwaysnoaccess"
+
+/// Traits granted to items due to their chameleon properties.
+#define CHAMELEON_ITEM_TRAIT "chameleon_item_trait"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /// This human wants to see the color of their glasses, for some reason
 #define TRAIT_SEE_GLASS_COLORS "see_glass_colors"
@@ -1032,7 +1519,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Simple trait that just holds if we came into growth from a specific mob type. Should hold a REF(src) to the type of mob that caused the growth, not anything else.
 #define TRAIT_WAS_EVOLVED "was_evolved_from_the_mob_we_hold_a_textref_to"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 // Traits to heal for
 
 /// This mob heals from carp rifts.
@@ -1065,8 +1555,24 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Is runechat for this atom/movable currently disabled, regardless of prefs or anything?
 #define TRAIT_RUNECHAT_HIDDEN "runechat_hidden"
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// the object has a label applied
 #define TRAIT_HAS_LABEL "labeled"
+=======
+///coming from a fish trait datum.
+#define FISH_TRAIT_DATUM "fish_trait_datum"
+///coming from a fish evolution datum
+#define FISH_EVOLUTION "fish_evolution"
+
+/// some trait sorces dirived from bodyparts BODYPART_TRAIT is generic.
+#define BODYPART_TRAIT "bodypart"
+#define HEAD_TRAIT "head"
+#define CHEST_TRAIT "chest"
+#define RIGHT_ARM_TRAIT "right_arm"
+#define LEFT_ARM_TRAIT "left_arm"
+#define RIGHT_LEG_TRAIT "right_leg"
+#define LEFT_LEG_TRAIT "left_leg"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /// Trait given to a mob that is currently thinking (giving off the "thinking" icon), used in an IC context
 #define TRAIT_THINKING_IN_CHARACTER "currently_thinking_IC"
@@ -1076,9 +1582,47 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 // specific sources for TRAIT_SPEAKS_CLEARLY
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 ///Trait given by /datum/component/germ_sensitive
 #define TRAIT_GERM_SENSITIVE "germ_sensitive"
 
+=======
+///trait source that tongues should use
+#define SPEAKING_FROM_TONGUE "tongue"
+///trait source that sign language should use
+#define SPEAKING_FROM_HANDS "hands"
+/// this object cannot have its export value be shown by export scanner (shows as unknown)
+#define TRAIT_HIDDEN_EXPORT_VALUE "hiddenexportvalue"
+
+///FOOD TRAITS
+///Trait for Fire Burps
+#define TRAIT_FOOD_FIRE_BURPS "food_buff_fire_burps"
+///Traut for fast sliding
+#define FOOD_SLIDE "food_slide_buff"
+///Trait for hand picked crops to be of a higher stats (ignores cap)
+#define FOOD_JOB_BOTANIST "food_job_botanist"
+///Trait for rocks to randomly drop ore
+#define FOOD_JOB_MINER "food_job_miner"
+#define GLUED_ITEM_TRAIT "glued-item"
+#define TRAIT_BELT_SATCHEL "belt_satchel"
+
+/// Trait given to mobs that we do not want to mindswap
+#define TRAIT_NO_MINDSWAP "no_mindswap"
+
+//monkestation edit start
+/// One can breath under water, you get me?
+#define TRAIT_WATER_BREATHING "water_breathing"
+
+/// Does not take damage from bloodloss(or any blood shenanigans)
+#define TRAIT_NO_BLOODLOSS_DAMAGE "no_bloodloss_damage"
+
+/// Do IPC's dream of doomsday? The answer is yes
+#define TRAIT_ROBOT_CAN_BLEED "robots_can_bleed"
+
+/// tough feets for the satyrs
+#define TRAIT_HARD_SOLES "hard_soles" //Taken from Skyrat
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// This atom can have spells cast from it if a mob is within it
 /// This means the "caster" of the spell is changed to the mob's loc
 /// Note this doesn't mean all spells are guaranteed to work or the mob is guaranteed to cast
@@ -1086,9 +1630,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 ///Trait given by /datum/element/relay_attacker
 #define TRAIT_RELAYING_ATTACKER "relaying_attacker"
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 
 ///Trait given to limb by /mob/living/basic/living_limb_flesh
 #define TRAIT_IGNORED_BY_LIVING_FLESH "livingflesh_ignored"
+=======
+// unique trait sources, still defines
+#define EMP_TRAIT "emp_trait"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /// Trait given while using /datum/action/cooldown/mob_cooldown/wing_buffet
 #define TRAIT_WING_BUFFET "wing_buffet"
@@ -1097,6 +1646,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait given to a dragon who fails to defend their rifts
 #define TRAIT_RIFT_FAILURE "fail_dragon_loser"
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 ///this mob is able to relay happiness, given by /datum/component/happiness
 #define TRAIT_MOB_RELAY_HAPPINESS "mob_relay_happiness"
 ///trait determines if this mob can breed given by /datum/component/breeding
@@ -1110,6 +1660,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Trait given to foam darts that have an insert in them
 #define TRAIT_DART_HAS_INSERT "dart_has_insert"
+=======
+///trait determines if this mob can breed given by /datum/component/breeding
+#define TRAIT_MOB_BREEDER "mob_breeder"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 
 /// Trait determines if this mob has examined an eldritch painting
 #define TRAIT_ELDRITCH_PAINTING_EXAMINE "eldritch_painting_examine"
@@ -1117,6 +1671,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Trait used by the /datum/brain_trauma/severe/flesh_desire trauma to change their preferences of what they eat
 #define TRAIT_FLESH_DESIRE "flesh_desire"
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 ///Trait granted by janitor skillchip, allows communication with cleanbots
 #define TRAIT_CLEANBOT_WHISPERER "cleanbot_whisperer"
 
@@ -1126,12 +1681,24 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 ///Trait given by the regenerative shield component
 #define TRAIT_REGEN_SHIELD "regen_shield"
 
+=======
+///trait given to food that can be baked by /datum/component/bakeable
+#define TRAIT_BAKEABLE "bakeable"
+
+/// Trait given to foam darts that have an insert in them
+#define TRAIT_DART_HAS_INSERT "dart_has_insert"
+
+///Trait granted by janitor skillchip, allows communication with cleanbots
+#define TRAIT_CLEANBOT_WHISPERER "cleanbot_whisperer"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 /// Trait given when a mob is currently in invisimin mode
 #define TRAIT_INVISIMIN "invisimin"
 
 ///Trait given when a mob has been tipped
 #define TRAIT_MOB_TIPPED "mob_tipped"
 
+<<<<<<< HEAD:code/__DEFINES/traits/declarations.dm
 /// Trait which self-identifies as an enemy of the law
 #define TRAIT_ALWAYS_WANTED "always_wanted"
 
@@ -1164,4 +1731,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This trait lets you attach limbs to any player without surgery.
 #define TRAIT_EASY_ATTACH "easy_attach"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/traits.dm
 // END TRAIT DEFINES

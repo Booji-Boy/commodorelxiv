@@ -107,14 +107,17 @@
 	if(!real_name)
 		real_name = name
 
+	/* MONKESTATION REMOVAL - This is totally valid to create a mob in nullspace, its not valid to move a client onto it, this seems weird.
 	if(!loc)
 		stack_trace("Basic mob being instantiated in nullspace")
+	*/
 
 	update_basic_mob_varspeed()
 
 	if(speak_emote)
 		speak_emote = string_list(speak_emote)
 
+<<<<<<< HEAD
 	///We need to wait for SSair to be initialized before we can check atmos/temp requirements.
 	if(PERFORM_ALL_TESTS(focus_only/atmos_and_temp_requirements) && mapload && !SSair.initialized)
 		RegisterSignal(SSair, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(on_ssair_init))
@@ -147,11 +150,30 @@
 	if (basic_mob_flags & PRECISE_ATTACK_ZONES)
 		return
 	AddElement(/datum/element/attack_zone_randomiser)
+=======
+	apply_atmos_requirements()
+	apply_temperature_requirements()
+
+/// Ensures this mob can take atmospheric damage if it's supposed to
+/mob/living/basic/proc/apply_atmos_requirements()
+	if(unsuitable_atmos_damage == 0)
+		return
+	//String assoc list returns a cached list, so this is like a static list to pass into the element below.
+	habitable_atmos = string_assoc_list(habitable_atmos)
+	AddElement(/datum/element/atmos_requirements, habitable_atmos, unsuitable_atmos_damage)
+
+/// Ensures this mob can take temperature damage if it's supposed to
+/mob/living/basic/proc/apply_temperature_requirements()
+	if(unsuitable_cold_damage == 0 && unsuitable_heat_damage == 0)
+		return
+	AddElement(/datum/element/basic_body_temp_sensitive, minimum_survivable_temperature, maximum_survivable_temperature, unsuitable_cold_damage, unsuitable_heat_damage)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
 	if(staminaloss > 0)
-		adjustStaminaLoss(-stamina_recovery * seconds_per_tick, forced = TRUE)
+		stamina.adjust(stamina_recovery * seconds_per_tick, forced = TRUE)
 
 /mob/living/basic/get_default_say_verb()
 	return length(speak_emote) ? pick(speak_emote) : ..()
@@ -213,7 +235,11 @@
 	. = ..()
 	if(stat != DEAD)
 		return
+<<<<<<< HEAD
 	. += span_deadsay("Upon closer examination, [p_they()] appear[p_s()] to be [HAS_MIND_TRAIT(user, TRAIT_NAIVE) ? "asleep" : "dead"].")
+=======
+	. += span_deadsay("Upon closer examination, [p_they()] appear[p_s()] to be [HAS_TRAIT(user.mind, TRAIT_NAIVE) ? "asleep" : "dead"].")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/proc/melee_attack(atom/target, list/modifiers, ignore_cooldown = FALSE)
 	face_atom(target)
@@ -226,7 +252,12 @@
 	return result
 
 /mob/living/basic/resolve_unarmed_attack(atom/attack_target, list/modifiers)
-	melee_attack(attack_target, modifiers)
+	//monkestation edit
+	if(advanced_simple && (isitem(attack_target) || !(istate & ISTATE_HARM)))
+		attack_target.attack_hand(src, modifiers)
+	else
+		melee_attack(attack_target, modifiers)
+	//monkestation edit
 
 /mob/living/basic/vv_edit_var(vname, vval)
 	switch(vname)
@@ -234,7 +265,11 @@
 			RemoveElement(/datum/element/atmos_requirements, habitable_atmos, unsuitable_atmos_damage)
 			. = TRUE
 		if(NAMEOF(src, minimum_survivable_temperature), NAMEOF(src, maximum_survivable_temperature), NAMEOF(src, unsuitable_cold_damage), NAMEOF(src, unsuitable_heat_damage))
+<<<<<<< HEAD
 			RemoveElement(/datum/element/body_temp_sensitive, minimum_survivable_temperature, maximum_survivable_temperature, unsuitable_cold_damage, unsuitable_heat_damage)
+=======
+			RemoveElement(/datum/element/basic_body_temp_sensitive, minimum_survivable_temperature, maximum_survivable_temperature, unsuitable_cold_damage, unsuitable_heat_damage)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			. = TRUE
 
 	. = ..()
@@ -273,13 +308,12 @@
 /mob/living/basic/get_status_tab_items()
 	. = ..()
 	. += "Health: [round((health / maxHealth) * 100)]%"
-	. += "Combat Mode: [combat_mode ? "On" : "Off"]"
 
 /mob/living/basic/compare_sentience_type(compare_type)
 	return sentience_type == compare_type
 
 /// Updates movement speed based on stamina loss
-/mob/living/basic/update_stamina()
+/mob/living/basic/on_stamina_update()
 	set_varspeed(initial(speed) + (staminaloss * 0.06))
 
 /mob/living/basic/on_fire_stack(seconds_per_tick, datum/status_effect/fire_handler/fire_stacks/fire_handler)

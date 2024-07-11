@@ -46,3 +46,14 @@
 		program_open_overlay = "alert-red"
 		ui_header = "alarm_red.gif"
 	update_computer_icon() // Always update the icon after we check our conditional because we might've changed it
+<<<<<<< HEAD
+=======
+
+/datum/computer_file/program/alarm_monitor/on_start(mob/user)
+	. = ..(user)
+	GLOB.alarmdisplay += src
+
+/datum/computer_file/program/alarm_monitor/kill_program()
+	GLOB.alarmdisplay -= src
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

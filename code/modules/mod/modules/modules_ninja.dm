@@ -31,7 +31,11 @@
 /obj/item/mod/module/stealth/on_deactivation(display_message = TRUE, deleting = FALSE)
 	if(bumpoff)
 		UnregisterSignal(mod.wearer, COMSIG_LIVING_MOB_BUMP)
+<<<<<<< HEAD
 	UnregisterSignal(mod.wearer, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_MOB_ITEM_ATTACK, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_BULLET_ACT, COMSIG_ATOM_HITBY, COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_PAW, COMSIG_CARBON_CUFF_ATTEMPTED))
+=======
+	UnregisterSignal(mod.wearer, list(COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_MOB_ITEM_ATTACK, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_ATTACK_HAND, COMSIG_ATOM_BULLET_ACT, COMSIG_ATOM_HITBY, COMSIG_ATOM_HULK_ATTACK, COMSIG_ATOM_ATTACK_PAW, COMSIG_CARBON_CUFF_ATTEMPTED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	animate(mod.wearer, alpha = 255, time = 1.5 SECONDS)
 
 /obj/item/mod/module/stealth/proc/unstealth(datum/source)
@@ -144,7 +148,7 @@
 /obj/item/mod/module/hacker/proc/hack(mob/living/carbon/human/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
-	if(!LAZYACCESS(modifiers, RIGHT_CLICK) || !proximity)
+	if(!(source.istate & ISTATE_SECONDARY) || !proximity)
 		return NONE
 	target.add_fingerprint(mod.wearer)
 	return target.ninjadrain_act(mod.wearer, src)
@@ -209,7 +213,11 @@
 
 /obj/item/mod/module/weapon_recall/proc/set_weapon(obj/item/weapon)
 	linked_weapon = weapon
+<<<<<<< HEAD
 	RegisterSignal(linked_weapon, COMSIG_MOVABLE_PRE_IMPACT, PROC_REF(catch_weapon))
+=======
+	RegisterSignal(linked_weapon, COMSIG_MOVABLE_IMPACT, PROC_REF(catch_weapon))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(linked_weapon, COMSIG_QDELETING, PROC_REF(deleted_weapon))
 
 /obj/item/mod/module/weapon_recall/proc/recall_weapon(caught = FALSE)
@@ -296,7 +304,11 @@
 		all possible biometric data of the wearer; sleep, nutrition, fitness, fingerprints, \
 		and even useful information such as their overall health and wellness. This one comes with a clock that calibrates to the \
 		local system time, and an operational ID number display. The vital monitor's speaker has been removed."
+<<<<<<< HEAD
 	display_time = TRUE
+=======
+	show_time = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	death_sound = null
 	death_sound_volume = null
 
@@ -311,6 +323,7 @@
 	module_type = MODULE_ACTIVE
 	use_energy_cost = DEFAULT_CHARGE_DRAIN * 6
 	incompatible_modules = list(/obj/item/mod/module/energy_net)
+<<<<<<< HEAD
 	cooldown_time = 5 SECONDS
 	required_slots = list(ITEM_SLOT_GLOVES)
 	/// List of all energy nets this module made.
@@ -319,6 +332,11 @@
 /obj/item/mod/module/energy_net/on_suit_deactivation(deleting)
 	for(var/obj/structure/energy_net/net as anything in energy_nets)
 		net.atom_destruction(ENERGY)
+=======
+	cooldown_time = 1.5 SECONDS
+	/// List of all energy nets this module made.
+	var/list/energy_nets = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/module/energy_net/on_select_use(atom/target)
 	. = ..()
@@ -332,6 +350,55 @@
 	playsound(src, 'sound/weapons/punchmiss.ogg', 25, TRUE)
 	INVOKE_ASYNC(net, TYPE_PROC_REF(/obj/projectile, fire))
 	drain_power(use_energy_cost)
+
+/obj/item/mod/module/energy_net/proc/add_net(obj/structure/energy_net/net)
+	energy_nets += net
+	RegisterSignal(net, COMSIG_QDELETING, PROC_REF(remove_net))
+
+/obj/item/mod/module/energy_net/proc/remove_net(obj/structure/energy_net/net)
+	SIGNAL_HANDLER
+	energy_nets -= net
+
+/obj/projectile/energy_net
+	name = "energy net"
+	icon_state = "net_projectile"
+	icon = 'icons/obj/clothing/modsuit/mod_modules.dmi'
+	damage = 0
+	range = 9
+	hitsound = 'sound/items/fultext_deploy.ogg'
+	hitsound_wall = 'sound/items/fultext_deploy.ogg'
+	/// Reference to the beam following the projectile.
+	var/line
+	/// Reference to the energy net module.
+	var/datum/weakref/net_module
+
+/obj/projectile/energy_net/Initialize(mapload, net_module)
+	. = ..()
+	src.net_module = WEAKREF(net_module)
+
+/obj/projectile/energy_net/fire(setAngle)
+	if(firer)
+		line = firer.Beam(src, "net_beam", 'icons/obj/clothing/modsuit/mod_modules.dmi')
+	return ..()
+
+/obj/projectile/energy_net/on_hit(mob/living/target, blocked = 0, pierce_hit)
+	. = ..()
+	if(!istype(target))
+		return
+	if(locate(/obj/structure/energy_net) in get_turf(target))
+		return
+	var/obj/structure/energy_net/net = new /obj/structure/energy_net(target.drop_location())
+	var/obj/item/mod/module/energy_net/module = net_module?.resolve()
+	if(module)
+		module.add_net(net)
+	firer?.visible_message(span_danger("[firer] caught [target] with an energy net!"), span_notice("You caught [target] with an energy net!"))
+	if(target.buckled)
+		target.buckled.unbuckle_mob(target, force = TRUE)
+	net.buckle_mob(target, force = TRUE)
+
+/obj/projectile/energy_net/Destroy()
+	QDEL_NULL(line)
+	return ..()
 
 /obj/item/mod/module/energy_net/proc/add_net(obj/structure/energy_net/net)
 	energy_nets += net
@@ -423,7 +490,7 @@
 	mod.wearer.SetKnockdown(0)
 	mod.wearer.SetImmobilized(0)
 	mod.wearer.SetParalyzed(0)
-	mod.wearer.adjustStaminaLoss(-200)
+	mod.wearer.stamina.adjust(200)
 	mod.wearer.remove_status_effect(/datum/status_effect/speech/stutter)
 	mod.wearer.reagents.add_reagent(/datum/reagent/medicine/stimulants, 5)
 	reagents.remove_reagent(reagent_required, reagents.total_volume * 0.75)
@@ -432,7 +499,11 @@
 /obj/item/mod/module/adrenaline_boost/on_install()
 	RegisterSignal(mod, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 
+<<<<<<< HEAD
 /obj/item/mod/module/adrenaline_boost/on_uninstall(deleting = FALSE)
+=======
+/obj/item/mod/module/adrenaline_boost/on_uninstall(deleting)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	UnregisterSignal(mod, COMSIG_ATOM_ATTACKBY)
 
 /obj/item/mod/module/adrenaline_boost/attackby(obj/item/attacking_item, mob/user, params)

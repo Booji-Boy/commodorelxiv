@@ -97,6 +97,7 @@
 /obj/structure/sign/poster/contraband/soviet_propaganda/directional/west,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/hunter/russian)
+<<<<<<< HEAD
 "hm" = (
 /obj/machinery/light/small/directional/west,
 /obj/effect/turf_decal/bot,
@@ -104,6 +105,19 @@
 /obj/machinery/fugitive_capture,
 /obj/structure/sign/poster/contraband/bountyhunters/directional/west,
 /turf/open/floor/pod/dark,
+=======
+"gU" = (
+/obj/machinery/door/airlock/external/glass/ruin{
+	id_tag = "russia_ship_bolt_n"
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/shuttle/hunter/russian)
 "ho" = (
 /obj/effect/decal/cleanable/dirt,
@@ -142,6 +156,28 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/hunter/russian)
+<<<<<<< HEAD
+=======
+"jO" = (
+/obj/machinery/door/airlock/security/glass{
+	name = "Ship Support Systems"
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+/area/shuttle/hunter/russian)
+"kL" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/directional/west,
+/obj/structure/kitchenspike,
+/turf/open/floor/pod/dark,
+/area/shuttle/hunter/russian)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "lx" = (
 /obj/structure/table,
 /obj/effect/turf_decal/siding/red{
@@ -173,11 +209,19 @@
 /obj/structure/closet/crate/secure/weapon{
 	name = "surplus crate"
 	},
+<<<<<<< HEAD
 /obj/item/ammo_box/strilka310,
 /obj/item/ammo_box/strilka310,
 /obj/item/ammo_box/strilka310,
 /obj/item/ammo_box/strilka310,
 /turf/open/floor/pod/dark,
+=======
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/shuttle/hunter/russian)
 "qF" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -219,7 +263,14 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+<<<<<<< HEAD
 /obj/effect/mapping_helpers/airlock/access/all/hunter,
+=======
+/obj/machinery/door/airlock/security/glass{
+	name = "Cockpit Access"
+	},
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/pod/light,
 /area/shuttle/hunter/russian)
 "uT" = (
@@ -271,6 +322,7 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+<<<<<<< HEAD
 /obj/effect/mapping_helpers/airlock/access/all/hunter,
 /turf/open/floor/pod/light,
 /area/shuttle/hunter/russian)
@@ -283,6 +335,9 @@
 	},
 /obj/effect/mapping_helpers/airlock/cutaiwire,
 /obj/effect/mapping_helpers/airlock/access/all/hunter,
+=======
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/pod/light,
 /area/shuttle/hunter/russian)
 "yo" = (
@@ -342,6 +397,14 @@
 	desc = "A large wood and steel-reinforced crate.";
 	name = "voytek's crate"
 	},
+<<<<<<< HEAD
+=======
+/obj/machinery/firealarm/directional/north,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/bear{
 	desc = "A very friendly yet still extremely menacing space-bear. Comrade until the end.";
 	name = "Voytek"
@@ -494,6 +557,34 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/hunter/russian)
+<<<<<<< HEAD
+=======
+"JS" = (
+/obj/docking_port/mobile{
+	shuttle_id = "huntership";
+	movement_force = list("KNOCKDOWN"=0,"THROW"=0);
+	name = "hunter shuttle";
+	rechargeTime = 1800
+	},
+/obj/docking_port/stationary{
+	dwidth = 11;
+	height = 16;
+	shuttle_id = "pirate_home";
+	name = "Deep Space";
+	width = 17
+	},
+/obj/machinery/door/airlock/external/glass/ruin{
+	id_tag = "russia_ship_bolt_s"
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/plating,
+/area/shuttle/hunter/russian)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "JU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/loading_area{
@@ -572,9 +663,25 @@
 /obj/machinery/door/airlock/security/glass{
 	name = "Cargo Hold Access"
 	},
+<<<<<<< HEAD
 /obj/effect/mapping_helpers/airlock/access/all/hunter,
 /turf/open/floor/pod/light,
 /area/shuttle/hunter/russian)
+=======
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+/area/shuttle/hunter/russian)
+"QG" = (
+/obj/machinery/door/airlock/external/glass/ruin{
+	id_tag = "russia_ship_bolt_n"
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/effect/mapping_helpers/airlock/locked,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/plating,
+/area/shuttle/hunter/russian)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Se" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -601,6 +708,20 @@
 /obj/structure/sign/poster/contraband/kss13/directional/south,
 /turf/open/floor/pod/dark,
 /area/shuttle/hunter/russian)
+<<<<<<< HEAD
+=======
+"Ut" = (
+/obj/machinery/door/airlock/security/glass{
+	name = "Crew Storage"
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+/area/shuttle/hunter/russian)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Uu" = (
 /obj/effect/turf_decal/siding/red{
 	dir = 1
@@ -667,6 +788,20 @@
 /obj/effect/mapping_helpers/airalarm/all_access,
 /turf/open/floor/plating,
 /area/shuttle/hunter/russian)
+<<<<<<< HEAD
+=======
+"WL" = (
+/obj/machinery/door/airlock/security/glass{
+	name = "Cockpit Access"
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/effect/mapping_helpers/airlock/access/any/away/bounty_hunter,
+/turf/open/floor/pod/light,
+/area/shuttle/hunter/russian)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Xu" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/closet/crate/medical,

@@ -28,6 +28,7 @@
 	/// Maximum amount that there should be of this item in the market if generated randomly.
 	var/stock_max = 0
 	/// Probability for this item to be available. Used by SSblackmarket on init.
+<<<<<<< HEAD
 	var/availability_prob
 
 	///The identifier for the market item, generated on runtime and used to access them in the market categories.
@@ -35,6 +36,11 @@
 
 	///If set, these will override the shipment methods set by the market
 	var/list/shipping_override
+=======
+	var/availability_prob = 0
+	///do we use stock
+	var/uses_stock = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/market_item/New()
 	if(isnull(price))
@@ -97,7 +103,8 @@
 
 	// SSblackmarket takes care of the shipping.
 	if(SSblackmarket.queue_item(purchase))
-		stock--
+		if(uses_stock)
+			stock--
 		buyer.log_message("has succesfully purchased [name] using [shipping_method] for shipping.", LOG_ECON)
 		return TRUE
 	return FALSE
@@ -113,6 +120,7 @@
 	/// Shipping method used to buy this item.
 	var/method
 
+<<<<<<< HEAD
 /datum/market_purchase/New(datum/market_item/entry, obj/item/market_uplink/uplink, method)
 	if(!uplink || !entry || !method)
 		CRASH("[type] created with a false value arg: (entry: [entry] - uplink: [uplink] - method: [method])")
@@ -122,6 +130,13 @@
 	RegisterSignal(entry, COMSIG_QDELETING, PROC_REF(on_instance_del))
 	RegisterSignal(uplink, COMSIG_QDELETING, PROC_REF(on_instance_del))
 	if(ismovable(entry.item))
+=======
+
+//needs to be here
+/datum/market_purchase/New(_entry, _uplink, _method)
+	entry = _entry
+	if(!ispath(entry.item))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		item = entry.item
 		RegisterSignal(entry.item, COMSIG_QDELETING, PROC_REF(on_instance_del))
 

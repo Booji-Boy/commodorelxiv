@@ -24,14 +24,24 @@
 	mob_biotypes = MOB_ORGANIC | MOB_BUG
 	gold_core_spawnable = FRIENDLY_SPAWN
 
+<<<<<<< HEAD
+=======
+	var/fixed_color = FALSE //monkestation edit - for fixed butterfly colors
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller = /datum/ai_controller/basic_controller/butterfly
 
 /mob/living/basic/butterfly/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/simple_flying)
 
+<<<<<<< HEAD
 	var/newcolor = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
 	add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
+=======
+	if(!fixed_color) //monkestation edit - for fixed butterfly colors
+		var/newcolor = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
+		add_atom_colour(newcolor, FIXED_COLOUR_PRIORITY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_BUTTERFLY, CELL_VIRUS_TABLE_GENERIC_MOB, cell_line_amount = 1, virus_chance = 5)
 
@@ -44,6 +54,7 @@
 
 /mob/living/basic/butterfly/lavaland
 	unsuitable_atmos_damage = 0
+<<<<<<< HEAD
 
 /mob/living/basic/butterfly/lavaland/temporary
 	name = "strange butterfly"
@@ -95,3 +106,5 @@
 /mob/living/basic/butterfly/lavaland/temporary/examine(mob/user)
 	. = ..()
 	. += span_notice("Something about it seems unreal...")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

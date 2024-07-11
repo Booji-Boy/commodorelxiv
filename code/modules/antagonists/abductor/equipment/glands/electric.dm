@@ -5,7 +5,7 @@
 	icon_state = "species"
 	uses = -1
 	mind_control_uses = 2
-	mind_control_duration = 900
+	mind_control_duration = 90 SECONDS
 
 /obj/item/organ/internal/heart/gland/electric/on_mob_insert(mob/living/carbon/gland_owner)
 	. = ..()

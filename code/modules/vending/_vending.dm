@@ -68,8 +68,12 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	circuit = /obj/item/circuitboard/machine/vendor
 	payment_department = ACCOUNT_SRV
 	light_power = 0.7
+<<<<<<< HEAD
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	voice_filter = "alimiter=0.9,acompressor=threshold=0.2:ratio=20:attack=10:release=50:makeup=2,highpass=f=1000"
+=======
+	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Is the machine active (No sales pitches if off)!
 	var/active = 1
@@ -83,7 +87,10 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	var/tilted = FALSE
 	/// If tilted, this variable should always be the rotation that was applied when we were tilted. Stored for the purposes of unapplying it.
 	var/tilted_rotation = 0
+<<<<<<< HEAD
 	///Whether this vendor can be tilted over or not
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/tiltable = TRUE
 	///Damage this vendor does when tilting onto an atom
 	var/squish_damage = 75
@@ -91,7 +98,10 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	var/crit_chance = 15
 	/// If set to a critical define in crushing.dm, anything this vendor crushes will always be hit with that effect.
 	var/forcecrit = null
+<<<<<<< HEAD
 	///Number of glass shards the vendor creates and tries to embed into an atom it tilted onto
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/num_shards = 7
 	///List of mobs stuck under the vendor
 	var/list/pinned_mobs = list()
@@ -234,12 +244,15 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		build_inv = TRUE
 	. = ..()
 	set_wires(new /datum/wires/vending(src))
+<<<<<<< HEAD
 
 	if(SStts.tts_enabled)
 		var/static/vendor_voice_by_type = list()
 		if(!vendor_voice_by_type[type])
 			vendor_voice_by_type[type] = pick(SStts.available_speakers)
 		voice = vendor_voice_by_type[type]
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(build_inv) //non-constructable vending machine
 		///Non-constructible vending machines do not have a refill canister to populate its products list from,
@@ -729,6 +742,12 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 				var/restocked = restock(canister)
 				post_restock(user, restocked)
 			return
+<<<<<<< HEAD
+=======
+	if(compartmentLoadAccessCheck(user) && !(user.istate & ISTATE_HARM))
+		if(canLoadItem(I))
+			loadingAttempt(I,user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(compartmentLoadAccessCheck(user) && !user.combat_mode)
 		if(canLoadItem(attack_item))
@@ -799,6 +818,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			break
 	deploy_credits()
 
+<<<<<<< HEAD
 /**
  * Tilts ontop of the atom supplied, if crit is true some extra shit can happen. See [fall_and_crush] for return values.
  * Arguments:
@@ -806,6 +826,9 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
  * local_crit_chance - percent chance of a critical hit
  * forced_crit - specific critical hit case to use, if any
 */
+=======
+/// Tilts ontop of the atom supplied, if crit is true some extra shit can happen. See [fall_and_crush] for return values.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/vending/proc/tilt(atom/fatty, local_crit_chance = crit_chance, forced_crit = forcecrit)
 	if(QDELETED(src) || !has_gravity(src))
 		return
@@ -821,11 +844,76 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 			tilted = TRUE
 			tilted_rotation = picked_rotation
 			layer = ABOVE_MOB_LAYER
+<<<<<<< HEAD
+=======
+			SET_PLANE_IMPLICIT(src, GAME_PLANE_UPPER)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(get_turf(fatty) != get_turf(src))
 		throw_at(get_turf(fatty), 1, 1, spin = FALSE, quickstart = FALSE)
 
 /**
+<<<<<<< HEAD
+=======
+ * Exists for the purposes of custom behavior.
+ * Called directly after [crushed] is crushed.
+ *
+ * Args:
+ * * mob/living/crushed: The mob that was crushed.
+ * * was_alive: Boolean. True if the mob was alive before the crushing.
+ */
+/atom/movable/proc/post_crush_living(mob/living/crushed, was_alive)
+	return
+
+/**
+ * Exists for the purposes of custom behavior.
+ * Called directly after src actually rotates and falls over.
+ */
+/atom/movable/proc/post_tilt()
+	return
+
+/obj/machinery/vending/post_crush_living(mob/living/crushed, was_alive)
+
+	if(was_alive && crushed.stat == DEAD && crushed.client)
+		crushed.client.give_award(/datum/award/achievement/misc/vendor_squish, crushed) // good job losing a fight with an inanimate object idiot
+
+	add_memory_in_range(crushed, 7, /datum/memory/witness_vendor_crush, protagonist = crushed, antagonist = src)
+
+	return ..()
+
+
+/obj/machinery/vending/apply_crit_crush(crit_case, atom_target)
+	. = ..()
+
+	if (.)
+		return TRUE
+
+	switch (crit_case)
+		if (VENDOR_CRUSH_CRIT_GLASSCANDY)
+			if (!iscarbon(atom_target))
+				return FALSE
+			var/mob/living/carbon/carbon_target = atom_target
+			for(var/i in 1 to num_shards)
+				var/obj/item/shard/shard = new /obj/item/shard(get_turf(carbon_target))
+				shard.embedding = list(embed_chance = 100, ignore_throwspeed_threshold = TRUE, impact_pain_mult = 1, pain_chance = 5)
+				shard.updateEmbedding()
+				carbon_target.hitby(shard, skipcatch = TRUE, hitpush = FALSE)
+				shard.embedding = list()
+				shard.updateEmbedding()
+			return TRUE
+		if (VENDOR_CRUSH_CRIT_PIN) // pin them beneath the machine until someone untilts it
+			if (!isliving(atom_target))
+				return FALSE
+			var/mob/living/living_target = atom_target
+			forceMove(get_turf(living_target))
+			buckle_mob(living_target, force=TRUE)
+			living_target.visible_message(span_danger("[living_target] is pinned underneath [src]!"), span_userdanger("You are pinned down by [src]!"))
+			return TRUE
+
+	return FALSE
+
+/**
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
  * Causes src to fall onto [target], crushing everything on it (including itself) with [damage]
  * and a small chance to do a spectacular effect per entity (if a chance above 0 is provided).
  *
@@ -893,7 +981,11 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 				post_crush_living(living_target, was_alive)
 				flags_to_return |= (SUCCESSFULLY_CRUSHED_MOB|SUCCESSFULLY_CRUSHED_ATOM)
 
+<<<<<<< HEAD
 			else if(check_atom_crushable(atom_target))
+=======
+			else if (atom_target.uses_integrity && !(atom_target.invisibility > SEE_INVISIBLE_LIVING) && !(is_type_in_typecache(atom_target, GLOB.WALLITEMS_INTERIOR) || is_type_in_typecache(atom_target, GLOB.WALLITEMS_EXTERIOR)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				atom_target.take_damage(adjusted_damage, damage_type, damage_flag, FALSE, crush_dir)
 				crushed = TRUE
 				flags_to_return |= SUCCESSFULLY_CRUSHED_ATOM
@@ -915,6 +1007,7 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	Move(target, crush_dir) // we still TRY to move onto it for shit like teleporters
 	return flags_to_return
 
+<<<<<<< HEAD
 /**
  * Exists for the purposes of custom behavior.
  * Called directly after [crushed] is crushed.
@@ -947,6 +1040,8 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 		return TRUE //SMUSH IT
 
 	return FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/vending/post_crush_living(mob/living/crushed, was_alive)
 
@@ -1458,8 +1553,13 @@ GLOBAL_LIST_EMPTY(vending_machines_to_restock)
 	if(usr.CanReach(src) && usr.put_in_hands(vended_item))
 		to_chat(usr, span_notice("You take [item_record.name] out of the slot."))
 	else
+<<<<<<< HEAD
 		to_chat(usr, span_warning("[capitalize(format_text(item_record.name))] falls onto the floor!"))
 	SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[item_record.product_path]"))
+=======
+		to_chat(usr, span_warning("[capitalize(R.name)] falls onto the floor!"))
+	SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[name]", "[R.name]"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	vend_ready = TRUE
 
 ///A proc meant to perform custom behavior on newly dispensed items.

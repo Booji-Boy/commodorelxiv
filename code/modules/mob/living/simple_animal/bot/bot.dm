@@ -25,19 +25,22 @@
 	speech_span = SPAN_ROBOT
 	faction = list(FACTION_NEUTRAL, FACTION_SILICON, FACTION_TURRET)
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 3
 	light_power = 0.6
 	del_on_death = TRUE
 	req_one_access = list(ACCESS_ROBOTICS)
 	interaction_flags_click = ALLOW_SILICON_REACH
+=======
+	light_outer_range = 3
+	light_power = 0.9
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	///Cooldown between salutations for commissioned bots
 	COOLDOWN_DECLARE(next_salute_check)
 
 	///The Robot arm attached to this robot - has a 50% chance to drop on death.
 	var/robot_arm = /obj/item/bodypart/arm/right/robot
-	///The inserted (if any) pAI in this bot.
-	var/obj/item/pai_card/paicard
 	///The type of bot it is, for radio control.
 	var/bot_type = NONE
 
@@ -46,10 +49,17 @@
 	///All initial access this bot started with.
 	var/list/prev_access = list()
 
+<<<<<<< HEAD
 	///Bot-related mode flags on the Bot indicating how they will act. BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
 	var/bot_mode_flags = BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
 
 	///Bot-related cover flags on the Bot to deal with what has been done to their cover, including emagging. BOT_COVER_MAINTS_OPEN | BOT_COVER_LOCKED | BOT_COVER_EMAGGED | BOT_COVER_HACKED
+=======
+	///Bot-related mode flags on the Bot indicating how they will act. BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_GHOST_CONTROLLABLE | BOT_MODE_ROUNDSTART_POSSESSION
+	var/bot_mode_flags = BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED | BOT_MODE_GHOST_CONTROLLABLE | BOT_MODE_ROUNDSTART_POSSESSION
+
+	///Bot-related cover flags on the Bot to deal with what has been done to their cover, including emagging. BOT_COVER_OPEN | BOT_COVER_LOCKED | BOT_COVER_EMAGGED | BOT_COVER_HACKED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/bot_cover_flags = BOT_COVER_LOCKED
 
 	///Small name of what the bot gets messed with when getting hacked/emagged.
@@ -103,12 +113,18 @@
 	var/reset_access_timer_id
 	var/ignorelistcleanuptimer = 1 // This ticks up every automated action, at 300 we clean the ignore list
 
+<<<<<<< HEAD
+=======
+	/// Component which allows ghosts to take over this bot
+	var/datum/component/ghost_direct_control/personality_download
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// If true we will allow ghosts to control this mob
 	var/can_be_possessed = FALSE
 	/// If true we will offer this
 	COOLDOWN_DECLARE(offer_ghosts_cooldown)
 	/// Message to display upon possession
 	var/possessed_message = "You're a generic bot. How did one of these even get made?"
+<<<<<<< HEAD
 	/// List of strings to sound effects corresponding to automated messages the bot can play
 	var/list/automated_announcements
 	/// Action we use to say voice lines out loud, also we just pass anything we try to say through here just in case it plays a voice line
@@ -117,6 +133,12 @@
 /mob/living/simple_animal/bot/proc/get_mode()
 	if(client) //Player bots do not have modes, thus the override. Also an easy way for PDA users/AI to know when a bot is a player.
 		return paicard ? "<b>pAI Controlled</b>" : "<b>Autonomous</b>"
+=======
+
+/mob/living/simple_animal/bot/proc/get_mode()
+	if(client) //Player bots do not have modes, thus the override. Also an easy way for PDA users/AI to know when a bot is a player.
+		return "<b>Autonomous</b>"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!(bot_mode_flags & BOT_MODE_ON))
 		return "<span class='bad'>Inactive</span>"
 	return "<span class='average'>[mode]</span>"
@@ -126,6 +148,7 @@
  */
 /mob/living/simple_animal/bot/proc/get_mode_ui()
 	if(client) //Player bots do not have modes, thus the override. Also an easy way for PDA users/AI to know when a bot is a player.
+<<<<<<< HEAD
 		return paicard ? "pAI Controlled" : "Autonomous"
 	if(!(bot_mode_flags & BOT_MODE_ON))
 		return "Inactive"
@@ -136,6 +159,12 @@
  */
 /mob/living/simple_animal/bot/proc/get_emagged_message()
 	return get_policy(ROLE_EMAGGED_BOT) || "You are a malfunctioning bot! Disrupt everyone and cause chaos!"
+=======
+		return "Autonomous"
+	if(!(bot_mode_flags & BOT_MODE_ON))
+		return "Inactive"
+	return "[mode]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/bot/proc/turn_on()
 	if(stat)
@@ -199,6 +228,7 @@
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_BOTS_GLITCHED))
 		randomize_language_if_on_station()
 
+<<<<<<< HEAD
 	if(mapload && is_station_level(z) && bot_mode_flags & BOT_MODE_CAN_BE_SAPIENT && bot_mode_flags & BOT_MODE_ROUNDSTART_POSSESSION)
 		enable_possession(mapload = mapload)
 
@@ -210,12 +240,21 @@
 	GLOB.bots_list -= src
 	QDEL_NULL(paicard)
 	QDEL_NULL(pa_system)
+=======
+	if(mapload && is_station_level(z) && bot_mode_flags & BOT_MODE_GHOST_CONTROLLABLE && bot_mode_flags & BOT_MODE_ROUNDSTART_POSSESSION)
+		enable_possession(mapload)
+
+/mob/living/simple_animal/bot/Destroy()
+	GLOB.bots_list -= src
+	QDEL_NULL(personality_download)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	QDEL_NULL(internal_radio)
 	QDEL_NULL(access_card)
 	QDEL_NULL(path_hud)
 	return ..()
 
 /// Allows this bot to be controlled by a ghost, who will become its mind
+<<<<<<< HEAD
 /mob/living/simple_animal/bot/proc/enable_possession(user, mapload = FALSE)
 	if (paicard)
 		balloon_alert(user, "already sapient!")
@@ -230,6 +269,19 @@
 		assumed_control_message = (bot_cover_flags & BOT_COVER_EMAGGED) ? get_emagged_message() : possessed_message, \
 		extra_control_checks = CALLBACK(src, PROC_REF(check_possession)), \
 		after_assumed_control = CALLBACK(src, PROC_REF(post_possession)), \
+=======
+/mob/living/simple_animal/bot/proc/enable_possession(mapload = FALSE)
+	can_be_possessed = TRUE
+	var/can_announce = !mapload && COOLDOWN_FINISHED(src, offer_ghosts_cooldown)
+	personality_download = AddComponent(\
+		/datum/component/ghost_direct_control,\
+		ban_type = ROLE_BOT,\
+		poll_candidates = can_announce,\
+		poll_ignore_key = POLL_IGNORE_BOTS,\
+		assumed_control_message = possessed_message,\
+		extra_control_checks = CALLBACK(src, PROC_REF(check_possession)),\
+		after_assumed_control = CALLBACK(src, PROC_REF(post_possession)),\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	if (can_announce)
 		COOLDOWN_START(src, offer_ghosts_cooldown, 30 SECONDS)
@@ -237,6 +289,7 @@
 /// Disables this bot from being possessed by ghosts
 /mob/living/simple_animal/bot/proc/disable_possession(mob/user)
 	can_be_possessed = FALSE
+<<<<<<< HEAD
 	qdel(GetComponent(/datum/component/ghost_direct_control))
 	if (isnull(key))
 		return
@@ -247,6 +300,17 @@
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
 	speak("Personality matrix reset!")
 	key = null
+=======
+	QDEL_NULL(personality_download)
+	if (mind)
+		if (user)
+			log_combat(user, src, "ejected from [initial(src.name)] control.")
+		to_chat(src, span_warning("You feel yourself fade as your personality matrix is reset!"))
+		ghostize(can_reenter_corpse = FALSE)
+		playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
+		say("Personally matrix reset!", forced = "bot")
+		key = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns true if this mob can be controlled
 /mob/living/simple_animal/bot/proc/check_possession(mob/potential_possessor)
@@ -257,7 +321,11 @@
 /// Fired after something takes control of this mob
 /mob/living/simple_animal/bot/proc/post_possession()
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
+<<<<<<< HEAD
 	speak("New personality installed successfully!")
+=======
+	say("New personality installed successfully!", forced = "bot")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	rename(src)
 
 /// Allows renaming the bot to something else
@@ -285,7 +353,15 @@
 			return
 	fully_replace_character_name(real_name, new_name)
 
+<<<<<<< HEAD
 /mob/living/simple_animal/bot/allowed(mob/living/user)
+=======
+/mob/living/simple_animal/bot/proc/check_access(mob/living/user, obj/item/card/id)
+	if(user.has_unlimited_silicon_privilege || isAdminGhostAI(user)) // Silicon and Admins always have access.
+		return TRUE
+	if(!maints_access_required) // No requirements to access it.
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!(bot_cover_flags & BOT_COVER_LOCKED)) // Unlocked.
 		return TRUE
 	return ..()
@@ -312,7 +388,11 @@
 		bot_cover_flags &= ~BOT_COVER_LOCKED
 		balloon_alert(user, "cover unlocked")
 		return TRUE
+<<<<<<< HEAD
 	if(!(bot_cover_flags & BOT_COVER_LOCKED) && bot_cover_flags & BOT_COVER_MAINTS_OPEN) //Bot panel is unlocked by ID or emag, and the panel is screwed open. Ready for emagging.
+=======
+	if(!(bot_cover_flags & BOT_COVER_LOCKED) && bot_cover_flags & BOT_COVER_OPEN) //Bot panel is unlocked by ID or emag, and the panel is screwed open. Ready for emagging.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		bot_cover_flags |= BOT_COVER_EMAGGED
 		bot_cover_flags &= ~BOT_COVER_LOCKED //Manually emagging the bot locks out the panel.
 		bot_mode_flags &= ~BOT_MODE_REMOTE_ENABLED //Manually emagging the bot also locks the AI from controlling it.
@@ -343,10 +423,13 @@
 		var/is_sillycone = HAS_SILICON_ACCESS(user)
 		if(!(bot_cover_flags & BOT_COVER_EMAGGED) && (is_sillycone || user.Adjacent(src)))
 			. += span_info("Alt-click [is_sillycone ? "" : "or use your ID on "]it to [bot_cover_flags & BOT_COVER_LOCKED ? "un" : ""]lock its control panel.")
+<<<<<<< HEAD
 	if(paicard)
 		. += span_notice("It has a pAI device installed.")
 		if(!(bot_cover_flags & BOT_COVER_MAINTS_OPEN))
 			. += span_info("You can use a <b>hemostat</b> to remove it.")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/bot/adjustHealth(amount, updating_health = TRUE, forced = FALSE)
 	if(amount > 0 && prob(10))
@@ -396,7 +479,7 @@
 
 
 /mob/living/simple_animal/bot/attack_hand(mob/living/carbon/human/user, list/modifiers)
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		ui_interact(user)
 	else
 		return ..()
@@ -443,7 +526,7 @@
 
 /mob/living/simple_animal/bot/welder_act(mob/living/user, obj/item/tool)
 	user.changeNext_move(CLICK_CD_MELEE)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return FALSE
 
 	if(health >= maxHealth)
@@ -462,6 +545,7 @@
 	if(attacking_item.GetID())
 		unlock_with_id(user)
 		return
+<<<<<<< HEAD
 	if(istype(attacking_item, /obj/item/pai_card))
 		insertpai(user, attacking_item)
 		return
@@ -482,6 +566,15 @@
 		do_sparks(5, TRUE, src)
 		. = TRUE
 	return ..() || .
+=======
+	return ..()
+
+/mob/living/simple_animal/bot/attacked_by(obj/item/I, mob/living/user)
+	. = ..()
+	if (!.)
+		return
+	do_sparks(5, TRUE, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/bot/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit = FALSE)
 	. = ..()
@@ -500,10 +593,13 @@
 	var/was_on = bot_mode_flags & BOT_MODE_ON ? TRUE : FALSE
 	stat |= EMPED
 	new /obj/effect/temp_visual/emp(loc)
+<<<<<<< HEAD
 	if(paicard)
 		paicard.emp_act(severity)
 		src.visible_message(span_notice("[paicard] is flies out of [initial(src.name)]!"), span_warning("You are forcefully ejected from [initial(src.name)]!"))
 		ejectpai()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if (QDELETED(src))
 		return
@@ -742,6 +838,8 @@ Pass a positive integer as an argument to override a bot's default speed.
 	set_path(null)
 	summon_target = null
 	pathset = FALSE
+	if(QDELETED(access_card))
+		access_card = new /obj/item/card/id/advanced/simple_bot(src)
 	access_card.set_access(prev_access)
 	tries = 0
 	mode = BOT_IDLE
@@ -884,8 +982,11 @@ Pass a positive integer as an argument to override a bot's default speed.
 				access_card.set_access(user_access + prev_access) //Adds the user's access, if any.
 			mode = BOT_SUMMON
 			speak("Responding.", radio_channel)
+<<<<<<< HEAD
 		if("ejectpai")
 			ejectpairemote(user)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return
 
 
@@ -968,9 +1069,14 @@ Pass a positive integer as an argument to override a bot's default speed.
 	data["has_access"] = allowed(user)
 	data["locked"] = bot_cover_flags & BOT_COVER_LOCKED
 	data["settings"] = list()
+<<<<<<< HEAD
 	if(!(bot_cover_flags & BOT_COVER_LOCKED) || HAS_SILICON_ACCESS(user))
 		data["settings"]["pai_inserted"] = !!paicard
 		data["settings"]["allow_possession"] = bot_mode_flags & BOT_MODE_CAN_BE_SAPIENT
+=======
+	if(!(bot_cover_flags & BOT_COVER_LOCKED) || issilicon(user) || isAdminGhostAI(user))
+		data["settings"]["allow_possession"] = bot_mode_flags & BOT_MODE_GHOST_CONTROLLABLE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		data["settings"]["possession_enabled"] = can_be_possessed
 		data["settings"]["airplane_mode"] = !(bot_mode_flags & BOT_MODE_REMOTE_ENABLED)
 		data["settings"]["maintenance_lock"] = !(bot_cover_flags & BOT_COVER_MAINTS_OPEN)
@@ -1018,6 +1124,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 				return
 			if(!(bot_cover_flags & BOT_COVER_HACKED))
 				to_chat(usr, span_boldannounce("You fail to repair [src]'s [hackables]."))
+<<<<<<< HEAD
 				return
 			bot_cover_flags &= ~(BOT_COVER_EMAGGED|BOT_COVER_HACKED)
 			to_chat(usr, span_notice("You reset the [src]'s [hackables]."))
@@ -1030,11 +1137,22 @@ Pass a positive integer as an argument to override a bot's default speed.
 				return
 			to_chat(usr, span_notice("You eject [paicard] from [initial(src.name)]."))
 			ejectpai(usr)
+=======
+			else
+				bot_cover_flags &= ~(BOT_COVER_EMAGGED|BOT_COVER_HACKED)
+				to_chat(usr, span_notice("You reset the [src]'s [hackables]."))
+				usr.log_message("re-enabled safety lock of [src]", LOG_GAME)
+				bot_reset()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("toggle_personality")
 			if (can_be_possessed)
 				disable_possession(usr)
 			else
+<<<<<<< HEAD
 				enable_possession(usr)
+=======
+				enable_possession()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("rename")
 			rename(usr)
 
@@ -1054,6 +1172,7 @@ Pass a positive integer as an argument to override a bot's default speed.
 			return TRUE
 	return FALSE
 
+<<<<<<< HEAD
 /// Places a pAI in control of this mob
 /mob/living/simple_animal/bot/proc/insertpai(mob/user, obj/item/pai_card/card)
 	if(paicard)
@@ -1124,6 +1243,8 @@ Pass a positive integer as an argument to override a bot's default speed.
 	speak("Ejecting personality chip.", radio_channel)
 	ejectpai(user)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/simple_animal/bot/Login()
 	. = ..()
 	if(!. || !client)

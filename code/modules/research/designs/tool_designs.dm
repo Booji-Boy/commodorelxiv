@@ -72,7 +72,7 @@
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_ENGINEERING_ADVANCED
 	)
-	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_CARGO
 
 /datum/design/rcd_loaded
 	name = "Rapid Construction Device"
@@ -137,7 +137,11 @@
 	name = "RCD anti disruption designs upgrade"
 	desc = "Prevents interruption of RCD construction and deconstruction."
 	id = "rcd_upgrade_anti_interrupt"
+<<<<<<< HEAD
 	build_type = PROTOLATHE | AWAY_LATHE
+=======
+	build_type = PROTOLATHE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2.5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.25,
@@ -154,7 +158,11 @@
 	name = "RCD cooling upgrade"
 	desc = "Allows the RCD to more quickly perform multiple actions at once."
 	id = "rcd_upgrade_cooling"
+<<<<<<< HEAD
 	build_type = PROTOLATHE | AWAY_LATHE
+=======
+	build_type = PROTOLATHE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT,

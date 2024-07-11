@@ -28,7 +28,11 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 	response_disarm_simple = "gently move aside"
 	response_harm_continuous = "swats"
 	response_harm_simple = "swat"
+<<<<<<< HEAD
 	combat_mode = TRUE //parrots now start "aggressive" since only player parrots will nuzzle.
+=======
+	istate = ISTATE_HARM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	attack_vis_effect = ATTACK_EFFECT_BITE
@@ -91,7 +95,17 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 	AddElement(/datum/element/strippable, GLOB.strippable_parrot_items)
 	AddElement(/datum/element/simple_flying)
 	AddComponent(/datum/component/listen_and_repeat, desired_phrases = get_static_list_of_phrases(), blackboard_key = BB_PARROT_REPEAT_STRING)
+<<<<<<< HEAD
 	AddComponent(/datum/component/tameable, food_types = edibles, tame_chance = 100, bonus_tame_chance = 0)
+=======
+	AddComponent(\
+		/datum/component/tameable,\
+		food_types = edibles,\
+		tame_chance = 100,\
+		bonus_tame_chance = 0,\
+		after_tame = CALLBACK(src, PROC_REF(tamed)),\
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attacking))
 	RegisterSignal(src, COMSIG_MOB_CLICKON, PROC_REF(on_click))
@@ -179,9 +193,16 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 
 /mob/living/basic/parrot/update_icon_state()
 	. = ..()
+<<<<<<< HEAD
 	if(stat == DEAD)
 		return
 	icon_state = HAS_TRAIT(src, TRAIT_PARROT_PERCHED) ? icon_sit : icon_living
+=======
+	if(HAS_TRAIT(src, TRAIT_PARROT_PERCHED))
+		icon_state = icon_sit
+	else
+		icon_state = icon_living
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Proc that we just use to see if we're rightclicking something for perch behavior or dropping the item we currently ahve
 /mob/living/basic/parrot/proc/on_click(mob/living/basic/source, atom/target, params)
@@ -439,7 +460,11 @@ GLOBAL_LIST_INIT(strippable_parrot_items, create_strippable_list(list(
 
 	return returnable_list
 
+<<<<<<< HEAD
 /mob/living/basic/parrot/tamed(mob/living/tamer, atom/food)
+=======
+/mob/living/basic/parrot/proc/tamed()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/effect/temp_visual/heart(drop_location())
 
 /mob/living/basic/parrot/proc/drop_item_on_signal(mob/living/user)

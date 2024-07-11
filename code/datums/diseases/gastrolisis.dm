@@ -80,7 +80,11 @@
 					OT.MakeSlippery(TURF_WET_LUBE, 100)
 
 
+<<<<<<< HEAD
 /datum/disease/gastrolosis/cure(add_resistance = TRUE)
+=======
+/datum/disease/gastrolosis/cure(add_resistance = TRUE, mob/living/carbon/target)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(affected_mob && !is_species(affected_mob, /datum/species/snail)) //undo all the snail fuckening
 		var/mob/living/carbon/human/H = affected_mob

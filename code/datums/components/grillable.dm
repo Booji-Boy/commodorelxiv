@@ -15,7 +15,14 @@
 	/// Reagents that should be added to the result
 	var/list/added_reagents
 
+<<<<<<< HEAD
 /datum/component/grillable/Initialize(cook_result, required_cook_time, positive_result, use_large_steam_sprite, list/added_reagents)
+=======
+	/// What type of pollutant we spread around as we are grilleed, can be none  // MONKESTATION EDIT ADDITION
+	var/pollutant_type
+
+/datum/component/grillable/Initialize(cook_result, required_cook_time, positive_result, use_large_steam_sprite, pollutant_type)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(!isitem(parent)) //Only items support grilling at the moment
 		return COMPONENT_INCOMPATIBLE
@@ -24,7 +31,11 @@
 	src.required_cook_time = required_cook_time
 	src.positive_result = positive_result
 	src.use_large_steam_sprite = use_large_steam_sprite
+<<<<<<< HEAD
 	src.added_reagents = added_reagents
+=======
+	src.pollutant_type = pollutant_type
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/grillable/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_GRILL_PLACED, PROC_REF(on_grill_placed))
@@ -34,6 +45,7 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/grillable/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(
 		COMSIG_ATOM_EXAMINE,
 		COMSIG_ITEM_GRILL_TURNED_ON,
@@ -41,6 +53,9 @@
 		COMSIG_ITEM_GRILL_PROCESS,
 		COMSIG_ITEM_GRILL_PLACED,
 	))
+=======
+	UnregisterSignal(parent, list(COMSIG_ITEM_GRILL_PLACED_ON, COMSIG_ITEM_GRILL_PROCESS, COMSIG_ATOM_EXAMINE))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Inherit the new values passed to the component
 /datum/component/grillable/InheritComponent(datum/component/grillable/new_comp, original, cook_result, required_cook_time, positive_result, use_large_steam_sprite)
@@ -84,6 +99,10 @@
 
 	. = COMPONENT_HANDLED_GRILLING
 
+	if(pollutant_type)
+		var/turf/parent_turf = get_turf(parent)
+		parent_turf.pollute_turf(pollutant_type, 10)
+
 	current_cook_time += seconds_per_tick * 10 //turn it into ds
 	if(current_cook_time >= required_cook_time)
 		finish_grilling(used_grill)
@@ -102,12 +121,17 @@
 		if(original_object.custom_materials)
 			grilled_result.set_custom_materials(original_object.custom_materials)
 
+<<<<<<< HEAD
 	if(IsEdible(grilled_result) && positive_result)
 		BLACKBOX_LOG_FOOD_MADE(grilled_result.type)
 		grilled_result.reagents.clear_reagents()
 		original_object.reagents?.trans_to(grilled_result, original_object.reagents.total_volume)
 		if(added_reagents) // Add any new reagents that should be added
 			grilled_result.reagents.add_reagent_list(added_reagents)
+=======
+	if(IS_EDIBLE(grilled_result))
+		BLACKBOX_LOG_FOOD_MADE(grilled_result)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	SEND_SIGNAL(parent, COMSIG_ITEM_GRILLED, grilled_result)
 	if(who_placed_us)

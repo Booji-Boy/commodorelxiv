@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { isEscape, KEY } from 'common/keys';
 import { BooleanLike } from 'common/react';
 import { Component, createRef, RefObject } from 'react';
@@ -8,6 +9,17 @@ import { ChatHistory } from './ChatHistory';
 import { LINE_LENGTHS, RADIO_PREFIXES, WINDOW_SIZES } from './constants';
 import { windowClose, windowOpen, windowSet } from './helpers';
 import { byondMessages } from './timers';
+=======
+import { Channel, ChannelIterator } from './ChannelIterator';
+import { ChatHistory } from './ChatHistory';
+import { Component, createRef, InfernoKeyboardEvent, RefObject } from 'inferno';
+import { LINE_LENGTHS, RADIO_PREFIXES, WINDOW_SIZES } from './constants';
+import { byondMessages } from './timers';
+import { dragStartHandler } from 'tgui/drag';
+import { windowOpen, windowClose, windowSet } from './helpers';
+import { BooleanLike } from 'common/react';
+import { KEY } from 'common/keys';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type ByondOpen = {
   channel: Channel;
@@ -23,7 +35,11 @@ type State = {
   size: WINDOW_SIZES;
 };
 
+<<<<<<< HEAD
 const CHANNEL_REGEX = /^:\w\s/;
+=======
+const CHANNEL_REGEX = /^[:.]\w\s/;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export class TguiSay extends Component<{}, State> {
   private channelIterator: ChannelIterator;
@@ -162,7 +178,11 @@ export class TguiSay extends Component<{}, State> {
       ? prefix + currentValue
       : currentValue;
 
+<<<<<<< HEAD
     this.messages.forceSayMsg(grunt, this.channelIterator.current());
+=======
+    this.messages.forceSayMsg(grunt);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     this.reset();
   }
 
@@ -206,7 +226,12 @@ export class TguiSay extends Component<{}, State> {
     // Is it a valid prefix?
     const prefix = typed
       .slice(0, 3)
+<<<<<<< HEAD
       ?.toLowerCase() as keyof typeof RADIO_PREFIXES;
+=======
+      ?.toLowerCase()
+      ?.replace('.', ':') as keyof typeof RADIO_PREFIXES;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     if (!RADIO_PREFIXES[prefix] || prefix === this.currentPrefix) {
       return;
     }
@@ -222,7 +247,11 @@ export class TguiSay extends Component<{}, State> {
     this.setValue(typed.slice(3));
   }
 
+<<<<<<< HEAD
   handleKeyDown(event) {
+=======
+  handleKeyDown(event: InfernoKeyboardEvent<HTMLTextAreaElement>) {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     switch (event.key) {
       case KEY.Up:
       case KEY.Down:
@@ -245,10 +274,16 @@ export class TguiSay extends Component<{}, State> {
         this.handleIncrementChannel();
         break;
 
+<<<<<<< HEAD
       default:
         if (isEscape(event.key)) {
           this.handleClose();
         }
+=======
+      case KEY.Escape:
+        this.handleClose();
+        break;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     }
   }
 
@@ -274,7 +309,10 @@ export class TguiSay extends Component<{}, State> {
   };
 
   reset() {
+<<<<<<< HEAD
     this.currentPrefix = null;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     this.setValue('');
     this.setSize();
     this.setState({
@@ -313,11 +351,22 @@ export class TguiSay extends Component<{}, State> {
       this.channelIterator.current();
 
     return (
+<<<<<<< HEAD
       <div className={`window window-${theme} window-${this.state.size}`}>
         <Dragzone position="top" theme={theme} />
         <div className="center">
           <Dragzone position="left" theme={theme} />
           <div className="input">
+=======
+      <div
+        className={`window window-${theme} window-${this.state.size}`}
+        $HasKeyedChildren
+      >
+        <Dragzone position="top" theme={theme} />
+        <div className="center" $HasKeyedChildren>
+          <Dragzone position="left" theme={theme} />
+          <div className="input" $HasKeyedChildren>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             <button
               className={`button button-${theme}`}
               onClick={this.handleIncrementChannel}
@@ -349,7 +398,11 @@ const Dragzone = ({ theme, position }: { theme: string; position: string }) => {
   return (
     <div
       className={`dragzone-${location} dragzone-${position} dragzone-${theme}`}
+<<<<<<< HEAD
       onMouseDown={dragStartHandler}
+=======
+      onmousedown={dragStartHandler}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     />
   );
 };

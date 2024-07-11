@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+=======
+import { useBackend, useLocalState } from '../../backend';
+import {
+  Box,
+  Button,
+  Flex,
+  Section,
+  Tabs,
+  TextArea,
+  Modal,
+  Stack,
+  ProgressBar,
+  NoticeBox,
+} from '../../components';
+import { Window } from '../../layouts';
+import { CallModal } from './CallModal';
+import { ChunkViewModal } from './ChunkViewModal';
+import { StateSelectModal } from './StateSelectModal';
+import { ListMapper } from './ListMapper';
+import { Log } from './Log';
+import { TaskManager } from './TaskManager';
+import { sanitizeText } from '../../sanitize';
+import { marked } from 'marked';
+import { Component, createRef } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import hljs from 'highlight.js/lib/core';
 import lua from 'highlight.js/lib/languages/lua';
 import { marked } from 'marked';
@@ -328,8 +354,15 @@ export class LuaEditor extends Component {
                           width="100%"
                           onClick={() => {
                             const sectionCurrent = this.sectionRef.current;
+<<<<<<< HEAD
                             sectionCurrent.scrollTop =
                               sectionCurrent.scrollHeight;
+=======
+                            const scrollableCurrent =
+                              sectionCurrent.scrollableRef.current;
+                            scrollableCurrent.scrollTop =
+                              scrollableCurrent.scrollHeight;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                           }}
                         >
                           Jump to Bottom

@@ -44,7 +44,11 @@
 		StartCooldown()
 		return TRUE
 
+<<<<<<< HEAD
 	do_after(owner, delay = beam_duration, target = owner, hidden = TRUE)
+=======
+	do_after(owner, delay = beam_duration, target = owner)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	extinguish_laser()
 	StartCooldown()
 	return TRUE
@@ -66,10 +70,16 @@
 				break
 		if(blocked)
 			break
+<<<<<<< HEAD
 		var/obj/effect/brimbeam/new_brimbeam = new(affected_turf)
 		new_brimbeam.dir = owner.dir
 		beam_parts += new_brimbeam
 		new_brimbeam.assign_creator(owner)
+=======
+		var/atom/new_brimbeam = new /obj/effect/brimbeam(affected_turf)
+		new_brimbeam.dir = owner.dir
+		beam_parts += new_brimbeam
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		for(var/mob/living/hit_mob in affected_turf.contents)
 			hit_mob.apply_damage(damage = 25, damagetype = BURN)
 			to_chat(hit_mob, span_userdanger("You're blasted by [owner]'s brimbeam!"))
@@ -101,9 +111,13 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	light_color = LIGHT_COLOR_BLOOD_MAGIC
 	light_power = 3
+<<<<<<< HEAD
 	light_range = 2
 	/// Who made us?
 	var/datum/weakref/creator
+=======
+	light_outer_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/brimbeam/Initialize(mapload)
 	. = ..()
@@ -114,10 +128,14 @@
 	return ..()
 
 /obj/effect/brimbeam/process()
+<<<<<<< HEAD
 	var/atom/ignore = creator?.resolve()
 	for(var/mob/living/hit_mob in get_turf(src))
 		if(hit_mob == ignore)
 			continue
+=======
+	for(var/mob/living/hit_mob in get_turf(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		damage(hit_mob)
 
 /// Hurt the passed mob
@@ -125,10 +143,13 @@
 	hit_mob.apply_damage(damage = 5, damagetype = BURN)
 	to_chat(hit_mob, span_danger("You're damaged by [src]!"))
 
+<<<<<<< HEAD
 /// Ignore damage dealt to this mob
 /obj/effect/brimbeam/proc/assign_creator(mob/living/maker)
 	creator = WEAKREF(maker)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Disappear
 /obj/effect/brimbeam/proc/disperse()
 	animate(src, time = 0.5 SECONDS, alpha = 0)

@@ -8,7 +8,11 @@
 	tastes = list("bread" = 10)
 	foodtypes = GRAIN
 	eat_time = 3 SECONDS
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// type is spawned 5 at a time and replaces this bread loaf when processed by cutting tool
 	var/obj/item/food/breadslice/slice_type
 	/// so that the yield can change if it isnt 5
@@ -33,7 +37,11 @@
 	food_flags = FOOD_FINGER_FOOD
 	eat_time = 0.5 SECONDS
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/breadslice/Initialize(mapload)
 	. = ..()
@@ -216,7 +224,11 @@
 	tastes = list("bread" = 10) // bananjuice will also flavour
 	foodtypes = GRAIN | FRUIT
 	slice_type = /obj/item/food/breadslice/banana
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/breadslice/banana
 	name = "banana-nut bread slice"
@@ -228,7 +240,11 @@
 	)
 	tastes = list("bread" = 10)
 	foodtypes = GRAIN | FRUIT
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_SMALL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/bread/tofu
 	name = "Tofubread"
@@ -270,6 +286,7 @@
 	tastes = list("bread" = 10, "cheese" = 10)
 	foodtypes = GRAIN | DAIRY
 	slice_type = /obj/item/food/breadslice/creamcheese
+	food_buffs = STATUS_EFFECT_STAM_REGEN_MEDIUM
 
 /obj/item/food/breadslice/creamcheese
 	name = "cream cheese bread slice"
@@ -282,6 +299,7 @@
 	)
 	tastes = list("bread" = 10, "cheese" = 10)
 	foodtypes = GRAIN | DAIRY
+	food_buffs = STATUS_EFFECT_STAM_REGEN_SMALL
 
 /obj/item/food/bread/mimana
 	name = "mimana bread"
@@ -296,7 +314,11 @@
 	tastes = list("bread" = 10, "silence" = 10)
 	foodtypes = GRAIN | FRUIT
 	slice_type = /obj/item/food/breadslice/mimana
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/breadslice/mimana
 	name = "mimana bread slice"
@@ -310,7 +332,11 @@
 	)
 	tastes = list("bread" = 10, "silence" = 10)
 	foodtypes = GRAIN | FRUIT
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/bread/empty
 	name = "bread"
@@ -450,7 +476,11 @@
 	tastes = list("bread" = 1, "garlic" = 1, "butter" = 1)
 	foodtypes = GRAIN
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/butterbiscuit
 	name = "butter biscuit"
@@ -465,7 +495,11 @@
 	foodtypes = GRAIN | BREAKFAST
 	w_class = WEIGHT_CLASS_SMALL
 	venue_value = FOOD_PRICE_CHEAP
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/butterdog
 	name = "butterdog"

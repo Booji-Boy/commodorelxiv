@@ -1,4 +1,5 @@
 import { createSearch, toTitleCase } from 'common/string';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend, useSharedState } from '../backend';
@@ -24,6 +25,30 @@ export const OreRedemptionMachine = (props) => {
   const [tab, setTab] = useSharedState('tab', 1);
   const [searchItem, setSearchItem] = useState('');
   const [compact, setCompact] = useState(false);
+=======
+import { useBackend, useLocalState, useSharedState } from '../backend';
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Table,
+  Tabs,
+  Input,
+  Stack,
+  Icon,
+  Section,
+  LabeledList,
+} from '../components';
+import { Window } from '../layouts';
+import { formatSiUnit } from '../format';
+
+export const OreRedemptionMachine = (props) => {
+  const { act, data } = useBackend();
+  const { unclaimedPoints, materials, user } = data;
+  const [tab, setTab] = useSharedState('tab', 1);
+  const [searchItem, setSearchItem] = useLocalState('searchItem', '');
+  const [compact, setCompact] = useSharedState('compact', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const search = createSearch(searchItem, (materials) => materials.name);
   const material_filtered =
     searchItem.length > 0
@@ -176,9 +201,15 @@ export const OreRedemptionMachine = (props) => {
 
 const MaterialRow = (props) => {
   const { data } = useBackend();
+<<<<<<< HEAD
   const { compact } = props;
   const { material_icons } = data;
   const { material, onRelease } = props;
+=======
+  const { material_icons } = data;
+  const { material, onRelease } = props;
+  const [compact, setCompact] = useLocalState('compact', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const display = material_icons.find(
     (mat_icon) => mat_icon.id === material.id,

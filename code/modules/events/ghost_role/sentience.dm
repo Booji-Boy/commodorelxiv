@@ -1,6 +1,10 @@
 GLOBAL_LIST_INIT(high_priority_sentience, typecacheof(list(
 	/mob/living/basic/bat,
 	/mob/living/basic/butterfly,
+<<<<<<< HEAD
+=======
+	/mob/living/basic/lizard,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/mob/living/basic/carp/pet/cayenne,
 	/mob/living/basic/chicken,
 	/mob/living/basic/cow,
@@ -17,7 +21,11 @@ GLOBAL_LIST_INIT(high_priority_sentience, typecacheof(list(
 	/mob/living/basic/spider/giant/sgt_araneus,
 	/mob/living/simple_animal/bot/secbot/beepsky,
 	/mob/living/simple_animal/hostile/retaliate/goose/vomit,
+<<<<<<< HEAD
 	/mob/living/basic/bear/snow/misha,
+=======
+	/mob/living/simple_animal/pet,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 )))
 
 /datum/round_event_control/sentience
@@ -49,9 +57,19 @@ GLOBAL_LIST_INIT(high_priority_sentience, typecacheof(list(
 	priority_announce(sentience_report,"[command_name()] Medium-Priority Update")
 
 /datum/round_event/ghost_role/sentience/spawn_role()
+<<<<<<< HEAD
 	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SENTIENCE, role = ROLE_SENTIENCE, alert_pic = /obj/item/slimepotion/slime/sentience, role_name_text = role_name)
 	if(!length(candidates))
 		return NOT_ENOUGH_PLAYERS
+=======
+	var/list/mob/dead/observer/candidates
+	candidates = SSpolling.poll_ghost_candidates(
+		"Would you like to be a random animal?",
+		role = ROLE_SENTIENCE,
+		pic_source = /obj/item/slimepotion/slime/sentience,
+		role_name_text = role_name
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// find our chosen mob to breathe life into
 	// Mobs have to be simple animals, mindless, on station, and NOT holograms.
@@ -75,11 +93,11 @@ GLOBAL_LIST_INIT(high_priority_sentience, typecacheof(list(
 
 	if(!potential.len)
 		return WAITING_FOR_SOMETHING
-	if(!candidates.len)
+	if(!length(candidates))
 		return NOT_ENOUGH_PLAYERS
 
 	var/spawned_animals = 0
-	while(spawned_animals < animals && candidates.len && potential.len)
+	while(spawned_animals < animals && length(candidates) && potential.len)
 		var/mob/living/selected = popleft(potential)
 		var/mob/dead/observer/picked_candidate = pick_n_take(candidates)
 

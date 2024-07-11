@@ -73,8 +73,21 @@
 	materials = null
 	return ..()
 
+/obj/machinery/mineral/ore_redemption/RefreshParts()
+	. = ..()
+	var/point_upgrade_temp = 1
+	var/ore_multiplier_temp = 1
+	for(var/datum/stock_part/matter_bin/B in component_parts)
+		ore_multiplier_temp = 0.65 + (0.35 * B.tier)
+	for(var/datum/stock_part/micro_laser/L in component_parts)
+		point_upgrade_temp = 0.65 + (0.35 * L.tier)
+	point_upgrade = point_upgrade_temp
+	ore_multiplier = round(ore_multiplier_temp, 0.01)
+
 /obj/machinery/mineral/ore_redemption/examine(mob/user)
 	. = ..()
+	if(in_range(user, src) || isobserver(user))
+		. += span_notice("The status display reads: Smelting <b>[ore_multiplier]</b> sheet(s) per piece of ore.<br>Reward point generation at <b>[point_upgrade*100]%</b>.")
 	if(panel_open)
 		. += span_notice("Alt-click to rotate the input and output direction.")
 
@@ -131,9 +144,15 @@
 	var/has_minerals = FALSE
 	var/list/appended_list = list()
 
+<<<<<<< HEAD
 	for(var/current_material in mat_container.materials)
 		var/datum/material/material_datum = current_material
 		var/mineral_amount = mat_container.materials[current_material] / SHEET_MATERIAL_AMOUNT
+=======
+	for(var/mat in mat_container.materials)
+		var/datum/material/material_datum = mat
+		var/mineral_amount = mat_container.materials[mat] / SHEET_MATERIAL_AMOUNT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(mineral_amount)
 			has_minerals = TRUE
 		appended_list["[capitalize(material_datum.name)]"] = "[mineral_amount] sheets"
@@ -319,11 +338,23 @@
 
 			//we have points
 			if(points)
+<<<<<<< HEAD
 				user_id_card.registered_account.mining_points += points
 				points = 0
 				return TRUE
 
 			return FALSE
+=======
+				if(user_id_card)
+					user_id_card.registered_account.mining_points += points
+					GLOB.lavaland_points_generated += points //monkestation edit
+					points = 0
+				else
+					to_chat(usr, span_warning("No valid ID detected."))
+			else
+				to_chat(usr, span_warning("No points to claim."))
+			return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("Release")
 			if(!mat_container)
 				return
@@ -344,7 +375,16 @@
 
 				var/desired = text2num(params["sheets"])
 				var/sheets_to_remove = round(min(desired, 50, stored_amount))
+<<<<<<< HEAD
 				materials.eject_sheets(mat, sheets_to_remove, get_step(src, output_dir))
+=======
+
+				var/count = mat_container.retrieve_sheets(sheets_to_remove, mat, get_step(src, output_dir))
+				var/list/mats = list()
+				mats[mat] = SHEET_MATERIAL_AMOUNT
+				materials.silo_log(src, "released", -count, "sheets", mats)
+				//Logging deleted for quick coding
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 		if("Smelt")
 			if(!mat_container)

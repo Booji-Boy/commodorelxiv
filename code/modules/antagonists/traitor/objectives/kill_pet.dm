@@ -23,7 +23,11 @@
 			/mob/living/basic/pet/dog/corgi/puppy/ian
 		),
 		JOB_CAPTAIN = /mob/living/basic/pet/fox/renault,
+<<<<<<< HEAD
 		JOB_CHIEF_MEDICAL_OFFICER = /mob/living/basic/pet/cat/runtime,
+=======
+		JOB_CHIEF_MEDICAL_OFFICER = /mob/living/simple_animal/pet/cat/runtime,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		JOB_CHIEF_ENGINEER = /mob/living/basic/parrot/poly,
 		JOB_QUARTERMASTER = list(
 			/mob/living/basic/gorilla/cargorilla,
@@ -55,7 +59,10 @@
 		JOB_HEAD_OF_SECURITY = list(
 			/mob/living/basic/carp/pet/lia,
 			/mob/living/basic/spider/giant/sgt_araneus,
+<<<<<<< HEAD
 			/mob/living/basic/bear/snow/misha,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		),
 		JOB_WARDEN = list(
 			/mob/living/basic/pet/dog/pug/mcgriff

@@ -21,11 +21,21 @@ ADMIN_VERB(announce, R_ADMIN, "Announce", "Announce your desires to the world.",
 	if(!message)
 		return
 
+<<<<<<< HEAD
 	if(!user.holder.check_for_rights(R_SERVER))
 		message = adminscrub(message,500)
 	send_ooc_announcement(message, "From [user.holder.fakekey ? "Administrator" : user.key]")
 	log_admin("Announce: [key_name(user)] : [message]")
 	BLACKBOX_LOG_ADMIN_VERB("Announce")
+=======
+	var/message = input("Global message to send:", "Admin Announce", null, null)  as message|null
+	if(message)
+		if(!check_rights(R_SERVER,0))
+			message = adminscrub(message,500)
+		send_formatted_announcement(message, "From [usr.client.holder.fakekey ? "Administrator" : usr.key]")
+		log_admin("Announce: [key_name(usr)] : [message]")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Announce") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(unprison, R_ADMIN, "UnPrison", ADMIN_VERB_NO_DESCRIPTION, ADMIN_CATEGORY_HIDDEN, mob/prisoner in GLOB.mob_list)
 	if(!is_centcom_level(prisoner.z))
@@ -112,10 +122,17 @@ ADMIN_VERB(cmd_admin_check_player_exp, R_ADMIN, "Player Playtime", "View player 
 				if(istype(D,key))
 					available_traits += GLOB.admin_visible_traits[key]
 		if("Remove")
+<<<<<<< HEAD
 			if(!GLOB.admin_trait_name_map)
 				GLOB.admin_trait_name_map = generate_admin_trait_name_map()
 			for(var/trait in D._status_traits)
 				var/name = GLOB.admin_trait_name_map[trait] || trait
+=======
+			if(!GLOB.trait_name_map)
+				GLOB.trait_name_map = generate_trait_name_map()
+			for(var/trait in D._status_traits)
+				var/name = GLOB.trait_name_map[trait] || trait
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				available_traits[name] = trait
 
 	var/chosen_trait = input("Select trait to modify", "Trait") as null|anything in sort_list(available_traits)

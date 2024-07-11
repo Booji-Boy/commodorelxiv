@@ -9,20 +9,31 @@
 /area/ruin/space/has_grav/powered/virtual_domain)
 "c" = (
 /obj/structure/sign/warning/directional/west,
+<<<<<<< HEAD
 /turf/open/chasm,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "e" = (
 /obj/effect/mob_spawn/corpse/human/cyber_police,
 /obj/effect/landmark/bitrunning/cache_spawn,
 /turf/open/indestructible/dark,
+=======
+/turf/open/chasm/lavaland,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/powered/virtual_domain)
 "h" = (
 /obj/structure/rack,
 /turf/open/indestructible/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
 "i" = (
 /obj/structure/sign/warning/directional/east,
 /turf/open/chasm,
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+"i" = (
+/obj/structure/sign/warning/directional/east,
+/turf/open/chasm/lavaland,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/powered/virtual_domain)
 "o" = (
 /turf/template_noop,
@@ -61,6 +72,7 @@
 /obj/effect/mapping_helpers/airlock/abandoned,
 /turf/open/indestructible/dark,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "D" = (
 /turf/open/indestructible/dark,
 /area/virtual_domain/protected_space)
@@ -75,6 +87,12 @@
 /obj/machinery/door/airlock/abductor,
 /turf/open/indestructible/dark,
 /area/virtual_domain/protected_space)
+=======
+"F" = (
+/obj/structure/mystery_box/guns,
+/turf/open/indestructible/dark,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "K" = (
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/closed/indestructible/binary,
@@ -84,6 +102,7 @@
 /turf/open/indestructible/dark,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "O" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "bathroom"
 	},
@@ -91,6 +110,13 @@
 /area/virtual_domain/safehouse)
 "Q" = (
 /turf/open/chasm,
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+/turf/template_noop,
+/area/virtual_domain/safehouse)
+"Q" = (
+/turf/open/chasm/lavaland,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/powered/virtual_domain)
 "R" = (
 /obj/effect/mine/explosive/light,
@@ -129,6 +155,11 @@ o
 o
 o
 o
+<<<<<<< HEAD
+=======
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -146,6 +177,10 @@ o
 o
 o
 o
+<<<<<<< HEAD
+=======
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 o
@@ -154,6 +189,11 @@ o
 o
 o
 o
+<<<<<<< HEAD
+=======
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -162,7 +202,11 @@ Y
 Y
 Y
 Y
+<<<<<<< HEAD
 U
+=======
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 o
@@ -172,9 +216,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(3,1,1) = {"
+=======
 o
 "}
 (3,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -200,10 +252,20 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (4,1,1) = {"
 a
 e
+=======
+o
+"}
+(4,1,1) = {"
+o
+o
+a
+W
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 X
 Y
 B
@@ -227,8 +289,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (5,1,1) = {"
+=======
+o
+"}
+(5,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 b
 b
@@ -254,8 +324,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (6,1,1) = {"
+=======
+o
+"}
+(6,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -280,9 +358,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(7,1,1) = {"
+=======
 o
 "}
 (7,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -307,9 +393,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(8,1,1) = {"
+=======
 o
 "}
 (8,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 X
@@ -335,8 +429,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (9,1,1) = {"
+=======
+o
+"}
+(9,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 W
@@ -362,8 +464,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (10,1,1) = {"
+=======
+o
+"}
+(10,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 Y
@@ -388,9 +498,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(11,1,1) = {"
+=======
 o
 "}
 (11,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -415,9 +533,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(12,1,1) = {"
+=======
 o
 "}
 (12,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -443,8 +569,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (13,1,1) = {"
+=======
+o
+"}
+(13,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -469,9 +603,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(14,1,1) = {"
+=======
 o
 "}
 (14,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -496,9 +638,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(15,1,1) = {"
+=======
 o
 "}
 (15,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 R
@@ -524,8 +674,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (16,1,1) = {"
+=======
+o
+"}
+(16,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -540,10 +698,13 @@ Y
 Y
 a
 Y
+<<<<<<< HEAD
 I
 I
 I
 I
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -551,8 +712,20 @@ a
 a
 a
 a
+<<<<<<< HEAD
 "}
 (17,1,1) = {"
+=======
+a
+a
+a
+a
+o
+"}
+(17,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 V
@@ -567,10 +740,17 @@ Y
 Y
 Y
 Y
+<<<<<<< HEAD
 I
 h
 D
 D
+=======
+a
+h
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -578,10 +758,20 @@ t
 t
 O
 a
+<<<<<<< HEAD
 "}
 (18,1,1) = {"
 a
 U
+=======
+o
+"}
+(18,1,1) = {"
+o
+o
+a
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Q
 a
@@ -594,10 +784,17 @@ X
 Y
 Y
 Y
+<<<<<<< HEAD
 I
 F
 D
 D
+=======
+a
+F
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -605,8 +802,16 @@ t
 t
 t
 a
+<<<<<<< HEAD
 "}
 (19,1,1) = {"
+=======
+o
+"}
+(19,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Q
 Q
@@ -621,10 +826,17 @@ a
 Y
 Y
 Y
+<<<<<<< HEAD
 I
 D
 D
 D
+=======
+a
+Y
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -632,14 +844,26 @@ t
 t
 t
 a
+<<<<<<< HEAD
 "}
 (20,1,1) = {"
+=======
+o
+"}
+(20,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Q
 Q
 Q
 a
+<<<<<<< HEAD
 U
+=======
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Y
 Y
 a
@@ -648,10 +872,17 @@ Y
 Y
 Y
 Y
+<<<<<<< HEAD
 J
 D
 D
 D
+=======
+T
+Y
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -659,8 +890,16 @@ t
 t
 t
 a
+<<<<<<< HEAD
 "}
 (21,1,1) = {"
+=======
+o
+"}
+(21,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 Q
@@ -675,10 +914,17 @@ Y
 R
 Y
 Y
+<<<<<<< HEAD
 I
 D
 D
 D
+=======
+a
+Y
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -686,8 +932,16 @@ t
 t
 t
 a
+<<<<<<< HEAD
 "}
 (22,1,1) = {"
+=======
+o
+"}
+(22,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 Q
@@ -702,10 +956,17 @@ Y
 Y
 Y
 Y
+<<<<<<< HEAD
 I
 F
 D
 D
+=======
+a
+F
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -713,8 +974,16 @@ t
 t
 t
 a
+<<<<<<< HEAD
 "}
 (23,1,1) = {"
+=======
+o
+"}
+(23,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 Q
@@ -729,10 +998,17 @@ a
 a
 Y
 Y
+<<<<<<< HEAD
 I
 h
 D
 D
+=======
+a
+h
+Y
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 t
 t
 t
@@ -740,8 +1016,16 @@ t
 t
 r
 a
+<<<<<<< HEAD
 "}
 (24,1,1) = {"
+=======
+o
+"}
+(24,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 Q
@@ -756,10 +1040,13 @@ a
 a
 a
 Y
+<<<<<<< HEAD
 I
 I
 I
 I
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -767,8 +1054,20 @@ a
 a
 a
 a
+<<<<<<< HEAD
 "}
 (25,1,1) = {"
+=======
+a
+a
+a
+a
+o
+"}
+(25,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 c
 Q
@@ -794,8 +1093,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (26,1,1) = {"
+=======
+o
+"}
+(26,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Q
 Q
@@ -820,9 +1127,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(27,1,1) = {"
+=======
 o
 "}
 (27,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -848,8 +1163,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (28,1,1) = {"
+=======
+o
+"}
+(28,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 X
@@ -875,8 +1198,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (29,1,1) = {"
+=======
+o
+"}
+(29,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 a
@@ -901,9 +1232,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(30,1,1) = {"
+=======
 o
 "}
 (30,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -929,8 +1268,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (31,1,1) = {"
+=======
+o
+"}
+(31,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -956,8 +1303,16 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (32,1,1) = {"
+=======
+o
+"}
+(32,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -982,9 +1337,17 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(33,1,1) = {"
+=======
 o
 "}
 (33,1,1) = {"
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 R
@@ -1009,10 +1372,19 @@ o
 o
 o
 o
+o
+<<<<<<< HEAD
+"}
+(34,1,1) = {"
+o
+=======
 o
 "}
 (34,1,1) = {"
 o
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 Y
 Y
@@ -1026,7 +1398,11 @@ a
 a
 Y
 M
+<<<<<<< HEAD
 U
+=======
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 W
 i
 Q
@@ -1037,11 +1413,22 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (35,1,1) = {"
 o
 a
 U
+=======
+o
+"}
+(35,1,1) = {"
+o
+o
+o
+a
+Y
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Y
 Y
 Y
@@ -1064,9 +1451,18 @@ o
 o
 o
 o
+<<<<<<< HEAD
 "}
 (36,1,1) = {"
 o
+=======
+o
+"}
+(36,1,1) = {"
+o
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 a
 a
 a
@@ -1091,4 +1487,38 @@ o
 o
 o
 o
+<<<<<<< HEAD
+=======
+o
+"}
+(37,1,1) = {"
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}

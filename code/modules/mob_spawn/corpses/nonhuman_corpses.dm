@@ -15,6 +15,7 @@
 	. = ..()
 	dead_ai.name = src.name
 	dead_ai.real_name = src.name
+	dead_ai.update_name_tag(src.name) // monkestation edit: name tags
 
 ///dead slimes, with a var for whatever color you want.
 /obj/effect/mob_spawn/corpse/slime
@@ -22,11 +23,19 @@
 	icon = 'icons/mob/simple/slimes.dmi'
 	icon_state = "grey-baby-dead" //sets the icon in the map editor
 	///the color of the slime you're spawning.
+<<<<<<< HEAD
 	var/slime_species = /datum/slime_type/grey
 
 /obj/effect/mob_spawn/corpse/slime/special(mob/living/basic/slime/spawned_slime)
 	. = ..()
 	spawned_slime.set_slime_type(slime_species)
+=======
+	var/slime_species = /datum/slime_color/grey
+
+/obj/effect/mob_spawn/corpse/slime/special(mob/living/basic/slime/spawned_slime)
+	. = ..()
+	spawned_slime.change_color(slime_species)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///dead facehuggers, great for xeno ruins so you can have a cool ruin without spiraling the entire round into xenomorph hell. also, this is a terrible terrible artifact of time
 /obj/effect/mob_spawn/corpse/facehugger
@@ -55,6 +64,16 @@
 
 /// Dead headcrab for changeling-themed ruins
 /obj/effect/mob_spawn/corpse/headcrab
+<<<<<<< HEAD
 	mob_type = /mob/living/basic/headslug/beakless
 	icon = 'icons/mob/simple/animal.dmi'
 	icon_state = "headslug_dead"
+=======
+	mob_type = /mob/living/basic/headslug
+	icon = 'icons/mob/simple/animal.dmi'
+	icon_state = "headslug_dead"
+
+/obj/effect/mob_spawn/corpse/headcrab/special(mob/living/basic/headslug/crab)
+	. = ..()
+	crab.egg_lain = TRUE // Prevents using mad science to become a changeling
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

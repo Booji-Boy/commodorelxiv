@@ -22,7 +22,11 @@
 
 	antag_type = /datum/antagonist/slaughter
 
+<<<<<<< HEAD
 	/// Which blood crawl do we give to the demon
+=======
+	/// Datum that stores the action for us to crawl around.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/crawl_type = /datum/action/cooldown/spell/jaunt/bloodcrawl/slaughter_demon
 	/// How long it takes for the alt-click slam attack to come off cooldown
 	var/slam_cooldown_time = 45 SECONDS
@@ -37,7 +41,12 @@
 
 /mob/living/basic/demon/slaughter/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	GRANT_ACTION(crawl_type)
+=======
+	var/datum/action/cooldown/spell/jaunt/bloodcrawl/slaughter_demon/crawl = new crawl_type(src)
+	crawl.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_attack))
 	RegisterSignals(src, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(on_crawl))
 
@@ -66,7 +75,11 @@
 
 /// Performs the classic slaughter demon bodyslam on the attack_target. Yeets them a screen away.
 /mob/living/basic/demon/slaughter/proc/bodyslam(atom/attack_target)
+<<<<<<< HEAD
 	if(!isliving(attack_target) || attack_target == src)
+=======
+	if(!isliving(attack_target))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(!Adjacent(attack_target))
@@ -98,19 +111,30 @@
 /mob/living/basic/demon/slaughter/proc/on_attack(mob/living/source, atom/attack_target, proximity_flag, list/modifiers)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(!proximity_flag)
 		return NONE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		bodyslam(attack_target)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if(!iscarbon(attack_target))
+<<<<<<< HEAD
 		return NONE
 
 	var/mob/living/carbon/target = attack_target
 	if(target.stat == DEAD || isnull(target.mind) || (current_hitstreak > wound_bonus_hitstreak_max))
 		return NONE
+=======
+		return
+
+	var/mob/living/carbon/target = attack_target
+	if(target.stat == DEAD || isnull(target.mind) || (current_hitstreak > wound_bonus_hitstreak_max))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	current_hitstreak++
 	wound_bonus += wound_bonus_per_hit
@@ -149,7 +173,11 @@
 /// We do our own special thing on death, which is to spawn a kitten.
 /mob/living/basic/demon/slaughter/laughter/proc/on_death()
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	var/mob/living/basic/pet/cat/kitten/kitty = new(drop_location())
+=======
+	var/mob/living/simple_animal/pet/cat/kitten/kitty = new(drop_location())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	kitty.name = "Laughter"
 
 /mob/living/basic/demon/slaughter/laughter/ex_act(severity)

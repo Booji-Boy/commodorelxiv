@@ -1,7 +1,13 @@
 /obj/item/wallframe
+<<<<<<< HEAD
 	icon = 'icons/obj/machines/wallmounts.dmi'
 	custom_materials = list(/datum/material/iron= SHEET_MATERIAL_AMOUNT * 2)
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	icon = 'icons/obj/wallframe.dmi'
+	custom_materials = list(/datum/material/iron= SHEET_MATERIAL_AMOUNT * 2)
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	inhand_icon_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'

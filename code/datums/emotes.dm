@@ -91,7 +91,11 @@
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
 	if(SEND_SIGNAL(user, COMSIG_MOB_PRE_EMOTED, key, params, type_override, intentional) & COMPONENT_CANT_EMOTE)
+<<<<<<< HEAD
 		return TRUE // We don't return FALSE because the error output would be incorrect, provide your own if necessary.
+=======
+		return // We don't return FALSE because the error output would be incorrect, provide your own if necessary.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/msg = select_message_type(user, message, intentional)
 	if(params && message_param)
 		msg = select_param(user, params)
@@ -105,7 +109,11 @@
 	var/tmp_sound = get_sound(user)
 	if(tmp_sound && should_play_sound(user, intentional) && TIMER_COOLDOWN_FINISHED(user, type))
 		TIMER_COOLDOWN_START(user, type, audio_cooldown)
-		playsound(user, tmp_sound, 50, vary)
+		//MONKESTATION EDIT START - Allows sounds to vary based on their calling conditions.
+		//playsound(user, tmp_sound, 50, vary, mixer_channel = CHANNEL_MOB_SOUNDS) //MONKESTATION EDIT ORIGINAL
+		var/tmp_vary = should_vary(user)
+		playsound(user, tmp_sound, 50, tmp_vary, mixer_channel = CHANNEL_MOB_SOUNDS)
+		//MONKESTATION EDIT END
 
 	var/is_important = emote_type & EMOTE_IMPORTANT
 	var/is_visual = emote_type & EMOTE_VISIBLE
@@ -188,6 +196,11 @@
 	return TRUE
 
 
+<<<<<<< HEAD
+=======
+	SEND_SIGNAL(user, COMSIG_MOB_EMOTED(key))
+	SSblackbox.record_feedback("tally", "emote_used", 1, name)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * For handling emote cooldown, return true to allow the emote to happen.
@@ -271,8 +284,19 @@
 		. = message_AI
 	else if(ismonkey(user) && message_monkey)
 		. = message_monkey
+<<<<<<< HEAD
 	else if((iscyborg(user) || (living_user.mob_biotypes & MOB_ROBOTIC)) && message_robot)
 		. = message_robot
+=======
+
+	// Monkestation Edit start
+	else if((ismoth(user) || isflyperson(user) || isarachnid(user) || istype(user, /mob/living/basic/mothroach)) && message_insect)
+		. = message_insect
+	else if(isipc(user) && message_ipc)
+		. = message_ipc
+	// MonkeStation Edit End
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(isanimal_or_basicmob(user) && message_animal_or_basic)
 		. = message_animal_or_basic
 
@@ -384,6 +408,10 @@
 	for(var/mob/ghost as anything in GLOB.dead_mob_list)
 		if(!ghost.client || isnewplayer(ghost))
 			continue
+<<<<<<< HEAD
 		if(get_chat_toggles(ghost.client) & CHAT_GHOSTSIGHT && !(ghost in viewers(origin_turf, null)))
+=======
+		if(ghost.client.prefs.chat_toggles & CHAT_GHOSTSIGHT && !(ghost in viewers(origin_turf, null)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			ghost.show_message("[FOLLOW_LINK(ghost, src)] [ghost_text]")
 	return TRUE

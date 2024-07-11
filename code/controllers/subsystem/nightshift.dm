@@ -50,6 +50,8 @@ SUBSYSTEM_DEF(nightshift)
 		update_nightshift(night_time, announcing)
 
 /datum/controller/subsystem/nightshift/proc/update_nightshift(active, announce = TRUE, resumed = FALSE, forced = FALSE)
+	set waitfor = FALSE
+
 	if(!resumed)
 		currentrun = SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/power/apc)
 		nightshift_active = active
@@ -62,5 +64,4 @@ SUBSYSTEM_DEF(nightshift)
 		currentrun -= APC
 		if (APC.area && (APC.area.type in GLOB.the_station_areas))
 			APC.set_nightshift(nightshift_active)
-		if(MC_TICK_CHECK && !forced) // subsystem will be in state SS_IDLE if forced by an admin
-			return
+		CHECK_TICK

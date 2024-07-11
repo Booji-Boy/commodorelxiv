@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+/// An admin verb to view all circuits, plus useful information
+/datum/admins/proc/view_all_circuits()
+	set category = "Admin.Logging"
+	set name = "View All Circuits"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(view_all_circuits, R_ADMIN, "View All Circuits", "List all circuits in the game.", ADMIN_CATEGORY_GAME)
 	var/static/datum/circuit_admin_panel/circuit_admin_panel = new

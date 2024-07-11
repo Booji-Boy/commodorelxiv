@@ -61,7 +61,7 @@
 	return TRUE
 
 /datum/keybinding/living/rest
-	hotkey_keys = list("U")
+	hotkey_keys = list("R") // monke: move this, so LOOC can be U, adjacent to other communication keys.
 	name = "rest"
 	full_name = "Rest"
 	description = "Lay down, or get up."
@@ -74,6 +74,7 @@
 	var/mob/living/living_mob = user.mob
 	living_mob.toggle_resting()
 	return TRUE
+<<<<<<< HEAD
 
 /datum/keybinding/living/toggle_combat_mode
 	hotkey_keys = list("F")
@@ -152,3 +153,5 @@
 	var/mob/living/M = user.mob
 	M.toggle_move_intent()
 	return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

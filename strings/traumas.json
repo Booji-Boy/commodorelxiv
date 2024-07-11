@@ -20,7 +20,6 @@
         "@pick(semicolon)the ai and borgs are mettacomming I think",
         "@pick(semicolon)this SI mY stATIon......",
         "@pick(semicolon)wtf??????????? @pick(bug)",
-        "@pick(servers) is down!! @pick(bug)",
         ">my face",
         "Bi is THE BEST OF BOTH WORLDS>",
 	"built DIFFERENT. I Stack Paper!",
@@ -28,8 +27,8 @@
         "closd for merbegging",
         "dem dwarfs man, dem dwarfs",
         "DON'T EVER TUCH ME",
+		"FAHER",
         "FOR TEH EMPRAH",
-        "fucking 4rries!",
         "FUS RO DAH",
         "geT THE FUCK OUTTTT",
         "GEY AWAY FROM ME U GREIFING PRICK!!!!",
@@ -38,11 +37,14 @@
         "hwee did eet fhor khayosss",
         "i will snatch erry motherfucker birthday",
         "INSTLL TEG",
-        "its gonna be like 9/11 all over again but insitaead is gonna be a bitc",
         "lifelike texture ;_;",
         "lol2cat",
         "luv can bloooom",
+<<<<<<< HEAD
 	"MAKE JIANT CRISTAL BURN I KEPT THROWING WELDERS IT WOOD LIGHT",
+=======
+		"MAKE ME WIZ???",
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         "NO I'M ONNA KILL YOU MOTHERFUCKER OLD STYLE",
         "PACKETS!!!",
         "parasteng was best",
@@ -61,7 +63,6 @@
         "THe saiyans screwed",
         "TURBIN IS BEST ENGIENE",
         "u just did the world a little bit more sad place for someone",
-        "ur a fuckeing autist!",
         "waaaaaagh!!!",
         "wearnig siNGUARLTY is.... FINE haHAAA",
         "WHERES THE SLIP REWRITE WHERE THR FUCK ID IT?",
@@ -107,19 +108,6 @@
         "e"
     ],
 
-    "servers": [
-        "bager",
-        "berry",
-        "colonel hall",
-        "mr basil",
-        "mr terry",
-        "mrs sybil",
-        "sybl",
-        "vent hell",
-        "manual",
-        "camel"
-    ],
-
     "create_verbs": [
         "creat",
         "gib",
@@ -133,7 +121,6 @@
         "anteg",
         "ayleins",
         "bleb",
-        "cock cult",
         "deth squads",
         "deval",
         "revinent",

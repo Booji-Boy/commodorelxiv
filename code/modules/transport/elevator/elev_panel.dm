@@ -47,7 +47,7 @@
 	var/door_reset_timerid
 	/// The light mask overlay we use
 	light_power = 0.5 // Minimums, we want the button to glow if it has a mask, not light an area
-	light_range = 1.5
+	light_outer_range = 1.5
 	light_color = LIGHT_COLOR_DARK_BLUE
 	var/light_mask = "elev-light-mask"
 

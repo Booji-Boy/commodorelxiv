@@ -70,6 +70,7 @@ const TIER2TIERDATA: TierData[] = [
 ];
 
 export const InfuserBook = (props) => {
+<<<<<<< HEAD
   const { data, act } = useBackend<DnaInfuserData>();
   const { entries } = data;
 
@@ -77,6 +78,18 @@ export const InfuserBook = (props) => {
     chapter: 0,
     pageInChapter: 0,
   });
+=======
+  const { data } = useBackend<DnaInfuserData>();
+  const { entries } = data;
+
+  const [bookPosition, setBookPosition] = useLocalState<BookPosition>(
+    'bookPosition',
+    {
+      chapter: 0,
+      pageInChapter: 0,
+    },
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { chapter, pageInChapter } = bookPosition;
 
   const paginatedEntries = paginateEntries(entries);
@@ -146,9 +159,13 @@ export const InfuserBook = (props) => {
                       key={tabIndex}
                       selected={chapter === tabIndex}
                       onClick={
+<<<<<<< HEAD
                         tabIndex === 4
                           ? undefined
                           : () => switchChapter(tabIndex)
+=======
+                        tabIndex === 4 ? null : () => switchChapter(tabIndex)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       }
                     >
                       <Box color={tabIndex === 4 && 'red'}>{tab}</Box>

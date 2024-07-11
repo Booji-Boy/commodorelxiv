@@ -96,6 +96,7 @@
 	//Determines damage dealt on a punch. Against a boxing defender, we apply our skill bonus.
 	var/damage = rand(lower_force, upper_force)
 
+<<<<<<< HEAD
 	if(honor_check(defender))
 		var/strength_bonus = HAS_TRAIT(attacker, TRAIT_STRENGTH) ? 2 : 0 //Investing into genetic strength improvements makes you a better boxer
 		damage += round(athletics_skill * check_streak(attacker, defender) + strength_bonus)
@@ -110,6 +111,10 @@
 
 	// Similar to a normal punch, should we have a value of 0 for our lower force, we simply miss outright.
 	if(!lower_force)
+=======
+	var/damage = rand(10, 16) + (active_arm.unarmed_damage_low * 2)
+	if(!damage)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		playsound(defender.loc, active_arm.unarmed_miss_sound, 25, TRUE, -1)
 		defender.visible_message(span_warning("[attacker]'s [current_atk_verb] misses [defender]!"), \
 			span_danger("You avoid [attacker]'s [current_atk_verb]!"), span_hear("You hear a swoosh!"), COMBAT_MESSAGE_RANGE, attacker)
@@ -137,6 +142,7 @@
 
 	defender.apply_damage(damage, damage_type, affecting, armor_block)
 
+<<<<<<< HEAD
 	log_combat(attacker, defender, "punched (boxing) ")
 
 	if(grant_experience)
@@ -185,6 +191,19 @@
 	new /obj/effect/temp_visual/crit(get_turf(defender))
 	skill_experience_adjustment(attacker, (damage/lower_force)) //double experience for a successful crit
 
+=======
+	defender.apply_damage(damage, STAMINA, affecting, armor_block)
+	log_combat(attacker_human, defender, "punched (boxing) ")
+	if(defender.stamina.loss > 50 && istype(defender.mind?.martial_art, /datum/martial_art/boxing))
+		var/knockout_prob = defender.stamina.loss_as_percent + rand(-15,15)
+		if((defender.stat != DEAD) && prob(knockout_prob))
+			defender.visible_message(span_danger("[attacker_human] knocks [defender] out with a haymaker!"), \
+							span_userdanger("You're knocked unconscious by [attacker_human]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker_human)
+			to_chat(attacker_human, span_danger("You knock [defender] out with a haymaker!"))
+			defender.apply_effect(20 SECONDS,EFFECT_KNOCKDOWN,armor_block)
+			defender.SetSleeping(10 SECONDS)
+			log_combat(attacker_human, defender, "knocked out (boxing) ")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /// Returns whether whoever is checked by this proc is complying with the rules of boxing. The boxer cannot block non-boxers, and cannot apply their scariest moves against non-boxers.

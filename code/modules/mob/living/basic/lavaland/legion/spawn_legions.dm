@@ -7,7 +7,11 @@
 	background_icon_state = "bg_demon"
 	overlay_icon_state = "bg_demon_border"
 	click_to_activate = TRUE
+<<<<<<< HEAD
 	cooldown_time = 4 SECONDS
+=======
+	cooldown_time = 2 SECONDS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	melee_cooldown_time = 0
 	shared_cooldown = NONE
 	/// If a mob is not clicked directly, inherit targeting data from this blackboard key and setting it upon this target key
@@ -17,6 +21,7 @@
 	/// How far can we fire?
 	var/max_range = 7
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/skull_launcher/IsAvailable(feedback)
 	. = ..()
 	if (!.)
@@ -26,6 +31,8 @@
 		return FALSE
 	return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/mob_cooldown/skull_launcher/Activate(atom/target)
 	var/turf/target_turf = get_turf(target)
 

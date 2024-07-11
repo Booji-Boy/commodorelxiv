@@ -90,7 +90,11 @@
 
 /datum/ai_behavior/basic_ranged_attack/trooper_shotgun
 	action_cooldown = 3 SECONDS
+<<<<<<< HEAD
 	required_distance = 3
+=======
+	required_distance = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	avoid_friendly_fire = TRUE
 
 /datum/ai_controller/basic_controller/trooper/viscerator

@@ -2,7 +2,11 @@
 	name = "Solar Panel Frame"
 	id = "solar_panel"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*1.75, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 3500, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/solar_assembly
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -14,7 +18,11 @@
 	name = "Sparker WallFrame"
 	id = "sparker"
 	build_type = PROTOLATHE | AWAY_LATHE | AUTOLATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT) // MONKESTATION EDIT CHANGE OLD // REQUIRES PR #75052
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/wallframe/sparker
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -50,7 +58,11 @@
 	name = "Ignition Switch Controller"
 	id = "ignition"
 	build_type = PROTOLATHE | AWAY_LATHE | AUTOLATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
+=======
+	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5) // MONKESTATION EDIT CHANGE OLD // REQUIRES PR #75052
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/assembly/control/igniter
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -160,7 +172,11 @@
 	name = "Intercom Frame"
 	id = "intercom_frame"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+=======
+	materials = list(/datum/material/iron = 75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/wallframe/intercom
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -316,7 +332,11 @@
 	name = "Pocket Fire Extinguisher"
 	id = "pocketfireextinguisher"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.5, /datum/material/glass = SMALL_MATERIAL_AMOUNT*0.4)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.5, /datum/material/glass = 40)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/extinguisher/mini/empty
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -340,7 +360,11 @@
 	name = "Light Switch Frame"
 	id = "light_switch_frame"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+=======
+	materials = list(/datum/material/iron = 75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/wallframe/light_switch
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -353,7 +377,11 @@
 	id = "telescreen_turbine"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/turbine
@@ -368,7 +396,11 @@
 	id = "telescreen_engine"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/engine
@@ -383,7 +415,11 @@
 	id = "telescreen_auxbase"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/auxbase

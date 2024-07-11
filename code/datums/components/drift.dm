@@ -19,7 +19,11 @@
 		return COMPONENT_INCOMPATIBLE
 	. = ..()
 
+<<<<<<< HEAD
 	var/flags = MOVEMENT_LOOP_OUTSIDE_CONTROL
+=======
+	var/flags = MOVEMENT_LOOP_DRAGGING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(instant)
 		flags |= MOVEMENT_LOOP_START_FAST
 	var/atom/movable/movable_parent = parent

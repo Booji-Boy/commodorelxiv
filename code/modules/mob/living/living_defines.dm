@@ -1,6 +1,6 @@
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
-	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD)
+	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD)
 	pressure_resistance = 10
 	hud_type = /datum/hud/living
 
@@ -92,10 +92,15 @@
 	/// Used by [living/Bump()][/mob/living/proc/Bump] and [living/PushAM()][/mob/living/proc/PushAM] to prevent potential infinite loop.
 	var/now_pushing = null
 
+<<<<<<< HEAD
 	///The mob's latest time-of-death
 	var/timeofdeath = 0
 	///The mob's latest time-of-death, as a station timestamp instead of world.time
 	var/station_timestamp_timeofdeath
+=======
+	/// Time of death
+	var/tod = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Sets AI behavior that allows mobs to target and dismember limbs with their basic attack.
 	var/limb_destroyer = 0
@@ -193,9 +198,6 @@
 	/// icon_state for holding mobs.
 	var/held_state = ""
 
-	///If combat mode is on or not
-	var/combat_mode = FALSE
-
 	/// Is this mob allowed to be buckled/unbuckled to/from things?
 	var/can_buckle_to = TRUE
 
@@ -223,6 +225,8 @@
 	/// Contains the owner and all imaginary friend mobs if they exist, otherwise null
 	var/list/imaginary_group = null
 
+	///The holder for stamina handling
+	var/datum/stamina_container/stamina
 	/// What our current gravity state is. Used to avoid duplicate animates and such
 	var/gravity_state = null
 

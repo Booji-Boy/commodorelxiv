@@ -5,6 +5,7 @@ import { resolveAsset } from '../assets';
 import { useBackend } from '../backend';
 import { Box, Button, Icon, Image, Stack } from '../components';
 import { Window } from '../layouts';
+import type { InfernoNode } from 'inferno';
 
 const ROWS = 5;
 const COLUMNS = 6;
@@ -20,7 +21,7 @@ const getGridSpotKey = (spot: [number, number]): GridSpotKey => {
 const CornerText = (props: {
   align: 'left' | 'right';
   children: string;
-}): JSX.Element => {
+}): InfernoNode => {
   const { align, children } = props;
 
   return (
@@ -28,8 +29,13 @@ const CornerText = (props: {
       style={{
         position: 'relative',
         left: align === 'left' ? '2px' : '-2px',
+<<<<<<< HEAD
         textAlign: align,
         textShadow: '1px 1px 1px #555',
+=======
+        'text-align': align,
+        'text-shadow': '1px 1px 1px #555',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }}
     >
       {children}
@@ -85,7 +91,7 @@ const SLOTS: Record<
     displayName: string;
     gridSpot: GridSpotKey;
     image?: string;
-    additionalComponent?: JSX.Element;
+    additionalComponent?: InfernoNode;
   }
 > = {
   eyes: {
@@ -394,7 +400,11 @@ export const StripMenu = (props) => {
                             position: 'relative',
                             width: '100%',
                             height: '100%',
+<<<<<<< HEAD
                             padding: '0',
+=======
+                            padding: 0,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                           }}
                         >
                           {slot.image && (
@@ -409,7 +419,30 @@ export const StripMenu = (props) => {
 
                           {slot.additionalComponent}
                         </Button>
+<<<<<<< HEAD
                         {alternateActions}
+=======
+
+                        {alternateAction !== undefined && (
+                          <Button
+                            onClick={() => {
+                              act('alt', {
+                                key: keyAtSpot,
+                              });
+                            }}
+                            tooltip={alternateAction.text}
+                            style={{
+                              background: 'rgba(0, 0, 0, 0.6)',
+                              position: 'absolute',
+                              bottom: 0,
+                              right: 0,
+                              'z-index': 2,
+                            }}
+                          >
+                            <Icon name={alternateAction.icon} />
+                          </Button>
+                        )}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       </Box>
                     </Stack.Item>
                   );

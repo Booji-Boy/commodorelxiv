@@ -30,7 +30,11 @@ GLOBAL_LIST_INIT(syndicate_space_suits_to_helmets,list(
 	/obj/item/clothing/suit/space/syndicate/black/red = /obj/item/clothing/head/helmet/space/syndicate/black/red,
 	/obj/item/clothing/suit/space/syndicate/black/med = /obj/item/clothing/head/helmet/space/syndicate/black/med,
 	/obj/item/clothing/suit/space/syndicate/black/engie = /obj/item/clothing/head/helmet/space/syndicate/black/engie,
+<<<<<<< HEAD
 ))
+=======
+)) //monkestation TODO: use this for battle royale drops
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/suit/space/syndicate
 	name = "red space suit"

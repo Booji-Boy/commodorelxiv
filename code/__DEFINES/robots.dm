@@ -94,7 +94,11 @@
 ///The Bot is currently allowed to be remote controlled by Silicon.
 #define BOT_MODE_REMOTE_ENABLED (1<<2)
 ///The Bot is allowed to have a ghost placed in control of it.
+<<<<<<< HEAD
 #define BOT_MODE_CAN_BE_SAPIENT (1<<3)
+=======
+#define BOT_MODE_GHOST_CONTROLLABLE (1<<3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///The Bot is allowed to be possessed if it is present on mapload.
 #define BOT_MODE_ROUNDSTART_POSSESSION (1<<4)
 
@@ -108,6 +112,7 @@
 ///The Bot has been hacked by a Silicon, emagging them, but revertable.
 #define BOT_COVER_HACKED (1<<3)
 
+<<<<<<< HEAD
 ///bitfield, used by basic bots, for our access flags
 DEFINE_BITFIELD(bot_access_flags, list(
 	"MAINTS_OPEN" = BOT_COVER_MAINTS_OPEN,
@@ -120,6 +125,20 @@ DEFINE_BITFIELD(bot_access_flags, list(
 DEFINE_BITFIELD(bot_cover_flags, list(
 	"MAINTS_OPEN" = BOT_COVER_MAINTS_OPEN,
 	"COVER_OPEN" = BOT_COVER_LOCKED,
+=======
+
+//basic bots defines
+
+///is our maintenancle panel currently open
+#define BOT_MAINTS_PANEL_OPEN (1<<0)
+///is our control panel currently open
+#define BOT_CONTROL_PANEL_OPEN (1<<1)
+
+///bitfield for our access flags
+DEFINE_BITFIELD(bot_access_flags, list(
+	"MAINTS_OPEN" = BOT_MAINTS_PANEL_OPEN,
+	"CONTROL_OPEN" = BOT_CONTROL_PANEL_OPEN,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"COVER_EMAGGED" = BOT_COVER_EMAGGED,
 	"COVER_HACKED" = BOT_COVER_HACKED,
 ))
@@ -145,6 +164,8 @@ DEFINE_BITFIELD(bot_cover_flags, list(
 #define HYGIENE_BOT "Hygienebot"
 /// Vibe bots
 #define VIBE_BOT "Vibebot"
+///Butt bots
+#define BUTT_BOT "Buttbot"
 
 // General Bot modes //
 /// Idle
@@ -334,4 +355,8 @@ DEFINE_BITFIELD(janitor_mode_flags, list(
 #define MEDIBOT_VOICED_THIS_HURTS "This hurts, my pain is real!"
 #define MEDIBOT_VOICED_THE_END "Is this the end?"
 #define MEDIBOT_VOICED_NOOO	"Nooo!"
+<<<<<<< HEAD
 #define MEDIBOT_VOICED_CHICKEN "LOOK AT ME?! I am a chicken."
+=======
+#define MEDIBOT_VOICED_CHICKEN "LOOK AT ME?! i am a chicken."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

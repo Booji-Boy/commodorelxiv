@@ -260,9 +260,15 @@
 			if(internals_slot & ITEM_SLOT_HANDS)
 				var/obj/item/tank/internals/internals = user.is_holding_item_of_type(/obj/item/tank/internals)
 				if(internals)
+<<<<<<< HEAD
 					user.open_internals(internals)
 			else
 				user.open_internals(user.get_item_by_slot(internals_slot))
+=======
+					H.open_internals(internals)
+			else
+				H.open_internals(H.get_item_by_slot(internals_slot))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(implants)
 			for(var/implant_type in implants)
 				var/obj/item/implant/implanter = SSwardrobe.provide_type(implant_type, user)

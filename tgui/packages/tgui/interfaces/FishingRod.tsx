@@ -19,15 +19,41 @@ type Props = {
   current_item_icon: string | null;
 };
 
+<<<<<<< HEAD
 const FishingRodSlot = (props: Props) => {
   const { act } = useBackend();
   const { current_item_icon, name, slot, current_item_name } = props;
+=======
+const FishingRodSlot = (props: FishingSlotProps) => {
+  const { act } = useBackend();
+
+  const icon_wrapper = (icon) => (
+    <Box
+      as="img"
+      width="64px" // todo come up with some way to scale this sanely
+      height="64px"
+      src={`data:image/jpeg;base64,${icon}`}
+      style={{
+        '-ms-interpolation-mode': 'nearest-neighbor',
+        'vertical-align': 'middle',
+        'object-fit': 'cover',
+      }}
+    />
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Section title={`${name}`}>
       <Stack>
         <Stack.Item grow>
+<<<<<<< HEAD
           <Button fluid onClick={() => act('slot_action', { slot: slot })}>
+=======
+          <Button
+            fluid
+            onClick={() => act('slot_action', { slot: props.slot })}
+          >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             <Flex>
               <Flex.Item>
                 {!!current_item_icon && (
@@ -52,6 +78,7 @@ const FishingRodSlot = (props: Props) => {
 };
 
 export const FishingRod = (props) => {
+<<<<<<< HEAD
   const { data } = useBackend<Data>();
   const {
     bait_name,
@@ -62,6 +89,9 @@ export const FishingRod = (props) => {
     hook_icon,
     description,
   } = data;
+=======
+  const { act, data } = useBackend<FishingRodData>();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window height={450} width={400}>

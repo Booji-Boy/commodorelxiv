@@ -51,6 +51,19 @@
 		remove_action_type_from_mob(actiontype, i)
 
 /**
+ * ## remove_passenger_action_type
+ *
+ * Removes this action from any passenger in the mech.
+ * args:
+ * * actiontype: typepath of the action you want to remove.
+ */
+/obj/vehicle/proc/remove_passenger_action_type(actiontype)
+	autogrant_actions_passenger -= actiontype
+	for(var/i in occupants)
+		remove_action_type_from_mob(actiontype, i)
+		grant_passenger_actions(i) // refresh
+
+/**
  * ## initialize_controller_action_type
  *
  * Gives any passenger that enters the vehicle this action... IF they have the correct vehicle control flag.
@@ -339,8 +352,8 @@
 		return
 	var/mob/living/rider = owner
 	var/turf/landing_turf = get_step(vehicle.loc, vehicle.dir)
-	rider.adjustStaminaLoss(vehicle.instability* 0.75)
-	if (rider.getStaminaLoss() >= 100)
+	rider.stamina.adjust(-vehicle.instability* 0.75)
+	if (rider.stamina.loss >= 100)
 		vehicle.obj_flags &= ~CAN_BE_HIT
 		playsound(src, 'sound/effects/bang.ogg', 20, TRUE)
 		vehicle.unbuckle_mob(rider)
@@ -376,8 +389,8 @@
 	var/obj/vehicle/ridden/scooter/skateboard/board = vehicle_target
 	var/mob/living/rider = owner
 
-	rider.adjustStaminaLoss(board.instability)
-	if (rider.getStaminaLoss() >= 100)
+	rider.stamina.adjust(-board.instability)
+	if (rider.stamina.loss >= 100)
 		playsound(src, 'sound/effects/bang.ogg', 20, vary = TRUE)
 		board.unbuckle_mob(rider)
 		rider.Paralyze(50)

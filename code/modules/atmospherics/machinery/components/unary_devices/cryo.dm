@@ -98,10 +98,18 @@
 	var/atom/movable/visual/cryo_occupant/occupant_vis
 	///Cryo will continue to treat people with 0 damage but existing wounds, but will sound off when damage healing is done in case doctors want to directly treat the wounds instead
 	var/treating_wounds = FALSE
+<<<<<<< HEAD
 	/// Reference to the datum connector we're using to interface with the pipe network
 	var/datum/gas_machine_connector/internal_connector
 	/// Check if the machine has been turned on
 	var/on = FALSE
+=======
+	/// Cryo should notify doctors if the patient is dead, and eject them if autoeject is enabled
+	var/patient_dead = FALSE
+	fair_market_price = 10
+	payment_department = ACCOUNT_MED
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/unary_cryo_cell
 	energy = 100
@@ -380,6 +388,7 @@
 	. = ..()
 	SSair.start_processing_machine(src)
 
+<<<<<<< HEAD
 /obj/machinery/cryo_cell/end_processing()
 	. = ..()
 	SSair.stop_processing_machine(src)
@@ -401,23 +410,53 @@
 			set_on(FALSE) //this explicitly disables processing so is nessassary
 			. = PROCESS_KILL
 
+=======
+/obj/machinery/atmospherics/components/unary/cryo_cell/process(seconds_per_tick)
+	..()
+	if(!occupant)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
+
+	if(!on)
+		// Should turn on if set to auto
+		if(autoeject)
+			set_on(TRUE)
+		else
+			return
 
 	var/mob/living/mob_occupant = occupant
 	if(mob_occupant.on_fire)
 		mob_occupant.extinguish_mob()
+<<<<<<< HEAD
+=======
+	if(!check_nap_violations())
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(mob_occupant.stat == DEAD) // Notify doctors and potentially eject if the patient is dead
 		set_on(FALSE)
 		var/msg = "Patient is deceased."
 		if(autoeject) // Eject if configured.
 			msg += " Auto ejecting patient now."
 			open_machine()
+<<<<<<< HEAD
 		playsound(src, 'sound/machines/cryo_warning.ogg', 100)
 		radio.talk_into(src, msg, RADIO_CHANNEL_MEDICAL)
 		return PROCESS_KILL
 
 	// Don't bother with fully healed people.
 	if(mob_occupant.get_organic_health() >= mob_occupant.getMaxHealth())
+=======
+		// Only need to tell them once
+		if(!patient_dead)
+			playsound(src, 'sound/machines/cryo_warning.ogg', volume)
+			patient_dead = TRUE
+			radio.talk_into(src, msg, radio_channel)
+		return
+
+	patient_dead = FALSE
+
+	if(mob_occupant.get_organic_health() >= mob_occupant.getMaxHealth()) // Don't bother with fully healed people.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(iscarbon(mob_occupant))
 			var/mob/living/carbon/C = mob_occupant
 			if(C.all_wounds)
@@ -520,7 +559,14 @@
 
 /obj/machinery/cryo_cell/close_machine(mob/living/carbon/user, density_to_set = TRUE)
 	treating_wounds = FALSE
+<<<<<<< HEAD
 	if(state_open && !panel_open)
+=======
+	if((isnull(user) || istype(user)) && state_open && !panel_open)
+		if(loc == user?.loc)
+			to_chat(user, span_warning("You can't close [src] on yourself!"))
+			return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		flick("pod-close-anim", src)
 		. = ..()
 		if(!QDELETED(occupant)) //auto on if an occupant is inside
@@ -548,9 +594,18 @@
 		ui = new(user, src, "Cryo", name)
 		ui.open()
 
+<<<<<<< HEAD
 /obj/machinery/cryo_cell/ui_static_data(mob/user)
 	. = list()
 	.["T0C"] = T0C
+=======
+/obj/machinery/atmospherics/components/unary/cryo_cell/ui_data(mob/user)
+	var/list/data = list()
+	data["isOperating"] = on
+	data["hasOccupant"] = occupant ? TRUE : FALSE
+	data["isOpen"] = state_open
+	data["autoEject"] = autoeject
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/cryo_cell/ui_data()
 	. = list()
@@ -584,6 +639,7 @@
 	var/datum/gas_mixture/air1 = internal_connector.gas_connector.airs[1]
 	.["cellTemperature"] = air1.temperature
 
+<<<<<<< HEAD
 	var/list/beaker_data = null
 	if(!QDELETED(beaker))
 		beaker_data = list()
@@ -595,6 +651,18 @@
 				beakerContents += list(list("name" = reagent.name, "volume" = round(reagent.volume, CHEMICAL_VOLUME_ROUNDING))) // list in a list because Byond merges the first list...
 		beaker_data["contents"] = beakerContents
 	.["beaker"] = beaker_data
+=======
+	data["isBeakerLoaded"] = beaker ? TRUE : FALSE
+	var/beakerContents = list()
+	if(beaker && beaker.reagents && beaker.reagents.reagent_list.len)
+		for(var/datum/reagent/R in beaker.reagents.reagent_list)
+			var/chem_name = R.name
+			if(istype(R, /datum/reagent/ammonia/urine) && user.client?.prefs.read_preference(/datum/preference/toggle/prude_mode))
+				chem_name = "Ammonia?"
+			beakerContents += list(list("name" = chem_name, "volume" = R.volume))
+	data["beakerContents"] = beakerContents
+	return data
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/cryo_cell/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()

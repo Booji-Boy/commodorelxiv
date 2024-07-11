@@ -1,6 +1,10 @@
 /// Tongs, let you pick up and feed people food from further away.
 /obj/item/kitchen/tongs
 	name = "tongs"
+<<<<<<< HEAD
+=======
+	icon = 'icons/obj/service/kitchen.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	desc = "So you never have to touch anything with your dirty, unwashed hands."
 	reach = 2
 	icon_state = "tongs"
@@ -73,7 +77,11 @@
 	update_appearance(UPDATE_ICON)
 
 /obj/item/kitchen/tongs/pre_attack(obj/item/attacked, mob/living/user, params)
+<<<<<<< HEAD
 	if (!isnull(tonged) && tonged.force <= 0) // prevents tongs from giving food-weapons extra range
+=======
+	if (!isnull(tonged))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		attacked.attackby(tonged, user)
 		return TRUE
 	if (isliving(attacked))
@@ -86,7 +94,10 @@
 	attacked.do_pickup_animation(src)
 	attacked.forceMove(src)
 	update_appearance(UPDATE_ICON)
+<<<<<<< HEAD
 	return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/kitchen/tongs/update_overlays()
 	. = ..()

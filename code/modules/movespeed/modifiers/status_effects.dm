@@ -40,7 +40,11 @@
 
 /// Get slower the more gold is in your system.
 /datum/movespeed_modifier/status_effect/midas_blight
+<<<<<<< HEAD
 	id = MOVESPEED_ID_MIDAS_BLIGHT
+=======
+	id = "midas_blight"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/movespeed_modifier/status_effect/midas_blight/soft
 	multiplicative_slowdown = 0.25

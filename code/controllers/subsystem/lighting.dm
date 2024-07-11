@@ -31,6 +31,7 @@ SUBSYSTEM_DEF(lighting)
 	if(!init_tick_checks)
 		MC_SPLIT_TICK
 
+<<<<<<< HEAD
 	if(!resumed)
 		current_sources = sources_queue
 		sources_queue = list()
@@ -38,6 +39,12 @@ SUBSYSTEM_DEF(lighting)
 	// UPDATE SOURCE QUEUE
 	var/i = 0
 	var/list/queue = current_sources
+=======
+	var/list/queue
+	var/i = 0
+	// UPDATE SOURCE QUEUE
+	queue = sources_queue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	while(i < length(queue)) //we don't use for loop here because i cannot be changed during an iteration
 		i += 1
 

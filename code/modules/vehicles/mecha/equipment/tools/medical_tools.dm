@@ -2,6 +2,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/medical
 	mech_flags = EXOSUIT_MODULE_MEDICAL
+	movedelay = 0.2
 
 /obj/item/mecha_parts/mecha_equipment/medical/attach(obj/vehicle/sealed/mecha/new_mecha)
 	. = ..()
@@ -219,6 +220,14 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+<<<<<<< HEAD
+=======
+/obj/item/mecha_parts/mecha_equipment/medical/syringe_gun/create_reagents(max_vol, flags)
+	. = ..()
+	RegisterSignals(reagents, list(COMSIG_REAGENTS_NEW_REAGENT, COMSIG_REAGENTS_ADD_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_REM_REAGENT), PROC_REF(on_reagent_change))
+	RegisterSignal(reagents, COMSIG_QDELETING, PROC_REF(on_reagents_del))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Handles detaching signal hooks incase someone is crazy enough to make this edible.
 /obj/item/mecha_parts/mecha_equipment/medical/syringe_gun/proc/on_reagents_del(datum/reagents/reagents)
 	SIGNAL_HANDLER

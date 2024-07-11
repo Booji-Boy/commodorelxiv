@@ -349,7 +349,7 @@
 			break_counter = 0
 
 		var/list/other_job_lists = list(
-			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp"),
+			"Abstract" = list("Appearance", "Emote", "Deadchat", "OOC", "Urgent Adminhelp", "Bug Report"), //monkestation edit
 			)
 		for(var/department in other_job_lists)
 			output += "<div class='column'><label class='rolegroup [ckey(department)]'>[tgui_fancy ? "<input type='checkbox' name='[department]' class='hidden' onClick='header_click_all_checkboxes(this)'>" : ""][department]</label><div class='content'>"
@@ -380,29 +380,42 @@
 				ROLE_ALIEN,
 				ROLE_BLOB,
 				ROLE_BROTHER,
+				ROLE_BLOODSUCKER,
+				ROLE_BLOODSUCKERBREAKOUT,
+				ROLE_CORTICAL_BORER, // MONKESTATION ADDITION -- CORTICAL_BORERS
 				ROLE_CHANGELING,
+				ROLE_CLOCK_CULTIST,
 				ROLE_CULTIST,
 				ROLE_HERETIC,
 				ROLE_HIVE,
+				ROLE_INFILTRATOR,
 				ROLE_MALF,
+				ROLE_MONSTERHUNTER,
 				ROLE_NINJA,
 				ROLE_OPERATIVE,
 				ROLE_OVERTHROW,
 				ROLE_REV,
 				ROLE_REVENANT,
 				ROLE_REV_HEAD,
+<<<<<<< HEAD
+=======
+				ROLE_SENTIENT_DISEASE,
+				ROLE_SLASHER,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				ROLE_SPIDER,
 				ROLE_SPY,
 				ROLE_SYNDICATE,
 				ROLE_TRAITOR,
+				ROLE_VAMPIRICACCIDENT,
 				ROLE_WIZARD,
+				BAN_OPFOR,
 			),
 		)
 		for(var/department in long_job_lists)
 			output += "<div class='column'><label class='rolegroup long [ckey(department)]'>[tgui_fancy ? "<input type='checkbox' name='[department]' class='hidden' onClick='header_click_all_checkboxes(this)'>" : ""][department]</label><div class='content'>"
 			break_counter = 0
 			for(var/job in long_job_lists[department])
-				if(break_counter > 0 && (break_counter % 10 == 0))
+				if(break_counter > 0 && (break_counter % 8 == 0))
 					output += "<br>"
 				output += {"<label class='inputlabel checkbox'>[job]
 							<input type='checkbox' name='[job]' class='[department]' value='1'>
@@ -1081,7 +1094,9 @@
 		if(GLOB.admin_datums[player_client.ckey] || GLOB.deadmins[player_client.ckey])
 			is_admin = TRUE
 		if(kick_banned_players && (!is_admin || (is_admin && applies_to_admins)))
-			qdel(player_client)
+			SSgarbage.HardDelete(player_client, override = TRUE)
+			if(player_client)
+				qdel(player_client)
 
 	for(var/client/other_player_client in GLOB.clients - player_client)
 		if(other_player_client.address == banned_player_ip || other_player_client.computer_id == banned_player_cid)
@@ -1090,7 +1105,9 @@
 			if(GLOB.admin_datums[other_player_client.ckey] || GLOB.deadmins[other_player_client.ckey])
 				is_admin = TRUE
 			if(kick_banned_players && (!is_admin || (is_admin && applies_to_admins)))
-				qdel(other_player_client)
+				SSgarbage.HardDelete(other_player_client, override = TRUE)
+				if(other_player_client)
+					qdel(other_player_client)
 
 #undef MAX_ADMINBANS_PER_ADMIN
 #undef MAX_ADMINBANS_PER_HEADMIN

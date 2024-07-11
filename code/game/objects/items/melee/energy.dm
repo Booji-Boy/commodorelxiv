@@ -6,7 +6,11 @@
 	attack_verb_simple = list("hit", "tap", "poke")
 	resistance_flags = FIRE_PROOF
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 3
+=======
+	light_outer_range = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_on = FALSE
 	bare_wound_bonus = 20
@@ -191,6 +195,7 @@
 	block_sound = 'sound/weapons/block_blade.ogg'
 	embedding = list("embed_chance" = 75, "impact_pain_mult" = 10)
 
+<<<<<<< HEAD
 /obj/item/melee/energy/sword/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
 	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		return FALSE
@@ -198,6 +203,11 @@
 	if(attack_type == LEAP_ATTACK)
 		final_block_chance -= 25 //OH GOD GET IT OFF ME
 
+=======
+/obj/item/melee/energy/sword/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
+	if(!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
+		return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/item/melee/energy/sword/cyborg

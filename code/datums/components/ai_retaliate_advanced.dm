@@ -16,7 +16,11 @@
 
 	ADD_TRAIT(parent, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, type)
 
+<<<<<<< HEAD
 /datum/component/ai_retaliate_advanced/Destroy(force)
+=======
+/datum/component/ai_retaliate_advanced/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	post_retaliate_callback = null
 	return ..()
 

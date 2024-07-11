@@ -6,6 +6,7 @@
 
 /obj/item/computer_disk/syndicate/camera_app
 	starting_programs = list(/datum/computer_file/program/secureye/syndicate)
+<<<<<<< HEAD
 
 /obj/item/computer_disk/syndicate/contractor
 	starting_programs = list(/datum/computer_file/program/contract_uplink)
@@ -36,3 +37,5 @@
 	///Make sure the disk has enough space for all the programs
 	max_capacity = max(total_programs_size, max_capacity)
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

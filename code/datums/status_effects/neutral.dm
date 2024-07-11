@@ -481,14 +481,10 @@
 				owner.Knockdown(10)
 
 			var/list/items = list()
-			var/max_loop
-			if (length(owner.get_contents()) >= 10)
-				max_loop = 10
-			else
-				max_loop = length(owner.get_contents())
+			var/max_loop  = min(length(owner.get_contents()), 10)
 			for (var/i in 1 to max_loop)
 				var/obj/item/item = owner.get_contents()[i]
-				if ((item.item_flags & DROPDEL) || HAS_TRAIT(item, TRAIT_NODROP)) // can't teleport these kinds of items
+				if (!istype(item) || (item.item_flags & DROPDEL) || HAS_TRAIT(item, TRAIT_NODROP)) // can't teleport these kinds of items
 					continue
 				items.Add(item)
 
@@ -547,8 +543,13 @@
 			if(QDELETED(human_mob))
 				return
 			if(prob(1))//low chance of the alternative reality returning to monkey
+<<<<<<< HEAD
 				var/obj/item/organ/external/tail/monkey/monkey_tail = new ()
 				monkey_tail.Insert(human_mob, movement_flags = DELETE_IF_REPLACED)
+=======
+				var/obj/item/organ/external/tail/simian/monkey_tail = new ()
+				monkey_tail.Insert(human_mob, drop_if_replaced = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			var/datum/species/human_species = human_mob.dna?.species
 			if(human_species)
 				human_species.randomize_active_features(human_mob)

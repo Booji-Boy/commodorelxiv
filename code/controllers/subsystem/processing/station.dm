@@ -124,9 +124,15 @@ PROCESSING_SUBSYSTEM_DEF(station)
 
 		selectable_traits_by_types[initial(trait_typepath.trait_type)][trait_typepath] = initial(trait_typepath.weight)
 
+<<<<<<< HEAD
 	var/positive_trait_budget = text2num(pick_weight(CONFIG_GET(keyed_list/positive_station_traits)))
 	var/neutral_trait_budget = text2num(pick_weight(CONFIG_GET(keyed_list/neutral_station_traits)))
 	var/negative_trait_budget = text2num(pick_weight(CONFIG_GET(keyed_list/negative_station_traits)))
+=======
+	var/positive_trait_count = pick(4;0, 3;1, 2;2, 1;3)
+	var/neutral_trait_count = pick(3;0, 6;1, 3;2, 1;3)
+	var/negative_trait_count = pick(4;0, 3;1, 2;2, 1;3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #ifdef MAP_TEST
 	positive_trait_budget = 0
@@ -146,6 +152,7 @@ PROCESSING_SUBSYSTEM_DEF(station)
 /datum/controller/subsystem/processing/station/proc/pick_traits(trait_sign, budget)
 	if(!budget)
 		return
+<<<<<<< HEAD
 	///A list of traits of the same trait sign
 	var/list/selectable_traits = selectable_traits_by_types[trait_sign]
 	while(budget)
@@ -160,6 +167,14 @@ PROCESSING_SUBSYSTEM_DEF(station)
 		var/datum/station_trait/trait_type = pick_weight(selectable_traits)
 		selectable_traits -= trait_type
 		budget -= initial(trait_type.cost)
+=======
+	for(var/iterator in 1 to amount)
+		var/datum/station_trait/trait_type = pick_weight(selectable_traits_by_types[trait_sign]) //Rolls from the table for the specific trait type
+		selectable_traits_by_types[trait_sign] -= trait_type
+		if(istype(trait_type, /datum/station_trait/late_arrivals) && SSmapping.config.map_name == "Oshan Station")
+			amount++
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		setup_trait(trait_type)
 
 ///Creates a given trait of a specific type, while also removing any blacklisted ones from the future pool.

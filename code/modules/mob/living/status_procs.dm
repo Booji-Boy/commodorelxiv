@@ -1,4 +1,8 @@
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Checks if we have stun immunity. Godmode always passes this check.
  *
@@ -39,7 +43,8 @@
 		return S.duration - world.time
 	return 0
 
-/mob/living/proc/Stun(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+/mob/living/proc/Stun(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Can't go below remaining duration
+	amount *= stun_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STUN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANSTUN, ignore_canstun))
@@ -49,6 +54,8 @@
 		S.duration = max(world.time + amount, S.duration)
 	else if(amount > 0)
 		S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
+	if(!ignores_diminish)
+		stun_diminish = min(max(0.1, stun_diminish - round(amount * 0.05, 0.1)),1)
 	return S
 
 /mob/living/proc/SetStun(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -67,7 +74,8 @@
 			S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
 	return S
 
-/mob/living/proc/AdjustStun(amount, ignore_canstun = FALSE) //Adds to remaining duration
+/mob/living/proc/AdjustStun(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Adds to remaining duration
+	amount *= stun_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_STUN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANSTUN, ignore_canstun))
@@ -77,6 +85,8 @@
 		S.duration += amount
 	else if(amount > 0)
 		S = apply_status_effect(/datum/status_effect/incapacitating/stun, amount)
+	if(!ignores_diminish)
+		stun_diminish = min(max(0.1, stun_diminish - round(amount * 0.05, 0.1)),1)
 	return S
 
 /* KNOCKDOWN */
@@ -89,7 +99,8 @@
 		return K.duration - world.time
 	return 0
 
-/mob/living/proc/Knockdown(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+/mob/living/proc/Knockdown(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Can't go below remaining duration
+	amount *= knockdown_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANKNOCKDOWN, ignore_canstun))
@@ -99,6 +110,8 @@
 		K.duration = max(world.time + amount, K.duration)
 	else if(amount > 0)
 		K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
+	if(!ignores_diminish)
+		knockdown_diminish = min(max(0.1, knockdown_diminish - round(amount * 0.05, 0.1)),1)
 	return K
 
 /mob/living/proc/SetKnockdown(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -117,7 +130,8 @@
 			K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
 	return K
 
-/mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE) //Adds to remaining duration
+/mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Adds to remaining duration
+	amount *= knockdown_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANKNOCKDOWN, ignore_canstun))
@@ -127,6 +141,8 @@
 		K.duration += amount
 	else if(amount > 0)
 		K = apply_status_effect(/datum/status_effect/incapacitating/knockdown, amount)
+	if(!ignores_diminish)
+		knockdown_diminish = min(max(0.1, knockdown_diminish - round(amount * 0.05, 0.1)),1)
 	return K
 
 /* IMMOBILIZED */
@@ -189,7 +205,8 @@
 		return P.duration - world.time
 	return 0
 
-/mob/living/proc/Paralyze(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+/mob/living/proc/Paralyze(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Can't go below remaining duration
+	amount *= paralyze_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_PARALYZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANSTUN|CANKNOCKDOWN, ignore_canstun)) // this requires both can stun and can knockdown
@@ -199,6 +216,8 @@
 		P.duration = max(world.time + amount, P.duration)
 	else if(amount > 0)
 		P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
+	if(!ignores_diminish)
+		paralyze_diminish = min(max(0.1, paralyze_diminish - round(amount * 0.05, 0.1)),1)
 	return P
 
 /mob/living/proc/SetParalyzed(amount, ignore_canstun = FALSE) //Sets remaining duration
@@ -217,7 +236,8 @@
 			P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
 	return P
 
-/mob/living/proc/AdjustParalyzed(amount, ignore_canstun = FALSE) //Adds to remaining duration
+/mob/living/proc/AdjustParalyzed(amount, ignore_canstun = FALSE, ignores_diminish = FALSE) //Adds to remaining duration
+	amount *= paralyze_diminish
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_PARALYZE, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(check_stun_immunity(CANSTUN|CANKNOCKDOWN, ignore_canstun))
@@ -227,6 +247,8 @@
 		P.duration += amount
 	else if(amount > 0)
 		P = apply_status_effect(/datum/status_effect/incapacitating/paralyzed, amount)
+	if(!ignores_diminish)
+		paralyze_diminish = min(max(0.1, paralyze_diminish - round(amount * 0.05, 0.1)),1)
 	return P
 
 /* INCAPACITATED */
@@ -533,7 +555,11 @@
 	if(stat != DEAD)
 		if(!silent)
 			emote("deathgasp")
+<<<<<<< HEAD
 		station_timestamp_timeofdeath = station_time_timestamp()
+=======
+		tod = station_time_timestamp()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	add_traits(list(TRAIT_FAKEDEATH, TRAIT_DEATHCOMA), source)
 
@@ -701,6 +727,9 @@
  * up_to - the upper end of the clamp, when adding the value
  */
 /mob/living/proc/adjust_drunk_effect(amount, down_to = 0, up_to = INFINITY)
+	if(HAS_TRAIT(src, TRAIT_LIVING_DRUNK))
+		return
+
 	if(!isnum(amount))
 		CRASH("adjust_drunk_effect: called with an invalid amount. (Got: [amount])")
 
@@ -718,6 +747,9 @@
  * set_to - the amount of "drunkness" to set on the mob.
  */
 /mob/living/proc/set_drunk_effect(set_to)
+	if(HAS_TRAIT(src, TRAIT_LIVING_DRUNK))
+		return
+
 	if(!isnum(set_to) || set_to < 0)
 		CRASH("set_drunk_effect: called with an invalid value. (Got: [set_to])")
 
@@ -734,4 +766,8 @@
 
 /// Helper to check if we seem to be alive or not
 /mob/living/proc/appears_alive()
+<<<<<<< HEAD
 	return stat != DEAD && !HAS_TRAIT(src, TRAIT_FAKEDEATH)
+=======
+	return health >= 0 && !HAS_TRAIT(src, TRAIT_FAKEDEATH)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

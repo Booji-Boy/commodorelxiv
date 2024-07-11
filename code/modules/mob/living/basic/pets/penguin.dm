@@ -23,7 +23,11 @@
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/ai_flee_while_injured)
 	AddElement(/datum/element/pet_bonus, "honks happily!")
+<<<<<<< HEAD
 	AddElementTrait(TRAIT_WADDLING, INNATE_TRAIT, /datum/element/waddling)
+=======
+	AddElement(/datum/element/waddling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!can_lay_eggs)
 		return
 	AddComponent(\
@@ -196,6 +200,7 @@
 /mob/living/basic/pet/penguin/baby/permanent
 	can_grow_up = FALSE
 
+<<<<<<< HEAD
 /mob/living/basic/pet/penguin/emperor/snowdin
 	minimum_survivable_temperature = ICEBOX_MIN_TEMPERATURE
 	gold_core_spawnable = NO_SPAWN
@@ -203,3 +208,6 @@
 /mob/living/basic/pet/penguin/baby/permanent/snowdin
 	minimum_survivable_temperature = ICEBOX_MIN_TEMPERATURE
 	gold_core_spawnable = NO_SPAWN
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

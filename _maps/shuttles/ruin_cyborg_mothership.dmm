@@ -16,10 +16,13 @@
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/cyborg_mothership)
+<<<<<<< HEAD
 "bE" = (
 /mob/living/basic/bot/cleanbot,
 /turf/open/floor/iron/showroomfloor,
 /area/shuttle/ruin/cyborg_mothership)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cU" = (
 /obj/machinery/conveyor{
 	id = "mothership_main";
@@ -27,6 +30,11 @@
 	},
 /obj/structure/cable,
 /turf/open/floor/plating/airless,
+/area/shuttle/ruin/cyborg_mothership)
+"dn" = (
+/mob/living/basic/bot/hygienebot,
+/obj/machinery/camera/directional/south,
+/turf/open/floor/iron/showroomfloor,
 /area/shuttle/ruin/cyborg_mothership)
 "dA" = (
 /obj/item/disk/holodisk/ruin/cyborg_mothership,
@@ -446,6 +454,31 @@
 /obj/structure/cable,
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/cyborg_mothership)
+<<<<<<< HEAD
+=======
+"xz" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/window/reinforced/spawner/directional/north{
+	layer = 2.9
+	},
+/obj/effect/turf_decal/stripes/asteroid/line{
+	dir = 4
+	},
+/obj/machinery/power/port_gen/pacman,
+/turf/open/floor/plating/airless,
+/area/shuttle/ruin/cyborg_mothership)
+"yc" = (
+/obj/machinery/space_heater{
+	anchored = 1
+	},
+/obj/machinery/camera/directional/west,
+/obj/item/pipe_dispenser,
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/obj/item/wrench,
+/turf/open/floor/plating,
+/area/shuttle/ruin/cyborg_mothership)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yd" = (
 /obj/effect/mapping_helpers/burnt_floor,
 /obj/effect/turf_decal/stripes/asteroid/line{
@@ -573,11 +606,14 @@
 /obj/structure/cable,
 /turf/open/floor/iron/showroomfloor,
 /area/shuttle/ruin/cyborg_mothership)
+<<<<<<< HEAD
 "Fe" = (
 /mob/living/basic/bot/hygienebot,
 /obj/machinery/camera/directional/south,
 /turf/open/floor/iron/showroomfloor,
 /area/shuttle/ruin/cyborg_mothership)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "FQ" = (
 /obj/structure/lattice,
 /mob/living/basic/hivebot/range,
@@ -614,6 +650,7 @@
 /obj/structure/cable,
 /turf/open/floor/circuit/green/airless,
 /area/shuttle/ruin/cyborg_mothership)
+<<<<<<< HEAD
 "HM" = (
 /obj/machinery/space_heater{
 	anchored = 1
@@ -625,6 +662,8 @@
 /obj/item/wrench,
 /turf/open/floor/plating,
 /area/shuttle/ruin/cyborg_mothership)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "IS" = (
 /obj/structure/lattice,
 /obj/machinery/camera/directional/west,
@@ -917,6 +956,17 @@
 /obj/structure/plasticflaps,
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/cyborg_mothership)
+<<<<<<< HEAD
+=======
+"Zm" = (
+/mob/living/basic/bot/cleanbot,
+/turf/open/floor/iron/showroomfloor,
+/area/shuttle/ruin/cyborg_mothership)
+"ZB" = (
+/obj/machinery/light/cold/no_nightlight/directional/west,
+/turf/open/floor/circuit/airless,
+/area/shuttle/ruin/cyborg_mothership)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ZD" = (
 /obj/structure/cable,
 /turf/open/floor/plating,
@@ -1185,10 +1235,15 @@ yF
 fB
 zZ
 Ey
+<<<<<<< HEAD
 Sd
 Fe
+=======
+jH
+dn
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 yF
-HM
+yc
 yF
 yg
 HK
@@ -1235,8 +1290,13 @@ yF
 pY
 zZ
 Ey
+<<<<<<< HEAD
 yw
 bE
+=======
+jH
+Zm
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 yF
 hB
 yF

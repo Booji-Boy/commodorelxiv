@@ -53,6 +53,29 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	///An assoc list of quirks that can be obtained as a hardcore character, and their hardcore value.
 	var/list/hardcore_quirks = list()
 
+<<<<<<< HEAD
+=======
+	/// A list of quirks that can not be used with each other. Format: list(quirk1,quirk2),list(quirk3,quirk4)
+	var/static/list/quirk_blacklist = list(
+		list("Blind", "Nearsighted"),
+		list("Jolly", "Depression", "Apathetic", "Hypersensitive"),
+		list("Ageusia", "Vegetarian", "Deviant Tastes", "Gamer"),
+		list("Ananas Affinity", "Ananas Aversion", "Gamer"),
+		list("Alcohol Tolerance", "Light Drinker"),
+		list("Clown Enjoyer", "Mime Fan"),
+		list("Bad Touch", "Friendly"),
+		list("Extrovert", "Introvert"),
+		list("Prosthetic Limb", "Quadruple Amputee", "Body Purist"),
+		list("Quadruple Amputee", "Paraplegic"),
+		list("Quadruple Amputee", "Frail"),
+		list("Gigantism", "Dwarfism"),
+		list("Social Anxiety", "Mute"),
+		list("Mute", "Soft-Spoken"),
+		list("Stormtrooper Aim", "Big Hands"),
+		list("Bilingual", "Foreigner"),
+	)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/controller/subsystem/processing/quirks/Initialize()
 	get_quirks()
 	return SS_INIT_SUCCESS
@@ -86,7 +109,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 
 /datum/controller/subsystem/processing/quirks/proc/AssignQuirks(mob/living/user, client/applied_client)
 	var/badquirk = FALSE
-	for(var/quirk_name in applied_client.prefs.all_quirks)
+	for(var/quirk_name in applied_client?.prefs?.all_quirks)
 		var/datum/quirk/quirk_type = quirks[quirk_name]
 		if(ispath(quirk_type))
 			if(user.add_quirk(quirk_type, override_client = applied_client))

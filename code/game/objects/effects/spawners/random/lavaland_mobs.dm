@@ -7,12 +7,20 @@
 	icon_state = "large_egg"
 	loot = list(
 		/mob/living/basic/mining/bileworm = 1,
+<<<<<<< HEAD
 		/mob/living/basic/mining/brimdemon = 1,
 		/mob/living/basic/mining/goldgrub = 1,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/mob/living/basic/mining/goliath = 1,
 		/mob/living/basic/mining/legion = 1,
 		/mob/living/basic/mining/lobstrosity/lava = 1,
 		/mob/living/basic/mining/watcher = 1,
+<<<<<<< HEAD
+=======
+		/mob/living/basic/mining/brimdemon = 1,
+		/mob/living/basic/mining/goldgrub = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /// Spawns random watcher variants during map generation
@@ -49,6 +57,7 @@
 		/mob/living/basic/mining/legion = 19,
 		/mob/living/basic/mining/legion/dwarf = 1,
 	)
+<<<<<<< HEAD
 
 /obj/effect/spawner/random/lavaland_mob/raptor
 	name = "random raptor"
@@ -63,3 +72,5 @@
 		/mob/living/basic/raptor/yellow = 20,
 		/mob/living/basic/raptor/black = 1,
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

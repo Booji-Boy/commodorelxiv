@@ -13,8 +13,14 @@ SUBSYSTEM_DEF(economy)
 										ACCOUNT_MED = ACCOUNT_MED_NAME,
 										ACCOUNT_SRV = ACCOUNT_SRV_NAME,
 										ACCOUNT_CAR = ACCOUNT_CAR_NAME,
+<<<<<<< HEAD
 										ACCOUNT_SEC = ACCOUNT_SEC_NAME)
 	var/list/departmental_accounts = list()
+=======
+										ACCOUNT_SEC = ACCOUNT_SEC_NAME,
+										ACCOUNT_CMD = ACCOUNT_CMD_NAME)
+	var/list/generated_accounts = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/**
 	 * Enables extra money charges for things that normally would be free, such as sleepers/cryo/beepsky.
 	 * Take care when enabling, as players will NOT respond well if the economy is set up for low cash flows.
@@ -42,8 +48,6 @@ SUBSYSTEM_DEF(economy)
 	var/inflation_value = 1
 	/// How many civilain bounties have been completed so far this shift? Affects civilian budget payout values.
 	var/civ_bounty_tracker = 0
-	/// Contains the message to send to newscasters about price inflation and earnings, updated on price_update()
-	var/earning_report
 	///The modifier multiplied to the value of bounties paid out.
 	var/bounty_modifier = 1
 	///The modifier multiplied to the value of cargo pack prices.
@@ -110,12 +114,11 @@ SUBSYSTEM_DEF(economy)
 		if(!issue_paydays())
 			return
 
+<<<<<<< HEAD
 		processing_part = ECON_PRICE_UPDATE_STEP
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		station_target = max(round(temporary_total / max(bank_accounts_by_id.len * 2, 1)) + station_target_buffer, 1)
-
-	if(processing_part == ECON_PRICE_UPDATE_STEP)
-		if(!HAS_TRAIT(SSeconomy, TRAIT_MARKET_CRASHING) && !price_update())
-			return
 
 	var/effective_mailcount = round(living_player_count()/(inflation_value - 0.5)) //More mail at low inflation, and vis versa.
 	mail_waiting += clamp(effective_mailcount, 1, MAX_MAIL_PER_MINUTE * seconds_per_tick)
@@ -164,6 +167,7 @@ SUBSYSTEM_DEF(economy)
 	return TRUE
 
 /**
+<<<<<<< HEAD
  * Updates the the inflation_value, effecting newscaster alerts and the mail system.
  **/
 /datum/controller/subsystem/economy/proc/price_update()
@@ -177,6 +181,8 @@ SUBSYSTEM_DEF(economy)
 	return TRUE
 
 /**
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
  * Proc that returns a value meant to shift inflation values in vendors, based on how much money exists on the station.
  *
  * If crew are somehow aquiring far too much money, this value will dynamically cause vendables across the station to skyrocket in price until some money is spent.

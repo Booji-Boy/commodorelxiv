@@ -288,6 +288,7 @@
 	uniform = /obj/item/clothing/under/plasmaman/bitrunner
 	gloves = /obj/item/clothing/gloves/color/plasmaman/black
 	head = /obj/item/clothing/head/helmet/space/plasmaman/bitrunner
+<<<<<<< HEAD
 
 /datum/outfit/plasmaman/bridge_assistant
 	name = "Bridge Assistant Plasmaman"
@@ -302,3 +303,5 @@
 	uniform = /obj/item/clothing/under/plasmaman //same
 	gloves = /obj/item/clothing/gloves/color/plasmaman/black
 	head = /obj/item/clothing/head/helmet/space/plasmaman
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -188,4 +188,14 @@
 	access_view = ACCESS_ROBOTICS
 	contains = list(/obj/item/mod/core/standard = 3)
 	crate_name = "\improper MOD core crate"
+<<<<<<< HEAD
 	crate_type = /obj/structure/closet/crate/secure/science/robo
+=======
+	crate_type = /obj/structure/closet/crate/secure/science
+
+/datum/supply_pack/science/analysis_bin
+	name = "Analysis bin Crate"
+	desc = "Two analysis bins, to analyze artifacts. For those who research a lot of artifacts."
+	cost = CARGO_CRATE_VALUE * 4
+	contains = list(/obj/item/analysis_bin = 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -24,6 +24,12 @@
 	var/cache_g = LIGHTING_SOFT_THRESHOLD
 	var/cache_b = LIGHTING_SOFT_THRESHOLD
 
+	//additive light values
+	var/add_r = 0
+	var/add_g = 0
+	var/add_b = 0
+	var/applying_additive = FALSE
+
 	///the maximum of lum_r, lum_g, and lum_b. if this is > 1 then the three cached color values are divided by this
 	var/largest_color_luminosity = 0
 
@@ -33,10 +39,8 @@
 // Takes as an argument the coords to use as the bottom left (south west) of our corner
 /datum/lighting_corner/New(x, y, z)
 	. = ..()
-
 	src.x = x + 0.5
 	src.y = y + 0.5
-	src.z = z
 
 	// Alright. We're gonna take a set of coords, and from them do a loop clockwise
 	// To build out the turfs adjacent to us. This is pretty fast
@@ -75,7 +79,7 @@
 		process_next.lighting_corner_NW = src
 
 /datum/lighting_corner/proc/self_destruct_if_idle()
-	if (!LAZYLEN(affecting))
+	if (!LAZYLEN(affecting) && !LAZYLEN(globAffect)) //monkestation edit + && !LAZYLEN(globAffect)
 		qdel(src, force = TRUE)
 
 /datum/lighting_corner/proc/vis_update()
@@ -101,6 +105,14 @@
 	lum_g += delta_g
 	lum_b += delta_b
 
+	add_r = clamp((lum_r - 1.35) * 0.4, 0, 0.3)
+	add_g = clamp((lum_g - 1.35) * 0.4, 0, 0.3)
+	add_b = clamp((lum_b - 1.35) * 0.4, 0, 0.3)
+	// Cull additive overlays that would be below 0.09 alpha in any color.
+	applying_additive = max(add_r, add_g, add_b) > 0.09
+	// Cull additive overlays whose color alpha sum is lower than 0.09
+	//applying_additive = (add_r + add_g + add_b) > 0.09
+
 	if (!needs_update)
 		needs_update = TRUE
 		SSlighting.corners_queue += src
@@ -112,12 +124,13 @@
 	var/lum_b = src.lum_b
 	var/largest_color_luminosity = max(lum_r, lum_g, lum_b) // Scale it so one of them is the strongest lum, if it is above 1.
 	. = 1 // factor
-	if (largest_color_luminosity > 1)
-		. = 1 / largest_color_luminosity
 
 	var/old_r = cache_r
 	var/old_g = cache_g
 	var/old_b = cache_b
+
+	if (largest_color_luminosity > 1)
+		. = 1 / largest_color_luminosity
 
 	#if LIGHTING_SOFT_THRESHOLD != 0
 	else if (largest_color_luminosity < LIGHTING_SOFT_THRESHOLD)

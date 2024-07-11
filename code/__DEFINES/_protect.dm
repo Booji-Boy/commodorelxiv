@@ -11,7 +11,11 @@
 	return FALSE;\
 }\
 ##Path/Read(savefile/savefile){\
+<<<<<<< HEAD
 	del(src);\
+=======
+	qdel(src);\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 }\
 ##Path/Write(savefile/savefile){\
 	return;\
@@ -19,4 +23,7 @@
 #else
 #define GENERAL_PROTECT_DATUM(Path)
 #endif
+<<<<<<< HEAD
 // we del instead of qdel because for security reasons we must ensure the datum does not exist if Read is called. qdel will not enforce this.
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import { capitalizeAll } from 'common/string';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -10,6 +14,10 @@ import {
   NumberInput,
   Section,
 } from '../components';
+<<<<<<< HEAD
+=======
+import { capitalizeAll } from 'common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 
 type Product = {
@@ -23,10 +31,17 @@ type Category = {
 };
 
 type Data = {
+<<<<<<< HEAD
   current_volume: number;
   product_name: string;
   min_volume: number;
   max_volume: number;
+=======
+  current_volume: Number;
+  product_name: string;
+  min_volume: Number;
+  max_volume: Number;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   packaging_category: string;
   packaging_types: Category[];
   packaging_type: string;
@@ -43,13 +58,24 @@ export const ChemPress = (props) => {
     packaging_types,
     packaging_type,
   } = data;
+<<<<<<< HEAD
   const [categoryName, setCategoryName] = useState(packaging_category);
+=======
+  const [categoryName, setCategoryName] = useLocalState(
+    'categoryName',
+    packaging_category,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const shownCategory =
     packaging_types.find((category) => category.cat_name === categoryName) ||
     packaging_types[0];
   return (
     <Window width={300} height={330}>
+<<<<<<< HEAD
       <Window.Content>
+=======
+      <Window.Content scrollable>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         <Section>
           <LabeledList>
             <LabeledList.Item label="Product">
@@ -71,7 +97,11 @@ export const ChemPress = (props) => {
                 maxValue={max_volume}
                 step={1}
                 stepPixelSize={2}
+<<<<<<< HEAD
                 onChange={(value) =>
+=======
+                onChange={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   act('change_current_volume', {
                     volume: value,
                   })

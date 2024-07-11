@@ -69,9 +69,12 @@
 	RegisterSignal(parent, COMSIG_BUCKLED_CAN_Z_MOVE, PROC_REF(riding_can_z_move))
 	RegisterSignals(parent, GLOB.movement_type_addtrait_signals, PROC_REF(on_movement_type_trait_gain))
 	RegisterSignals(parent, GLOB.movement_type_removetrait_signals, PROC_REF(on_movement_type_trait_loss))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_SUPERMATTER_CONSUMED, PROC_REF(on_entered_supermatter))
 	if(!can_force_unbuckle)
 		RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(force_unbuckle))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * This proc handles all of the proc calls to things like set_vehicle_dir_layer() that a type of riding datum needs to call on creation
@@ -98,7 +101,11 @@
 	for (var/trait in GLOB.movement_type_trait_to_flag)
 		if (HAS_TRAIT(parent, trait))
 			REMOVE_TRAIT(rider, trait, REF(src))
+<<<<<<< HEAD
 	rider.remove_traits(rider_traits, REF(src))
+=======
+	REMOVE_TRAIT(rider, TRAIT_NO_FLOATING_ANIM, REF(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!movable_parent.has_buckled_mobs())
 		qdel(src)
 
@@ -117,8 +124,12 @@
 	for (var/trait in GLOB.movement_type_trait_to_flag)
 		if (HAS_TRAIT(parent, trait))
 			ADD_TRAIT(rider, trait, REF(src))
+<<<<<<< HEAD
 	rider.add_traits(rider_traits, REF(src))
 	post_vehicle_mob_buckle(movable_parent, rider)
+=======
+	ADD_TRAIT(rider, TRAIT_NO_FLOATING_ANIM, REF(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// This proc is called when the rider attempts to grab the thing they're riding, preventing them from doing so.
 /datum/component/riding/proc/on_rider_try_pull(mob/living/rider_pulling, atom/movable/target, force)
@@ -322,9 +333,12 @@
 	if((living_hitter in source.buckled_mobs))
 		return
 	return COMPONENT_CANCEL_ATTACK_CHAIN
+<<<<<<< HEAD
 
 /// When we touch a crystal, kill everything inside us
 /datum/component/riding/proc/on_entered_supermatter(atom/movable/ridden, atom/movable/supermatter)
 	SIGNAL_HANDLER
 	for (var/mob/passenger as anything in ridden.buckled_mobs)
 		passenger.Bump(supermatter)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

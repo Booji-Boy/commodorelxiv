@@ -121,7 +121,7 @@
 	weight = 1
 	show_in_report = TRUE
 	report_message = "Please be nice to him."
-	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday)
+	blacklist = list(/datum/station_trait/announcement_medbot, /datum/station_trait/birthday, /datum/station_trait/announcement_duke, /datum/station_trait/announcement_dagoth)
 
 /datum/station_trait/announcement_intern/New()
 	. = ..()
@@ -138,7 +138,7 @@
 	weight = 1
 	show_in_report = TRUE
 	report_message = "Our announcement system is under scheduled maintanance at the moment. Thankfully, we have a backup."
-	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/birthday)
+	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/birthday, /datum/station_trait/announcement_duke, /datum/station_trait/announcement_dagoth)
 
 /datum/station_trait/announcement_medbot/New()
 	. = ..()
@@ -159,6 +159,63 @@
 	var/new_colored_assistant_type = pick(subtypesof(/datum/colored_assistant) - get_configured_colored_assistant_type())
 	GLOB.colored_assistant = new new_colored_assistant_type
 
+<<<<<<< HEAD
+=======
+/datum/station_trait/cargorilla
+	name = "Cargo Gorilla"
+	trait_type = STATION_TRAIT_NEUTRAL
+	weight = 5
+	show_in_report = FALSE // Selective attention test. Did you spot the gorilla?
+
+	/// The gorilla we created, we only hold this ref until the round starts.
+	var/mob/living/basic/gorilla/cargorilla/cargorilla
+
+/datum/station_trait/cargorilla/New()
+	. = ..()
+	RegisterSignal(SSatoms, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(replace_cargo))
+
+/// Replace some cargo equipment and 'personnel' with a gorilla.
+/datum/station_trait/cargorilla/proc/replace_cargo(datum/source)
+	SIGNAL_HANDLER
+
+	var/mob/living/basic/sloth/cargo_sloth = GLOB.cargo_sloth
+	if(isnull(cargo_sloth))
+		return
+
+	cargorilla = new(cargo_sloth.loc)
+	cargorilla.name = cargo_sloth.name
+	// We do a poll on roundstart, don't let ghosts in early
+	INVOKE_ASYNC(src, PROC_REF(make_id_for_gorilla))
+	// hm our sloth looks funny today
+	qdel(cargo_sloth)
+
+	// monkey carries the crates, the age of robot is over
+	if(GLOB.cargo_ripley)
+		qdel(GLOB.cargo_ripley)
+
+/// Makes an ID card for the gorilla
+/datum/station_trait/cargorilla/proc/make_id_for_gorilla()
+	var/obj/item/card/id/advanced/cargo_gorilla/gorilla_id = new(cargorilla.loc)
+	gorilla_id.registered_name = cargorilla.name
+	gorilla_id.update_label()
+
+	cargorilla.put_in_hands(gorilla_id, del_on_fail = TRUE)
+
+/datum/station_trait/cargorilla/on_round_start()
+	if(!cargorilla)
+		return
+
+	addtimer(CALLBACK(src, PROC_REF(get_ghost_for_gorilla), cargorilla), 12 SECONDS) // give ghosts a bit of time to funnel in
+	cargorilla = null
+
+/// Get us a ghost for the gorilla.
+/datum/station_trait/cargorilla/proc/get_ghost_for_gorilla(mob/living/basic/gorilla/cargorilla/gorilla)
+	if(QDELETED(gorilla))
+		return
+
+	gorilla.poll_for_gorilla()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/station_trait/birthday
 	name = "Employee Birthday"
 	trait_type = STATION_TRAIT_NEUTRAL
@@ -166,7 +223,7 @@
 	show_in_report = TRUE
 	report_message = "We here at Nanotrasen would all like to wish Employee Name a very happy birthday"
 	trait_to_give = STATION_TRAIT_BIRTHDAY
-	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/announcement_medbot) //Overiding the annoucer hides the birthday person in the annoucement message.
+	blacklist = list(/datum/station_trait/announcement_intern, /datum/station_trait/announcement_medbot, /datum/station_trait/announcement_duke, /datum/station_trait/announcement_dagoth) //Overiding the annoucer hides the birthday person in the annoucement message.
 	///Variable that stores a reference to the person selected to have their birthday celebrated.
 	var/mob/living/carbon/human/birthday_person
 	///Variable that holds the real name of the birthday person once selected, just incase the birthday person's real_name changes.
@@ -272,12 +329,12 @@
 	flags_inv = 0
 	armor_type = /datum/armor/none
 	var/static/list/hat_colors = list(
-		COLOR_PRIDE_RED,
-		COLOR_PRIDE_ORANGE,
-		COLOR_PRIDE_YELLOW,
-		COLOR_PRIDE_GREEN,
-		COLOR_PRIDE_BLUE,
-		COLOR_PRIDE_PURPLE,
+		COLOR_BRIGHT_RED,
+		COLOR_BRIGHT_ORANGE,
+		COLOR_BRIGHT_YELLOW,
+		COLOR_BRIGHT_GREEN,
+		COLOR_BRIGHT_TEAL,
+		COLOR_BRIGHT_PURPLE,
 	)
 
 /obj/item/clothing/head/costume/party/Initialize(mapload)
@@ -288,6 +345,7 @@
 	name = "festive paper hat"
 	icon_state = "xmashat_grey"
 	greyscale_config = /datum/greyscale_config/festive_hat
+<<<<<<< HEAD
 	greyscale_config_worn = /datum/greyscale_config/festive_hat/worn
 
 /datum/station_trait/scarves
@@ -295,6 +353,14 @@
 	trait_type = STATION_TRAIT_NEUTRAL
 	weight = 5
 	cost = STATION_TRAIT_COST_MINIMAL
+=======
+	greyscale_config_worn = /datum/greyscale_config/festive_hat_worn
+
+/datum/station_trait/scarves
+	name = "Scarves"
+	trait_type = STATION_TRAIT_POSITIVE
+	weight = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	show_in_report = TRUE
 	var/list/scarves
 
@@ -325,10 +391,16 @@
 
 /datum/station_trait/wallets
 	name = "Wallets!"
+<<<<<<< HEAD
 	trait_type = STATION_TRAIT_NEUTRAL
 	show_in_report = TRUE
 	weight = 5
 	cost = STATION_TRAIT_COST_MINIMAL
+=======
+	trait_type = STATION_TRAIT_POSITIVE
+	show_in_report = TRUE
+	weight = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	report_message = "It has become temporarily fashionable to use a wallet, so everyone on the station has been issued one."
 
 /datum/station_trait/wallets/New()
@@ -363,6 +435,7 @@
 	for(var/obj/item/item in wallet)
 		item.add_fingerprint(living_mob, ignoregloves = TRUE)
 
+<<<<<<< HEAD
 /// Tells the area map generator to ADD MORE TREEEES
 /datum/station_trait/forested
 	name = "Forested"
@@ -373,6 +446,8 @@
 	show_in_report = TRUE
 	report_message = "There sure are a lot of trees out there."
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/station_trait/linked_closets
 	name = "Closet Anomaly"
 	trait_type = STATION_TRAIT_NEUTRAL
@@ -411,13 +486,17 @@
 /datum/station_trait/triple_ai
 	name = "AI Triumvirate"
 	trait_type = STATION_TRAIT_NEUTRAL
+<<<<<<< HEAD
 	trait_flags = parent_type::trait_flags | STATION_TRAIT_REQUIRES_AI
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	show_in_report = TRUE
 	weight = 1
 	report_message = "Your station has been instated with three Nanotrasen Artificial Intelligence models."
 
 /datum/station_trait/triple_ai/New()
 	. = ..()
+<<<<<<< HEAD
 	RegisterSignal(SSjob, COMSIG_OCCUPATIONS_SETUP, PROC_REF(on_occupations_setup))
 
 /datum/station_trait/triple_ai/revert()
@@ -583,3 +662,19 @@
 	dynamic_category = RULESET_CATEGORY_NO_WITTING_CREW_ANTAGONISTS
 	threat_reduction = 15
 	dynamic_threat_id = "Background Checks"
+=======
+	RegisterSignal(SSjob, COMSIG_OCCUPATIONS_DIVIDED, PROC_REF(on_occupations_divided))
+
+/datum/station_trait/triple_ai/revert()
+	UnregisterSignal(SSjob, COMSIG_OCCUPATIONS_DIVIDED)
+	return ..()
+
+/datum/station_trait/triple_ai/proc/on_occupations_divided(datum/source, pure, allow_all)
+	SIGNAL_HANDLER
+
+	for(var/datum/job/ai/ai_datum in SSjob.joinable_occupations)
+		ai_datum.spawn_positions = 3
+	if(!pure)
+		for(var/obj/effect/landmark/start/ai/secondary/secondary_ai_spawn in GLOB.start_landmarks_list)
+			secondary_ai_spawn.latejoin_active = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -17,10 +17,17 @@
 	attack_verb_continuous = "snips"
 	attack_verb_simple = "snip"
 	attack_sound = 'sound/weapons/bite.ogg'
+<<<<<<< HEAD
 	attack_vis_effect = ATTACK_EFFECT_BITE // Closer than a scratch to a crustacean pinching effect
 	melee_attack_cooldown = 1 SECONDS
 	butcher_results = list(
 		/obj/item/food/meat/slab/rawcrab = 2,
+=======
+	attack_vis_effect = ATTACK_EFFECT_BITE //  Closer than a scratch to a crustacean pinching effect
+	melee_attack_cooldown = 1 SECONDS
+	butcher_results = list(
+		/obj/item/food/meat/crab = 2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/stack/sheet/bone = 2,
 		/obj/item/organ/internal/monster_core/rush_gland = 1,
 	)
@@ -29,6 +36,7 @@
 	/// Charging ability
 	var/datum/action/cooldown/mob_cooldown/charge/basic_charge/lobster/charge
 	/// Things we will eat if we see them (arms, chiefly)
+<<<<<<< HEAD
 	var/static/list/target_foods = list(/obj/item/bodypart/arm, /obj/item/fish/lavaloop)
 
 /mob/living/basic/mining/lobstrosity/Initialize(mapload)
@@ -40,6 +48,13 @@
 		/turf/open/lava/plasma = /datum/fish_source/lavaland/icemoon,
 	)
 	AddComponent(/datum/component/profound_fisher, npc_fishing_preset = fishing_preset)
+=======
+	var/static/list/target_foods = list(/obj/item/bodypart/arm)
+
+/mob/living/basic/mining/lobstrosity/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_SNOWSTORM_IMMUNE, INNATE_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/mob_grabber)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/basic_eating, food_types = target_foods)
@@ -69,15 +84,26 @@
 
 /// Charge a long way, knock down for longer, and perform an instant melee attack
 /datum/action/cooldown/mob_cooldown/charge/basic_charge/lobster
+<<<<<<< HEAD
 	name = "Lobster Rush"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	charge_distance = 8
 	knockdown_duration = 2.5 SECONDS
 
 /datum/action/cooldown/mob_cooldown/charge/basic_charge/lobster/hit_target(atom/movable/source, atom/target, damage_dealt)
 	. = ..()
+<<<<<<< HEAD
 	if(!isbasicmob(source) || !isliving(target))
 		return
 	var/mob/living/basic/basic_source = source
+=======
+	if(!isbasicmob(source))
+		return
+	var/mob/living/basic/basic_source = source
+	if(!ismob(target)) //Monkestation edit: Catches a runtime when the lobster charges into a wall.
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/living_target = target
 	basic_source.melee_attack(living_target, ignore_cooldown = TRUE)
 	basic_source.ai_controller?.set_blackboard_key(BB_BASIC_MOB_STOP_FLEEING, TRUE)

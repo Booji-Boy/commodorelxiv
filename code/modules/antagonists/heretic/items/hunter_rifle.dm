@@ -8,9 +8,15 @@
 	name = "\improper Lionhunter's Rifle"
 	desc = "An antique looking rifle that looks immaculate despite being clearly very old."
 	slot_flags = ITEM_SLOT_BACK
+<<<<<<< HEAD
 	icon_state = "lionhunter"
 	inhand_icon_state = "lionhunter"
 	worn_icon_state = "lionhunter"
+=======
+	icon_state = "moistprime"
+	inhand_icon_state = "moistprime"
+	worn_icon_state = "moistprime"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/lionhunter
 	fire_sound = 'sound/weapons/gun/sniper/shot.ogg'
 
@@ -149,6 +155,6 @@
 	icon_state = "sniper_zoom"
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
-	light_range = 2
+	light_outer_range = 2
 
 #undef MAX_LIONHUNTER_RANGE

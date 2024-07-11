@@ -233,11 +233,17 @@
 	var/list/allowed_stickers = list()
 
 	for(var/obj/item/sticker/sticker_type as anything in subtypesof(/obj/item/sticker))
+<<<<<<< HEAD
 		if(!sticker_type::contraband)
 			allowed_stickers += sticker_type
 
 	return allowed_stickers
 
+=======
+		if(initial(sticker_type.contraband) == STICKER_NORMAL)
+			. += sticker_type
+	return .
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/storage/box/stickers/PopulateContents()
 	var/static/list/non_contraband
 

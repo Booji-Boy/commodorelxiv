@@ -11,17 +11,28 @@
 	maxHealth = 25
 	damage_coeff = list(BRUTE = 0.5, BURN = 0.7, TOX = 0, STAMINA = 0, OXY = 0)
 	pass_flags = PASSMOB | PASSFLAPS
+<<<<<<< HEAD
 	combat_mode = TRUE
 	can_buckle_to = FALSE
+=======
+	istate = ISTATE_HARM|ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	req_one_access = list(ACCESS_SECURITY)
 	radio_key = /obj/item/encryptionkey/secbot //AI Priv + Security
 	radio_channel = RADIO_CHANNEL_SECURITY //Security channel
 	bot_type = SEC_BOT
+<<<<<<< HEAD
 	bot_mode_flags = ~BOT_MODE_CAN_BE_SAPIENT
 	data_hud_type = DATA_HUD_SECURITY_ADVANCED
 	hackables = "target identification systems"
 	path_image_color = COLOR_RED
+=======
+	bot_mode_flags = ~BOT_MODE_GHOST_CONTROLLABLE
+	data_hud_type = DATA_HUD_SECURITY_ADVANCED
+	hackables = "target identification systems"
+	path_image_color = "#FF0000"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possessed_message = "You are a securitron! Guard the station to the best of your ability!"
 
 	automated_announcements = list(
@@ -85,13 +96,21 @@
 /mob/living/simple_animal/bot/secbot/beepsky/ofitser
 	name = "Prison Ofitser"
 	desc = "Powered by the tears and sweat of laborers."
+<<<<<<< HEAD
 	bot_mode_flags = ~(BOT_MODE_CAN_BE_SAPIENT|BOT_MODE_AUTOPATROL)
+=======
+	bot_mode_flags = ~(BOT_MODE_GHOST_CONTROLLABLE|BOT_MODE_AUTOPATROL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/bot/secbot/beepsky/armsky
 	name = "Sergeant-At-Armsky"
 	desc = "It's Sergeant-At-Armsky! He's a disgruntled assistant to the warden that would probably shoot you if he had hands."
 	health = 45
+<<<<<<< HEAD
 	bot_mode_flags = ~(BOT_MODE_CAN_BE_SAPIENT|BOT_MODE_AUTOPATROL)
+=======
+	bot_mode_flags = ~(BOT_MODE_GHOST_CONTROLLABLE|BOT_MODE_AUTOPATROL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	security_mode_flags = SECBOT_DECLARE_ARRESTS | SECBOT_CHECK_IDS | SECBOT_CHECK_RECORDS
 
 /mob/living/simple_animal/bot/secbot/beepsky/jr
@@ -108,7 +127,11 @@
 	desc = "It's Officer Pingsky! Delegated to satellite guard duty for harbouring anti-human sentiment."
 	light_color = "#62baf5"
 	radio_channel = RADIO_CHANNEL_AI_PRIVATE
+<<<<<<< HEAD
 	bot_mode_flags = ~(BOT_MODE_CAN_BE_SAPIENT|BOT_MODE_AUTOPATROL)
+=======
+	bot_mode_flags = ~(BOT_MODE_GHOST_CONTROLLABLE|BOT_MODE_AUTOPATROL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	security_mode_flags = SECBOT_DECLARE_ARRESTS | SECBOT_CHECK_IDS | SECBOT_CHECK_RECORDS
 
 /mob/living/simple_animal/bot/secbot/genesky
@@ -253,7 +276,7 @@
 	return
 
 /mob/living/simple_animal/bot/secbot/attack_hand(mob/living/carbon/human/user, list/modifiers)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		retaliate(user)
 		if(special_retaliate_after_attack(user))
 			return
@@ -273,7 +296,7 @@
 	..()
 	if(!(bot_mode_flags & BOT_MODE_ON)) // Bots won't remember if you hit them while they're off.
 		return
-	if(attacking_item.tool_behaviour == TOOL_WELDER && !user.combat_mode) // Any intent but harm will heal, so we shouldn't get angry.
+	if(attacking_item.tool_behaviour == TOOL_WELDER && !(user.istate & ISTATE_HARM)) // Any intent but harm will heal, so we shouldn't get angry.
 		return
 	if(attacking_item.tool_behaviour != TOOL_SCREWDRIVER && (attacking_item.force) && (!target) && (attacking_item.damtype != STAMINA)) // Added check for welding tool to fix #2432. Welding tool behavior is handled in superclass.
 		retaliate(user)
@@ -307,7 +330,7 @@
 			if(Proj.is_hostile_projectile() && Proj.damage < src.health && ishuman(Proj.firer))
 				retaliate(Proj.firer)
 
-/mob/living/simple_animal/bot/secbot/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
+/mob/living/simple_animal/bot/secbot/UnarmedAttack(atom/attack_target, proximity_flag)
 	if(!(bot_mode_flags & BOT_MODE_ON))
 		return
 	if(!can_unarmed_attack())

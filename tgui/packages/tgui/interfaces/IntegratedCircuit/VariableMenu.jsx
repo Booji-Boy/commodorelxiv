@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+=======
+import {
+  Box,
+  Stack,
+  Section,
+  Button,
+  Input,
+  Dropdown,
+  Icon,
+} from '../../components';
+import { Component } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { shallowDiffers } from 'common/react';
 import { Component } from 'react';
 
@@ -189,6 +202,7 @@ export class VariableMenu extends Component {
                         }
                         fluid
                       >
+<<<<<<< HEAD
                         <IconButton icon="list-ol" />
                       </Button>
                     </Stack.Item>
@@ -207,6 +221,9 @@ export class VariableMenu extends Component {
                         fluid
                       >
                         <IconButton icon="table-list" />
+=======
+                        <IconButton icon="list" />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       </Button>
                     </Stack.Item>
                   </Stack>

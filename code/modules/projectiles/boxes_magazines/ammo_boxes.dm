@@ -39,8 +39,13 @@
 	caliber = CALIBER_38
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*10)
+<<<<<<< HEAD
 	ammo_band_icon = "+38_ammo_band"
 	ammo_band_color = null
+=======
+//	ammo_band_icon = "+38_ammo_band" //monkestation temp removal, needs a PR
+//	ammo_band_color = null //temp
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/ammo_box/c38/trac
 	name = "speed loader (.38 TRAC)"
@@ -143,6 +148,7 @@
 	ammo_type = /obj/item/ammo_casing/foam_dart
 	max_ammo = 40
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 
 /obj/item/ammo_box/foambox/mini
 	icon_state = "foambox_mini"
@@ -158,3 +164,10 @@
 	icon_state = "foambox_riot_mini"
 	max_ammo = 20
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*12.5)
+=======
+
+/obj/item/ammo_box/foambox/riot
+	icon_state = "foambox_riot"
+	ammo_type = /obj/item/ammo_casing/caseless/foam_dart/riot
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*25)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

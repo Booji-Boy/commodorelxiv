@@ -29,6 +29,35 @@
 /turf/closed/wall/mineral/cult/artificer/devastate_wall()
 	new /obj/effect/temp_visual/cult/turf(get_turf(src))
 
+<<<<<<< HEAD
+=======
+/turf/closed/wall/vault
+	name = "strange wall"
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "rockvault"
+	base_icon_state = "rockvault"
+	turf_flags = IS_SOLID
+	smoothing_flags = NONE
+	canSmoothWith = null
+	smoothing_groups = null
+	rcd_memory = null
+	wall_trim = null //monkestation edit
+
+/turf/closed/wall/vault/rock
+	name = "rocky wall"
+	desc = "You feel a strange nostalgia from looking at this..."
+
+/turf/closed/wall/vault/alien
+	name = "alien wall"
+	icon_state = "alienvault"
+	base_icon_state = "alienvault"
+
+/turf/closed/wall/vault/sandstone
+	name = "sandstone wall"
+	icon_state = "sandstonevault"
+	base_icon_state = "sandstonevault"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/closed/wall/ice
 	icon = 'icons/turf/walls/icedmetal_wall.dmi'
 	icon_state = "icedmetal_wall-0"
@@ -41,11 +70,17 @@
 	hardness = 35
 	slicing_duration = 150 //welding through the ice+metal
 	bullet_sizzle = TRUE
+	wall_trim = null //monkestation edit
 
 /turf/closed/wall/rust
 	//SDMM supports colors, this is simply for easier mapping
 	//and should be removed on initialize
+<<<<<<< HEAD
 	color = MAP_SWITCH(null, COLOR_ORANGE_BROWN)
+=======
+	color = COLOR_ORANGE_BROWN
+	wall_trim = null //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/rust/Initialize(mapload)
 	. = ..()
@@ -54,15 +89,20 @@
 /turf/closed/wall/r_wall/rust
 	//SDMM supports colors, this is simply for easier mapping
 	//and should be removed on initialize
+<<<<<<< HEAD
 	color = MAP_SWITCH(null, COLOR_ORANGE_BROWN)
 	base_decon_state = "rusty_r_wall"
+=======
+	color = COLOR_ORANGE_BROWN
+	wall_trim = null //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/r_wall/rust/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/rust)
 
 /turf/closed/wall/mineral/bronze
-	name = "clockwork wall"
+	name = "bronze wall" //monkestation edit: renamed from clockwork to bronze
 	desc = "A huge chunk of bronze, decorated like gears and cogs."
 	icon = 'icons/turf/walls/clockwork_wall.dmi'
 	icon_state = "clockwork_wall-0"
@@ -84,6 +124,7 @@
 	hardness = 50
 	girder_type = null
 	decon_type = /turf/closed/mineral/asteroid
+	wall_trim = null //monkestation edit
 
 /turf/closed/wall/rock/porous
 	name = "reinforced porous rock"
@@ -99,6 +140,7 @@
 	smoothing_flags = NONE
 	canSmoothWith = null
 	smoothing_groups = null
+	wall_trim = null //monkestation edit
 
 /turf/closed/wall/material/meat
 	name = "living wall"

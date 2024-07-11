@@ -449,9 +449,16 @@
 /obj/structure/alien/weeds/node,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/abandonedzoo)
+<<<<<<< HEAD
 "Rc" = (
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/machinery/light/floor,
+=======
+"PF" = (
+/obj/machinery/light/directional/south,
+/mob/living/basic/bee,
+/mob/living/basic/bee,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/abandonedzoo)
 "Rh" = (
@@ -515,10 +522,13 @@
 /area/ruin/space/has_grav/abandonedzoo)
 "WV" = (
 /mob/living/basic/mining/basilisk,
+<<<<<<< HEAD
 /turf/open/misc/asteroid,
 /area/ruin/space/has_grav/abandonedzoo)
 "Xl" = (
 /obj/machinery/light/floor,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid,
 /area/ruin/space/has_grav/abandonedzoo)
 "Xx" = (

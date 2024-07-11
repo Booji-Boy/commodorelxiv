@@ -11,7 +11,11 @@
 	/// When this egg last got removed from a body. If -1, the egg hasn't been removed from a body.
 	var/removal_time = -1
 
+<<<<<<< HEAD
 /obj/item/organ/internal/body_egg/changeling_egg/Insert(mob/living/carbon/egg_owner, special = FALSE, movement_flags = DELETE_IF_REPLACED)
+=======
+/obj/item/organ/internal/body_egg/changeling_egg/Insert(mob/living/carbon/egg_owner, special = FALSE, drop_if_replaced = TRUE) //monkestation edit: movement_flags = DELETE_IF_REPLACED)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	hatch_time = world.time + (removal_time == -1 ? EGG_INCUBATION_TIME : (hatch_time - removal_time))
 
@@ -45,7 +49,11 @@
 		changeling_datum.regain_powers()
 
 	owner.investigate_log("has been gibbed by a changeling egg burst.", INVESTIGATE_DEATHS)
+<<<<<<< HEAD
 	owner.gib(DROP_ALL_REMAINS)
+=======
+	owner.gib()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 #undef EGG_INCUBATION_TIME

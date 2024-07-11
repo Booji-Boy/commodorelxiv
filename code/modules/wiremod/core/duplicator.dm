@@ -227,7 +227,11 @@ ADMIN_VERB(load_circuit, R_VAREDIT, "Load Circuit", "Loads a circuit from a file
 	var/txt
 	switch(option)
 		if("File")
+<<<<<<< HEAD
 			txt = file2text(input(user, "Input File") as null|file)
+=======
+			txt = file2text(input(usr, "Input File") as null|file)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("Direct Input")
 			txt = input(user, "Input JSON", "Input JSON") as text|null
 

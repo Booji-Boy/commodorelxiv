@@ -97,7 +97,11 @@
 	/// Datum that holds the canpass info of this pathing attempt. This is what CanAstarPass sees
 	var/datum/can_pass_info/pass_info
 
+<<<<<<< HEAD
 /datum/pathfind/Destroy(force)
+=======
+/datum/pathfind/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	SSpathfinder.active_pathing -= src
 	SSpathfinder.currentrun -= src
@@ -281,7 +285,11 @@
 	/// Are we being thrown?
 	var/thrown = FALSE
 	/// Are we anchored
+<<<<<<< HEAD
 	var/anchored = FALSE
+=======
+	var/anchored = FLASH_LIGHT_POWER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Are we a ghost? (they have effectively unique pathfinding)
 	var/is_observer = FALSE
@@ -297,6 +305,11 @@
 	var/incapacitated = FALSE
 	/// Is our mob incorporeal
 	var/incorporeal_move = FALSE
+<<<<<<< HEAD
+=======
+	/// is our mob a xenofauna or slime
+	var/xenofauna_or_slime = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// If our mob has a rider, what does it look like
 	var/datum/can_pass_info/rider_info = null
 	/// If our mob is buckled to something, what's it like
@@ -346,6 +359,12 @@
 		src.can_ventcrawl = HAS_TRAIT(living_construct, TRAIT_VENTCRAWLER_ALWAYS) || HAS_TRAIT(living_construct, TRAIT_VENTCRAWLER_NUDE)
 		src.mob_size = living_construct.mob_size
 		src.incorporeal_move = living_construct.incorporeal_move
+<<<<<<< HEAD
+=======
+		if(istype(living_construct, /mob/living/basic/slime) || istype(living_construct, /mob/living/basic/xenofauna))
+			src.xenofauna_or_slime = TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(iscameramob(construct_from))
 		src.camera_type = construct_from.type
 	src.is_bot = isbot(construct_from)

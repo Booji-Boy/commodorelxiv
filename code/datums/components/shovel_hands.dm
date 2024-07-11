@@ -14,6 +14,7 @@
 
 /datum/component/shovel_hands/RegisterWithParent()
 	. = ..()
+<<<<<<< HEAD
 	RegisterSignals(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(dig))
 
 /datum/component/shovel_hands/UnregisterFromParent()
@@ -21,6 +22,15 @@
 	return ..()
 
 /datum/component/shovel_hands/Destroy(force)
+=======
+	RegisterSignals(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(dig))
+
+/datum/component/shovel_hands/UnregisterFromParent()
+	UnregisterSignal(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET))
+	return ..()
+
+/datum/component/shovel_hands/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (internal_shovel)
 		UnregisterSignal(internal_shovel, COMSIG_QDELETING)
 	QDEL_NULL(internal_shovel)

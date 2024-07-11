@@ -60,7 +60,12 @@
 	return FALSE
 
 /datum/ai_behavior/step_away/perform(seconds_per_tick, datum/ai_controller/controller)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/step_away/finish_action(datum/ai_controller/controller, succeeded)
 	. = ..()
@@ -82,8 +87,13 @@
 /datum/ai_behavior/pursue_to_range/perform(seconds_per_tick, datum/ai_controller/controller, target_key, range)
 	var/atom/current_target = controller.blackboard[target_key]
 	if (!QDELETED(current_target) && get_dist(controller.pawn, current_target) > range)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT
 	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		return
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///instead of taking a single step, we cover the entire distance
 /datum/ai_behavior/cover_minimum_distance
@@ -111,4 +121,9 @@
 	set_movement_target(controller, target = chosen_turf)
 
 /datum/ai_behavior/cover_minimum_distance/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

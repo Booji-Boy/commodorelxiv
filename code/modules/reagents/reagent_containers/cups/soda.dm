@@ -23,9 +23,19 @@
 
 /obj/item/reagent_containers/cup/soda_cans/Initialize(mapload, vol)
 	. = ..()
+<<<<<<< HEAD
 	AddComponent(/datum/component/slapcrafting,\
 		slapcraft_recipes = list(/datum/crafting_recipe/improv_explosive)\
 	)
+=======
+	AddComponent(/datum/component/edible, \
+		initial_reagents = list(/datum/reagent/iron = 20), \
+		foodtypes = JUNKFOOD, \
+		eat_time = 1 SECONDS, \
+		tastes = list("Metalic"), \
+		bite_consumption = 6, \
+		required_trait = TRAIT_TIN_EATER)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/reagent_containers/cup/soda_cans/random/Initialize(mapload)
 	..()
@@ -66,7 +76,7 @@
 	return TOXLOSS
 
 /obj/item/reagent_containers/cup/soda_cans/attack(mob/M, mob/living/user)
-	if(iscarbon(M) && !reagents.total_volume && user.combat_mode && user.zone_selected == BODY_ZONE_HEAD)
+	if(iscarbon(M) && !reagents.total_volume && (user.istate & ISTATE_HARM) && user.zone_selected == BODY_ZONE_HEAD)
 		if(M == user)
 			user.visible_message(span_warning("[user] crushes the can of [src] on [user.p_their()] forehead!"), span_notice("You crush the can of [src] on your forehead."))
 		else

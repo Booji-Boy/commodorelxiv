@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 import { decodeHtmlEntities } from 'common/string';
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../../backend';
 import {
   BlockQuote,
@@ -9,6 +12,10 @@ import {
   Section,
   Stack,
 } from '../../components';
+<<<<<<< HEAD
+=======
+import { decodeHtmlEntities } from 'common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   RequestMessage,
   RequestPriority,
@@ -48,10 +55,17 @@ const MessageDisplay = (props: { message: RequestMessage }) => {
         }
       >
         {message.priority === RequestPriority.HIGH && (
+<<<<<<< HEAD
           <NoticeBox>High Priority</NoticeBox>
         )}
         {message.priority === RequestPriority.EXTREME && (
           <NoticeBox danger>!!!Extreme Priority!!!</NoticeBox>
+=======
+          <NoticeBox warning>High Priority</NoticeBox>
+        )}
+        {message.priority === RequestPriority.EXTREME && (
+          <NoticeBox bad>!!!Extreme Priority!!!</NoticeBox>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         )}
         <BlockQuote>
           {decodeHtmlEntities(message.content)}

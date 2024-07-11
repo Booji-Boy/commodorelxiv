@@ -247,6 +247,21 @@
 
 	if(M.mind?.special_role)
 		return TRUE
+<<<<<<< HEAD
+=======
+
+	// Turns 'faker' to TRUE if the antag datum is fake. If it's not fake, returns TRUE directly.
+	var/faker = FALSE
+	for(var/datum/antagonist/antag_datum as anything in M.mind?.antag_datums)
+		if((antag_datum.antag_flags & FLAG_FAKE_ANTAG))
+			faker = TRUE
+		else
+			return TRUE
+
+	// If 'faker' was assigned TRUE in the above loop and the argument 'allow_fake_antags' is set to TRUE, this passes.
+	// Else, return FALSE.
+	return (faker && allow_fake_antags)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Turns 'faker' to TRUE if the antag datum is fake. If it's not fake, returns TRUE directly.
 	var/faker = FALSE
@@ -278,6 +293,7 @@
  */
 /proc/notify_ghosts(
 	message,
+<<<<<<< HEAD
 	atom/source,
 	header = "Something Interesting!",
 	mutable_appearance/alert_overlay,
@@ -287,11 +303,25 @@
 	ignore_key,
 	notify_flags = NOTIFY_CATEGORY_DEFAULT,
 	notify_volume = 100,
+=======
+	ghost_sound,
+	enter_link,
+	atom/source,
+	mutable_appearance/alert_overlay,
+	action = NOTIFY_JUMP,
+	flashwindow = TRUE,
+	ignore_mapload = TRUE,
+	ignore_key,
+	header = "",
+	notify_suiciders = TRUE,
+	notify_volume = 100
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 )
 
 	if(notify_flags & GHOST_NOTIFY_IGNORE_MAPLOAD && SSatoms.initialized != INITIALIZATION_INNEW_REGULAR) //don't notify for objects created during a map load
 		return
 
+<<<<<<< HEAD
 	if(source)
 		if(isnull(alert_overlay))
 			alert_overlay = get_small_overlay(source)
@@ -300,30 +330,49 @@
 		alert_overlay.layer = FLOAT_LAYER
 		alert_overlay.plane = FLOAT_PLANE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/mob/dead/observer/ghost in GLOB.player_list)
 		if(!(notify_flags & GHOST_NOTIFY_NOTIFY_SUICIDERS) && HAS_TRAIT(ghost, TRAIT_SUICIDED))
 			continue
 		if(ignore_key && (ghost.ckey in GLOB.poll_ignore[ignore_key]))
 			continue
 
+<<<<<<< HEAD
 		if(notify_flags & GHOST_NOTIFY_FLASH_WINDOW)
 			window_flash(ghost.client)
 
 		if(ghost_sound)
 			SEND_SOUND(ghost, sound(ghost_sound, volume = notify_volume))
 
+=======
+		if(flashwindow)
+			window_flash(ghost.client)
+
+		if(ghost_sound)
+			SEND_SOUND(ghost, sound(ghost_sound, volume = notify_volume))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(isnull(source))
 			to_chat(ghost, span_ghostalert(message))
 			continue
 
+<<<<<<< HEAD
 		var/interact_link = click_interact ? " <a href='?src=[REF(ghost)];play=[REF(source)]'>(Play)</a>" : ""
 		var/view_link = " <a href='?src=[REF(ghost)];view=[REF(source)]'>(View)</a>"
 
 		to_chat(ghost, span_ghostalert("[message][custom_link][interact_link][view_link]"))
+=======
+		var/custom_link = enter_link ? " [enter_link]" : ""
+		var/link = " <a href='?src=[REF(ghost)];[action]=[REF(source)]'>([capitalize(action)])</a>"
+
+		to_chat(ghost, span_ghostalert("[message][custom_link][link]"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		var/atom/movable/screen/alert/notify_action/toast = ghost.throw_alert(
 			category = "[REF(source)]_notify_action",
 			type = /atom/movable/screen/alert/notify_action,
+<<<<<<< HEAD
 		)
 		toast.add_overlay(alert_overlay)
 		toast.click_interact = click_interact
@@ -331,6 +380,28 @@
 		toast.name = header
 		toast.target_ref = WEAKREF(source)
 
+=======
+			new_master = source,
+		)
+		toast.action = action
+		toast.desc = "Click to [action]."
+		toast.name = header
+		toast.target = source
+
+/// Heals a robotic limb on a mob
+/proc/item_heal_robotic(mob/living/carbon/human/human, mob/user, brute_heal, burn_heal)
+	var/obj/item/bodypart/affecting = human.get_bodypart(check_zone(user.zone_selected))
+	if(!affecting || IS_ORGANIC_LIMB(affecting))
+		to_chat(user, span_warning("[affecting] is already in good condition!"))
+		return FALSE
+	var/brute_damage = brute_heal > burn_heal //changes repair text based on how much brute/burn was supplied
+	if((brute_heal > 0 && affecting.brute_dam > 0) || (burn_heal > 0 && affecting.burn_dam > 0))
+		if(affecting.heal_damage(brute_heal, burn_heal, BODYTYPE_ROBOTIC))
+			human.update_damage_overlays()
+		user.visible_message(span_notice("[user] fixes some of the [brute_damage ? "dents on" : "burnt wires in"] [human]'s [affecting.name]."), \
+			span_notice("You fix some of the [brute_damage ? "dents on" : "burnt wires in"] [human == user ? "your" : "[human]'s"] [affecting.name]."))
+		return TRUE //successful heal
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 ///Is the passed in mob a ghost with admin powers, doesn't check for AI interact like isAdminGhost() used to
@@ -371,8 +442,13 @@
 		else
 			var/datum/antagonist/A = M.mind.has_antag_datum(/datum/antagonist/)
 			if(A)
+<<<<<<< HEAD
 				poll_message = "[poll_message] Status: [span_boldnotice(A.name)]."
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(poll_message, check_jobban = ROLE_PAI, poll_time = 10 SECONDS, checked_target = M, alert_pic = M, role_name_text = "ghost control")
+=======
+				poll_message = "[poll_message] Status: [A.name]."
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(poll_message, check_jobban = ROLE_PAI, poll_time = 10 SECONDS, target_mob = M, pic_source = M, role_name_text = "ghost control")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(chosen_one)
 		to_chat(M, "Your mob has been taken over by a ghost!")

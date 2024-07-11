@@ -38,13 +38,11 @@
 	icon_state = "staffofchange"
 	inhand_icon_state = "staffofchange"
 	school = SCHOOL_TRANSMUTATION
+	allow_intruder_use = TRUE
 	/// If set, all wabbajacks this staff produces will be of this type, instead of random
 	var/preset_wabbajack_type
 	/// If set, all wabbajacks this staff produces will be of this changeflag, instead of only WABBAJACK
 	var/preset_wabbajack_changeflag
-
-/obj/item/gun/magic/staff/change/unrestricted
-	allow_intruder_use = TRUE
 
 /obj/item/gun/magic/staff/change/pickup(mob/user)
 	. = ..()
@@ -200,6 +198,10 @@
 		/obj/projectile/bullet/honker,
 		/obj/projectile/bullet/mime,
 		/obj/projectile/curse_hand,
+<<<<<<< HEAD
+=======
+		/obj/projectile/energy/declone,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/projectile/energy/electrode,
 		/obj/projectile/energy/net,
 		/obj/projectile/energy/nuclear_particle,

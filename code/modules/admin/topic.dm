@@ -69,7 +69,12 @@
 	else if(href_list["gamemode_panel"])
 		if(!check_rights(R_ADMIN))
 			return
+<<<<<<< HEAD
 		SSdynamic.admin_panel()
+=======
+		SSticker.mode.admin_panel()
+		SSgamemode.admin_panel(usr) //monkestation addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	else if(href_list["call_shuttle"])
 		if(!check_rights(R_ADMIN))
@@ -215,18 +220,28 @@
 			if(!check_if_greater_rights_than(M.client))
 				to_chat(usr, span_danger("Error: They have more rights than you do."), confidential = TRUE)
 				return
+			/* //MONKESTATION EDIT START - Change this tgui alert to a regular alert
 			if(tgui_alert(usr, "Kick [key_name(M)]?", "Confirm", list("Yes", "No")) != "Yes")
 				return
+			*/ //MONKESTATION EDIT ORIGINAL
+			if(alert(usr, "Kick [key_name(M)]?", "Confirm", "Yes", "No") != "Yes")
+				return
+			//MONKESTATION EDIT END
 			if(!M)
 				to_chat(usr, span_danger("Error: [M] no longer exists!"), confidential = TRUE)
 				return
 			if(!M.client)
 				to_chat(usr, span_danger("Error: [M] no longer has a client!"), confidential = TRUE)
 				return
+			//MONKESTATION EDIT START - Kicking players has been moved to a proc
+			/*
 			to_chat(M, span_danger("You have been kicked from the server by [usr.client.holder.fakekey ? "an Administrator" : "[usr.client.key]"]."), confidential = TRUE)
 			log_admin("[key_name(usr)] kicked [key_name(M)].")
 			message_admins(span_adminnotice("[key_name_admin(usr)] kicked [key_name_admin(M)]."))
 			qdel(M.client)
+			*/ //MONKESTATION EDIT ORIGINAL
+			kick_client(M.client)
+			//MONKESTATION EDIT END
 
 	else if(href_list["addmessage"])
 		if(!check_rights(R_ADMIN))
@@ -744,6 +759,9 @@
 		to_chat(usr, span_notice("Jumping to [target_ckey]'s new mob: [target_mob]!"))
 		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/show_player_panel, target_mob)
 
+	else if(href_list["adminopendemo"])
+		usr.client << link("http://viewer.monkestation.com/?roundid=[GLOB.round_id]&password=[CONFIG_GET(string/replay_password)]#[world.time]") //opens current round at current time
+
 	else if(href_list["adminplayerobservefollow"])
 		if(!isobserver(usr) && !check_rights(R_ADMIN))
 			return
@@ -825,7 +843,11 @@
 					status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status: [status]"
 			health_description += "<br>Brute: [lifer.getBruteLoss()] - Burn: [lifer.getFireLoss()] - Toxin: [lifer.getToxLoss()] - Suffocation: [lifer.getOxyLoss()]"
+<<<<<<< HEAD
 			health_description += "<br>Brain: [lifer.get_organ_loss(ORGAN_SLOT_BRAIN)] - Stamina: [lifer.getStaminaLoss()]"
+=======
+			health_description += "<br>Clone: [lifer.getCloneLoss()] - Brain: [lifer.get_organ_loss(ORGAN_SLOT_BRAIN)] - Stamina: [lifer.stamina.loss]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			health_description = "This mob type has no health to speak of."
 
@@ -1731,7 +1753,61 @@
 		if(!link_url)
 			return
 
+<<<<<<< HEAD
 		web_sound(usr, link_url, credit)
 
 	else if(href_list["debug_z_levels"])
 		return SSadmin_verbs.dynamic_invoke_verb(usr, /datum/admin_verb/debug_z_levels)
+=======
+		web_sound(usr, link_url)
+//monkestation edit start
+	else if(href_list["approve_antag_token"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/atom/movable/target = locate(href_list["approve_antag_token"])
+		if(!IS_CLIENT_OR_MOCK(target))
+			return
+		var/client/user_client = target
+		user_client.client_token_holder.approve_antag_token()
+		log_admin("[user_client]'s token has been approved by [owner].")
+
+	else if(href_list["reject_antag_token"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/atom/movable/target = locate(href_list["reject_antag_token"])
+		if(!IS_CLIENT_OR_MOCK(target))
+			return
+		var/client/user_client = target
+		user_client.client_token_holder.reject_antag_token()
+		log_admin("[user_client]'s token has been rejected by [owner].")
+
+	else if(href_list["open_music_review"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/id = href_list["open_music_review"]
+		var/datum/cassette_review/cassette_review = fetch_review(id)
+		if(!istype(cassette_review))
+			return
+		cassette_review.ui_interact(usr)
+
+	else if(href_list["approve_token_event"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/atom/movable/target = locate(href_list["approve_token_event"])
+		if(!IS_CLIENT_OR_MOCK(target))
+			return
+		var/client/user_client = target
+		user_client.client_token_holder.approve_token_event()
+		log_admin("[user_client]'s token event has been approved by [owner].")
+
+	else if(href_list["reject_token_event"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/atom/movable/target = locate(href_list["reject_token_event"])
+		if(!IS_CLIENT_OR_MOCK(target))
+			return
+		var/client/user_client = target
+		user_client.client_token_holder.reject_token_event()
+		log_admin("[user_client]'s token event has been rejected by [owner].")
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

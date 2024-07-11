@@ -81,12 +81,19 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /mob/living/carbon/human/dummy/log_mob_tag(text)
 	return
 
+<<<<<<< HEAD
 // To speed up the preference menu, we apply 1 filter to the entire mob
 /mob/living/carbon/human/dummy/regenerate_icons()
 	. = ..()
 	apply_height_filters(src, TRUE)
 
 /mob/living/carbon/human/dummy/apply_height_filters(image/appearance, only_apply_in_prefs = FALSE)
+=======
+
+/mob/living/carbon/human/dummy/apply_height_filters(image/appearance, only_apply_in_prefs = FALSE)
+	if(QDELETED(src))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(only_apply_in_prefs)
 		return ..()
 
@@ -94,14 +101,18 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /mob/living/carbon/human/dummy/apply_height_offsets(image/appearance, upper_torso)
 	return
 
+<<<<<<< HEAD
 /// Takes in an accessory list and returns the first entry from that list, ensuring that we dont return SPRITE_ACCESSORY_NONE in the process.
 /proc/get_consistent_feature_entry(list/accessory_feature_list)
 	var/consistent_entry = (accessory_feature_list- SPRITE_ACCESSORY_NONE)[1]
 	ASSERT(!isnull(consistent_entry))
 	return consistent_entry
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /proc/create_consistent_human_dna(mob/living/carbon/human/target)
 	target.dna.features["mcolor"] = COLOR_VIBRANT_LIME
+<<<<<<< HEAD
 	target.dna.features["ethcolor"] = COLOR_WHITE
 	target.dna.features["lizard_markings"] = get_consistent_feature_entry(SSaccessories.lizard_markings_list)
 	target.dna.features["ears"] = get_consistent_feature_entry(SSaccessories.ears_list)
@@ -127,6 +138,33 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	else
 		target.dna.unique_features = consistent_UF
 		target.dna.unique_identity = consistent_UI
+=======
+	target.dna.features["mcolor_secondary"] = COLOR_VIBRANT_LIME
+	target.dna.features["moth_antennae"] = "Plain"
+	target.dna.features["moth_markings"] = "None"
+	target.dna.features["moth_wings"] = "Plain"
+	target.dna.features["snout"] = "Round"
+	target.dna.features["spines"] = "None"
+	target.dna.features["tail_cat"] = "None"
+	target.dna.features["tail_lizard"] = "Smooth"
+	target.dna.features["tail_monkey"] = "Chimp" //Monkestation Addition
+	target.dna.features["pod_hair"] = "Ivy"
+	target.dna.features["ethereal_horns"] = "None" //Monkestation Addition
+	target.dna.features["ethereal_tail"] = "None" //Monkestation Addition
+	target.dna.features["ipc_screen"] = "BSOD" //Monkestation Addition
+	target.dna.features["ipc_chassis"] = "Bishop Cyberkinetics" //Monkestation Addition
+	target.dna.features["ipc_antenna"] = "None" //Monkestation Addition
+	target.dna.features["anime_top"] = "None" //Monkestation Addition
+	target.dna.features["anime_middle"] = "None" //Monkestation Addition
+	target.dna.features["anime_bottom"] = "None" //Monkestation Addition
+	target.dna.features["arachnid_appendages"] = "Long" //Monkestation Addition
+	target.dna.features["arachnid_chelicerae"] = "Basic" //Monkestation Addition
+	target.dna.features["goblin_ears"] = "Normal" //Monkestation Addition
+	target.dna.features["floran_leaves"] = "Furnivour" //Monkestation Addition
+	target.dna.features["satyr_fluff"] = "Normal" //Monkestation Addition
+	target.dna.features["satyr_tail"] = "Short" //Monkestation Addition
+	target.dna.features["satyr_horns"] = "Back" //Monkestation Addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Provides a dummy that is consistently bald, white, naked, etc.
 /mob/living/carbon/human/dummy/consistent
@@ -205,3 +243,8 @@ GLOBAL_LIST_EMPTY(dummy_mob_list)
 	if(istype(dummy))
 		GLOB.dummy_mob_list -= dummy
 		qdel(dummy)
+
+/mob/living/carbon/human/dummy/extra_tall
+	bound_height = 64
+
+	var/list/extra_bodyparts = list()

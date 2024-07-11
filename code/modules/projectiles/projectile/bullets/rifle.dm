@@ -46,6 +46,7 @@
 	bare_wound_bonus = 80
 	embedding = list(embed_chance=100, fall_chance=3, jostle_chance=4, ignore_throwspeed_threshold=TRUE, pain_stam_pct=0.4, pain_mult=5, jostle_pain_mult=6, rip_time=10)
 	wound_falloff_tile = -5
+<<<<<<< HEAD
 	shrapnel_type = null
 
 // Rebar (Rebar Crossbow)
@@ -175,3 +176,21 @@
 	desc = "doink!"
 	damage_type = BRUTE
 	icon_state = "paperball"
+=======
+
+/obj/projectile/bullet/a223
+	name = ".223 bullet"
+	damage = 35
+	armour_penetration = 30
+	wound_bonus = -40
+
+/obj/projectile/bullet/a223/weak //centcom
+	damage = 20
+
+/obj/projectile/bullet/a223/phasic
+	name = ".223 phasic bullet"
+	icon_state = "gaussphase"
+	damage = 30
+	armour_penetration = 100
+	projectile_phasing =  PASSTABLE | PASSGLASS | PASSGRILLE | PASSCLOSEDTURF | PASSMACHINE | PASSSTRUCTURE | PASSDOORS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -166,7 +166,7 @@
 	. = ..()
 
 	var/power = machine_stat & (NOPOWER|BROKEN) ? 0 : 1 + min(biomass / max_visual_biomass, 1) + (processing & 1)
-	set_light(MINIMUM_USEFUL_LIGHT_RANGE, power, LIGHT_COLOR_CYAN)
+	set_light(l_outer_range = MINIMUM_USEFUL_LIGHT_RANGE, l_power = power, l_color = LIGHT_COLOR_CYAN)
 
 
 /obj/machinery/biogenerator/update_overlays()
@@ -202,7 +202,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/biogenerator/attackby(obj/item/attacking_item, mob/living/user, params)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return ..()
 
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, attacking_item))

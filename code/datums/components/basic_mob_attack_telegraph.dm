@@ -25,7 +25,11 @@
 	src.telegraph_duration = telegraph_duration
 	src.on_began_forecast = on_began_forecast
 
+<<<<<<< HEAD
 /datum/component/basic_mob_attack_telegraph/Destroy(force)
+=======
+/datum/component/basic_mob_attack_telegraph/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(current_target)
 		forget_target(current_target)
 	target_overlay = null

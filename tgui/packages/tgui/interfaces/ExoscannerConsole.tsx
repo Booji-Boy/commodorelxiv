@@ -4,12 +4,22 @@ import {
   Box,
   Button,
   Icon,
+<<<<<<< HEAD
   LabeledList,
   Modal,
   NoticeBox,
   Section,
   Stack,
 } from '../components';
+=======
+  Modal,
+  Section,
+  LabeledList,
+  NoticeBox,
+  Stack,
+} from '../components';
+import { Window } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { formatTime } from '../format';
 import { Window } from '../layouts';
 

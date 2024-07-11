@@ -19,7 +19,11 @@ export const RequestManager = (props) => {
       Object.entries(displayTypeMap).map(([type, _]) => [type, true]),
     ),
   );
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
+=======
+  const [searchText, setSearchText] = useLocalState('searchText');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   // Handle filtering
   let displayedRequests = requests.filter(
@@ -130,7 +134,14 @@ const RequestControls = (props) => {
 };
 
 const FilterPanel = (props) => {
+<<<<<<< HEAD
   const [filterVisible, setFilterVisible] = useState(false);
+=======
+  const [filterVisible, setFilterVisible] = useLocalState(
+    'filterVisible',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [filteredTypes, setFilteredTypes] = useLocalState(
     'filteredTypes',
     Object.fromEntries(
@@ -172,11 +183,17 @@ const FilterPanel = (props) => {
         </div>
       }
     >
+<<<<<<< HEAD
       <div>
         <Button icon="cog" onClick={() => setFilterVisible(!filterVisible)}>
           Type Filter
         </Button>
       </div>
+=======
+      <Button icon="cog" onClick={() => setFilterVisible(!filterVisible)}>
+        Type Filter
+      </Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     </Popper>
   );
 };

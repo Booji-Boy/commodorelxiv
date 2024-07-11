@@ -8,7 +8,11 @@
 #define LINE1_Y -4
 #define LINE2_X 1
 #define LINE2_Y -11
+<<<<<<< HEAD
 GLOBAL_DATUM_INIT(status_font, /datum/font, new /datum/font/tiny_unicode/size_12pt())
+=======
+#define STATUS_DISPLAY_FONT_DATUM /datum/font/tiny_unicode/size_12pt
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Status display which can show images and scrolling text.
 /obj/machinery/status_display
@@ -61,7 +65,7 @@ GLOBAL_DATUM_INIT(status_font, /datum/font, new /datum/font/tiny_unicode/size_12
 		return TRUE
 
 /obj/machinery/status_display/welder_act(mob/living/user, obj/item/tool)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	if(atom_integrity >= max_integrity)
 		balloon_alert(user, "it doesn't need repairs!")
@@ -144,16 +148,31 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
  * * message - the new message text.
  * Returns new /obj/effect/overlay/status_display_text or null if unchanged.
  */
+<<<<<<< HEAD
 /obj/machinery/status_display/proc/update_message(current_key, line_y, message, x_offset, line_pair)
 	var/obj/effect/overlay/status_display_text/current_overlay = get_status_text(current_key)
 	var/obj/effect/overlay/status_display_text/new_overlay = generate_status_text(line_y, message, x_offset, text_color, header_text_color, line_pair)
+=======
+/obj/machinery/status_display/proc/update_message(obj/effect/overlay/status_display_text/overlay, line_y, message, x_offset, line_pair)
+	if(overlay && message == overlay.message)
+		return null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(current_overlay == new_overlay)
 		return current_key
 
+<<<<<<< HEAD
 	current_overlay?.disown(src)
 	new_overlay.own(src)
 	return new_overlay.status_key
+=======
+	var/obj/effect/overlay/status_display_text/new_status_display_text = new(src, line_y, message, text_color, header_text_color, x_offset, line_pair)
+	// Draw our object visually "in front" of this display, taking advantage of sidemap
+	new_status_display_text.pixel_y = -32
+	new_status_display_text.pixel_z = 32
+	vis_contents += new_status_display_text
+	return new_status_display_text
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/status_display/update_appearance(updates=ALL)
 	. = ..()
@@ -164,7 +183,11 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 	)
 		set_light(0)
 		return
+<<<<<<< HEAD
 	set_light(1.5, 0.7, LIGHT_COLOR_FAINT_CYAN) // blue light
+=======
+	set_light(l_outer_range = 1.4, l_power = 0.7, l_color = LIGHT_COLOR_BLUE) // blue light
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/status_display/update_overlays(updates)
 	. = ..()
@@ -187,12 +210,26 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 			var/line1_metric
 			var/line2_metric
 			var/line_pair
+<<<<<<< HEAD
 			line1_metric = GLOB.status_font.get_metrics(message1)
 			line2_metric = GLOB.status_font.get_metrics(message2)
 			line_pair = (line1_metric > line2_metric ? line1_metric : line2_metric)
 
 			message_key_1 = update_message(message_key_1, LINE1_Y, message1, LINE1_X, line_pair)
 			message_key_2 = update_message(message_key_2, LINE2_Y, message2, LINE2_X, line_pair)
+=======
+			var/datum/font/display_font = new STATUS_DISPLAY_FONT_DATUM()
+			line1_metric = display_font.get_metrics(message1)
+			line2_metric = display_font.get_metrics(message2)
+			line_pair = (line1_metric > line2_metric ? line1_metric : line2_metric)
+
+			var/overlay = update_message(message1_overlay, LINE1_Y, message1, LINE1_X, line_pair)
+			if(overlay)
+				message1_overlay = overlay
+			overlay = update_message(message2_overlay, LINE2_Y, message2, LINE2_X, line_pair)
+			if(overlay)
+				message2_overlay = overlay
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			// Turn off backlight if message is blank
 			if(message1 == "" && message2 == "")
@@ -242,7 +279,11 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 		set_messages("shutl","not in service")
 		return PROCESS_KILL
 	else if(shuttle.timer)
+<<<<<<< HEAD
 		var/line1 = shuttle.getModeStr()
+=======
+		var/line1 = "<<< [shuttle.getModeStr()]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/line2 = shuttle.getTimerStr()
 
 		set_messages(line1, line2)
@@ -274,13 +315,18 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 	// If the line is short enough to not marquee, and it matches this, it's a header.
 	var/static/regex/header_regex = regex("^-.*-$")
 
+<<<<<<< HEAD
 /obj/effect/overlay/status_display_text/Initialize(mapload, maptext_y, message, text_color, header_text_color, xoffset = 0, line_pair, status_key)
+=======
+/obj/effect/overlay/status_display_text/Initialize(mapload, yoffset, line, text_color, header_text_color, xoffset = 0, line_pair)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 
 	src.maptext_y = maptext_y
 	src.message = message
 	src.status_key = status_key
 
+<<<<<<< HEAD
 	var/line_width = GLOB.status_font.get_metrics(message)
 
 	if(line_width > MAX_STATIC_WIDTH)
@@ -291,6 +337,19 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 		var/full_marquee_width = GLOB.status_font.get_metrics("[marquee_message]    ")
 		// We loop after only this much has passed.
 		var/looping_marquee_width = (GLOB.status_font.get_metrics("[message]    ]") - SCROLL_PADDING)
+=======
+	var/datum/font/display_font = new STATUS_DISPLAY_FONT_DATUM()
+	var/line_width = display_font.get_metrics(line)
+
+	if(line_width > MAX_STATIC_WIDTH)
+		// Marquee text
+		var/marquee_message = "[line]    [line]    [line]"
+
+		// Width of full content. Must of these is never revealed unless the user inputted a single character.
+		var/full_marquee_width = display_font.get_metrics("[marquee_message]    ")
+		// We loop after only this much has passed.
+		var/looping_marquee_width = (display_font.get_metrics("[line]    ]") - SCROLL_PADDING)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		maptext = generate_text(marquee_message, center = FALSE, text_color = text_color)
 		maptext_width = full_marquee_width
@@ -309,6 +368,7 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 		maptext = generate_text(message, center = TRUE, text_color = color)
 		maptext_x = xoffset //Defaults to 0, this would be centered unless overided
 
+<<<<<<< HEAD
 /obj/effect/overlay/status_display_text/Destroy(force)
 	GLOB.key_to_status_display -= status_key
 	return ..()
@@ -327,6 +387,8 @@ GLOBAL_LIST_EMPTY(key_to_status_display)
 	if(use_count <= 0)
 		qdel(src)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Generate the actual maptext.
  * Arguments:
@@ -433,7 +495,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/evac, 32)
 			line1 = ""
 			line2 = ""
 	else
+<<<<<<< HEAD
 		line1 = SSshuttle.supply.getModeStr()
+=======
+		line1 = "<<< [SSshuttle.supply.getModeStr()]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		line2 = SSshuttle.supply.getTimerStr()
 	set_messages(line1, line2)
 
@@ -482,8 +548,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/ai, 32)
 	if(!isAI(user))
 		return
 	var/list/choices = list()
+<<<<<<< HEAD
 	for(var/emotion_const in GLOB.ai_status_display_emotes)
 		var/icon_state = GLOB.ai_status_display_emotes[emotion_const]
+=======
+	for(var/emotion_const in emotion_map)
+		var/icon_state = emotion_map[emotion_const]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		choices[emotion_const] = image(icon = 'icons/obj/machines/status_display.dmi', icon_state = icon_state)
 
 	var/emotion_result = show_radial_menu(user, src, choices, tooltips = TRUE)
@@ -600,4 +671,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/status_display/random_message, 32)
 #undef LINE1_Y
 #undef LINE2_X
 #undef LINE2_Y
+<<<<<<< HEAD
 #undef SCROLL_PADDING
+=======
+#undef STATUS_DISPLAY_FONT_DATUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

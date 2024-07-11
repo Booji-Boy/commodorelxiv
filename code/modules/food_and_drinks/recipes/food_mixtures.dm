@@ -54,14 +54,14 @@
 	required_reagents = list(/datum/reagent/consumable/soymilk = 10)
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
 	mob_react = FALSE
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/tofu
 
 /datum/chemical_reaction/food/candycorn
 	required_reagents = list(/datum/reagent/consumable/nutriment/fat/oil = 5)
 	required_catalysts = list(/datum/reagent/consumable/sugar = 5)
 	mob_react = FALSE
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/candy_corn
 
 /datum/chemical_reaction/food/chocolatepudding
@@ -74,18 +74,18 @@
 
 /datum/chemical_reaction/food/chocolate_bar
 	required_reagents = list(/datum/reagent/consumable/soymilk = 2, /datum/reagent/consumable/coco = 2, /datum/reagent/consumable/sugar = 2)
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/chocolatebar
 
 /datum/chemical_reaction/food/chocolate_bar2
 	required_reagents = list(/datum/reagent/consumable/milk/chocolate_milk = 4, /datum/reagent/consumable/sugar = 2)
 	mob_react = FALSE
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/chocolatebar
 
 /datum/chemical_reaction/food/chocolate_bar3
 	required_reagents = list(/datum/reagent/consumable/milk = 2, /datum/reagent/consumable/coco = 2, /datum/reagent/consumable/sugar = 2)
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/chocolatebar
 
 /datum/chemical_reaction/food/soysauce
@@ -119,28 +119,32 @@
 /datum/chemical_reaction/food/cheesewheel
 	required_reagents = list(/datum/reagent/consumable/milk = 40)
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/cheese/wheel
 
 /datum/chemical_reaction/food/synthmeat
 	required_reagents = list(/datum/reagent/blood = 5, /datum/reagent/medicine/cryoxadone = 1)
 	mob_react = FALSE
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/meat/slab/synthmeat
 
 /datum/chemical_reaction/food/hot_ramen
 	results = list(/datum/reagent/consumable/hot_ramen = 3)
 	required_reagents = list(/datum/reagent/water = 1, /datum/reagent/consumable/dry_ramen = 3)
 
+	pollutant_type = /datum/pollutant/food/spicy_noodles
+
 /datum/chemical_reaction/food/hell_ramen
 	results = list(/datum/reagent/consumable/hell_ramen = 6)
 	required_reagents = list(/datum/reagent/consumable/capsaicin = 1, /datum/reagent/consumable/hot_ramen = 6)
+
+	pollutant_type = /datum/pollutant/food/spicy_noodles
 
 /datum/chemical_reaction/food/imitationcarpmeat
 	required_reagents = list(/datum/reagent/toxin/carpotoxin = 5)
 	required_container = /obj/item/food/tofu
 	mix_message = "The mixture becomes similar to carp meat."
-	reaction_flags = REACTION_INSTANT
+
 
 /datum/chemical_reaction/food/imitationcarpmeat/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -151,7 +155,7 @@
 /datum/chemical_reaction/food/dough
 	required_reagents = list(/datum/reagent/water = 10, /datum/reagent/consumable/flour = 15)
 	mix_message = "The ingredients form a dough."
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/dough
 
 /datum/chemical_reaction/food/rice_dough
@@ -163,7 +167,7 @@
 /datum/chemical_reaction/food/cakebatter
 	required_reagents = list(/datum/reagent/consumable/eggyolk = 6, /datum/reagent/consumable/eggwhite = 12, /datum/reagent/consumable/flour = 15, /datum/reagent/consumable/sugar = 5)
 	mix_message = "The ingredients form a cake batter."
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/cakebatter
 
 /datum/chemical_reaction/food/cakebatter/vegan
@@ -176,7 +180,7 @@
 /datum/chemical_reaction/food/uncooked_rice
 	required_reagents = list(/datum/reagent/consumable/rice = 10, /datum/reagent/water = 10)
 	mix_message = "The rice absorbs the water."
-	reaction_flags = REACTION_INSTANT
+
 
 /datum/chemical_reaction/food/uncooked_rice/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	var/location = get_turf(holder.my_atom)
@@ -216,14 +220,14 @@
 /datum/chemical_reaction/food/mothic_pizza_dough
 	required_reagents = list(/datum/reagent/consumable/milk = 5, /datum/reagent/consumable/nutriment/fat/oil/olive = 2, /datum/reagent/medicine/salglu_solution = 5, /datum/reagent/consumable/cornmeal = 10, /datum/reagent/consumable/flour = 5)
 	mix_message = "The ingredients form a pizza dough."
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/mothic_pizza_dough
 
 /datum/chemical_reaction/food/curd_cheese
 	required_reagents = list(/datum/reagent/consumable/milk = 15, /datum/reagent/consumable/vinegar = 5, /datum/reagent/consumable/cream = 5)
 	mix_message = "The milk curdles into cheese."
 	required_temp = 353
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/cheese/curd_cheese
 
 /datum/chemical_reaction/food/mozzarella
@@ -231,7 +235,7 @@
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 1)
 	mix_message = "Fine ribbons of curd form in the milk."
 	required_temp = 353
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/cheese/mozzarella
 
 /datum/chemical_reaction/food/cornmeal_batter
@@ -243,30 +247,31 @@
 	required_reagents = list(/datum/reagent/consumable/cornmeal_batter = 25)
 	mix_message = "The batter bakes into cornbread- somehow!"
 	required_temp = 473
-	reaction_flags = REACTION_INSTANT
+
 	resulting_food_path = /obj/item/food/bread/corn
 
 /datum/chemical_reaction/food/yoghurt
 	required_reagents = list(/datum/reagent/consumable/cream = 10, /datum/reagent/consumable/virus_food = 2)
 	results = list(/datum/reagent/consumable/yoghurt = 10)
 	mix_message = "The mixture thickens into yoghurt."
-	reaction_flags = REACTION_INSTANT
+
 
 /datum/chemical_reaction/food/olive_oil_upconvert
 	required_catalysts = list(/datum/reagent/consumable/nutriment/fat/oil/olive = 1)
 	required_reagents = list( /datum/reagent/consumable/nutriment/fat/oil = 2)
 	results = list(/datum/reagent/consumable/nutriment/fat/oil/olive = 2)
 	mix_message = "The cooking oil dilutes the quality oil- how delightfully devilish..."
-	reaction_flags = REACTION_INSTANT
+
 
 /datum/chemical_reaction/food/olive_oil
 	results = list(/datum/reagent/consumable/nutriment/fat/oil/olive = 2)
 	required_reagents = list(/datum/reagent/consumable/olivepaste = 4, /datum/reagent/water = 1)
-	reaction_flags = REACTION_INSTANT
+
 
 /datum/chemical_reaction/food/wine_vinegar
 	results = list(/datum/reagent/consumable/vinegar = 5)
 	required_reagents = list(/datum/reagent/consumable/ethanol/wine = 1, /datum/reagent/water = 1, /datum/reagent/consumable/sugar = 1)
+<<<<<<< HEAD
 	reaction_flags = REACTION_INSTANT
 
 /datum/chemical_reaction/food/grounding_neutralise
@@ -287,3 +292,19 @@
 	required_reagents = list(/datum/reagent/consumable/grapejuice = 5)
 	required_catalysts = list(/datum/reagent/consumable/enzyme = 5)
 	mix_message = "The smell of the mixture reminds you of how you lost access to the country club..."
+=======
+	//reaction_flags = REACTION_INSTANT
+
+/datum/chemical_reaction/food/grounding_neutralise
+	results = list(/datum/reagent/consumable/salt = 2)
+	required_reagents = list(/datum/reagent/consumable/liquidelectricity = 2, /datum/reagent/consumable/grounding_solution = 1)  //Monkestation edit: no enriched
+	mix_message = "The mixture lets off a sharp snap as the electricity discharges."
+	mix_sound = 'sound/weapons/taser.ogg'
+	//reaction_flags = REACTION_INSTANT
+
+/datum/chemical_reaction/food/martian_batter
+	results = list(/datum/reagent/consumable/martian_batter = 2)
+	required_reagents = list(/datum/reagent/consumable/flour = 1, /datum/reagent/consumable/nutriment/soup/dashi = 1)
+	mix_message = "A smooth batter forms."
+	//reaction_flags = REACTION_INSTANT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

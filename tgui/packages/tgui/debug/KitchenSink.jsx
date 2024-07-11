@@ -23,8 +23,13 @@ const getStories = () => r.keys().map((path) => r(path));
 
 export const KitchenSink = (props) => {
   const { panel } = props;
+<<<<<<< HEAD
   const [theme] = useState(null);
   const [pageIndex, setPageIndex] = useState(0);
+=======
+  const [theme] = useLocalState('kitchenSinkTheme');
+  const [pageIndex, setPageIndex] = useLocalState('pageIndex', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const stories = getStories();
   const story = stories[pageIndex];
   const Layout = panel ? Pane : Window;

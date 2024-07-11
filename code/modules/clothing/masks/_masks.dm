@@ -7,15 +7,22 @@
 	slot_flags = ITEM_SLOT_MASK
 	strip_delay = 40
 	equip_delay_other = 40
+<<<<<<< HEAD
 	visor_vars_to_toggle = NONE
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/modifies_speech = FALSE
 	var/adjusted_flags = null
 	///Did we install a filtering cloth?
 	var/has_filter = FALSE
+<<<<<<< HEAD
 	/// If defined, what voice should we override with if TTS is active?
 	var/voice_override
 	/// If set to true, activates the radio effect on TTS. Used for sec hailers, but other masks can utilize it for their own vocal effect.
 	var/use_radio_beeps_tts = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// The unique sound effect of dying while wearing this
 	var/unique_death
 

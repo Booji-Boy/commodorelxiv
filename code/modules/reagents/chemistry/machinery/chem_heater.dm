@@ -31,7 +31,11 @@
 		QDEL_NULL(beaker)
 	return ..()
 
+<<<<<<< HEAD
 /obj/machinery/chem_heater/Exited(atom/movable/gone, direction)
+=======
+/obj/machinery/chem_heater/handle_atom_del(atom/A)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(gone == beaker)
 		UnregisterSignal(beaker.reagents, COMSIG_REAGENTS_REACTION_STEP)
@@ -215,6 +219,40 @@
 	if(!ui)
 		ui = new(user, src, "ChemHeater", name)
 		ui.open()
+<<<<<<< HEAD
+=======
+		add_ui_client_list(ui)
+
+/obj/machinery/chem_heater/ui_close(mob/user)
+	for(var/ui_client in ui_client_list)
+		var/datum/tgui/ui = ui_client
+		if(ui.user == user)
+			remove_ui_client_list(ui)
+	return ..()
+
+/*
+*This adds an open ui client to the list - so that it can be force updated from reaction mechanisms.
+* After adding it to the list, it enables a signal incase the ui is deleted - which will call a method to remove it from the list
+* This is mostly to ensure we don't have defunct ui instances stored from any condition.
+*/
+/obj/machinery/chem_heater/proc/add_ui_client_list(new_ui)
+	LAZYADD(ui_client_list, new_ui)
+	RegisterSignal(new_ui, COMSIG_QDELETING, PROC_REF(on_ui_deletion))
+
+///This removes an open ui instance from the ui list and deregsiters the signal
+/obj/machinery/chem_heater/proc/remove_ui_client_list(old_ui)
+	UnregisterSignal(old_ui, COMSIG_QDELETING)
+	LAZYREMOVE(ui_client_list, old_ui)
+
+///This catches a signal and uses it to delete the ui instance from the list
+/obj/machinery/chem_heater/proc/on_ui_deletion(datum/tgui/source, force)
+	SIGNAL_HANDLER
+	remove_ui_client_list(source)
+
+/obj/machinery/chem_heater/ui_assets()
+	. = ..() || list()
+	. += get_asset_datum(/datum/asset/simple/tutorial_advisors)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/chem_heater/ui_data(mob/user)
 	. = list()

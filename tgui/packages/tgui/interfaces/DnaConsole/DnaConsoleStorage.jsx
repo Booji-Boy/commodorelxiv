@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Collapsible,
+<<<<<<< HEAD
   LabeledList,
   Section,
   Stack,
@@ -21,6 +22,24 @@ import {
 } from './constants';
 import { GeneticMakeupInfo } from './GeneticMakeupInfo';
 import { MutationInfo } from './MutationInfo';
+=======
+  Stack,
+  LabeledList,
+  Section,
+  Tabs,
+} from '../../components';
+import { GeneticMakeupInfo } from './GeneticMakeupInfo';
+import { MutationInfo } from './MutationInfo';
+import {
+  STORAGE_CONS_SUBMODE_CHROMOSOMES,
+  STORAGE_CONS_SUBMODE_MUTATIONS,
+  STORAGE_DISK_SUBMODE_ENZYMES,
+  STORAGE_DISK_SUBMODE_MUTATIONS,
+  STORAGE_MODE_ADVINJ,
+  STORAGE_MODE_CONSOLE,
+  STORAGE_MODE_DISK,
+} from './constants';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const DnaConsoleStorage = (props) => {
   const { data, act } = useBackend();

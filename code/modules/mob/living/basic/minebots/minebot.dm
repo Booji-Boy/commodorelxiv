@@ -1,6 +1,10 @@
 /mob/living/basic/mining_drone
 	name = "\improper Nanotrasen minebot"
+<<<<<<< HEAD
 	desc = "The instructions printed on the side read: This is a small robot used to support miners, can be set to search and collect loose ore, or to help fend off wildlife."
+=======
+	desc = "The instructions printed on the side read: This is a small robot used to support miners, can be set to search and collect loose ore, or to help fend off wildlife. Insert any type of ore into it to make it start listening to your commands!"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	gender = NEUTER
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "mining_drone"
@@ -8,8 +12,12 @@
 	basic_mob_flags = DEL_ON_DEATH
 	status_flags = CANSTUN|CANKNOCKDOWN|CANPUSH
 	mouse_opacity = MOUSE_OPACITY_ICON
+<<<<<<< HEAD
 	combat_mode = TRUE
 	habitable_atmos = null
+=======
+	habitable_atmos  = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = 0
 	health = 125
 	maxHealth = 125
@@ -24,6 +32,7 @@
 	mob_biotypes = MOB_ROBOTIC
 	death_message = "blows apart!"
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 6
 	// I want this to be a bit more dim, for vibes
 	light_power = 0.6
@@ -43,6 +52,18 @@
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle/minebot,
 		/datum/pet_command/protect_owner/minebot,
+=======
+	light_outer_range = 6
+	light_on = FALSE
+	ai_controller = /datum/ai_controller/basic_controller/minebot
+	///the access card we use to access mining
+	var/obj/item/card/id/access_card
+	///the gun we use to kill
+	var/obj/item/gun/energy/recharge/kinetic_accelerator/minebot/stored_gun
+	///the commands our owner can give us
+	var/list/pet_commands = list(
+		/datum/pet_command/idle/minebot,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/pet_command/minebot_ability/light,
 		/datum/pet_command/minebot_ability/dump,
 		/datum/pet_command/automate_mining,
@@ -50,6 +71,7 @@
 		/datum/pet_command/follow,
 		/datum/pet_command/point_targeting/attack/minebot,
 	)
+<<<<<<< HEAD
 	///possible colors the bot can have
 	var/static/list/possible_colors= list(
 		"Default" = null, //default color state
@@ -63,10 +85,17 @@
 	neutral_overlay = mutable_appearance(icon = 'icons/mob/silicon/aibots.dmi', icon_state = "mining_drone_grey")
 	combat_overlay = mutable_appearance(icon = 'icons/mob/silicon/aibots.dmi', icon_state = "mining_drone_offense_grey")
 	AddComponent(/datum/component/obeys_commands, pet_commands)
+=======
+
+/mob/living/basic/mining_drone/Initialize(mapload)
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/static/list/death_drops = list(/obj/effect/decal/cleanable/robot_debris/old)
 	AddElement(/datum/element/death_drops, death_drops)
 	add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE), INNATE_TRAIT)
 	AddElement(/datum/element/footstep, FOOTSTEP_OBJ_ROBOT, 1, -6, sound_vary = TRUE)
+<<<<<<< HEAD
 
 	var/static/list/innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/missile_launcher = BB_MINEBOT_MISSILE_ABILITY,
@@ -77,10 +106,29 @@
 	)
 
 	grant_actions_by_list(innate_actions)
+=======
+	AddComponent(\
+		/datum/component/tameable,\
+		food_types = list(/obj/item/stack/ore),\
+		tame_chance = 100,\
+		bonus_tame_chance = 5,\
+		after_tame = CALLBACK(src, PROC_REF(activate_bot)),\
+	)
+
+	var/datum/action/cooldown/mob_cooldown/minedrone/toggle_light/toggle_light_action = new(src)
+	var/datum/action/cooldown/mob_cooldown/minedrone/toggle_meson_vision/toggle_meson_vision_action = new(src)
+	var/datum/action/cooldown/mob_cooldown/minedrone/dump_ore/dump_ore_action = new(src)
+	toggle_light_action.Grant(src)
+	toggle_meson_vision_action.Grant(src)
+	dump_ore_action.Grant(src)
+	ai_controller.set_blackboard_key(BB_MINEBOT_LIGHT_ABILITY, toggle_light_action)
+	ai_controller.set_blackboard_key(BB_MINEBOT_DUMP_ABILITY, dump_ore_action)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	stored_gun = new(src)
 	var/obj/item/implant/radio/mining/comms = new(src)
 	comms.implant(src)
+<<<<<<< HEAD
 	var/static/list/accesses = list(
 		/datum/id_trim/job/shaft_miner,
 	)
@@ -91,6 +139,17 @@
 	. = ..()
 	icon_state = combat_mode ? "mining_drone_offense" : "mining_drone"
 	balloon_alert(src, "now [combat_mode ? "attacking" : "collecting"]")
+=======
+	access_card = new /obj/item/card/id/advanced/gold(src)
+	SSid_access.apply_trim_to_card(access_card, /datum/id_trim/job/shaft_miner)
+
+	RegisterSignal(src, COMSIG_MOB_TRIED_ACCESS, PROC_REF(attempt_access))
+
+/mob/living/basic/mining_drone/set_combat_mode(new_mode, silent = TRUE)
+	. = ..()
+	icon_state = (istate & ISTATE_HARM) ? "mining_drone_offense" : "mining_drone"
+	balloon_alert(src, "now [(istate & ISTATE_HARM) ? "attacking" : "collecting"]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/mining_drone/examine(mob/user)
 	. = ..()
@@ -107,6 +166,7 @@
 
 	for(var/obj/item/borg/upgrade/modkit/modkit as anything in stored_gun.modkits)
 		. += span_notice("There is \a [modkit] installed, using <b>[modkit.cost]%</b> capacity.")
+<<<<<<< HEAD
 	if(ai_controller && ai_controller.ai_status == AI_STATUS_IDLE)
 		. += "The [src] appears to be in <b>sleep mode</b>. You can restore normal functions by <b>tapping</b> it."
 
@@ -115,6 +175,14 @@
 	if(user.combat_mode)
 		return FALSE
 	if(combat_mode)
+=======
+
+
+/mob/living/basic/mining_drone/welder_act(mob/living/user, obj/item/welder)
+	if(user.istate & ISTATE_HARM)
+		return FALSE
+	if(istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.balloon_alert(user, "can't repair in attack mode!")
 		return TRUE
 	if(maxHealth == health)
@@ -133,6 +201,7 @@
 	return ..()
 
 /mob/living/basic/mining_drone/attack_hand(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	if(!user.combat_mode)
 		if(ai_controller && ai_controller.ai_status == AI_STATUS_IDLE)
 			ai_controller.set_ai_status(AI_STATUS_ON)
@@ -219,11 +288,29 @@
 	if(!combat_mode)
 		return
 	stored_gun.try_fire_gun(target, src, list2params(modifiers))
+=======
+	. = ..()
+
+	if(. ||( user.istate & ISTATE_HARM))
+		return
+	set_combat_mode(!(istate & ISTATE_HARM))
+	balloon_alert(user, "now [(istate & ISTATE_HARM) ? "attacking wildlife" : "collecting loose ore"]")
+
+/mob/living/basic/mining_drone/RangedAttack(atom/target)
+	if(!(istate & ISTATE_HARM))
+		return
+	stored_gun.afterattack(target, src)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/mining_drone/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
 	. = ..()
 
+<<<<<<< HEAD
 	if(!. || !proximity_flag || combat_mode)
+=======
+	if(!. || !proximity_flag || (istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(istype(attack_target, /obj/item/stack/ore))
@@ -235,6 +322,19 @@
 	for(var/obj/item/stack/ore/dropped_item in contents)
 		dropped_item.forceMove(get_turf(src))
 
+<<<<<<< HEAD
+=======
+/mob/living/basic/mining_drone/proc/attempt_access(mob/drone, obj/door_attempt)
+	SIGNAL_HANDLER
+
+	if(door_attempt.check_access(access_card))
+		return ACCESS_ALLOWED
+	return ACCESS_DISALLOWED
+
+/mob/living/basic/mining_drone/proc/activate_bot()
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/mining_drone/death(gibbed)
 	drop_ore()
 
@@ -248,6 +348,7 @@
 
 /mob/living/basic/mining_drone/Destroy()
 	QDEL_NULL(stored_gun)
+<<<<<<< HEAD
 	return ..()
 
 /mob/living/basic/mining_drone/proc/pre_attack(datum/source, atom/target)
@@ -270,3 +371,8 @@
 		return
 
 	. += combat_mode ? combat_overlay : neutral_overlay
+=======
+	QDEL_NULL(access_card)
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

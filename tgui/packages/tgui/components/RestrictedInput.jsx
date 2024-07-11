@@ -160,6 +160,7 @@ export class RestrictedInput extends Component {
         minValue,
         maxValue,
         allowFloats,
+<<<<<<< HEAD
       );
       if (onBlur) {
         onBlur(e, +safeNum);
@@ -172,6 +173,8 @@ export class RestrictedInput extends Component {
         minValue,
         maxValue,
         allowFloats,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       );
       if (onChange) {
         onChange(e, +e.target.value);

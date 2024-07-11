@@ -5,7 +5,12 @@
 	greyscale_colors = CIRCUIT_COLOR_SUPPLY
 	build_path = /obj/machinery/quantum_server
 	req_components = list(
+<<<<<<< HEAD
 		/datum/stock_part/servo = 2,
+=======
+//		/datum/stock_part/servo = 2, MONKEYSTATION EDIT ORIGINAL - We have manipulators instead of servo's
+		/datum/stock_part/manipulator = 2, // MONKEYSTATION EDIT NEW - We have manipulators instead of servo's
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/stock_part/scanning_module = 1,
 		/datum/stock_part/capacitor = 1,
 	)
@@ -22,7 +27,12 @@
 	greyscale_colors = CIRCUIT_COLOR_SUPPLY
 	build_path = /obj/machinery/netpod
 	req_components = list(
+<<<<<<< HEAD
 		/datum/stock_part/servo = 1,
+=======
+//		/datum/stock_part/servo = 1, MONKEYSTATION EDIT ORIGINAL - We have manipulators instead of servo's
+		/datum/stock_part/manipulator = 1, // MONKEYSTATION EDIT NEW - We have manipulators instead of servo's
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/stock_part/matter_bin = 2,
 	)
 
@@ -72,3 +82,19 @@
 		RND_CATEGORY_COMPUTER + RND_SUBCATEGORY_COMPUTER_CARGO
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING
+<<<<<<< HEAD
+=======
+
+
+/datum/techweb_node/bitrunning
+	id = "bitrunning"
+	display_name = "Bitrunning Technology"
+	description = "Bluespace technology has led to the development of quantum-scale computing, which unlocks the means to materialize atomic structures while executing advanced programs."
+	prereq_ids = list("practical_bluespace")
+	design_ids = list(
+		"byteforge",
+		"quantum_console",
+		"netpod",
+	)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

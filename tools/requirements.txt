@@ -8,6 +8,9 @@ beautifulsoup4==4.9.3
 
 # ezdb
 mysql-connector-python==8.0.33
+<<<<<<< HEAD
 
 # icon cutter
 numpy==1.26.0
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -3,12 +3,12 @@
 	desc = "Attack the weak point for massive damage."
 	health = 1000
 	maxHealth = 1000
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	sentience_type = SENTIENCE_BOSS
 	environment_smash = ENVIRONMENT_SMASH_RWALLS
 	mob_biotypes = MOB_ORGANIC|MOB_SPECIAL
 	obj_damage = 400
-	light_range = 3
+	light_outer_range = 3
 	faction = list(FACTION_MINING, FACTION_BOSS)
 	weather_immunities = list(TRAIT_LAVA_IMMUNE,TRAIT_ASHSTORM_IMMUNE)
 	robust_searching = TRUE
@@ -54,8 +54,11 @@
 	var/chosen_attack = 1
 	/// Attack actions, sets chosen_attack to the number in the action
 	var/list/attack_action_types = list()
+<<<<<<< HEAD
 	/// Summoning line, said when summoned via megafauna vents.
 	var/summon_line = "I'll kick your ass!"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/hostile/megafauna/Initialize(mapload)
 	. = ..()
@@ -65,7 +68,13 @@
 		AddComponent(/datum/component/gps, gps_name)
 	ADD_TRAIT(src, TRAIT_SPACEWALK, INNATE_TRAIT)
 	add_traits(list(TRAIT_NO_TELEPORT, TRAIT_MARTIAL_ARTS_IMMUNE), MEGAFAUNA_TRAIT)
+<<<<<<< HEAD
 	grant_actions_by_list(attack_action_types)
+=======
+	for(var/action_type in attack_action_types)
+		var/datum/action/innate/megafauna_attack/attack_action = new action_type()
+		attack_action.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/hostile/megafauna/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	//Safety check
@@ -104,14 +113,25 @@
 		return
 
 	return ..()
+<<<<<<< HEAD
 
 /mob/living/simple_animal/hostile/megafauna/singularity_act()
 	set_health(0)
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/hostile/megafauna/dust(just_ash, drop_items, force)
 	if(!force && health > 0)
 		return
+<<<<<<< HEAD
+=======
+
+	crusher_loot.Cut()
+	loot.Cut()
+
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	crusher_loot.Cut()
 	loot.Cut()

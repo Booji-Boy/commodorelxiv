@@ -86,6 +86,10 @@
 	UnregisterSignal(owner, list(COMSIG_LIVING_PRE_WABBAJACKED, COMSIG_LIVING_DEATH))
 	UnregisterSignal(caster_mob, list(COMSIG_QDELETING, COMSIG_LIVING_DEATH))
 
+<<<<<<< HEAD
+=======
+	caster_mob.forceMove(owner.loc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	REMOVE_TRAIT(caster_mob, TRAIT_NO_TRANSFORM, REF(src))
 	caster_mob.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_SHAPECHANGE_EFFECT)
 
@@ -213,7 +217,8 @@
 	var/damage_to_apply = caster_mob.maxHealth * (owner.get_total_damage() / owner.maxHealth)
 	caster_mob.apply_damage(damage_to_apply, source_spell.convert_damage_type, forced = TRUE, spread_damage = TRUE, wound_bonus = CANT_WOUND)
 
-	caster_mob.blood_volume = owner.blood_volume
+	if(iscarbon(owner)) // monkestation edit: iscarbon check (fixes slimes instakilling you when you detransform)
+		caster_mob.blood_volume = owner.blood_volume
 
 /datum/status_effect/shapechange_mob/from_spell/on_shape_death(datum/source, gibbed)
 	var/datum/action/cooldown/spell/shapeshift/source_spell = source_weakref.resolve()

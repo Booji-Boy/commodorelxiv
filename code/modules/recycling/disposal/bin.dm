@@ -10,7 +10,10 @@
 	resistance_flags = FIRE_PROOF
 	interaction_flags_machine = INTERACT_MACHINE_OPEN | INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON
 	obj_flags = CAN_BE_HIT
+<<<<<<< HEAD
 	use_power = NO_POWER_USE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// The internal air reservoir of the disposal
 	var/datum/gas_mixture/air_contents
@@ -128,7 +131,7 @@
 				deconstruct()
 			return
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		if((I.item_flags & ABSTRACT) || !user.temporarilyRemoveItemFromInventory(I))
 			return
 		place_item_in_disposal(I, user)
@@ -306,6 +309,10 @@
 		to_dump.pixel_x = to_dump.base_pixel_x + rand(-5, 5)
 		to_dump.pixel_y = to_dump.base_pixel_y + rand(-5, 5)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/disposal/force_pushed(atom/movable/pusher, force = MOVE_FORCE_DEFAULT, direction)
 	. = ..()
 	visible_message(span_warning("[src] is ripped free from the floor!"))
@@ -316,6 +323,17 @@
 	visible_message(span_warning("[src] is ripped free from the floor!"))
 	deconstruct()
 
+<<<<<<< HEAD
+=======
+// Monkestation Addition Start
+/obj/machinery/disposal/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = MOVE_FORCE_STRONG, gentle = FALSE, quickstart = TRUE)
+	. = ..()
+	if(target && (target != src.loc))
+		visible_message(span_warning("[src] is ripped free from the floor!"))
+		deconstruct()
+// Monkestation Addition End
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Disposal bin
 // Holds items for disposal into pipe system
 // Draws air from turf, gradually charges internal reservoir
@@ -613,7 +631,11 @@
 /// Handles the signal for the rat king looking inside the disposal
 /obj/machinery/disposal/proc/on_rat_rummage(datum/source, mob/living/basic/regal_rat/king)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(king.combat_mode)
+=======
+	if(king.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/machinery/disposal/, rat_rummage), king)

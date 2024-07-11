@@ -100,7 +100,11 @@
 			if(!target)
 				return FALSE
 
+<<<<<<< HEAD
 			playsound(src, SFX_TERMINAL_TYPE, 50, TRUE)
+=======
+			playsound(src, "sound/machines/terminal_button0[rand(1, 8)].ogg", 50, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			update_preview(user, params["assigned_view"], target)
 			return TRUE
 

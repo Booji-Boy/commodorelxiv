@@ -300,15 +300,18 @@
 	return ..()
 
 /obj/machinery/door/proc/try_to_activate_door(mob/user, access_bypass = FALSE)
+	set waitfor = FALSE //monkestation edit
+
 	add_fingerprint(user)
 	if(operating || (obj_flags & EMAGGED) || !can_open_with_hands)
 		return
 	if(access_bypass || (requiresID() && allowed(user)))
+		. = TRUE //monkestation edit
 		if(density)
 			open()
 		else
 			close()
-		return TRUE
+		return . //monkestation edit
 	if(density)
 		do_animate("deny")
 
@@ -342,13 +345,19 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/door/crowbar_act(mob/living/user, obj/item/tool)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 
 	var/forced_open = FALSE
 	if(istype(tool, /obj/item/crowbar))
 		var/obj/item/crowbar/crowbar = tool
 		forced_open = crowbar.force_opens
+	if(istype(tool, /obj/item/slasher_machette))
+		forced_open = TRUE
+	if(istype(tool, /obj/item/mantis_blade/chromata))
+		var/obj/item/mantis_blade/chromata/attacker = tool
+		forced_open = attacker.check_can_crowbar(user)
+
 	try_to_crowbar(tool, user, forced_open)
 	return ITEM_INTERACT_SUCCESS
 
@@ -356,12 +365,16 @@
 	if(istype(weapon, /obj/item/access_key))
 		var/obj/item/access_key/key = weapon
 		return key.attempt_open_door(user, src)
-	else if(!user.combat_mode && istype(weapon, /obj/item/fireaxe))
+	else if(!(user.istate & ISTATE_HARM) && istype(weapon, /obj/item/fireaxe))
 		try_to_crowbar(weapon, user, FALSE)
 		return TRUE
-	else if(weapon.item_flags & NOBLUDGEON || user.combat_mode)
+	else if(weapon.item_flags & NOBLUDGEON || (user.istate & ISTATE_HARM))
 		return ..()
+<<<<<<< HEAD
 	else if(!user.combat_mode && istype(weapon, /obj/item/stack/sheet/mineral/wood))
+=======
+	else if(!(user.istate & ISTATE_HARM) && istype(weapon, /obj/item/stack/sheet/mineral/wood))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..() // we need this so our can_barricade element can be called using COMSIG_ATOM_ATTACKBY
 	else if(try_to_activate_door(user))
 		return TRUE
@@ -447,6 +460,7 @@
 	update_freelook_sight()
 	if(autoclose)
 		autoclose_in(DOOR_CLOSE_WAIT)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN)
 	return TRUE
 
 /// Private proc that runs a series of checks to see if we should forcibly open the door. Returns TRUE if we should open the door, FALSE otherwise. Implemented in child types.
@@ -471,6 +485,19 @@
 	operating = TRUE
 
 	do_animate("closing")
+
+	var/turf/open/open_turf = get_turf(src)
+	if(open_turf.liquids)
+		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
+		turfs_group.remove_from_group(open_turf)
+		qdel(open_turf.liquids)
+		turfs_group.try_split(open_turf)
+		for(var/dir in GLOB.cardinals)
+			var/turf/open/direction_turf = get_step(open_turf, dir)
+			if(!isopenturf(direction_turf) || !direction_turf.liquids)
+				continue
+			turfs_group.check_edges(direction_turf)
+
 	layer = closingLayer
 	SLEEP_NOT_DEL(0.5 SECONDS)
 	set_density(TRUE)

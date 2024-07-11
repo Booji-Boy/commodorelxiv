@@ -88,7 +88,11 @@
 	icon_state = "tether"
 	module_type = MODULE_ACTIVE
 	complexity = 2
+<<<<<<< HEAD
 	use_energy_cost = DEFAULT_CHARGE_DRAIN
+=======
+	use_power_cost = DEFAULT_CHARGE_DRAIN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	incompatible_modules = list(/obj/item/mod/module/tether)
 	cooldown_time = 1.5 SECONDS
 	required_slots = list(ITEM_SLOT_GLOVES)

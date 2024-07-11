@@ -14,7 +14,11 @@
 	if(!isliving(parent)) //technically is possible to drop this on carbons... but you wouldn't do that to me, would you?
 		return COMPONENT_INCOMPATIBLE
 	udder = new udder_type(null)
+<<<<<<< HEAD
 	udder.add_features(parent, on_generate_callback, reagent_produced_override)
+=======
+	udder.add_features(parent, on_generate_callback, reagent_produced_typepath)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	src.on_milk_callback = on_milk_callback
 
 /datum/component/udder/RegisterWithParent()
@@ -80,12 +84,20 @@
 	///hunger key we set to look for food
 	var/hunger_key = BB_CHECK_HUNGRY
 
+<<<<<<< HEAD
 /obj/item/udder/proc/add_features(parent, callback, reagent_override)
 	udder_mob = parent
 	on_generate_callback = callback
 	create_reagents(size, REAGENT_HOLDER_ALIVE)
 	if(reagent_override)
 		reagent_produced_typepath = reagent_override
+=======
+/obj/item/udder/proc/add_features(parent, callback, reagent = /datum/reagent/consumable/milk)
+	udder_mob = parent
+	on_generate_callback = callback
+	create_reagents(size, REAGENT_HOLDER_ALIVE)
+	reagent_produced_typepath = reagent
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	initial_conditions()
 	if(isnull(require_consume_type))
 		return
@@ -160,6 +172,7 @@
  */
 /obj/item/udder/proc/generate()
 	if(!isnull(require_consume_type) && !(locate(require_consume_type) in src))
+<<<<<<< HEAD
 		return FALSE
 	if(!prob(production_probability))
 		return FALSE
@@ -167,6 +180,14 @@
 	if(on_generate_callback)
 		on_generate_callback.Invoke(reagents.total_volume, reagents.maximum_volume)
 	return TRUE
+=======
+		return
+	if(prob(95))
+		return
+	reagents.add_reagent(reagent_produced_typepath, rand(5, 10), added_purity = 1)
+	if(on_generate_callback)
+		on_generate_callback.Invoke(reagents.total_volume, reagents.maximum_volume)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Proc called from attacking the component parent with the correct item, moves reagents into the glass basically.

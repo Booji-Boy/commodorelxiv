@@ -124,12 +124,29 @@ Des: Removes all infected images from the alien.
 	)
 
 	new_xeno.setDir(dir)
+<<<<<<< HEAD
 	new_xeno.change_name(name, real_name, numba)
 
 	if(mind)
 		mind.name = new_xeno.real_name
 		mind.transfer_to(new_xeno)
 
+=======
+	if(numba && unique_name)
+		new_xeno.numba = numba
+		new_xeno.set_name()
+	if(!alien_name_regex.Find(name))
+		new_xeno.name = name
+		new_xeno.real_name = real_name
+		new_xeno.update_name_tag() // monkestation edit: name tags
+	if(mind)
+		mind.name = new_xeno.real_name
+		mind.transfer_to(new_xeno)
+	var/datum/component/nanites/nanites = GetComponent(/datum/component/nanites)
+	if(nanites)
+		new_xeno.AddComponent(/datum/component/nanites, nanites.nanite_volume)
+		SEND_SIGNAL(new_xeno, COMSIG_NANITE_SYNC, nanites)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 /// Changes the name of the xeno we are evolving into in order to keep the same numerical identifier the old xeno had.

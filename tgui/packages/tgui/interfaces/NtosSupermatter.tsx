@@ -10,7 +10,11 @@ type NtosSupermatterData = SupermatterData & { focus_uid?: number };
 export const NtosSupermatter = (props) => {
   const { act, data } = useBackend<NtosSupermatterData>();
   const { sm_data, gas_metadata, focus_uid } = data;
+<<<<<<< HEAD
   const [activeUID, setActiveUID] = useState(0);
+=======
+  const [activeUID, setActiveUID] = useLocalState('activeUID', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const activeSM = sm_data.find((sm) => sm.uid === activeUID);
 
   return (

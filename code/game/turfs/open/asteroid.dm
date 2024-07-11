@@ -28,10 +28,17 @@
 	/// Percentage chance of receiving a bonus worm
 	var/worm_chance = 30
 
+<<<<<<< HEAD
 /turf/open/misc/asteroid/broken_states()
 	if(initial(dug))
 		return list(icon_state)
 	return list("[base_icon_state]_dug")
+=======
+	/// Set to TRUE to call ex_act parent
+	var/explodable = FALSE
+
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/misc/asteroid/break_tile()
 	. = ..()
@@ -57,7 +64,13 @@
 	return
 
 /turf/open/misc/asteroid/ex_act(severity, target)
+<<<<<<< HEAD
 	return FALSE
+=======
+	if(!explodable)
+		return
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/misc/asteroid/attackby(obj/item/attack_item, mob/user, params)
 	. = ..()
@@ -79,9 +92,15 @@
 			getDug()
 			SSblackbox.record_feedback("tally", "pick_used_mining", 1, attack_item.type)
 			return TRUE
+<<<<<<< HEAD
 	else if(istype(attack_item, /obj/item/storage/bag/ore))
 		for(var/obj/item/stack/ore/dropped_ore in src)
 			SEND_SIGNAL(attack_item, COMSIG_ATOM_ATTACKBY, dropped_ore)
+=======
+	else if(istype(W, /obj/item/storage/bag/ore))
+		for(var/obj/item/stack/ore/O in src)
+			SEND_SIGNAL(W, COMSIG_ATOM_ATTACKBY, O)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Drops itemstack when dug and changes icon
 /turf/open/misc/asteroid/proc/getDug()
@@ -167,9 +186,9 @@ GLOBAL_LIST_EMPTY(dug_up_basalt)
 /proc/set_basalt_light(turf/open/floor/B)
 	switch(B.icon_state)
 		if("basalt1", "basalt2", "basalt3")
-			B.set_light(2, 0.6, LIGHT_COLOR_LAVA) //more light
+			B.set_light(l_outer_range = 2, l_power = 0.6, l_color = LIGHT_COLOR_LAVA) //more light
 		if("basalt5", "basalt9")
-			B.set_light(1.4, 0.6, LIGHT_COLOR_LAVA) //barely anything!
+			B.set_light(l_outer_range = 1.4, l_power = 0.6, l_color = LIGHT_COLOR_LAVA) //barely anything!
 
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 

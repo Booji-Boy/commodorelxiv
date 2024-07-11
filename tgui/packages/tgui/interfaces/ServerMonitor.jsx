@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -11,6 +12,19 @@ import {
   Section,
   Stack,
   Table,
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  Section,
+  Stack,
+  Input,
+  Button,
+  Table,
+  LabeledList,
+  Flex,
+  Divider,
+  NoticeBox,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -87,7 +101,11 @@ const ServerScreen = (props) => {
 const MainScreen = (props) => {
   const { act, data } = useBackend();
   const { servers, network } = data;
+<<<<<<< HEAD
   const [networkId, setNetworkId] = useState(network);
+=======
+  const [networkId, setNetworkId] = useLocalState('networkId', network);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Stack fill vertical>

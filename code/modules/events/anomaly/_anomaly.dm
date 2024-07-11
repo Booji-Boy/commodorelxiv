@@ -24,6 +24,7 @@
 		impact_area = get_area(spawn_location)
 	else
 		impact_area = placer.findValidArea()
+	setup = TRUE //MONKESTATION ADDITION
 
 /datum/round_event/anomaly/announce(fake)
 	if(isnull(impact_area))

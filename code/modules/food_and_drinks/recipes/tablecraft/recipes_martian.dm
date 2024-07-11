@@ -168,7 +168,11 @@
 		/obj/item/food/onion_slice = 1,
 		/datum/reagent/consumable/nutriment/soup/teriyaki = 4,
 	)
+<<<<<<< HEAD
 	result = /obj/item/food/salad/bulgogi_noodles
+=======
+	result = /obj/item/food/salad/bibimbap
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = CAT_MARTIAN
 
 /datum/crafting_recipe/food/yakisoba_katsu
@@ -188,7 +192,11 @@
 	name = "Martian fried noodles"
 	reqs = list(
 		/obj/item/food/spaghetti/boilednoodles = 1,
+<<<<<<< HEAD
 		/obj/item/food/grown/peanut = 2,
+=======
+		/obj/item/food/peanuts/salted = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/food/meat/cutlet = 1,
 		/obj/item/food/onion_slice = 1,
 		/obj/item/food/egg = 1,
@@ -648,7 +656,11 @@
 		/obj/item/food/friedegg = 1,
 		/obj/item/food/grown/chili = 1,
 		/datum/reagent/consumable/yoghurt = 5,
+<<<<<<< HEAD
 		/datum/reagent/consumable/nutriment/fat/oil/olive = 2,
+=======
+		/datum/reagent/consumable/quality_oil = 2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	result = /obj/item/food/cilbir
 	category = CAT_MARTIAN
@@ -669,7 +681,11 @@
 	reqs = list(
 		/obj/item/food/cake/plain = 1,
 		/obj/item/food/grown/ambrosia/vulgaris = 1,
+<<<<<<< HEAD
 		/obj/item/food/butterslice = 2,
+=======
+		/obj/item/food/butter = 1, //monkestation edit: no butterslices yet, is intended to be 2 slices
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	result = /obj/item/food/cake/spekkoek
 	category = CAT_MARTIAN
@@ -700,7 +716,11 @@
 	name = "Boh loh yah"
 	reqs = list(
 		/obj/item/food/doughslice = 1,
+<<<<<<< HEAD
 		/obj/item/food/butterslice = 1,
+=======
+		/obj/item/food/butter = 1, //monkestation edit: no butterslices yet, is intended to be 1 slice
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/reagent/consumable/sugar = 5,
 	)
 	result = /obj/item/food/boh_loh_yah

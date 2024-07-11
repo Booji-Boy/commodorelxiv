@@ -50,7 +50,11 @@
 	name = "Universal Recorder Tape"
 	id = "tape"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.2, /datum/material/glass = SMALL_MATERIAL_AMOUNT*0.2)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.2, /datum/material/glass = 5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/tape/random
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -138,6 +142,18 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/shotgun_slug
+	name = "Shotgun Slug"
+	id = "shotgun_slug"
+	build_type = AUTOLATHE | PROTOLATHE
+	materials = list(/datum/material/iron = 4000)
+	build_path = /obj/item/ammo_casing/shotgun
+	category = list(
+		RND_CATEGORY_HACKED,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/design/incendiary_slug
 	name = "Incendiary Slug (Lethal)"
 	id = "incendiary_slug"
@@ -155,7 +171,11 @@
 	id = "riot_dart"
 	build_type = AUTOLATHE
 	materials = list(/datum/material/iron =HALF_SHEET_MATERIAL_AMOUNT) //Discount for making individually - no box = less iron!
+<<<<<<< HEAD
 	build_path = /obj/item/ammo_casing/foam_dart/riot
+=======
+	build_path = /obj/item/ammo_casing/caseless/foam_dart/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_HACKED,
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
@@ -239,7 +259,11 @@
 	id = "telescreen_interrogation"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/interrogation
@@ -254,7 +278,11 @@
 	id = "telescreen_prison"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/prison

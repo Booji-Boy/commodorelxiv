@@ -269,6 +269,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "aG" = (
@@ -664,6 +665,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/pirate)
 "df" = (
@@ -938,7 +940,13 @@
 "OD" = (
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/all_access,
+<<<<<<< HEAD
 /obj/structure/sign/poster/contraband/random/directional/east,
+=======
+/obj/structure/sign/poster/contraband/random{
+	pixel_x = 32
+	},
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/pirate)

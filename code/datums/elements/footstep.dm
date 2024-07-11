@@ -66,12 +66,20 @@
 	if(!istype(turf))
 		return
 
+<<<<<<< HEAD
 	if(source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED) || CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL))
 		return
 
 	if(source.body_position == LYING_DOWN) //play crawling sound if we're lying
 		if(turf.footstep)
 			playsound(turf, 'sound/effects/footstep/crawl1.ogg', 15 * volume, falloff_distance = 1, vary = sound_vary)
+=======
+	if(!turf.footstep || source.buckled || source.throwing || source.movement_type & (VENTCRAWLING | FLYING) || HAS_TRAIT(source, TRAIT_IMMOBILIZED) || source.check_move_loop_flags(MOVEMENT_LOOP_DRAGGING))
+		return
+
+	if(source.body_position == LYING_DOWN) //play crawling sound if we're lying
+		playsound(turf, 'sound/effects/footstep/crawl1.ogg', 15 * volume, falloff_distance = 1, vary = sound_vary, mixer_channel = CHANNEL_SOUND_FOOTSTEPS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(iscarbon(source))
@@ -94,19 +102,28 @@
 		return
 
 	. = list(FOOTSTEP_MOB_SHOE = turf.footstep, FOOTSTEP_MOB_BAREFOOT = turf.barefootstep, FOOTSTEP_MOB_HEAVY = turf.heavyfootstep, FOOTSTEP_MOB_CLAW = turf.clawfootstep, STEP_SOUND_PRIORITY = STEP_SOUND_NO_PRIORITY)
+<<<<<<< HEAD
 	var/overriden = SEND_SIGNAL(turf, COMSIG_TURF_PREPARE_STEP_SOUND, .) & FOOTSTEP_OVERRIDEN
 	//The turf has no footstep sound (e.g. open space) and none of the objects on that turf (e.g. catwalks) overrides it
 	if(!overriden && isnull(turf.footstep))
 		return null
+=======
+	SEND_SIGNAL(turf, COMSIG_TURF_PREPARE_STEP_SOUND, .)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return .
 
 /datum/element/footstep/proc/play_simplestep(mob/living/source, atom/oldloc, direction, forced, list/old_locs, momentum_change)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 
+=======
+	var/turf/source_loc = get_turf(source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (forced || SHOULD_DISABLE_FOOTSTEPS(source))
 		return
 
 	var/list/prepared_steps = prepare_step(source)
+<<<<<<< HEAD
 	if(isnull(prepared_steps))
 		return
 
@@ -122,6 +139,22 @@
 /datum/element/footstep/proc/play_humanstep(mob/living/carbon/human/source, atom/oldloc, direction, forced, list/old_locs, momentum_change)
 	SIGNAL_HANDLER
 
+=======
+	if(!prepared_steps)
+		return
+
+	if(isfile(footstep_sounds) || istext(footstep_sounds))
+		playsound(source_loc, footstep_sounds, volume, falloff_distance = 1, vary = sound_vary, mixer_channel = CHANNEL_SOUND_FOOTSTEPS)
+		return
+
+	var/turf_footstep = prepared_steps[footstep_type]
+	if(!turf_footstep)
+		return
+	playsound(source_loc, pick(footstep_sounds[turf_footstep][1]), footstep_sounds[turf_footstep][2] * volume, TRUE, footstep_sounds[turf_footstep][3] + e_range, falloff_distance = 1, vary = sound_vary, mixer_channel = CHANNEL_SOUND_FOOTSTEPS)
+
+/datum/element/footstep/proc/play_humanstep(mob/living/carbon/human/source, atom/oldloc, direction, forced, list/old_locs, momentum_change)
+	SIGNAL_HANDLER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (forced || SHOULD_DISABLE_FOOTSTEPS(source) || !momentum_change)
 		return
 
@@ -133,7 +166,11 @@
 		range_adjustment = -2
 
 	var/list/prepared_steps = prepare_step(source)
+<<<<<<< HEAD
 	if(isnull(prepared_steps))
+=======
+	if(!prepared_steps)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	//cache for sanic speed (lists are references anyways)
@@ -145,6 +182,7 @@
 		// we are wearing shoes
 
 		var/shoestep_type = prepared_steps[FOOTSTEP_MOB_SHOE]
+<<<<<<< HEAD
 		if(!isnull(shoestep_type) && footstep_sounds[shoestep_type]) // shoestep type can be null
 			heard_clients = playsound(source.loc, pick(footstep_sounds[shoestep_type][1]),
 				footstep_sounds[shoestep_type][2] * volume * volume_multiplier,
@@ -163,6 +201,23 @@
 					bare_footstep_sounds[barefoot_type][2] * volume * volume_multiplier,
 					TRUE,
 					bare_footstep_sounds[barefoot_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary)
+=======
+		heard_clients = playsound(source.loc, pick(footstep_sounds[shoestep_type][1]),
+			footstep_sounds[shoestep_type][2] * volume * volume_multiplier,
+			TRUE,
+			footstep_sounds[shoestep_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary, mixer_channel = CHANNEL_SOUND_FOOTSTEPS)
+	else
+		var/barefoot_type = prepared_steps[FOOTSTEP_MOB_BAREFOOT]
+		if(source.dna.species.special_step_sounds)
+			heard_clients = playsound(source.loc, pick(source.dna.species.special_step_sounds), 50, TRUE, falloff_distance = 1, vary = sound_vary)
+		else
+			var/static/list/bare_footstep_sounds = GLOB.barefootstep
+
+			heard_clients = playsound(source.loc, pick(bare_footstep_sounds[barefoot_type][1]),
+				bare_footstep_sounds[barefoot_type][2] * volume * volume_multiplier,
+				TRUE,
+				bare_footstep_sounds[barefoot_type][3] + e_range + range_adjustment, falloff_distance = 1, vary = sound_vary, mixer_channel = CHANNEL_SOUND_FOOTSTEPS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(heard_clients)
 		play_fov_effect(source, 5, "footstep", direction, ignore_self = TRUE, override_list = heard_clients)
@@ -179,7 +234,11 @@
 	if(!istype(source_loc))
 		return
 
+<<<<<<< HEAD
 	if(CHECK_MOVE_LOOP_FLAGS(source, MOVEMENT_LOOP_OUTSIDE_CONTROL))
+=======
+	if(source.check_move_loop_flags(MOVEMENT_LOOP_DRAGGING))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	playsound(source_loc, footstep_sounds, 50, falloff_distance = 1, vary = sound_vary)

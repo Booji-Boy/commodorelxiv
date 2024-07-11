@@ -6,7 +6,11 @@
 	icon_state = "rolled_abductor"
 
 /obj/structure/sign/poster/abductor
+<<<<<<< HEAD
 	icon = 'icons/obj/poster.dmi'
+=======
+	icon = 'icons/obj/abductor_posters.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	poster_item_name = "abductor poster"
 	poster_item_desc = "A sheet of holofiber resin, with a nanospike perforation on the back end for maximum adhesion."
 	poster_item_icon_state = "rolled_abductor"

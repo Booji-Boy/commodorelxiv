@@ -137,6 +137,7 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	arrival_announcement = "We humbly ask for a substantial amount of income for the future research of our cause. It sure would be a shame if you got sick, but we can fix that."
 	possible_answers = list("Very well.","Get a job!")
 
+<<<<<<< HEAD
 	response_received = "Thank you for your generosity. Your money will not be wasted."
 	response_rejected = "Oh, you're not a station, you're a tumor. Well, we're gonna have to cut it out."
 	response_too_late = "We hope you like skin cancer!"
@@ -227,3 +228,9 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	response_rejected = "FOOLISH DECISION, I'LL MAKE AN EXAMPLE OUT OF YOUR CARCASS!! (does anyone remember how to pilot our ship?)"
 	response_too_late = "YOU ARE ALREADY UNDER SIEGE YOU BUFFON, ARE YOU BRAINSICK OR IGNORANT?!!"
 	response_not_enough = "DO THINK OF ME AS A JESTER? YOU ARE DEAD MEAT!! (i forgot how to fly the ship, tarnation.)"
+=======
+	response_received = "You guys aren't so bad for being dormants. Next gore-fest goes to you guys. Peace!"
+	response_too_late = "Oh, now you think we're worth the money. Pathetic dormants."
+	response_not_enough = "You really shouldn't have messed with us. You're in for a psychic nightmare."
+	announcement_color = "purple"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

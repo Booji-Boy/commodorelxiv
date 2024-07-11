@@ -39,14 +39,21 @@ export const Fax = (props) => {
   const { act } = useBackend();
   const { data } = useBackend<FaxData>();
   const faxes = data.faxes
+<<<<<<< HEAD
     ? sortBy(
+=======
+    ? sortBy((sortFax: FaxInfo) => sortFax.fax_name)(
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         data.syndicate_network
           ? data.faxes.filter((filterFax: FaxInfo) => filterFax.visible)
           : data.faxes.filter(
               (filterFax: FaxInfo) =>
                 filterFax.visible && !filterFax.syndicate_network,
             ),
+<<<<<<< HEAD
         (sortFax: FaxInfo) => sortFax.fax_name,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       )
     : [];
   const special_networks = data.syndicate_network
@@ -88,7 +95,16 @@ export const Fax = (props) => {
             "The fax couldn't detect any other faxes on the network."
           ) : (
             <Box mt={0.4}>
+<<<<<<< HEAD
               {special_networks.map((special: FaxSpecial) => (
+=======
+              {(data.syndicate_network
+                ? data.special_faxes
+                : data.special_faxes.filter(
+                    (fax: FaxSpecial) => !fax.emag_needed,
+                  )
+              ).map((special: FaxSpecial) => (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 <Button
                   key={special.fax_id}
                   tooltip={special.fax_name}
@@ -104,6 +120,7 @@ export const Fax = (props) => {
                   {special.fax_name}
                 </Button>
               ))}
+<<<<<<< HEAD
               {faxes.length !== 0
                 ? faxes.map((fax: FaxInfo) => (
                     <Button
@@ -122,6 +139,24 @@ export const Fax = (props) => {
                     </Button>
                   ))
                 : null}
+=======
+              {faxes.map((fax: FaxInfo) => (
+                <Button
+                  key={fax.fax_id}
+                  title={fax.fax_name}
+                  disabled={!data.has_paper}
+                  color={fax.syndicate_network ? 'red' : 'blue'}
+                  onClick={() =>
+                    act('send', {
+                      id: fax.fax_id,
+                      name: fax.fax_name,
+                    })
+                  }
+                >
+                  {fax.fax_name}
+                </Button>
+              ))}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             </Box>
           )}
         </Section>

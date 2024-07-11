@@ -13,6 +13,7 @@ export const Gps = (props) => {
   const { act, data } = useBackend();
   const { currentArea, currentCoords, globalmode, power, tag, updating } = data;
   const signals = flow([
+<<<<<<< HEAD
     (signals) =>
       map(signals, (signal, index) => {
         // Calculate distance to the target. BYOND distance is capped to 127,
@@ -37,6 +38,26 @@ export const Gps = (props) => {
         // Sort alphabetically
         (signal) => signal.entrytag,
       ),
+=======
+    map((signal, index) => {
+      // Calculate distance to the target. BYOND distance is capped to 127,
+      // that's why we roll our own calculations here.
+      const dist =
+        signal.dist &&
+        Math.round(
+          vecLength(
+            vecSubtract(coordsToVec(currentCoords), coordsToVec(signal.coords)),
+          ),
+        );
+      return { ...signal, dist, index };
+    }),
+    sortBy(
+      // Signals with distance metric go first
+      (signal) => signal.dist === undefined,
+      // Sort alphabetically
+      (signal) => signal.entrytag,
+    ),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ])(data.signals || []);
   return (
     <Window title="Global Positioning System" width={470} height={700}>

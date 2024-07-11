@@ -7,17 +7,27 @@
 	unique_name = TRUE
 	pass_flags = PASSBLOB
 	faction = list(ROLE_BLOB)
+<<<<<<< HEAD
 	combat_mode = TRUE
 	bubble_icon = "blob"
 	speak_emote = null
 	habitable_atmos = null
+=======
+	istate = ISTATE_HARM
+	bubble_icon = "blob"
+	speak_emote = null
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = INFINITY
 	lighting_cutoff_red = 20
 	lighting_cutoff_green = 40
 	lighting_cutoff_blue = 30
 	initial_language_holder = /datum/language_holder/empty
+<<<<<<< HEAD
 	can_buckle_to = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/blob_minion/Initialize(mapload)
 	. = ..()

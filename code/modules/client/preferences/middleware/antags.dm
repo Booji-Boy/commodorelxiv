@@ -138,7 +138,24 @@ GLOBAL_LIST_INIT(non_ruleset_antagonists, list(
 	var/list/antag_icons = list()
 
 /datum/asset/spritesheet/antagonists/create_spritesheets()
+<<<<<<< HEAD
 	var/list/antagonists = GLOB.non_ruleset_antagonists.Copy()
+=======
+	// Antagonists that don't have a dynamic ruleset, but do have a preference
+	var/static/list/non_ruleset_antagonists = list(
+		ROLE_CYBER_POLICE = /datum/antagonist/cyber_police,
+		ROLE_FUGITIVE = /datum/antagonist/fugitive,
+		ROLE_LONE_OPERATIVE = /datum/antagonist/nukeop/lone,
+		ROLE_SENTIENCE = /datum/antagonist/sentient_creature,
+		//monkestation antags
+		ROLE_CORTICAL_BORER = /datum/antagonist/cortical_borer,
+		ROLE_DRIFTING_CONTRACTOR = /datum/antagonist/traitor/contractor,
+		ROLE_SLASHER = /datum/antagonist/slasher,
+		ROLE_FLORIDA_MAN = /datum/antagonist/florida_man
+	)
+
+	var/list/antagonists = non_ruleset_antagonists.Copy()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for (var/datum/dynamic_ruleset/ruleset as anything in subtypesof(/datum/dynamic_ruleset))
 		var/datum/antagonist/antagonist_type = initial(ruleset.antag_datum)

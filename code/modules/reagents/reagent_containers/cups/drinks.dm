@@ -50,7 +50,11 @@
 	throwforce = 1
 	amount_per_transfer_from_this = 5
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	has_variable_transfer_amount = FALSE
+=======
+	possible_transfer_amounts = list(5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	volume = 5
 	obj_flags = CONDUCTS_ELECTRICITY
 	spillable = TRUE
@@ -139,14 +143,14 @@
 	desc = "Careful, cold ice, do not chew."
 	custom_price = PAYCHECK_LOWER * 0.6
 	icon_state = "icecup"
-	list_reagents = list(/datum/reagent/consumable/ice = 30)
+	//list_reagents = list(/datum/reagent/consumable/ice = 30) Monkestation Removal: Ice was Instantly melting from vending machines
 	spillable = TRUE
 	isGlass = FALSE
 
 /obj/item/reagent_containers/cup/glass/ice/prison
 	name = "dirty ice cup"
 	desc = "Either Nanotrasen's water supply is contaminated, or this machine actually vends lemon, chocolate, and cherry snow cones."
-	list_reagents = list(/datum/reagent/consumable/ice = 25, /datum/reagent/consumable/liquidgibs = 5)
+	//list_reagents = list(/datum/reagent/consumable/ice = 25, /datum/reagent/consumable/liquidgibs = 5) Monkestation Removal: Ice was Instantly melting from vending machines
 
 /obj/item/reagent_containers/cup/glass/mug // parent type is literally just so empty mug sprites are a thing
 	name = "mug"
@@ -291,8 +295,15 @@
 
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/cup/glass/waterbottle/interact_with_atom(atom/target, mob/living/user, list/modifiers)
 	if(cap_on && (target.is_refillable() || target.is_drainable() || (reagents.total_volume && !user.combat_mode)))
+=======
+/obj/item/reagent_containers/cup/glass/waterbottle/afterattack(obj/target, mob/living/user, proximity)
+	. |= AFTERATTACK_PROCESSED_ITEM
+
+	if(cap_on && (target.is_refillable() || target.is_drainable() || (reagents.total_volume && !(user.istate & ISTATE_HARM))))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("You must remove the cap before you can do that!"))
 		return ITEM_INTERACT_BLOCKING
 

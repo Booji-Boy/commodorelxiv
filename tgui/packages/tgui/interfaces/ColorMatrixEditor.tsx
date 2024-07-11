@@ -1,4 +1,5 @@
 import { toFixed } from 'common/math';
+<<<<<<< HEAD
 
 import { useBackend } from '../backend';
 import {
@@ -8,6 +9,15 @@ import {
   NumberInput,
   Section,
   Stack,
+=======
+import {
+  Box,
+  Stack,
+  Section,
+  ByondUi,
+  NumberInput,
+  Button,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 

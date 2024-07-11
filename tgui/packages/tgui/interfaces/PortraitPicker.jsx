@@ -7,7 +7,11 @@ import { Window } from '../layouts';
 
 export const PortraitPicker = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const [listIndex, setListIndex] = useState(0);
+=======
+  const [listIndex, setListIndex] = useLocalState('listIndex', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { paintings, search_string, search_mode } = data;
   const got_paintings = !!paintings.length;
   const current_portrait_title = got_paintings && paintings[listIndex]['title'];

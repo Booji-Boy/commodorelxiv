@@ -136,13 +136,21 @@
 	after_use_message = "The Stargazer hears your call..."
 
 // Path of Knock's blade
+<<<<<<< HEAD
 /obj/item/melee/sickly_blade/lock
+=======
+/obj/item/melee/sickly_blade/knock
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "\improper key blade"
 	desc = "A blade and a key, a key to what? \
 		What grand gates does it open?"
 	icon_state = "key_blade"
 	inhand_icon_state = "key_blade"
+<<<<<<< HEAD
 	after_use_message = "The Stewards hear your call..."
+=======
+	after_use_message = "The Mother of Ants hears your call..."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	tool_behaviour = TOOL_CROWBAR
 	toolspeed = 1.3
 

@@ -204,6 +204,7 @@
 
 		// Otherwise, we can check for contents if they have wizardly apparel. This isn't *quite* perfect, but it'll do, especially since many of the edge cases (gorilla holding a wizard hat) still more or less make sense.
 		if(spell_requirements & SPELL_REQUIRES_WIZARD_GARB)
+<<<<<<< HEAD
 			var/any_casting = FALSE
 			for(var/obj/item/clothing/item in owner)
 				if(item.clothing_flags & CASTING_CLOTHES)
@@ -214,6 +215,14 @@
 				if(feedback)
 					to_chat(owner, span_warning("You don't feel strong enough without your hat!"))
 				return FALSE
+=======
+			for(var/atom/movable/item in owner.contents)
+				var/obj/item/clothing/clothem = item
+				if(istype(clothem) && clothem.clothing_flags & CASTING_CLOTHES)
+					return TRUE
+			to_chat(owner, span_warning("You don't feel strong enough without your hat!"))
+			return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(!(spell_requirements & SPELL_CASTABLE_AS_BRAIN) && isbrain(owner))
 			if(feedback)
@@ -422,7 +431,13 @@
 	if(invoke_sig_return & SPELL_INVOCATION_FAIL)
 		return FALSE
 
+<<<<<<< HEAD
 	if(invocation_type == INVOCATION_EMOTE && HAS_TRAIT(invoker, TRAIT_EMOTEMUTE))
+=======
+	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !living_owner.can_speak())
+		if(HAS_TRAIT(living_owner, TRAIT_SIGN_LANG) && !HAS_MIND_TRAIT(living_owner, TRAIT_CANT_SIGN_SPELLS)) // monkestation edit: allow sign language users to cast spells
+			return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(feedback)
 			to_chat(invoker, span_warning("You can't position your hands correctly to invoke [src]!"))
 		return FALSE

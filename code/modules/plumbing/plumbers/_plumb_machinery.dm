@@ -64,6 +64,7 @@
 	if(user.combat_mode)
 		return NONE
 
+<<<<<<< HEAD
 	. = ITEM_INTERACT_BLOCKING
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
 		if(anchored)
@@ -71,6 +72,14 @@
 		else
 			end_processing()
 		return ITEM_INTERACT_SUCCESS
+=======
+/obj/machinery/plumbing/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
+	user.balloon_alert_to_viewers("furiously plunging...")
+	if(do_after(user, 30, target = src))
+		user.balloon_alert_to_viewers("finished plunging")
+		reagents.expose(get_turf(src), TOUCH) //splash on the floor
+		reagents.clear_reagents()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/plumbing/welder_act(mob/living/user, obj/item/I)
 	if(user.combat_mode)

@@ -2,11 +2,14 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
+<<<<<<< HEAD
 		BB_BASIC_MOB_FLEE_DISTANCE = 3,
 		BB_MINIMUM_SHOOTING_DISTANCE = 3,
 		BB_MINEBOT_PLANT_MINES = TRUE,
 		BB_MINEBOT_REPAIR_DRONE = TRUE,
 		BB_MINEBOT_AUTO_DEFEND = TRUE,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		BB_BLACKLIST_MINERAL_TURFS = list(/turf/closed/mineral/gibtonite),
 		BB_AUTOMATED_MINING = FALSE,
 	)
@@ -15,16 +18,21 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/simple_find_target,
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/launch_missiles,
 		/datum/ai_planning_subtree/pet_planning,
 		/datum/ai_planning_subtree/befriend_miners,
 		/datum/ai_planning_subtree/defend_node,
 		/datum/ai_planning_subtree/minebot_maintain_distance,
+=======
+		/datum/ai_planning_subtree/pet_planning,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/ai_planning_subtree/basic_ranged_attack_subtree/minebot,
 		/datum/ai_planning_subtree/find_and_hunt_target/hunt_ores/minebot,
 		/datum/ai_planning_subtree/minebot_mining,
 		/datum/ai_planning_subtree/locate_dead_humans,
 	)
+<<<<<<< HEAD
 	ai_traits = PAUSE_DURING_DO_AFTER
 
 /datum/ai_planning_subtree/launch_missiles
@@ -98,6 +106,8 @@
 	. = ..()
 	if(!success)
 		controller.clear_blackboard_key(target_key)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///find dead humans and report their location on the radio
 /datum/ai_planning_subtree/locate_dead_humans/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
@@ -110,13 +120,17 @@
 	for(var/mob/living/carbon/human/target in oview(search_range, controller.pawn))
 		if(target.stat >= UNCONSCIOUS && target.mind)
 			return target
+<<<<<<< HEAD
 	return null
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/send_sos_message
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	action_cooldown = 2 MINUTES
 
 /datum/ai_behavior/send_sos_message/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
 	var/mob/living/carbon/target = controller.blackboard[target_key]
 	var/mob/living/living_pawn = controller.pawn
 	if(QDELETED(target) || is_station_level(target.z))
@@ -128,6 +142,22 @@
 	var/message = "ALERT, [target] in need of help at coordinates: [target_turf.x], [target_turf.y], [target_turf.z]!"
 	radio_implant.radio.talk_into(living_pawn, message, RADIO_CHANNEL_SUPPLY)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	var/mob/living/carbon/target = controller.blackboard[target_key]
+	var/mob/living/living_pawn = controller.pawn
+	if(QDELETED(target) || is_station_level(target.z))
+		finish_action(controller, FALSE, target_key)
+		return
+	var/turf/target_turf = get_turf(target)
+	var/obj/item/implant/radio/radio_implant = locate(/obj/item/implant/radio) in living_pawn.contents
+	if(!radio_implant)
+		finish_action(controller, FALSE, target_key)
+		return
+	var/message = "ALERT, [target] in need of help at coordinates: [target_turf.x], [target_turf.y], [target_turf.z]!"
+	radio_implant.radio.talk_into(living_pawn, message, RADIO_CHANNEL_SUPPLY)
+	finish_action(controller, TRUE, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/send_sos_message/finish_action(datum/ai_controller/controller, success, target_key)
 	. = ..()
@@ -138,6 +168,7 @@
 	operational_datums = null
 	ranged_attack_behavior = /datum/ai_behavior/basic_ranged_attack/minebot
 
+<<<<<<< HEAD
 /datum/ai_planning_subtree/basic_ranged_attack_subtree/minebot/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -181,6 +212,17 @@
 	var/mob/living/living_pawn = controller.pawn
 	if(get_dist(living_pawn, target) <= minimum_distance)
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+/datum/ai_behavior/basic_ranged_attack/minebot
+	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
+	avoid_friendly_fire = TRUE
+
+/datum/ai_planning_subtree/basic_ranged_attack_subtree/minebot/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+	var/mob/living/living_pawn = controller.pawn
+	if(!(living_pawn.istate & ISTATE_HARM)) //we are not on attack mode
+		return
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///mine walls if we are on automated mining mode
 /datum/ai_planning_subtree/minebot_mining/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
@@ -214,10 +256,15 @@
 	set_movement_target(controller, target)
 
 /datum/ai_behavior/minebot_mine_turf/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/living_pawn = controller.pawn
 	var/turf/target = controller.blackboard[target_key]
 
 	if(QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 	if(check_obstacles_in_path(controller, target))
@@ -228,6 +275,21 @@
 
 	living_pawn.RangedAttack(target)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE, target_key)
+		return
+
+	if(check_obstacles_in_path(controller, target))
+		finish_action(controller, FALSE, target_key)
+		return
+
+	if(!(living_pawn.istate & ISTATE_HARM))
+		living_pawn.set_combat_mode(TRUE)
+
+	living_pawn.RangedAttack(target)
+	finish_action(controller, TRUE, target_key)
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/minebot_mine_turf/proc/check_obstacles_in_path(datum/ai_controller/controller, turf/target)
 	var/mob/living/source = controller.pawn
@@ -251,7 +313,11 @@
 	var/automated_mining = controller.blackboard[BB_AUTOMATED_MINING]
 	var/mob/living/living_pawn = controller.pawn
 
+<<<<<<< HEAD
 	if(!automated_mining && living_pawn.combat_mode) //are we not on automated mining or collect mode?
+=======
+	if(!automated_mining && (living_pawn.istate & ISTATE_HARM)) //are we not on automated mining or collect mode?
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	return ..()
@@ -260,7 +326,11 @@
 	hunt_cooldown = 2 SECONDS
 
 /datum/ai_behavior/hunt_target/unarmed_attack_target/consume_ores/minebot/target_caught(mob/living/hunter, obj/item/stack/ore/hunted)
+<<<<<<< HEAD
 	if(hunter.combat_mode)
+=======
+	if(hunter.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		hunter.set_combat_mode(FALSE)
 	return ..()
 
@@ -317,7 +387,11 @@
 /datum/pet_command/point_targeting/attack/minebot/execute_action(datum/ai_controller/controller)
 	controller.set_blackboard_key(BB_AUTOMATED_MINING, FALSE)
 	var/mob/living/living_pawn = controller.pawn
+<<<<<<< HEAD
 	if(!living_pawn.combat_mode)
+=======
+	if(!(living_pawn.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		living_pawn.set_combat_mode(TRUE)
 	return ..()
 
@@ -326,6 +400,7 @@
 /datum/pet_command/idle/minebot/execute_action(datum/ai_controller/controller)
 	controller.set_blackboard_key(BB_AUTOMATED_MINING, FALSE)
 	return ..()
+<<<<<<< HEAD
 
 /datum/pet_command/protect_owner/minebot
 
@@ -342,3 +417,5 @@
 	controller.clear_blackboard_key(BB_ACTIVE_PET_COMMAND)
 
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

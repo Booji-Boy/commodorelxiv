@@ -14,11 +14,21 @@
 	set_movement_target(controller, fetch_thing)
 
 /datum/ai_behavior/fetch_seek/perform(seconds_per_tick, datum/ai_controller/controller, target_key, delivery_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/fetch_thing = controller.blackboard[target_key]
 
 	// It stopped existing
 	if (QDELETED(fetch_thing))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, target_key, delivery_key)
+		return
+	var/mob/living/living_pawn = controller.pawn
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// We can't pick this up
 	if (fetch_thing.anchored)
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
@@ -49,9 +59,17 @@
 	set_movement_target(controller, return_target)
 
 /datum/ai_behavior/deliver_fetched_item/perform(seconds_per_tick, datum/ai_controller/controller, delivery_key, storage_key)
+<<<<<<< HEAD
 	var/mob/living/return_target = controller.blackboard[delivery_key]
 	if(QDELETED(return_target))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	. = ..()
+	var/mob/living/return_target = controller.blackboard[delivery_key]
+	if(QDELETED(return_target))
+		finish_action(controller, FALSE, delivery_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!deliver_item(controller, return_target, storage_key))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
@@ -94,11 +112,18 @@
 	set_movement_target(controller, snack)
 
 /datum/ai_behavior/eat_fetched_snack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, delivery_key)
+<<<<<<< HEAD
 	var/obj/item/snack = controller.blackboard[target_key]
 	var/is_living_loc = isliving(snack.loc)
 	if(QDELETED(snack) || (!isturf(snack.loc) && !is_living_loc))
 		// Where did it go?
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	. = ..()
+	var/obj/item/snack = controller.blackboard[target_key]
+	if(QDELETED(snack) || !isturf(snack.loc) || ishuman(snack.loc))
+		finish_action(controller, FALSE) // Where did it go?
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mob/living/basic/basic_pawn = controller.pawn
 	if(is_living_loc)
@@ -140,4 +165,8 @@
 /datum/ai_behavior/forget_failed_fetches/perform(seconds_per_tick, datum/ai_controller/controller)
 	COOLDOWN_START(src, reset_ignore_cooldown, cooldown_duration)
 	controller.clear_blackboard_key(BB_FETCH_IGNORE_LIST)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

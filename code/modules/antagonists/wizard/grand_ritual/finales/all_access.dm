@@ -15,3 +15,8 @@
 			INVOKE_ASYNC(target_door, TYPE_PROC_REF(/obj/machinery/door/airlock, open))
 			CHECK_TICK
 	priority_announce("AULIE OXIN FIERA!!", null, 'sound/magic/knock.ogg', sender_override = "[invoker.real_name]", color_override = "purple")
+<<<<<<< HEAD
+=======
+	var/obj/item/remote = new /obj/item/door_remote/omni(get_turf(invoker)) //MONKESTATION ADDITION: you now also control bolting
+	invoker.put_in_hands(remote) //MONKESTATION ADDITION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

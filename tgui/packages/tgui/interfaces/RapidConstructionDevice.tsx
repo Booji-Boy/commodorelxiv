@@ -90,7 +90,14 @@ export const InfoSection = (props) => {
 const DesignSection = (props) => {
   const { act, data } = useBackend<Data>();
   const { categories = [], selected_category, selected_design } = data;
+<<<<<<< HEAD
   const [categoryName, setCategoryName] = useState(selected_category);
+=======
+  const [categoryName, setCategoryName] = useLocalState(
+    'categoryName',
+    selected_category,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const shownCategory =
     categories.find((category) => category.cat_name === categoryName) ||
     categories[0];

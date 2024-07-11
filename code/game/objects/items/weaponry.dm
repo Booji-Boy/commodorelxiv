@@ -37,7 +37,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	else
 		M.visible_message(span_danger("[M] has been banned FOR NO REISIN by [user]!"), span_userdanger("You have been banned FOR NO REISIN by [user]!"), span_hear("You hear a banhammer banning someone."))
 	playsound(loc, 'sound/effects/adminhelp.ogg', 15) //keep it at 15% volume so people don't jump out of their skin too much
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return ..(M, user)
 
 
@@ -193,7 +193,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	item_flags = DROPDEL //WOW BRO YOU LOST AN ARM, GUESS WHAT YOU DONT GET YOUR SWORD ANYMORE //I CANT BELIEVE SPOOKYDONUT WOULD BREAK THE REQUIREMENTS
 	slot_flags = null
 	block_chance = 0 //RNG WON'T HELP YOU NOW, PANSY
-	light_range = 3
+	light_outer_range = 3
 	attack_verb_continuous = list("brutalizes", "eviscerates", "disembowels", "hacks", "carves", "cleaves") //ONLY THE MOST VISCERAL ATTACK VERBS
 	attack_verb_simple = list("brutalize", "eviscerate", "disembowel", "hack", "carve", "cleave")
 	var/notches = 0 //HOW MANY PEOPLE HAVE BEEN SLAIN WITH THIS BLADE
@@ -376,6 +376,72 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/katana/cursed //used by wizard events, see the tendril_loot.dm file for the miner one
 	slot_flags = null
 
+<<<<<<< HEAD
+=======
+/obj/item/wirerod
+	name = "wired rod"
+	desc = "A rod with some wire wrapped around the top. It'd be easy to attach something to the top bit."
+	icon = 'icons/obj/weapons/spear.dmi'
+	icon_state = "wiredrod"
+	inhand_icon_state = "rods"
+	flags_1 = CONDUCT_1
+	force = 9
+	throwforce = 10
+	w_class = WEIGHT_CLASS_BULKY
+	custom_materials = list(/datum/material/iron= HALF_SHEET_MATERIAL_AMOUNT + SMALL_MATERIAL_AMOUNT * 1.5, /datum/material/glass= SMALL_MATERIAL_AMOUNT * 0.75)
+	attack_verb_continuous = list("hits", "bludgeons", "whacks", "bonks")
+	attack_verb_simple = list("hit", "bludgeon", "whack", "bonk")
+
+/obj/item/wirerod/Initialize(mapload)
+	. = ..()
+
+	var/static/list/hovering_item_typechecks = list(
+		/obj/item/shard = list(
+			SCREENTIP_CONTEXT_LMB = "Craft spear",
+		),
+
+		/obj/item/assembly/igniter = list(
+			SCREENTIP_CONTEXT_LMB = "Craft stunprod",
+		),
+	)
+
+	AddElement(/datum/element/contextual_screentip_item_typechecks, hovering_item_typechecks)
+
+/obj/item/wirerod/attackby(obj/item/attacking_item, mob/user, params)
+	if(istype(attacking_item, /obj/item/shard))
+		var/datum/crafting_recipe/recipe_to_use = /datum/crafting_recipe/spear
+		user.balloon_alert(user, "crafting spear...")
+		if(do_after(user, initial(recipe_to_use.time), src)) // we do initial work here to get the correct timer
+			var/obj/item/spear/crafted_spear = new /obj/item/spear()
+
+			remove_item_from_storage(user)
+			if (!user.transferItemToLoc(attacking_item, crafted_spear))
+				return
+			crafted_spear.CheckParts(list(attacking_item))
+			qdel(src)
+
+			user.put_in_hands(crafted_spear)
+			user.balloon_alert(user, "crafted spear")
+		return
+
+	if(isigniter(attacking_item) && !(HAS_TRAIT(attacking_item, TRAIT_NODROP)))
+		var/datum/crafting_recipe/recipe_to_use = /datum/crafting_recipe/stunprod
+		user.balloon_alert(user, "crafting cattleprod...")
+		if(do_after(user, initial(recipe_to_use.time), src))
+			var/obj/item/melee/baton/security/cattleprod/prod = new
+
+			remove_item_from_storage(user)
+
+			qdel(attacking_item)
+			qdel(src)
+
+			user.put_in_hands(prod)
+			user.balloon_alert(user, "crafted cattleprod")
+		return
+	return ..()
+
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/throwing_star
 	name = "throwing star"
 	desc = "An ancient weapon still used to this day, due to its ease of lodging itself into its victim's body parts."
@@ -797,6 +863,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		desc = pick("You've got red on you.", "You gotta know what a crumpet is to understand cricket.")
 
 	AddElement(/datum/element/kneecapping)
+	AddComponent(/datum/component/multi_hit, icon_state = "swipe", width = 3)
 
 /obj/item/melee/baseball_bat/attack_self(mob/user)
 	if(!homerun_able)
@@ -829,6 +896,27 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	else if(!QDELETED(target) && !target.anchored)
 		var/whack_speed = (prob(60) ? 1 : 4)
 		target.throw_at(throw_target, rand(1, 2), whack_speed, user, gentle = TRUE) // sorry friends, 7 speed batting caused wounds to absolutely delete whoever you knocked your target into (and said target)
+
+/obj/item/melee/baseball_bat/multi_attack(mob/living/target_mob, mob/living/user, params, direction_traveled)
+	// we obtain the relative direction from the bat itself to the target
+	var/relative_direction = get_cardinal_dir(direction_traveled, target_mob)
+	var/atom/throw_target = get_edge_target_turf(target_mob, relative_direction)
+	. = ..()
+	if(iscarbon(target_mob))
+		var/mob/living/carbon/target = target_mob
+		target.stamina.adjust(-force * 2)
+
+	if(homerun_ready)
+		user.visible_message(span_userdanger("It's a home run!"))
+		if(!QDELETED(target_mob))
+			target_mob.throw_at(throw_target, rand(8,10), 14, user)
+		SSexplosions.medturf += throw_target
+		playsound(get_turf(src), 'sound/weapons/homerun.ogg', 100, TRUE)
+		homerun_ready = FALSE
+		return
+	else if(!QDELETED(target_mob) && !target_mob.anchored)
+		var/whack_speed = (prob(60) ? 1 : 4)
+		target_mob.throw_at(throw_target, rand(1, 2), whack_speed, user, gentle = TRUE) // sorry friends, 7 speed batting caused wounds to absolutely delete whoever you knocked your target into (and said target)
 
 /obj/item/melee/baseball_bat/Destroy(force)
 	for(var/target in thrown_datums)
@@ -935,6 +1023,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 
 /obj/item/melee/flyswatter/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	if (isnull(splattable))
 		splattable = typecacheof(list(
 			/mob/living/basic/ant,
@@ -949,6 +1038,20 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		strong_against = typecacheof(list(
 			/mob/living/basic/spider,
 		))
+=======
+	splattable = typecacheof(list(
+		/mob/living/basic/ant,
+		/mob/living/basic/butterfly,
+		/mob/living/basic/cockroach,
+		/mob/living/basic/spider/growing/spiderling,
+		/mob/living/basic/bee,
+		/obj/effect/decal/cleanable/ants,
+		/obj/item/queen_bee,
+	))
+	strong_against = typecacheof(list(
+		/mob/living/basic/spider/giant,
+	))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /obj/item/melee/flyswatter/afterattack(atom/target, mob/user, click_parameters)

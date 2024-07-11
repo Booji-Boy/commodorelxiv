@@ -38,12 +38,25 @@
 	SSjob.latejoin_trackers -= src //These may be here due to the arrivals shuttle
 	return ..()
 
+<<<<<<< HEAD
 /obj/structure/chair/atom_deconstruct(disassembled)
 	if(buildstacktype)
 		new buildstacktype(loc,buildstackamount)
 	else
 		for(var/datum/material/mat as anything in custom_materials)
 			new mat.sheet_type(loc, FLOOR(custom_materials[mat] / SHEET_MATERIAL_AMOUNT, 1))
+=======
+/obj/structure/chair/deconstruct(disassembled)
+	// If we have materials, and don't have the NOCONSTRUCT flag
+	if(!(flags_1 & NODECONSTRUCT_1))
+		if(buildstacktype)
+			new buildstacktype(loc,buildstackamount)
+		else
+			for(var/i in custom_materials)
+				var/datum/material/M = i
+				new M.sheet_type(loc, FLOOR(custom_materials[M] / SHEET_MATERIAL_AMOUNT, 1))
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/chair/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -311,7 +324,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/chair/stool/bar, 0)
 	hitsound = 'sound/items/trayhit1.ogg'
 	hit_reaction_chance = 50
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	item_flags = SKIP_FANTASY_ON_SPAWN
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/break_chance = 5 //Likely hood of smashing the chair.
 	var/obj/structure/chair/origin_type = /obj/structure/chair
 

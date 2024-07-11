@@ -288,8 +288,17 @@ var/datum/picture/goatse = new(name = "urgent notice", desc = "You see a prolaps
 			state = STATE_MAIN
 		if ("recallShuttle")
 			// AIs cannot recall the shuttle
+<<<<<<< HEAD
 			if (!authenticated(usr) || HAS_SILICON_ACCESS(usr) || syndicate)
+=======
+			var/clock_user = IS_CLOCK(usr) //monkestation edit
+			if (!authenticated(usr) || issilicon(usr) || syndicate || (clock_user && GLOB.main_clock_cult?.member_recalled)) //monkestation edit: adds the CWC check
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
+//monkestation edit start
+			if(clock_user)
+				GLOB.main_clock_cult?.member_recalled = TRUE
+//monkestation edit end
 			SSshuttle.cancelEvac(usr)
 		if ("requestNukeCodes")
 			if (!authenticated_as_non_silicon_captain(usr))
@@ -891,7 +900,12 @@ var/datum/picture/goatse = new(name = "urgent notice", desc = "You see a prolaps
 				"Attention crew: sector monitoring reports a massive jump-trace from an enemy vessel destined for your system. Prepare for imminent hostile contact.",
 				"[command_name()] High-Priority Update",
 			)
+<<<<<<< HEAD
 			SSdynamic.picking_specific_rule(pick(pirate_rulesets), forced = TRUE, ignore_cost = TRUE)
+=======
+
+			force_event_after(/datum/round_event_control/pirates, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(HACK_FUGITIVES) // Triggers fugitives, which can cause confusion / chaos as the crew decides which side help
 			priority_announce(
@@ -912,9 +926,27 @@ var/datum/picture/goatse = new(name = "urgent notice", desc = "You see a prolaps
 					continue
 				shake_camera(crew_member, 15, 1)
 
+<<<<<<< HEAD
 			SSdynamic.unfavorable_situation()
+=======
+			SSgamemode.point_gain_multipliers[EVENT_TRACK_ROLESET]++
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(HACK_SLEEPER) // Trigger one or multiple sleeper agents with the crew (or for latejoining crew)
+			// monkestation start: inject storyteller events instead of dynamic rulesets
+			var/event_to_spawn = pick_weight(list(
+				/datum/round_event_control/antagonist/solo/traitor/midround = 75,
+				// hmmm, let's rarely spawn some non-traitor antags just to spice things up a bit
+				/datum/round_event_control/antagonist/solo/heretic/midround = 15,
+				/datum/round_event_control/antagonist/solo/from_ghosts/wizard = 1
+			))
+			force_event_after(event_to_spawn, "[hacker] hacking a communications console", rand(20 SECONDS, 1 MINUTES))
+			priority_announce(
+				"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
+				"[command_name()] High-Priority Update",
+			)
+			/*
 			var/datum/dynamic_ruleset/midround/sleeper_agent_type = /datum/dynamic_ruleset/midround/from_living/autotraitor
 			var/max_number_of_sleepers = clamp(round(length(GLOB.alive_player_list) / 20), 1, 3)
 			var/num_agents_created = 0
@@ -933,6 +965,7 @@ var/datum/picture/goatse = new(name = "urgent notice", desc = "You see a prolaps
 					"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
 					"[command_name()] High-Priority Update",
 				)
+			*/ // monkestation end
 
 #undef HACK_PIRATE
 #undef HACK_FUGITIVES

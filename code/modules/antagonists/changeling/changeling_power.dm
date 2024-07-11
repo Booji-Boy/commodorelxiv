@@ -66,7 +66,11 @@ the same goes for Remove(). if you override Remove(), call parent or else your p
 	if(disabled_by_fire && user.fire_stacks && user.on_fire)
 		user.balloon_alert(user, "on fire!")
 		return FALSE
+<<<<<<< HEAD
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
+=======
+	var/datum/antagonist/changeling/changeling = user.mind.has_antag_datum(/datum/antagonist/changeling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(sting_action(user, target))
 		sting_feedback(user, target)
 		changeling.adjust_chemicals(-chemical_cost)

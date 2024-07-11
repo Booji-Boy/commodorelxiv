@@ -129,11 +129,14 @@
 	input = /obj/item/food/grown/parsnip
 	output = /obj/item/food/roastparsnip
 
+<<<<<<< HEAD
 /datum/food_processor_process/mob/slime
 	input = /mob/living/basic/slime
 	output = null
 	required_machine = /obj/machinery/processor/slime
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/food_processor_process/towercap
 	input = /obj/item/grown/log
 	output = /obj/item/popsicle_stick

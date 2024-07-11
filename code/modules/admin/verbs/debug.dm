@@ -179,7 +179,11 @@ ADMIN_VERB(cmd_give_direct_control, R_ADMIN, "Give Direct Control", "Give direct
 	if(M.ckey)
 		if(tgui_alert(user,"This mob is being controlled by [M.key]. Are you sure you wish to give someone else control of it? [M.key] will be made a ghost.",,list("Yes","No")) != "Yes")
 			return
+<<<<<<< HEAD
 	var/client/newkey = input(user, "Pick the player to put in control.", "New player") as null|anything in sort_list(GLOB.clients)
+=======
+	var/client/newkey = input(src, "Pick the player to put in control.", "New player") as null|anything in sort_list(GLOB.clients)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(newkey))
 		return
 	var/mob/oldmob = newkey.mob

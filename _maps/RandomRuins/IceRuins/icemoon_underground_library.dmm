@@ -145,7 +145,11 @@
 	},
 /area/ruin/unpowered/buried_library)
 "aO" = (
+<<<<<<< HEAD
 /mob/living/basic/pet/fox/icemoon,
+=======
+/mob/living/basic/pet/fox,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/wood{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
@@ -221,6 +225,16 @@
 /obj/item/paper/fluff/ruins/oldstation/protogun,
 /turf/open/misc/asteroid/snow/icemoon,
 /area/ruin/unpowered/buried_library)
+<<<<<<< HEAD
+=======
+"bh" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/mob/living/basic/pet/fox,
+/turf/open/floor/wood{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/ruin/unpowered/buried_library)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bi" = (
 /obj/structure/fluff/paper,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -293,6 +307,35 @@
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
 /area/ruin/unpowered/buried_library)
+<<<<<<< HEAD
+=======
+"bC" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/paper{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/mob/living/basic/pet/fox,
+/turf/open/floor/wood{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/ruin/unpowered/buried_library)
+"bE" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/ruin/unpowered/buried_library)
+"bH" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/paper,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/ruin/unpowered/buried_library)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bK" = (
 /obj/item/stack/sheet/mineral/wood,
 /obj/effect/mapping_helpers/broken_floor,

@@ -4,6 +4,11 @@
 	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
 	icon_state = "sakhno"
 	w_class = WEIGHT_CLASS_BULKY
+<<<<<<< HEAD
+=======
+	inhand_icon_state = "moistnugget"
+	worn_icon_state = "moistnugget"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction
 	bolt_wording = "bolt"
 	bolt_type = BOLT_TYPE_LOCKING
@@ -14,12 +19,13 @@
 	rack_sound = 'sound/weapons/gun/rifle/bolt_out.ogg'
 	bolt_drop_sound = 'sound/weapons/gun/rifle/bolt_in.ogg'
 	tac_reloads = FALSE
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/rifle/rack(mob/user = null)
 	if (bolt_locked == FALSE)
 		balloon_alert(user, "bolt opened")
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
-		process_chamber(FALSE, FALSE, FALSE)
+		process_chamber(user = user, empty_chamber = FALSE, from_firing = FALSE, chamber_next_round = FALSE)
 		bolt_locked = TRUE
 		update_appearance()
 		return
@@ -141,8 +147,16 @@
 	sawn_desc = "A sawn-off Sakhno Precision Rifle, popularly known as an \"Obrez\". \
 		\"Sakhno M2442 Army\" is stamped into the side of it. \
 		There was probably a reason it wasn't manufactured this short to begin with. \
+<<<<<<< HEAD
 		Cutting the weapon down seems to have not helped with the moisture problem."
 	icon_state = "sakhno_tactifucked"
+=======
+		This one has been ruined by centuries of moisture and WILL jam. Often found in the hands of \
+		cargo technicians with a death wish, Russian military LARPers, actual drunk Space Russians, \
+		Tiger Co-op assassins, cryo-frozen Space Russians, and security personnel with \
+		little care for professional conduct while making 'arrests' point blank in the back of the head \
+		until the gun clicks. EXTREMELY moist."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/surplus
 	can_jam = TRUE
 
@@ -268,9 +282,18 @@
 	worn_icon_state = "pipegun"
 	fire_sound = 'sound/weapons/gun/sniper/shot.ogg'
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/pipegun
+<<<<<<< HEAD
 
 	projectile_damage_multiplier = 1.35
 	obj_flags = UNIQUE_RENAME
+=======
+	initial_caliber = CALIBER_SHOTGUN
+	alternative_caliber = CALIBER_A762
+	initial_fire_sound = 'sound/weapons/gun/sniper/shot.ogg'
+	alternative_fire_sound = 'sound/weapons/gun/shotgun/shot.ogg'
+	can_modify_ammo = TRUE
+	can_misfire = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	can_bayonet = TRUE
 	knife_x_offset = 35
 	knife_y_offset = 10
@@ -279,7 +302,7 @@
 
 	SET_BASE_PIXEL(-8, 0)
 
-/obj/item/gun/ballistic/rifle/boltaction/pipegun/handle_chamber()
+/obj/item/gun/ballistic/rifle/boltaction/pipegun/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	. = ..()
 	do_sparks(1, TRUE, src)
 
@@ -312,6 +335,7 @@
 
 /obj/item/gun/ballistic/rifle/boltaction/pipegun/prime
 	name = "regal pipegun"
+<<<<<<< HEAD
 	desc = "To call this 'regal' is a cruel irony. For the only noteworthy quality of nobility is in how it is wielded to kill. \
 		All monarchs deserve to be crowned. But none will remember the dead tyrant for the red stain they left on the carpet."
 	icon_state = "regal_pipegun"
@@ -319,6 +343,14 @@
 	worn_icon_state = "regal_pipegun"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/pipegun/prime
 	projectile_damage_multiplier = 2
+=======
+	desc = "Older, territorial assistants typically possess more valuable loot."
+	icon_state = "musket_prime"
+	inhand_icon_state = "musket_prime"
+	worn_icon_state = "musket_prime"
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/boltaction/pipegun/prime
+	projectile_damage_multiplier = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/rifle/boltaction/pipegun/pistol/prime
 	name = "regal pipe pistol"
@@ -343,7 +375,25 @@
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/enchanted
 	can_be_sawn_off = FALSE
 
+<<<<<<< HEAD
 	SET_BASE_PIXEL(-8, 0)
+=======
+/obj/item/gun/ballistic/rifle/enchanted/arcane_barrage
+	name = "arcane barrage"
+	desc = "Pew Pew Pew."
+	fire_sound = 'sound/weapons/emitter.ogg'
+	pin = /obj/item/firing_pin/magic
+	icon_state = "arcane_barrage"
+	inhand_icon_state = "arcane_barrage"
+	slot_flags = null
+	can_bayonet = FALSE
+	item_flags = NEEDS_PERMIT | DROPDEL | ABSTRACT | NOBLUDGEON
+	flags_1 = NONE
+	trigger_guard = TRIGGER_GUARD_ALLOW_ALL
+	show_bolt_icon = FALSE //It's a magic hand, not a rifle
+
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/arcane_barrage
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/rifle/enchanted/dropped()
 	. = ..()

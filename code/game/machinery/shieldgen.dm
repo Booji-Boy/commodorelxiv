@@ -1,3 +1,6 @@
+#define ACTIVE_SETUPFIELDS 1
+#define ACTIVE_HASFIELDS 2
+
 /obj/structure/emergency_shield
 	name = "emergency energy shield"
 	desc = "An energy shield used to contain hull breaches."
@@ -60,6 +63,7 @@
 	. = ..()
 	AddElement(/datum/element/empprotection, EMP_PROTECT_SELF)
 
+<<<<<<< HEAD
 /obj/structure/emergency_shield/regenerating/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
@@ -75,6 +79,11 @@
 	if(repaired_amount <= 0)
 		// 0 damage repaired means we're at the max integrity, so don't need to process anymore
 		STOP_PROCESSING(SSobj, src)
+=======
+/obj/structure/emergency_shield/regenerating/process(seconds_per_tick)
+	if(get_integrity() < max_integrity)
+		repair_damage(5 * seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/emergency_shield/cult
 	name = "cult barrier"
@@ -273,13 +282,27 @@
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	balloon_alert(user, "access controller shorted")
 	return TRUE
+<<<<<<< HEAD
+=======
+
+/// Turn the machine on with side effects
+/obj/machinery/power/shieldwallgen/proc/activate()
+	active = ACTIVE_SETUPFIELDS
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_CONTAINMENT_FIELD)))
+
+/// Turn the machine off with side effects
+/obj/machinery/power/shieldwallgen/proc/deactivate()
+	active = FALSE
+	for(var/d in GLOB.cardinals)
+		cleanup_field(d)
+	update_appearance()
+	RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_CONTAINMENT_FIELD)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/shieldgen/update_icon_state()
 	icon_state = "shield[active ? "on" : "off"][(machine_stat & BROKEN) ? "br" : null]"
 	return ..()
 
-#define ACTIVE_SETUPFIELDS 1
-#define ACTIVE_HASFIELDS 2
 /obj/machinery/power/shieldwallgen
 	name = "shield wall generator"
 	desc = "A shield generator."
@@ -298,10 +321,15 @@
 	var/active = FALSE
 	/// are we locked?
 	var/locked = TRUE
+<<<<<<< HEAD
 	/// how far do we seek another generator in our cardinal directions
 	var/shield_range = 8
 	/// the attached cable under us
 	var/obj/structure/cable/attached
+=======
+	var/shield_range = 12 //monke edit
+	var/obj/structure/cable/attached // the attached cable
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/power/shieldwallgen/xenobiologyaccess //use in xenobiology containment
 	name = "xenobiology shield wall generator"
@@ -364,6 +392,10 @@
 			visible_message(span_danger("[src] shuts down due to lack of power!"), \
 				"If this message is ever seen, something is wrong.",
 				span_hear("You hear heavy droning fade out."))
+<<<<<<< HEAD
+=======
+			icon_state = "shield_wall_gen"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			deactivate()
 			log_game("[src] deactivated due to lack of power at [AREACOORD(src)]")
 	else
@@ -508,6 +540,7 @@
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	balloon_alert(user, "access controller shorted")
 	return TRUE
+<<<<<<< HEAD
 
 /// Turn the machine on with side effects
 /obj/machinery/power/shieldwallgen/proc/activate()
@@ -521,6 +554,8 @@
 		cleanup_field(d)
 	update_appearance()
 	RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_CONTAINMENT_FIELD)))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //////////////Containment Field START
 /obj/machinery/shieldwall
@@ -530,7 +565,8 @@
 	icon_state = "shieldwall"
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	light_range = 3
+	light_outer_range = 3
+	pass_flags_self = parent_type::pass_flags_self & ~LETPASSCLICKS // monkestation edit: no you can't reach around the impenetrable shield
 	var/needs_power = FALSE
 	var/obj/machinery/power/shieldwallgen/gen_primary
 	var/obj/machinery/power/shieldwallgen/gen_secondary

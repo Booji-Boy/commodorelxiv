@@ -14,6 +14,10 @@ import {
   Section,
   TextArea,
 } from '../components';
+<<<<<<< HEAD
+=======
+import { StatusDisplayControls } from './common/StatusDisplayControls';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
 import { StatusDisplayControls } from './common/StatusDisplayControls';
@@ -29,12 +33,19 @@ const SWIPE_NEEDED = 'SWIPE_NEEDED';
 const EMAG_SHUTTLE_NOTICE =
   'This shuttle is deemed significantly dangerous to the crew, and is only supplied by the Syndicate.';
 
+<<<<<<< HEAD
 const sortShuttles = (shuttles) =>
   sortBy(
     shuttles,
     (shuttle) => !shuttle.emagOnly,
     (shuttle) => shuttle.initial_cost,
   );
+=======
+const sortShuttles = sortBy(
+  (shuttle) => !shuttle.emagOnly,
+  (shuttle) => shuttle.initial_cost,
+);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const AlertButton = (props) => {
   const { act, data } = useBackend();
@@ -268,15 +279,38 @@ const PageMain = (props) => {
     shuttleRecallable,
   } = data;
 
+<<<<<<< HEAD
   const [callingShuttle, setCallingShuttle] = useState(false);
   const [messagingAssociates, setMessagingAssociates] = useState(false);
   const [messagingSector, setMessagingSector] = useState(null);
   const [requestingNukeCodes, setRequestingNukeCodes] = useState(false);
+=======
+  const [callingShuttle, setCallingShuttle] = useLocalState(
+    'calling_shuttle',
+    false,
+  );
+  const [messagingAssociates, setMessagingAssociates] = useLocalState(
+    'messaging_associates',
+    false,
+  );
+  const [messagingSector, setMessagingSector] = useLocalState(
+    'messaing_sector',
+    null,
+  );
+  const [requestingNukeCodes, setRequestingNukeCodes] = useLocalState(
+    'requesting_nuke_codes',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const [
     [showAlertLevelConfirm, confirmingAlertLevelTick],
     setShowAlertLevelConfirm,
+<<<<<<< HEAD
   ] = useState([null, null]);
+=======
+  ] = useLocalState('showConfirmPrompt', [null, null]);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Box>

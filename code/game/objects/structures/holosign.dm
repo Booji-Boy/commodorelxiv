@@ -196,6 +196,16 @@
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
+=======
+/obj/structure/holosign/barrier/medical/attack_hand(mob/living/user, list/modifiers)
+	if(!(user.istate & ISTATE_HARM) && CanPass(user, get_dir(src, user)))
+		force_allaccess = !force_allaccess
+		to_chat(user, span_warning("You [force_allaccess ? "deactivate" : "activate"] the biometric scanners.")) //warning spans because you can make the station sick!
+	else
+		return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/holosign/barrier/cyborg/hacked
 	name = "Charged Energy Field"
 	desc = "A powerful energy field that blocks movement. Energy arcs off it."

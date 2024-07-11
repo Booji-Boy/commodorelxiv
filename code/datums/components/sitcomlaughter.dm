@@ -22,7 +22,11 @@
 	if(laugh_delay)
 		src.laugh_delay = laugh_delay
 
+<<<<<<< HEAD
 /datum/component/wearertargeting/sitcomlaughter/Destroy(force)
+=======
+/datum/component/wearertargeting/sitcomlaughter/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	post_comedy_callback = null
 	return ..()
 

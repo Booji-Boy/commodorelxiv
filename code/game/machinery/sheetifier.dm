@@ -23,9 +23,13 @@
 		) \
 	)
 
+<<<<<<< HEAD
 /obj/machinery/sheetifier/Destroy()
 	materials = null
 	return ..()
+=======
+	AddComponent(/datum/component/material_container, list(/datum/material/meat, /datum/material/hauntium), SHEET_MATERIAL_AMOUNT * MAX_STACK_SIZE * 2, MATCONTAINER_EXAMINE|BREAKDOWN_FLAGS_SHEETIFIER, typesof(/datum/material/meat) + /datum/material/hauntium, list(/obj/item/food/meat, /obj/item/photo), null, CALLBACK(src, PROC_REF(CanInsertMaterials)), CALLBACK(src, PROC_REF(AfterInsertMaterials)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/sheetifier/update_overlays()
 	. = ..()

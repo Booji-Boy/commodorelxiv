@@ -1,10 +1,17 @@
 import {
   Action,
+<<<<<<< HEAD
+=======
+  Reducer,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   applyMiddleware,
   combineReducers,
   createAction,
   createStore,
+<<<<<<< HEAD
   Reducer,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from './redux';
 
 // Dummy Reducer

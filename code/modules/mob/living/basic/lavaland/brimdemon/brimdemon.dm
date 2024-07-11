@@ -23,7 +23,11 @@
 	death_sound = 'sound/magic/demon_dies.ogg'
 	light_color = LIGHT_COLOR_BLOOD_MAGIC
 	light_power = 5
+<<<<<<< HEAD
 	light_range = 1.4
+=======
+	light_outer_range = 1.4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	ai_controller = /datum/ai_controller/basic_controller/brimdemon
 
@@ -43,6 +47,13 @@
 	beam.Grant(src)
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, beam)
 
+<<<<<<< HEAD
+=======
+/mob/living/basic/mining/brimdemon/Destroy()
+	QDEL_NULL(beam)
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/mining/brimdemon/RangedAttack(atom/target, modifiers)
 	beam.Trigger(target = target)
 

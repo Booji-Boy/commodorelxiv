@@ -83,8 +83,14 @@
 #define FACTION_TURRET "turret"
 /// Vines, lots of overlap with plants
 #define FACTION_VINES "vines"
+<<<<<<< HEAD
 ///raptor factions
 #define FACTION_RAPTOR "raptor"
+=======
+/// Tamed creatures
+#define FACTION_TAMED "tamed"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Antagonist factions
 
 /// Cultists and their constructs

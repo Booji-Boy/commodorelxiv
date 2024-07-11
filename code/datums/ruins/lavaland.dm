@@ -59,8 +59,14 @@
 	description = "A race of unbreathing lizards live here, that run faster than a human can, worship a broken dead city, and are capable of reproducing by something involving tentacles? \
 	Probably best to stay clear."
 	suffix = "lavaland_surface_ash_walker1.dmm"
-	cost = 20
+	cost = 1
 	allow_duplicates = FALSE
+	always_place = TRUE
+
+/datum/map_template/ruin/lavaland/ash_walker/New()
+	if(rand(50))
+		suffix = "lavaland_surface_ash_walker2.dmm"
+	. = ..()
 
 /datum/map_template/ruin/lavaland/syndicate_base
 	name = "Lava-Ruin Syndicate Lava Base"
@@ -276,7 +282,11 @@
 	allow_duplicates = FALSE
 
 /datum/map_template/ruin/lavaland/lava_phonebooth
+<<<<<<< HEAD
 	name = "Lava-Ruin Phonebooth"
+=======
+	name = "Phonebooth"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	id = "lava_phonebooth"
 	description = "A venture by nanotrasen to help popularize the use of holopads. This one somehow made its way here."
 	suffix = "lavaland_surface_phonebooth.dmm"
@@ -284,13 +294,18 @@
 	cost = 5
 
 /datum/map_template/ruin/lavaland/battle_site
+<<<<<<< HEAD
 	name = "Lava-Ruin Battle Site"
+=======
+	name = "Battle Site"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	id = "battle_site"
 	description = "The long past site of a battle between beast and humanoids. The victor is unknown, but the losers are clear."
 	suffix = "lavaland_battle_site.dmm"
 	allow_duplicates = TRUE
 	cost = 3
 
+<<<<<<< HEAD
 /datum/map_template/ruin/lavaland/vent
 	name = "Lava-Ruin Ore Vent"
 	id = "ore_vent"
@@ -311,11 +326,16 @@
 
 /datum/map_template/ruin/lavaland/mook_village
 	name = "Lava-Ruin Mook Village"
+=======
+/datum/map_template/ruin/lavaland/mook_village
+	name = "Mook Village"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	id = "mook_village"
 	description = "A village hosting a community of friendly mooks!"
 	suffix = "lavaland_surface_mookvillage.dmm"
 	allow_duplicates = FALSE
 	cost = 5
+<<<<<<< HEAD
 
 /datum/map_template/ruin/lavaland/shuttle_wreckage
 	name = "Lava-Ruin Shuttle Wreckage"
@@ -323,3 +343,6 @@
 	description = "Not every shuttle makes it back to CentCom."
 	suffix = "lavaland_surface_shuttle_wreckage.dmm"
 	allow_duplicates = FALSE
+=======
+	always_place = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

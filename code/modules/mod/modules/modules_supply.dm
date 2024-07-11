@@ -118,7 +118,11 @@
 	icon_state = "drill"
 	module_type = MODULE_ACTIVE
 	complexity = 1
+<<<<<<< HEAD
 	use_energy_cost = DEFAULT_CHARGE_DRAIN
+=======
+	use_power_cost = DEFAULT_CHARGE_DRAIN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	incompatible_modules = list(/obj/item/mod/module/drill)
 	cooldown_time = 0.5 SECONDS
 	overlay_state_active = "module_drill"
@@ -556,7 +560,11 @@
 	suppressed = SUPPRESSED_VERY
 	armor_flag = BOMB
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1
+=======
+	light_outer_range = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_color = COLOR_LIGHT_ORANGE
 	embedding = null
@@ -578,7 +586,11 @@
 	anchored = TRUE
 	resistance_flags = FIRE_PROOF|LAVA_PROOF
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1
+=======
+	light_outer_range = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_color = COLOR_LIGHT_ORANGE
 	/// Time to prime the explosion

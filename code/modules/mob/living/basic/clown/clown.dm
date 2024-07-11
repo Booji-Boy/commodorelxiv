@@ -12,7 +12,11 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "robusts"
 	response_harm_simple = "robust"
+<<<<<<< HEAD
 	combat_mode = TRUE
+=======
+	istate = ISTATE_HARM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	maxHealth = 75
 	health = 75
 	melee_damage_lower = 10
@@ -49,7 +53,11 @@
 	ai_controller.set_blackboard_key(BB_BASIC_MOB_SPEAK_LINES, emotes)
 	//im not putting dynamic humans or whatever its called here because this is the base path of nonhuman clownstrosities
 	if(waddles)
+<<<<<<< HEAD
 		AddElementTrait(TRAIT_WADDLING, INNATE_TRAIT, /datum/element/waddling)
+=======
+		AddElement(/datum/element/waddling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(length(loot))
 		loot = string_list(loot)
 		AddElement(/datum/element/death_drops, loot)
@@ -112,12 +120,16 @@
 	var/static/list/injection_range
 	if(!injection_range)
 		injection_range = string_numbers_list(list(1, 5))
+<<<<<<< HEAD
 	AddElement(\
 		/datum/element/venomous,\
 		/datum/reagent/consumable/laughter,\
 		injection_range,\
 		injection_flags = INJECT_CHECK_PENETRATE_THICK | INJECT_CHECK_IGNORE_SPECIES,\
 	)
+=======
+	AddElement(/datum/element/venomous, /datum/reagent/consumable/laughter, injection_range)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/clown/fleshclown
 	name = "Fleshclown"
@@ -293,12 +305,16 @@
 	var/static/list/injection_range
 	if(!injection_range)
 		injection_range = string_numbers_list(list(1, 5))
+<<<<<<< HEAD
 	AddElement(\
 		/datum/element/venomous,\
 		/datum/reagent/peaceborg/confuse,\
 		injection_range,\
 		injection_flags = INJECT_CHECK_PENETRATE_THICK | INJECT_CHECK_IGNORE_SPECIES,\
 	) // I don't really know what a clown is using to inject people but let's assume it doesn't need to penetrate at all
+=======
+	AddElement(/datum/element/venomous, /datum/reagent/peaceborg/confuse, injection_range)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/clown/clownhulk/destroyer
 	name = "The Destroyer"
@@ -380,7 +396,12 @@
 	speed = 1
 	melee_damage_lower = 10
 	melee_damage_upper = 15
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 1)
+=======
+	force_threshold = 10 //lots of fat to cushion blows.
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 2, STAMINA = 0, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_verb_continuous = "slams"
 	attack_verb_simple = "slam"
 	loot = list(
@@ -400,11 +421,20 @@
 
 /mob/living/basic/clown/mutant/glutton/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	GRANT_ACTION(/datum/action/cooldown/regurgitate)
 
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_GLUTTON, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/cheesiehonkers, /obj/item/food/cornchips), tame_chance = 30, bonus_tame_chance = 0)
 	AddElement(/datum/element/damage_threshold, 10) //lots of fat to cushion blows.
+=======
+	var/datum/action/cooldown/regurgitate/spit = new(src)
+	spit.Grant(src)
+
+	AddElement(/datum/element/swabable, CELL_LINE_TABLE_GLUTTON, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
+	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/cheesiehonkers, /obj/item/food/cornchips), tame_chance = 30, bonus_tame_chance = 0, after_tame = CALLBACK(src, PROC_REF(tamed)))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/clown/mutant/glutton/attacked_by(obj/item/item, mob/living/user)
 	if(!check_edible(item))
@@ -461,7 +491,11 @@
 	playsound(loc,'sound/items/eatfood.ogg', rand(30,50), TRUE)
 	flick("glutton_mouth", src)
 
+<<<<<<< HEAD
 /mob/living/basic/clown/mutant/glutton/tamed(mob/living/tamer, atom/food)
+=======
+/mob/living/basic/clown/mutant/glutton/proc/tamed(mob/living/tamer)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	buckle_lying = 0
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/glutton)
 
@@ -549,6 +583,7 @@
 		BB_EMOTE_SEE = list("bites into the banana", "plucks a banana off its head", "photosynthesizes"),
 		BB_EMOTE_SOUND = list('sound/items/bikehorn.ogg'),
 	)
+<<<<<<< HEAD
 
 /mob/living/basic/clown/banana/Initialize(mapload)
 	. = ..()
@@ -558,6 +593,24 @@
 		/datum/action/cooldown/rustle,
 	)
 	grant_actions_by_list(innate_actions)
+=======
+	///Our peel dropping ability
+	var/datum/action/cooldown/rustle/banana_rustle
+	///Our banana bunch spawning ability
+	var/datum/action/cooldown/exquisite_bunch/banana_bunch
+
+/mob/living/basic/clown/banana/Initialize(mapload)
+	. = ..()
+	banana_rustle = new()
+	banana_rustle.Grant(src)
+	banana_bunch = new()
+	banana_bunch.Grant(src)
+
+/mob/living/basic/clown/banana/Destroy()
+	. = ..()
+	QDEL_NULL(banana_rustle)
+	QDEL_NULL(banana_bunch)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///drops peels around the mob when activated
 /datum/action/cooldown/rustle
@@ -594,7 +647,11 @@
 /datum/action/cooldown/exquisite_bunch
 	name = "Exquisite Bunch"
 	desc = "Pluck your finest bunch of bananas from your head. This bunch is especially nutrious to monkeykind. A gentle tap will trigger an explosive ripening process."
+<<<<<<< HEAD
 	button_icon = 'icons/obj/service/hydroponics/harvest.dmi'
+=======
+	button_icon = 'icons/obj/hydroponics/harvest.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	cooldown_time = 60 SECONDS
 	button_icon_state = "banana_bunch"
 	background_icon_state = "bg_nature"

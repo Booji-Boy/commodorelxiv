@@ -86,7 +86,11 @@
 		return
 
 	var/num_slain = LAZYLEN(cultists_slain)
+<<<<<<< HEAD:code/modules/jobs/job_types/chaplain/chaplain_nullrod.dm
 	. += span_cult_italic("It has the blood of [num_slain] fallen cultist[num_slain == 1 ? "" : "s"] on it. \
+=======
+	. += span_cultitalic("It has the blood of [num_slain] fallen cultist[num_slain == 1 ? "" : "s"] on it. \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/objects/items/holy_weapons.dm
 		<b>Offering</b> it to Nar'sie will transform it into a [num_slain >= 3 ? "powerful" : "standard"] cult weapon.")
 
 /obj/item/nullrod/godhand
@@ -402,7 +406,20 @@
 	sharpness = SHARP_EDGED
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
-	menu_description = "A sharp dagger. Fits in pockets. Can be worn on the belt. Honk."
+	menu_description = "A sharp dagger. Fits in pockets. Slippery. Can be worn on the belt. Honk."
+
+/obj/item/nullrod/clown/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/slippery, 140) //Same as maximum potency banana peel.
+	
+/obj/item/nullrod/clown/afterattack(atom/target, mob/living/user)
+	. = ..()
+	if(!isliving(target))
+		return
+	var/mob/living/living_target = target
+	living_target.emote("laugh")
+	living_target.add_mood_event("chemical_laughter", /datum/mood_event/chemical_laughter)
+	user.add_mood_event("chemical_laughter", /datum/mood_event/chemical_laughter) //Hitting people with it makes you feel good.
 
 #define CHEMICAL_TRANSFER_CHANCE 30
 

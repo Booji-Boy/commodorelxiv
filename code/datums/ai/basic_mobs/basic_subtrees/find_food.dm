@@ -11,4 +11,8 @@
 		// Busy with something
 		return
 
+<<<<<<< HEAD
 	controller.queue_behavior(finding_behavior, BB_BASIC_MOB_CURRENT_TARGET, controller.blackboard[food_list_key])
+=======
+	controller.queue_behavior(/datum/ai_behavior/find_and_set/in_list, BB_BASIC_MOB_CURRENT_TARGET, controller.blackboard[BB_BASIC_FOODS])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

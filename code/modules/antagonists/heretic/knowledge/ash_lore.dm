@@ -72,6 +72,7 @@
 	name = "Ashen Passage"
 	desc = "Grants you Ashen Passage, a spell that lets you phase out of reality and traverse a short distance, passing though any walls."
 	gain_text = "He knew how to walk between the planes."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/mark/ash_mark,
 		/datum/heretic_knowledge/summon/fire_shark,
@@ -127,6 +128,7 @@
 		The mask instills fear into heathens who witness it, causing stamina damage, hallucinations, and insanity. \
 		It can also be forced onto a heathen, to make them unable to take it off..."
 	gain_text = "The Nightwatcher was lost. That's what the Watch believed. Yet he walked the world, unnoticed by the masses."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/blade_upgrade/ash,
 		/datum/heretic_knowledge/reroll_targets,
@@ -165,6 +167,7 @@
 		If any victims afflicted are in critical condition, they will also instantly die."
 	gain_text = "The fire was inescapable, and yet, life remained in his charred body. \
 		The Nightwatcher was a particular man, always watching."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/ultimate/ash_final,
 		/datum/heretic_knowledge/summon/ashy,
@@ -214,7 +217,11 @@
 	priority_announce(
 		text = "[generate_heretic_text()] Fear the blaze, for the Ashlord, [user.real_name] has ascended! The flames shall consume all! [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
+<<<<<<< HEAD
 		sound = 'sound/ambience/antag/heretic/ascend_ash.ogg',
+=======
+		sound = 'monkestation/sound/ambience/antag/heretic/ascend_ash.ogg',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		color_override = "pink",
 	)
 

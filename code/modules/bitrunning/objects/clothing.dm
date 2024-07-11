@@ -1,6 +1,9 @@
 /obj/item/clothing/glasses/sunglasses/oval
 	name = "oval sunglasses"
+<<<<<<< HEAD
 	flags_cover = GLASSESCOVERSEYES
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	desc = "Vintage wrap around sunglasses. Provides a little protection."
 	icon_state = "jensenshades"
 

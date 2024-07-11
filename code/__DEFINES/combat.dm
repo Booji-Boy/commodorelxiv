@@ -275,6 +275,9 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define GRENADE_CLUMSY_FUMBLE 1
 #define GRENADE_NONCLUMSY_FUMBLE 2
 
+#define BODY_ZONE_EVERYTHING "everything"
+#define BODY_ZONE_ARMS "arms"
+#define BODY_ZONE_LEGS "legs"
 #define BODY_ZONE_HEAD "head"
 #define BODY_ZONE_CHEST "chest"
 #define BODY_ZONE_L_ARM "l_arm"
@@ -282,10 +285,14 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BODY_ZONE_L_LEG "l_leg"
 #define BODY_ZONE_R_LEG "r_leg"
 
+<<<<<<< HEAD
 GLOBAL_LIST_INIT(all_body_zones, list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
 GLOBAL_LIST_INIT(limb_zones, list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
 GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
 GLOBAL_LIST_INIT(leg_zones, list(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+=======
+GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define BODY_ZONE_PRECISE_EYES "eyes"
 #define BODY_ZONE_PRECISE_MOUTH "mouth"

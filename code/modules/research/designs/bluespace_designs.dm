@@ -8,7 +8,11 @@
 	desc = "A bluespace tracking beacon."
 	id = "beacon"
 	build_type = PROTOLATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*1.5, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 150, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/beacon
 	category = list(
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_BLUESPACE
@@ -20,7 +24,11 @@
 	desc = "A block of metal ready to be transformed into a bag of holding with a bluespace anomaly core."
 	id = "bag_holding"
 	build_type = PROTOLATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/gold =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/diamond =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/uranium = SMALL_MATERIAL_AMOUNT*2.5, /datum/material/bluespace =SHEET_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/gold =SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/diamond =HALF_SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/uranium = 250, /datum/material/bluespace =SHEET_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/bag_of_holding_inert
 	category = list(
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_SCIENCE
@@ -69,7 +77,11 @@
 	desc = "A mining satchel that can hold an infinite amount of ores."
 	id = "minerbag_holding"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/gold = SMALL_MATERIAL_AMOUNT*2.5, /datum/material/uranium =SMALL_MATERIAL_AMOUNT*5) //quite cheap, for more convenience
+=======
+	materials = list(/datum/material/gold = 250, /datum/material/uranium =SMALL_MATERIAL_AMOUNT*5) //quite cheap, for more convenience
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/storage/bag/ore/holding
 	category = list(
 		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_MINING

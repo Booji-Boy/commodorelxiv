@@ -61,9 +61,15 @@
 		if(LAZYLEN(signs) >= max_signs)
 			return ITEM_INTERACT_BLOCKING
 		if(target_turf.is_blocked_turf(TRUE)) //don't try to sneak dense stuff on our tile during the wait.
+<<<<<<< HEAD
 			return ITEM_INTERACT_BLOCKING
 	target_holosign = create_holosign(interacting_with, user)
 	return ITEM_INTERACT_SUCCESS
+=======
+			return .
+	target_holosign = create_holosign(target, user)
+	return .
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/holosign_creator/attack(mob/living/carbon/human/M, mob/user)
 	return

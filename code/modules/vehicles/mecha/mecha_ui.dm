@@ -30,6 +30,7 @@
 
 /obj/vehicle/sealed/mecha/ui_static_data(mob/user)
 	var/list/data = list()
+<<<<<<< HEAD
 	data["ui_theme"] = ui_theme
 	//same thresholds as in air alarm
 	data["cabin_pressure_warning_min"]  = WARNING_LOW_PRESSURE
@@ -43,6 +44,10 @@
 	data["one_atmosphere"]  = ONE_ATMOSPHERE
 
 	data["sheet_material_amount"] = SHEET_MATERIAL_AMOUNT
+=======
+	data["cabin_dangerous_highpressure"] = WARNING_HIGH_PRESSURE
+	data["SHEET_MATERIAL_AMOUNT"] = SHEET_MATERIAL_AMOUNT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//map of relevant flags to check tgui side, not every flag needs to be here
 	data["mechflag_keys"] = list(
 		"ID_LOCK_ON" = ID_LOCK_ON,
@@ -147,6 +152,77 @@
 	. = ..()
 	if(.)
 		return
+<<<<<<< HEAD
+=======
+	if(!(usr in occupants))
+		switch(action)
+			if("stopmaint")
+				if(construction_state > MECHA_LOCKED)
+					to_chat(usr, span_warning("You must end Maintenance Procedures first!"))
+					return
+				mecha_flags &= ~ADDING_MAINT_ACCESS_POSSIBLE
+				ui.close()
+				return FALSE
+			if("togglemaint")
+				if(!(mecha_flags & ADDING_MAINT_ACCESS_POSSIBLE))
+					return FALSE
+				if(construction_state == MECHA_LOCKED)
+					construction_state = MECHA_SECURE_BOLTS
+					to_chat(usr, span_notice("The securing bolts are now exposed."))
+				else if(construction_state == MECHA_SECURE_BOLTS)
+					construction_state = MECHA_LOCKED
+					to_chat(usr, span_notice("The securing bolts are now hidden."))
+			if("drop_cell")
+				if((mecha_flags & NOT_ABLE_TO_REMOVE_STOCK_PARTS)) //monkestation edit
+					to_chat(usr, span_warning("You cant figure out how to remove this!")) //monkestation edit
+					return //monkestation edit
+				if(construction_state != MECHA_OPEN_HATCH)
+					return
+				usr.put_in_hands(cell)
+				cell = null
+			if("drop_scanning")
+				if((mecha_flags & NOT_ABLE_TO_REMOVE_STOCK_PARTS)) //monkestation edit
+					to_chat(usr, span_warning("You cant figure out how to remove this!")) //monkestation edit
+					return //monkestation edit
+				if(construction_state != MECHA_OPEN_HATCH)
+					return
+				usr.put_in_hands(scanmod)
+				scanmod = null
+			if("drop_capacitor")
+				if((mecha_flags & NOT_ABLE_TO_REMOVE_STOCK_PARTS)) //monkestation edit
+					to_chat(usr, span_warning("You cant figure out how to remove this!")) //monkestation edit
+					return //monkestation edit
+				if(construction_state != MECHA_OPEN_HATCH)
+					return
+				usr.put_in_hands(capacitor)
+				capacitor = null
+			if("set_pressure")
+				var/new_pressure = tgui_input_number(usr, "Enter new pressure", "Cabin pressure change", internal_tank_valve)
+				if(isnull(new_pressure) || !construction_state)
+					return
+				internal_tank_valve = new_pressure
+				to_chat(usr, span_notice("The internal pressure valve has been set to [internal_tank_valve]kPa."))
+			if("add_req_access")
+				if(!(mecha_flags & ADDING_ACCESS_POSSIBLE))
+					return
+				if(!(params["added_access"] == "all"))
+					operation_req_access += params["added_access"]
+				else
+					var/mob/living/living_user = usr
+					var/obj/item/card/id/card = living_user.get_idcard(TRUE)
+					operation_req_access += card.access
+			if("del_req_access")
+				if(!(mecha_flags & ADDING_ACCESS_POSSIBLE))
+					return
+				if(!(params["removed_access"] == "all"))
+					operation_req_access -= params["removed_access"]
+				else
+					operation_req_access = list()
+			if("lock_req_edit")
+				mecha_flags &= ~ADDING_ACCESS_POSSIBLE
+		return TRUE
+	//usr is in occupants
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("clear_all")
 			accesses = list()

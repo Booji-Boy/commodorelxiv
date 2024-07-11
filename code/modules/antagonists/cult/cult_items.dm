@@ -628,7 +628,7 @@ Striking a noncultist, however, will tear their flesh."}
 	name = "void torch"
 	desc = "Used by veteran cultists to instantly transport items to their needful brethren."
 	w_class = WEIGHT_CLASS_SMALL
-	light_range = 1
+	light_outer_range = 1
 	icon_state = "torch"
 	inhand_icon_state = "torch"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
@@ -799,7 +799,12 @@ Striking a noncultist, however, will tear their flesh."}
 	name = "blood bolt barrage"
 	desc = "Blood for blood."
 	color = "#ff0000"
+<<<<<<< HEAD
 	ammo_type =  /obj/item/ammo_casing/magic/arcane_barrage/blood
+=======
+	guns_left = 24
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/blood
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	fire_sound = 'sound/magic/wand_teleport.ogg'
 
 /obj/item/ammo_casing/magic/arcane_barrage/blood

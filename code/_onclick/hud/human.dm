@@ -52,6 +52,9 @@
 	var/mob/living/carbon/carbon_user = usr
 	carbon_user.unset_sting()
 
+/datum/hud/human
+	has_interaction_ui = TRUE
+
 /datum/hud/human/New(mob/living/carbon/human/owner)
 	..()
 
@@ -70,6 +73,7 @@
 	using.icon = ui_style
 	static_inventory += using
 
+<<<<<<< HEAD
 	using = new /atom/movable/screen/floor_menu(null, src)
 	using.icon = ui_style
 	static_inventory += using
@@ -83,6 +87,11 @@
 	using = new /atom/movable/screen/mov_intent(null, src)
 	using.icon = ui_style
 	using.icon_state = (owner.move_intent == MOVE_INTENT_RUN ? "running" : "walking")
+=======
+	using = new /atom/movable/screen/mov_intent
+	using.icon = ui_style
+	using.icon_state = (mymob.m_intent == MOVE_INTENT_WALK ? "walking" : "running")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	using.screen_loc = ui_movi
 	static_inventory += using
 

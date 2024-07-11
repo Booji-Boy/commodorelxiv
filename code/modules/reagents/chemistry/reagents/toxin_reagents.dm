@@ -8,6 +8,7 @@
 	taste_description = "bitterness"
 	taste_mult = 1.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	evaporation_rate = 3 //6x faster than normal chems
 	///The amount of toxin damage this will cause when metabolized (also used to calculate liver damage)
 	var/toxpwr = 1.5
 	///The amount to multiply the liver damage this toxin does by (Handled solely in liver code)
@@ -17,10 +18,13 @@
 	///The afflicted must be above this health value in order for the toxin to deal damage
 	var/health_required = -100
 
+<<<<<<< HEAD
 // Are you a bad enough dude to poison your own plants?
 /datum/reagent/toxin/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_toxic(round(volume * 2))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(toxpwr && affected_mob.health > health_required)
@@ -63,6 +67,7 @@
 		exposed_mob.domutcheck()
 
 /datum/reagent/toxin/mutagen/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	if(affected_mob.adjustToxLoss(0.5 * seconds_per_tick * REM, required_biotype = affected_biotype))
 		return UPDATE_MOB_HEALTH
@@ -70,6 +75,25 @@
 /datum/reagent/toxin/mutagen/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.mutation_roll(user)
 	mytray.adjust_toxic(3) //It is still toxic, mind you, but not to the same degree.
+=======
+	affected_mob.adjustToxLoss(0.5 * seconds_per_tick * REM, required_biotype = affected_biotype)
+	return ..()
+
+/datum/reagent/toxin/mutagen/feed_interaction(mob/living/basic/chicken/target, volume, mob/user)
+	target.instability += min(25, volume)
+
+/*
+/datum/reagent/toxin/mutagen/on_hydroponics_apply(obj/item/seeds/myseed, datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user)
+	if(!myseed)
+		return
+	if(chems.has_reagent(type, 1))
+		mytray.adjust_toxic(3) //It is still toxic, mind you, but not to the same degree.
+		plant_mutation_reagent_apply(chems, mytray, user, mr = 10, hm = 5)
+	if(prob(10))
+		chems.remove_all_type(type, chems.get_reagent_amount(type))
+		mytray.mutatespecie_new()
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define LIQUID_PLASMA_BP (50+T0C)
 #define LIQUID_PLASMA_IG (325+T0C)
@@ -276,6 +300,7 @@
 			affected_mob.adjust_confusion(1 SECONDS * REM * seconds_per_tick)
 			affected_mob.adjust_drowsiness(2 SECONDS * REM * seconds_per_tick)
 			affected_mob.adjust_slurring(6 SECONDS * REM * seconds_per_tick)
+<<<<<<< HEAD
 		if(6 to 9)
 			need_mob_update = affected_mob.adjustStaminaLoss(40 * REM * seconds_per_tick, updating_stamina = FALSE)
 		if(10 to INFINITY)
@@ -283,6 +308,15 @@
 				affected_mob.fakedeath(type)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+		if(5 to 8)
+			affected_mob.stamina.adjust(-40 * REM * seconds_per_tick, 0)
+		if(9 to INFINITY)
+			if(affected_mob.stat != DEAD)
+				affected_mob.fakedeath(type)
+	..()
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/ghoulpowder
 	name = "Ghoul Powder"
@@ -316,8 +350,12 @@
 	addiction_types = list(/datum/addiction/hallucinogens = 18)  //7.2 per 2 seconds
 	metabolized_traits = list(TRAIT_RDS_SUPPRESSED)
 
+<<<<<<< HEAD
 /datum/reagent/toxin/mindbreaker/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+=======
+/datum/reagent/toxin/mindbreaker/on_mob_life(mob/living/carbon/metabolizer, seconds_per_tick, times_fired)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// mindbreaker toxin assuages hallucinations in those plagued with it, mentally
 	if(affected_mob.has_trauma_type(/datum/brain_trauma/mild/hallucinations))
 		affected_mob.remove_status_effect(/datum/status_effect/hallucination)
@@ -336,17 +374,19 @@
 	ph = 2.7
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 // Plant-B-Gone is just as bad
 /datum/reagent/toxin/plantbgone/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_plant_health(-round(volume * 10))
 	mytray.adjust_toxic(round(volume * 6))
 	mytray.adjust_weedlevel(-rand(4,8))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/plantbgone/expose_obj(obj/exposed_obj, reac_volume)
 	. = ..()
 	if(istype(exposed_obj, /obj/structure/alien/weeds))
-		var/obj/structure/alien/weeds/alien_weeds = exposed_obj
-		alien_weeds.take_damage(rand(15, 35), BRUTE, 0) // Kills alien weeds pretty fast
+		exposed_obj.take_damage(rand(15, 35), BRUTE, 0) // Kills alien weeds pretty fast
 	if(istype(exposed_obj, /obj/structure/alien/resin/flower_bud))
 		var/obj/structure/alien/resin/flower_bud/flower = exposed_obj
 		flower.take_damage(rand(30, 50), BRUTE, 0)
@@ -378,11 +418,14 @@
 	ph = 3
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 //Weed Spray
 /datum/reagent/toxin/plantbgone/weedkiller/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_toxic(round(volume * 0.5))
 	mytray.adjust_weedlevel(-rand(1,2))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/pestkiller
 	name = "Pest Killer"
 	description = "A harmful toxic mixture to kill pests. Do not ingest!"
@@ -391,7 +434,11 @@
 	ph = 3.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 /datum/reagent/toxin/pestkiller/on_new(data)
+=======
+/datum/reagent/toxin/pestkiller/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	AddElement(/datum/element/bugkiller_reagent)
 
@@ -412,11 +459,14 @@
 	toxpwr = 1
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 //Pest Spray
 /datum/reagent/toxin/pestkiller/organic/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_toxic(round(volume * 0.1))
 	mytray.adjust_pestlevel(-rand(1,2))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/spore
 	name = "Spore Toxin"
 	description = "A natural toxin produced by blob spores that inhibits vision when ingested."
@@ -561,9 +611,13 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/toxin/staminatoxin/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	if(affected_mob.adjustStaminaLoss(data * REM * seconds_per_tick, updating_stamina = FALSE))
 		. = UPDATE_MOB_HEALTH
+=======
+	affected_mob.stamina.adjust(-data * REM * seconds_per_tick, 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	data = max(data - 1, 3)
 
 /datum/reagent/toxin/polonium
@@ -660,6 +714,10 @@
 	var/newsize = 1.1 * RESIZE_DEFAULT_SIZE
 	affected_mob.update_transform(newsize/current_size)
 	current_size = newsize
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	toxpwr = 0.1 * volume
 
 	if(affected_mob.adjustBruteLoss((0.3 * volume) * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype))
@@ -673,9 +731,15 @@
 		return ..() || .
 
 /datum/reagent/toxin/venom/on_mob_end_metabolize(mob/living/affected_mob)
+<<<<<<< HEAD
 	. = ..()
 	affected_mob.update_transform(RESIZE_DEFAULT_SIZE/current_size)
 	current_size = RESIZE_DEFAULT_SIZE
+=======
+	affected_mob.update_transform(RESIZE_DEFAULT_SIZE/current_size)
+	current_size = RESIZE_DEFAULT_SIZE
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/fentanyl
 	name = "Fentanyl"
@@ -843,8 +907,14 @@
 	. = ..()
 	if(current_cycle > 10)
 		affected_mob.Sleeping(40 * REM * seconds_per_tick)
+<<<<<<< HEAD
 	if(affected_mob.adjustStaminaLoss(10 * REM * seconds_per_tick, updating_stamina = FALSE))
 		return UPDATE_MOB_HEALTH
+=======
+	affected_mob.stamina.adjust(-10 * REM * seconds_per_tick, 0)
+	..()
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/sulfonal
 	name = "Sulfonal"
@@ -1054,6 +1124,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	var/acidpwr = 10 //the amount of protection removed from the armour
 
+<<<<<<< HEAD
 // ...Why? I mean, clearly someone had to have done this and thought, well,
 // acid doesn't hurt plants, but what brought us here, to this point?
 /datum/reagent/toxin/acid/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
@@ -1061,6 +1132,8 @@
 	mytray.adjust_toxic(round(volume * 1.5))
 	mytray.adjust_weedlevel(-rand(1,2))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/acid/expose_mob(mob/living/carbon/exposed_carbon, methods=TOUCH, reac_volume)
 	. = ..()
 	if(!istype(exposed_carbon))
@@ -1102,12 +1175,15 @@
 	ph = 0.0
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 // SERIOUSLY
 /datum/reagent/toxin/acid/fluacid/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_plant_health(-round(volume * 2))
 	mytray.adjust_toxic(round(volume * 3))
 	mytray.adjust_weedlevel(-rand(1,4))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/toxin/acid/fluacid/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(affected_mob.adjustFireLoss(((current_cycle-1)/15) * REM * normalise_creation_purity() * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype))
@@ -1182,6 +1258,7 @@
 	affected_mob.say("oof ouch my bones", forced = /datum/reagent/toxin/bonehurtingjuice)
 
 /datum/reagent/toxin/bonehurtingjuice/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	if(affected_mob.adjustStaminaLoss(7.5 * REM * seconds_per_tick, updating_stamina = FALSE))
 		. = UPDATE_MOB_HEALTH
@@ -1194,6 +1271,18 @@
 			affected_mob.manual_emote(pick("oofs silently.", "looks like [affected_mob.p_their()] bones hurt.", "grimaces, as though [affected_mob.p_their()] bones hurt."))
 		if(3)
 			to_chat(affected_mob, span_warning("Your bones hurt!"))
+=======
+	affected_mob.stamina.adjust(-7.5 * REM * seconds_per_tick, 0)
+	if(SPT_PROB(10, seconds_per_tick))
+		switch(rand(1, 3))
+			if(1)
+				affected_mob.say(pick("oof.", "ouch.", "my bones.", "oof ouch.", "oof ouch my bones."), forced = /datum/reagent/toxin/bonehurtingjuice)
+			if(2)
+				affected_mob.manual_emote(pick("oofs silently.", "looks like [affected_mob.p_their()] bones hurt.", "grimaces, as though [affected_mob.p_their()] bones hurt."))
+			if(3)
+				to_chat(affected_mob, span_warning("Your bones hurt!"))
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/bonehurtingjuice/overdose_process(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -1272,13 +1361,21 @@
 /datum/reagent/toxin/viperspider/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	affected_mob.adjust_hallucinations(10 SECONDS * REM * seconds_per_tick)
+<<<<<<< HEAD
+=======
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/tetrodotoxin
 	name = "Tetrodotoxin"
 	description = "A colorless, oderless, tasteless neurotoxin usually carried by livers of animals of the Tetraodontiformes order."
 	silent_toxin = TRUE
 	reagent_state = SOLID
+<<<<<<< HEAD
 	color = COLOR_VERY_LIGHT_GRAY
+=======
+	color = "#EEEEEE"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM
 	toxpwr = 0
 	taste_mult = 0
@@ -1291,12 +1388,19 @@
 	)
 
 /datum/reagent/toxin/tetrodotoxin/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	//be ready for a cocktail of symptoms, including:
 	//numbness, nausea, vomit, breath loss, weakness, paralysis and nerve damage/impairment and eventually a heart attack if enough time passes.
 	var/need_mob_update
 	switch(current_cycle)
 		if(7 to 13)
+=======
+	//be ready for a cocktail of symptoms, including:
+	//numbness, nausea, vomit, breath loss, weakness, paralysis and nerve damage/impairment and eventually a heart attack if enough time passes.
+	switch(current_cycle)
+		if(6 to 12)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(SPT_PROB(20, seconds_per_tick))
 				affected_mob.set_jitter_if_lower(rand(2 SECONDS, 3 SECONDS) * REM * seconds_per_tick)
 			if(SPT_PROB(5, seconds_per_tick))
@@ -1305,6 +1409,7 @@
 					to_chat(affected_mob, span_warning("your [tongue.name] feels numb..."))
 				affected_mob.set_slurring_if_lower(5 SECONDS * REM * seconds_per_tick)
 			affected_mob.adjust_disgust(3.5 * REM * seconds_per_tick)
+<<<<<<< HEAD
 		if(13 to 21)
 			silent_toxin = FALSE
 			toxpwr = 0.5
@@ -1312,10 +1417,19 @@
 			if(SPT_PROB(20, seconds_per_tick))
 				affected_mob.losebreath += 1 * REM * seconds_per_tick
 				need_mob_update = TRUE
+=======
+		if(12 to 20)
+			silent_toxin = FALSE
+			toxpwr = 0.5
+			affected_mob.stamina.adjust(-2.5 * REM * seconds_per_tick, 0)
+			if(SPT_PROB(20, seconds_per_tick))
+				affected_mob.losebreath += 1 * REM * seconds_per_tick
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(SPT_PROB(40, seconds_per_tick))
 				affected_mob.set_jitter_if_lower(rand(2 SECONDS, 3 SECONDS) * REM * seconds_per_tick)
 			affected_mob.adjust_disgust(3 * REM * seconds_per_tick)
 			affected_mob.set_slurring_if_lower(1 SECONDS * REM * seconds_per_tick)
+<<<<<<< HEAD
 			affected_mob.adjustStaminaLoss(2 * REM * seconds_per_tick, updating_stamina = FALSE)
 			if(SPT_PROB(4, seconds_per_tick))
 				paralyze_limb(affected_mob)
@@ -1328,10 +1442,23 @@
 			if(SPT_PROB(40, seconds_per_tick))
 				affected_mob.losebreath += 2 * REM * seconds_per_tick
 				need_mob_update = TRUE
+=======
+			affected_mob.stamina.adjust(-2 * REM * seconds_per_tick, 0)
+			if(SPT_PROB(4, seconds_per_tick))
+				paralyze_limb(affected_mob)
+			if(SPT_PROB(10, seconds_per_tick))
+				affected_mob.adjust_confusion(rand(6 SECONDS, 8 SECONDS))
+		if(20 to 28)
+			toxpwr = 1
+			affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.5)
+			if(SPT_PROB(40, seconds_per_tick))
+				affected_mob.losebreath += 2 * REM * seconds_per_tick
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			affected_mob.adjust_disgust(3 * REM * seconds_per_tick)
 			affected_mob.set_slurring_if_lower(3 SECONDS * REM * seconds_per_tick)
 			if(SPT_PROB(5, seconds_per_tick))
 				to_chat(affected_mob, span_danger("you feel horribly weak."))
+<<<<<<< HEAD
 			need_mob_update += affected_mob.adjustStaminaLoss(5 * REM * seconds_per_tick, updating_stamina = FALSE)
 			if(SPT_PROB(8, seconds_per_tick))
 				paralyze_limb(affected_mob)
@@ -1356,6 +1483,29 @@
 
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+			affected_mob.stamina.adjust(-5 * REM * seconds_per_tick, 0)
+			if(SPT_PROB(8, seconds_per_tick))
+				paralyze_limb(affected_mob)
+			if(SPT_PROB(10, seconds_per_tick))
+				affected_mob.adjust_confusion(rand(6 SECONDS, 8 SECONDS))
+		if(28 to INFINITY)
+			toxpwr = 1.5
+			affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1, BRAIN_DAMAGE_DEATH)
+			affected_mob.set_silence_if_lower(3 SECONDS * REM * seconds_per_tick)
+			affected_mob.stamina.adjust(-5 * REM * seconds_per_tick, 0)
+			affected_mob.adjust_disgust(2 * REM * seconds_per_tick)
+			if(SPT_PROB(15, seconds_per_tick))
+				paralyze_limb(affected_mob)
+			if(SPT_PROB(10, seconds_per_tick))
+				affected_mob.adjust_confusion(rand(6 SECONDS, 8 SECONDS))
+
+	if(current_cycle >= 38 && !length(traits_not_applied) && SPT_PROB(5, seconds_per_tick) && !affected_mob.undergoing_cardiac_arrest())
+		affected_mob.set_heartattack(TRUE)
+		to_chat(affected_mob, span_danger("you feel a burning pain spread throughout your chest, oh no..."))
+
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/toxin/tetrodotoxin/proc/paralyze_limb(mob/living/affected_mob)
 	if(!length(traits_not_applied))
@@ -1383,5 +1533,42 @@
 
 /datum/reagent/toxin/tetrodotoxin/proc/block_breath(mob/living/source)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(current_cycle > 28)
 		return COMSIG_CARBON_BLOCK_BREATH
+=======
+	if(current_cycle >= 28)
+		return COMSIG_CARBON_BLOCK_BREATH
+
+/datum/reagent/toxin/radiomagnetic_disruptor // MONKESTATION ADDITION: NANITE REMOVAL CHEM
+	name = "Radiomagnetic Disruptor"
+	color = "#1d5a1aae" // grayish dark green
+	description = "A toxic chemical that rapidly destroys nanites and causes highly localized EMPs."
+	taste_description = "radio waves"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED | REAGENT_DEAD_PROCESS
+	metabolization_rate = 0.5 * REAGENTS_METABOLISM
+	overdose_threshold = 20
+	self_consuming = TRUE
+	toxpwr = 1
+	var/purge_rate = 10
+
+/datum/reagent/toxin/radiomagnetic_disruptor/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	handle_effects(affected_mob, seconds_per_tick)
+
+/datum/reagent/toxin/radiomagnetic_disruptor/on_mob_dead(mob/living/carbon/affected_mob, seconds_per_tick)
+	. = ..()
+	handle_effects(affected_mob, seconds_per_tick)
+
+/datum/reagent/toxin/radiomagnetic_disruptor/proc/handle_effects(mob/living/carbon/affected_mob, seconds_per_tick)
+	if (SPT_PROB(2, seconds_per_tick))
+		empulse(affected_mob, heavy_range = 0, light_range = 1)
+	var/datum/component/nanites/nanites = affected_mob.GetComponent(/datum/component/nanites)
+	if (nanites)
+		nanites.adjust_nanites(null, -(overdosed ? purge_rate * 2 : purge_rate) * seconds_per_tick)
+
+/datum/reagent/toxin/radiomagnetic_disruptor/overdose_process(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+	. = ..()
+	if (SPT_PROB(4, seconds_per_tick))
+		empulse(affected_mob, heavy_range = 1, light_range = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -23,9 +23,19 @@ GLOBAL_LIST_INIT(posibrain_names, world.file2list("strings/names/posibrain.txt")
 GLOBAL_LIST_INIT(nightmare_names, world.file2list("strings/names/nightmare.txt"))
 GLOBAL_LIST_INIT(megacarp_first_names, world.file2list("strings/names/megacarp1.txt"))
 GLOBAL_LIST_INIT(megacarp_last_names, world.file2list("strings/names/megacarp2.txt"))
+<<<<<<< HEAD
 GLOBAL_LIST_INIT(cyberauth_names, world.file2list("strings/names/cyberauth.txt"))
 GLOBAL_LIST_INIT(syndicate_monkey_names, world.file2list("strings/names/syndicate_monkey.txt"))
 GLOBAL_LIST_INIT(cargorilla_names, world.file2list("strings/names/cargorilla.txt"))
+=======
+GLOBAL_LIST_INIT(oozeling_first_names, world.file2list("strings/names/ooze_first.txt"))
+GLOBAL_LIST_INIT(oozeling_last_names, world.file2list("strings/names/ooze_last.txt"))
+GLOBAL_LIST_INIT(simian_last_names, world.file2list("monkestation/strings/names/simian_last.txt"))
+GLOBAL_LIST_INIT(simian_names_female, world.file2list("monkestation/strings/names/simian_female_first.txt"))
+GLOBAL_LIST_INIT(simian_names_male, world.file2list("monkestation/strings/names/simian_male_first.txt"))
+GLOBAL_LIST_INIT(cyberauth_names, world.file2list("strings/names/cyberauth.txt"))
+GLOBAL_LIST_INIT(syndicate_monkey_names, world.file2list("strings/names/syndicate_monkey.txt"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 GLOBAL_LIST_INIT(guardian_first_names, world.file2list("strings/names/guardian_descriptions.txt"))
 GLOBAL_LIST_INIT(guardian_tech_surnames, world.file2list("strings/names/guardian_gamepieces.txt"))
 GLOBAL_LIST_INIT(guardian_fantasy_surnames, world.file2list("strings/names/guardian_tarot.txt"))
@@ -43,3 +53,5 @@ GLOBAL_LIST_INIT(greek_alphabet, world.file2list("strings/greek_alphabet.txt"))
 GLOBAL_LIST_INIT(hive_names,  world.file2list("strings/names/hive_names.txt"))
 //loaded on startup because of "
 //would include in rsc if ' was used
+
+GLOBAL_LIST_INIT(pill_names, list())

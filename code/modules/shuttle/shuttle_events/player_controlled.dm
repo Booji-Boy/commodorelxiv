@@ -17,17 +17,37 @@
 
 /// Attempt to grant control of a mob to ghosts before spawning it in. if spawn_anyway_if_no_player = TRUE, we spawn the mob even if there's no ghosts
 /datum/shuttle_event/simple_spawner/player_controlled/proc/try_grant_ghost_control(spawn_type)
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(ghost_alert_string + " (Warning: you will not be able to return to your body!)", check_jobban = role_type, poll_time = 10 SECONDS, alert_pic = spawn_type, role_name_text = "shot at shuttle", amount_to_pick = 1)
 	if(isnull(chosen_one) && !spawn_anyway_if_no_player)
 		return
 	var/mob/living/new_mob = new spawn_type (get_turf(get_spawn_turf()))
 	new_mob.ckey = chosen_one.ckey
 	post_spawn(new_mob)
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(
+		ghost_alert_string + " (Warning: you will not be able to return to your body!)",
+		check_jobban = role_type,
+		poll_time = 10 SECONDS,
+		pic_source = spawn_type,
+		role_name_text = "shot at shuttle"
+	)
+	var/mob/dead/observer/candidate = length(candidates) ? pick(candidates) : null
+	if(candidate || spawn_anyway_if_no_player)
+		var/mob/living/new_mob = new spawn_type (get_turf(get_spawn_turf()))
+		if(candidate)
+			new_mob.ckey = candidate.ckey
+		post_spawn(new_mob)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///BACK FOR REVENGE!!!
 /datum/shuttle_event/simple_spawner/player_controlled/alien_queen
 	name = "ALIEN QUEEN! (Kinda dangerous!)"
+<<<<<<< HEAD
 	spawning_list = list(/mob/living/carbon/alien/adult/royal/queen = 1, /obj/vehicle/sealed/mecha/ripley = 1)
+=======
+	spawning_list = list(/mob/living/carbon/alien/adult/royal/queen = 1, /obj/vehicle/sealed/mecha/working/ripley = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	spawning_flags = SHUTTLE_EVENT_HIT_SHUTTLE
 
 	event_probability = 0.2

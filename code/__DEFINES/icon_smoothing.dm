@@ -16,10 +16,13 @@
 /// it represents the sides of our directional border object that have a neighbor
 /// Is incompatible with SMOOTH_CORNERS because border objects don't have corners
 #define SMOOTH_BORDER_OBJECT (1<<6)
+<<<<<<< HEAD
 /// Has a smooth broken sprite, used to decide whether to apply an offset to the broken overlay or not. For /turf/open only.
 #define SMOOTH_BROKEN_TURF (1<<7)
 /// Has a smooth burnt sprite, used to decide whether to apply an offset to the burnt overlay or not. For /turf/open only.
 #define SMOOTH_BURNT_TURF (1<<8)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 DEFINE_BITFIELD(smoothing_flags, list(
 	"SMOOTH_CORNERS" = SMOOTH_CORNERS,
@@ -29,8 +32,11 @@ DEFINE_BITFIELD(smoothing_flags, list(
 	"SMOOTH_QUEUED" = SMOOTH_QUEUED,
 	"SMOOTH_OBJ" = SMOOTH_OBJ,
 	"SMOOTH_BORDER_OBJECT" = SMOOTH_BORDER_OBJECT,
+<<<<<<< HEAD
 	"SMOOTH_BROKEN_TURF" = SMOOTH_BROKEN_TURF,
 	"SMOOTH_BURNT_TURF" = SMOOTH_BURNT_TURF,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ))
 
 /// Components of a smoothing junction
@@ -137,7 +143,15 @@ DEFINE_BITFIELD(smoothing_junction, list(
 #define SMOOTH_GROUP_SURVIVAL_TITANIUM_WALLS S_TURF(59) ///turf/closed/wall/mineral/titanium/survival
 #define SMOOTH_GROUP_TURF_OPEN_CLIFF S_TURF(60) ///turf/open/cliff
 
+<<<<<<< HEAD
 #define MAX_S_TURF 60 //Always match this value with the one above it.
+=======
+#define SMOOTH_GROUP_ELEVATED_PLASTEEL S_TURF(60)
+#define SMOOTH_GROUP_LOWERED_PLASTEEL S_TURF(61)
+#define SMOOTH_GROUP_FISSURE S_TURF(62)
+
+#define MAX_S_TURF 62 //Always match this value with the one above it.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define S_OBJ(num) ("-" + #num + ",")
 /* /obj included */
@@ -160,12 +174,17 @@ DEFINE_BITFIELD(smoothing_junction, list(
 #define SMOOTH_GROUP_BAMBOO_WALLS S_TURF(17) //![/turf/closed/wall/mineral/bamboo, /obj/structure/falsewall/bamboo]
 #define SMOOTH_GROUP_PLASTINUM_WALLS S_TURF(18) //![turf/closed/indestructible/riveted/plastinum]
 
+#define SMOOTH_GROUP_SHIPWALLS S_OBJ(19) ///turf/closed/wall/mineral/titanium/spaceship
+#define SMOOTH_GROUP_STONE_WALLS S_OBJ(20) ///turf/closed/wall/mineral/stone, /obj/structure/falsewall/stone
+
 #define SMOOTH_GROUP_PAPERFRAME S_OBJ(21) ///obj/structure/window/paperframe, /obj/structure/mineral_door/paperframe
 
 #define SMOOTH_GROUP_WINDOW_FULLTILE S_OBJ(22) ///turf/closed/indestructible/fakeglass, /obj/structure/window/fulltile, /obj/structure/window/reinforced/fulltile, /obj/structure/window/reinforced/tinted/fulltile, /obj/structure/window/plasma/fulltile, /obj/structure/window/reinforced/plasma/fulltile
 #define SMOOTH_GROUP_WINDOW_FULLTILE_BRONZE S_OBJ(23) ///obj/structure/window/bronze/fulltile
 #define SMOOTH_GROUP_WINDOW_FULLTILE_PLASTITANIUM S_OBJ(24) ///turf/closed/indestructible/opsglass, /obj/structure/window/reinforced/plasma/plastitanium
 #define SMOOTH_GROUP_WINDOW_FULLTILE_SHUTTLE S_OBJ(25) ///obj/structure/window/reinforced/shuttle
+
+#define SMOOTH_GROUP_WINDOW_DIRECTIONAL_TRAM S_OBJ(26) ///obj/structure/window/reinforced/tram
 
 #define SMOOTH_GROUP_LATTICE S_OBJ(31) ///obj/structure/lattice
 #define SMOOTH_GROUP_CATWALK S_OBJ(32) ///obj/structure/lattice/catwalk
@@ -181,6 +200,7 @@ DEFINE_BITFIELD(smoothing_junction, list(
 #define SMOOTH_GROUP_BRONZE_TABLES S_OBJ(54) ///obj/structure/table/bronze
 #define SMOOTH_GROUP_ABDUCTOR_TABLES S_OBJ(55) ///obj/structure/table/abductor
 #define SMOOTH_GROUP_GLASS_TABLES S_OBJ(56) ///obj/structure/table/glass
+#define SMOOTH_GROUP_SANDSTONE_TABLES S_OBJ(57) ///obj/structure/table/sandstone //MONKESTATION EDIT
 
 #define SMOOTH_GROUP_ALIEN_NEST S_OBJ(60) ///obj/structure/bed/nest
 #define SMOOTH_GROUP_ALIEN_RESIN S_OBJ(61) ///obj/structure/alien/resin
@@ -204,6 +224,13 @@ DEFINE_BITFIELD(smoothing_junction, list(
 #define SMOOTH_GROUP_SPIDER_WEB_WALL_TOUGH S_OBJ(73) // /obj/structure/spider/stickyweb/sealed/thick
 #define SMOOTH_GROUP_SPIDER_WEB_WALL_MIRROR S_OBJ(74) // /obj/structure/spider/stickyweb/sealed/reflector
 
+#define SMOOTH_GROUP_WATER S_OBJ(73) ///obj/effect/abstract/liquid_turf
+
+#define SMOOTH_GROUP_WINDOW_SILL S_OBJ(74)
+
+#define SMOOTH_GROUP_GRILLE S_OBJ(75)
+
+#define SMOOTH_GROUP_WAXWALL S_OBJ(76)
 /// Performs the work to set smoothing_groups and canSmoothWith.
 /// An inlined function used in both turf/Initialize and atom/Initialize.
 #define SETUP_SMOOTHING(...) \

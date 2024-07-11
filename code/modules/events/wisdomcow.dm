@@ -60,6 +60,7 @@
 /datum/event_admin_setup/input_number/wisdom_cow/apply_to_event(datum/round_event/wisdomcow/event)
 	event.selected_experience = chosen_value
 
+<<<<<<< HEAD
 /datum/event_admin_setup/listed_options/wisdom_cow_milk
 	input_text = "Select a kind of milk?"
 	normal_run_option = "Random Reagent"
@@ -69,3 +70,6 @@
 
 /datum/event_admin_setup/listed_options/wisdom_cow_milk/apply_to_event(datum/round_event/scrubber_overflow/event)
 	event.forced_reagent_type = chosen
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

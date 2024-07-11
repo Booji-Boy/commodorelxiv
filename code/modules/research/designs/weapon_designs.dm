@@ -79,6 +79,31 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 	autolathe_exportable = FALSE
 
+/datum/design/buckshot_shell
+	name = "Buckshot Shell"
+	id = "buckshot_shell"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 4000)
+	build_path = /obj/item/ammo_casing/shotgun/buckshot
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+	autolathe_exportable = FALSE
+
+/datum/design/shotgun_slug
+	name = "12g Slug"
+	id = "slug_shell"
+	desc = "A 12g slug shell"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = 4000)
+	build_path = /obj/item/ammo_casing/shotgun
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+	autolathe_exportable = FALSE
+
 /datum/design/shotgun_dart/sec
 	id = "sec_dart"
 	desc = "Dart shotgun shells. Fires a single projectile (a dart). Can be filled with chemicals, \
@@ -101,6 +126,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 	autolathe_exportable = FALSE
 
+<<<<<<< HEAD
 /datum/design/mag_autorifle
 	name = "WT-550 Autorifle Magazine (4.6x30mm) (Lethal)"
 	desc = "A 20 round magazine for the out of date WT-550 Autorifle."
@@ -129,6 +155,8 @@
 	build_path = /obj/item/ammo_box/magazine/wt550m9/wtic
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/design/pin_testing
 	name = "Test-Range Firing Pin"
 	desc = "This safety firing pin allows firearms to be operated within proximity to a firing range."
@@ -209,8 +237,13 @@
 	desc = "A heavy shield designed for blocking projectiles, weaker to melee."
 	id = "ballistic_shield"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 2, /datum/material/titanium =SHEET_MATERIAL_AMOUNT)
 	build_path = /obj/item/shield/ballistic
+=======
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/diamond =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/uranium = SHEET_MATERIAL_AMOUNT * 4, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 2.25, /datum/material/gold =SHEET_MATERIAL_AMOUNT * 2.5)
+	build_path = /obj/item/weaponcrafting/gunkit/beam_rifle
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_MELEE
 	)
@@ -222,8 +255,13 @@
 	desc = "The kit that produces a weapon made to end your foes on an existential level. Why the fuck can you make this?"
 	id = "beamrifle"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/diamond =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/uranium = SHEET_MATERIAL_AMOUNT * 4, /datum/material/silver = SHEET_MATERIAL_AMOUNT * 2.25, /datum/material/gold =SHEET_MATERIAL_AMOUNT * 2.5)
 	build_path = /obj/item/weaponcrafting/gunkit/beam_rifle
+=======
+	materials = list(/datum/material/gold =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/uranium = SHEET_MATERIAL_AMOUNT * 5)
+	build_path = /obj/item/weaponcrafting/gunkit/decloner
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_KITS
 	)

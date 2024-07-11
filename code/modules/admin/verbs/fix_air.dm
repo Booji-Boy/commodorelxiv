@@ -3,6 +3,7 @@ ADMIN_VERB_AND_CONTEXT_MENU(fix_air, R_ADMIN, "Fix Air", "Fixes air in a specifi
 	message_admins("[key_name_admin(user)] fixed air with range [range] in area [locale.loc.name]")
 	user.mob.log_message("fixed air with range [range] in area [locale.loc.name]", LOG_ADMIN)
 
+<<<<<<< HEAD
 	for(var/turf/open/valid_range_turf in range(range,locale))
 		if(valid_range_turf.blocks_air)
 		//skip walls
@@ -11,3 +12,22 @@ ADMIN_VERB_AND_CONTEXT_MENU(fix_air, R_ADMIN, "Fix Air", "Fixes air in a specifi
 		valid_range_turf.copy_air(GM)
 		valid_range_turf.temperature = initial(valid_range_turf.temperature)
 		valid_range_turf.update_visuals()
+=======
+	if(!holder)
+		to_chat(src, "Only administrators may use this command.", confidential = TRUE)
+		return
+	if(check_rights(R_ADMIN,1))
+		var/range=input("Enter range:","Num",2) as num
+		message_admins("[key_name_admin(usr)] fixed air with range [range] in area [T.loc.name]")
+		usr.log_message("fixed air with range [range] in area [T.loc.name]", LOG_ADMIN)
+		for(var/turf/open/F in range(range,T))
+			if(F.blocks_air)
+			//skip walls
+				continue
+			var/datum/gas_mixture/GM = SSair.parse_gas_string(F.initial_gas_mix, /datum/gas_mixture/turf)
+			F.copy_air(GM)
+			F.update_visuals()
+
+			if(F.pollution)
+				qdel(F.pollution)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

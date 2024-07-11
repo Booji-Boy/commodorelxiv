@@ -110,8 +110,17 @@ ADMIN_VERB(cmd_admin_add_freeform_ai_law, R_ADMIN, "Add Custom AI Law", "Add a c
 	var/datum/round_event/ion_storm/add_law_only/ion = new
 	ion.announce_chance = announce_ion_laws
 	ion.ionMessage = input
+<<<<<<< HEAD
 
 	BLACKBOX_LOG_ADMIN_VERB("Add Custom AI Law")
+=======
+	ion.start() // Monkeystation Edit: Fixes AI law additions.
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Add Custom AI Law") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/admin_call_shuttle()
+	set category = "Admin.Events"
+	set name = "Call Shuttle"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(call_shuttle, R_ADMIN, "Call Shuttle", "Force a shuttle call with additional modifiers.", ADMIN_CATEGORY_EVENTS)
 	if(EMERGENCY_AT_LEAST_DOCKED)
@@ -164,6 +173,16 @@ ADMIN_VERB(disable_shuttle, R_ADMIN, "Disable Shuttle", "Those fuckers aren't ge
 		sender_override = "Emergency Shuttle Uplink Alert",
 		color_override = "grey",
 	)
+<<<<<<< HEAD
+=======
+
+/client/proc/admin_enable_shuttle()
+	set category = "Admin.Events"
+	set name = "Enable Shuttle"
+
+	if(!check_rights(R_ADMIN))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(enable_shuttle, R_ADMIN, "Enable Shuttle", "Those fuckers ARE getting out.", ADMIN_CATEGORY_EVENTS)
 	if(SSshuttle.emergency.mode != SHUTTLE_DISABLED)
@@ -245,7 +264,7 @@ ADMIN_VERB(run_weather, R_FUN, "Run Weather", "Triggers specific weather on the 
 	if(!isnum(z_level))
 		return
 
-	SSweather.run_weather(weather_type, z_level)
+	SSweather.run_weather(new weather_type(), z_level)
 
 	message_admins("[key_name_admin(user)] started weather of type [weather_type] on the z-level [z_level].")
 	log_admin("[key_name(user)] started weather of type [weather_type] on the z-level [z_level].")

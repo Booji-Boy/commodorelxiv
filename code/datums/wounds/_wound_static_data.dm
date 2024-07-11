@@ -185,7 +185,11 @@
 
 	return new wound_path_to_generate
 
+<<<<<<< HEAD
 /datum/wound_pregen_data/Destroy(force)
+=======
+/datum/wound_pregen_data/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/error_message = "[src], a singleton wound pregen data instance, was destroyed! This should not happen!"
 	if (force)
 		error_message += " NOTE: This Destroy() was called with force == TRUE. This instance will be deleted and replaced with a new one."

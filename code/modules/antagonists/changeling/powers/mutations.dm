@@ -200,9 +200,15 @@
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
 	attack_verb_simple = list("attack", "slash", "stab", "slice", "tear", "lacerate", "rip", "dice", "cut")
 	sharpness = SHARP_EDGED
+<<<<<<< HEAD
 	wound_bonus = 10
 	bare_wound_bonus = 10
 	armour_penetration = 35
+=======
+	wound_bonus = -20
+	bare_wound_bonus = 20
+	resistance_flags = FLAMMABLE //MONKESTATION ADDITION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/can_drop = FALSE
 	var/fake = FALSE
 
@@ -293,6 +299,7 @@
 	throw_range = 0
 	throw_speed = 0
 	can_hold_up = FALSE
+	resistance_flags = FLAMMABLE //MONKESTATION ADDITION
 
 /obj/item/gun/magic/tentacle/Initialize(mapload, silent)
 	. = ..()
@@ -411,7 +418,11 @@
 	if(!isliving(victim) || target.anchored || victim.throwing)
 		return BULLET_ACT_BLOCK
 
+<<<<<<< HEAD
 	if(!iscarbon(victim) || !ishuman(ling) || !ling.combat_mode)
+=======
+	if(!iscarbon(victim) || !ishuman(ling) || !(ling.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		victim.visible_message(
 			span_danger("[victim] is grabbed by [ling]'s [src]]!"),
 			span_userdanger("\A [src] grabs you and pulls you towards [ling]!"),
@@ -442,7 +453,11 @@
 		to_chat(ling, span_danger("[victim] has nothing in hand to disarm!"))
 		return BULLET_ACT_HIT
 
+<<<<<<< HEAD
 	if(ling.combat_mode)
+=======
+	if(ling.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		victim.visible_message(
 			span_danger("[victim] is thrown towards [ling] by \a [src]!"),
 			span_userdanger("\A [src] grabs you and throws you towards [ling]!"),
@@ -498,6 +513,7 @@
 	lefthand_file = 'icons/mob/inhands/antag/changeling_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/antag/changeling_righthand.dmi'
 	block_chance = 50
+	resistance_flags = FLAMMABLE //MONKESTATION ADDITION
 
 	var/remaining_uses //Set by the changeling ability.
 
@@ -547,6 +563,7 @@
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = 0
 	heat_protection = 0
+	resistance_flags = FLAMMABLE //MONKESTATION ADDITION
 
 /datum/armor/armor_changeling
 	melee = 40
@@ -555,7 +572,7 @@
 	energy = 50
 	bomb = 10
 	bio = 10
-	fire = 90
+	/*fire = 90*/ //MONKESTATION REMOVAL
 	acid = 90
 
 /obj/item/clothing/suit/armor/changeling/Initialize(mapload)
@@ -572,6 +589,7 @@
 	item_flags = DROPDEL
 	armor_type = /datum/armor/helmet_changeling
 	flags_inv = HIDEEARS|HIDEHAIR|HIDEEYES|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT
+	resistance_flags = FLAMMABLE //MONKESTATION ADDITION
 
 /datum/armor/helmet_changeling
 	melee = 40
@@ -580,7 +598,7 @@
 	energy = 50
 	bomb = 10
 	bio = 10
-	fire = 90
+	/*fire = 90*/ //MONKESTATION REMOVAL
 	acid = 90
 
 /obj/item/clothing/head/helmet/changeling/Initialize(mapload)

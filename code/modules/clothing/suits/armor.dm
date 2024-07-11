@@ -58,6 +58,11 @@
 
 /obj/item/clothing/suit/armor/vest/alt/sec
 	icon_state = "armor_sec"
+	body_parts_covered = CHEST|GROIN
+
+/obj/item/clothing/suit/armor/vest/alt/sec/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/toggle_icon)
 
 /obj/item/clothing/suit/armor/vest/marine
 	name = "tactical armor vest"
@@ -167,7 +172,7 @@
 /obj/item/clothing/suit/armor/hos/trenchcoat/winter
 	name = "head of security's winter trenchcoat"
 	desc = "A trenchcoat enhanced with a special lightweight kevlar, padded with wool on the collar and inside. You feel strangely lonely wearing this coat."
-	icon_state = "hoswinter"
+	icon_state = "pimpcoat" // monkestation edit
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 
 /obj/item/clothing/suit/armor/hos/hos_formal
@@ -399,7 +404,7 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT_OFF
 	heat_protection = CHEST | GROIN | LEGS | FEET | ARMS | HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
-	slowdown = 0.7
+	slowdown = 0.5 //monkestation edit, 0.7 to 0.5
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	clothing_traits = list(TRAIT_BRAWLING_KNOCKDOWN_BLOCKED)
 
@@ -408,7 +413,7 @@
 
 /datum/armor/armor_swat
 	melee = 40
-	bullet = 30
+	bullet = 40 //monkestation edit, 30 to 40
 	laser = 30
 	energy = 40
 	bomb = 50
@@ -669,6 +674,7 @@
 	fire = 40
 	acid = 50
 	wound = 30
+<<<<<<< HEAD
 
 /obj/item/clothing/suit/armor/vest/military
 	name = "Crude chestplate"
@@ -714,3 +720,5 @@
 	fire = 50
 	acid = 50
 	wound = 30
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -2,11 +2,15 @@
 	name = "infrared emitter"
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
+<<<<<<< HEAD
 	base_icon_state = "infrared"
 	custom_materials = list(
 		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT,
 		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 5,
 	)
+=======
+	custom_materials = list(/datum/material/iron=HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass=SMALL_MATERIAL_AMOUNT*5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	is_position_sensitive = TRUE
 	drop_sound = 'sound/items/handling/component_drop.ogg'
 	pickup_sound = 'sound/items/handling/component_pickup.ogg'

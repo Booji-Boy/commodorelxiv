@@ -11,6 +11,10 @@ import {
   Section,
   Stack,
 } from '../../components';
+<<<<<<< HEAD
+=======
+import { GeneticMakeupInfo } from './GeneticMakeupInfo';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { PULSE_DURATION_MAX, PULSE_STRENGTH_MAX } from './constants';
 import { GeneticMakeupInfo } from './GeneticMakeupInfo';
 

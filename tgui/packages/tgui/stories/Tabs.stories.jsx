@@ -16,7 +16,11 @@ export const meta = {
 const TAB_RANGE = ['Tab #1', 'Tab #2', 'Tab #3', 'Tab #4'];
 
 const Story = (props) => {
+<<<<<<< HEAD
   const [tabProps, setTabProps] = useState({});
+=======
+  const [tabProps, setTabProps] = useLocalState('tabProps', {});
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <>
       <Section>
@@ -103,8 +107,13 @@ const Story = (props) => {
 };
 
 const TabsPrefab = (props) => {
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(0);
   const [tabProps] = useState({});
+=======
+  const [tabIndex, setTabIndex] = useLocalState('tabIndex', 0);
+  const [tabProps] = useLocalState('tabProps', {});
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Tabs
       vertical={tabProps.vertical}

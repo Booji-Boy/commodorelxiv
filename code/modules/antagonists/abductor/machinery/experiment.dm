@@ -125,6 +125,9 @@
 	if(!ishuman(occupant)) //We shouldn't be processing anything other than humans
 		return "Not a humanoid!"
 
+	if(!istype(H)) //We shouldn't be processing anything other than humans, and if we do we runtime.
+		return
+
 	var/datum/antagonist/abductor/user_abductor = user.mind.has_antag_datum(/datum/antagonist/abductor)
 	if(!user_abductor)
 		return "Authorization failure. Contact mothership immediately."

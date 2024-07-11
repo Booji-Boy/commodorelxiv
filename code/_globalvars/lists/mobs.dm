@@ -32,6 +32,10 @@ GLOBAL_LIST_INIT(abstract_mob_types, list(
 	/mob/living/simple_animal/hostile/mimic, // Cannot exist if spawned without being passed an item reference
 	/mob/living/simple_animal/hostile/retaliate,
 	/mob/living/simple_animal/hostile,
+<<<<<<< HEAD
+=======
+	/mob/living/simple_animal/pet,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/mob/living/simple_animal/soulscythe, // As mimic, can't exist if spawned outside an item
 	/mob/living/simple_animal,
 ))
@@ -63,6 +67,7 @@ GLOBAL_LIST_EMPTY(spidermobs) //all sentient spider mobs
 GLOBAL_LIST_EMPTY(bots_list)
 GLOBAL_LIST_EMPTY(aiEyes)
 GLOBAL_LIST_EMPTY(suit_sensors_list) //all people with suit sensors on
+GLOBAL_LIST_EMPTY(nanite_sensors_list) //app people with nanite monitoring program
 
 /// All alive mobs with clients.
 GLOBAL_LIST_EMPTY(alive_player_list)
@@ -91,6 +96,7 @@ GLOBAL_LIST_INIT(all_languages, init_all_languages())
 // /List of language prototypes to reference, assoc "name" = typepath
 GLOBAL_LIST_INIT(language_types_by_name, init_language_types_by_name())
 
+<<<<<<< HEAD
 /proc/init_language_prototypes()
 	var/list/lang_list = list()
 	for(var/datum/language/lang_type as anything in typesof(/datum/language))
@@ -132,6 +138,12 @@ GLOBAL_LIST_INIT_TYPED(species_prototypes, /datum/species, init_species_prototyp
 	for(var/species_type in subtypesof(/datum/species))
 		species_list[species_type] = new species_type()
 	return species_list
+=======
+GLOBAL_LIST_EMPTY(language_datum_instances)
+GLOBAL_LIST_EMPTY(all_languages)
+///List of all languages ("name" = type)
+GLOBAL_LIST_EMPTY(language_types_by_name)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 GLOBAL_LIST_EMPTY(sentient_disease_instances)
 
@@ -186,7 +198,11 @@ GLOBAL_LIST_INIT(construct_radial_images, list(
 /proc/get_crewmember_minds()
 	var/list/minds = list()
 	for(var/datum/record/locked/target in GLOB.manifest.locked)
+<<<<<<< HEAD
 		var/datum/mind/mind = target.mind_ref.resolve()
+=======
+		var/datum/mind/mind = target.mind_ref?.resolve() // monkestation edit: weakreffed mind ref
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(mind)
 			minds += mind
 	return minds

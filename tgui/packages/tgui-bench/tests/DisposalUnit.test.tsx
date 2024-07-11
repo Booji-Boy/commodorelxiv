@@ -12,6 +12,14 @@ const renderUi = createRenderer((dataJson: string) => {
     backendUpdate({
       data: Byond.parseJson(dataJson),
     }),
+<<<<<<< HEAD
+=======
+  );
+  return (
+    <StoreProvider store={store}>
+      <DisposalUnit />
+    </StoreProvider>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
   return <DisposalUnit />;
 });

@@ -20,8 +20,12 @@
 	RegisterSignal(owner, COMSIG_MOB_FIRED_GUN, PROC_REF(staff_check))
 
 	//adds the relay_attackers element to the owner so whoever attacks him becomes guilty.
+<<<<<<< HEAD
 	if(!HAS_TRAIT(owner, TRAIT_RELAYING_ATTACKER))
 		owner.AddElement(/datum/element/relay_attackers)
+=======
+	owner.AddElement(/datum/element/relay_attackers)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(owner, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
 
 	//signal that checks for dishonorable attacks
@@ -56,7 +60,11 @@
 		return
 	if(weapon?.item_flags & NOBLUDGEON)
 		return
+<<<<<<< HEAD
 	if(!honorbound.combat_mode && (HAS_TRAIT(clicked_mob, TRAIT_ALLOWED_HONORBOUND_ATTACK) || ((!weapon || !weapon.force) && !LAZYACCESS(modifiers, RIGHT_CLICK))))
+=======
+	if(!(honorbound.istate & ISTATE_HARM) && (HAS_TRAIT(clickedmob, TRAIT_ALLOWED_HONORBOUND_ATTACK) || ((!weapon || !weapon.force) && !(honorbound.istate & ISTATE_SECONDARY))))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(!(clicked_mob in guilty))
 		check_visible_guilt(clicked_mob)
@@ -97,7 +105,11 @@
 	if(user in guilty)
 		return
 	var/datum/mind/guilty_conscience = user.mind
+<<<<<<< HEAD
 	if(guilty_conscience && reason != GUILT_REASON_DECLARATION) //sec and medical are immune to becoming guilty through attack (we don't check holy because holy shouldn't be able to attack eachother anyways)
+=======
+	if(guilty_conscience && !declaration) //sec and medical are immune to becoming guilty through attack (we don't check holy because holy shouldn't be able to attack eachother anyways)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/datum/job/job = guilty_conscience.assigned_role
 		if(job.departments_bitflags & (DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SECURITY))
 			return
@@ -109,7 +121,11 @@
 /datum/brain_trauma/special/honorbound/proc/on_attacked(mob/source, mob/attacker, attack_flags)
 	SIGNAL_HANDLER
 	if(!(attack_flags & (ATTACKER_STAMINA_ATTACK|ATTACKER_SHOVING)))
+<<<<<<< HEAD
 		guilty(attacker, "for attacking [source] first.")
+=======
+		guilty(attacker)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Called by attack_honor signal to check whether an attack should be allowed or not

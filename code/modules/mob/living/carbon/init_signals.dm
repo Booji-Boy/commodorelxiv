@@ -8,7 +8,11 @@
 
 	//Traits that register add only
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBREATH), PROC_REF(on_nobreath_trait_gain))
+<<<<<<< HEAD
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_LIVERLESS_METABOLISM), PROC_REF(on_liverless_metabolism_trait_gain))
+=======
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOMETABOLISM), PROC_REF(on_nometabolism_trait_gain))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_VIRUSIMMUNE), PROC_REF(on_virusimmune_trait_gain))
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_TOXIMMUNE), PROC_REF(on_toximmune_trait_gain))
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_GENELESS), PROC_REF(on_geneless_trait_gain))
@@ -93,7 +97,11 @@
 	SIGNAL_HANDLER
 
 	for(var/datum/disease/disease as anything in diseases)
+<<<<<<< HEAD
 		disease.cure(FALSE)
+=======
+		disease.cure(add_resistance = TRUE, target = src) // monkestation edit - virology bs
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * On gain of TRAIT_TOXIMMUNE

@@ -10,10 +10,31 @@
 	if(attack_closed_turf && isclosedturf(target))
 		return TRUE
 
+<<<<<<< HEAD
 	if(target in living_mob.ai_controller.blackboard[BB_FRIENDS_LIST])
 		return FALSE
 
 	return ..()
+=======
+	if (ismob(target))
+		var/mob/mob_target = target
+		if (mob_target.status_flags & GODMODE)
+			return FALSE
+		if (mob_target.stat > attack_until_past_stat)
+			return FALSE
+
+	if (living_mob.see_invisible < target.invisibility)
+		return FALSE
+	if (isturf(target.loc) && living_mob.z != target.z) // z check will always fail if target is in a mech
+		return FALSE
+	if (!living_mob.ai_controller) // How did you get here?
+		return FALSE
+
+	if (!(target in living_mob.ai_controller.blackboard[BB_FRIENDS_LIST]))
+		// We don't have any friends, anything's fair game
+		// OR This is not our friend, fire at will
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///friends dont care about factions
 /datum/targeting_strategy/basic/not_friends/faction_check(mob/living/living_mob, mob/living/the_target)

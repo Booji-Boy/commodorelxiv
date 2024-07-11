@@ -5,12 +5,16 @@
 	base_icon_state = "durand"
 	movedelay = 4
 	max_integrity = 400
+<<<<<<< HEAD
 	accesses = list(ACCESS_MECH_SCIENCE, ACCESS_MECH_SECURITY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	armor_type = /datum/armor/mecha_durand
 	max_temperature = 30000
 	force = 40
 	destruction_sleep_duration = 40
 	exit_delay = 40
+	encumbrance_gap = 2
 	wreckage = /obj/structure/mecha_wreckage/durand
 	mech_type = EXOSUIT_MODULE_DURAND
 	max_equip_by_category = list(
@@ -165,8 +169,13 @@ own integrity back to max. Shield is automatically dropped if we run out of powe
 	max_integrity = 10000
 	anchored = TRUE
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_power = 2
+=======
+	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_power = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_ELECTRIC_CYAN
 	light_on = FALSE
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF //The shield should not take damage from fire,  lava, or acid; that's the mech's job.

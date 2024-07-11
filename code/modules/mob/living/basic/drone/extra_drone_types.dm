@@ -33,7 +33,11 @@
 /mob/living/basic/drone/syndrone/Initialize(mapload)
 	. = ..()
 	var/datum/component/uplink/hidden_uplink = internal_storage.GetComponent(/datum/component/uplink)
+<<<<<<< HEAD
 	hidden_uplink.uplink_handler.set_telecrystals(telecrystal_count)
+=======
+	hidden_uplink.set_telecrystals(telecrystal_count)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/mob_spawn/ghost_role/drone/syndrone
 	name = "syndrone shell"
@@ -50,6 +54,17 @@
 /datum/job/syndrone
 	title = ROLE_SYNDICATE_DRONE
 	policy_index = ROLE_SYNDICATE_DRONE
+
+/// A version of the syndrone that gets a nuclear uplink, a firearms implant, and 30 TC.
+/mob/living/basic/drone/syndrone/badass
+	name = "Badass Syndrone"
+	default_storage = /obj/item/uplink/nuclear
+	telecrystal_count = 30
+
+/mob/living/basic/drone/syndrone/badass/Initialize(mapload)
+	. = ..()
+	var/obj/item/implant/weapons_auth/weapon_implant = new/obj/item/implant/weapons_auth(src)
+	weapon_implant.implant(src, force = TRUE)
 
 /// A version of the syndrone that gets a nuclear uplink, a firearms implant, and 30 TC.
 /mob/living/basic/drone/syndrone/badass

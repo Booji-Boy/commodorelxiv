@@ -22,11 +22,25 @@
 	slot_flags = ITEM_SLOT_BACK //ERROOOOO
 	resistance_flags = NONE
 	max_integrity = 300
+<<<<<<< HEAD
 	storage_type = /datum/storage/backpack
+=======
+	var/shoulder_carry = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/storage/backpack/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/attack_equip)
+
+/obj/item/storage/backpack/equipped(mob/user, slot, initial)
+	if(slot == ITEM_SLOT_BACK)
+		if(HAS_TRAIT(user, TRAIT_BELT_SATCHEL))
+			slowdown++
+	. = ..()
+
+/obj/item/storage/backpack/dropped(mob/user, silent)
+	. = ..()
+	slowdown = initial(slowdown)
 
 /*
  * Backpack Types
@@ -300,6 +314,28 @@
 	desc = "A trendy looking satchel."
 	icon_state = "satchel-norm"
 	inhand_icon_state = "satchel-norm"
+	shoulder_carry = TRUE
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT
+
+/obj/item/storage/backpack/satchel/Initialize(mapload)
+	. = ..()
+	atom_storage.max_total_storage = 18
+
+/obj/item/storage/backpack/satchel/equipped(mob/user, slot, initial)
+	. = ..()
+	if(slot == ITEM_SLOT_BELT)
+		ADD_TRAIT(user, TRAIT_BELT_SATCHEL, CLOTHING_TRAIT)
+		if(istype(user.get_item_by_slot(ITEM_SLOT_BACK), /obj/item/storage/backpack))
+			var/obj/item/storage/backpack/selected_bag = user.get_item_by_slot(ITEM_SLOT_BACK)
+			selected_bag.slowdown++
+
+/obj/item/storage/backpack/satchel/dropped(mob/user, silent)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_BELT_SATCHEL))
+		REMOVE_TRAIT(user, TRAIT_BELT_SATCHEL, CLOTHING_TRAIT)
+		if(istype(user.get_item_by_slot(ITEM_SLOT_BACK), /obj/item/storage/backpack))
+			var/obj/item/storage/backpack/selected_bag = user.get_item_by_slot(ITEM_SLOT_BACK)
+			selected_bag.slowdown = initial(selected_bag.slowdown)
 
 /obj/item/storage/backpack/satchel/leather
 	name = "leather satchel"
@@ -400,6 +436,14 @@
 /obj/item/storage/backpack/satchel/flat/with_tools/PopulateContents()
 	new /obj/item/stack/tile/iron/base(src)
 	new /obj/item/crowbar(src)
+
+	..()
+
+/obj/item/storage/backpack/satchel/flat/listening_post_secret_stash/PopulateContents()
+	new /obj/item/clothing/head/helmet/space/eva(src)
+	new /obj/item/clothing/suit/space/eva(src)
+	new /obj/item/tank/internals/oxygen/empty(src)
+	new /obj/item/tank/internals/oxygen/empty(src)
 
 	..()
 
@@ -572,7 +616,7 @@
 	inhand_icon_state = "duffel-sci"
 
 /obj/item/storage/backpack/duffelbag/virology
-	name = "virologist's duffel bag"
+	name = "pathologist's duffel bag"
 	desc = "A large duffel bag for holding extra viral bottles."
 	icon_state = "duffel-virology"
 	inhand_icon_state = "duffel-virology"
@@ -681,11 +725,19 @@
 	new /obj/item/cautery/advanced(src)
 	new /obj/item/surgical_drapes(src)
 	new /obj/item/reagent_containers/medigel/sterilizine(src)
+<<<<<<< HEAD
+=======
+	new /obj/item/surgicaldrill(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/item/bonesetter(src)
 	new /obj/item/blood_filter(src)
 	new /obj/item/stack/medical/bone_gel(src)
 	new /obj/item/stack/sticky_tape/surgical(src)
+<<<<<<< HEAD
 	new /obj/item/emergency_bed(src)
+=======
+	new /obj/item/roller(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/item/clothing/suit/jacket/straight_jacket(src)
 	new /obj/item/clothing/mask/muzzle(src)
 	new /obj/item/mmi/syndie(src)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useContext } from 'react';
 
 import { resolveAsset } from '../../assets';
@@ -14,6 +15,21 @@ import { ParticleContext } from '.';
 
 export const ShowDesc = (props) => {
   const { desc, setDesc } = useContext(ParticleContext);
+=======
+import { useLocalState } from '../../backend';
+import {
+  Box,
+  Button,
+  LabeledList,
+  Section,
+  Modal,
+  Stack,
+} from '../../components';
+import { resolveAsset } from '../../assets';
+
+export const ShowDesc = (props) => {
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Modal
       width={'60em'}

@@ -1,5 +1,9 @@
 /mob/living/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
+=======
+	stamina = new(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(current_size != RESIZE_DEFAULT_SIZE)
 		update_transform(current_size)
 	AddElement(/datum/element/movetype_handler)
@@ -15,8 +19,12 @@
 	SSpoints_of_interest.make_point_of_interest(src)
 	update_fov()
 	gravity_setup()
+<<<<<<< HEAD
 	ADD_TRAIT(src, TRAIT_UNIQUE_IMMERSE, INNATE_TRAIT)
 	src.CanBuild() //all sandbox checks handled in this proc and not here b/c i don't want to touch living.dm too much
+=======
+	voice_type = pick(voice_type2sound) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/prepare_huds()
 	..()
@@ -27,6 +35,7 @@
 	med_hud_set_status()
 
 /mob/living/Destroy()
+	qdel(stamina)
 	for(var/datum/status_effect/effect as anything in status_effects)
 		// The status effect calls on_remove when its mob is deleted
 		if(effect.on_remove_on_mob_delete)
@@ -53,6 +62,7 @@
 
 	return ..()
 
+<<<<<<< HEAD
 /**
  * Called when this mob is receiving damage from falling
  *
@@ -123,6 +133,16 @@
 /datum/movespeed_modifier/landed_on_feet
 	movetypes = GROUND|UPSIDE_DOWN
 	multiplicative_slowdown = CRAWLING_ADD_SLOWDOWN / 2
+=======
+/mob/living/proc/ZImpactDamage(turf/T, levels)
+	SEND_SIGNAL(T, COMSIG_TURF_MOB_FALL, src)
+	if(SEND_SIGNAL(src, COMSIG_LIVING_Z_IMPACT, levels, T) & NO_Z_IMPACT_DAMAGE)
+		return
+	visible_message(span_danger("[src] crashes into [T] with a sickening noise!"), \
+					span_userdanger("You crash into [T] with a sickening noise!"))
+	adjustBruteLoss((levels * 5) ** 1.5)
+	Knockdown(levels * 50)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Generic Bump(). Override MobBump() and ObjBump() instead of this.
 /mob/living/Bump(atom/A)
@@ -133,6 +153,10 @@
 	if(ismob(A))
 		var/mob/M = A
 		if(MobBump(M))
+			return
+	if(isturf(A))
+		var/turf/bump_turf = A
+		if(TurfBump(bump_turf))
 			return
 	if(isobj(A))
 		var/obj/O = A
@@ -156,6 +180,23 @@
 	if(SEND_SIGNAL(M, COMSIG_LIVING_PRE_MOB_BUMP, src) & COMPONENT_LIVING_BLOCK_PRE_MOB_BUMP)
 		return TRUE
 
+	if(length(diseases) && isliving(M))
+		var/mob/living/living = M
+		var/block = living.check_contact_sterility(BODY_ZONE_EVERYTHING)
+		var/list/contact = filter_disease_by_spread(diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+		if(length(contact) && !block)
+			for(var/datum/disease/advanced/V as anything in contact)
+				living.infect_disease(V, notes="(Skin Contact - (Bump), coming from [src])")
+
+	if(isliving(M))
+		var/mob/living/living = M
+		var/block = check_contact_sterility(BODY_ZONE_EVERYTHING)
+		if(length(living.diseases))
+			var/list/contact = filter_disease_by_spread(living.diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+			if(length(contact) && !block)
+				for(var/datum/disease/advanced/V as anything in contact)
+					infect_disease(V, notes="(Skin Contact - (Bump), coming from [living])")
+
 	SEND_SIGNAL(src, COMSIG_LIVING_MOB_BUMP, M)
 	SEND_SIGNAL(M, COMSIG_LIVING_MOB_BUMPED, src)
 	//Even if we don't push/swap places, we "touched" them, so spread fire
@@ -164,23 +205,23 @@
 	if(now_pushing)
 		return TRUE
 
+	if(has_status_effect(SUGAR_RUSH) || has_status_effect(HEN_RUSH))
+		visible_message("<span class='warning'>[src] bounces off [M]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, get_dir(M, src))
+		var/atom/throw_target_mob = get_edge_target_turf(M, get_dir(src, M))
+
+		playsound(src, 'monkestation/sound/effects/boing1.ogg', 50)
+		src.throw_at(throw_target, 20, 3, force = 0)
+		if(has_status_effect(SUGAR_RUSH))
+			M.throw_at(throw_target_mob, 20, 3, force = 0)
+
 	var/they_can_move = TRUE
-	var/their_combat_mode = FALSE
+	var/theyre_blocking = FALSE
 
 	if(isliving(M))
 		var/mob/living/L = M
-		their_combat_mode = L.combat_mode
+		theyre_blocking = L.istate & ISTATE_BLOCKING
 		they_can_move = L.mobility_flags & MOBILITY_MOVE
-		//Also spread diseases
-		for(var/thing in diseases)
-			var/datum/disease/D = thing
-			if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
-				L.ContactContractDisease(D)
-
-		for(var/thing in L.diseases)
-			var/datum/disease/D = thing
-			if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
-				ContactContractDisease(D)
 
 		//Should stop you pushing a restrained person out of the way
 		if(L.pulledby && L.pulledby != src && HAS_TRAIT(L, TRAIT_RESTRAINED))
@@ -211,8 +252,8 @@
 				mob_swap = TRUE
 			else if(
 				!(HAS_TRAIT(M, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP)) &&\
-				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || !their_combat_mode) &&\
-				(HAS_TRAIT(src, TRAIT_RESTRAINED) || !combat_mode)
+				((HAS_TRAIT(M, TRAIT_RESTRAINED) && !too_strong) || !theyre_blocking) &&\
+				(HAS_TRAIT(src, TRAIT_RESTRAINED) || !(istate & ISTATE_HARM))
 			)
 				mob_swap = TRUE
 		if(mob_swap)
@@ -255,12 +296,12 @@
 	//If they're a human, and they're not in help intent, block pushing
 	if(ishuman(M))
 		var/mob/living/carbon/human/human = M
-		if(human.combat_mode)
+		if((human.istate & ISTATE_HARM))
 			return TRUE
 	//if they are a cyborg, and they're alive and in combat mode, block pushing
 	if(iscyborg(M))
 		var/mob/living/silicon/robot/borg = M
-		if(borg.combat_mode && borg.stat != DEAD)
+		if((borg.istate & ISTATE_HARM) && borg.stat != DEAD)
 			return TRUE
 	//anti-riot equipment is also anti-push
 	for(var/obj/item/I in M.held_items)
@@ -283,10 +324,26 @@
 
 //Called when we bump onto an obj
 /mob/living/proc/ObjBump(obj/O)
+	if(has_status_effect(SUGAR_RUSH) || has_status_effect(HEN_RUSH))
+		visible_message("<span class='warning'>[src] bounces off  \the [O]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, turn(get_dir(O, src), rand(-1,1) * 45))
+		playsound(src, 'monkestation/sound/effects/boing1.ogg', 50)
+		src.throw_at(throw_target, 20, 3, force = 0)
+	return
+
+//Called when we bump onto an obj
+/mob/living/proc/TurfBump(turf/T)
+	if(has_status_effect(SUGAR_RUSH) || has_status_effect(HEN_RUSH))
+		visible_message("<span class='warning'>[src] bounces off  \the [T]!</span>")
+		var/atom/throw_target = get_edge_target_turf(src, turn(get_dir(T, src), rand(-1,1) * 45))
+		playsound(src, 'monkestation/sound/effects/boing1.ogg', 50)
+		src.throw_at(throw_target, 20, 3, force = 0)
 	return
 
 //Called when we want to push an atom/movable
 /mob/living/proc/PushAM(atom/movable/AM, force = move_force)
+	if(AM.cant_grab)
+		return FALSE
 	if(now_pushing)
 		return TRUE
 	if(moving_diagonally)// no pushing during diagonal moves.
@@ -344,8 +401,10 @@
 		AM.setDir(current_dir)
 	now_pushing = FALSE
 
-/mob/living/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE)
+/mob/living/start_pulling(atom/movable/AM, 	state, force = pull_force, supress_message = FALSE)
 	if(!AM || !src)
+		return FALSE
+	if(isturf(AM))
 		return FALSE
 	if(!(AM.can_be_pulled(src, state, force)))
 		return FALSE
@@ -366,6 +425,7 @@
 		stop_pulling()
 
 	changeNext_move(CLICK_CD_GRABBING)
+	animate_interact(AM, INTERACT_PULL) //monkestatione dit
 
 	if(AM.pulledby)
 		if(!supress_message)
@@ -412,15 +472,22 @@
 
 			SEND_SIGNAL(M, COMSIG_LIVING_GET_PULLED, src)
 			//Share diseases that are spread by touch
-			for(var/thing in diseases)
-				var/datum/disease/D = thing
-				if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
-					L.ContactContractDisease(D)
+			if(length(diseases) && isliving(M))
+				var/mob/living/living = M
+				var/block = living.check_contact_sterility(BODY_ZONE_EVERYTHING)
+				var/list/contact = filter_disease_by_spread(diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+				if(length(contact) && !block)
+					for(var/datum/disease/advanced/V as anything in contact)
+						living.infect_disease(V, notes="(Skin Contact - (Grab), coming from [src])")
 
-			for(var/thing in L.diseases)
-				var/datum/disease/D = thing
-				if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
-					ContactContractDisease(D)
+			if(isliving(M))
+				var/mob/living/living = M
+				var/block = check_contact_sterility(BODY_ZONE_EVERYTHING)
+				if(length(living.diseases))
+					var/list/contact = filter_disease_by_spread(living.diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+					if(length(contact) && !block)
+						for(var/datum/disease/advanced/V as anything in contact)
+							infect_disease(V, notes="(Skin Contact - (Grab), coming from [living])")
 
 			if(iscarbon(L))
 				var/mob/living/carbon/C = L
@@ -474,10 +541,11 @@
 
 	if(istype(AM) && Adjacent(AM))
 		start_pulling(AM)
-	else if(!combat_mode) //Don;'t cancel pulls if misclicking in combat mode.
+	else if(!(istate & ISTATE_HARM)) //Don;'t cancel pulls if misclicking in combat mode.
 		stop_pulling()
 
 /mob/living/stop_pulling()
+	animate_interact(pulling, INTERACT_UNPULL)//monkestation edit
 	if(ismob(pulling))
 		reset_pull_offsets(pulling)
 	..()
@@ -499,6 +567,7 @@
 /mob/living/_pointed(atom/pointing_at)
 	if(!..())
 		return FALSE
+
 	log_message("points at [pointing_at]", LOG_EMOTE)
 	visible_message("<span class='infoplain'>[span_name("[src]")] points at [pointing_at].</span>", span_notice("You point at [pointing_at]."))
 
@@ -535,6 +604,9 @@
  * * IGNORE_GRAB - mob that is agressively grabbed is not considered incapacitated
 **/
 /mob/living/incapacitated(flags)
+	if((flags & IGNORE_CRIT) && ((stat >= SOFT_CRIT && (stat != DEAD && stat != UNCONSCIOUS)) && !src.pulledby))
+		return FALSE
+
 	if(HAS_TRAIT(src, TRAIT_INCAPACITATED))
 		return TRUE
 
@@ -607,11 +679,18 @@
  * Returns the access list for this mob
  */
 /mob/living/proc/get_access()
+<<<<<<< HEAD
 	var/list/access_list = list()
 	SEND_SIGNAL(src, COMSIG_MOB_RETRIEVE_SIMPLE_ACCESS, access_list)
 	var/obj/item/card/id/id = get_idcard()
 	access_list += id?.GetAccess()
 	return access_list
+=======
+	var/obj/item/card/id/id = get_idcard()
+	if(isnull(id))
+		return list()
+	return id.GetAccess()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/proc/get_id_in_hand()
 	var/obj/item/held_item = get_active_held_item()
@@ -706,6 +785,10 @@
 		setDir(pick(NORTH, SOUTH)) // We are and look helpless.
 	if(rotate_on_lying)
 		body_position_pixel_y_offset = PIXEL_Y_OFFSET_LYING
+<<<<<<< HEAD
+=======
+	playsound(loc, 'goon/sounds/body_thud.ogg', ishuman(src) ? 40 : 15, 1, 0.3, mixer_channel = CHANNEL_MOB_SOUNDS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /// Proc to append behavior related to lying down.
@@ -783,7 +866,7 @@
 	med_hud_set_health()
 	med_hud_set_status()
 	update_health_hud()
-	update_stamina()
+	on_stamina_update()
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
 
 /mob/living/update_health_hud()
@@ -1192,7 +1275,7 @@
 			pulledby.stop_pulling()
 			return FALSE
 		else
-			adjustStaminaLoss(rand(15,20))//failure to escape still imparts a pretty serious penalty
+			stamina.adjust(-rand(15,20))//failure to escape still imparts a pretty serious penalty
 			visible_message(span_danger("[src] struggles as they fail to break free of [pulledby]'s grip!"), \
 							span_warning("You struggle as you fail to break free of [pulledby]'s grip!"), null, null, pulledby)
 			to_chat(pulledby, span_danger("[src] struggles as they fail to break free of your grip!"))
@@ -1211,6 +1294,13 @@
 /mob/living/proc/resist_restraints()
 	return
 
+<<<<<<< HEAD
+=======
+/// Used by mobs to determine the name for someone wearing a mask, or with a disfigured or missing face. By default just returns the atom's name. add_id_name will control whether or not we append "(as [id_name])".
+/atom/proc/get_visible_name(add_id_name)
+	return name
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/proc/update_gravity(gravity)
 	// Handle movespeed stuff
 	var/speed_change = max(0, gravity - STANDARD_GRAVITY)
@@ -1395,10 +1485,15 @@
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
 /mob/living/proc/update_stamina()
 	update_stamina_hud()
+=======
+/mob/living/proc/on_stamina_update()
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
-/mob/living/carbon/alien/update_stamina()
+/mob/living/carbon/alien/on_stamina_update()
 	return
 
 /mob/living/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE)
@@ -1511,7 +1606,10 @@
 				/mob/living/basic/carp,
 				/mob/living/basic/carp/magic,
 				/mob/living/basic/carp/magic/chaos,
+<<<<<<< HEAD
 				/mob/living/basic/chick,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				/mob/living/basic/chicken,
 				/mob/living/basic/cow,
 				/mob/living/basic/crab,
@@ -1526,8 +1624,11 @@
 				/mob/living/basic/mouse,
 				/mob/living/basic/mushroom,
 				/mob/living/basic/parrot,
+<<<<<<< HEAD
 				/mob/living/basic/pet/cat,
 				/mob/living/basic/pet/cat/cak,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				/mob/living/basic/pet/dog/breaddog,
 				/mob/living/basic/pet/dog/corgi,
 				/mob/living/basic/pet/dog/pug,
@@ -1538,6 +1639,11 @@
 				/mob/living/basic/stickman,
 				/mob/living/basic/stickman/dog,
 				/mob/living/simple_animal/hostile/megafauna/dragon/lesser,
+<<<<<<< HEAD
+=======
+				/mob/living/simple_animal/pet/cat,
+				/mob/living/simple_animal/pet/cat/cak,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			)
 			new_mob = new picked_animal(loc)
 		if(WABBAJACK_HUMAN)
@@ -1600,6 +1706,7 @@
 	SEND_SIGNAL(src, COMSIG_LIVING_ON_WABBAJACKED, new_mob)
 	new_mob.name = real_name
 	new_mob.real_name = real_name
+	new_mob.update_name_tag(real_name) // monkestation edit: name tags
 
 	// Transfer mind to the new mob (also handles actions and observers and stuff)
 	if(mind)
@@ -1806,13 +1913,18 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		return
 
 	//Check the amount of clients exists on the Z level we're leaving from,
+<<<<<<< HEAD
 	//this excludes us because at this point we are not registered to any z level.
+=======
+	//this excludes us as we haven't added ourselves to the new z level yet.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/old_level_new_clients = (registered_z ? SSmobs.clients_by_zlevel[registered_z].len : null)
 	//No one is left after we're gone, shut off inactive ones
 	if(registered_z && old_level_new_clients == 0)
 		for(var/datum/ai_controller/controller as anything in SSai_controllers.ai_controllers_by_zlevel[registered_z])
 			controller.set_ai_status(AI_STATUS_OFF)
 
+<<<<<<< HEAD
 	if(new_z)
 		//Check the amount of clients exists on the Z level we're moving towards, excluding ourselves.
 		var/new_level_old_clients = SSmobs.clients_by_zlevel[new_z].len
@@ -1827,6 +1939,20 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 				controller.set_ai_status(controller.get_expected_ai_status())
 
 	registered_z = new_z
+=======
+	//Check the amount of clients exists on the Z level we're moving towards, excluding ourselves.
+	var/new_level_old_clients = SSmobs.clients_by_zlevel[new_z].len
+
+	registered_z = new_z
+	//We'll add ourselves to the list now so get_expected_ai_status() will know we're on the z level.
+	SSmobs.clients_by_zlevel[registered_z] += src
+
+	if(new_level_old_clients == 0) //No one was here before, wake up all the AIs.
+		for (var/datum/ai_controller/controller as anything in SSai_controllers.ai_controllers_by_zlevel[new_z])
+			//We don't set them directly on, for instances like AIs acting while dead and other cases that may exist in the future.
+			//This isn't a problem for AIs with a client since the client will prevent this from being called anyway.
+			controller.set_ai_status(controller.get_expected_ai_status())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	..()
@@ -1955,7 +2081,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 			TOXIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=toxin' id='toxin'>[getToxLoss()]</a>
 			OXY:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
 			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[get_organ_loss(ORGAN_SLOT_BRAIN)]</a>
-			STAMINA:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=stamina' id='stamina'>[getStaminaLoss()]</a>
+			STAMINA:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=stamina' id='stamina'>[stamina.loss]</a>
 		</font>
 	"}
 
@@ -2256,26 +2382,26 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		if(CONSCIOUS)
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
-			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED, TRAIT_CRITICAL_CONDITION), STAT_TRAIT)
+			remove_traits(list(TRAIT_HANDS_BLOCKED, TRAIT_INCAPACITATED, TRAIT_FLOORED, TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 		if(SOFT_CRIT)
 			if(pulledby)
 				ADD_TRAIT(src, TRAIT_IMMOBILIZED, PULLED_WHILE_SOFTCRIT_TRAIT) //adding trait sources should come before removing to avoid unnecessary updates
 			if(. >= UNCONSCIOUS)
 				REMOVE_TRAIT(src, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT)
-			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			add_traits(list(TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 		if(UNCONSCIOUS)
 			if(. != HARD_CRIT)
 				become_blind(UNCONSCIOUS_TRAIT)
 			if(health <= crit_threshold && !HAS_TRAIT(src, TRAIT_NOSOFTCRIT))
-				ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+				add_traits( list(TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 			else
-				REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+				remove_traits(list(TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 		if(HARD_CRIT)
 			if(. != UNCONSCIOUS)
 				become_blind(UNCONSCIOUS_TRAIT)
-			ADD_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			add_traits(list(TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 		if(DEAD)
-			REMOVE_TRAIT(src, TRAIT_CRITICAL_CONDITION, STAT_TRAIT)
+			remove_traits(list(TRAIT_CRITICAL_CONDITION, TRAIT_POOR_AIM), STAT_TRAIT)
 			remove_from_alive_mob_list()
 			add_to_dead_mob_list()
 
@@ -2441,6 +2567,10 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	if(body_position == STANDING_UP) //force them on the ground
 		set_body_position(LYING_DOWN)
 		set_lying_angle(pick(90, 270))
+<<<<<<< HEAD
+=======
+		on_fall()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /// Proc to append behavior to the condition of being floored. Called when the condition ends.
@@ -2464,6 +2594,34 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 /mob/living/proc/get_attack_type()
 	return BRUTE
 
+<<<<<<< HEAD
+=======
+
+/**
+ * Apply a martial art move from src to target.
+ *
+ * This is used to process martial art attacks against nonhumans.
+ * It is also used to process martial art attacks by nonhumans, even against humans
+ * Human vs human attacks are handled in species code right now.
+ */
+/mob/living/proc/apply_martial_art(mob/living/target, modifiers)
+	if(HAS_TRAIT(target, TRAIT_MARTIAL_ARTS_IMMUNE))
+		return MARTIAL_ATTACK_INVALID
+	var/datum/martial_art/style = mind?.martial_art
+	if (!style)
+		return MARTIAL_ATTACK_INVALID
+	// will return boolean below since it's not invalid
+	if ((istate & ISTATE_CONTROL))
+		return style.grab_act(src, target)
+	if ((istate & ISTATE_SECONDARY))
+		return style.disarm_act(src, target)
+	if((istate & ISTATE_HARM))
+		if (HAS_TRAIT(src, TRAIT_PACIFISM))
+			return FALSE
+		return style.harm_act(src, target)
+	return style.help_act(src, target)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Returns an assoc list of assignments and minutes for updating a client's exp time in the databse.
  *
@@ -2595,7 +2753,11 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 /mob/living/proc/compare_sentience_type(compare_type)
 	return FALSE
 
+<<<<<<< HEAD
 /// Proc called when TARGETED by a lazarus injector
+=======
+/// Proc called when targeted by a lazarus injector
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/proc/lazarus_revive(mob/living/reviver, malfunctioning)
 	revive(HEAL_ALL)
 	befriend(reviver)
@@ -2694,9 +2856,24 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	if(isnull(guardian_client))
 		return
 	else if(guardian_client == "Poll Ghosts")
+<<<<<<< HEAD
 		var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as an admin created [span_notice("Guardian Spirit")] of [span_danger(real_name)]?", check_jobban = ROLE_PAI, poll_time = 10 SECONDS, ignore_category = POLL_IGNORE_HOLOPARASITE, alert_pic = mutable_appearance('icons/mob/nonhuman-player/guardian.dmi', "magicexample"), jump_target = src, role_name_text = "guardian spirit", amount_to_pick = 1)
 		if(chosen_one)
 			guardian_client = chosen_one.client
+=======
+		var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(
+			"Do you want to play as an admin created Guardian Spirit of [real_name]?",
+			check_jobban = ROLE_PAI,
+			poll_time = 10 SECONDS,
+			target_mob = src,
+			ignore_category = POLL_IGNORE_HOLOPARASITE,
+			pic_source = /mob/living/basic/guardian,
+			role_name_text = "guardian spirit"
+		)
+		if(LAZYLEN(candidates))
+			var/mob/dead/observer/candidate = pick(candidates)
+			guardian_client = candidate.client
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			tgui_alert(admin, "No ghost candidates.", "Guardian Controller")
 			return
@@ -2709,7 +2886,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	if(picked_theme == "Random")
 		picked_theme = null //holopara code handles not having a theme by giving a random one
 	var/picked_name = tgui_input_text(admin, "Name the guardian, leave empty to let player name it.", "Guardian Controller")
-	var/picked_color = input(admin, "Set the guardian's color, cancel to let player set it.", "Guardian Controller", "#ffffff") as color|null
+	var/picked_color = tgui_color_picker(admin, "Set the guardian's color, cancel to let player set it.", "Guardian Controller", "#ffffff")
 	if(tgui_alert(admin, "Confirm creation.", "Guardian Controller", list("Yes", "No")) != "Yes")
 		return
 	var/mob/living/basic/guardian/summoned_guardian = new picked_type(src, picked_theme)

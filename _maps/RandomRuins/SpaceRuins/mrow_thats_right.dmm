@@ -393,6 +393,15 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/powered/cat_man)
+<<<<<<< HEAD
+=======
+"bs" = (
+/mob/living/basic/cat_butcherer,
+/turf/open/floor/iron/white/side{
+	dir = 4
+	},
+/area/ruin/space/has_grav/powered/cat_man)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bt" = (
 /obj/structure/table/optable,
 /obj/effect/mob_spawn/corpse/human/damaged,

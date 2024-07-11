@@ -4,14 +4,18 @@
 		protect Ian, run the station when the captain dies."
 	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	department_head = list(JOB_CAPTAIN)
-	head_announce = list(RADIO_CHANNEL_SERVICE)
+	head_announce = list(RADIO_CHANNEL_SERVICE, RADIO_CHANNEL_SUPPLY)
 	faction = FACTION_STATION
 	total_positions = 1
 	spawn_positions = 1
+<<<<<<< HEAD
 	supervisors = SUPERVISOR_CAPTAIN
+=======
+	supervisors = SUPERVISOR_CAPTAIN //dunno when this got fucked but this will now be fixed to be proper.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	req_admin_notify = 1
 	minimal_player_age = 10
-	exp_requirements = 180
+	exp_requirements = 1500
 	exp_required_type = EXP_TYPE_CREW
 	exp_required_type_department = EXP_TYPE_SERVICE
 	exp_granted_type = EXP_TYPE_CREW
@@ -21,6 +25,7 @@
 	plasmaman_outfit = /datum/outfit/plasmaman/head_of_personnel
 	departments_list = list(
 		/datum/job_department/service,
+		/datum/job_department/cargo,
 		/datum/job_department/command,
 		)
 
@@ -63,6 +68,7 @@
 	head = /obj/item/clothing/head/hats/hopcap
 	shoes = /obj/item/clothing/shoes/laceup
 	suit = /obj/item/clothing/suit/armor/vest/hop
+	implants = list(/obj/item/implant/mindshield)
 
 	chameleon_extras = list(
 		/obj/item/gun/energy/e_gun,

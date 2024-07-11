@@ -72,8 +72,16 @@ const NtosNotepadMenuBar = (props: MenuBarProps) => {
     setWordWrap,
     aboutNotepadDialog,
   } = props;
+<<<<<<< HEAD
   const [openOnHover, setOpenOnHover] = useState(false);
   const [openMenuBar, setOpenMenuBar] = useState<string | null>(null);
+=======
+  const [openOnHover, setOpenOnHover] = useLocalState('openOnHover', false);
+  const [openMenuBar, setOpenMenuBar] = useLocalState<string | null>(
+    'openMenuBar',
+    null,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const onMenuItemClick = (value) => {
     setOpenOnHover(false);
     setOpenMenuBar(null);
@@ -344,7 +352,11 @@ const AboutDialog = (props: AboutDialogProps) => {
           <span
             style={{
               padding: '3rem 1rem 0.5rem 2rem',
+<<<<<<< HEAD
               maxWidth: '35rem',
+=======
+              'max-width': '35rem',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }}
           >
             This product is licensed under the NT Corporation Terms to:
@@ -367,6 +379,7 @@ type RetryActionType = (retrying?: boolean) => void;
 export const NtosNotepad = (props) => {
   const { act, data, config } = useBackend<NoteData>();
   const { note } = data;
+<<<<<<< HEAD
   const [documentName, setDocumentName] = useState(DEFAULT_DOCUMENT_NAME);
   const [originalText, setOriginalText] = useState(note);
   const [text, setText] = useState<string>(note);
@@ -379,6 +392,35 @@ export const NtosNotepad = (props) => {
   const [showStatusBar, setShowStatusBar] = useState<boolean>(true);
   const [wordWrap, setWordWrap] = useState<boolean>(true);
 
+=======
+  const [documentName, setDocumentName] = useLocalState<string>(
+    'documentName',
+    DEFAULT_DOCUMENT_NAME,
+  );
+  const [originalText, setOriginalText] = useLocalState<string>(
+    'originalText',
+    note,
+  );
+  console.log(note);
+  const [text, setText] = useLocalState<string>('text', note);
+  const [statuses, setStatuses] = useLocalState<Statuses>('statuses', {
+    line: 0,
+    column: 0,
+  });
+  const [activeDialog, setActiveDialog] = useLocalState<Dialogs>(
+    'activeDialog',
+    Dialogs.NONE,
+  );
+  const [retryAction, setRetryAction] = useLocalState<RetryActionType | null>(
+    'activeAction',
+    null,
+  );
+  const [showStatusBar, setShowStatusBar] = useLocalState<boolean>(
+    'showStatusBar',
+    true,
+  );
+  const [wordWrap, setWordWrap] = useLocalState<boolean>('wordWrap', true);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const handleCloseDialog = () => setActiveDialog(Dialogs.NONE);
   const handleSave = (newDocumentName: string = documentName) => {
     logger.log(`Saving the document as ${newDocumentName}`);

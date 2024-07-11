@@ -22,8 +22,12 @@
 
 	//because one ability is always INFINITY cooldown, this actually works to check which ability should be used
 	//sometimes it will try to spew bile on infinity cooldown, but that's okay because as soon as resurface is ready it will attempt that
+<<<<<<< HEAD
 
 	if(resurface?.IsAvailable())
+=======
+	if(!QDELETED(resurface) && resurface.next_use_time <= world.time)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		controller.queue_behavior(/datum/ai_behavior/targeted_mob_ability/and_plan_execute, BB_BILEWORM_RESURFACE, BB_BASIC_MOB_CURRENT_TARGET)
 		return SUBTREE_RETURN_FINISH_PLANNING
 
@@ -39,6 +43,12 @@
 
 	var/atom/movable/target = controller.blackboard[BB_BASIC_MOB_EXECUTION_TARGET]
 	if(QDELETED(target) || !isliving(target))
+<<<<<<< HEAD
+=======
+		return
+	var/mob/living/living_target = target
+	if(living_target.stat < UNCONSCIOUS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/datum/action/cooldown/mob_cooldown/devour = controller.blackboard[BB_BILEWORM_DEVOUR]

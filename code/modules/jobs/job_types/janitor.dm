@@ -41,7 +41,10 @@
 	belt = /obj/item/modular_computer/pda/janitor
 	ears = /obj/item/radio/headset/headset_srv
 	skillchips = list(/obj/item/skillchip/job/janitor)
+<<<<<<< HEAD
 	backpack_contents = list(/obj/item/access_key)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/outfit/job/janitor/pre_equip(mob/living/carbon/human/human_equipper, visuals_only)
 	. = ..()

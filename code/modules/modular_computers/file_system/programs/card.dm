@@ -87,7 +87,10 @@
 	return ..()
 
 /datum/computer_file/program/card_mod/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/user = usr
 	var/obj/item/card/id/inserted_auth_card = computer.computer_id_slot
 

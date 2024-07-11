@@ -13,12 +13,15 @@
 	w_class = WEIGHT_CLASS_SMALL
 	resistance_flags = FIRE_PROOF
 	force = 0
+<<<<<<< HEAD
 	/// Used on Initialize, how much time to cut cable restraints and zipties.
 	var/snap_time_weak_handcuffs = 0 SECONDS
 	/// Used on Initialize, how much time to cut real handcuffs. Null means it can't.
 	var/snap_time_strong_handcuffs = null
 	/// Starts open if true
 	var/start_extended = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/boxcutter/get_all_tool_behaviours()
 	return list(TOOL_KNIFE)
@@ -33,7 +36,10 @@
 
 	AddComponent( \
 		/datum/component/transforming, \
+<<<<<<< HEAD
 		start_transformed = start_extended, \
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		force_on = 10, \
 		throwforce_on = 4, \
 		throw_speed_on = throw_speed, \

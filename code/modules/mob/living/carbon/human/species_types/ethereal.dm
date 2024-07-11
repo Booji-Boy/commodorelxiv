@@ -1,3 +1,4 @@
+/* // MONKESTATION removal
 /datum/species/ethereal
 	name = "\improper Ethereal"
 	id = SPECIES_ETHEREAL
@@ -20,8 +21,14 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	species_cookie = /obj/item/food/energybar
 	species_language_holder = /datum/language_holder/ethereal
+<<<<<<< HEAD
 	sexes = FALSE //no fetish content allowed
 	// Body temperature for ethereals is much higher than humans as they like hotter environments
+=======
+	sexes = FALSE
+	toxic_food = NONE
+	// Body temperature for ethereals is much higher then humans as they like hotter environments
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bodytemp_normal = (BODYTEMP_NORMAL + 50)
 	bodytemp_heat_damage_limit = FIRE_MINIMUM_TEMPERATURE_TO_SPREAD // about 150C
 	// Cold temperatures hurt faster as it is harder to move with out the heat energy
@@ -44,11 +51,16 @@
 	var/EMPeffect = FALSE
 	var/emageffect = FALSE
 	var/obj/effect/dummy/lighting_obj/ethereal_light
+<<<<<<< HEAD
+=======
+	var/default_color
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/species/ethereal/Destroy(force)
 	QDEL_NULL(ethereal_light)
 	return ..()
 
+<<<<<<< HEAD
 /datum/species/ethereal/on_species_gain(mob/living/carbon/human/new_ethereal, datum/species/old_species, pref_load)
 	. = ..()
 	if(!ishuman(new_ethereal))
@@ -61,6 +73,24 @@
 	RegisterSignal(new_ethereal, COMSIG_LIVING_HEALTH_UPDATE, PROC_REF(refresh_light_color))
 	ethereal_light = new_ethereal.mob_light(light_type = /obj/effect/dummy/lighting_obj/moblight/species)
 	refresh_light_color(new_ethereal)
+=======
+/datum/species/ethereal/on_species_gain(mob/living/carbon/new_ethereal, datum/species/old_species, pref_load)
+	. = ..()
+	if(!ishuman(new_ethereal))
+		return
+	var/mob/living/carbon/human/ethereal = new_ethereal
+	default_color = ethereal.dna.features["ethcolor"]
+	r1 = GETREDPART(default_color)
+	g1 = GETGREENPART(default_color)
+	b1 = GETBLUEPART(default_color)
+	RegisterSignal(ethereal, COMSIG_ATOM_EMAG_ACT, PROC_REF(on_emag_act))
+	RegisterSignal(ethereal, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp_act))
+	RegisterSignal(ethereal, COMSIG_LIGHT_EATER_ACT, PROC_REF(on_light_eater))
+	ethereal_light = ethereal.mob_light(light_type = /obj/effect/dummy/lighting_obj/moblight/species)
+	spec_updatehealth(ethereal)
+	new_ethereal.set_safe_hunger_level()
+	update_mail_goodies(ethereal)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/obj/item/organ/internal/heart/ethereal/ethereal_heart = new_ethereal.get_organ_slot(ORGAN_SLOT_HEART)
 	ethereal_heart.ethereal_color = default_color
@@ -141,10 +171,17 @@
 		return FALSE
 	emageffect = TRUE
 	if(user)
+<<<<<<< HEAD
 		to_chat(user, span_notice("You tap [source] on the back with your card."))
 	source.visible_message(span_danger("[source] starts flickering in an array of colors!"))
 	handle_emag(source)
 	addtimer(CALLBACK(src, PROC_REF(stop_emag), source), 2 MINUTES) //Disco mode for 2 minutes! This doesn't affect the ethereal at all besides either annoying some players, or making someone look badass.
+=======
+		to_chat(user, span_notice("You tap [H] on the back with your card."))
+	H.visible_message(span_danger("[H] starts flickering in an array of colors!"))
+	handle_emag(H)
+	addtimer(CALLBACK(src, PROC_REF(stop_emag), H), 2 MINUTES) //Disco mode for 2 minutes! This doesn't affect the ethereal at all besides either annoying some players, or making someone look badass.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /// Special handling for getting hit with a light eater
@@ -194,6 +231,7 @@
 		separated socially by caste, and espouse a dogma of aiding the weak and \
 		downtrodden."
 
+<<<<<<< HEAD
 /datum/species/ethereal/get_species_lore()
 	return list(
 		"Ethereals are a species native to the planet Sprout. \
@@ -201,6 +239,8 @@
 		but due to their natural acclimation with electricity, they felt easy among the large Nanotrasen installations.",
 	)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/species/ethereal/create_pref_unique_perks()
 	var/list/to_add = list()
 
@@ -239,6 +279,7 @@
 	)
 
 	return to_add
+<<<<<<< HEAD
 
 /datum/species/ethereal/lustrous //Ethereal pirates with an inherent bluespace prophet trauma.
 	name = "Lustrous"
@@ -282,3 +323,6 @@
 	..()
 	default_color = new_lustrous.dna.features["ethcolor"]
 	new_lustrous.dna.features["ethcolor"] = GLOB.color_list_lustrous[pick(GLOB.color_list_lustrous)] //Picks one of 5 lustrous-specific colors.
+=======
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

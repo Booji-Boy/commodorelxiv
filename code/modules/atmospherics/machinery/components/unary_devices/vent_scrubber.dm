@@ -85,6 +85,24 @@
 	. = ..()
 	disconnect_from_area(area_to_unregister)
 
+<<<<<<< HEAD
+=======
+///adds a gas or list of gases to our filter_types. used so that the scrubber can check if its supposed to be processing after each change
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/add_filters(filter_or_filters)
+	if(!islist(filter_or_filters))
+		filter_or_filters = list(filter_or_filters)
+
+	for(var/gas_to_filter in filter_or_filters)
+		var/translated_gas = istext(gas_to_filter) ? gas_id2path(gas_to_filter) : gas_to_filter
+
+		if(ispath(translated_gas, /datum/gas))
+			filter_types |= translated_gas
+			continue
+
+	atmos_conditions_changed()
+	return TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///remove a gas or list of gases from our filter_types.used so that the scrubber can check if its supposed to be processing after each change
 /obj/machinery/atmospherics/components/unary/vent_scrubber/proc/remove_filters(filter_or_filters)
 	if(!islist(filter_or_filters))
@@ -344,6 +362,62 @@
 	piping_layer = 4
 	icon_state = "scrub_map_on-4"
 
+<<<<<<< HEAD
+=======
+/obj/machinery/atmospherics/components/unary/vent_scrubber/plunger_act(obj/item/plunger/plunger, mob/living/user, reinforced)
+	if(!clogged)
+		return
+
+	if(welded)
+		to_chat(user, span_notice("You cannot pump [src] if it's welded shut!"))
+		balloon_alert(user, "welded!")
+		return
+
+	user.balloon_alert_to_viewers("plunging scrubber...", "plunging clogged scrubber...")
+	if(do_after(user, 6 SECONDS, target = src))
+		user.balloon_alert_to_viewers("finished plunging")
+		clogged = FALSE
+
+/**
+ * Sets "clogged" to TRUE.
+ *
+ * Sets the clogged value to be true. Called during the scrubber clog event to begin the production of mobs, and allows for the plunger_act to run.
+ */
+
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/clog()
+	clogged = TRUE
+
+/**
+ * Sets "clogged" to FALSE.
+ *
+ * Changes the clogged value to be false. Called during the scrubber clog event to stop the production of mobs and prevent further plunger use.
+ */
+
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/unclog()
+	clogged = FALSE
+
+/**
+ * Produces a mob based on the input given by scrubber clog event.
+ *
+ * Used by the scrubber clog random event to handle the spawning of mobs. The proc recieves the mob that will be spawned,
+ * and the event's current list of living mobs produced by the event so far. After checking if the vent is welded, the
+ * new mob is created on the scrubber's turf, then added to the living_mobs list.
+ *
+ * Arguments:
+ * * spawned_mob - Stores which mob will be spawned and added to the living_mobs list.
+ * * living_mobs - Used to add the spawned mob to the list of currently living mobs produced by this vent.
+ * Relevant code for how the list is handled is in the scrubber_clog.dm file.
+ */
+
+/obj/machinery/atmospherics/components/unary/vent_scrubber/proc/produce_mob(spawned_mob, list/living_mobs)
+	if(welded)
+		return
+
+	var/mob/new_mob = new spawned_mob(get_turf(src))
+	living_mobs += WEAKREF(new_mob)
+	visible_message(span_warning("[new_mob] crawls out of [src]!"))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/atmospherics/components/unary/vent_scrubber/disconnect()
 	..()
 	on = FALSE

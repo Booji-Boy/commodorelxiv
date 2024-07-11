@@ -32,7 +32,11 @@
 /datum/status_effect/his_grace/on_remove()
 	owner.remove_stun_absorption(id)
 
+<<<<<<< HEAD
 /datum/status_effect/his_grace/tick(seconds_between_ticks)
+=======
+/datum/status_effect/his_grace/tick()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bloodlust = 0
 	var/graces = 0
 	for(var/obj/item/his_grace/HG in owner.held_items)
@@ -44,6 +48,7 @@
 		owner.apply_status_effect(/datum/status_effect/his_wrath)
 		qdel(src)
 		return
+<<<<<<< HEAD
 	var/grace_heal = bloodlust * 0.02
 	var/need_mob_update = FALSE
 	need_mob_update += owner.adjustBruteLoss(-grace_heal * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
@@ -52,6 +57,15 @@
 	need_mob_update += owner.adjustOxyLoss(-(grace_heal * 2) * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
 	if(need_mob_update)
 		owner.updatehealth()
+=======
+	var/grace_heal = bloodlust * 0.05
+	owner.adjustBruteLoss(-grace_heal)
+	owner.adjustFireLoss(-grace_heal)
+	owner.adjustToxLoss(-grace_heal, TRUE, TRUE)
+	owner.adjustOxyLoss(-(grace_heal * 2))
+	owner.adjustCloneLoss(-grace_heal)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/status_effect/wish_granters_gift //Fully revives after ten seconds.
 	id = "wish_granters_gift"
@@ -91,6 +105,10 @@
 		human_owner.physiology.burn_mod *= 0.1
 		human_owner.physiology.tox_mod *= 0.1
 		human_owner.physiology.oxy_mod *= 0.1
+<<<<<<< HEAD
+=======
+		human_owner.physiology.clone_mod *= 0.1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		human_owner.physiology.stamina_mod *= 0.1
 	owner.add_stun_absorption(source = id, priority = 4)
 	owner.playsound_local(get_turf(owner), 'sound/effects/singlebeat.ogg', 40, 1, use_reverb = FALSE)
@@ -103,6 +121,10 @@
 		human_owner.physiology.burn_mod *= 10
 		human_owner.physiology.tox_mod *= 10
 		human_owner.physiology.oxy_mod *= 10
+<<<<<<< HEAD
+=======
+		human_owner.physiology.clone_mod *= 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		human_owner.physiology.stamina_mod *= 10
 	REMOVE_TRAIT(owner, TRAIT_IGNOREDAMAGESLOWDOWN, BLOODDRUNK_TRAIT)
 	owner.remove_stun_absorption(id)
@@ -334,6 +356,7 @@
 			//Because a servant of medicines stops at nothing to help others, lets keep them on their toes and give them an additional boost.
 			if(itemUser.health < itemUser.maxHealth)
 				new /obj/effect/temp_visual/heal(get_turf(itemUser), "#375637")
+<<<<<<< HEAD
 			var/need_mob_update = FALSE
 			need_mob_update += itemUser.adjustBruteLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
 			need_mob_update += itemUser.adjustFireLoss(-0.6 * seconds_between_ticks, updating_health = FALSE, forced = TRUE)
@@ -343,6 +366,15 @@
 			need_mob_update += itemUser.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.6 * seconds_between_ticks)
 			if(need_mob_update)
 				itemUser.updatehealth()
+=======
+			itemUser.adjustBruteLoss(-1.5)
+			itemUser.adjustFireLoss(-1.5)
+			itemUser.adjustToxLoss(-1.5, forced = TRUE) //Because Slime People are people too
+			itemUser.adjustOxyLoss(-1.5, forced = TRUE)
+			itemUser.stamina.adjust(1.5)
+			itemUser.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1.5)
+			itemUser.adjustCloneLoss(-0.5) //Becasue apparently clone damage is the bastion of all health
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/status_effect/hippocratic_oath/proc/consume_owner()
 	owner.visible_message(span_notice("[owner]'s soul is absorbed into the rod, relieving the previous snake of its duty."))
@@ -527,6 +559,7 @@
 		qdel(src)
 		return
 
+<<<<<<< HEAD
 	var/need_mob_update = FALSE
 	need_mob_update += owner.adjustBruteLoss(-2 * seconds_between_ticks, updating_health = FALSE)
 	need_mob_update += owner.adjustFireLoss(-2 * seconds_between_ticks, updating_health = FALSE)
@@ -534,6 +567,12 @@
 	need_mob_update += owner.adjustStaminaLoss(-4 * seconds_between_ticks, updating_stamina = FALSE)
 	if(need_mob_update)
 		owner.updatehealth()
+=======
+	owner.adjustBruteLoss(-2 * seconds_per_tick, updating_health = FALSE)
+	owner.adjustFireLoss(-2 * seconds_per_tick, updating_health = FALSE)
+	owner.adjustOxyLoss(-4 * seconds_per_tick, updating_health = FALSE)
+	owner.stamina.adjust(4 * seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	owner.adjust_bodytemperature(BODYTEMP_NORMAL, 0, BODYTEMP_NORMAL) //Won't save you from the void of space, but it will stop you from freezing or suffocating in low pressure
 
 
@@ -565,12 +604,20 @@
 		owner_physiology.burn_mod *= 0.5
 		owner_physiology.tox_mod *= 0.5
 		owner_physiology.oxy_mod *= 0.5
+<<<<<<< HEAD
+=======
+		owner_physiology.clone_mod *= 0.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		owner_physiology.stamina_mod *= 0.5
 	owner.add_filter("mad_glow", 2, list("type" = "outline", "color" = "#eed811c9", "size" = 2))
 	owner.AddElement(/datum/element/forced_gravity, 0)
 	owner.AddElement(/datum/element/simple_flying)
 	owner.add_stun_absorption(source = id, priority = 4)
+<<<<<<< HEAD
 	owner.add_traits(list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_FREE_HYPERSPACE_MOVEMENT), MAD_WIZARD_TRAIT)
+=======
+	add_traits(list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_FREE_HYPERSPACE_MOVEMENT), MAD_WIZARD_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	owner.playsound_local(get_turf(owner), 'sound/chemistry/ahaha.ogg', vol = 100, vary = TRUE, use_reverb = TRUE)
 	return TRUE
 
@@ -582,11 +629,16 @@
 		owner_physiology.burn_mod *= 2
 		owner_physiology.tox_mod *= 2
 		owner_physiology.oxy_mod *= 2
+<<<<<<< HEAD
+=======
+		owner_physiology.clone_mod *= 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		owner_physiology.stamina_mod *= 2
 	owner.remove_filter("mad_glow")
 	owner.RemoveElement(/datum/element/forced_gravity, 0)
 	owner.RemoveElement(/datum/element/simple_flying)
 	owner.remove_stun_absorption(id)
+<<<<<<< HEAD
 	owner.remove_traits(list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_FREE_HYPERSPACE_MOVEMENT), MAD_WIZARD_TRAIT)
 
 /// Gives you a brief period of anti-gravity
@@ -622,3 +674,6 @@
 	name = "Radiation shielding"
 	desc = "You're immune to radiation, get settled quick!"
 	icon_state = "radiation_shield"
+=======
+	remove_traits(list(TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_FREE_HYPERSPACE_MOVEMENT), MAD_WIZARD_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

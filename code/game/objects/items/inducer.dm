@@ -36,8 +36,13 @@
 	if(!isnull(our_cell) && !(. & EMP_PROTECT_CONTENTS))
 		our_cell.emp_act(severity)
 
+<<<<<<< HEAD
 /obj/item/inducer/attack_atom(obj/target, mob/living/carbon/user, params)
 	if(user.combat_mode)
+=======
+/obj/item/inducer/attack_atom(obj/O, mob/living/carbon/user, params)
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 
 	if(cantbeused(user))
@@ -112,8 +117,18 @@
 	var/obj/item/stock_parts/cell/target_cell = target.get_cell()
 	var/obj/target_as_object = target
 	var/coefficient = 1
+<<<<<<< HEAD
 
 	if(istype(target, /obj/item/gun/energy) || istype(target, /obj/item/clothing/suit/space))
+=======
+	if(istype(A, /obj/structure/chemical_manufacturer))
+		to_chat(user, span_alert("Error: unable to interface with device."))
+		return FALSE
+	if(istype(A, /obj/item/integrated_circuit/chemical))
+		to_chat(user, span_alert("Error: unable to interface with device."))
+		return FALSE
+	if(istype(A, /obj/item/gun/energy))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_alert("Error: unable to interface with device."))
 		return FALSE
 
@@ -142,8 +157,13 @@
 	recharging = FALSE
 
 
+<<<<<<< HEAD
 /obj/item/inducer/attack(mob/target, mob/living/user)
 	if(user.combat_mode)
+=======
+/obj/item/inducer/attack(mob/M, mob/living/user)
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 
 	if(cantbeused(user))

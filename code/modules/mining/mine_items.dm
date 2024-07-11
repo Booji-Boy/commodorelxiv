@@ -11,7 +11,7 @@
 
 /obj/effect/light_emitter/Initialize(mapload)
 	. = ..()
-	set_light(set_luminosity, set_cap)
+	set_light(l_outer_range = set_luminosity, l_power = set_cap)
 
 /obj/effect/light_emitter/singularity_pull()
 	return
@@ -73,7 +73,11 @@
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/storage/bag/plants(src)
 	new /obj/item/storage/bag/ore(src)
+<<<<<<< HEAD
 	new /obj/item/mining_scanner(src)
+=======
+	new /obj/item/t_scanner/adv_mining_scanner/lesser(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/item/clothing/glasses/meson(src)
 	if (HAS_TRAIT(SSstation, STATION_TRAIT_SMALLER_PODS))
 		new /obj/item/survivalcapsule/bathroom(src)

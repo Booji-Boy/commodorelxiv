@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 #define TESLA_DEFAULT_ENERGY (695.304 MEGA JOULES)
 #define TESLA_MINI_ENERGY (347.652 MEGA JOULES) // Has a weird scaling thing so this is a lie for now (doesn't generate power anyways).
+=======
+#define TESLA_DEFAULT_POWER 86913
+#define TESLA_MINI_POWER 43456
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Zap constants, speeds up targeting
 #define BIKE (COIL + 1)
 #define COIL (ROD + 1)
@@ -21,7 +26,7 @@
 	density = TRUE
 	plane = MASSIVE_OBJ_PLANE
 	plane = ABOVE_LIGHTING_PLANE
-	light_range = 6
+	light_outer_range = 6
 	move_resist = INFINITY
 	obj_flags = CAN_BE_HIT | DANGEROUS_POSSESSION
 	pixel_x = -32
@@ -46,7 +51,7 @@
 	START_PROCESSING(SSobj, src)
 
 	if (!is_miniball)
-		set_light(10, 7, "#5e5edd")
+		set_light(l_outer_range = 10, l_power = 7, l_color= "#5e5edd")
 
 		var/turf/spawned_turf = get_turf(src)
 		message_admins("A tesla has been created at [ADMIN_VERBOSEJMP(spawned_turf)].")

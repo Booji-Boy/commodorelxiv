@@ -2,7 +2,7 @@
 	blood_volume = BLOOD_VOLUME_NORMAL
 	gender = MALE
 	pressure_resistance = 15
-	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,GLAND_HUD)
+	hud_possible = list(HEALTH_HUD,STATUS_HUD,ANTAG_HUD,GLAND_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD,SENSOR_HUD)
 	has_limbs = TRUE
 	held_items = list(null, null)
 	num_legs = 0 //Populated on init through list/bodyparts
@@ -115,6 +115,7 @@
 	var/last_top_offset
 
 	/// A bitfield of "bodytypes", updated by /obj/item/bodypart/proc/synchronize_bodytypes()
+<<<<<<< HEAD
 	var/bodytype = BODYTYPE_ORGANIC
 
 	/// A bitfield of "bodyshapes", updated by /obj/item/bodypart/proc/synchronize_bodyshapes()
@@ -122,3 +123,12 @@
 
 	COOLDOWN_DECLARE(bleeding_message_cd)
 
+=======
+	var/bodytype = BODYTYPE_HUMANOID | BODYTYPE_ORGANIC
+
+	var/is_leaning = FALSE
+
+	COOLDOWN_DECLARE(bleeding_message_cd)
+
+	var/next_smell = 0 /// Cooldown for the next smell
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

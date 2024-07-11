@@ -411,7 +411,11 @@
 
 /datum/move_loop/has_target/jps/Destroy()
 	avoid = null
+<<<<<<< HEAD
 	on_finish_callbacks = null
+=======
+	on_finish_callbacks.Cut()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 ///Tries to calculate a new path for this moveloop.
@@ -743,7 +747,11 @@
  * priority - Defines how different move loops override each other. Lower numbers beat higher numbers, equal defaults to what currently exists. Defaults to MOVEMENT_DEFAULT_PRIORITY
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  */
+<<<<<<< HEAD
 /datum/move_manager/proc/freeze(moving, halted_turf, delay, timeout, subsystem, priority, flags, datum/extra_info)
+=======
+/datum/controller/subsystem/move_manager/proc/freeze(moving, halted_turf, delay, timeout, subsystem, priority, flags, datum/extra_info)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return add_to_loop(moving, subsystem, /datum/move_loop/freeze, priority, flags, extra_info, delay, timeout, halted_turf)
 
 /// As close as you can get to a "do-nothing" move loop, the pure intention of this is to absolutely resist all and any automated movement until the move loop times out.

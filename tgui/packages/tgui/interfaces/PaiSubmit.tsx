@@ -22,7 +22,11 @@ alert pAI cards of your candidacy.`;
 export const PaiSubmit = (props) => {
   const { data } = useBackend<Data>();
   const { comments, description, name } = data;
+<<<<<<< HEAD
   const [input, setInput] = useState({
+=======
+  const [input, setInput] = useLocalState<Data>('input', {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     comments,
     description,
     name,

@@ -27,6 +27,7 @@ em						{font-style: normal;	font-weight: bold;}
 .oocplain				{}
 .warningplain			{}
 .ooc					{					font-weight: bold;}
+.looc					{					font-weight: bold;}
 .adminobserverooc		{color: #0099cc;	font-weight: bold;}
 .adminooc				{color: #700038;	font-weight: bold;}
 
@@ -55,6 +56,7 @@ em						{font-style: normal;	font-weight: bold;}
 .blueteamradio			{color: #0000ff;}
 .greenteamradio			{color: #00ff00;}
 .yellowteamradio		{color: #d1ba22;}
+.radioradio				{color: #FFC0CB;}
 .gangradio				{color: #ac2ea1;}
 
 .yell					{					font-weight: bold;}
@@ -171,4 +173,71 @@ h1.alert, h2.alert		{color: #000000;}
 .resonate				{color: #298F85;}
 
 .upside_down			{display: inline; -moz-transform: scale(-1, -1); -webkit-transform: scale(-1, -1); -o-transform: scale(-1, -1); -ms-transform: scale(-1, -1); transform: scale(-1, -1);}
+<<<<<<< HEAD
+=======
+
+//MONKESTATION ADDITION START
+.brass {
+	color: #BE8700;
+}
+.big_brass {
+	color: #BE8700;
+	font-size: 3;
+	font-weight: bold;
+	font-style: italic;
+}
+.clockyellow {
+	color: #DAAA18;
+	font-weight: bold;
+	font-style: italic;
+}
+.clockgray {
+	color: #42474D;
+	font-weight: bold;
+	font-style: italic;
+}
+.clockred {
+	color: #6E001A;
+	font-weight: bold;
+	font-style: italic;
+}
+.brown {
+	color: #3d2009;
+}
+.orange {
+	color: #b8761a;
+}
+.yellow {
+	color: #c7b72c;
+}
+.cyan {
+	color: #0ea1e6;
+}
+.ratvar {
+	color: #BE8700;
+	font-size: 6;
+	font-weight: bold;
+	font-style: italic;
+	animation: ratvarcolor 5000ms infinite;
+}
+@keyframes ratvarcolor {
+	0% { color: #0d0d0d; }
+	9% { color: #BE8700; }
+	18% { color: #0d0d0d; }
+	27% { color: #42474D; }
+	36% { color: #0d0d0d; }
+	45% { color: #AF0AAF; }
+	54% { color: #0d0d0d; }
+	63% { color: #1E8CE1; }
+	72% { color: #0d0d0d; }
+	81% { color: #DAAA18; }
+	90% { color: #0d0d0d; }
+	100% { color: #6E001A; }
+}
+.brown					{color: #3d2009;}
+.orange 				{color: #b8761a;}
+.yellow					{color: #c7b72c;}
+.cyan					{color: #0ea1e6;}
+// MONKESTATION ADDITION END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 </style>"}

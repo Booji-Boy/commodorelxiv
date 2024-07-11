@@ -17,7 +17,10 @@
 	if(isliving(parent_atom))
 		var/mob/living/L = parent_atom
 		ADD_TRAIT(L, TRAIT_UNDENSE, SHRUNKEN_TRAIT)
+<<<<<<< HEAD
 		RegisterSignal(L, COMSIG_MOB_SAY, PROC_REF(handle_shrunk_speech))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		L.add_movespeed_modifier(/datum/movespeed_modifier/shrink_ray)
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
@@ -27,6 +30,7 @@
 			if(ishuman(C))
 				var/mob/living/carbon/human/H = C
 				H.physiology.damage_resistance -= 100//carbons take double damage while shrunk
+<<<<<<< HEAD
 		if(!L.GetComponent(/datum/component/squashable))
 			newsquash = L.AddComponent( \
 				/datum/component/squashable, \
@@ -34,6 +38,8 @@
 				squash_damage = 10, \
 				squash_flags = SQUASHED_ALWAYS_IF_DEAD|SQUASHED_DONT_SQUASH_IN_CONTENTS, \
 			)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		parent_atom.set_density(FALSE) // this is handled by the UNDENSE trait on mobs
 	parent_atom.visible_message(span_warning("[parent_atom] shrinks down to a tiny size!"),
@@ -55,7 +61,10 @@
 		var/mob/living/L = parent_atom
 		L.remove_movespeed_modifier(/datum/movespeed_modifier/shrink_ray)
 		REMOVE_TRAIT(L, TRAIT_UNDENSE, SHRUNKEN_TRAIT)
+<<<<<<< HEAD
 		UnregisterSignal(L, COMSIG_MOB_SAY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(ishuman(L))
 			var/mob/living/carbon/human/H = L
 			H.physiology.damage_resistance += 100

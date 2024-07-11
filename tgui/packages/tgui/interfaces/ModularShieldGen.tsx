@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
@@ -10,6 +11,19 @@ import {
   Stack,
 } from '../components';
 import { Window } from '../layouts';
+=======
+import { useBackend } from '../backend';
+import { Window } from '../layouts';
+import {
+  Stack,
+  Section,
+  ProgressBar,
+  Button,
+  NumberInput,
+  LabeledList,
+} from '../components';
+import { BooleanLike } from 'common/react';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type ModularShieldGenData = {
   max_strength: number;
@@ -98,11 +112,18 @@ export const ModularShieldGen = (props) => {
                   <NumberInput
                     disabled={active}
                     fluid
+<<<<<<< HEAD
                     step={1}
                     value={current_radius}
                     minValue={3}
                     maxValue={max_radius}
                     onChange={(value) =>
+=======
+                    value={current_radius}
+                    minValue={3}
+                    maxValue={max_radius}
+                    onChange={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       act('set_radius', {
                         new_radius: value,
                       })
@@ -123,7 +144,11 @@ export const ModularShieldGen = (props) => {
               <LabeledList>
                 <LabeledList.Item label="Toggle Power">
                   <Button
+<<<<<<< HEAD
                     bold
+=======
+                    bold={1}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     disabled={recovering || initiating_field}
                     selected={active}
                     content={active ? 'On' : 'Off'}

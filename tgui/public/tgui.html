@@ -60,7 +60,11 @@
   })();
 
   // Basic checks to detect whether this page runs in BYOND
+<<<<<<< HEAD
   var isByond = (Byond.TRIDENT !== null || Byond.BLINK !== null || window.cef_to_byond)
+=======
+  var isByond = (Byond.TRIDENT !== null || navigator.userAgent.includes('Edg/') || window.cef_to_byond)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     && location.hostname === '127.0.0.1'
     && location.search !== '?external';
     //As of BYOND 515 the path doesn't seem to include tmp dir anymore if you're trying to open tgui in external browser and looking why it doesn't work
@@ -637,5 +641,9 @@ Thank you for your cooperation.
 // Signal tgui that we're ready to receive updates
 Byond.sendMessage('ready');
 </script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 </body>
 </html>

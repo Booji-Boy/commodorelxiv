@@ -219,7 +219,11 @@ const MedicalKioskScanResults2 = (props) => {
 
 const MedicalKioskScanResults3 = (props) => {
   const { data } = useBackend();
+<<<<<<< HEAD
   const { brain_damage, brain_health, trauma_status } = data;
+=======
+  const { clone_health, brain_damage, brain_health, trauma_status } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section title="Patient Neurological Health">
       <LabeledList>

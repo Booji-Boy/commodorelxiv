@@ -24,9 +24,12 @@
 #ifdef UNIT_TESTS
 	GLOB.unit_test_mapping_logs += text
 #endif
+<<<<<<< HEAD
 #ifdef MAP_TEST
 	message_admins("Mapping: [text]")
 #endif
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	logger.Log(LOG_CATEGORY_DEBUG_MAPPING, text)
 	if(skip_world_log)
 		return
@@ -39,7 +42,11 @@
 
 /// Logging for hard deletes
 /proc/log_qdel(text, list/data)
+<<<<<<< HEAD
 	logger.Log(LOG_CATEGORY_QDEL, text, data)
+=======
+	logger.Log(LOG_CATEGORY_DEBUG_QDEL, text, data)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /* Log to the logfile only. */
 /proc/log_runtime(text, list/data)

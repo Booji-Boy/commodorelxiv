@@ -219,8 +219,13 @@
 		return ..()
 
 
+<<<<<<< HEAD
 /turf/closed/wall/r_wall/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
 	if(the_rcd.canRturf || rcd_data["[RCD_DESIGN_MODE]"] == RCD_WALLFRAME)
+=======
+/turf/closed/wall/r_wall/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
+	if(the_rcd.canRturf || passed_mode == RCD_WALLFRAME)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 
 /turf/closed/wall/r_wall/rust_turf()

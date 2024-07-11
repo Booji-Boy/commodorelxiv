@@ -4,13 +4,17 @@
 	icon_state = "odysseus"
 	base_icon_state = "odysseus"
 	movedelay = 2
+	encumbrance_gap = 1
 	max_temperature = 15000
 	max_integrity = 120
 	wreckage = /obj/structure/mecha_wreckage/odysseus
 	mech_type = EXOSUIT_MODULE_ODYSSEUS
 	step_energy_drain = 6
+<<<<<<< HEAD
 	accesses = list(ACCESS_MECH_SCIENCE, ACCESS_MECH_MEDICAL)
 	pivot_step = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/vehicle/sealed/mecha/odysseus/moved_inside(mob/living/carbon/human/H)
 	. = ..()

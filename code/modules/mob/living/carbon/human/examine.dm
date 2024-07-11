@@ -22,6 +22,10 @@
 	if(obscure_examine)
 		return list("<span class='warning'>You're struggling to make out any details...")
 
+	//Monkestation Addition: Species
+	if(dna?.species?.name)
+		. += "[t_He] [t_is] \a [dna.species.name]."//name should be what others see you as imo, id should be used for your true species (for species that disguise)
+
 	var/obscured = check_obscured_slots()
 
 	//uniform
@@ -228,15 +232,37 @@
 			msg += "[t_He] look[p_s()] extremely disgusted.\n"
 
 	var/apparent_blood_volume = blood_volume
+<<<<<<< HEAD
 	if(HAS_TRAIT(src, TRAIT_USES_SKINTONES) && (skin_tone == "albino"))
+=======
+	if((dna.species.use_skintones)&& skin_tone == "albino")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		apparent_blood_volume -= 150 // enough to knock you down one tier
-	switch(apparent_blood_volume)
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			msg += "[t_He] [t_has] pale skin.\n"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			msg += "<b>[t_He] look[p_s()] like pale death.</b>\n"
-		if(-INFINITY to BLOOD_VOLUME_BAD)
-			msg += "[span_deadsay("<b>[t_He] resemble[p_s()] a crushed, empty juice pouch.</b>")]\n"
+	if(isethereal(src))//Monkestation Changes Start:
+		if(appears_dead)
+			if(blood_volume < ETHEREAL_BLOOD_CHARGE_LOWEST_PASSIVE)
+				msg += "[span_deadsay("<b>[t_He] resemble[p_s()] a crushed, empty juice pouch.</b>")]\n"
+		else
+			switch(blood_volume)
+				if(ETHEREAL_BLOOD_CHARGE_OVERLOAD to ETHEREAL_BLOOD_CHARGE_DANGEROUS)
+					msg += "<b>Electricity is arcing off of [t_him]!</b>\n"
+				if(ETHEREAL_BLOOD_CHARGE_FULL to ETHEREAL_BLOOD_CHARGE_OVERLOAD)
+					msg += "[t_He] seems unusually bright, and [t_is] sparking occasionally.\n"
+				if(ETHEREAL_BLOOD_CHARGE_LOW to ETHEREAL_BLOOD_CHARGE_NORMAL)
+					msg += "[t_His] light is dimming.\n"
+				if(ETHEREAL_BLOOD_CHARGE_LOWEST_PASSIVE to ETHEREAL_BLOOD_CHARGE_LOW)
+					msg += "<b>[t_His] light is very dim, and is flickering slightly.</b>\n"
+				if(-INFINITY to ETHEREAL_BLOOD_CHARGE_LOWEST_PASSIVE)
+					msg += "<b>[t_His] light is very dim, and is flickering on and off.</b>\n"
+					msg += "[span_deadsay("<b>[t_His] movements seem painful and [t_his] breathing is erratic!</b>")]\n"
+	else
+		switch(apparent_blood_volume)
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				msg += "[t_He] [t_has] pale skin.\n"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				msg += "<b>[t_He] look[p_s()] like pale death.</b>\n"
+			if(-INFINITY to BLOOD_VOLUME_BAD)
+				msg += "[span_deadsay("<b>[t_He] resemble[p_s()] a crushed, empty juice pouch.</b>")]\n"
 
 	if(is_bleeding())
 		var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -289,7 +315,7 @@
 		var/mob/living/living_user = user
 		if(src != user)
 			if(HAS_TRAIT(user, TRAIT_EMPATH))
-				if (combat_mode)
+				if ((istate & ISTATE_HARM))
 					msg += "[t_He] seem[p_s()] to be on guard.\n"
 				if (getOxyLoss() >= 10)
 					msg += "[t_He] seem[p_s()] winded.\n"
@@ -321,11 +347,26 @@
 			if(CONSCIOUS)
 				if(HAS_TRAIT(src, TRAIT_DUMB))
 					msg += "[t_He] [t_has] a stupid expression on [t_his] face.\n"
+<<<<<<< HEAD
 		if(get_organ_by_type(/obj/item/organ/internal/brain) && isnull(ai_controller))
 			if(!key)
+=======
+		if(get_organ_by_type(/obj/item/organ/internal/brain))
+			var/obj/item/organ/internal/brain/brain = get_organ_by_type(/obj/item/organ/internal/brain)
+			if(!key && !brain.temporary_sleep)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				msg += "[span_deadsay("[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.")]\n"
+			else if(brain.temporary_sleep)
+				msg += "[span_deadsay("[t_He] [t_is] temporarly disconnected from their mind. Recovery is likely.")]\n"
 			else if(!client)
+<<<<<<< HEAD
 				msg += "[span_deadsay("[t_He] [t_has] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.")]\n"
+=======
+				if(round(((world.time - lastclienttime) / (1 MINUTES)),1) >= 15)
+					msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon. They are able to be put into a cryopod by you.\n"
+				else
+					msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/scar_severity = 0
 	for(var/i in all_scars)
@@ -409,6 +450,15 @@
 		. += span_info("\n<b>Quirks:</b> [get_quirk_string(FALSE, CAT_QUIRK_ALL)]")
 	. += "</span>"
 
+<<<<<<< HEAD
+=======
+	if (!CONFIG_GET(flag/disable_antag_opt_in_preferences))
+		var/opt_in_status = mind?.get_effective_opt_in_level()
+		if (!isnull(opt_in_status))
+			var/stringified_optin = GLOB.antag_opt_in_strings["[opt_in_status]"]
+			. += span_info("Antag Opt-in Status: <b><font color='[GLOB.antag_opt_in_colors[stringified_optin]]'>[stringified_optin]</font></b>")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(src, COMSIG_ATOM_EXAMINE, user, .)
 
 /**

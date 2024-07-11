@@ -23,6 +23,7 @@
 /// Can't be removed using surgery or other common means
 #define ORGAN_UNREMOVABLE (1<<8)
 /// Can't be seen by scanners, doesn't anger body purists
+<<<<<<< HEAD
 #define ORGAN_HIDDEN (1<<9)
 /// Has the organ already been inserted inside someone
 #define ORGAN_VIRGIN (1<<10)
@@ -35,6 +36,11 @@
 #define IS_ROBOTIC_LIMB(limb) (limb.bodytype & BODYTYPE_ROBOTIC)
 /// Helper to figure out if a limb is a peg limb
 #define IS_PEG_LIMB(limb) (limb.bodytype & BODYTYPE_PEG)
+=======
+#define ORGAN_HIDDEN (1<<7)
+/// Synthetic organ granted by a species (for use for organ replacements between species)
+#define ORGAN_SYNTHETIC_FROM_SPECIES (1<<8)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Flags for the bodypart_flags var on /obj/item/bodypart
 /// Bodypart cannot be dismembered or amputated

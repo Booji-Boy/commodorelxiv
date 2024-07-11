@@ -1,7 +1,14 @@
 import { filter, sortBy } from 'common/collections';
+<<<<<<< HEAD
 import { toFixed } from 'common/math';
 import { BooleanLike } from 'common/react';
 
+=======
+import { flow } from 'common/fp';
+import { toFixed } from 'common/math';
+import { BooleanLike } from 'common/react';
+import { multiline } from 'common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../backend';
 import {
   Button,
@@ -48,10 +55,17 @@ export const BluespaceVendor = (props) => {
     tank_full,
   } = data;
 
+<<<<<<< HEAD
   const gases: Gas[] = sortBy(
     filter(bluespace_network_gases, (gas) => gas.amount >= 0.01),
     (gas) => -gas.amount,
   );
+=======
+  const gases: Gas[] = flow([
+    filter<Gas>((gas) => gas.amount >= 0.01),
+    sortBy<Gas>((gas) => -gas.amount),
+  ])(bluespace_network_gases);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const gasMax = Math.max(1, ...gases.map((gas) => gas.amount));
 
@@ -86,12 +100,19 @@ export const BluespaceVendor = (props) => {
                   <NumberInput
                     animated
                     value={tank_filling_amount}
+<<<<<<< HEAD
                     step={1}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     width="63px"
                     unit="% tank filling goal"
                     minValue={0}
                     maxValue={100}
+<<<<<<< HEAD
                     onDrag={(value) =>
+=======
+                    onDrag={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       act('pumping_rate', {
                         rate: value,
                       })
@@ -123,7 +144,11 @@ export const BluespaceVendor = (props) => {
                   color="transparent"
                   icon="info"
                   tooltipPosition="bottom-start"
+<<<<<<< HEAD
                   tooltip={`
+=======
+                  tooltip={multiline`
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   Quick guide for machine use: Prepare a tank to create a
                   new one in the machine, pick how much you want it filled,
                   and finally press start on the gas of your choice!

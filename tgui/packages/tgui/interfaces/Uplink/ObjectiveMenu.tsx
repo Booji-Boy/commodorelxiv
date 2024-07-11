@@ -1,4 +1,5 @@
 import { BooleanLike, classes } from 'common/react';
+<<<<<<< HEAD
 import { Component, MouseEvent } from 'react';
 
 import {
@@ -11,6 +12,19 @@ import {
   Section,
   Stack,
   Tooltip,
+=======
+import { Component } from 'inferno';
+import {
+  Section,
+  Stack,
+  Box,
+  Button,
+  Flex,
+  Tooltip,
+  NoticeBox,
+  Dimmer,
+  Icon,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../../components';
 import {
   calculateProgression,
@@ -18,6 +32,7 @@ import {
   Rank,
 } from './calculateDangerLevel';
 import { ObjectiveState } from './constants';
+import type { InfernoNode } from 'inferno';
 
 export type Objective = {
   id: number;
@@ -27,6 +42,7 @@ export type Objective = {
   progression_reward: number;
   telecrystal_reward: number;
   telecrystal_penalty: number;
+  contractor_rep?: number;
   ui_buttons?: ObjectiveUiButton[];
   objective_state: ObjectiveState;
   original_progression: number;
@@ -243,7 +259,21 @@ export class ObjectiveMenu extends Component<
                   </Dimmer>
                 )) ||
                   (potentialObjectives.length < maximumPotentialObjectives && (
+<<<<<<< HEAD
                     <Flex.Item basis="100%" mb={1} mx="0.5%" minHeight="100px">
+=======
+                    <Flex.Item
+                      basis="100%"
+                      style={
+                        {
+                          // "background-color": "rgba(0, 0, 0, 0.5)",
+                        }
+                      }
+                      mb={1}
+                      mx="0.5%"
+                      minHeight="100px"
+                    >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       <Stack
                         align="center"
                         height="100%"
@@ -272,7 +302,11 @@ export class ObjectiveMenu extends Component<
             left={`${objectiveX - 180}px`}
             top={`${objectiveY}px`}
             style={{
+<<<<<<< HEAD
               pointerEvents: 'none',
+=======
+              'pointer-events': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }}
           >
             {ObjectiveFunction(draggingObjective, false)}
@@ -300,6 +334,7 @@ const ObjectiveFunction = (
       telecrystalReward={objective.telecrystal_reward}
       telecrystalPenalty={objective.telecrystal_penalty}
       progressionReward={objective.progression_reward}
+      contractorRep={objective.contractor_rep}
       objectiveState={objective.objective_state}
       originalProgression={objective.original_progression}
       hideTcRep={objective.final_objective}
@@ -349,7 +384,8 @@ type ObjectiveElementProps = {
   description: string;
   telecrystalReward: number;
   progressionReward: number;
-  uiButtons?: JSX.Element;
+  contractorRep?: number;
+  uiButtons?: InfernoNode;
   objectiveState?: ObjectiveState;
   originalProgression: number;
   telecrystalPenalty: number;
@@ -370,6 +406,7 @@ export const ObjectiveElement = (props: ObjectiveElementProps) => {
     uiButtons = null,
     telecrystalReward,
     progressionReward,
+    contractorRep,
     objectiveState,
     telecrystalPenalty,
     handleCompletion,
@@ -459,9 +496,15 @@ export const ObjectiveElement = (props: ObjectiveElementProps) => {
                   <Box
                     style={{
                       border: '2px solid rgba(0, 0, 0, 0.5)',
+<<<<<<< HEAD
                       borderLeft: 'none',
                       borderRight: 'none',
                       borderBottom: objectiveFinished ? 'none' : undefined,
+=======
+                      'border-left': 'none',
+                      'border-right': 'none',
+                      'border-bottom': objectiveFinished ? 'none' : undefined,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                     className={dangerLevel.gradient}
                     py={0.5}
@@ -469,6 +512,7 @@ export const ObjectiveElement = (props: ObjectiveElementProps) => {
                     textAlign="center"
                   >
                     {telecrystalReward} TC,
+                    {contractorRep ? ' ' + contractorRep + ' REP,' : ''}
                     <Box ml={1} as="span">
                       {calculateProgression(progressionReward)} Threat Level
                       {Math.abs(progressionDiff) > 10 && (
@@ -522,10 +566,17 @@ export const ObjectiveElement = (props: ObjectiveElementProps) => {
                     inline
                     className={dangerLevel.gradient}
                     style={{
+<<<<<<< HEAD
                       borderRadius: '0',
                       border: '2px solid rgba(0, 0, 0, 0.5)',
                       borderLeft: 'none',
                       borderRight: 'none',
+=======
+                      'border-radius': '0',
+                      border: '2px solid rgba(0, 0, 0, 0.5)',
+                      'border-left': 'none',
+                      'border-right': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                     position="relative"
                     width="100%"

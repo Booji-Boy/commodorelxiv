@@ -15,6 +15,7 @@ type Data = {
   unres_direction: number;
 };
 
+<<<<<<< HEAD
 export function AirlockElectronics(props) {
   return (
     <Window width={420} height={485}>
@@ -26,6 +27,9 @@ export function AirlockElectronics(props) {
 }
 
 export function AirLockMainSection(props) {
+=======
+export const AirLockMainSection = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { act, data } = useBackend<Data>();
   const {
     accesses = [],
@@ -159,4 +163,18 @@ export function AirLockMainSection(props) {
       </Stack.Item>
     </Stack>
   );
+<<<<<<< HEAD
 }
+=======
+};
+
+export const AirlockElectronics = (props) => {
+  return (
+    <Window width={420} height={485}>
+      <Window.Content>
+        <AirLockMainSection />
+      </Window.Content>
+    </Window>
+  );
+};
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

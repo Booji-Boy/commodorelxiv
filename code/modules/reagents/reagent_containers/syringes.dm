@@ -194,7 +194,7 @@
 /obj/item/reagent_containers/syringe/antiviral
 	name = "syringe (spaceacillin)"
 	desc = "Contains antiviral agents."
-	list_reagents = list(/datum/reagent/medicine/spaceacillin = 15)
+	list_reagents = list(/datum/reagent/medicine/antipathogenic/spaceacillin = 15)
 
 /obj/item/reagent_containers/syringe/bioterror
 	name = "bioterror syringe"
@@ -271,12 +271,17 @@
 /obj/item/reagent_containers/syringe/crude/update_reagent_overlay()
 	return
 
+<<<<<<< HEAD
 	// Used by monkeys from the elemental plane of bananas. Reagents come from bungo pit, death berries, destroying angel, jupiter cups, and jumping beans.
+=======
+// Used by monkeys from the elemental plane of bananas. Reagents come from bungo pit, death berries, destroying angel, jupiter cups, and jumping beans.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/reagent_containers/syringe/crude/tribal
 	name = "tribal syringe"
 	desc = "A crudely made syringe. Smells like bananas."
 
 /obj/item/reagent_containers/syringe/crude/tribal/Initialize(mapload)
+<<<<<<< HEAD
 	var/toxin_to_get = pick(/datum/reagent/toxin/bungotoxin, /datum/reagent/toxin/coniine, /datum/reagent/toxin/amanitin, /datum/reagent/consumable/liquidelectricity/enriched, /datum/reagent/ants)
 	list_reagents = list((toxin_to_get) = 5)
 	return ..()
@@ -287,6 +292,12 @@
 /obj/item/reagent_containers/syringe/crude/blastoff
 	list_reagents = list(/datum/reagent/drug/blastoff = 5)
 
+=======
+	var/toxin_to_get = pick(/datum/reagent/toxin/bungotoxin, /datum/reagent/toxin/coniine, /datum/reagent/toxin/amanitin, /datum/reagent/consumable/liquidelectricity, /datum/reagent/ants)
+	list_reagents = list((toxin_to_get) = 5)
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/reagent_containers/syringe/spider_extract
 	name = "spider extract syringe"
 	desc = "Contains crikey juice - makes any gold core create the most deadly companions in the world."

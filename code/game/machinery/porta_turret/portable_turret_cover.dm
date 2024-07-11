@@ -84,6 +84,11 @@
 
 /obj/machinery/porta_turret_cover/emag_act(mob/user, obj/item/card/emag/emag_card)
 
+<<<<<<< HEAD
+=======
+/obj/machinery/porta_turret_cover/emag_act(mob/user, obj/item/card/emag/emag_card)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if((parent_turret.obj_flags & EMAGGED))
 		return FALSE
 

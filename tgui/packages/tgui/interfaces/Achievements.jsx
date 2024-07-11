@@ -1,13 +1,24 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Box, Flex, Icon, Table, Tabs, Tooltip } from '../components';
 import { Window } from '../layouts';
 
 export const Achievements = (props) => {
   const { data } = useBackend();
   const { categories } = data;
+<<<<<<< HEAD
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+=======
+  const [selectedCategory, setSelectedCategory] = useLocalState(
+    'category',
+    categories[0],
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const achievements = data.achievements.filter(
     (x) => x.category === selectedCategory,
   );
@@ -93,7 +104,11 @@ const Achievement = (props) => {
 const HighScoreTable = (props) => {
   const { data } = useBackend();
   const { highscore: highscores, user_ckey } = data;
+<<<<<<< HEAD
   const [highScoreIndex, setHighScoreIndex] = useState(0);
+=======
+  const [highScoreIndex, setHighScoreIndex] = useLocalState('highscore', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const highscore = highscores[highScoreIndex];
   if (!highscore) {
     return null;

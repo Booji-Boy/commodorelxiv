@@ -313,7 +313,11 @@
 		var/datum/move_loop/loop = GLOB.move_manager.move_towards(resin, interacting_with, delay, timeout = delay * 5, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
 		RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(resin_stop_check))
 		RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(resin_landed))
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(nozzle_mode == RESIN_FOAM)
 		if(!Adj || !isturf(interacting_with))

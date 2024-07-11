@@ -8,7 +8,11 @@
 	. = ..()
 	if(prob(1))
 		user.say("The testimony contradicts the evidence!", forced = "[src]")
+<<<<<<< HEAD
 	user.point_at(src)
+=======
+	user.visible_message(span_notice("[user] shows [user.p_their()] attorney's badge."), span_notice("You show your attorney's badge."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/accessory/lawyers_badge/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	RegisterSignal(user, COMSIG_LIVING_SLAM_TABLE, PROC_REF(table_slam))
@@ -119,7 +123,10 @@
 	name = "Dogtag"
 	desc = "Can't wear a collar, but this is fine?"
 	icon_state = "allergy"
+<<<<<<< HEAD
 	w_class = WEIGHT_CLASS_TINY
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attachment_slot = NONE // actually NECK but that doesn't make sense
 	/// What message is displayed when our dogtags / its clothes / its wearer is examined
 	var/display = "Nothing!"
@@ -171,14 +178,31 @@
 	else
 		display = span_notice("The dogtag is all scratched up.")
 
+<<<<<<< HEAD
 /obj/item/clothing/accessory/dogtag/borg_ready
 	name = "Pre-Approved Cyborg Candidate dogtag"
 	display = "This employee has been screened for negative mental traits to an acceptable level of accuracy, and is approved for the NT Cyborg program as an alternative to medical resuscitation."
+=======
+/*
+/// Reskins for the pride pin accessory, mapped by display name to icon state
+GLOBAL_LIST_INIT(pride_pin_reskins, list(
+	"Rainbow Pride" = "pride",
+	"Bisexual Pride" = "pride_bi",
+	"Pansexual Pride" = "pride_pan",
+	"Asexual Pride" = "pride_ace",
+	"Non-binary Pride" = "pride_enby",
+	"Transgender Pride" = "pride_trans",
+	"Intersex Pride" = "pride_intersex",
+	"Lesbian Pride" = "pride_lesbian",
+))
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/accessory/pride
 	name = "pride pin"
 	desc = "A Nanotrasen Diversity & Inclusion Center-sponsored holographic pin to show off your pride, reminding the crew of their unwavering commitment to equity, diversity, and inclusion!"
 	icon_state = "pride"
+<<<<<<< HEAD
 	obj_flags = UNIQUE_RENAME | INFINITE_RESKIN
 	unique_reskin = list(
 		"Rainbow Pride" = "pride",
@@ -202,6 +226,14 @@
 	name = "deaf personnel pin"
 	desc = "Indicates that the wearer is deaf."
 	icon_state = "deaf_pin"
+=======
+	obj_flags = UNIQUE_RENAME
+	infinite_reskin = TRUE
+
+/obj/item/clothing/accessory/pride/Initialize(mapload)
+	. = ..()
+	unique_reskin = GLOB.pride_pin_reskins
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Awarded for being dutiful and extinguishing the debt from the "Indebted" quirk.
 /obj/item/clothing/accessory/debt_payer_pin
@@ -209,6 +241,7 @@
 	desc = "I've paid my debt and all I've got was this pin."
 	icon_state = "debt_payer_pin"
 
+<<<<<<< HEAD
 /// Self-identify as a dangerous subversive
 /obj/item/clothing/accessory/anti_sec_pin
 	name = "subversive pin"
@@ -241,3 +274,9 @@
 	if (ishuman(user))
 		var/mob/living/carbon/human/human_wearer = user
 		human_wearer.sec_hud_set_security_status()
+=======
+/obj/item/clothing/accessory/deaf_pin
+	name = "deaf personnel pin"
+	desc = "Indicates that the wearer is deaf."
+	icon_state = "deaf_pin"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

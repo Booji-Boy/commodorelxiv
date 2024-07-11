@@ -11,11 +11,14 @@
 	SpinAnimation()
 
 /obj/projectile/energy/net/on_hit(atom/target, blocked = 0, pierce_hit)
+<<<<<<< HEAD
 	var/obj/item/dragnet_beacon/destination_beacon = null
 	var/obj/item/gun/energy/e_gun/dragnet/our_dragnet = fired_from
 	if(our_dragnet && istype(our_dragnet))
 		destination_beacon = our_dragnet.linked_beacon
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isliving(target))
 		var/turf/Tloc = get_turf(target)
 		if(!locate(/obj/effect/nettingportal) in Tloc)
@@ -31,7 +34,7 @@
 	desc = "A field of bluespace energy, locking on to teleport a target."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dragnetfield"
-	light_range = 3
+	light_outer_range = 3
 	anchored = TRUE
 
 /obj/effect/nettingportal/Initialize(mapload, destination_beacon)

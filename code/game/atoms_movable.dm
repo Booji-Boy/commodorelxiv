@@ -19,11 +19,18 @@
 	/// What language holder type to init as
 	var/initial_language_holder = /datum/language_holder
 	/// Holds all languages this mob can speak and understand
+<<<<<<< HEAD
 	VAR_PRIVATE/datum/language_holder/language_holder
 	/// The list of factions this atom belongs to
 	var/list/faction
 
 	/// Use get_default_say_verb() in say.dm instead of reading verb_say.
+=======
+	var/datum/language_holder/language_holder
+	/// The list of factions this atom belongs to
+	var/list/faction
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/verb_say = "says"
 	var/verb_ask = "asks"
 	var/verb_exclaim = "exclaims"
@@ -101,6 +108,7 @@
 	/// The degree of pressure protection that mobs in list/contents have from the external environment, between 0 and 1
 	var/contents_pressure_protection = 0
 
+<<<<<<< HEAD
 	/// The voice that this movable makes when speaking
 	var/voice
 
@@ -112,12 +120,17 @@
 
 	/// Set to anything other than "" to activate the silicon voice effect for TTS messages.
 	var/tts_silicon_voice_effect = ""
+=======
+	/// Whether a user will face atoms on entering them with a mouse. Despite being a mob variable, it is here for performance reasons
+	var/face_mouse = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Value used to increment ex_act() if reactionary_explosions is on
 	/// How much we as a source block explosions by
 	/// Will not automatically apply to the turf below you, you need to apply /datum/element/block_explosives in conjunction with this
 	var/explosion_block = 0
 
+<<<<<<< HEAD
 	// Access levels, used in modules\jobs\access.dm
 	/// List of accesses needed to use this object: The user must possess all accesses in this list in order to use the object.
 	/// Example: If req_access = list(ACCESS_ENGINE, ACCESS_CE)- then the user must have both ACCESS_ENGINE and ACCESS_CE in order to use the object.
@@ -125,6 +138,10 @@
 	/// List of accesses needed to use this object: The user must possess at least one access in this list in order to use the object.
 	/// Example: If req_one_access = list(ACCESS_ENGINE, ACCESS_CE)- then the user must have either ACCESS_ENGINE or ACCESS_CE in order to use the object.
 	var/list/req_one_access
+=======
+	///can we grab this object?
+	var/cant_grab = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mutable_appearance/emissive_blocker
 
@@ -192,7 +209,11 @@
 			AddComponent(/datum/component/overlay_lighting)
 		if(OVERLAY_LIGHT_DIRECTIONAL)
 			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE)
+<<<<<<< HEAD
 		if(OVERLAY_LIGHT_BEAM)
+=======
+		if(MOVABLE_LIGHT_BEAM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE, is_beam = TRUE)
 
 /atom/movable/Destroy(force)
@@ -504,7 +525,12 @@
 /atom/movable/proc/start_pulling(atom/movable/pulled_atom, state, force = move_force, supress_message = FALSE)
 	if(QDELETED(pulled_atom))
 		return FALSE
+	if(!istype(pulled_atom))
+		return FALSE
 	if(!(pulled_atom.can_be_pulled(src, state, force)))
+		return FALSE
+
+	if(cant_grab)
 		return FALSE
 
 	// If we're pulling something then drop what we're currently pulling and pull this instead.
@@ -527,6 +553,7 @@
 	pulling = pulled_atom
 	pulled_atom.set_pulledby(src)
 	SEND_SIGNAL(src, COMSIG_ATOM_START_PULL, pulled_atom, state, force)
+	SEND_SIGNAL(pulled_atom, COMSIG_ATOM_PULLED, src, state, force)
 	setGrabState(state)
 	if(ismob(pulled_atom))
 		var/mob/pulled_mob = pulled_atom
@@ -598,14 +625,19 @@
 	if(!only_pulling && pulledby && moving_diagonally != FIRST_DIAG_STEP && (get_dist(src, pulledby) > 1 || (z != pulledby.z && !z_allowed))) //separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
 
+<<<<<<< HEAD
 /atom/movable/proc/set_glide_size(target = 8)
+=======
+/atom/movable/proc/set_glide_size(target = 8, recursed = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (HAS_TRAIT(src, TRAIT_NO_GLIDE))
 		return
 	SEND_SIGNAL(src, COMSIG_MOVABLE_UPDATE_GLIDE_SIZE, target)
 	glide_size = target
 
-	for(var/mob/buckled_mob as anything in buckled_mobs)
-		buckled_mob.set_glide_size(target)
+	if(!recursed)
+		for(var/mob/buckled_mob as anything in buckled_mobs)
+			buckled_mob.set_glide_size(target, TRUE)
 
 /**
  * meant for movement with zero side effects. only use for objects that are supposed to move "invisibly" (like camera mobs or ghosts)
@@ -634,7 +666,7 @@
 	if(!direction)
 		direction = get_dir(src, newloc)
 
-	if(set_dir_on_move && dir != direction && update_dir)
+	if(set_dir_on_move && dir != direction && update_dir && !face_mouse)
 		setDir(direction)
 
 	var/is_multi_tile_object = is_multi_tile_object(src)
@@ -665,8 +697,13 @@
 			if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, entering_loc) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
 				return
 	else // Else just try to enter the single destination.
-		if(!newloc.Enter(src))
-			return
+		if(isliving(src))
+			var/mob/living/living = src
+			if(!newloc.Enter(src) && !living.buckled)
+				return
+		else
+			if(!newloc.Enter(src))
+				return
 		if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, newloc) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
 			return
 
@@ -761,7 +798,7 @@
 						moving_diagonally = SECOND_DIAG_STEP
 						. = step(src, SOUTH)
 			if(moving_diagonally == SECOND_DIAG_STEP)
-				if(!. && set_dir_on_move && update_dir)
+				if(!. && set_dir_on_move && update_dir && !face_mouse)
 					setDir(first_step_dir)
 				else if(!inertia_moving)
 					newtonian_move(direct)
@@ -808,7 +845,7 @@
 
 	last_move = direct
 
-	if(set_dir_on_move && dir != direct && update_dir)
+	if(set_dir_on_move && dir != direct && update_dir && !face_mouse)
 		setDir(direct)
 	if(. && has_buckled_mobs() && !handle_buckled_mob_movement(loc, direct, glide_size_override)) //movement failed due to buckled mob(s)
 		. = FALSE
@@ -846,6 +883,7 @@
 	if (!moving_diagonally && client_mobs_in_contents)
 		update_parallax_contents()
 
+	SSdemo.mark_dirty(src) //Monkestation Edit: REPLAYS
 	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, movement_dir, forced, old_locs, momentum_change)
 
 	if(old_loc)
@@ -972,6 +1010,15 @@
 					if(!length(recursive_contents[channel]))
 						SSspatial_grid.add_grid_awareness(location, channel)
 			recursive_contents[channel] |= arrived.important_recursive_contents[channel]
+
+/**
+ * Returns a bitfield containing flags both present in `flags` arg and the `processing_move_loop_flags` move_packet variable.
+ * Has no use outside of procs called within the movement proc chain.
+ */
+/atom/movable/proc/check_move_loop_flags(flags)
+	if(!move_packet)
+		return NONE
+	return flags & move_packet.processing_move_loop_flags
 
 ///allows this movable to hear and adds itself to the important_recursive_contents list of itself and every movable loc its in
 /atom/movable/proc/become_hearing_sensitive(trait_source = TRAIT_GENERIC)
@@ -1285,7 +1332,10 @@
 		return // in case a signal interceptor broke or deleted the thing before we could process our hit
 	if(SEND_SIGNAL(hit_atom, COMSIG_ATOM_PREHITBY, src, throwingdatum) & COMSIG_HIT_PREVENTED)
 		return
+<<<<<<< HEAD
 	SEND_SIGNAL(src, COMSIG_MOVABLE_IMPACT, hit_atom, throwingdatum)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return hit_atom.hitby(src, throwingdatum=throwingdatum, hitpush=hitpush)
 
 /atom/movable/hitby(atom/movable/hitting_atom, skipcatch, hitpush = TRUE, blocked, datum/thrownthing/throwingdatum)
@@ -1487,8 +1537,12 @@
 */
 
 /// Gets or creates the relevant language holder. For mindless atoms, gets the local one. For atom with mind, gets the mind one.
+<<<<<<< HEAD
 /atom/movable/proc/get_language_holder()
 	RETURN_TYPE(/datum/language_holder)
+=======
+/atom/movable/proc/get_language_holder(get_minds = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(QDELING(src))
 		CRASH("get_language_holder() called on a QDELing atom, \
 			this will try to re-instantiate the language holder that's about to be deleted, which is bad.")
@@ -1624,6 +1678,11 @@
 			pulling.remove_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), CHOKEHOLD_TRAIT)
 			if(. >= GRAB_NECK) // Previous state was a a neck-grab or higher.
 				REMOVE_TRAIT(pulling, TRAIT_FLOORED, CHOKEHOLD_TRAIT)
+			if(ismob(src))
+				var/mob/grabbed = src
+				if(grabbed.stat == SOFT_CRIT || grabbed.stat == HARD_CRIT)
+					pulling.add_traits(list(TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), CHOKEHOLD_TRAIT)
+
 		if(GRAB_AGGRESSIVE)
 			if(. >= GRAB_NECK) // Grab got downgraded.
 				REMOVE_TRAIT(pulling, TRAIT_FLOORED, CHOKEHOLD_TRAIT)
@@ -1646,10 +1705,15 @@
 
 /atom/movable/vv_get_dropdown()
 	. = ..()
+<<<<<<< HEAD
 	VV_DROPDOWN_OPTION("", "---------")
 	VV_DROPDOWN_OPTION(VV_HK_OBSERVE_FOLLOW, "Observe Follow")
 	VV_DROPDOWN_OPTION(VV_HK_GET_MOVABLE, "Get Movable")
+=======
+	VV_DROPDOWN_OPTION(VV_HK_EDIT_MOVABLE_PHYSICS, "Edit Movable Physics")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	VV_DROPDOWN_OPTION(VV_HK_EDIT_PARTICLES, "Edit Particles")
+	VV_DROPDOWN_OPTION(VV_HK_EDIT_DISPLACEMENT_LARGE, "Edit Large Displacement")
 	VV_DROPDOWN_OPTION(VV_HK_DEADCHAT_PLAYS, "Start/Stop Deadchat Plays")
 	VV_DROPDOWN_OPTION(VV_HK_ADD_FANTASY_AFFIX, "Add Fantasy Affix")
 
@@ -1674,6 +1738,24 @@
 	if(href_list[VV_HK_EDIT_PARTICLES] && check_rights(R_VAREDIT))
 		var/client/C = usr.client
 		C?.open_particle_editor(src)
+
+	if(href_list[VV_HK_EDIT_DISPLACEMENT_LARGE])
+		if(!check_rights(R_VAREDIT))
+			return
+		switch(alert("Should this be a pre-filled displacement (Note: If you choose a blank one directional displacement may prove more difficult)?",,"Yes","No","Cancel"))
+			if("Yes")
+				var/choice = input(usr, "Choose a displacement to add", "Choose a Displacement") as null|anything in subtypesof(/obj/effect/distortion/large)
+				if(!choice)
+					return
+				apply_displacement_icon(choice)
+			if("No")
+				apply_displacement_icon(/obj/effect/distortion/large)
+			else
+				return
+
+	if(href_list[VV_HK_EDIT_MOVABLE_PHYSICS] && check_rights(R_VAREDIT))
+		var/client/C = usr.client
+		C?.open_movable_physics_editor(src)
 
 	if(href_list[VV_HK_DEADCHAT_PLAYS] && check_rights(R_FUN))
 		if(tgui_alert(usr, "Allow deadchat to control [src] via chat commands?", "Deadchat Plays [src]", list("Allow", "Cancel")) != "Allow")

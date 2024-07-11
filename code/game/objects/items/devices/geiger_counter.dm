@@ -70,11 +70,16 @@
 /obj/item/geiger_counter/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return interact_with_atom(interacting_with, user, modifiers)
 
+<<<<<<< HEAD
 /obj/item/geiger_counter/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if (user.combat_mode)
 		return NONE
 	if (!CAN_IRRADIATE(interacting_with))
 		return NONE
+=======
+	if ((user.istate & ISTATE_HARM))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	user.visible_message(span_notice("[user] scans [interacting_with] with [src]."), span_notice("You scan [interacting_with]'s radiation levels with [src]..."))
 	addtimer(CALLBACK(src, PROC_REF(scan), interacting_with, user), 20, TIMER_UNIQUE) // Let's not have spamming GetAllContents

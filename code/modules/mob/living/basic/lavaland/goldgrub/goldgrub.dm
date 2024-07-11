@@ -20,7 +20,10 @@
 	attack_verb_continuous = "barrels into"
 	attack_verb_simple = "barrel into"
 	attack_sound = 'sound/weapons/punch1.ogg'
+<<<<<<< HEAD
 	combat_mode = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	speak_emote = list("screeches")
 	death_message = "stops moving as green liquid oozes from the carcass!"
 	status_flags = CANPUSH
@@ -44,8 +47,11 @@
 
 	if(mapload)
 		generate_loot()
+<<<<<<< HEAD
 	else
 		can_lay_eggs = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/static/list/innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/spit_ore = BB_SPIT_ABILITY,
@@ -64,8 +70,12 @@
 		make_tameable()
 	if(can_lay_eggs)
 		make_egg_layer()
+<<<<<<< HEAD
 	ADD_TRAIT(src, TRAIT_BOULDER_BREAKER, INNATE_TRAIT)
 	ADD_TRAIT(src, TRAIT_INSTANTLY_PROCESSES_BOULDERS, INNATE_TRAIT)
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_ATOM_PRE_BULLET_ACT, PROC_REF(block_bullets))
 
 /mob/living/basic/mining/goldgrub/proc/block_bullets(datum/source, obj/projectile/hitting_projectile)
@@ -74,16 +84,23 @@
 	if(stat != CONSCIOUS)
 		return COMPONENT_BULLET_PIERCED
 
+<<<<<<< HEAD
 	///high penetration bullets should still go through. No goldgrub can save you from the colossus' death bolts.
 	if(prob(hitting_projectile.armour_penetration))
 		return NONE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	visible_message(span_danger("[hitting_projectile] is repelled by [source]'s girth!"))
 	return COMPONENT_BULLET_BLOCKED
 
 /mob/living/basic/mining/goldgrub/proc/barf_contents(gibbed)
 	playsound(src, 'sound/effects/splat.ogg', 50, TRUE)
+<<<<<<< HEAD
 	for(var/obj/item/stack/ore/ore in src)
+=======
+	for(var/obj/item/ore as anything in src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		ore.forceMove(loc)
 	if(!gibbed)
 		visible_message(span_danger("[src] spits out its consumed ores!"))
@@ -105,12 +122,30 @@
 	return ..()
 
 /mob/living/basic/mining/goldgrub/proc/make_tameable()
+<<<<<<< HEAD
 	AddComponent(/datum/component/tameable, food_types = list(/obj/item/stack/ore), tame_chance = 25, bonus_tame_chance = 5)
 
 /mob/living/basic/mining/goldgrub/tamed(mob/living/tamer, atom/food)
 	new /obj/effect/temp_visual/heart(src.loc)
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/goldgrub)
 	AddComponent(/datum/component/obeys_commands, pet_commands)
+=======
+	AddComponent(\
+		/datum/component/tameable,\
+		food_types = list(/obj/item/stack/ore),\
+		tame_chance = 25,\
+		bonus_tame_chance = 5,\
+		after_tame = CALLBACK(src, PROC_REF(tame_grub)),\
+	)
+
+/mob/living/basic/mining/goldgrub/proc/tame_grub()
+	new /obj/effect/temp_visual/heart(src.loc)
+	AddElement(/datum/element/ridable, /datum/component/riding/creature/goldgrub)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+	response_help_simple = "pet"
+	response_help_continuous = "pets"
+	AddElement(/datum/element/pet_bonus, "undulates!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/mining/goldgrub/proc/make_egg_layer()
 	AddComponent(\
@@ -161,11 +196,33 @@
 		upper_growth_value = 1,\
 		signals_to_kill_on = list(COMSIG_MOB_CLIENT_LOGIN),\
 		optional_checks = CALLBACK(src, PROC_REF(ready_to_grow)),\
+<<<<<<< HEAD
+=======
+		optional_grow_behavior = CALLBACK(src, PROC_REF(grow)),\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /mob/living/basic/mining/goldgrub/baby/proc/ready_to_grow()
 	return (stat == CONSCIOUS && !is_jaunting(src))
 
+<<<<<<< HEAD
+=======
+/mob/living/basic/mining/goldgrub/baby/proc/grow()
+	var/mob/living/new_mob = /mob/living/basic/mining/goldgrub
+	var/new_mob_name = initial(new_mob.name)
+
+	src.visible_message(span_warning("[src] grows into \a [new_mob_name]!"))
+	var/list/friends = src.ai_controller.blackboard[BB_FRIENDS_LIST]
+	var/mob/living/basic/mining/goldgrub/transformed_mob = src.change_mob_type(/mob/living/basic/mining/goldgrub, src.loc, new_name = new_mob_name, delete_old_mob = TRUE)
+	transformed_mob.ai_controller.blackboard[BB_FRIENDS_LIST] = friends
+
+	if(length(friends))
+		transformed_mob.tame_grub()
+
+	if(initial(new_mob.unique_name))
+		transformed_mob.set_name()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/food/egg/green/grub_egg
 	name = "grub egg"
 	desc = "Covered in disgusting fluid."

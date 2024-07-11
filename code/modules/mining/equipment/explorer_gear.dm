@@ -14,6 +14,7 @@
 	hoodtype = /obj/item/clothing/head/hooded/explorer
 	armor_type = /datum/armor/hooded_explorer
 	resistance_flags = FIRE_PROOF
+	clothing_traits = list(TRAIT_SNOWSTORM_IMMUNE)
 
 /datum/armor/hooded_explorer
 	melee = 30
@@ -109,6 +110,7 @@
 	name = "goliath cloak"
 	icon_state = "goliath_cloak"
 	desc = "A staunch, practical cape made out of numerous monster materials, it is coveted amongst exiles & hermits."
+<<<<<<< HEAD
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS
 	cold_protection = CHEST|GROIN|LEGS|ARMS
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
@@ -116,14 +118,49 @@
 	max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF
 	armor_type = /datum/armor/hooded_goliath
+=======
+	allowed = list(
+		/obj/item/flashlight,
+		/obj/item/knife/combat/bone,
+		/obj/item/knife/combat/survival,
+		/obj/item/organ/internal/monster_core,
+		/obj/item/pickaxe,
+		/obj/item/spear,
+		/obj/item/tank/internals,
+		)
+	resistance_flags = FIRE_PROOF
+	armor_type = /datum/armor/cloak_goliath
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hoodtype = /obj/item/clothing/head/hooded/cloakhood/goliath
 
 /obj/item/clothing/suit/hooded/cloak/goliath/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	allowed = GLOB.mining_suit_allowed
 
 /datum/armor/hooded_goliath
 	melee = 60
+=======
+	if(iscarbon(user))
+		var/mob/living/carbon/char = user
+		if((char.get_item_by_slot(ITEM_SLOT_NECK) == src) || (char.get_item_by_slot(ITEM_SLOT_OCLOTHING) == src))
+			to_chat(user, span_warning("You can't adjust [src] while wearing it!"))
+			return
+		if(!user.is_holding(src))
+			to_chat(user, span_warning("You must be holding [src] in order to adjust it!"))
+			return
+		if(slot_flags & ITEM_SLOT_OCLOTHING)
+			slot_flags = ITEM_SLOT_NECK
+			set_armor(/datum/armor/none)
+			user.visible_message(span_notice("[user] adjusts their [src] for ceremonial use."), span_notice("You adjust your [src] for ceremonial use."))
+		else
+			slot_flags = initial(slot_flags)
+			set_armor(initial(armor_type))
+			user.visible_message(span_notice("[user] adjusts their [src] for defensive use."), span_notice("You adjust your [src] for defensive use."))
+
+/datum/armor/cloak_goliath
+	melee = 35
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bullet = 10
 	laser = 10
 	energy = 20

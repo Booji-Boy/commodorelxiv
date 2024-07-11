@@ -44,6 +44,10 @@
 /datum/guardian_fluff/proc/apply(mob/living/basic/guardian/guardian)
 	guardian.name = name
 	guardian.real_name = name
+<<<<<<< HEAD
+=======
+	guardian.update_name_tag() // monkestation edit: name tags
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	guardian.bubble_icon = bubble_icon
 	guardian.icon_living = icon_state
 	guardian.icon_state = icon_state

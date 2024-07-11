@@ -14,10 +14,17 @@ export const meta = {
 };
 
 const Story = (props) => {
+<<<<<<< HEAD
   const [grow, setGrow] = useState(1);
   const [direction, setDirection] = useState('column');
   const [fill, setFill] = useState(true);
   const [hasTitle, setHasTitle] = useState(true);
+=======
+  const [grow, setGrow] = useLocalState('fs_grow', 1);
+  const [direction, setDirection] = useLocalState('fs_direction', 'column');
+  const [fill, setFill] = useLocalState('fs_fill', true);
+  const [hasTitle, setHasTitle] = useLocalState('fs_title', true);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Flex height="100%" direction="column">
       <Flex.Item mb={1}>

@@ -61,7 +61,22 @@ export const Smes = (props) => {
           }
         >
           <LabeledList>
+<<<<<<< HEAD
             <LabeledList.Item label="Charge Mode">
+=======
+            <LabeledList.Item
+              label="Charge Mode"
+              buttons={
+                <Button
+                  icon={inputAttempt ? 'sync-alt' : 'times'}
+                  selected={inputAttempt}
+                  onClick={() => act('tryinput')}
+                >
+                  {inputAttempt ? 'Auto' : 'Off'}
+                </Button>
+              }
+            >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Box color={inputState}>
                 {(capacityPercent >= 100 && 'Fully Charged') ||
                   (inputting && 'Charging') ||
@@ -146,7 +161,22 @@ export const Smes = (props) => {
           }
         >
           <LabeledList>
+<<<<<<< HEAD
             <LabeledList.Item label="Output Mode">
+=======
+            <LabeledList.Item
+              label="Output Mode"
+              buttons={
+                <Button
+                  icon={outputAttempt ? 'power-off' : 'times'}
+                  selected={outputAttempt}
+                  onClick={() => act('tryoutput')}
+                >
+                  {outputAttempt ? 'On' : 'Off'}
+                </Button>
+              }
+            >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Box color={outputState}>
                 {outputting
                   ? 'Sending'

@@ -74,6 +74,9 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 	/// Global proc to call if the rune fails to be created
 	var/failed_to_create
 
+	/// can non-cultists use this rune? used for the tramstation beer rune. Monkestation - addition
+	var/cult_override = FALSE
+
 /obj/effect/rune/Initialize(mapload, set_keyword)
 	. = ..()
 	if(set_keyword)
@@ -98,7 +101,12 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 	. = ..()
 	if(.)
 		return
+<<<<<<< HEAD
 	if(!IS_CULTIST_OR_CULTIST_MOB(user))
+=======
+//	if(!IS_CULTIST(user)) // monkestation change, original code
+	if(!IS_CULTIST(user) && !cult_override) // monkestation change, cult override added
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("You aren't able to understand the words of [src]."))
 		return
 	var/list/invokers = can_invoke(user)
@@ -109,6 +117,7 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 		to_chat(user, span_danger("You need [req_cultists - length(invokers)] more adjacent cultists to use this rune in such a manner."))
 		fail_invoke()
 
+<<<<<<< HEAD
 /obj/effect/rune/attack_animal(mob/living/user, list/modifiers)
 	if(!isshade(user) && !isconstruct(user))
 		return
@@ -119,6 +128,17 @@ Runes can either be invoked by one's self or with many different cultists. Each 
 		attack_hand(user)
 	else
 		to_chat(user, span_warning("You are unable to invoke the rune!"))
+=======
+/obj/effect/rune/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	if(isshade(user) || isconstruct(user))
+		if(HAS_TRAIT(user, TRAIT_ANGELIC))
+			to_chat(user, span_warning("You purge the rune!"))
+			qdel(src)
+		else if(construct_invoke || !IS_CULTIST(user)) //if you're not a cult construct we want the normal fail message
+			attack_hand(user)
+		else
+			to_chat(user, span_warning("You are unable to invoke the rune!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/rune/proc/conceal() //for talisman of revealing/hiding
 	visible_message(span_danger("[src] fades away."))
@@ -263,7 +283,11 @@ structure_check() searches for nearby cultist structures required for the invoca
 	else
 		do_invoke_glow()
 
+<<<<<<< HEAD
 	animate(src, color = initial(color), time = 0.5 SECONDS)
+=======
+	animate(src, color = oldcolor, time = 0.5 SECONDS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_atom_colour)), 0.5 SECONDS)
 	rune_in_use = FALSE
 	return ..()
@@ -280,6 +304,15 @@ structure_check() searches for nearby cultist structures required for the invoca
 		for(var/invoker in invokers)
 			to_chat(invoker, span_warning("Something is shielding [convertee]'s mind!"))
 		return FALSE
+
+
+	// monke start: old man henderson
+	if(convertee.get_drunk_amount() >= OLD_MAN_HENDERSON_DRUNKENNESS)
+		convertee.visible_message(span_cultitalic("[convertee] is unfazed by the rune, grumbling with incoherent drunken annoyance instead!"))
+		for(var/invoker in invokers)
+			to_chat(invoker, span_warning("The rune's blood magic is ineffective on [convertee], unable to pierce the intense alcoholic haze clouding [convertee.p_their()] mind!"))
+		return FALSE
+	// monke end
 
 	var/brutedamage = convertee.getBruteLoss()
 	var/burndamage = convertee.getFireLoss()
@@ -329,7 +362,11 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/big_sac = FALSE
 	if((((ishuman(sacrificial) || iscyborg(sacrificial)) && sacrificial.stat != DEAD) || cult_team.is_sacrifice_target(sacrificial.mind)) && length(invokers) < 3)
 		for(var/invoker in invokers)
+<<<<<<< HEAD
 			to_chat(invoker, span_cult_italic("[sacrificial] is too greatly linked to the world! You need three acolytes!"))
+=======
+			to_chat(invoker, span_cultitalic("[sacrificial] is too greatly linked to the world! You need three acolytes!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	var/signal_result = SEND_SIGNAL(sacrificial, COMSIG_LIVING_CULT_SACRIFICED, invokers, cult_team)
@@ -378,7 +415,11 @@ structure_check() searches for nearby cultist structures required for the invoca
 	if(sacrificial)
 		playsound(sacrificial, 'sound/magic/disintegrate.ogg', 100, TRUE)
 		sacrificial.investigate_log("has been sacrificially gibbed by the cult.", INVESTIGATE_DEATHS)
+<<<<<<< HEAD
 		sacrificial.gib(DROP_ALL_REMAINS)
+=======
+		sacrificial.gib()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	try_spawn_sword() // after sharding and gibbing, which potentially dropped a null rod
 	return TRUE
@@ -394,7 +435,11 @@ structure_check() searches for nearby cultist structures required for the invoca
 		if(GET_ATOM_BLOOD_DNA_LENGTH(rod))
 			displayed_message += " The blood of [num_slain] fallen cultist[num_slain == 1 ? "":"s"] is absorbed into [rod]!"
 
+<<<<<<< HEAD
 		rod.visible_message(span_cult_italic(displayed_message))
+=======
+		rod.visible_message(span_cultitalic(displayed_message))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		switch(num_slain)
 			if(0, 1)
 				animate_spawn_sword(rod, /obj/item/melee/cultblade/dagger)
@@ -667,8 +712,7 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 			to_chat(invoker, span_warning("Nar'Sie is already on this plane!"))
 		log_game("Nar'Sie rune activated by [user] at [COORD(src)] failed - already summoned.")
 		return
-
-	//BEGIN THE SUMMONING
+//monkestation edit start
 	used = TRUE
 	var/datum/team/cult/cult_team = user_antag.cult_team
 	if (cult_team.narsie_summoned)
@@ -677,6 +721,28 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 			cultist_mob.client?.give_award(/datum/award/achievement/misc/narsupreme, cultist_mob)
 
 	cult_team.narsie_summoned = TRUE
+
+	if(GLOB.clock_ark) //might bump this up to need the ark to be active in some form
+		if(!GLOB.narsie_breaching_rune)
+			GLOB.narsie_breaching_rune = src
+
+		for(var/invoker in invokers)
+			to_chat(invoker, span_bigbrass("A vile light prvents you from saying the invocation! \
+											It looks like you will have to destroy whatever is causing this before Nar'sie may be summoned."))
+		return
+//monkestation edit end
+
+	//BEGIN THE SUMMONING
+//monkestation removal start
+/*	used = TRUE
+	var/datum/team/cult/cult_team = user_antag.cult_team
+	if (cult_team.narsie_summoned)
+		for (var/datum/mind/cultist_mind in cult_team.members)
+			var/mob/living/cultist_mob = cultist_mind.current
+			cultist_mob.client?.give_award(/datum/award/achievement/misc/narsupreme, cultist_mob)
+
+	cult_team.narsie_summoned = TRUE */
+//monkestation removal end
 	..()
 	sound_to_playing_players('sound/effects/dimensional_rend.ogg')
 	var/turf/rune_turf = get_turf(src)
@@ -744,8 +810,21 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 
 	if(!mob_to_revive.client || mob_to_revive.client.is_afk())
 		set waitfor = FALSE
+<<<<<<< HEAD
 		var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger(mob_to_revive.real_name)], an [span_notice("inactive blood cultist")]?", check_jobban = ROLE_CULTIST, role = ROLE_CULTIST, poll_time = 5 SECONDS, checked_target = mob_to_revive, alert_pic = mob_to_revive, role_name_text = "inactive cultist")
 		if(chosen_one)
+=======
+		var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(
+			"Do you want to play as a [mob_to_revive.real_name], an inactive blood cultist?",
+			check_jobban = ROLE_CULTIST,
+			role = ROLE_CULTIST,
+			poll_time = 5 SECONDS,
+			target_mob = mob_to_revive,
+			role_name_text = "blood cultist"
+		)
+		if(LAZYLEN(candidates))
+			var/mob/dead/observer/C = pick(candidates)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			to_chat(mob_to_revive.mind, "Your physical form has been taken over by another soul due to your inactivity! Ahelp if you wish to regain your form.")
 			message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(mob_to_revive)]) to replace an AFK player.")
 			mob_to_revive.ghostize(FALSE)
@@ -754,7 +833,11 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 			fail_invoke()
 			return
 	SEND_SOUND(mob_to_revive, 'sound/ambience/antag/bloodcult/bloodcult_gain.ogg')
+<<<<<<< HEAD
 	to_chat(mob_to_revive, span_cult_large("\"PASNAR SAVRAE YAM'TOTH. Arise.\""))
+=======
+	to_chat(mob_to_revive, span_cultlarge("\"PASNAR SAVRAE YAM'TOTH. Arise.\""))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mob_to_revive.visible_message(span_warning("[mob_to_revive] draws in a huge breath, red light shining from [mob_to_revive.p_their()] eyes."), \
 		span_cult_large("You awaken suddenly from the void. You're alive!"))
 	rune_in_use = FALSE
@@ -900,7 +983,7 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 	var/turf/T = get_turf(src)
 	visible_message(span_warning("[src] turns a bright, glowing orange!"))
 	color = "#FC9B54"
-	set_light(6, 1, color)
+	set_light(l_outer_range = 6, l_power = 1, l_color = color)
 	for(var/mob/living/target in viewers(T))
 		if(!IS_CULTIST(target) && target.blood_volume)
 			if(target.can_block_magic(charge_cost = 0))
@@ -925,7 +1008,7 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 	qdel(src)
 
 /obj/effect/rune/blood_boil/proc/do_area_burn(turf/T, multiplier)
-	set_light(6, 1, color)
+	set_light(l_outer_range = 6, l_power = 1, l_color = color)
 	for(var/mob/living/target in viewers(T))
 		if(!IS_CULTIST(target) && target.blood_volume)
 			if(target.can_block_magic(charge_cost = 0))
@@ -1123,7 +1206,8 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 
 	for(var/mob/living/target in range(src, 3))
 		target.Paralyze(30)
-	empulse(T, 0.42*(intensity), 1)
+	if(!GLOB.clock_ark) //monkestation edit: this does a little too much damage to the clock cult due to killing their cam consoles with no counterplay
+		empulse(T, 0.42*(intensity), 1)
 
 	var/list/images = list()
 	var/datum/atom_hud/sec_hud = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]

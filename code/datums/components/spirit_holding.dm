@@ -62,6 +62,7 @@
 	)
 	affix_spirit(user, chosen_one)
 
+<<<<<<< HEAD
 /// On conclusion of the ghost poll
 /datum/component/spirit_holding/proc/affix_spirit(mob/awakener, mob/dead/observer/ghost)
 
@@ -69,6 +70,18 @@
 
 	if(isnull(ghost))
 		thing.balloon_alert(awakener, "silence...")
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as the spirit of [awakener.real_name]'s blade?",
+		check_jobban = ROLE_PAI,
+		poll_time = 10 SECONDS,
+		ignore_category = POLL_IGNORE_POSSESSED_BLADE,
+		pic_source = parent,
+		role_name_text = "possessed blade",
+	)
+	if(!LAZYLEN(candidates))
+		to_chat(awakener, span_warning("[parent] is dormant. Maybe you can try again later."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		attempting_awakening = FALSE
 		return
 

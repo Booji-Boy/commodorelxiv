@@ -26,7 +26,11 @@
 
 /datum/emote/living/carbon/human/glasses/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
+<<<<<<< HEAD
 	var/image/emote_animation = image('icons/mob/human/emote_visuals.dmi', user, "glasses")
+=======
+	var/image/emote_animation = image('icons/mob/species/human/emote_visuals.dmi', user, "glasses")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	flick_overlay_global(emote_animation, GLOB.clients, 1.6 SECONDS)
 
 /datum/emote/living/carbon/human/grumble
@@ -57,13 +61,13 @@
 	message_mime = "mumbles silently!"
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
 
+/* monkestation edit start - relocating this to our own code @ <monkestation/code/modules/mob/living/emote.dm>
 /datum/emote/living/carbon/human/scream
 	key = "scream"
 	key_third_person = "screams"
 	message = "screams!"
 	message_mime = "acts out a scream!"
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
-	only_forced_audio = TRUE
 	vary = TRUE
 
 /datum/emote/carbon/human/scream/run_emote(mob/user, params, type_override, intentional = FALSE)
@@ -74,6 +78,16 @@
 /datum/emote/living/carbon/human/scream/get_sound(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
+<<<<<<< HEAD
+=======
+
+	// MonkeStation Edit Start
+	// Alternative Scream Hook
+	if(user.alternative_screams.len)
+		return pick(user.alternative_screams)
+	// MonkeStation Edit End
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return user.dna.species.get_scream_sound(user)
 
 /datum/emote/living/carbon/human/scream/screech //If a human tries to screech it'll just scream.
@@ -88,6 +102,7 @@
 	if(ismonkey(user))
 		return TRUE
 	return ..()
+monkestation edit end */
 
 /datum/emote/living/carbon/human/pale
 	key = "pale"
@@ -217,3 +232,49 @@
 	key_third_person = "signs"
 	message_param = "signs the number %t."
 	hands_use_check = TRUE
+
+/datum/emote/living/carbon/human/fart
+	key = "fart"
+	key_third_person = "farts"
+
+//MonkeStation Edit Start
+//Butt-Based Farts
+/datum/emote/living/carbon/human/fart/run_emote(mob/user, params, type_override, intentional)
+	if(issilicon(user))
+		var/list/ignored_mobs = list()
+		for(var/mob/anything in GLOB.player_list)
+			if(!anything.client)
+				continue
+			if(!anything.client.prefs.read_preference(/datum/preference/toggle/prude_mode))
+				continue
+			ignored_mobs |= anything
+		user.visible_message("[user] lets out a synthesized fart!", "You let out a synthesized fart!", ignored_mobs = ignored_mobs)
+		playsound(user, pick(
+			'monkestation/sound/effects/robot_farts/rbf1.ogg',
+			'monkestation/sound/effects/robot_farts/rbf2.ogg',
+			'monkestation/sound/effects/robot_farts/rbf3.ogg',
+			'monkestation/sound/effects/robot_farts/rbf4.ogg',
+			'monkestation/sound/effects/robot_farts/rbf5.ogg',
+			'monkestation/sound/effects/robot_farts/rbf6.ogg',
+			'monkestation/sound/effects/robot_farts/rbf7.ogg',
+			'monkestation/sound/effects/robot_farts/rbf8.ogg',
+			'monkestation/sound/effects/robot_farts/rbf9.ogg',
+			'monkestation/sound/effects/robot_farts/rbf10.ogg',
+			'monkestation/sound/effects/robot_farts/rbf11.ogg',
+			'monkestation/sound/effects/robot_farts/rbf12.ogg',
+			'monkestation/sound/effects/robot_farts/rbf13.ogg',
+			'monkestation/sound/effects/robot_farts/rbf14.ogg',
+			'monkestation/sound/effects/robot_farts/rbf15.ogg',
+			'monkestation/sound/effects/robot_farts/rbf16.ogg',
+			'monkestation/sound/effects/robot_farts/rbf17.ogg',
+			'monkestation/sound/effects/robot_farts/rbf18.ogg',
+		), 50, TRUE, mixer_channel = CHANNEL_PRUDE)
+		return
+	. = ..()
+	if(user.stat == CONSCIOUS)
+		if((!user.get_organ_by_type(/obj/item/organ/internal/butt) || !ishuman(user)))
+			to_chat(user, "<span class='warning'>You don't have a butt!</span>")
+			return
+		var/obj/item/organ/internal/butt/booty = user.get_organ_by_type(/obj/item/organ/internal/butt)
+		if(!booty.cooling_down)
+			booty.On_Fart(user)

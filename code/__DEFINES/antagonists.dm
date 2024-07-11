@@ -86,7 +86,11 @@
 #define PATH_VOID "Void Path"
 #define PATH_BLADE "Blade Path"
 #define PATH_COSMIC "Cosmic Path"
+<<<<<<< HEAD
 #define PATH_LOCK "Lock Path"
+=======
+#define PATH_KNOCK "Knock Path"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define PATH_MOON "Moon Path"
 
 /// Defines are used in /proc/has_living_heart() to report if the heretic has no heart period, no living heart, or has a living heart.
@@ -163,6 +167,7 @@ GLOBAL_LIST_INIT(syndicate_employers, list(
 	"Tiger Cooperative Fanatic",
 	"Waffle Corporation Terrorist",
 	"Waffle Corporation",
+	"The Ashen Forge Member",
 ))
 ///employers that are from nanotrasen
 GLOBAL_LIST_INIT(nanotrasen_employers, list(
@@ -180,6 +185,7 @@ GLOBAL_LIST_INIT(hijack_employers, list(
 	"Gone Postal",
 	"Tiger Cooperative Fanatic",
 	"Waffle Corporation Terrorist",
+	"The Ashen Forge Member",
 ))
 
 ///employers who hire agents to do a task and escape... or martyrdom. whatever
@@ -193,6 +199,7 @@ GLOBAL_LIST_INIT(normal_employers, list(
 	"Legal Trouble",
 	"MI13",
 	"Waffle Corporation",
+	"The Ashen Forge Member",
 ))
 
 ///employers for malfunctioning ais. they do not have sides, unlike traitors.
@@ -238,8 +245,11 @@ GLOBAL_LIST_INIT(ai_employers, list(
 #define IS_LUNATIC(mob) (mob.mind?.has_antag_datum(/datum/antagonist/lunatic))
 /// Checks if the given mob is either a heretic, heretic monster or a lunatic.
 #define IS_HERETIC_OR_MONSTER(mob) (IS_HERETIC(mob) || IS_HERETIC_MONSTER(mob) || IS_LUNATIC(mob))
+<<<<<<< HEAD
 /// CHecks if the given mob is in the mansus realm
 #define IS_IN_MANSUS(mob) (istype(get_area(mob), /area/centcom/heretic_sacrifice))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Checks if the given mob is a wizard
 #define IS_WIZARD(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/wizard))
@@ -341,6 +351,7 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 #define ANTAG_GROUP_ASHWALKERS "Ash Walkers"
 #define ANTAG_GROUP_BIOHAZARDS "Biohazards"
 #define ANTAG_GROUP_CLOWNOPS "Clown Operatives"
+#define ANTAG_GROUP_CYBERAUTH "Cyber Authority"
 #define ANTAG_GROUP_ERT "Emergency Response Team"
 #define ANTAG_GROUP_GLITCH "Digital Anomalies"
 #define ANTAG_GROUP_HORRORS "Eldritch Horrors"
@@ -351,19 +362,26 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 #define ANTAG_GROUP_SYNDICATE "Syndicate"
 #define ANTAG_GROUP_WIZARDS "Wizard Federation"
 #define ANTAG_GROUP_XENOS "Xenomorph Infestation"
+<<<<<<< HEAD
 #define ANTAG_GROUP_FUGITIVES "Escaped Fugitives"
 #define ANTAG_GROUP_HUNTERS "Bounty Hunters"
 #define ANTAG_GROUP_PARADOX "Spacetime Aberrations"
 #define ANTAG_GROUP_CREW "Deviant Crew"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // This flag disables certain checks that presume antagonist datums mean 'baddie'.
 #define FLAG_FAKE_ANTAG (1 << 0)
 
+<<<<<<< HEAD
 #define HUNTER_PACK_COPS "Spacepol Fugitive Hunters"
 #define HUNTER_PACK_RUSSIAN "Russian Fugitive Hunters"
 #define HUNTER_PACK_BOUNTY "Bounty Fugitive Hunters"
 #define HUNTER_PACK_PSYKER "Psyker Fugitive Hunters"
+=======
+#define FREEDOM_IMPLANT_CHARGES 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Changeling abilities with DNA cost = this are innately given to all changelings
 #define CHANGELING_POWER_INNATE -1
@@ -392,6 +410,7 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 #define BATON_CUFF 2
 #define BATON_PROBE 3
 #define BATON_MODES 4
+<<<<<<< HEAD
 
 #define FREEDOM_IMPLANT_CHARGES 4
 
@@ -405,3 +424,5 @@ GLOBAL_LIST_INIT(human_invader_antagonists, list(
 
 /// Camera net used by battle royale objective
 #define BATTLE_ROYALE_CAMERA_NET "battle_royale_camera_net"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

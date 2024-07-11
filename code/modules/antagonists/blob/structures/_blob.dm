@@ -2,7 +2,7 @@
 /obj/structure/blob
 	name = "blob"
 	icon = 'icons/mob/nonhuman-player/blob.dmi'
-	light_range = 2
+	light_outer_range = 2
 	desc = "A thick wall of writhing tendrils."
 	density = TRUE
 	opacity = FALSE
@@ -293,6 +293,11 @@
 			damage_amount *= brute_resist
 		if(BURN)
 			damage_amount *= fire_resist
+<<<<<<< HEAD
+=======
+		if(CLONE)
+			EMPTY_BLOCK_GUARD // Pass
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			return 0
 	var/armor_protection = 0
@@ -350,7 +355,7 @@
 /obj/structure/blob/normal
 	name = "normal blob"
 	icon_state = "blob"
-	light_range = 0
+	light_outer_range = 0
 	max_integrity = BLOB_REGULAR_MAX_HP
 	var/initial_integrity = BLOB_REGULAR_HP_INIT
 	health_regen = BLOB_REGULAR_HP_REGEN

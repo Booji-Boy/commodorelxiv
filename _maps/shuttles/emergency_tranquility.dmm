@@ -10,10 +10,6 @@
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "aj" = (
-/obj/structure/railing/corner{
-	dir = 8;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
@@ -22,12 +18,24 @@
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
-"aI" = (
+"ar" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
 /obj/structure/railing{
-	color = "#A47449";
+	dir = 8;
+	layer = 4.1
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/shuttle/escape)
+"aI" = (
+/obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/effect/turf_decal/siding/wood{
+/obj/structure/railing{
 	dir = 4
 	},
 /turf/open/water/jungle,
@@ -61,10 +69,6 @@
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
 "bS" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 8
-	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 9
 	},
@@ -73,6 +77,9 @@
 	pixel_y = 8
 	},
 /obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/structure/railing{
 	dir = 8
 	},
 /turf/open/water/jungle,
@@ -338,10 +345,6 @@
 /turf/open/floor/carpet/red,
 /area/shuttle/escape)
 "hk" = (
-/obj/structure/railing/corner{
-	dir = 4;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
 	},
@@ -376,7 +379,7 @@
 	dir = 5
 	},
 /obj/structure/closet/crate/bin,
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/wood,
 /area/shuttle/escape)
 "hG" = (
@@ -412,10 +415,6 @@
 /turf/open/floor/wood,
 /area/shuttle/escape)
 "ij" = (
-/obj/structure/railing/corner{
-	dir = 2;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner,
 /obj/structure/chair/sofa/bamboo/left{
 	dir = 8
@@ -441,10 +440,6 @@
 /turf/open/floor/iron/herringbone,
 /area/shuttle/escape)
 "iM" = (
-/obj/structure/railing/corner{
-	dir = 1;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -459,14 +454,15 @@
 /turf/open/floor/stone,
 /area/shuttle/escape)
 "jl" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 10;
-	layer = 3.1
-	},
 /obj/structure/flora/bush/fullgrass/style_2,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
+	},
+/obj/structure/railing{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 8
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -509,25 +505,24 @@
 /turf/open/floor/wood/parquet,
 /area/shuttle/escape)
 "jM" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 6;
-	layer = 3.1
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
 /obj/structure/flora/bush/style_4,
+/obj/structure/railing{
+	dir = 6;
+	layer = 3.1
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
+	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "jN" = (
 /turf/open/floor/carpet/green,
 /area/shuttle/escape)
 "kh" = (
-/obj/structure/railing/corner{
-	dir = 2;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner,
 /turf/open/water/jungle,
 /area/shuttle/escape)
@@ -535,14 +530,15 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 10;
-	layer = 3.1
-	},
 /obj/structure/flora/bush/fullgrass,
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
+	},
+/obj/structure/railing{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 8
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -693,11 +689,6 @@
 /turf/open/floor/wood/large,
 /area/shuttle/escape)
 "nA" = (
-/obj/structure/railing/corner{
-	dir = 8;
-	color = "#A47449";
-	layer = 3.1
-	},
 /obj/structure/flora/rock/pile/jungle/style_3{
 	pixel_x = -4
 	},
@@ -737,15 +728,18 @@
 /turf/template_noop,
 /area/shuttle/escape)
 "oj" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 10;
-	layer = 3.1
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
 /obj/structure/flora/bush/style_3,
+/obj/structure/railing{
+	dir = 6;
+	layer = 3.1
+	},
+/obj/structure/railing{
+	dir = 8;
+	layer = 4.1
+	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "os" = (
@@ -766,9 +760,12 @@
 	dir = 10
 	},
 /obj/structure/railing{
-	color = "#A47449";
-	dir = 10;
+	dir = 6;
 	layer = 3.1
+	},
+/obj/structure/railing{
+	dir = 8;
+	layer = 4.1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -817,16 +814,19 @@
 /turf/open/floor/plating,
 /area/shuttle/escape)
 "pf" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 6;
-	layer = 3.1
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
 /mob/living/basic/butterfly{
 	name = "Peacekeeper Henry"
+	},
+/obj/structure/railing{
+	dir = 6;
+	layer = 3.1
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -859,6 +859,52 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/plating,
 /area/shuttle/escape)
+<<<<<<< HEAD
+=======
+"pM" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/structure/railing{
+	dir = 8;
+	layer = 4.1
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/shuttle/escape)
+"pN" = (
+/obj/item/paper_bin{
+	pixel_x = -4
+	},
+/obj/item/pen/fourcolor{
+	pixel_x = -4
+	},
+/obj/item/stamp{
+	pixel_x = 8;
+	pixel_y = 5
+	},
+/obj/item/stamp/denied{
+	pixel_x = 8
+	},
+/obj/item/stamp/head/qm{
+	pixel_y = -5;
+	pixel_x = 8
+	},
+/obj/structure/table/reinforced{
+	color = "#c1b6a5"
+	},
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "pP" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
@@ -988,10 +1034,6 @@
 /turf/open/floor/wood/tile,
 /area/shuttle/escape)
 "sU" = (
-/obj/structure/railing/corner{
-	dir = 1;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -1011,13 +1053,16 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
 /obj/structure/railing{
-	color = "#A47449";
 	dir = 6;
 	layer = 3.1
 	},
-/obj/effect/turf_decal/siding/wood{
-	dir = 6
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -1099,17 +1144,32 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "vB" = (
-/obj/structure/railing/corner{
-	dir = 2;
-	color = "#A47449"
-	},
-/obj/structure/railing/corner{
+/obj/structure/railing{
 	dir = 8;
-	color = "#A47449"
+	layer = 4.1
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
 	},
 /turf/open/floor/iron/stairs{
 	dir = 1
 	},
+/area/shuttle/escape)
+"vG" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 9
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "vI" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
@@ -1118,12 +1178,14 @@
 /turf/open/floor/iron/dark/small,
 /area/shuttle/escape)
 "vT" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 9
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -1265,26 +1327,17 @@
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "yF" = (
-/obj/structure/railing/corner{
-	dir = 1;
-	color = "#A47449"
-	},
 /obj/structure/flora/bush/fullgrass,
 /obj/structure/flora/bush/flowers_yw,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "yJ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
-	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 6;
-	layer = 3.1
 	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
@@ -1294,6 +1347,12 @@
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
+	},
+/obj/structure/railing{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4
 	},
 /turf/open/water/jungle,
 /area/shuttle/escape)
@@ -1370,15 +1429,22 @@
 	},
 /turf/open/floor/carpet/red,
 /area/shuttle/escape)
+"zC" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/shuttle/escape)
 "zI" = (
-/obj/structure/railing/corner{
-	dir = 4;
-	color = "#A47449"
-	},
-/obj/structure/railing/corner{
-	dir = 1;
-	color = "#A47449"
-	},
 /turf/open/floor/iron/stairs,
 /area/shuttle/escape)
 "zX" = (
@@ -1488,7 +1554,6 @@
 /turf/open/floor/plating,
 /area/shuttle/escape)
 "Bn" = (
-/obj/structure/railing/corner,
 /obj/effect/turf_decal/siding/wood/corner,
 /obj/effect/turf_decal/siding/wood,
 /turf/open/floor/wood/large,
@@ -1503,6 +1568,24 @@
 	},
 /turf/open/floor/stone,
 /area/shuttle/escape)
+<<<<<<< HEAD
+=======
+"By" = (
+/obj/structure/flora/bush/large/style_2{
+	pixel_x = -6;
+	pixel_y = -16
+	},
+/obj/structure/flora/rock/pile/jungle{
+	pixel_x = -3;
+	pixel_y = -6
+	},
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 8
+	},
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/grass,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "BC" = (
 /obj/machinery/computer/station_alert{
 	dir = 8
@@ -1512,14 +1595,29 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"Ci" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 6;
-	layer = 3.1
+<<<<<<< HEAD
+=======
+"BL" = (
+/obj/effect/turf_decal/siding/wood/corner{
+	dir = 8
 	},
+/obj/structure/hedge{
+	icon_state = "hedge-8"
+	},
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/siding/wood,
+/turf/open/floor/wood/large,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+"Ci" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
+	},
+/obj/structure/railing{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4
 	},
 /turf/open/water/jungle,
 /area/shuttle/escape)
@@ -1541,6 +1639,19 @@
 	},
 /obj/structure/chair/comfy/shuttle,
 /turf/open/floor/carpet/royalblue,
+/area/shuttle/escape)
+"Dv" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "DC" = (
 /obj/effect/turf_decal/siding/wood{
@@ -1579,10 +1690,6 @@
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "EH" = (
-/obj/structure/railing/corner{
-	dir = 4;
-	color = "#A47449"
-	},
 /obj/structure/flora/bush/flowers_br{
 	pixel_x = -3;
 	pixel_y = -2
@@ -1647,10 +1754,6 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "Fg" = (
-/obj/structure/railing/corner{
-	dir = 4;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/weather/dirt{
 	dir = 5
 	},
@@ -1816,20 +1919,18 @@
 /turf/open/floor/stone,
 /area/shuttle/escape)
 "HL" = (
-/obj/structure/railing/corner{
-	dir = 2;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "HS" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 5
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -1865,10 +1966,6 @@
 /turf/open/floor/wood,
 /area/shuttle/escape)
 "IV" = (
-/obj/structure/railing/corner{
-	dir = 8;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
 	},
@@ -1888,10 +1985,6 @@
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "Jp" = (
-/obj/structure/railing/corner{
-	dir = 4;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
 	},
@@ -2009,13 +2102,12 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 4;
-	layer = 3.2
-	},
 /obj/structure/flora/bush/flowers_pp,
 /obj/structure/flora/bush/flowers_pp/style_2,
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
+	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "KK" = (
@@ -2044,12 +2136,15 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 5
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4;
+	layer = 4.1
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -2121,9 +2216,8 @@
 	},
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/structure/railing{
-	color = "#A47449";
 	dir = 8;
-	layer = 3.2
+	layer = 4.1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -2174,13 +2268,16 @@
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "Oj" = (
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 10;
-	layer = 3.1
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
+	},
+/obj/structure/railing{
+	dir = 6;
+	layer = 3.1
+	},
+/obj/structure/railing{
+	dir = 8;
+	layer = 4.1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -2191,7 +2288,7 @@
 /turf/open/floor/carpet,
 /area/shuttle/escape)
 "Or" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/wood/tile,
 /area/shuttle/escape)
 "OB" = (
@@ -2322,6 +2419,14 @@
 	},
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)
+<<<<<<< HEAD
+=======
+"Rx" = (
+/mob/living/basic/bot/hygienebot,
+/obj/machinery/light/directional/north,
+/turf/open/floor/wood,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "RD" = (
 /obj/machinery/computer/emergency_shuttle{
 	dir = 8
@@ -2329,10 +2434,6 @@
 /turf/open/floor/iron/dark/small,
 /area/shuttle/escape)
 "RG" = (
-/obj/structure/railing/corner{
-	dir = 2;
-	color = "#A47449"
-	},
 /obj/structure/flora/bush/reed/style_2{
 	pixel_y = 21;
 	pixel_x = -1
@@ -2527,12 +2628,14 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 9
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
+	},
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -2575,12 +2678,14 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
-/obj/structure/railing{
-	color = "#A47449";
-	dir = 5
-	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/misc/dirt/jungle/dark,
 /area/shuttle/escape)
@@ -2594,10 +2699,6 @@
 /turf/open/floor/carpet/royalblue,
 /area/shuttle/escape)
 "Wx" = (
-/obj/structure/railing/corner{
-	dir = 1;
-	color = "#A47449"
-	},
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
 	},
@@ -3072,8 +3173,13 @@ oB
 oB
 Bs
 qw
+<<<<<<< HEAD
 rb
 UU
+=======
+ni
+pM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ow
 os
 IR
@@ -3096,8 +3202,13 @@ ux
 UP
 NC
 ux
+<<<<<<< HEAD
 Uk
 vT
+=======
+zo
+ar
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 iM
 aj
 oj
@@ -3130,7 +3241,7 @@ Oj
 Zh
 Sa
 nE
-vT
+vG
 yF
 ag
 ag
@@ -3180,7 +3291,7 @@ pf
 Zh
 Or
 nE
-HS
+zC
 EH
 QK
 bB
@@ -3197,7 +3308,7 @@ UF
 pe
 ux
 AN
-HS
+Dv
 hk
 ij
 jM

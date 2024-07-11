@@ -8,7 +8,7 @@
 	move_resist = MOVE_FORCE_OVERPOWERING
 	density = TRUE
 	status_flags = CANSTUN|CANPUSH
-	combat_mode = TRUE //so we always get pushed instead of trying to swap
+	istate = ISTATE_HARM|ISTATE_BLOCKING //so we always get pushed instead of trying to swap
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS
 	hud_type = /datum/hud/ai
 	med_hud = DATA_HUD_MEDICAL_BASIC
@@ -101,6 +101,9 @@
 	///whether AI is anchored or not, used for checks
 	var/is_anchored = TRUE
 
+	///Command report cooldown
+	COOLDOWN_DECLARE(command_report_cd) // monkestation edit
+
 /mob/living/silicon/ai/Initialize(mapload, datum/ai_laws/L, mob/target_ai)
 	. = ..()
 	if(!target_ai) //If there is no player/brain inside.
@@ -178,6 +181,10 @@
 
 	builtInCamera = new (src)
 	builtInCamera.network = list(CAMERANET_NETWORK_SS13)
+
+	ai_tracking_tool = new(src)
+	RegisterSignal(ai_tracking_tool, COMSIG_TRACKABLE_TRACKING_TARGET, PROC_REF(on_track_target))
+	RegisterSignal(ai_tracking_tool, COMSIG_TRACKABLE_GLIDE_CHANGED, PROC_REF(tracked_glidesize_changed))
 
 	ai_tracking_tool = new(src)
 	RegisterSignal(ai_tracking_tool, COMSIG_TRACKABLE_TRACKING_TARGET, PROC_REF(on_track_target))
@@ -637,6 +644,10 @@
 /mob/living/silicon/ai/proc/ai_network_change()
 	set category = "AI Commands"
 	set name = "Jump To Network"
+<<<<<<< HEAD
+=======
+	unset_machine()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_tracking_tool.reset_tracking()
 	var/cameralist[0]
 

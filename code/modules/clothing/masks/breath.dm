@@ -12,7 +12,11 @@
 	flags_cover = MASKCOVERSMOUTH
 	visor_flags_cover = MASKCOVERSMOUTH
 	resistance_flags = NONE
+<<<<<<< HEAD
 	interaction_flags_click = NEED_DEXTERITY|ALLOW_RESTING
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/mask_breath
 	bio = 50

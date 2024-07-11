@@ -3,8 +3,13 @@
 /obj/item/slime_extract
 	name = "slime extract"
 	desc = "Goo extracted from a slime. Legends claim these to have \"magical powers\"."
+<<<<<<< HEAD
 	icon = 'icons/mob/simple/slimes.dmi'
 	icon_state = "grey-core"
+=======
+	icon = 'monkestation/code/modules/slimecore/icons/slimes.dmi'
+	icon_state = "grey_slime_extract"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	force = 0
 	w_class = WEIGHT_CLASS_TINY
 	throwforce = 0
@@ -20,6 +25,8 @@
 	///Reagents required for activation
 	var/list/activate_reagents = list()
 	var/recurring = FALSE
+
+	var/tier = 1
 
 /obj/item/slime_extract/examine(mob/user)
 	. = ..()
@@ -62,6 +69,7 @@
 	to_chat(user, span_warning("Nothing happened... This slime extract cannot be activated this way."))
 	return FALSE
 
+<<<<<<< HEAD
 /**
 * Core-crossing: Feeding adult slimes extracts to obtain a much more powerful, single extract.
 *
@@ -95,12 +103,18 @@
 	name = "grey slime extract"
 	icon_state = "grey-core"
 	crossbreed_modification = "reproductive"
+=======
+/obj/item/slime_extract/grey
+	name = "grey slime extract"
+	icon_state = "grey_slime_extract"
+	effectmod = "reproductive"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
 
 /obj/item/slime_extract/grey/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
 		if(SLIME_ACTIVATE_MINOR)
-			var/obj/item/food/monkeycube/M = new
+			var/obj/item/stack/biomass/M = new
 			if(!user.put_in_active_hand(M))
 				M.forceMove(user.drop_location())
 			playsound(user, 'sound/effects/splat.ogg', 50, TRUE)
@@ -108,8 +122,13 @@
 			return 120
 		if(SLIME_ACTIVATE_MAJOR)
 			to_chat(user, span_notice("Your [name] starts pulsing..."))
+<<<<<<< HEAD
 			if(do_after(user, 4 SECONDS, target = user))
 				var/mob/living/basic/slime/new_slime = new(get_turf(user), /datum/slime_type/grey)
+=======
+			if(do_after(user, 40, target = user))
+				var/mob/living/basic/slime/S = new(get_turf(user))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				playsound(user, 'sound/effects/splat.ogg', 50, TRUE)
 				to_chat(user, span_notice("You spit out [new_slime]."))
 				return 350
@@ -118,9 +137,15 @@
 
 /obj/item/slime_extract/gold
 	name = "gold slime extract"
+<<<<<<< HEAD
 	icon_state = "gold-core"
 	crossbreed_modification = "symbiont"
+=======
+	icon_state = "gold_slime_extract"
+	effectmod = "symbiont"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 4
 
 
 
@@ -139,7 +164,7 @@
 			user.visible_message(span_warning("[user] starts shaking violently!"),span_warning("Your [name] starts pulsing violently..."))
 			if(do_after(user, 5 SECONDS, target = user))
 				var/mob/living/spawned_mob = create_random_mob(user.drop_location(), HOSTILE_SPAWN)
-				if(!user.combat_mode)
+				if(!(user.istate & ISTATE_HARM))
 					spawned_mob.faction |= FACTION_NEUTRAL
 				else
 					spawned_mob.faction |= FACTION_SLIME
@@ -149,9 +174,15 @@
 
 /obj/item/slime_extract/silver
 	name = "silver slime extract"
+<<<<<<< HEAD
 	icon_state = "silver-core"
 	crossbreed_modification = "consuming"
+=======
+	icon_state = "silver_slime_extract"
+	effectmod = "consuming"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 2
 
 
 
@@ -177,8 +208,13 @@
 
 /obj/item/slime_extract/metal
 	name = "metal slime extract"
+<<<<<<< HEAD
 	icon_state = "metal-core"
 	crossbreed_modification = "industrial"
+=======
+	icon_state = "metal_slime_extract"
+	effectmod = "industrial"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma,/datum/reagent/water)
 
 /obj/item/slime_extract/metal/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
@@ -201,8 +237,13 @@
 
 /obj/item/slime_extract/purple
 	name = "purple slime extract"
+<<<<<<< HEAD
 	icon_state = "purple-core"
 	crossbreed_modification = "regenerative"
+=======
+	icon_state = "purple_slime_extract"
+	effectmod = "regenerative"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
 
 /obj/item/slime_extract/purple/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
@@ -220,9 +261,15 @@
 
 /obj/item/slime_extract/darkpurple
 	name = "dark purple slime extract"
+<<<<<<< HEAD
 	icon_state = "dark-purple-core"
 	crossbreed_modification = "self-sustaining"
+=======
+	icon_state = "dark_purple_slime_extract"
+	effectmod = "self-sustaining"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma)
+	tier = 2
 
 /obj/item/slime_extract/darkpurple/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -243,8 +290,13 @@
 
 /obj/item/slime_extract/orange
 	name = "orange slime extract"
+<<<<<<< HEAD
 	icon_state = "orange-core"
 	crossbreed_modification = "burning"
+=======
+	icon_state = "orange_slime_extract"
+	effectmod = "burning"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
 
 /obj/item/slime_extract/orange/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
@@ -263,9 +315,15 @@
 
 /obj/item/slime_extract/yellow
 	name = "yellow slime extract"
+<<<<<<< HEAD
 	icon_state = "yellow-core"
 	crossbreed_modification = "charged"
+=======
+	icon_state = "yellow_slime_extract"
+	effectmod = "charged"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 2
 
 /obj/item/slime_extract/yellow/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -286,9 +344,15 @@
 
 /obj/item/slime_extract/red
 	name = "red slime extract"
+<<<<<<< HEAD
 	icon_state = "red-core"
 	crossbreed_modification = "sanguine"
+=======
+	icon_state = "red_slime_extract"
+	effectmod = "sanguine"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 3
 
 /obj/item/slime_extract/red/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -300,14 +364,23 @@
 		if(SLIME_ACTIVATE_MAJOR)
 			user.visible_message(span_warning("[user]'s skin flashes red for a moment..."), span_warning("Your skin flashes red as you emit rage-inducing pheromones..."))
 			for(var/mob/living/basic/slime/slime in viewers(get_turf(user), null))
+<<<<<<< HEAD
 				slime.ai_controller?.set_blackboard_key(BB_SLIME_RABID, TRUE)
+=======
+				ADD_TRAIT(slime, TRAIT_SLIME_RABID, "red-extract")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				slime.visible_message(span_danger("The [slime] is driven into a frenzy!"))
 			return 600
 
 /obj/item/slime_extract/blue
 	name = "blue slime extract"
+<<<<<<< HEAD
 	icon_state = "blue-core"
 	crossbreed_modification = "stabilized"
+=======
+	icon_state = "blue_slime_extract"
+	effectmod = "stabilized"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
 
 /obj/item/slime_extract/blue/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
@@ -325,9 +398,15 @@
 
 /obj/item/slime_extract/darkblue
 	name = "dark blue slime extract"
+<<<<<<< HEAD
 	icon_state = "dark-blue-core"
 	crossbreed_modification = "chilling"
+=======
+	icon_state = "dark_blue_slime_extract"
+	effectmod = "chilling"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 2
 
 /obj/item/slime_extract/darkblue/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -348,9 +427,15 @@
 
 /obj/item/slime_extract/pink
 	name = "pink slime extract"
+<<<<<<< HEAD
 	icon_state = "pink-core"
 	crossbreed_modification = "gentle"
+=======
+	icon_state = "pink_slime_extract"
+	effectmod = "gentle"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
+	tier = 4
 
 /obj/item/slime_extract/pink/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -376,9 +461,15 @@
 
 /obj/item/slime_extract/green
 	name = "green slime extract"
+<<<<<<< HEAD
 	icon_state = "green-core"
 	crossbreed_modification = "mutative"
+=======
+	icon_state = "green_slime_extract"
+	effectmod = "mutative"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/uranium/radium)
+	tier = 4
 
 /obj/item/slime_extract/green/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -400,9 +491,15 @@
 
 /obj/item/slime_extract/lightpink
 	name = "light pink slime extract"
+<<<<<<< HEAD
 	icon_state = "light-pink-core"
 	crossbreed_modification = "loyal"
+=======
+	icon_state = "light_pink_slime_extract"
+	effectmod = "loyal"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma)
+	tier = 5
 
 /obj/item/slime_extract/lightpink/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -424,15 +521,20 @@
 
 /obj/item/slime_extract/black
 	name = "black slime extract"
+<<<<<<< HEAD
 	icon_state = "black-core"
 	crossbreed_modification = "transformative"
+=======
+	icon_state = "black_slime_extract"
+	effectmod = "transformative"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma)
+	tier = 5
 
 /obj/item/slime_extract/black/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
 		if(SLIME_ACTIVATE_MINOR)
-			to_chat(user, span_userdanger("You feel something <i>wrong</i> inside you..."))
-			user.ForceContractDisease(new /datum/disease/transformation/slime(), FALSE, TRUE)
+			user.infect_disease_predefined(DISEASE_SLIME, TRUE, "[ROUND_TIME()] Black slime extract Infection [key_name(user)]")
 			return 100
 
 		if(SLIME_ACTIVATE_MAJOR)
@@ -445,9 +547,15 @@
 
 /obj/item/slime_extract/oil
 	name = "oil slime extract"
+<<<<<<< HEAD
 	icon_state = "oil-core"
 	crossbreed_modification = "detonating"
+=======
+	icon_state = "oil_slime_extract"
+	effectmod = "detonating"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
+	tier = 5
 
 /obj/item/slime_extract/oil/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -469,9 +577,15 @@
 
 /obj/item/slime_extract/adamantine
 	name = "adamantine slime extract"
+<<<<<<< HEAD
 	icon_state = "adamantine-core"
 	crossbreed_modification = "crystalline"
+=======
+	icon_state = "adamantine_slime_extract"
+	effectmod = "crystalline"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/toxin/plasma)
+	tier = 5
 
 /obj/item/slime_extract/adamantine/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -499,13 +613,19 @@
 
 /obj/item/slime_extract/bluespace
 	name = "bluespace slime extract"
+<<<<<<< HEAD
 	icon_state = "bluespace-core"
 	crossbreed_modification = "warping"
+=======
+	icon_state = "bluespace_slime_extract"
+	effectmod = "warping"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
 	var/teleport_ready = FALSE
 	var/teleport_x = 0
 	var/teleport_y = 0
 	var/teleport_z = 0
+	tier = 6
 
 /obj/item/slime_extract/bluespace/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -535,9 +655,15 @@
 
 /obj/item/slime_extract/pyrite
 	name = "pyrite slime extract"
+<<<<<<< HEAD
 	icon_state = "pyrite-core"
 	crossbreed_modification = "prismatic"
+=======
+	icon_state = "pyrite_slime_extract"
+	effectmod = "prismatic"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
+	tier = 3
 
 /obj/item/slime_extract/pyrite/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -562,9 +688,15 @@
 
 /obj/item/slime_extract/cerulean
 	name = "cerulean slime extract"
+<<<<<<< HEAD
 	icon_state = "cerulean-core"
 	crossbreed_modification = "recurring"
+=======
+	icon_state = "cerulean_slime_extract"
+	effectmod = "recurring"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma)
+	tier = 3
 
 /obj/item/slime_extract/cerulean/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -582,9 +714,15 @@
 
 /obj/item/slime_extract/sepia
 	name = "sepia slime extract"
+<<<<<<< HEAD
 	icon_state = "sepia-core"
 	crossbreed_modification = "lengthened"
+=======
+	icon_state = "sepia_slime_extract"
+	effectmod = "lengthened"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,/datum/reagent/water)
+	tier = 3
 
 /obj/item/slime_extract/sepia/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -604,9 +742,15 @@
 
 /obj/item/slime_extract/rainbow
 	name = "rainbow slime extract"
+<<<<<<< HEAD
 	icon_state = "rainbow-core"
 	crossbreed_modification = "hyperchromatic"
+=======
+	icon_state = "rainbow_slime_extract"
+	effectmod = "hyperchromatic"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	activate_reagents = list(/datum/reagent/blood,/datum/reagent/toxin/plasma,"lesser plasma",/datum/reagent/toxin/slimejelly,"holy water and uranium") //Curse this snowflake reagent list.
+	tier = 6
 
 /obj/item/slime_extract/rainbow/activate(mob/living/carbon/human/user, datum/species/jelly/luminescent/species, activation_type)
 	switch(activation_type)
@@ -657,13 +801,19 @@
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "potsilver"
 
+<<<<<<< HEAD
 /obj/item/slimepotion/slime/docility/attack(mob/living/basic/slime/target_slime, mob/user)
 	if(!isslime(target_slime))
+=======
+/obj/item/slimepotion/slime/docility/attack(mob/living/basic/slime/M, mob/user)
+	if(!isslime(M))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("The potion only works on slimes!"))
 		return ..()
 	if(target_slime.stat)
 		to_chat(user, span_warning("The slime is dead!"))
 		return
+<<<<<<< HEAD
 	if(target_slime.ai_controller?.clear_blackboard_key(BB_SLIME_RABID)) //Stops being rabid, but doesn't become truly docile.
 		to_chat(target_slime, span_warning("You absorb the potion, and your rabid hunger finally settles to a normal desire to feed."))
 		to_chat(user, span_notice("You feed the slime the potion, calming its rabid rage."))
@@ -672,13 +822,29 @@
 		return
 	target_slime.set_pacified_behaviour()
 	to_chat(target_slime, span_warning("You absorb the potion and feel your intense desire to feed melt away."))
+=======
+	if(HAS_TRAIT(M, TRAIT_SLIME_RABID)) //Stops being rabid, but doesn't become truly docile.
+		to_chat(M, span_warning("You absorb the potion, and your rabid hunger finally settles to a normal desire to feed."))
+		to_chat(user, span_notice("You feed the slime the potion, calming its rabid rage."))
+		REMOVE_TRAIT(M, TRAIT_SLIME_RABID, null)
+		qdel(src)
+		return
+	M.add_trait(/datum/slime_trait/docility)
+	to_chat(M, span_warning("You absorb the potion and feel your intense desire to feed melt away."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	to_chat(user, span_notice("You feed the slime the potion, removing its hunger and calming it."))
 	var/newname = sanitize_name(tgui_input_text(user, "Would you like to give the slime a name?", "Name your new pet", "Pet Slime", MAX_NAME_LEN))
 
 	if (!newname)
 		newname = "Pet Slime"
+<<<<<<< HEAD
 	target_slime.name = newname
 	target_slime.real_name = newname
+=======
+	M.name = newname
+	M.real_name = newname
+	M.update_name_tag(newname) // monkestation edit: name tags
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 /obj/item/slimepotion/slime/sentience
@@ -737,9 +903,22 @@
 	)
 	on_poll_concluded(user, dumb_mob, chosen_one)
 
+<<<<<<< HEAD
 /// Assign the chosen ghost to the mob
 /obj/item/slimepotion/slime/sentience/proc/on_poll_concluded(mob/user, mob/living/dumb_mob, mob/dead/observer/ghost)
 	if(isnull(ghost))
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(
+		"Do you want to play as [dumb_mob.name]",
+		role = ROLE_SENTIENCE,
+		poll_time = 5 SECONDS,
+		target_mob = dumb_mob,
+		ignore_category = POLL_IGNORE_SENTIENCE_POTION,
+		pic_source = dumb_mob,
+		role_name_text = "sentient mob"
+	)
+	if(!LAZYLEN(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "try again later!")
 		being_used = FALSE
 		return
@@ -826,10 +1005,11 @@
 
 /obj/item/slimepotion/slime/steroid
 	name = "slime steroid"
-	desc = "A potent chemical mix that will cause a baby slime to generate more extract."
+	desc = "A potent chemical mix that will cause slimes to make more ooze."
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "potred"
 
+<<<<<<< HEAD
 /obj/item/slimepotion/slime/steroid/attack(mob/living/basic/slime/target, mob/user)
 	if(!isslime(target))//If target is not a slime.
 		to_chat(user, span_warning("The steroid only works on baby slimes!"))
@@ -846,6 +1026,22 @@
 
 	to_chat(user, span_notice("You feed the slime the steroid. It will now produce one more extract."))
 	target.cores++
+=======
+/obj/item/slimepotion/slime/steroid/attack(mob/living/basic/slime/M, mob/user)
+	if(!isslime(M))//If target is not a slime.
+		to_chat(user, span_warning("The steroid only works on slimes!")) // monkestation edit: not baby slimes only, no
+		return ..()
+	if(M.stat)
+		to_chat(user, span_warning("The slime is dead!"))
+		return
+	// monkestation start: xenobio rework
+	if(M.ooze_production >= 50)
+		to_chat(user, span_warning("The slime is already producing too much ooze!"))
+		return
+	to_chat(user, span_notice("You feed the slime the steroid. It will now produce more ooze."))
+	M.ooze_production = min(M.ooze_production + 20, 50)
+	// monkestation end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 /obj/item/slimepotion/enhancer
@@ -860,8 +1056,13 @@
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "potcyan"
 
+<<<<<<< HEAD
 /obj/item/slimepotion/slime/stabilizer/attack(mob/living/basic/slime/target_slime, mob/user)
 	if(!isslime(target_slime))
+=======
+/obj/item/slimepotion/slime/stabilizer/attack(mob/living/basic/slime/M, mob/user)
+	if(!isslime(M))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("The stabilizer only works on slimes!"))
 		return ..()
 	if(target_slime.stat)
@@ -881,14 +1082,23 @@
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "potgreen"
 
+<<<<<<< HEAD
 /obj/item/slimepotion/slime/mutator/attack(mob/living/basic/slime/target_slime, mob/user)
 	if(!isslime(target_slime))
+=======
+/obj/item/slimepotion/slime/mutator/attack(mob/living/basic/slime/M, mob/user)
+	if(!isslime(M))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("The mutator only works on slimes!"))
 		return ..()
 	if(target_slime.stat)
 		to_chat(user, span_warning("The slime is dead!"))
 		return
+<<<<<<< HEAD
 	if(target_slime.mutator_used)
+=======
+	if(HAS_TRAIT(M, TRAIT_MUTATOR_USED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("This slime has already consumed a mutator, any more would be far too unstable!"))
 		return
 	if(target_slime.mutation_chance == 100)
@@ -896,8 +1106,13 @@
 		return
 
 	to_chat(user, span_notice("You feed the slime the mutator. It is now more likely to mutate."))
+<<<<<<< HEAD
 	target_slime.mutation_chance = clamp(target_slime.mutation_chance+12,0,100)
 	target_slime.mutator_used = TRUE
+=======
+	M.mutation_chance = clamp(M.mutation_chance+12,0,100)
+	ADD_TRAIT(M, TRAIT_MUTATOR_USED, "slime-mutator")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 /obj/item/slimepotion/speed
@@ -912,6 +1127,7 @@
 		return .
 	if(!isobj(interacting_with))
 		to_chat(user, span_warning("The potion can only be used on objects!"))
+<<<<<<< HEAD
 		return ITEM_INTERACT_BLOCKING
 	if(SEND_SIGNAL(interacting_with, COMSIG_SPEED_POTION_APPLIED, src, user) & SPEED_POTION_STOP)
 		return ITEM_INTERACT_SUCCESS
@@ -921,6 +1137,18 @@
 			to_chat(user, span_warning("The [apply_to] can't be made any faster!"))
 			return ITEM_INTERACT_BLOCKING
 		apply_to.slowdown = 0
+=======
+		return
+	. |= AFTERATTACK_PROCESSED_ITEM
+	if(SEND_SIGNAL(C, COMSIG_SPEED_POTION_APPLIED, src, user) & SPEED_POTION_STOP)
+		return
+	if(isitem(C))
+		var/obj/item/I = C
+		if(I.slowdown <= 0 || (I.item_flags & IMMUTABLE_SLOW))
+			to_chat(user, span_warning("The [C] can't be made any faster!"))
+			return ..()
+		I.slowdown = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	to_chat(user, span_notice("You slather the red gunk over the [interacting_with], making it faster."))
 	interacting_with.remove_atom_colour(WASHABLE_COLOUR_PRIORITY)

@@ -432,6 +432,7 @@
 	using = TRUE
 	balloon_alert(user, "you hold the scythe up...")
 	ADD_TRAIT(src, TRAIT_NODROP, type)
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(
 		check_jobban = ROLE_PAI,
 		poll_time = 20 SECONDS,
@@ -460,6 +461,30 @@
 	if(!ismob(loc))
 		reset_spin()
 
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as [user.real_name]'s soulscythe?",
+		role = ROLE_PAI,
+		check_jobban = ROLE_PAI,
+		poll_time = 10 SECONDS,
+		ignore_category = POLL_IGNORE_POSSESSED_BLADE,
+		pic_source = src,
+		role_name_text = "soul scythe"
+	)
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/picked_ghost = pick(candidates)
+		soul.ckey = picked_ghost.ckey
+		soul.copy_languages(user, LANGUAGE_MASTER) //Make sure the sword can understand and communicate with the user.
+		soul.update_atom_languages()
+		soul.faction = list("[REF(user)]")
+		balloon_alert(user, "the scythe glows up")
+		add_overlay("soulscythe_gem")
+		density = TRUE
+		if(!ismob(loc))
+			reset_spin()
+	else
+		balloon_alert(user, "the scythe is dormant!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	REMOVE_TRAIT(src, TRAIT_NODROP, type)
 	using = FALSE
 
@@ -626,7 +651,7 @@
 	icon_state = "soulslash"
 	armor_flag = MELEE //jokair
 	damage = 15
-	light_range = 1
+	light_outer_range = 1
 	light_power = 1
 	light_color = LIGHT_COLOR_BLOOD_MAGIC
 
@@ -763,7 +788,7 @@
 			consumer.set_species(/datum/species/lizard)
 		if(2)
 			to_chat(user, span_danger("Your flesh begins to melt! Miraculously, you seem fine otherwise."))
-			consumer.set_species(/datum/species/skeleton)
+			consumer.set_species(/datum/species/skeleton/draconic) //monke edit
 		if(3)
 			to_chat(user, span_danger("Power courses through you! You can now shift your form at will."))
 			var/datum/action/cooldown/spell/shapeshift/dragon/dragon_shapeshift = new(user.mind || user)
@@ -882,6 +907,12 @@
 	var/open_force = 20
 	/// Throwforce when the saw is opened.
 	var/open_throwforce = 20
+	/// how much stamina does it cost to roll?
+	var/roll_stamcost = 20
+	/// how far are we rolling?
+	var/roll_range = 5
+	/// do you spin when dodgerolling
+	var/roll_orientation = TRUE
 
 /obj/item/melee/cleaving_saw/Initialize(mapload)
 	. = ..()
@@ -903,6 +934,7 @@
 	. += span_notice("It is [HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? "open, will cleave enemies in a wide arc and deal additional damage to fauna":"closed, and can be used for rapid consecutive attacks that cause fauna to bleed"].")
 	. += span_notice("Both modes will build up existing bleed effects, doing a burst of high damage if the bleed is built up high enough.")
 	. += span_notice("Transforming it immediately after an attack causes the next attack to come out faster.")
+	. += span_notice("You can also right click to perform a roll! This has NO i-frames, do not try to dodge through attacks!")
 
 /obj/item/melee/cleaving_saw/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is [HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) ? "closing [src] on [user.p_their()] neck" : "opening [src] into [user.p_their()] chest"]! It looks like [user.p_theyre()] trying to commit suicide!"))
@@ -957,6 +989,29 @@
 		existing_bleed.add_stacks(bleed_stacks_per_hit)
 	else
 		target.apply_status_effect(/datum/status_effect/stacking/saw_bleed, bleed_stacks_per_hit)
+
+/*
+ * The dodge roll that is mandatory for a Fromsoft reference
+ *
+ */
+
+/obj/item/melee/cleaving_saw/AltClick(mob/user) //want blood born quick steps or dark souls rolls (completely cosmetic)
+	. = ..()
+	roll_orientation = !roll_orientation
+	to_chat(user, span_notice("You are now [roll_orientation ? "rolling" : "quick-stepping"] when you dodge. (This only affects if you spin or not during a dodge.)"))
+
+/obj/item/melee/cleaving_saw/pre_attack_secondary(atom/A, mob/living/user, params)
+	return TRUE // Let's dance.
+
+/obj/item/melee/cleaving_saw/afterattack_secondary(atom/target, mob/living/user, proximity_flag, click_parameters)
+	if(user.IsImmobilized()) // no free dodgerolls
+		return
+	var/turf/where_to = get_turf(target)
+	user.stamina.adjust(-roll_stamcost)
+	user.Immobilize(0.8 SECONDS) // you dont get to adjust your roll
+	user.throw_at(where_to, range = roll_range, speed = 2, force = MOVE_FORCE_NORMAL, spin = roll_orientation)
+	playsound(user, 'monkestation/sound/effects/body-armor-rolling.ogg', 50, FALSE)
+	return ..()
 
 /*
  * Signal proc for [COMSIG_TRANSFORMING_ON_TRANSFORM].

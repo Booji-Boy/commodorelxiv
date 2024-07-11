@@ -9,7 +9,7 @@ GLOBAL_DATUM(summon_magic, /datum/summon_things_controller/item)
 GLOBAL_DATUM(mass_teaching, /datum/summon_things_controller/spellbook_entry)
 
 // 1 in 50 chance of getting something really special.
-#define SPECIALIST_MAGIC_PROB 2
+#define SPECIALIST_MAGIC_PROB 5 //monkestation edit: from 2 to 5 so now its 1 in 20, these are cool but not THAT cool
 
 GLOBAL_LIST_INIT(summoned_guns, list(
 	/obj/item/gun/energy/disabler,
@@ -271,7 +271,11 @@ GLOBAL_LIST_INIT(summoned_magic_objectives, list(
 /datum/summon_things_controller/New()
 	RegisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED, PROC_REF(on_latejoin))
 
+<<<<<<< HEAD
 /datum/summon_things_controller/Destroy(force)
+=======
+/datum/summon_things_controller/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	UnregisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED)
 
@@ -360,6 +364,7 @@ GLOBAL_LIST_INIT(summoned_magic_objectives, list(
 
 /datum/summon_things_controller/spellbook_entry/proc/grant_entry(mob/to_who)
 	var/gained = used_entry.buy_spell(to_who, log_buy = FALSE)
+<<<<<<< HEAD
 	// Make spells castable without robes
 	if(istype(gained, /datum/action/cooldown/spell))
 		var/datum/action/cooldown/spell/given_out = gained
@@ -367,3 +372,39 @@ GLOBAL_LIST_INIT(summoned_magic_objectives, list(
 
 	// Makes staffs and related items usable without penalty
 	ADD_TRAIT(to_who.mind, TRAIT_MAGICALLY_GIFTED, INNATE_TRAIT)
+=======
+	// Give humans robes, otherwise make the spell robeless
+	if(istype(gained, /datum/action/cooldown/spell))
+		if(!ishuman(to_who))
+			var/datum/action/cooldown/spell/given_out = gained
+			given_out.spell_requirements &= ~SPELL_REQUIRES_WIZARD_GARB
+		else
+			handle_giving_robes(to_who) //monkestation edit: humans, instead of getting robeless casting, get robes
+
+	// Makes staffs and related items usable without penalty
+	ADD_TRAIT(to_who.mind, TRAIT_MAGICALLY_GIFTED, INNATE_TRAIT)
+
+//monkestation edit start
+//I dont want to just give everyone blue robes and this is the price I must pay
+
+//weighted list of lists of wizard clothing sets, might be better to handle this as a static var inside the proc instead
+#define ROBE_SET_LIST list(list(/obj/item/clothing/suit/wizrobe, /obj/item/clothing/head/wizard) = 3, \
+							list(/obj/item/clothing/suit/wizrobe/black, /obj/item/clothing/head/wizard/black) = 3, \
+							list(/obj/item/clothing/suit/wizrobe/red, /obj/item/clothing/head/wizard/red) = 3, \
+							list(/obj/item/clothing/suit/wizrobe/yellow, /obj/item/clothing/head/wizard/yellow) = 3, \
+							list(/obj/item/clothing/suit/wizrobe/magusblue, /obj/item/clothing/head/wizard/magus) = 2, \
+							list(/obj/item/clothing/suit/wizrobe/magusred, /obj/item/clothing/head/wizard/magus) = 2, \
+							list(/obj/item/clothing/suit/wizrobe/marisa, /obj/item/clothing/head/wizard/marisa) = 2, \
+							list(/obj/item/clothing/suit/wizrobe/tape, /obj/item/clothing/head/wizard/tape) = 2, \
+							list(/obj/item/clothing/suit/wizrobe/santa, /obj/item/clothing/head/wizard/santa) = 1)
+
+///handle equiping humans with their robes
+/datum/summon_things_controller/spellbook_entry/proc/handle_giving_robes(mob/living/carbon/human/given_to)
+	var/list/picked_set = pick_weight(ROBE_SET_LIST)
+	for(var/obj/item/clothing/clothing_type as anything in picked_set)
+		clothing_type = new clothing_type(get_turf(given_to))
+		given_to.equip_in_one_of_slots(clothing_type, list("head" = ITEM_SLOT_HEAD, "wear_suit" = ITEM_SLOT_OCLOTHING), FALSE)
+
+#undef ROBE_SET_LIST
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

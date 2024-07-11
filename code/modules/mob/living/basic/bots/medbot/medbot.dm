@@ -6,16 +6,28 @@
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "medibot0"
 	base_icon_state = "medibot"
+<<<<<<< HEAD
 	health = 20
 	maxHealth = 20
 	speed = 2
 	light_power = 0.8
 	light_color = "#99ccff"
+=======
+	density = FALSE
+	anchored = FALSE
+	health = 20
+	maxHealth = 20
+	speed = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pass_flags = PASSMOB | PASSFLAPS
 	status_flags = (CANPUSH | CANSTUN)
 	ai_controller = /datum/ai_controller/basic_controller/bot/medbot
 
+<<<<<<< HEAD
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_MEDICAL)
+=======
+	maints_access_required = list(ACCESS_ROBOTICS, ACCESS_MEDICAL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	radio_key = /obj/item/encryptionkey/headset_med
 	radio_channel = RADIO_CHANNEL_MEDICAL
 	bot_type = MED_BOT
@@ -136,6 +148,7 @@
 		pre_tipped_callback = CALLBACK(src, PROC_REF(pre_tip_over)), \
 		post_tipped_callback = CALLBACK(src, PROC_REF(after_tip_over)), \
 		post_untipped_callback = CALLBACK(src, PROC_REF(after_righted)))
+<<<<<<< HEAD
 
 	var/static/list/hat_offsets = list(4,-9)
 	var/static/list/remove_hat = list(SIGNAL_ADDTRAIT(TRAIT_MOB_TIPPED))
@@ -156,12 +169,30 @@
 	damage_type_healer = HEAL_ALL_DAMAGE
 	if(prob(50))
 		name += ", PhD."
+=======
+	var/static/list/hat_offsets = list(4,-9)
+	AddElement(/datum/element/hat_wearer, offsets = hat_offsets)
+	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
+
+	if(HAS_TRAIT(SSstation, STATION_TRAIT_MEDBOT_MANIA) && mapload && is_station_level(z))
+		skin = "advanced"
+		update_appearance(UPDATE_OVERLAYS)
+		damage_type_healer = HEAL_ALL_DAMAGE
+		if(prob(50))
+			name += ", PhD."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return INITIALIZE_HINT_LATELOAD
 
 /mob/living/basic/bot/medbot/LateInitialize()
+<<<<<<< HEAD
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !linked_techweb)
 		CONNECT_TO_RND_SERVER_ROUNDSTART(linked_techweb, src)
+=======
+	. = ..()
+	if(!CONFIG_GET(flag/no_default_techweb_link) && !linked_techweb)
+		link_techweb(SSresearch.science_tech) // monkestation edit: techweb linking refactor
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/medbot/update_icon_state()
 	. = ..()
@@ -171,11 +202,18 @@
 	if(HAS_TRAIT(src, TRAIT_INCAPACITATED))
 		icon_state = "[base_icon_state]a"
 		return
+<<<<<<< HEAD
 	var/stationary_mode = !!(medical_mode_flags & MEDBOT_STATIONARY_MODE)
 	if(mode == BOT_HEALING)
 		icon_state = "[base_icon_state]s[stationary_mode]"
 		return
 	icon_state = "[base_icon_state][stationary_mode ? 2 : 1]" //Bot has yellow light to indicate stationary mode.
+=======
+	if(mode == BOT_HEALING)
+		icon_state = "[base_icon_state]s[medical_mode_flags & MEDBOT_STATIONARY_MODE]"
+		return
+	icon_state = "[base_icon_state][medical_mode_flags & MEDBOT_STATIONARY_MODE ? 2 : 1]" //Bot has yellow light to indicate stationary mode.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/medbot/update_overlays()
 	. = ..()
@@ -193,13 +231,22 @@
 
 /mob/living/basic/bot/medbot/multitool_act(mob/living/user, obj/item/multitool/tool)
 	if(!QDELETED(tool.buffer) && istype(tool.buffer, /datum/techweb))
+<<<<<<< HEAD
 		linked_techweb = tool.buffer
 	return ITEM_INTERACT_SUCCESS
+=======
+		link_techweb(tool.buffer) // monkestation edit: techweb linking refactor
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Variables sent to TGUI
 /mob/living/basic/bot/medbot/ui_data(mob/user)
 	var/list/data = ..()
+<<<<<<< HEAD
 	if(!(bot_access_flags & BOT_COVER_LOCKED) || HAS_SILICON_ACCESS(user))
+=======
+	if((bot_access_flags & BOT_CONTROL_PANEL_OPEN) || issilicon(user) || isAdminGhostAI(user))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		data["custom_controls"]["heal_threshold"] = heal_threshold
 		data["custom_controls"]["speaker"] = medical_mode_flags & MEDBOT_SPEAK_MODE
 		data["custom_controls"]["crit_alerts"] = medical_mode_flags & MEDBOT_DECLARE_CRIT
@@ -210,7 +257,11 @@
 // Actions received from TGUI
 /mob/living/basic/bot/medbot/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+<<<<<<< HEAD
 	if(. || !isliving(ui.user) || (bot_access_flags & BOT_COVER_LOCKED) && !HAS_SILICON_ACCESS(ui.user))
+=======
+	if(. || !isliving(ui.user) || !(bot_access_flags & BOT_CONTROL_PANEL_OPEN) && !(ui.user.has_unlimited_silicon_privilege))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	var/mob/living/our_user = ui.user
 	switch(action)
@@ -228,9 +279,16 @@
 		if("stationary_mode")
 			medical_mode_flags ^= MEDBOT_STATIONARY_MODE
 		if("sync_tech")
+<<<<<<< HEAD
 			if(!linked_techweb)
 				to_chat(our_user, span_notice("No research techweb connected."))
 				return
+=======
+			if(!sync_tech())
+				to_chat(our_user, span_notice("No research techweb connected."))
+				return
+			/* monkestation start - move sync_tech into its own proc.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			var/oldheal_amount = heal_amount
 			var/tech_boosters
 			for(var/index in linked_techweb.researched_designs)
@@ -242,6 +300,10 @@
 				heal_amount = (round(tech_boosters * 0.5, 0.1) * initial(heal_amount)) + initial(heal_amount) //every 2 tend wounds tech gives you an extra 100% healing, adjusting for unique branches (combo is bonus)
 				if(oldheal_amount < heal_amount)
 					speak("New knowledge found! Surgical efficacy improved to [round(heal_amount/initial(heal_amount)*100)]%!")
+<<<<<<< HEAD
+=======
+			*/ // monkestation end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	update_appearance()
 
@@ -288,12 +350,15 @@
 	if(prob(10))
 		speak("PSYCH ALERT: Crewmember [user.name] recorded displaying antisocial tendencies torturing bots in [get_area(src)]. Please schedule psych evaluation.", radio_channel)
 
+<<<<<<< HEAD
 /mob/living/basic/bot/medbot/explode()
 	var/atom/our_loc = drop_location()
 	drop_part(medkit_type, our_loc)
 	drop_part(health_analyzer, our_loc)
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /*
  * Proc used in a callback for after this medibot is righted, either by themselves or by a mob, by the tippable component.
  *
@@ -350,9 +415,13 @@
 		log_combat(src, patient, "tended the wounds of", "internal tools")
 		if(patient.get_current_damage_of_type(damage_type_healer) <= heal_threshold)
 			done_healing = TRUE
+<<<<<<< HEAD
 
 	patient.visible_message(span_notice("[src] tends the wounds of [patient]!"), "[span_infoplain(span_green("[src] tends your wounds!"))]")
 
+=======
+	patient.visible_message(span_notice("[src] tends the wounds of [patient]!"), "[span_infoplain(span_green("[src] tends your wounds!"))]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(done_healing)
 		visible_message(span_infoplain("[src] places its tools back into itself."))
 		to_chat(src, "[patient] is now healthy!")
@@ -364,7 +433,11 @@
 
 
 /mob/living/basic/bot/medbot/autopatrol
+<<<<<<< HEAD
 	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
+=======
+	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_GHOST_CONTROLLABLE | BOT_MODE_ROUNDSTART_POSSESSION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/medbot/stationary
 	medical_mode_flags = MEDBOT_DECLARE_CRIT | MEDBOT_STATIONARY_MODE | MEDBOT_SPEAK_MODE
@@ -391,8 +464,12 @@
 	skin = "bezerk"
 	health = 40
 	maxHealth = 40
+<<<<<<< HEAD
 	req_one_access = list(ACCESS_SYNDICATE)
 	bot_mode_flags = parent_type::bot_mode_flags & ~BOT_MODE_REMOTE_ENABLED
+=======
+	maints_access_required = list(ACCESS_SYNDICATE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	radio_key = /obj/item/encryptionkey/syndicate
 	radio_channel = RADIO_CHANNEL_SYNDICATE
 	damage_type_healer = HEAL_ALL_DAMAGE

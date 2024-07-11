@@ -1,4 +1,5 @@
 
+#define PARALLAX_ICON_SIZE 672 // monkestation edit
 /datum/hud/proc/create_parallax(mob/viewmob)
 	var/mob/screenmob = viewmob || mymob
 	var/client/C = screenmob.client
@@ -17,12 +18,25 @@
 
 	if(!length(C.parallax_layers_cached))
 		C.parallax_layers_cached = list()
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_1(null, src)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_2(null, src)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/planet(null, src)
 		if(SSparallax.random_layer)
 			C.parallax_layers_cached += new SSparallax.random_layer.type(null, src, FALSE, SSparallax.random_layer)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_3(null, src)
+=======
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_1(null, screenmob)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/stars(null, screenmob) //monkestation edit
+		/* monkestation removal
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_2(null, screenmob)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/planet(null, screenmob)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/nebula(null, screenmob)
+		if(SSparallax.random_layer)
+			C.parallax_layers_cached += new SSparallax.random_layer(null, screenmob)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_3(null, screenmob)
+		*/ //monkestation removal end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 
 	C.parallax_layers = C.parallax_layers_cached.Copy()
 
@@ -114,11 +128,26 @@
 	var/client/C = screenmob.client
 	if(new_parallax_movedir == C.parallax_movedir)
 		return
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
+=======
+	var/animatedir = new_parallax_movedir
+	if(new_parallax_movedir == FALSE)
+		var/animate_time = 0
+		for(var/atom/movable/screen/parallax_layer/L as anything in C.parallax_layers) //monkestation edit
+			L.icon_state = initial(L.icon_state)
+			L.update_o(C.view)
+			var/T = PARALLAX_LOOP_TIME / L.speed
+			if (T > animate_time)
+				animate_time = T
+		C.dont_animate_parallax = world.time + min(animate_time, PARALLAX_LOOP_TIME)
+		animatedir = C.parallax_movedir
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 
 	var/animation_dir = new_parallax_movedir || C.parallax_movedir
 	var/matrix/new_transform
 	switch(animation_dir)
 		if(NORTH)
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
 			new_transform = matrix(1, 0, 0, 0, 1, 480)
 		if(SOUTH)
 			new_transform = matrix(1, 0, 0, 0, 1,-480)
@@ -136,6 +165,20 @@
 		if(new_parallax_movedir == NONE) // If we're stopping, we need to stop on the same dime, yeah?
 			scaled_time = PARALLAX_LOOP_TIME
 		longest_timer = max(longest_timer, scaled_time)
+=======
+			newtransform = matrix(1, 0, 0, 0, 1, PARALLAX_ICON_SIZE) // monkestation edit
+		if(SOUTH)
+			newtransform = matrix(1, 0, 0, 0, 1,-PARALLAX_ICON_SIZE) // monkestation edit
+		if(EAST)
+			newtransform = matrix(1, 0, PARALLAX_ICON_SIZE, 0, 1, 0) // monkestation edit
+		if(WEST)
+			newtransform = matrix(1, 0,-PARALLAX_ICON_SIZE, 0, 1, 0) // monkestation edit
+
+	var/shortesttimer
+	if(!skip_windups)
+		for(var/atom/movable/screen/parallax_layer/L as anything in C.parallax_layers) // monkestation edit
+			//var/atom/movable/screen/parallax_layer/L = thing monkestation removal
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 
 		if(skip_windups)
 			update_parallax_motionblur(C, layer, new_parallax_movedir, new_transform)
@@ -215,6 +258,7 @@
 
 			// This is how we tile parralax sprites
 			// It doesn't use change because we really don't want to animate this
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
 			if(old_x - change_x > 240)
 				parallax_layer.offset_x -= 480
 				parallax_layer.pixel_w = parallax_layer.offset_x
@@ -227,6 +271,18 @@
 			else if(old_y - change_y < -240)
 				parallax_layer.offset_y += 480
 				parallax_layer.pixel_z = parallax_layer.offset_y
+=======
+			//monkestation edit start
+			if(parallax_layer.offset_x - change_x > PARALLAX_ICON_SIZE/2)
+				parallax_layer.offset_x -= PARALLAX_ICON_SIZE
+			else if(parallax_layer.offset_x - change_x < -PARALLAX_ICON_SIZE/2)
+				parallax_layer.offset_x += PARALLAX_ICON_SIZE
+			if(parallax_layer.offset_y - change_y > PARALLAX_ICON_SIZE/2)
+				parallax_layer.offset_y -= PARALLAX_ICON_SIZE
+			else if(parallax_layer.offset_y - change_y < -PARALLAX_ICON_SIZE/2)
+				parallax_layer.offset_y += PARALLAX_ICON_SIZE
+			//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 
 		parallax_layer.offset_x -= change_x
 		parallax_layer.offset_y -= change_y
@@ -261,12 +317,16 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_home)
 // We need parallax to always pass its args down into initialize, so we immediate init it
 INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 /atom/movable/screen/parallax_layer
-	icon = 'icons/effects/parallax.dmi'
+	icon = 'monkestation/icons/effects/skybox.dmi' //monkestation edit
 	var/speed = 1
 	var/offset_x = 0
 	var/offset_y = 0
 	var/absolute = FALSE
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
 	appearance_flags = APPEARANCE_UI | KEEP_TOGETHER
+=======
+	appearance_flags = APPEARANCE_UI | TILE_BOUND //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 	blend_mode = BLEND_ADD
 	plane = PLANE_SPACE_PARALLAX
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
@@ -298,7 +358,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 	if (!view)
 		view = world.view
 
-	var/static/parallax_scaler = world.icon_size / 480
+	var/static/parallax_scaler = world.icon_size / PARALLAX_ICON_SIZE //monkestation edit
 
 	// Turn the view size into a grid of correctly scaled overlays
 	var/list/viewscales = getviewsize(view)
@@ -311,13 +371,34 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 			if(x == 0 && y == 0)
 				continue
 			var/mutable_appearance/texture_overlay = mutable_appearance(icon, icon_state)
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
 			texture_overlay.pixel_w += 480 * x
 			texture_overlay.pixel_z += 480 * y
+=======
+			texture_overlay.transform = matrix(1, 0, x*PARALLAX_ICON_SIZE, 0, 1, y*PARALLAX_ICON_SIZE) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 			new_overlays += texture_overlay
 	cut_overlays()
 	add_overlay(new_overlays)
 
+//monkestation edit start
 /atom/movable/screen/parallax_layer/layer_1
+	icon_state = "dyable" // monkestation edit
+	blend_mode = BLEND_OVERLAY
+	speed = 0.5
+	layer = 1
+
+/atom/movable/screen/parallax_layer/layer_1/Initialize(mapload, mob/owner)
+	. = ..()
+	src.add_atom_colour(GLOB.starlight_color, ADMIN_COLOUR_PRIORITY)
+
+/atom/movable/screen/parallax_layer/stars
+	icon_state = "stars"
+	blend_mode = BLEND_OVERLAY
+	layer = 1
+	speed = 0.5
+//monkestation edit end
+/* monkestation removal start
 	icon_state = "layer1"
 	speed = 0.6
 	layer = 1
@@ -332,6 +413,24 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 	speed = 1.4
 	layer = 3
 
+<<<<<<< HEAD:code/_onclick/hud/parallax/parallax.dm
+=======
+/atom/movable/screen/parallax_layer/random
+	blend_mode = BLEND_OVERLAY
+	speed = 3
+	layer = 3
+
+/atom/movable/screen/parallax_layer/random/space_gas
+	icon_state = "space_gas"
+
+/atom/movable/screen/parallax_layer/random/space_gas/Initialize(mapload, mob/owner)
+	. = ..()
+	src.add_atom_colour(SSparallax.random_parallax_color, ADMIN_COLOUR_PRIORITY)
+
+/atom/movable/screen/parallax_layer/random/asteroids
+	icon_state = "asteroids"
+	layer = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/_onclick/hud/parallax.dm
 /atom/movable/screen/parallax_layer/planet
 	icon_state = "planet"
 	blend_mode = BLEND_OVERLAY
@@ -366,3 +465,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 
 /atom/movable/screen/parallax_layer/planet/update_o()
 	return //Shit won't move
+*/ //monkestation removal end
+
+#undef PARALLAX_ICON_SIZE

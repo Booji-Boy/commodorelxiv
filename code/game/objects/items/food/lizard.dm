@@ -164,7 +164,11 @@
 	tastes = list("snails" = 1, "garlic" = 1, "oil" = 1)
 	foodtypes = MEAT | VEGETABLES
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_4
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SLIDE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/fried_blood_sausage
 	name = "fried blood sausage"
@@ -242,7 +246,11 @@
 	tastes = list("fish" = 1, "acid" = 1, "onion" = 1, "heat" = 1)
 	foodtypes = SEAFOOD | VEGETABLES
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_FIREBURPS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/nectar_larvae
 	name = "nectar larvae"
@@ -358,7 +366,11 @@
 	)
 	tastes = list("garlic" = 1, "oil" = 1, "gnocchi" = 1)
 	foodtypes = VEGETABLES | NUTS
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_JOB_MINER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/spaghetti/demit_nizaya
 	name = "demit nizaya"

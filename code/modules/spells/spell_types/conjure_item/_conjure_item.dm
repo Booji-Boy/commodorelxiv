@@ -65,9 +65,14 @@
 	if(QDELETED(created))
 		CRASH("[type] tried to create an item, but failed. It's item type is [item_type].")
 
+<<<<<<< HEAD
 	if(istype(mob_caster))
 		mob_caster.put_in_hands(created, del_on_fail = delete_on_failure)
 
+=======
+	cast_on.put_in_hands(created, del_on_fail = TRUE)
+	post_created(cast_on, created) //monkestation edit: im just gonna call this here
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /// Instantiates the item we're conjuring and returns it.

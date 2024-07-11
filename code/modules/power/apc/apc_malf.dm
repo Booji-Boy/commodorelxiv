@@ -92,7 +92,11 @@
 	if(!occupier.mind || !occupier.client)
 		to_chat(user, span_warning("[occupier] is either inactive or destroyed!"))
 		return FALSE
+<<<<<<< HEAD
 	if(occupier.linked_core) //if they have an active linked_core, they can't be transferred from an APC
+=======
+	if(!occupier.parent.stat)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("[occupier] is refusing all attempts at transfer!") )
 		return FALSE
 	if(transfer_in_progress)

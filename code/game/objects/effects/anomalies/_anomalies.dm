@@ -6,7 +6,7 @@
 	icon_state = "vortex"
 	density = FALSE
 	anchored = TRUE
-	light_range = 3
+	light_outer_range = 3
 
 	var/obj/item/assembly/signaler/anomaly/anomaly_core = /obj/item/assembly/signaler/anomaly
 	var/area/impact_area
@@ -21,6 +21,11 @@
 	var/drops_core = TRUE
 	///Do we keep on living forever?
 	var/immortal = FALSE
+<<<<<<< HEAD
+=======
+	///Do we stay in one place?
+	var/immobile = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Chance per second that we will move
 	var/move_chance = ANOMALY_MOVECHANCE
 
@@ -50,9 +55,8 @@
 	countdown = new(src)
 	if(countdown_colour)
 		countdown.color = countdown_colour
-	if(immortal)
-		return
-	countdown.start()
+	if(!immortal)
+		countdown.start()
 
 /obj/effect/anomaly/vv_edit_var(vname, vval)
 	. = ..()
@@ -76,7 +80,11 @@
 	return ..()
 
 /obj/effect/anomaly/proc/anomalyEffect(seconds_per_tick)
+<<<<<<< HEAD
 	if(SPT_PROB(move_chance, seconds_per_tick))
+=======
+	if(!immobile && SPT_PROB(move_chance, seconds_per_tick))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		move_anomaly()
 
 /// Move in a direction
@@ -97,6 +105,7 @@
 	new /obj/effect/particle_effect/fluid/smoke/bad(loc)
 
 	if(drops_core)
+<<<<<<< HEAD
 		if(isnull(anomaly_core))
 			stack_trace("An anomaly ([src]) exists that drops a core, yet has no core!")
 		else
@@ -109,13 +118,21 @@
 				visible_message(span_warning("[anomaly_core] loses its lustre as it falls to the ground, there is too little ambient energy to support another core of this type."))
 				new /obj/item/inert_anomaly(drop_location())
 
+=======
+		aSignal?.forceMove(drop_location())
+		aSignal = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// else, anomaly core gets deleted by qdel(src).
 
 	qdel(src)
 
 /obj/effect/anomaly/attackby(obj/item/weapon, mob/user, params)
+<<<<<<< HEAD
 	if(weapon.tool_behaviour == TOOL_ANALYZER && anomaly_core)
 		to_chat(user, span_notice("Analyzing... [src]'s unstable field is fluctuating along frequency [format_frequency(anomaly_core.frequency)], code [anomaly_core.code]."))
+=======
+	if(weapon.tool_behaviour == TOOL_ANALYZER && scan_anomaly(user, weapon)) // monke edit: refactor into scan_anomaly
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 	return ..()

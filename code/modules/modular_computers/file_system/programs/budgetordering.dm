@@ -65,7 +65,7 @@
 	var/datum/bank_account/buyer = SSeconomy.get_dep_account(cargo_account)
 	var/obj/item/card/id/id_card = computer.computer_id_slot?.GetID()
 	if(id_card?.registered_account)
-		if((ACCESS_COMMAND in id_card.access))
+		if((ACCESS_COMMAND in id_card.access) || (ACCESS_QM in id_card.access))
 			requestonly = FALSE
 			buyer = SSeconomy.get_dep_account(id_card.registered_account.account_job.paycheck_department)
 			can_approve_requests = TRUE
@@ -119,11 +119,17 @@
 	if(SSshuttle.supply_blocked)
 		message = blockade_warning
 	data["message"] = message
+<<<<<<< HEAD
 	var/list/amount_by_name = list()
 	var/cart_list = list()
 	for(var/datum/supply_order/order in SSshuttle.shopping_list)
 		if(cart_list[order.pack.name])
 			amount_by_name[order.pack.name] += 1
+=======
+	var/cart_list = list()
+	for(var/datum/supply_order/order in SSshuttle.shopping_list)
+		if(cart_list[order.pack.name])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			cart_list[order.pack.name][1]["amount"]++
 			cart_list[order.pack.name][1]["cost"] += order.get_final_cost()
 			if(order.department_destination)
@@ -162,6 +168,7 @@
 
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/budgetorders/ui_static_data(mob/user)
 	var/list/data = list()
 	data["max_order"] = CARGO_MAX_ORDER
@@ -169,6 +176,9 @@
 
 /datum/computer_file/program/budgetorders/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/budgetorders/ui_act(action, params, datum/tgui/ui)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("send")
 			if(!SSshuttle.supply.canMove())
@@ -304,6 +314,14 @@
 			. = TRUE
 		if("toggleprivate")
 			self_paid = !self_paid
+			. = TRUE
+		if("company_import_window")
+			var/datum/component/armament/company_imports/gun_comp = computer.GetComponent(/datum/component/armament/company_imports)
+			if(!gun_comp)
+				computer.AddComponent(/datum/component/armament/company_imports, subtypesof(/datum/armament_entry/company_import), 0)
+			gun_comp = computer.GetComponent(/datum/component/armament/company_imports)
+			gun_comp.parent_prog ||= src
+			gun_comp.ui_interact(usr)
 			. = TRUE
 	if(.)
 		post_signal(cargo_shuttle)

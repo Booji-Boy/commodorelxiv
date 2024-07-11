@@ -1260,7 +1260,11 @@
 	},
 /area/awaymission/caves/bmp_asteroid/level_two)
 "kE" = (
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/hunter/away_caves,
+=======
+/mob/living/basic/spider/giant/hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron,
 /area/awaymission/caves/bmp_asteroid)
 "kL" = (
@@ -1332,7 +1336,11 @@
 /area/awaymission/caves/northblock)
 "pC" = (
 /obj/item/mjollnir,
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/nurse/away_caves,
+=======
+/mob/living/basic/spider/giant/nurse,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},
@@ -1432,7 +1440,11 @@
 /obj/machinery/sleeper{
 	dir = 8
 	},
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/hunter/away_caves,
+=======
+/mob/living/basic/spider/giant/hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron,
 /area/awaymission/caves/bmp_asteroid)
 "uO" = (
@@ -1590,7 +1602,11 @@
 	},
 /area/awaymission/caves/bmp_asteroid/level_two)
 "Bz" = (
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/nurse/away_caves,
+=======
+/mob/living/basic/spider/giant/nurse,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},
@@ -1672,7 +1688,11 @@
 "FS" = (
 /obj/machinery/light/small/built/directional/north,
 /obj/structure/spider/stickyweb,
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/hunter/away_caves,
+=======
+/mob/living/basic/spider/giant/hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron,
 /area/awaymission/caves/bmp_asteroid)
 "FV" = (
@@ -1949,7 +1969,11 @@
 /turf/open/floor/iron,
 /area/awaymission/caves/northblock)
 "Xs" = (
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/hunter/away_caves,
+=======
+/mob/living/basic/spider/giant/hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},
@@ -1971,7 +1995,11 @@
 /area/awaymission/caves/bmp_asteroid/level_two)
 "XR" = (
 /obj/structure/spider/stickyweb,
+<<<<<<< HEAD
 /mob/living/basic/spider/giant/hunter/away_caves,
+=======
+/mob/living/basic/spider/giant/hunter,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid/basalt{
 	initial_gas_mix = "n2=23;o2=14;TEMP=2.7"
 	},

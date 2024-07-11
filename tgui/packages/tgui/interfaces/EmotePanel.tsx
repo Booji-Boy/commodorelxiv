@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { BooleanLike } from '../../common/react';
@@ -6,6 +7,14 @@ import { useBackend } from '../backend';
 import { Box, Button, Flex, Icon, Section } from '../components';
 import { Window } from '../layouts';
 import { SearchBar } from './common/SearchBar';
+=======
+import { useBackend, useLocalState } from '../backend';
+import { Window } from '../layouts';
+import { Button, Section, Flex, Icon, Box } from '../components';
+import { BooleanLike } from '../../common/react';
+import { SearchBar } from './Fabrication/SearchBar';
+import { capitalizeFirst } from '../../common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Emote = {
   key: string;
@@ -25,6 +34,7 @@ export const EmotePanelContent = (props) => {
   const { act, data } = useBackend<EmotePanelData>();
   const { emotes } = data;
 
+<<<<<<< HEAD
   const [filterVisible, toggleVisualFilter] = useState(false);
 
   const [filterAudible, toggleAudibleFilter] = useState(false);
@@ -42,6 +52,49 @@ export const EmotePanelContent = (props) => {
   const [showNames, toggleShowNames] = useState(true);
 
   const [showIcons, toggleShowIcons] = useState(false);
+=======
+  const [filterVisible, toggleVisualFilter] = useLocalState<boolean>(
+    'filterVisible',
+    false,
+  );
+
+  const [filterAudible, toggleAudibleFilter] = useLocalState<boolean>(
+    'filterAudible',
+    false,
+  );
+
+  const [filterSound, toggleSoundFilter] = useLocalState<boolean>(
+    'filterSound',
+    false,
+  );
+
+  const [filterHands, toggleHandsFilter] = useLocalState<boolean>(
+    'filterHands',
+    false,
+  );
+
+  const [filterUseParams, toggleUseParamsFilter] = useLocalState<boolean>(
+    'filterUseParams',
+    false,
+  );
+
+  const [useParams, toggleUseParams] = useLocalState<boolean>(
+    'useParams',
+    false,
+  );
+
+  const [searchText, setSearchText] = useLocalState<string>('search_text', '');
+
+  const [showNames, toggleShowNames] = useLocalState<boolean>(
+    'showNames',
+    true,
+  );
+
+  const [showIcons, toggleShowIcons] = useLocalState<boolean>(
+    'showIcons',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Section>
@@ -98,9 +151,15 @@ export const EmotePanelContent = (props) => {
         }
       >
         <SearchBar
+<<<<<<< HEAD
           query={searchText}
           onSearch={setSearchText}
           placeholder="Search all emotes..."
+=======
+          searchText={searchText}
+          onSearchTextChanged={setSearchText}
+          hint={'Search all emotes...'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         />
       </Section>
       <Section
@@ -160,7 +219,13 @@ export const EmotePanelContent = (props) => {
                   width={showIcons ? 16 : 8}
                   key={emote.name}
                   tooltip={
+<<<<<<< HEAD
                     showIcons ? undefined : (
+=======
+                    showIcons ? (
+                      ''
+                    ) : (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       <EmoteIcons
                         visible={emote.visible}
                         audible={emote.audible}

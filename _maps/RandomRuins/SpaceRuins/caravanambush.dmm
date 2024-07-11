@@ -103,6 +103,7 @@
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter2)
+<<<<<<< HEAD
 "cY" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
@@ -112,6 +113,8 @@
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter2)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dc" = (
 /obj/item/shard,
 /turf/template_noop,
@@ -215,6 +218,14 @@
 /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter3)
+"fv" = (
+/obj/effect/turf_decal/bot_white,
+/obj/structure/closet/crate/secure/engineering,
+/obj/item/organ/internal/cyberimp/arm/item_set,
+/obj/item/organ/internal/cyberimp/eyes/hud/medical,
+/obj/item/organ/internal/cyberimp/brain/anti_stun,
+/turf/open/floor/iron/dark/airless,
+/area/shuttle/ruin/caravan/freighter3)
 "fy" = (
 /obj/effect/turf_decal/bot_white,
 /obj/machinery/light/small/directional/south,
@@ -252,6 +263,15 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /turf/open/floor/iron/airless,
+/area/shuttle/ruin/caravan/freighter2)
+"in" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "iR" = (
 /obj/effect/turf_decal/bot_white,
@@ -358,6 +378,12 @@
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/gun/energy/disabler,
 /turf/open/floor/iron/dark/airless,
+/area/shuttle/ruin/caravan/freighter2)
+"mQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/turf/open/floor/iron/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "mR" = (
 /turf/closed/wall/mineral/plastitanium,
@@ -521,14 +547,6 @@
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/iron/airless,
 /area/shuttle/ruin/caravan/freighter2)
-"tL" = (
-/obj/effect/turf_decal/bot_white,
-/obj/structure/closet/crate/secure/engineering,
-/obj/item/organ/internal/cyberimp/arm/toolset,
-/obj/item/organ/internal/cyberimp/eyes/hud/medical,
-/obj/item/organ/internal/cyberimp/brain/anti_stun,
-/turf/open/floor/iron/dark/airless,
-/area/shuttle/ruin/caravan/freighter3)
 "tO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
@@ -575,6 +593,7 @@
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter3)
+<<<<<<< HEAD
 "wc" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -582,6 +601,8 @@
 /obj/machinery/airalarm/directional/east,
 /turf/open/floor/iron/airless,
 /area/shuttle/ruin/caravan/freighter3)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "wB" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
@@ -677,10 +698,22 @@
 	},
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter2)
+<<<<<<< HEAD
 "Bq" = (
 /obj/structure/broken_flooring/pile/directional/east,
 /turf/template_noop,
 /area/template_noop)
+=======
+"Bb" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/obj/effect/decal/cleanable/blood,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/open/floor/iron/dark/airless,
+/area/shuttle/ruin/caravan/freighter3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Bv" = (
 /obj/structure/chair{
 	dir = 4
@@ -823,12 +856,18 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter3)
-"IF" = (
+"HA" = (
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/all_access,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+<<<<<<< HEAD
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/machinery/airalarm/directional/east,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron/airless,
-/area/shuttle/ruin/caravan/freighter2)
+/area/shuttle/ruin/caravan/freighter3)
 "IZ" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/meter,
@@ -929,6 +968,7 @@
 	},
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
+<<<<<<< HEAD
 "Nl" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
@@ -938,6 +978,14 @@
 /obj/machinery/airalarm/directional/west,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter3)
+=======
+"MT" = (
+/obj/effect/turf_decal/box/white/corners,
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/gun/energy/e_gun/mini,
+/turf/open/floor/iron/dark/airless,
+/area/shuttle/ruin/caravan/freighter2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Nm" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on,
 /obj/effect/decal/cleanable/dirt,
@@ -3682,7 +3730,7 @@ JW
 Sh
 qX
 Rf
-IF
+mQ
 tx
 eU
 JW
@@ -3785,7 +3833,7 @@ aa
 gA
 WT
 JE
-cY
+in
 jf
 sk
 WC
@@ -5241,7 +5289,7 @@ PF
 sR
 wC
 Je
-tL
+fv
 wJ
 aa
 aa
@@ -5395,7 +5443,7 @@ rB
 Vx
 Sk
 Qv
-wc
+HA
 PE
 fy
 rB
@@ -5498,7 +5546,7 @@ aa
 Ct
 Oj
 eO
-Nl
+Bb
 mZ
 ZX
 oV

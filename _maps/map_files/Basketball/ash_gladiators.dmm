@@ -266,7 +266,11 @@
 /turf/open/floor/fakebasalt,
 /area/centcom/basketball)
 "nv" = (
+<<<<<<< HEAD
 /obj/machinery/hydroponics/soil,
+=======
+/obj/machinery/growing/soil,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/fakebasalt,
 /area/centcom/basketball)
 "oR" = (

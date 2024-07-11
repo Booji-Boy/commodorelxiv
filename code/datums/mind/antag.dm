@@ -103,6 +103,7 @@
 	remove_antag_datum(/datum/antagonist/cult)
 
 	var/datum/antagonist/rev/revolutionary = has_antag_datum(/datum/antagonist/rev)
+<<<<<<< HEAD
 	revolutionary?.remove_revolutionary()
 
 /**
@@ -130,6 +131,10 @@
 			return my_pen || my_pda || my_radio
 
 	return null
+=======
+	revolutionary?.remove_revolutionary(borged = TRUE)
+	remove_antag_datum(/datum/antagonist/clock_cultist) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * ## give_uplink

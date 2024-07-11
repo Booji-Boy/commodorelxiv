@@ -38,6 +38,7 @@
 	dir = 4;
 	id = "ShuttleLoad"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/supply)
 "m" = (
@@ -131,6 +132,7 @@
 	dir = 8;
 	id = "ShuttleUnload"
 	},
+/obj/structure/fans/tiny,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/supply)
 "K" = (
@@ -148,6 +150,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mapping_helpers/airlock/access/all/supply/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/iron,
 /area/shuttle/supply)
 "T" = (

@@ -168,7 +168,16 @@
  * Scans an object, target, and provides it's export value based on selling to the cargo shuttle, to mob/user.
  */
 /obj/item/universal_scanner/proc/export_scan(obj/target, mob/user)
+<<<<<<< HEAD
 	var/datum/export_report/report = export_item_and_contents(target, dry_run = TRUE)
+=======
+	// Before you fix it:
+	// yes, checking manifests is a part of intended functionality.
+	if(HAS_TRAIT(target, TRAIT_HIDDEN_EXPORT_VALUE))
+		to_chat(user, span_warning("Scanned [target], export value unknown."))
+		return
+	var/datum/export_report/ex = export_item_and_contents(target, dry_run = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/price = 0
 	for(var/exported_datum in report.total_amount)
 		price += report.total_value[exported_datum]

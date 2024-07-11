@@ -5,10 +5,17 @@ SUBSYSTEM_DEF(blackmarket)
 
 	/// Descriptions for each shipping methods.
 	var/shipping_method_descriptions = list(
+<<<<<<< HEAD
 		SHIPPING_METHOD_LAUNCH = "Launches the item at the station from space, cheap but you might not receive your item at all.",
 		SHIPPING_METHOD_LTSRBT = "Long-To-Short-Range-Bluespace-Transceiver, a machine that receives items outside the station and then teleports them to the location of the uplink.",
 		SHIPPING_METHOD_TELEPORT = "Teleports the item in a random area in the station, you get 60 seconds to get there first though.",
 		SHIPPING_METHOD_SUPPLYPOD = "Ships the item inside a supply pod at your exact location. Showy, speedy and expensive.",
+=======
+		SHIPPING_METHOD_LAUNCH="Launches the item at the station from space, cheap but you might not receive your item at all.",
+		SHIPPING_METHOD_LTSRBT="Long-To-Short-Range-Bluespace-Transceiver, a machine that receives items outside the station and then teleports them to the location of the uplink.",
+		SHIPPING_METHOD_TELEPORT="Teleports the item in a random area in the station, you get 60 seconds to get there first though.",
+		SHIPPING_METHOD_AT_FEET="Teleports the item to your feet."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 	/// List of all existing markets.
@@ -19,7 +26,7 @@ SUBSYSTEM_DEF(blackmarket)
 	var/list/queued_purchases = list()
 
 /datum/controller/subsystem/blackmarket/Initialize()
-	for(var/market in subtypesof(/datum/market))
+	for(var/market in subtypesof(/datum/market) - /datum/market/auction - /datum/market/restock) //monkestation edit - MODULAR_GUNS
 		markets[market] += new market
 
 	for(var/datum/market_item/item as anything in subtypesof(/datum/market_item))
@@ -39,6 +46,12 @@ SUBSYSTEM_DEF(blackmarket)
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/blackmarket/fire(resumed)
+	for(var/market in markets) //monkestation edit - MODULAR_GUNS
+		var/datum/market/listed_market = markets[market]
+		if(!(listed_market.market_flags & MARKET_PROCESS))
+			continue
+		listed_market.try_process()
+
 	while(length(queued_purchases))
 		var/datum/market_purchase/purchase = queued_purchases[1]
 		queued_purchases.Cut(1,2)
@@ -99,6 +112,14 @@ SUBSYSTEM_DEF(blackmarket)
 				new /obj/effect/pod_landingzone(get_turf(purchase.uplink), pod)
 
 				to_chat(buyer, span_notice("[purchase.uplink] flashes a message noting the order is being launched at your location. Right here, right now!"))
+				qdel(purchase)
+			if(SHIPPING_METHOD_AT_FEET)
+				var/turf/targetturf = get_turf(purchase.uplink)
+				if (!targetturf)
+					continue
+
+				fake_teleport(purchase.entry.spawn_item(), targetturf)
+				queued_purchases -= purchase
 				qdel(purchase)
 
 		if(MC_TICK_CHECK)

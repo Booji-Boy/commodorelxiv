@@ -34,7 +34,14 @@ const FutureStationTraitsPage = (props) => {
   const { act, data } = useBackend<StationTraitsData>();
   const { future_station_traits } = data;
 
+<<<<<<< HEAD
   const [selectedTrait, setSelectedTrait] = useState<string>('');
+=======
+  const [selectedTrait, setSelectedTrait] = useLocalState<string | null>(
+    'selectedFutureTrait',
+    null,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const traitsByName = Object.fromEntries(
     data.valid_station_traits.map((trait) => {
@@ -110,9 +117,21 @@ const FutureStationTraitsPage = (props) => {
                       icon="times"
                       onClick={() => {
                         act('setup_future_traits', {
+<<<<<<< HEAD
                           station_traits: filter(
                             map(future_station_traits, (t) => t.path),
                             (p) => p !== trait.path,
+=======
+                          station_traits: filterMap(
+                            future_station_traits,
+                            (otherTrait) => {
+                              if (otherTrait.path === trait.path) {
+                                return undefined;
+                              } else {
+                                return otherTrait.path;
+                              }
+                            },
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                           ),
                         });
                       }}
@@ -202,7 +221,14 @@ const ViewStationTraitsPage = (props) => {
 };
 
 export const StationTraitsPanel = (props) => {
+<<<<<<< HEAD
   const [currentTab, setCurrentTab] = useState(Tab.ViewStationTraits);
+=======
+  const [currentTab, setCurrentTab] = useLocalState(
+    'station_traits_tab',
+    Tab.ViewStationTraits,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   let currentPage;
 

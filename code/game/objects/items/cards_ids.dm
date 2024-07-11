@@ -103,6 +103,8 @@
 
 	/// Boolean value. If TRUE, the [Intern] tag gets prepended to this ID card when the label is updated.
 	var/is_intern = FALSE
+	///are we allowed to tie an account to the id card
+	var/accepts_accounts = TRUE
 
 /datum/armor/card_id
 	fire = 100
@@ -644,8 +646,15 @@
 		return FALSE
 	var/list/user_memories = user.mind.memories
 	var/datum/memory/key/account/user_key = user_memories[/datum/memory/key/account]
+<<<<<<< HEAD
 	var/default_account = (istype(user_key) && user_key.remembered_id) || 11111
 	var/new_bank_id = tgui_input_number(user, "Enter the account ID to associate with this card.", "Link Bank Account", default_account, 999999, 111111)
+=======
+	var/user_account = 11111
+	if(!isnull(user_key))
+		user_account = user_key.remembered_id
+	var/new_bank_id = tgui_input_number(user, "Enter the account ID to associate with this card.", "Link Bank Account", user_account, 999999, 111111)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!new_bank_id || QDELETED(user) || QDELETED(src) || issilicon(user) || !alt_click_can_use_id(user) || loc != user)
 		return FALSE
 	if(registered_account?.account_id == new_bank_id)
@@ -665,6 +674,7 @@
 
 /obj/item/card/id/click_alt(mob/living/user)
 	if(!alt_click_can_use_id(user))
+<<<<<<< HEAD
 		return NONE
 	if(registered_account.account_debt)
 		var/choice = tgui_alert(user, "Choose An Action", "Bank Account", list("Withdraw", "Pay Debt"))
@@ -673,6 +683,19 @@
 		if(choice == "Pay Debt")
 			pay_debt(user)
 			return CLICK_ACTION_SUCCESS
+=======
+		return
+	if(!registered_account || registered_account.replaceable)
+		set_new_account(user)
+		return
+	if(registered_account.account_debt)
+		var/choice = tgui_alert(user, "Choose An Action", "Bank Account", list("Withdraw", "Pay Debt"))
+		if(!choice || QDELETED(user) || QDELETED(src) || !alt_click_can_use_id(user) || loc != user)
+			return
+		if(choice == "Pay Debt")
+			pay_debt(user)
+			return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (registered_account.being_dumped)
 		registered_account.bank_card_talk(span_warning("内部服务器错误"), TRUE)
 		return CLICK_ACTION_SUCCESS
@@ -708,6 +731,18 @@
 		return
 	if(!registered_account || registered_account.replaceable)
 		set_new_account(user)
+
+/obj/item/card/id/proc/pay_debt(user)
+	var/amount_to_pay = tgui_input_number(user, "How much do you want to pay? (Max: [registered_account.account_balance] cr)", "Debt Payment", max_value = min(registered_account.account_balance, registered_account.account_debt))
+	if(!amount_to_pay || QDELETED(src) || loc != user || !alt_click_can_use_id(user))
+		return
+	var/prev_debt = registered_account.account_debt
+	var/amount_paid = registered_account.pay_debt(amount_to_pay)
+	if(amount_paid)
+		var/message = span_notice("You pay [amount_to_pay] credits of a [prev_debt] cr debt. [registered_account.account_debt] cr to go.")
+		if(!registered_account.account_debt)
+			message = span_nicegreen("You pay the last [amount_to_pay] credits of your debt, extinguishing it. Congratulations!")
+		to_chat(user, message)
 
 /obj/item/card/id/proc/pay_debt(user)
 	var/amount_to_pay = tgui_input_number(user, "How much do you want to pay? (Max: [registered_account.account_balance] cr)", "Debt Payment", max_value = min(registered_account.account_balance, registered_account.account_debt))
@@ -1424,8 +1459,37 @@
 	/// Weak ref to the ID card we're currently attempting to steal access from.
 	var/datum/weakref/theft_target
 
+	var/datum/action/item_action/chameleon/change/id/chameleon_card_action // MONKESTATION ADDITION -- DATUM MOVED FROM INITIALIZE()
+
+// MONKESTATION ADDITION START
+/obj/item/card/id/advanced/chameleon/attackby(obj/item/W, mob/user, params)
+	if(W.tool_behaviour != TOOL_MULTITOOL)
+		return ..()
+
+	if(chameleon_card_action.hidden)
+		chameleon_card_action.hidden = FALSE
+		actions += chameleon_card_action
+		chameleon_card_action.Grant(user)
+		log_game("[key_name(user)] has removed the disguise lock on the agent ID ([name]) with [W]")
+	else
+		chameleon_card_action.hidden = TRUE
+		actions -= chameleon_card_action
+		chameleon_card_action.Remove(user)
+		log_game("[key_name(user)] has locked the disguise of the agent ID ([name]) with [W]")
+// MONKESTATION ADDITION END
+
 /obj/item/card/id/advanced/chameleon/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
+=======
+
+//	var/datum/action/item_action/chameleon/change/id/chameleon_card_action = new(src) MONKESTATION EDIT CHANGE OLD
+	chameleon_card_action = new(src) // MONKESTATION EDIT CHANGE NEW -- MOVED THE DATUM TO THE ITEM ITSELF
+	chameleon_card_action.chameleon_type = /obj/item/card/id/advanced
+	chameleon_card_action.chameleon_name = "ID Card"
+	chameleon_card_action.initialize_disguises()
+	add_item_action(chameleon_card_action)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	register_item_context()
 
 /obj/item/card/id/advanced/chameleon/Destroy()
@@ -1598,6 +1662,7 @@
 			return TRUE
 
 /obj/item/card/id/advanced/chameleon/attack_self(mob/user)
+<<<<<<< HEAD
 	if(!user.can_perform_action(user, NEED_DEXTERITY| FORBID_TELEKINESIS_REACH))
 		return ..()
 	var/popup_input = tgui_input_list(user, "Choose Action", "Agent ID", list("Show", "Forge/Reset", "Change Account ID"))
@@ -1605,6 +1670,95 @@
 		return TRUE
 	switch(popup_input)
 		if ("Change Account ID")
+=======
+	// MONKESTATION ADDITION START
+	if(chameleon_card_action.hidden)
+		return ..()
+	// MONKESTATION ADDITION END
+	if(isliving(user) && user.mind)
+		var/popup_input = tgui_input_list(user, "Choose Action", "Agent ID", list("Show", "Forge/Reset", "Change Account ID"))
+		if(user.incapacitated())
+			return
+		if(!user.is_holding(src))
+			return
+		if(popup_input == "Forge/Reset")
+			if(!forged)
+				var/input_name = tgui_input_text(user, "What name would you like to put on this card? Leave blank to randomise.", "Agent card name", registered_name ? registered_name : (ishuman(user) ? user.real_name : user.name), MAX_NAME_LEN)
+				input_name = sanitize_name(input_name, allow_numbers = TRUE)
+				if(!input_name)
+					// Invalid/blank names give a randomly generated one.
+					if(user.gender == MALE)
+						input_name = "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]"
+					else if(user.gender == FEMALE)
+						input_name = "[pick(GLOB.first_names_female)] [pick(GLOB.last_names)]"
+					else
+						input_name = "[pick(GLOB.first_names)] [pick(GLOB.last_names)]"
+
+				registered_name = input_name
+
+				var/change_trim = tgui_alert(user, "Adjust the appearance of your card's trim?", "Modify Trim", list("Yes", "No"))
+				if(change_trim == "Yes")
+					var/list/blacklist = typecacheof(list(
+						type,
+						/obj/item/card/id/advanced/simple_bot,
+					))
+					var/list/trim_list = list()
+					for(var/trim_path in typesof(/datum/id_trim))
+						if(blacklist[trim_path])
+							continue
+
+						var/datum/id_trim/trim = SSid_access.trim_singletons_by_path[trim_path]
+
+						if(trim && trim.trim_state && trim.assignment)
+							var/fake_trim_name = "[trim.assignment] ([trim.trim_state])"
+							trim_list[fake_trim_name] = trim_path
+
+					var/selected_trim_path = tgui_input_list(user, "Select trim to apply to your card.\nNote: This will not grant any trim accesses.", "Forge Trim", sort_list(trim_list, GLOBAL_PROC_REF(cmp_typepaths_asc)))
+					if(selected_trim_path)
+						SSid_access.apply_trim_to_chameleon_card(src, trim_list[selected_trim_path])
+
+				var/target_occupation = tgui_input_text(user, "What occupation would you like to put on this card?\nNote: This will not grant any access levels.", "Agent card job assignment", assignment ? assignment : "Assistant")
+				if(target_occupation)
+					assignment = target_occupation
+
+				var/new_age = tgui_input_number(user, "Choose the ID's age", "Agent card age", AGE_MIN, AGE_MAX, AGE_MIN)
+				if(QDELETED(user) || QDELETED(src) || !user.can_perform_action(user, NEED_DEXTERITY| FORBID_TELEKINESIS_REACH))
+					return
+				if(new_age)
+					registered_age = new_age
+
+				if(tgui_alert(user, "Activate wallet ID spoofing, allowing this card to force itself to occupy the visible ID slot in wallets?", "Wallet ID Spoofing", list("Yes", "No")) == "Yes")
+					ADD_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
+
+				update_label()
+				update_icon()
+				forged = TRUE
+				to_chat(user, span_notice("You successfully forge the ID card."))
+				user.log_message("forged \the [initial(name)] with name \"[registered_name]\", occupation \"[assignment]\" and trim \"[trim?.assignment]\".", LOG_GAME)
+
+				if(!registered_account)
+					if(ishuman(user))
+						var/mob/living/carbon/human/accountowner = user
+
+						var/datum/bank_account/account = SSeconomy.bank_accounts_by_id["[accountowner.account_id]"]
+						if(account)
+							account.bank_cards += src
+							registered_account = account
+							to_chat(user, span_notice("Your account number has been automatically assigned."))
+				return
+			if(forged)
+				registered_name = initial(registered_name)
+				assignment = initial(assignment)
+				SSid_access.remove_trim_from_chameleon_card(src)
+				REMOVE_TRAIT(src, TRAIT_MAGNETIC_ID_CARD, CHAMELEON_ITEM_TRAIT)
+				user.log_message("reset \the [initial(name)] named \"[src]\" to default.", LOG_GAME)
+				update_label()
+				update_icon()
+				forged = FALSE
+				to_chat(user, span_notice("You successfully reset the ID card."))
+				return
+		if (popup_input == "Change Account ID")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			set_new_account(user)
 			return
 		if("Show")

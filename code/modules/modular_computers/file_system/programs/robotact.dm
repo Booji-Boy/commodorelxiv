@@ -85,7 +85,10 @@
 	return data
 
 /datum/computer_file/program/robotact/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//Implied type, memes
 	var/obj/item/modular_computer/pda/silicon/tablet = computer
 	var/mob/living/silicon/robot/cyborg = tablet.silicon_owner

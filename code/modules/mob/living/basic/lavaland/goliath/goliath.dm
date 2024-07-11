@@ -44,19 +44,39 @@
 	COOLDOWN_DECLARE(ability_animation_cooldown)
 	/// Our base tentacles ability
 	var/datum/action/cooldown/mob_cooldown/goliath_tentacles/tentacles
+<<<<<<< HEAD
 	/// Our melee tentacles ability
 	var/datum/action/cooldown/mob_cooldown/tentacle_burst/melee_tentacles
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Our long-ranged tentacles ability
 	var/datum/action/cooldown/mob_cooldown/tentacle_grasp/tentacle_line
 	/// Things we want to eat off the floor (or a plate, we're not picky)
 	var/static/list/goliath_foods = list(/obj/item/food/grown/ash_flora, /obj/item/food/bait/worm)
 
+<<<<<<< HEAD
 /mob/living/basic/mining/goliath/Initialize(mapload)
 	. = ..()
+=======
+	//monkestation edit
+	//pet commands when we tame the grub
+	var/list/pet_commands = list(
+		/datum/pet_command/idle,
+		/datum/pet_command/free,
+		/datum/pet_command/follow,
+		/datum/pet_command/point_targeting/fetch,
+	)
+	//monkestation edit
+
+/mob/living/basic/mining/goliath/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NO_GLIDE, INNATE_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ADD_TRAIT(src, TRAIT_TENTACLE_IMMUNE, INNATE_TRAIT)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY)
 	AddElement(/datum/element/basic_eating, heal_amt = 10, food_types = goliath_foods)
+<<<<<<< HEAD
 	AddElement(\
 		/datum/element/change_force_on_death,\
 		move_force = MOVE_FORCE_DEFAULT,\
@@ -64,15 +84,31 @@
 		pull_force = PULL_FORCE_DEFAULT,\
 	)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(/datum/component/ai_target_timer)
 	AddComponent(/datum/component/basic_mob_attack_telegraph)
 	AddComponentFrom(INNATE_TRAIT, /datum/component/shovel_hands)
 	if (tameable)
+<<<<<<< HEAD
 		AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/grown/ash_flora), tame_chance = 10, bonus_tame_chance = 5)
 
 	tentacles = new (src)
 	tentacles.Grant(src)
 	melee_tentacles = new(src)
+=======
+		AddComponent(\
+			/datum/component/tameable,\
+			food_types = list(/obj/item/food/grown/ash_flora),\
+			tame_chance = 10,\
+			bonus_tame_chance = 5,\
+			after_tame = CALLBACK(src, PROC_REF(tamed)),\
+		)
+
+	tentacles = new (src)
+	tentacles.Grant(src)
+	var/datum/action/cooldown/mob_cooldown/tentacle_burst/melee_tentacles = new (src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	melee_tentacles.Grant(src)
 	AddComponent(/datum/component/revenge_ability, melee_tentacles, targeting = GET_TARGETING_STRATEGY(ai_controller.blackboard[BB_TARGETING_STRATEGY]), max_range = 1, target_self = TRUE)
 	tentacle_line = new (src)
@@ -81,14 +117,43 @@
 
 	tentacles_ready()
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(used_ability))
+<<<<<<< HEAD
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(goliath_foods))
 	ai_controller.set_blackboard_key(BB_GOLIATH_TENTACLES, tentacles)
 
+=======
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, goliath_foods)
+	ai_controller.set_blackboard_key(BB_GOLIATH_TENTACLES, tentacles)
+
+
+/mob/living/basic/mining/goliath/Destroy()
+	QDEL_NULL(tentacles)
+	QDEL_NULL(tentacle_line)
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/mining/goliath/examine(mob/user)
 	. = ..()
 	if (saddled)
 		. += span_info("Someone appears to have attached a saddle to this one.")
 
+<<<<<<< HEAD
+=======
+/mob/living/basic/mining/goliath/revive(full_heal_flags, excess_healing, force_grab_ghost)
+	. = ..()
+	if (!.)
+		return
+	move_force = initial(move_force)
+	move_resist = initial(move_resist)
+	pull_force = initial(pull_force)
+
+/mob/living/basic/mining/goliath/death(gibbed)
+	move_force = MOVE_FORCE_DEFAULT
+	move_resist = MOVE_RESIST_DEFAULT
+	pull_force = PULL_FORCE_DEFAULT
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Goliaths can summon tentacles more frequently as they take damage, scary.
 /mob/living/basic/mining/goliath/apply_damage(damage, damagetype, def_zone, blocked, forced, spread_damage, wound_bonus, bare_wound_bonus, sharpness, attack_direction, attacking_item)
 	. = ..()
@@ -114,9 +179,12 @@
 		return
 	balloon_alert(user, "ready to ride")
 	qdel(attacking_item)
+<<<<<<< HEAD
 	make_rideable()
 
 /mob/living/basic/mining/goliath/proc/make_rideable()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	saddled = TRUE
 	buckle_lying = 0
 	add_overlay("goliath_saddled")
@@ -146,8 +214,20 @@
 	icon_state = tentacle_warning_state
 
 /// Get ready for mounting
+<<<<<<< HEAD
 /mob/living/basic/mining/goliath/tamed(mob/living/tamer, atom/food)
 	tamed = TRUE
+=======
+/mob/living/basic/mining/goliath/proc/tamed()
+	new /obj/effect/temp_visual/heart(src.loc)
+	tamed = TRUE
+	//monkestation edit
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+	response_help_simple = "pet"
+	response_help_continuous = "pets"
+	AddElement(/datum/element/pet_bonus, "wails happily!")
+	//monkestation edit ends
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Copy entire faction rather than just placing user into faction, to avoid tentacle peril on station
 /mob/living/basic/mining/goliath/befriend(mob/living/new_friend)
@@ -160,6 +240,7 @@
 /mob/living/basic/mining/goliath/ranged_secondary_attack(atom/atom_target, modifiers)
 	tentacle_line?.Trigger(target = atom_target)
 
+<<<<<<< HEAD
 /// Version of the goliath that already starts saddled and doesn't require a lasso to be ridden.
 /mob/living/basic/mining/goliath/deathmatch
 	saddled = TRUE
@@ -173,6 +254,8 @@
 	add_overlay("goliath_saddled")
 	AddElement(/datum/element/ridable, /datum/component/riding/creature/goliath/deathmatch)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Legacy Goliath mob with different sprites, largely the same behaviour
 /mob/living/basic/mining/goliath/ancient
 	name = "ancient goliath"

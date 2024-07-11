@@ -8,7 +8,10 @@
 	interaction_flags_click = NEED_DEXTERITY|ALLOW_RESTING
 	/// For setting icon archetype
 	var/soft_type = "cargo"
+<<<<<<< HEAD
 	/// If there is a suffix to append
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/soft_suffix = "soft"
 
 	dog_fashion = /datum/dog_fashion/head/cargo_tech
@@ -172,7 +175,12 @@
 
 /obj/item/clothing/head/soft/fishing_hat/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	AddElement(/datum/element/skill_reward, /datum/skill/fishing)
+=======
+	if(add_element) //monkestation edit
+		AddElement(/datum/element/skill_reward, /datum/skill/fishing)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define PROPHAT_MOOD "prophat"
 

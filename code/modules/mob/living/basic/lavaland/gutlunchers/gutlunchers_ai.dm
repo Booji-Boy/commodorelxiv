@@ -5,7 +5,11 @@
 
 /datum/ai_controller/basic_controller/gutlunch/gutlunch_warrior
 	blackboard = list(
+<<<<<<< HEAD
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+=======
+		BB_TARGETING_STRATEGY =  /datum/targeting_strategy/basic,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends,
 		BB_BABIES_PARTNER_TYPES = list(/mob/living/basic/mining/gutlunch/milk),
 		BB_BABIES_CHILD_TYPES = list(/mob/living/basic/mining/gutlunch/grub),
@@ -44,9 +48,18 @@
 			continue
 		living_pawn.befriend(potential_friend)
 		to_chat(potential_friend, span_nicegreen("[living_pawn] looks at you with endearing eyes!"))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, TRUE)
+		return
+
+	finish_action(controller, FALSE)
+	return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /datum/ai_controller/basic_controller/gutlunch/gutlunch_baby
@@ -75,7 +88,11 @@
 	target_key = BB_TROUGH_TARGET
 	hunting_behavior = /datum/ai_behavior/hunt_target/unarmed_attack_target/food_trough
 	finding_behavior = /datum/ai_behavior/find_hunt_target/food_trough
+<<<<<<< HEAD
 	hunt_targets = list(/obj/structure/ore_container/food_trough/gutlunch_trough)
+=======
+	hunt_targets = list(/obj/structure/ore_container/gutlunch_trough)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hunt_chance = 75
 	hunt_range = 9
 

@@ -142,6 +142,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 /datum/pipe_info/meter
 	icon_state = "meter"
 	dirtype = PIPE_ONEDIR
+	all_layers = TRUE // MONKESTATION ADDITION -- TG DOES NOT WANT YOU TO KNOW THIS ONE TRICK TO MAKE METERS WORK ON LAYERS 1 AND 5
 
 /datum/pipe_info/meter/New(label)
 	name = label
@@ -587,7 +588,11 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 
 						if(queued_pipe_flipped)
 							tube.setDir(turn(queued_pipe_dir, 45 + ROTATION_FLIP))
+<<<<<<< HEAD
 							tube.post_rotation(user, ROTATION_FLIP)
+=======
+							tube.AfterRotation(user, ROTATION_FLIP)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 						tube.add_fingerprint(usr)
 						if(mode & WRENCH_MODE)
@@ -699,15 +704,24 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 /obj/item/rpd_upgrade
 	name = "RPD advanced design disk"
 	desc = "It seems to be empty."
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
+=======
+//	icon = 'icons/obj/devices/circuitry_n_data.dmi' // MONKESTATION EDIT CHANGE OLD // REQUIRES PR #80025
+	icon = 'icons/obj/module.dmi' // MONKESTATION EDIT CHANGE NEW
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "datadisk3"
 	/// Bitflags for upgrades
 	var/upgrade_flags
 
 /obj/item/rpd_upgrade/unwrench
+<<<<<<< HEAD
 	name = "RPD advanced upgrade: wrench mode"
 	desc = "Adds reverse wrench mode to the RPD. Attention, due to budget cuts, the mode is hard linked to the destroy mode control button."
 	icon_state = "datadisk1"
+=======
+	desc = "Adds reverse wrench mode to the RPD. Attention, due to budget cuts, the mode is hard linked to the destroy mode control button."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	upgrade_flags = RPD_UPGRADE_UNWRENCH
 
 #undef ATMOS_CATEGORY

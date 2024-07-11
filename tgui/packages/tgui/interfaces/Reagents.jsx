@@ -192,6 +192,19 @@ const TagBox = (props) => {
           Suffocation
         </Button>
         <Button
+<<<<<<< HEAD
+=======
+          color={selectedBitflags & bitflags.CLONE ? 'green' : 'red'}
+          icon="male"
+          onClick={() => {
+            act('toggle_tag_clone');
+            setPage(1);
+          }}
+        >
+          Clone
+        </Button>
+        <Button
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           color={selectedBitflags & bitflags.ORGAN ? 'green' : 'red'}
           icon="brain"
           onClick={() => {
@@ -381,8 +394,16 @@ const RecipeLibrary = (props) => {
     linkedBeaker,
   } = data;
 
+<<<<<<< HEAD
   const [reagentFilter, setReagentFilter] = useState(true);
   const [bookmarkMode, setBookmarkMode] = useState(false);
+=======
+  const [reagentFilter, setReagentFilter] = useLocalState(
+    'reagentFilter',
+    true,
+  );
+  const [bookmarkMode, setBookmarkMode] = useLocalState('bookmarkMode', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const matchReagents = (reaction) => {
     if (!reagentFilter || currentReagents === null) {

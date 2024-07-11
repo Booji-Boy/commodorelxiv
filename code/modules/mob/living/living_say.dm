@@ -254,7 +254,28 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	if(pressure < ONE_ATMOSPHERE*0.4) //Thin air, let's italicise the message
 		spans |= SPAN_ITALICS
 
+<<<<<<< HEAD
 	send_speech(message, message_range, src, bubble_type, spans, language, message_mods, tts_message = tts_message, tts_filter = tts_filter)//roughly 58% of living/say()'s total cost
+=======
+	send_speech(message, message_range, src, bubble_type, spans, language, message_mods)//roughly 58% of living/say()'s total cost
+
+	//monkestation edit
+	///Play a sound to indicate we just spoke
+	if(client && !HAS_TRAIT(src, TRAIT_SIGN_LANG))
+		var/ending = copytext_char(message, -1)
+		var/sound/speak_sound
+		if(HAS_TRAIT(src, TRAIT_HELIUM))
+			speak_sound = sound('monkestation/sound/effects/helium_squeak.ogg')
+		else if(ending == "?")
+			speak_sound = voice_type2sound[voice_type]["?"]
+		else if(ending == "!")
+			speak_sound = voice_type2sound[voice_type]["!"]
+		else
+			speak_sound = voice_type2sound[voice_type][voice_type]
+		playsound(src, speak_sound, 300, 1, SHORT_RANGE_SOUND_EXTRARANGE-2, falloff_exponent = 0, pressure_affected = FALSE, ignore_walls = FALSE, use_reverb = FALSE, mixer_channel = CHANNEL_MOB_SOUNDS)
+	//monkestation edit end
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(succumbed)
 		succumb(TRUE)
 		to_chat(src, compose_message(src, language, message, , spans, message_mods))
@@ -265,6 +286,17 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 /mob/living/Hear(message, atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), message_range=0)
 	if((SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_HEAR, args) & COMSIG_MOVABLE_CANCEL_HEARING) || !GET_CLIENT(src))
 		return FALSE
+<<<<<<< HEAD
+=======
+	if(!GET_CLIENT(src))
+		return
+	//monkestation edit
+	if(radio_freq && can_hear())
+		var/atom/movable/virtualspeaker/V = speaker
+		if(isAI(V.source))
+			playsound_local(get_turf(src), 'goon/sounds/radio_ai.ogg', 170, 1, 0, 0, pressure_affected = FALSE, use_reverb = FALSE, mixer_channel = CHANNEL_MOB_SOUNDS)
+	//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/deaf_message
 	var/deaf_type
@@ -300,7 +332,11 @@ GLOBAL_LIST_INIT(message_modes_stat_limits, list(
 	SEND_SIGNAL(src, COMSIG_MOVABLE_HEAR, args)
 
 	if(HAS_TRAIT(speaker, TRAIT_SIGN_LANG)) //Checks if speaker is using sign language
+<<<<<<< HEAD
 		deaf_message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods, TRUE)
+=======
+		deaf_message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods, FALSE, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(speaker != src)
 			if(!radio_freq) //I'm about 90% sure there's a way to make this less cluttered

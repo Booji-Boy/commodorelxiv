@@ -9,7 +9,12 @@
 	worn_icon_state = "plumbing"
 	icon = 'icons/obj/tools.dmi'
 	slot_flags = ITEM_SLOT_BELT
+<<<<<<< HEAD
 	banned_upgrades = RCD_ALL_UPGRADES & ~RCD_UPGRADE_SILO_LINK
+=======
+	///it does not make sense why any of these should be installed.
+	banned_upgrades = RCD_UPGRADE_FRAMES | RCD_UPGRADE_SIMPLE_CIRCUITS  | RCD_UPGRADE_FURNISHING | RCD_UPGRADE_ANTI_INTERRUPT | RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	matter = 200
 	max_matter = 200
 
@@ -320,6 +325,7 @@
 			/obj/machinery/plumbing/growing_vat = 20,
 		),
 
+<<<<<<< HEAD
 		//Category 2 Distributors
 		"Distributors" = list(
 			/obj/machinery/duct = 1,
@@ -334,6 +340,30 @@
 			/obj/machinery/plumbing/tank = 20,
 			/obj/machinery/plumbing/acclimator = 10,
 		),
+=======
+/obj/item/construction/plumbing/research/set_plumbing_designs()
+	plumbing_design_types = list(
+		//category 1 synthesizers
+		/obj/machinery/plumbing/synthesizer = 15,
+		/obj/machinery/plumbing/reaction_chamber = 15,
+		/obj/machinery/plumbing/grinder_chemical = 30,
+		/obj/machinery/plumbing/disposer = 10,
+		/obj/machinery/plumbing/growing_vat = 20,
+
+		//category 2 Distributors
+		/obj/machinery/plumbing/ooze_sucker = 5,
+		/obj/machinery/plumbing/slime_grinder = 5,
+		/obj/machinery/plumbing/ooze_compressor = 20,
+		/obj/machinery/duct = 1,
+		/obj/machinery/plumbing/input = 5,
+		/obj/machinery/plumbing/filter = 5,
+		/obj/machinery/plumbing/splitter = 5,
+		/obj/machinery/plumbing/output = 5,
+
+		//category 3 storage
+		/obj/machinery/plumbing/tank = 20,
+		/obj/machinery/plumbing/acclimator = 10,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /obj/item/construction/plumbing/research/Initialize(mapload)

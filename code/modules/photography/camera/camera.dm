@@ -10,8 +10,13 @@
 	worn_icon_state = "camera"
 	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
+<<<<<<< HEAD
 	light_system = OVERLAY_LIGHT_DIRECTIONAL //Used as a flash here.
 	light_range = 6
+=======
+	light_system = OVERLAY_LIGHT //Used as a flash here.
+	light_outer_range = 8
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_WHITE
 	light_power = FLASH_LIGHT_POWER
 	light_on = FALSE
@@ -196,8 +201,11 @@
 	var/list/mobs = list()
 	var/blueprints = FALSE
 	var/clone_area = SSmapping.request_turf_block_reservation(size_x * 2 + 1, size_y * 2 + 1, 1)
+<<<<<<< HEAD
 	///list of human names taken on picture
 	var/list/names = list()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/width = size_x * 2 + 1
 	var/height = size_y * 2 + 1

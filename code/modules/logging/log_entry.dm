@@ -24,6 +24,7 @@
 	/// Message of the log entry.
 	var/message
 
+<<<<<<< HEAD
 	/// Bitfield that describes how exactly to log stuff exactly
 	/// See code/__DEFINES/logging/dm
 	var/flags = NONE
@@ -31,19 +32,36 @@
 	/// Data of the log entry; optional.
 	var/list/data
 
+=======
+	/// Data of the log entry; optional.
+	var/list/data
+
+	///severity level of this log
+	var/severity = "info"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Semver store of the log entry, used to store the schema of data entries
 	var/list/semver_store
 
 GENERAL_PROTECT_DATUM(/datum/log_entry)
 
+<<<<<<< HEAD
 /datum/log_entry/New(timestamp, category, message, flags, list/data, list/semver_store)
+=======
+/datum/log_entry/New(timestamp, category, message, list/data, list/semver_store, severity = "info")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	..()
 
 	src.id = next_id++
 	src.timestamp = timestamp
 	src.category = category
+<<<<<<< HEAD
 	src.flags = flags
 	src.message = message
+=======
+	src.message = message
+	src.severity = severity
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	with_data(data)
 	with_semver_store(semver_store)
 
@@ -67,6 +85,7 @@ GENERAL_PROTECT_DATUM(/datum/log_entry)
 
 /// Converts the log entry to a human-readable string.
 /datum/log_entry/proc/to_readable_text(format = TRUE)
+<<<<<<< HEAD
 	var/output = ""
 	if(format)
 		output += "\[[timestamp]\] [uppertext(category)]: [message]"
@@ -76,6 +95,12 @@ GENERAL_PROTECT_DATUM(/datum/log_entry)
 	if(flags & ENTRY_USE_DATA_W_READABLE)
 		output += json_encode(data, JSON_PRETTY_PRINT)
 	return output
+=======
+	if(format)
+		return "\[[timestamp]\] [uppertext(category)]: [message]"
+	else
+		return "[message]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define MANUAL_JSON_ENTRY(list, key, value) list.Add("\"[key]\":[(!isnull(value)) ? json_encode(value) : "null"]")
 
@@ -84,6 +109,10 @@ GENERAL_PROTECT_DATUM(/datum/log_entry)
 	// I do not trust byond's json encoder, and need to ensure the order doesn't change.
 	var/list/json_entries = list()
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_TIMESTAMP, timestamp)
+<<<<<<< HEAD
+=======
+	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_ROUNDID, GLOB.round_id) // monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_CATEGORY, category)
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_MESSAGE, message)
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_DATA, data)
@@ -91,6 +120,10 @@ GENERAL_PROTECT_DATUM(/datum/log_entry)
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_SEMVER_STORE, semver_store)
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_ID, id)
 	MANUAL_JSON_ENTRY(json_entries, LOG_ENTRY_KEY_SCHEMA_VERSION, schema_version)
+<<<<<<< HEAD
+=======
+	MANUAL_JSON_ENTRY(json_entries, "level", severity)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return "{[json_entries.Join(",")]}"
 
 #undef MANUAL_JSON_ENTRY

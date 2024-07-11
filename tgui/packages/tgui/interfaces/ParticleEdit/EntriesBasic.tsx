@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useContext } from 'react';
 
 import { useBackend } from '../../backend';
@@ -12,6 +13,19 @@ import {
   Stack,
 } from '../../components';
 import { ParticleContext } from '.';
+=======
+import { useBackend, useLocalState } from '../../backend';
+import {
+  Box,
+  Button,
+  LabeledList,
+  NumberInput,
+  ColorBox,
+  Input,
+  Dropdown,
+  Stack,
+} from '../../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   EntryCoordProps,
   EntryFloatProps,
@@ -19,18 +33,30 @@ import {
   EntryIconStateProps,
   EntryTransformProps,
   MatrixTypes,
+<<<<<<< HEAD
   P_DATA_ICON_ADD,
   P_DATA_ICON_REMOVE,
   P_DATA_ICON_WEIGHT,
   ParticleUIData,
+=======
+  ParticleUIData,
+  P_DATA_ICON_ADD,
+  P_DATA_ICON_REMOVE,
+  P_DATA_ICON_WEIGHT,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   SpaceToNum,
   SpaceTypes,
 } from './data';
 import { editKeyOf, editWeightOf, setGradientSpace } from './helpers';
 
 export const EntryFloat = (props: EntryFloatProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, float } = props;
   return (
     <LabeledList.Item label={name}>
@@ -57,8 +83,13 @@ export const EntryFloat = (props: EntryFloatProps) => {
 };
 
 export const EntryCoord = (props: EntryCoordProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, coord } = props;
   return (
     <LabeledList.Item label={name}>
@@ -111,8 +142,13 @@ export const EntryCoord = (props: EntryCoordProps) => {
 };
 
 export const EntryGradient = (props: EntryGradientProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, gradient } = props;
   const isLooping = gradient?.find((x) => x === 'loop');
   const space_type = gradient?.includes('space')
@@ -212,8 +248,13 @@ export const EntryGradient = (props: EntryGradientProps) => {
 };
 
 export const EntryTransform = (props: EntryTransformProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const len = props.transform?.length ? props.transform.length : 0;
   const selected =
     len < 7
@@ -266,8 +307,13 @@ export const EntryTransform = (props: EntryTransformProps) => {
 };
 
 export const EntryIcon = (props: EntryIconStateProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, icon_state } = props;
   return (
     <LabeledList.Item label={name}>
@@ -340,8 +386,13 @@ export const EntryIcon = (props: EntryIconStateProps) => {
 };
 
 export const EntryIconState = (props: EntryIconStateProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, icon_state } = props;
   const newValue =
     typeof icon_state === 'string'

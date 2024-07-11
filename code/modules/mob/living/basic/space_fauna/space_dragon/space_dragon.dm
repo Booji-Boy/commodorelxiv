@@ -1,5 +1,9 @@
 /// You can't make a dragon darker than this, it'd be hard to see
+<<<<<<< HEAD
 #define REJECT_DARK_COLOUR_THRESHOLD 20
+=======
+#define REJECT_DARK_COLOUR_THRESHOLD 50
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Any interactions executed by the space dragon
 #define DOAFTER_SOURCE_SPACE_DRAGON_INTERACTION "space dragon interaction"
 
@@ -17,7 +21,10 @@
 	icon_dead = "spacedragon_dead"
 	health_doll_icon = "spacedragon"
 	faction = list(FACTION_CARP)
+<<<<<<< HEAD
 	mob_biotypes = MOB_SPECIAL
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
 	gender = NEUTER
 	maxHealth = 400
@@ -25,9 +32,16 @@
 	unsuitable_cold_damage = 0
 	unsuitable_heat_damage = 0
 	unsuitable_atmos_damage = 0
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0.5, OXY = 1)
 	combat_mode = TRUE
 	speed = 0
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 0.5, OXY = 1)
+	istate = ISTATE_HARM
+	speed = 0
+	movement_type = FLYING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/magic/demon_attack1.ogg'
@@ -46,7 +60,10 @@
 	death_sound = 'sound/creatures/space_dragon_roar.ogg'
 	death_message = "screeches in agony as it collapses to the floor, its life extinguished."
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
+<<<<<<< HEAD
 	can_buckle_to = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// The colour of the space dragon
 	var/chosen_colour
@@ -78,8 +95,13 @@
 	buffet.Grant(src)
 
 /mob/living/basic/space_dragon/Destroy()
+<<<<<<< HEAD
 	fire_breath = null
 	buffet = null
+=======
+	QDEL_NULL(fire_breath)
+	QDEL_NULL(buffet)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /mob/living/basic/space_dragon/Login()
@@ -101,13 +123,22 @@
 
 /// Select scale colour with the colour picker
 /mob/living/basic/space_dragon/proc/select_colour()
+<<<<<<< HEAD
 	chosen_colour = input(src, "What colour would you like to be?" ,"Colour Selection", COLOR_WHITE) as color|null
+=======
+	chosen_colour = tgui_color_picker(src, "What colour would you like to be?", "Colour Selection", COLOR_WHITE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!chosen_colour) // Redo proc until we get a color
 		to_chat(src, span_warning("Not a valid colour, please try again."))
 		select_colour()
 		return
+<<<<<<< HEAD
 	var/list/skin_hsv = rgb2hsv(chosen_colour)
 	if(skin_hsv[3] < REJECT_DARK_COLOUR_THRESHOLD)
+=======
+	var/temp_hsv = RGBtoHSV(chosen_colour)
+	if(ReadHSV(temp_hsv)[3] < REJECT_DARK_COLOUR_THRESHOLD)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(src, span_danger("Invalid colour. Your colour is not bright enough."))
 		select_colour()
 		return

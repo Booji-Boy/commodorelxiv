@@ -45,5 +45,11 @@
 /// from /obj/structure/hololadder/disconnect()
 #define COMSIG_BITRUNNER_LADDER_SEVER "bitrunner_ladder_sever"
 
+<<<<<<< HEAD
 /// Sent when a server console is emagged
 #define COMSIG_BITRUNNER_SERVER_EMAGGED "bitrunner_server_emagged"
+=======
+
+/// deprecated
+#define COMSIG_BITRUNNER_SPAWN_GLITCH "bitrunner_spawn_glitch"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

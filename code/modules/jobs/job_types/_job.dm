@@ -172,6 +172,7 @@
 		for(var/i in roundstart_experience)
 			spawned_human.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
+<<<<<<< HEAD
 /// Return the outfit to use
 /datum/job/proc/get_outfit(consistent)
 	return outfit
@@ -179,8 +180,12 @@
 /// Announce that this job as joined the round to all crew members.
 /// Note the joining mob has no client at this point.
 /datum/job/proc/announce_job(mob/living/joining_mob)
+=======
+
+/datum/job/proc/announce_job(mob/living/joining_mob, job_title)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(head_announce)
-		announce_head(joining_mob, head_announce)
+		announce_head(joining_mob, head_announce, job_title)
 
 
 //Used for a special check of whether to allow a client to latejoin as this job.
@@ -191,7 +196,16 @@
 /mob/living/proc/on_job_equipping(datum/job/equipping, client/player_client)
 	return
 
+<<<<<<< HEAD
 #define VERY_LATE_ARRIVAL_TOAST_PROB 20
+=======
+/mob/living/carbon/human/on_job_equipping(datum/job/equipping, datum/preferences/used_pref)
+	var/datum/bank_account/bank_account = new(real_name, equipping, dna.species.payday_modifier)
+	bank_account.payday(STARTING_PAYCHECKS, TRUE)
+	account_id = bank_account.account_id
+	bank_account.replaceable = FALSE
+	dress_up_as_job(equipping, FALSE, used_pref)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/carbon/human/on_job_equipping(datum/job/equipping, client/player_client)
 	if(equipping.paycheck_department)
@@ -216,14 +230,22 @@
 /mob/living/proc/dress_up_as_job(datum/job/equipping, visual_only = FALSE, client/player_client, consistent = FALSE)
 	return
 
+<<<<<<< HEAD
 /mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE, client/player_client, consistent = FALSE)
 	dna.species.pre_equip_species_outfit(equipping, src, visual_only)
 	equip_outfit_and_loadout(equipping.get_outfit(consistent), player_client?.prefs, visual_only)
 
 /datum/job/proc/announce_head(mob/living/carbon/human/H, channels) //tells the given channel that the given mob is the new department head. See communications.dm for valid channels.
+=======
+/mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE, datum/preferences/used_pref)
+	dna.species.pre_equip_species_outfit(equipping, src, visual_only)
+	equip_outfit_and_loadout(equipping.outfit, used_pref, visual_only, equipping)
+
+/datum/job/proc/announce_head(mob/living/carbon/human/H, channels, job_title) //tells the given channel that the given mob is the new department head. See communications.dm for valid channels.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(H && GLOB.announcement_systems.len)
 		//timer because these should come after the captain announcement
-		SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_addtimer), CALLBACK(pick(GLOB.announcement_systems), TYPE_PROC_REF(/obj/machinery/announcement_system, announce), "NEWHEAD", H.real_name, H.job, channels), 1))
+		SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(_addtimer), CALLBACK(pick(GLOB.announcement_systems), TYPE_PROC_REF(/obj/machinery/announcement_system, announce), "NEWHEAD", H.real_name, job_title, channels), 1))
 
 //If the configuration option is set to require players to be logged as old enough to play certain jobs, then this proc checks that they are, otherwise it just returns 1
 /datum/job/proc/player_old_enough(client/player)
@@ -446,7 +468,7 @@
 
 
 /// Returns an atom where the mob should spawn in.
-/datum/job/proc/get_roundstart_spawn_point()
+/datum/job/proc/get_roundstart_spawn_point(chosen_title)
 	if(random_spawns_possible)
 		if(HAS_TRAIT(SSstation, STATION_TRAIT_LATE_ARRIVALS))
 			return get_latejoin_spawn_point()
@@ -463,22 +485,40 @@
 			return hangover_spawn_point || get_latejoin_spawn_point()
 	if(length(GLOB.jobspawn_overrides[title]))
 		return pick(GLOB.jobspawn_overrides[title])
-	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point()
+	var/obj/effect/landmark/start/spawn_point = get_default_roundstart_spawn_point(chosen_title)
 	if(!spawn_point) //if there isn't a spawnpoint send them to latejoin, if there's no latejoin go yell at your mapper
 		return get_latejoin_spawn_point()
 	return spawn_point
 
 
 /// Handles finding and picking a valid roundstart effect landmark spawn point, in case no uncommon different spawning events occur.
-/datum/job/proc/get_default_roundstart_spawn_point()
+/datum/job/proc/get_default_roundstart_spawn_point(chosen_title)
+	var/list/spawn_points_picked = list()
+	var/list/spawn_points_not_picked = list()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
 		if(spawn_point.name != title)
 			continue
-		. = spawn_point
-		if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
-			continue
-		spawn_point.used = TRUE
-		break
+		if(spawn_point.required_jobtitle && spawn_point.required_jobtitle == chosen_title) // we default to jobtitle spawns first
+			. = spawn_point
+			if(spawn_point.used) //so we can revert to spawning them on top of eachother if something goes wrong
+				continue
+			spawn_point.used = TRUE
+			break
+		else
+
+			if(spawn_point.used)
+				spawn_points_picked += spawn_point
+			else
+				spawn_points_not_picked += spawn_point
+
+	var/obj/effect/landmark/start/picked = pick(spawn_points_not_picked)
+
+	if(!picked)
+		picked = pick(spawn_points_picked)
+
+	. = picked
+	picked.used = TRUE
+
 	if(!.)
 		log_mapping("Job [title] ([type]) couldn't find a round start spawn point.")
 
@@ -554,7 +594,11 @@
 				player_client.prefs.read_preference(/datum/preference/choiced/species),
 			)
 	dna.update_dna_identity()
+<<<<<<< HEAD
 	updateappearance()
+=======
+	dna.species.after_equip_job(job, src, FALSE, player_client.prefs)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/silicon/ai/apply_prefs_job(client/player_client, datum/job/job)
 	if(GLOB.current_anonymous_theme)

@@ -365,11 +365,14 @@
 	result = /obj/item/food/watermelonslice
 	category = CAT_SALAD
 
+<<<<<<< HEAD
 /datum/crafting_recipe/food/knife/appleslice
 	reqs = list(/obj/item/food/grown/apple = 1)
 	result = /obj/item/food/appleslice
 	category = CAT_SALAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/crafting_recipe/food/knife/kamaboko_slice
 	reqs = list(/obj/item/food/kamaboko = 1)
 	result = /obj/item/food/kamaboko_slice
@@ -453,7 +456,11 @@
 /datum/crafting_recipe/food/grill/grilled_cheese_sandwich
 	reqs = list(/obj/item/food/sandwich/cheese = 1)
 	result = /obj/item/food/sandwich/cheese/grilled
+<<<<<<< HEAD
 	category = CAT_SANDWICH
+=======
+	category = CAT_BREAD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/food/grill/grilled_cheese
 	reqs = list(/obj/item/food/cheese/firm_cheese_slice = 1)
@@ -681,15 +688,10 @@
 	result = /obj/item/food/boiledegg
 	category = CAT_EGG
 
-/datum/crafting_recipe/food/microwave/boiledrice
+/* /datum/crafting_recipe/food/microwave/boiledrice Monkestation Edit: Boiled rice needs to be boiled
 	reqs = list(/obj/item/food/uncooked_rice = 1)
 	result = /obj/item/food/boiledrice
-	category = CAT_SALAD
-
-/datum/crafting_recipe/food/microwave/boiledspaghetti
-	reqs = list(/obj/item/food/spaghetti/raw = 1)
-	result = /obj/item/food/spaghetti/boiledspaghetti
-	category = CAT_SPAGHETTI
+	category = CAT_SALAD */
 
 /datum/crafting_recipe/food/microwave/onionrings
 	reqs = list(/obj/item/food/onion_slice = 1)
@@ -814,6 +816,16 @@
 	reqs = list(/obj/item/food/grown/potato/sweet = 1)
 	result = /obj/item/food/yakiimo
 	category = CAT_MISCFOOD
+
+/datum/crafting_recipe/food/oven/reispan
+	reqs = list(/obj/item/food/rice_dough = 1)
+	result = /obj/item/food/bread/reispan
+	category = CAT_MARTIAN
+
+/datum/crafting_recipe/food/oven/ballpark_pretzel
+	reqs = list(/obj/item/food/raw_ballpark_pretzel = 1)
+	result = /obj/item/food/ballpark_pretzel
+	category = CAT_MARTIAN
 
 /datum/crafting_recipe/food/oven/reispan
 	reqs = list(/obj/item/food/rice_dough = 1)

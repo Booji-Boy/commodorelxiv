@@ -13,7 +13,7 @@
 	max_wizard_trigger_potency = 3
 
 //Check if there's a tram we can cause to malfunction.
-/datum/round_event_control/tram_malfunction/can_spawn_event(players_amt, allow_magic = FALSE)
+/datum/round_event_control/tram_malfunction/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) //MONKESTATION ADDITION: fake_check = FALSE
 	. = ..()
 	if (!.)
 		return FALSE
@@ -33,7 +33,14 @@
 
 /datum/round_event/tram_malfunction/setup()
 	end_when = rand(TRAM_MALFUNCTION_TIME_LOWER, TRAM_MALFUNCTION_TIME_UPPER)
+	setup = TRUE //MONKESTATION ADDITION
 
+<<<<<<< HEAD
+=======
+/datum/round_event/tram_malfunction/announce()
+	priority_announce("Our automated control system has lost contact with the tram's onboard computer. Please take extra care while engineers diagnose and resolve the issue.", "[command_name()] Engineering Division")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/round_event/tram_malfunction/start()
 	for(var/datum/transport_controller/linear/tram/malfunctioning_controller as anything in SStransport.transports_by_type[TRANSPORT_TYPE_TRAM])
 		if(malfunctioning_controller.specific_transport_id == specific_transport_id)
@@ -41,10 +48,26 @@
 			return
 
 /datum/round_event/tram_malfunction/end()
+<<<<<<< HEAD
 	for(var/datum/transport_controller/linear/tram/malfunctioning_controller as anything in SStransport.transports_by_type[TRANSPORT_TYPE_TRAM])
 		if(malfunctioning_controller.specific_transport_id == specific_transport_id && malfunctioning_controller.malf_active)
 			malfunctioning_controller.end_malf_event()
 			return
+=======
+	for(var/obj/machinery/crossing_signal/signal as anything in GLOB.tram_signals)
+		signal.end_malfunction()
+
+	for(var/obj/machinery/door/window/tram/door as anything in GLOB.tram_doors)
+		door.end_malfunction()
+
+	for(var/obj/machinery/destination_sign/sign as anything in GLOB.tram_signs)
+		sign.malfunctioning = FALSE
+
+	for(var/obj/structure/industrial_lift/tram as anything in GLOB.lifts)
+		tram.collision_lethality = original_lethality
+
+	priority_announce("The software on the tram has been reset, normal operations are now resuming. Sorry for any inconvienence this may have caused.", "[command_name()] Engineering Division")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #undef TRAM_MALFUNCTION_TIME_UPPER
 #undef TRAM_MALFUNCTION_TIME_LOWER

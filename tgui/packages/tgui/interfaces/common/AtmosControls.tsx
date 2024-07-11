@@ -55,6 +55,7 @@ export const Vent = (props: VentProps) => {
     <Section
       title={decodeHtmlEntities(long_name)}
       buttons={
+<<<<<<< HEAD
         <>
           <Button
             icon={power ? 'power-off' : 'times'}
@@ -80,6 +81,19 @@ export const Vent = (props: VentProps) => {
             tooltip={`${overclock ? 'Disable' : 'Enable'} overclocking`}
           />
         </>
+=======
+        <Button
+          icon={power ? 'power-off' : 'times'}
+          selected={power}
+          content={power ? 'On' : 'Off'}
+          onClick={() =>
+            act('power', {
+              ref: refID,
+              val: Number(!power),
+            })
+          }
+        />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }
     >
       <LabeledList>

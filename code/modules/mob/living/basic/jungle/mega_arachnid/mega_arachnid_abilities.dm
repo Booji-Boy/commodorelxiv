@@ -2,7 +2,11 @@
 /datum/action/cooldown/spell/pointed/projectile/flesh_restraints
 	name = "fleshy restraints"
 	desc = "Launch at your prey to immobilize them."
+<<<<<<< HEAD
 	button_icon = 'icons/obj/weapons/restraints.dmi'
+=======
+	button_icon = 'icons/obj/restraints.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	button_icon_state = "flesh_snare"
 
 	cooldown_time = 6 SECONDS
@@ -22,7 +26,11 @@
 	if(!iscarbon(target) || blocked >= 100)
 		return
 	var/obj/item/restraints/legcuffs/beartrap/mega_arachnid/restraint = new(get_turf(target))
+<<<<<<< HEAD
 	restraint.spring_trap(target)
+=======
+	restraint.spring_trap(null, target)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/restraints/legcuffs/beartrap/mega_arachnid
 	name = "fleshy restraints"

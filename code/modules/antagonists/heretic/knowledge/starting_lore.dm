@@ -237,7 +237,10 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	cost = 1
 	route = PATH_START
 	priority = MAX_KNOWLEDGE_PRIORITY - 3 // Least priority out of the starting knowledges, as it's an optional boon.
+<<<<<<< HEAD
 	var/static/list/non_mob_bindings = typecacheof(list(/obj/item/stack/sheet/leather, /obj/item/stack/sheet/animalhide))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/heretic_knowledge/codex_cicatrix/parse_required_item(atom/item_path, number_of_things)
 	if(item_path == /obj/item/pen)
@@ -249,8 +252,16 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	if(!.)
 		return FALSE
 
+<<<<<<< HEAD
 	for(var/thingy in atoms)
 		if(is_type_in_typecache(thingy, non_mob_bindings))
+=======
+	// monke edit start: fix for codex cicatrix ritual
+	var/static/list/non_body_items = typecacheof(list(/obj/item/stack/sheet/leather, /obj/item/stack/sheet/animalhide))
+
+	for(var/thingy in atoms)
+		if(is_type_in_typecache(thingy, non_body_items))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			selected_atoms += thingy
 			return TRUE
 		else if(isliving(thingy))
@@ -259,12 +270,20 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 				continue
 			selected_atoms += body
 			return TRUE
+<<<<<<< HEAD
+=======
+	// monke end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /datum/heretic_knowledge/codex_cicatrix/cleanup_atoms(list/selected_atoms)
 	var/mob/living/body = locate() in selected_atoms
 	if(!body)
+<<<<<<< HEAD
 		return
+=======
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// A golem or an android doesn't have skin!
 	var/exterior_text = "skin"
 	// If carbon, it's the limb. If not, it's the body.
@@ -293,6 +312,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	body.do_jitter_animation()
 	body.visible_message(span_danger("An awful ripping sound is heard as [ripped_thing]'s [exterior_text] is ripped straight out, wrapping around [le_book || "the book"], turning into an eldritch shade of blue!"))
 	return ..()
+<<<<<<< HEAD
 
 /datum/heretic_knowledge/feast_of_owls
 	name = "Feast of Owls"
@@ -318,3 +338,5 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		sleep(1 SECONDS)
 	to_chat(user,span_danger("You feel different..."))
 	heretic_datum.feast_of_owls = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

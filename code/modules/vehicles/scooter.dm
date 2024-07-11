@@ -3,6 +3,7 @@
 	desc = "A fun way to get around."
 	icon_state = "scooter"
 	are_legs_exposed = TRUE
+	var/holdable = TRUE
 
 /obj/vehicle/ridden/scooter/Initialize(mapload)
 	. = ..()
@@ -74,7 +75,8 @@
 /obj/vehicle/ridden/scooter/skateboard/generate_actions()
 	. = ..()
 	initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/ollie, VEHICLE_CONTROL_DRIVE)
-	initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/kickflip, VEHICLE_CONTROL_DRIVE)
+	if(holdable)
+		initialize_controller_action_type(/datum/action/vehicle/ridden/scooter/skateboard/kickflip, VEHICLE_CONTROL_DRIVE)
 
 /obj/vehicle/ridden/scooter/skateboard/post_buckle_mob(mob/living/M)//allows skateboards to be non-dense but still allows 2 skateboarders to collide with each other
 	set_density(TRUE)
@@ -94,9 +96,14 @@
 		return
 
 	next_crash = world.time + 10
+<<<<<<< HEAD
 	rider.adjustStaminaLoss(instability*6)
+=======
+	var/mob/living/rider = buckled_mobs[1]
+	rider.stamina.adjust(-instability*6)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	playsound(src, 'sound/effects/bang.ogg', 40, TRUE)
-	if(!iscarbon(rider) || rider.getStaminaLoss() >= 100 || grinding || iscarbon(bumped_thing))
+	if(!iscarbon(rider) || rider.stamina.loss >= 100 || grinding || iscarbon(bumped_thing))
 		var/atom/throw_target = get_edge_target_turf(rider, pick(GLOB.cardinals))
 		unbuckle_mob(rider)
 		if((istype(bumped_thing, /obj/machinery/disposal/bin)))
@@ -133,8 +140,8 @@
 		return
 
 	var/mob/living/skater = buckled_mobs[1]
-	skater.adjustStaminaLoss(instability*0.3)
-	if(skater.getStaminaLoss() >= 100)
+	skater.stamina.adjust(-instability*0.3)
+	if(skater.stamina.loss >= 100)
 		obj_flags = CAN_BE_HIT
 		playsound(src, 'sound/effects/bang.ogg', 20, TRUE)
 		unbuckle_mob(skater)
@@ -157,7 +164,7 @@
 			playsound(location, 'sound/items/trayhit2.ogg', 40)
 			victim.apply_damage(damage = 25, damagetype = BRUTE, def_zone = victim.get_random_valid_zone(even_weights = TRUE), wound_bonus = 20)
 			victim.Paralyze(1.5 SECONDS)
-			skater.adjustStaminaLoss(instability)
+			skater.stamina.adjust(-instability)
 			victim.visible_message(span_danger("[victim] straight up gets grinded into the ground by [skater]'s [src]! Radical!"))
 	addtimer(CALLBACK(src, PROC_REF(grind)), 0.1 SECONDS)
 
@@ -289,6 +296,7 @@
 	icon_state = null
 	density = FALSE
 	instability = 12
+	holdable = FALSE
 	///Stores the shoes associated with the vehicle
 	var/obj/item/clothing/shoes/wheelys/shoes = null
 	///Name of the wheels, for visible messages

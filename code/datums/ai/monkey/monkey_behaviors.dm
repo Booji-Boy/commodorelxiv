@@ -33,7 +33,12 @@
 		living_pawn.drop_all_held_items()
 		living_pawn.put_in_hands(target)
 		controller.set_blackboard_key(BB_MONKEY_BEST_FORCE_FOUND, target.force)
+<<<<<<< HEAD
 		return TRUE
+=======
+		finish_action(controller, TRUE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	else if(target.slot_flags) //Clothing == top priority
 		living_pawn.dropItemToGround(target, TRUE)
@@ -187,6 +192,11 @@
 	set_movement_target(controller, controller.blackboard[target_key])
 
 /datum/ai_behavior/monkey_attack_mob/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/target = controller.blackboard[target_key]
 	var/mob/living/living_pawn = controller.pawn
 
@@ -216,7 +226,11 @@
 	controller.clear_blackboard_key(target_key)
 	if(QDELETED(living_pawn)) // pawn can be null at this point
 		return
+<<<<<<< HEAD
 	GLOB.move_manager.stop_looping(living_pawn)
+=======
+	SSmove_manager.stop_looping(living_pawn)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// attack using a held weapon otherwise bite the enemy, then if we are angry there is a chance we might calm down a little
 /datum/ai_behavior/monkey_attack_mob/proc/monkey_attack(datum/ai_controller/controller, mob/living/target, seconds_per_tick, disarm)
@@ -239,17 +253,27 @@
 
 	if(isnull(controller.blackboard[BB_MONKEY_GUN_WORKED]))
 		controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, TRUE)
+<<<<<<< HEAD
 
 	if(prob(5)) //five percent chance to throw poop at the enemy. there is definitely a better way to call the behaviour than this
 		var/datum/ai_behavior/monkey_poop/test = new /datum/ai_behavior/monkey_poop()
 		call(test, "pooping")(controller)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// attack with weapon if we have one
 	if(living_pawn.CanReach(target, weapon))
 		if(weapon)
 			weapon.melee_attack_chain(living_pawn, target)
 		else
+<<<<<<< HEAD
 			living_pawn.UnarmedAttack(target, null, disarm ? list("right" = TRUE) : null) //Fake a right click if we're disarmin
+=======
+			if(disarm)
+				living_pawn.istate |= ISTATE_SECONDARY
+			living_pawn.UnarmedAttack(target, null) //Fake a right click if we're disarmin
+			living_pawn.istate &= ~ISTATE_SECONDARY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, TRUE) // We reset their memory of the gun being 'broken' if they accomplish some other attack
 	else if(weapon)
 		var/atom/real_target = target
@@ -260,7 +284,11 @@
 		var/can_shoot = gun?.can_shoot() || FALSE
 		if(gun && controller.blackboard[BB_MONKEY_GUN_WORKED] && prob(95))
 			// We attempt to attack even if we can't shoot so we get the effects of pulling the trigger
+<<<<<<< HEAD
 			gun.melee_attack_chain(living_pawn, real_target)
+=======
+			gun.afterattack(real_target, living_pawn, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, can_shoot ? TRUE : prob(80)) // Only 20% likely to notice it didn't work
 			if(can_shoot)
 				controller.set_blackboard_key(BB_MONKEY_GUN_NEURONS_ACTIVATED, TRUE)
@@ -269,6 +297,7 @@
 			controller.set_blackboard_key(BB_MONKEY_GUN_WORKED, TRUE) // 'worked'
 
 	// no de-aggro
+<<<<<<< HEAD
 	if(controller.blackboard[BB_MONKEY_AGGRESSIVE])
 		return NONE
 
@@ -282,6 +311,21 @@
 		finish_action(controller, TRUE)
 		return
 
+=======
+	if(controller.blackboard[BB_MONKEY_AGGRESSIVE] && !(HAS_TRAIT(target, TRAIT_MONKEYFRIEND)))
+		return
+
+	// we've queued up a monkey attack on a mob which isn't already an enemy, so give them 1 threat to start
+	// note they might immediately reduce threat and drop from the list.
+	// this is fine, we're just giving them a love tap then leaving them alone.
+	// unless they fight back, then we retaliate
+
+	// Some mobs delete on death. If the target is no longer alive, go back to idle
+	if(QDELETED(target))
+		finish_action(controller, TRUE)
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(controller.blackboard[BB_MONKEY_ENEMIES][target]))
 		controller.set_blackboard_key_assoc(BB_MONKEY_ENEMIES, target, 1)
 
@@ -290,11 +334,19 @@
 		controller.add_blackboard_key_assoc(BB_MONKEY_ENEMIES, target, -1)
 
 	// if we are not angry at our target, go back to idle
+<<<<<<< HEAD
 	if(controller.blackboard[BB_MONKEY_ENEMIES][target] <= 0)
 		controller.remove_thing_from_blackboard_key(BB_MONKEY_ENEMIES, target)
 		if(controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET] == target)
 			return AI_BEHAVIOR_SUCCEEDED
 	return NONE
+=======
+	if(controller.blackboard[BB_MONKEY_ENEMIES][target] <= 0 || (HAS_TRAIT(target, TRAIT_MONKEYFRIEND)))
+		controller.remove_thing_from_blackboard_key(BB_MONKEY_ENEMIES, target)
+		living_pawn.set_combat_mode(FALSE)
+		if(controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET] == target)
+			finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/disposal_mob
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_MOVE_AND_PERFORM //performs to increase frustration
@@ -351,6 +403,11 @@
 
 
 /datum/ai_behavior/recruit_monkeys/perform(seconds_per_tick, datum/ai_controller/controller)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	controller.set_blackboard_key(BB_MONKEY_RECRUIT_COOLDOWN, world.time + MONKEY_RECRUIT_COOLDOWN)
 	var/mob/living/living_pawn = controller.pawn
 
@@ -364,7 +421,11 @@
 		// Other monkeys now also hate the guy we're currently targeting
 		nearby_monkey.ai_controller.add_blackboard_key_assoc(BB_MONKEY_ENEMIES, controller.blackboard[BB_MONKEY_CURRENT_ATTACK_TARGET], MONKEY_RECRUIT_HATED_AMOUNT)
 
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/monkey_set_combat_target/perform(seconds_per_tick, datum/ai_controller/controller, set_key, enemies_key)
 	var/list/enemies = controller.blackboard[enemies_key]
@@ -373,7 +434,11 @@
 		if(possible_enemy == controller.pawn)
 			continue // don't target ourselves
 		if(!enemies[possible_enemy]) //We don't hate this creature! But we might still attack it!
+<<<<<<< HEAD
 			if(!controller.blackboard[BB_MONKEY_AGGRESSIVE]) //We are not aggressive either, so we won't attack!
+=======
+			if(faction_check(possible_enemy.faction, list(FACTION_MONKEY, FACTION_JUNGLE), exact_match = FALSE) && !controller.blackboard[BB_MONKEY_TARGET_MONKEYS]) // do not target your team. includes monkys gorillas etc.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				continue
 			if(faction_check(possible_enemy.faction, list(FACTION_MONKEY, FACTION_JUNGLE), exact_match = FALSE) && !controller.blackboard[BB_MONKEY_TARGET_MONKEYS]) // do not target your team. includes monkys gorillas etc.
 				continue
@@ -381,7 +446,15 @@
 		valids[possible_enemy] = CEILING(100 / (get_dist(controller.pawn, possible_enemy) || 1), 1)
 
 	if(!length(valids))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 
 	controller.set_blackboard_key(set_key, pick_weight(valids))
 	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE)
+		return
+
+	controller.set_blackboard_key(set_key, pick_weight(valids))
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

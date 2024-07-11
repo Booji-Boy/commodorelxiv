@@ -416,7 +416,11 @@
 	name = "suspicious contact lens case"
 	desc = "A sinister red case that contains two shiny black contact lenses."
 	w_class = WEIGHT_CLASS_TINY
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/syndie_gadget.dmi'
+=======
+	icon = 'icons/obj/device.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "contacts"
 
 /obj/item/syndicate_contacts/attack_self(mob/user, modifiers)
@@ -441,7 +445,10 @@
 	inhand_icon_state = "welding-g"
 	actions_types = list(/datum/action/item_action/toggle)
 	flash_protect = FLASH_PROTECTION_WELDER
+<<<<<<< HEAD
 	flags_cover = GLASSESCOVERSEYES
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*2.5)
 	tint = 2
 	visor_vars_to_toggle = VISOR_FLASHPROTECT | VISOR_TINT
@@ -529,7 +536,44 @@
 /obj/item/clothing/glasses/thermal/syndi
 	name = "chameleon thermals"
 	desc = "A pair of thermal optic goggles with an onboard chameleon generator."
+<<<<<<< HEAD
 	actions_types = list(/datum/action/item_action/chameleon/change/glasses/no_preset)
+=======
+
+	var/datum/action/item_action/chameleon/change/chameleon_action
+
+// MONKESTATION ADDITION START
+/obj/item/clothing/glasses/thermal/syndi/attackby(obj/item/W, mob/user, params)
+	if(W.tool_behaviour != TOOL_MULTITOOL)
+		return ..()
+
+	if(chameleon_action.hidden)
+		chameleon_action.hidden = FALSE
+		actions += chameleon_action
+		chameleon_action.Grant(user)
+		log_game("[key_name(user)] has removed the disguise lock on the chameleon thermals ([name]) with [W]")
+	else
+		chameleon_action.hidden = TRUE
+		actions -= chameleon_action
+		chameleon_action.Remove(user)
+		log_game("[key_name(user)] has locked the disguise of the chameleon thermals ([name]) with [W]")
+// MONKESTATION ADDITION END
+
+/obj/item/clothing/glasses/thermal/syndi/Initialize(mapload)
+	. = ..()
+	chameleon_action = new(src)
+	chameleon_action.chameleon_type = /obj/item/clothing/glasses
+	chameleon_action.chameleon_name = "Glasses"
+	chameleon_action.chameleon_blacklist = typecacheof(/obj/item/clothing/glasses/changeling, only_root_path = TRUE)
+	chameleon_action.initialize_disguises()
+	add_item_action(chameleon_action)
+
+/obj/item/clothing/glasses/thermal/syndi/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
+	chameleon_action.emp_randomise()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/glasses/thermal/monocle
 	name = "thermoncle"

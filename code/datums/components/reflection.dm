@@ -55,7 +55,11 @@
 	var/list/reflect_update_signals = list(COMSIG_MOVABLE_MOVED) + update_signals
 	RegisterSignals(parent, reflect_update_signals, PROC_REF(get_reflection_targets))
 
+<<<<<<< HEAD
 /datum/component/reflection/Destroy(force)
+=======
+/datum/component/reflection/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	QDEL_LIST_ASSOC_VAL(reflected_movables)
 	QDEL_NULL(reflection_holder)
 	can_reflect = null

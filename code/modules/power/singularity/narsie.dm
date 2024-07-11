@@ -20,8 +20,8 @@
 	plane = MASSIVE_OBJ_PLANE
 	light_color = COLOR_RED
 	light_power = 0.7
-	light_range = 15
-	light_range = 6
+	light_outer_range = 15
+	light_outer_range = 6
 	move_resist = INFINITY
 	obj_flags = CAN_BE_HIT | DANGEROUS_POSSESSION
 	pixel_x = -236
@@ -72,6 +72,7 @@
 
 	var/area/area = get_area(src)
 	if(area)
+<<<<<<< HEAD
 		var/mutable_appearance/alert_overlay = mutable_appearance('icons/effects/cult.dmi', "ghostalertsie")
 		notify_ghosts(
 			"Nar'Sie has risen in [area]. Reach out to the Geometer to be given a new shell for your soul.",
@@ -80,6 +81,11 @@
 			click_interact = TRUE,
 			alert_overlay = alert_overlay,
 		)
+=======
+		var/mutable_appearance/alert_overlay = mutable_appearance('icons/effects/cult/effects.dmi', "ghostalertsie")
+		notify_ghosts("Nar'Sie has risen in [area]. Reach out to the Geometer to be given a new shell for your soul.", source = src, alert_overlay = alert_overlay, action = NOTIFY_PLAY)
+	narsie_spawn_animation()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/all_cults = list()
 
@@ -106,6 +112,8 @@
 
 	soul_goal = round(1 + LAZYLEN(souls_needed) * 0.75)
 	INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(begin_the_end))
+	gods_battle() //monkestation edit
+	START_PROCESSING(SSobj, src) //monkestation edit
 
 /// Cleans up all of Nar'Sie's abilities, stats, and ends her round-ending capabilities. This should only be called if `start_ending_the_round()` successfully started.
 /obj/narsie/proc/fall_of_the_harbinger()
@@ -126,6 +134,7 @@
 	send_to_playing_players(span_narsie(span_bold(pick("Nooooo...", "Not die. How-", "Die. Mort-", "Sas tyen re-"))))
 	sound_to_playing_players('sound/magic/demon_dies.ogg', 50)
 
+<<<<<<< HEAD
 /obj/narsie/vv_get_dropdown()
 	. = ..()
 	VV_DROPDOWN_OPTION("", "---------")
@@ -145,12 +154,42 @@
 
 	log_admin("[key_name(usr)] has triggered the Nar'Sie roundender.")
 	start_ending_the_round()
+=======
+	STOP_PROCESSING(SSobj, src) //monkestation edit
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/narsie/attack_ghost(mob/user)
 	make_new_construct(/mob/living/basic/construct/harvester, user, cultoverride = TRUE, loc_override = loc)
 
 /obj/narsie/process()
 	var/datum/component/singularity/singularity_component = singularity.resolve()
+
+//monkestation edit start
+	if(GLOB.cult_ratvar)
+		singularity_component?.target = GLOB.cult_ratvar
+		if(get_dist(src, GLOB.cult_ratvar) < 5)
+			if(next_attack_tick < world.time)
+				next_attack_tick = world.time + rand(50, 100)
+				send_to_playing_players(span_danger("[pick("You hear the scratching of cogs.", "You hear the clanging of pipes.", "You feel your bones start to rust...")]"))
+				sound_to_playing_players('sound/magic/clockwork/narsie_attack.ogg', 100)
+				explosion(GLOB.cult_ratvar, 0, 2, 6)
+				SpinAnimation(4, 0)
+
+				for(var/mob/living/living_player in GLOB.player_list)
+					shake_camera(living_player, 2.5 SECONDS, 5)
+					living_player.Knockdown(1 SECONDS)
+
+				if(prob(max(length(get_antag_minds(/datum/antagonist/cult))/2, 15)))
+					sound_to_playing_players('sound/magic/clockwork/anima_fragment_death.ogg', 100)
+					sound_to_playing_players('sound/effects/explosionfar.ogg', 100)
+					qdel(GLOB.cult_ratvar)
+					send_to_playing_players(span_narsie("You really thought you could best me twice?"))
+					for(var/datum/mind/servant_mind in GLOB.main_clock_cult?.members)
+						to_chat(servant_mind, span_userdanger("You feel a stabbing pain in your chest... This can't be happening!"))
+						servant_mind.current?.dust()
+		return
+//monkestation edit end
 
 	if (!isnull(singularity_component) && (!singularity_component?.target || prob(NARSIE_CHANCE_TO_PICK_NEW_TARGET)))
 		pickcultist()

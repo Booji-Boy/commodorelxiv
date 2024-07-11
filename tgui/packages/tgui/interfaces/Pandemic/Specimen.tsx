@@ -7,10 +7,16 @@ import { Data } from './types';
 import { VirusDisplay } from './Virus';
 
 export const SpecimenDisplay = (props) => {
+<<<<<<< HEAD
   const { act, data } = useBackend<Data>();
   const { is_ready, viruses = [] } = data;
 
   const [tab, setTab] = useState(0);
+=======
+  const { data } = useBackend<Data>();
+  const { viruses = [] } = data;
+  const [tab, setTab] = useLocalState('tab', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const virus = viruses[tab];
 
   return (
@@ -69,3 +75,48 @@ export const SpecimenDisplay = (props) => {
     </Section>
   );
 };
+<<<<<<< HEAD
+=======
+
+const Buttons = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { is_ready, viruses = [] } = data;
+  const [tab, setTab] = useLocalState('tab', 0);
+  const virus = viruses[tab];
+
+  return (
+    <Stack>
+      {viruses.length > 1 && (
+        <Stack.Item>
+          <Tabs>
+            {viruses.map((virus, index) => {
+              return (
+                <Tabs.Tab
+                  selected={tab === index}
+                  onClick={() => setTab(index)}
+                  key={index}
+                >
+                  {virus.name}
+                </Tabs.Tab>
+              );
+            })}
+          </Tabs>
+        </Stack.Item>
+      )}
+      <Stack.Item>
+        <Button
+          icon="flask"
+          content="Create culture bottle"
+          disabled={!is_ready || !virus}
+          tooltip={virus ? '' : 'No virus culture found.'}
+          onClick={() =>
+            act('create_culture_bottle', {
+              index: virus.index,
+            })
+          }
+        />
+      </Stack.Item>
+    </Stack>
+  );
+};
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

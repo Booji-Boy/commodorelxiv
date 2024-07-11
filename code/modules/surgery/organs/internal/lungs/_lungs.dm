@@ -266,8 +266,12 @@
 
 	var/ratio = (breath.gases[/datum/gas/oxygen][MOLES] / safe_oxygen_max) * 10
 	breather.apply_damage(clamp(ratio, oxy_breath_dam_min, oxy_breath_dam_max), oxy_damage_type, spread_damage = TRUE)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/lungs/_lungs.dm
 	if(!HAS_TRAIT(breather, TRAIT_ANOSMIA))
 		breather.throw_alert(ALERT_TOO_MUCH_OXYGEN, /atom/movable/screen/alert/too_much_oxy)
+=======
+	breather.throw_alert(ALERT_TOO_MUCH_OXYGEN, /atom/movable/screen/alert/too_much_oxy)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/lungs.dm
 
 /// Handles NOT having too much o2. only relevant if safe_oxygen_max has a value
 /obj/item/organ/internal/lungs/proc/safe_oxygen(mob/living/carbon/breather, datum/gas_mixture/breath, old_o2_pp)
@@ -344,7 +348,7 @@
 			breather.throw_alert(ALERT_NOT_ENOUGH_PLASMA, /atom/movable/screen/alert/not_enough_plas)
 		// Breathe insufficient amount of Plasma, exhale CO2.
 		var/gas_breathed = handle_suffocation(breather, plasma_pp, safe_plasma_min, breath.gases[/datum/gas/plasma][MOLES])
-		if(plasma_pp)
+		if(plasma_pp > gas_stimulation_min)
 			breathe_gas_volume(breath, /datum/gas/plasma, /datum/gas/carbon_dioxide, volume = gas_breathed)
 		return
 
@@ -437,14 +441,17 @@
 	breathe_gas_volume(breath, /datum/gas/helium)
 	if(helium_pp > helium_speech_min)
 		if(old_helium_pp <= helium_speech_min)
+			ADD_TRAIT(breather, TRAIT_HELIUM, ORGAN_TRAIT) // monke edit: funny helium voice
 			RegisterSignal(breather, COMSIG_MOB_SAY, PROC_REF(handle_helium_speech))
 	else
 		if(old_helium_pp > helium_speech_min)
 			UnregisterSignal(breather, COMSIG_MOB_SAY)
+			REMOVE_TRAIT(breather, TRAIT_HELIUM, ORGAN_TRAIT) // monke edit: funny helium voice
 
 /// Lose helium high pitched voice
 /obj/item/organ/internal/lungs/proc/lose_helium(mob/living/carbon/breather, datum/gas_mixture/breath, old_helium_pp)
 	UnregisterSignal(breather, COMSIG_MOB_SAY)
+	REMOVE_TRAIT(breather, TRAIT_HELIUM, ORGAN_TRAIT) // monke edit: funny helium voice
 
 /// React to speach while hopped up on the high pitched voice juice
 /obj/item/organ/internal/lungs/proc/handle_helium_speech(mob/living/carbon/breather, list/speech_args)
@@ -1031,7 +1038,6 @@
 	breath_out.assert_gases(/datum/gas/oxygen, /datum/gas/hydrogen)
 	breath_out.gases[/datum/gas/oxygen][MOLES] += gas_breathed
 	breath_out.gases[/datum/gas/hydrogen][MOLES] += gas_breathed * 2
-
 
 #undef BREATH_RELATIONSHIP_INITIAL_GAS
 #undef BREATH_RELATIONSHIP_CONVERT

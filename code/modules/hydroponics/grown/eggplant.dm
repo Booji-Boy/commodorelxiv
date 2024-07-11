@@ -6,13 +6,13 @@
 	species = "eggplant"
 	plantname = "Eggplants"
 	product = /obj/item/food/grown/eggplant
-	yield = 2
+	yield = 20
 	potency = 20
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
 	icon_grow = "eggplant-grow"
 	icon_dead = "eggplant-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/eggplant/eggy)
+	infusion_mutations = list(/datum/hydroponics/plant_mutation/infusion/eggy_plant)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1)
 
 /obj/item/food/grown/eggplant
@@ -33,7 +33,8 @@
 	product = /obj/item/food/grown/shell/eggy
 	lifespan = 75
 	production = 12
-	mutatelist = null
+	harvest_age = 240
+	infusion_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.1)
 
 /obj/item/food/grown/shell/eggy

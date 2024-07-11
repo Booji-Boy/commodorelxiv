@@ -9,10 +9,13 @@
 "o" = (
 /turf/open/floor/carpet/green,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "p" = (
 /obj/item/kirbyplants/random/fullysynthetic,
 /turf/open/indestructible/hotelwood,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "s" = (
 /obj/machinery/light/small/directional/east,
 /obj/effect/landmark/bitrunning/cache_goal_turf,
@@ -27,6 +30,7 @@
 /obj/item/newspaper,
 /turf/open/indestructible/hotelwood,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "w" = (
 /obj/modular_map_connector,
 /turf/closed/wall/mineral/wood,
@@ -37,6 +41,8 @@
 	},
 /turf/open/floor/carpet/green,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "z" = (
 /obj/structure/sign/poster/random/directional/east,
 /turf/open/indestructible/hotelwood,
@@ -72,7 +78,11 @@ G
 i
 G
 G
+<<<<<<< HEAD
 w
+=======
+G
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 i
@@ -84,7 +94,11 @@ i
 "}
 (3,1,1) = {"
 G
+<<<<<<< HEAD
 p
+=======
+a
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 o
 o
 T
@@ -101,7 +115,11 @@ G
 (5,1,1) = {"
 G
 a
+<<<<<<< HEAD
 x
+=======
+o
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 o
 T
 G

@@ -47,7 +47,11 @@
 
 /obj/machinery/airalarm/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if((buildstage == AIR_ALARM_BUILD_NO_CIRCUIT) && (the_rcd.upgrade & RCD_UPGRADE_SIMPLE_CIRCUITS))
+<<<<<<< HEAD
 		return list("delay" = 2 SECONDS, "cost" = 1)
+=======
+		return list("mode" = RCD_WALLFRAME, "delay" = 2 SECONDS, "cost" = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/machinery/airalarm/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)

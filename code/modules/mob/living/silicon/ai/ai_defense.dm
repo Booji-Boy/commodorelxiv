@@ -11,6 +11,15 @@
 
 	return ..()
 
+<<<<<<< HEAD
+=======
+/mob/living/silicon/ai/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
+	if(!SSticker.HasRoundStarted())
+		to_chat(user, "You cannot attack people before the game has started.")
+		return
+	..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/silicon/ai/blob_act(obj/structure/blob/B)
 	if (stat != DEAD)
 		adjustBruteLoss(60)
@@ -43,7 +52,11 @@
 			if (stat != DEAD)
 				adjustBruteLoss(30)
 
+<<<<<<< HEAD
 	return TRUE
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/silicon/ai/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /atom/movable/screen/fullscreen/flash, length = 25)
 	return // no eyes, no flashing
@@ -62,7 +75,7 @@
 
 /mob/living/silicon/ai/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	if(stat != DEAD && !incapacitated() && (client || deployed_shell?.client))
 		// alive and well AIs control their floor bolts
@@ -79,7 +92,7 @@
 
 /mob/living/silicon/ai/crowbar_act(mob/living/user, obj/item/tool)
 	. = ..()
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	if(!is_anchored)
 		balloon_alert(user, "bolt it down first!")
@@ -132,7 +145,7 @@
 
 /mob/living/silicon/ai/wirecutter_act(mob/living/user, obj/item/tool)
 	. = ..()
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	if(!is_anchored)
 		balloon_alert(user, "bolt it down first!")

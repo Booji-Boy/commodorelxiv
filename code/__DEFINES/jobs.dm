@@ -57,6 +57,7 @@
 #define JOB_HUMAN_AI "Big Brother"
 //Security
 #define JOB_WARDEN "Warden"
+#define JOB_BRIG_PHYSICIAN "Brig Physician"
 #define JOB_DETECTIVE "Detective"
 #define JOB_SECURITY_OFFICER "Security Officer"
 #define JOB_SECURITY_OFFICER_MEDICAL "Security Officer (Medical)"
@@ -71,6 +72,10 @@
 #define JOB_MEDICAL_DOCTOR "Medical Doctor"
 #define JOB_PARAMEDIC "Paramedic"
 #define JOB_CHEMIST "Chemist"
+<<<<<<< HEAD
+=======
+#define JOB_VIROLOGIST "Pathologist"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Science
 #define JOB_SCIENTIST "Scientist"
 #define JOB_ROBOTICIST "Roboticist"
@@ -93,6 +98,14 @@
 #define JOB_LAWYER "Lawyer"
 #define JOB_CHAPLAIN "Chaplain"
 #define JOB_PSYCHOLOGIST "Psychologist"
+//Spooktober
+#define JOB_SPOOKTOBER_GHOST "Ghost"
+#define JOB_SPOOKTOBER_GODZILLA "Discount Godzilla"
+#define JOB_SPOOKTOBER_WIZARD "Diet Wizard"
+#define JOB_SPOOKTOBER_YELLOWCLOWN "Yellow Clown"
+#define JOB_SPOOKTOBER_SKELETON "Skeleton"
+#define JOB_SPOOKTOBER_CANDYSALESMAN "Candy Salesman"
+#define JOB_SPOOKTOBER_GORILLA "Gorilla"
 //ERTs
 #define JOB_ERT_DEATHSQUAD "Death Commando"
 #define JOB_ERT_COMMANDER "Emergency Response Team Commander"
@@ -125,6 +138,7 @@
 #define JOB_DISPLAY_ORDER_ASSISTANT 1
 #define JOB_DISPLAY_ORDER_CAPTAIN 2
 #define JOB_DISPLAY_ORDER_HEAD_OF_PERSONNEL 3
+<<<<<<< HEAD
 #define JOB_DISPLAY_ORDER_BRIDGE_ASSISTANT 4
 #define JOB_DISPLAY_ORDER_BARTENDER 5
 #define JOB_DISPLAY_ORDER_BOTANIST 6
@@ -161,6 +175,44 @@
 #define JOB_DISPLAY_ORDER_DETECTIVE 37
 #define JOB_DISPLAY_ORDER_SECURITY_OFFICER 38
 #define JOB_DISPLAY_ORDER_PRISONER 39
+=======
+#define JOB_DISPLAY_ORDER_BARTENDER 4
+#define JOB_DISPLAY_ORDER_BOTANIST 5
+#define JOB_DISPLAY_ORDER_COOK 6
+#define JOB_DISPLAY_ORDER_JANITOR 7
+#define JOB_DISPLAY_ORDER_CLOWN 8
+#define JOB_DISPLAY_ORDER_MIME 9
+#define JOB_DISPLAY_ORDER_CURATOR 10
+#define JOB_DISPLAY_ORDER_LAWYER 11
+#define JOB_DISPLAY_ORDER_CHAPLAIN 12
+#define JOB_DISPLAY_ORDER_PSYCHOLOGIST 13
+#define JOB_DISPLAY_ORDER_AI 14
+#define JOB_DISPLAY_ORDER_CYBORG 15
+#define JOB_DISPLAY_ORDER_CHIEF_ENGINEER 16
+#define JOB_DISPLAY_ORDER_STATION_ENGINEER 17
+#define JOB_DISPLAY_ORDER_ATMOSPHERIC_TECHNICIAN 18
+#define JOB_DISPLAY_ORDER_QUARTERMASTER 19
+#define JOB_DISPLAY_ORDER_CARGO_TECHNICIAN 20
+#define JOB_DISPLAY_ORDER_SHAFT_MINER 21
+#define JOB_DISPLAY_ORDER_BITRUNNER 22
+#define JOB_DISPLAY_ORDER_CHIEF_MEDICAL_OFFICER 23
+#define JOB_DISPLAY_ORDER_MEDICAL_DOCTOR 24
+#define JOB_DISPLAY_ORDER_PARAMEDIC 25
+#define JOB_DISPLAY_ORDER_CHEMIST 26
+#define JOB_DISPLAY_ORDER_VIROLOGIST 27
+#define JOB_DISPLAY_ORDER_RESEARCH_DIRECTOR 28
+#define JOB_DISPLAY_ORDER_SCIENTIST 29
+#define JOB_DISPLAY_ORDER_ROBOTICIST 30
+#define JOB_DISPLAY_ORDER_GENETICIST 31
+#define JOB_DISPLAY_ORDER_HEAD_OF_SECURITY 32
+#define JOB_DISPLAY_ORDER_WARDEN 33
+#define JOB_DISPLAY_ORDER_BRIG_PHYSICIAN 34
+#define JOB_DISPLAY_ORDER_DETECTIVE 35
+#define JOB_DISPLAY_ORDER_SECURITY_OFFICER 36
+#define JOB_DISPLAY_ORDER_SECURITY_ASSISTANT 37 // monkestation edit: security assistants
+#define JOB_DISPLAY_ORDER_PRISONER 38
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define DEPARTMENT_UNASSIGNED "No Department"
 
@@ -184,6 +236,8 @@
 #define DEPARTMENT_ASSISTANT "Assistant"
 #define DEPARTMENT_BITFLAG_CAPTAIN (1<<9)
 #define DEPARTMENT_CAPTAIN "Captain"
+#define DEPARTMENT_BITFLAG_SPOOKTOBER (1<<10)
+#define DEPARTMENT_SPOOKTOBER "Spooktober"
 
 DEFINE_BITFIELD(departments_bitflags, list(
 	"SECURITY" = DEPARTMENT_BITFLAG_SECURITY,
@@ -217,6 +271,7 @@ DEFINE_BITFIELD(departments_bitflags, list(
 #define JOB_ASSIGN_QUIRKS (1<<7)
 /// Whether this job can be an intern.
 #define JOB_CAN_BE_INTERN (1<<8)
+<<<<<<< HEAD
 /// This job cannot have more slots opened by the Head of Personnel (but admins or other random events can still do this).
 #define JOB_CANNOT_OPEN_SLOTS (1<<9)
 /// This job will not display on the job menu when there are no slots available, instead of appearing greyed out
@@ -248,6 +303,10 @@ DEFINE_BITFIELD(job_flags, list(
 #define HEAD_OF_STAFF_JOB_FLAGS (JOB_BOLD_SELECT_TEXT|JOB_CANNOT_OPEN_SLOTS|JOB_HEAD_OF_STAFF)
 /// Combination flag for jobs which are enabled by station traits.
 #define STATION_TRAIT_JOB_FLAGS (JOB_CANNOT_OPEN_SLOTS|JOB_HIDE_WHEN_EMPTY|JOB_LATEJOIN_ONLY&~JOB_REOPEN_ON_ROUNDSTART_LOSS)
+=======
+/// Whether this job is enabled/disabled by the spooktober config
+#define JOB_SPOOKTOBER (1<<9)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define FACTION_NONE "None"
 #define FACTION_STATION "Station"

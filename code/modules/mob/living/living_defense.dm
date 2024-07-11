@@ -144,19 +144,10 @@
 		else
 				return 0
 
+///LEGACY HELPER
 /mob/living/proc/set_combat_mode(new_mode, silent = TRUE)
-	if(combat_mode == new_mode)
-		return
-	. = combat_mode
-	combat_mode = new_mode
-	if(hud_used?.action_intent)
-		hud_used.action_intent.update_appearance()
-	if(silent || !(client?.prefs.read_preference(/datum/preference/toggle/sound_combatmode)))
-		return
-	if(combat_mode)
-		SEND_SOUND(src, sound('sound/misc/ui_togglecombat.ogg', volume = 25)) //Sound from interbay!
-	else
-		SEND_SOUND(src, sound('sound/misc/ui_toggleoffcombat.ogg', volume = 25)) //Slightly modified version of the above
+	if(!client?.imode.set_combat_mode(new_mode, silent))
+		istate = ISTATE_HARM|ISTATE_BLOCKING
 
 /mob/living/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum)
 	if(!isitem(AM))
@@ -343,7 +334,17 @@
 			)
 			to_chat(user, span_notice("You [user.friendly_verb_simple] [src]!"))
 		return FALSE
+<<<<<<< HEAD
 
+=======
+	if(user.advanced_simple)
+		if((user.istate & ISTATE_SECONDARY))
+			if (user != src && iscarbon(src))
+				user.disarm(src)
+				return TRUE
+		if (!(user.istate & ISTATE_HARM))
+			return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("You don't want to hurt anyone!"))
 		return FALSE
@@ -390,20 +391,48 @@
 		return TRUE
 
 	for(var/datum/surgery/operations as anything in surgeries)
+<<<<<<< HEAD
 		if(user.combat_mode)
+=======
+		if(user.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			break
 		if(IS_IN_INVALID_SURGICAL_POSITION(src, operations))
 			continue
 		if(operations.next_step(user, modifiers))
 			return TRUE
 
+<<<<<<< HEAD
+	return FALSE
+=======
+	var/martial_result = user.apply_martial_art(src, modifiers)
+	if (martial_result != MARTIAL_ATTACK_INVALID)
+		return martial_result
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
 	return FALSE
 
 /mob/living/attack_paw(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		user.disarm(src)
 		return TRUE
 	if (!user.combat_mode)
+=======
+	if(isturf(loc) && istype(loc.loc, /area/misc/start))
+		to_chat(user, "No attacking people at spawn, you jackass.")
+		return FALSE
+
+	var/martial_result = user.apply_martial_art(src, modifiers)
+	if (martial_result != MARTIAL_ATTACK_INVALID)
+		return martial_result
+
+	if((user.istate & ISTATE_SECONDARY))
+		if (user != src && iscarbon(src))
+			user.disarm(src)
+			return TRUE
+	if (!(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("You don't want to hurt anyone!"))
@@ -434,7 +463,7 @@
 	return FALSE
 
 /mob/living/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)
-	if(L.combat_mode)
+	if((L.istate & ISTATE_HARM))
 		if(HAS_TRAIT(L, TRAIT_PACIFISM))
 			to_chat(L, span_warning("You don't want to hurt anyone!"))
 			return FALSE
@@ -463,6 +492,7 @@
 
 /mob/living/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_MOB_ATTACK_ALIEN, user, modifiers)
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(check_block(user, 0, "[user]'s tackle", MELEE_ATTACK, 0, BRUTE))
 			return FALSE
@@ -470,6 +500,12 @@
 		return TRUE
 
 	if(user.combat_mode)
+=======
+	if((user.istate & ISTATE_SECONDARY))
+		user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		return TRUE
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(HAS_TRAIT(user, TRAIT_PACIFISM))
 			to_chat(user, span_warning("You don't want to hurt anyone!"))
 			return FALSE
@@ -513,7 +549,7 @@
 	if(!(flags & SHOCK_ILLUSION))
 		adjustFireLoss(shock_damage)
 	else
-		adjustStaminaLoss(shock_damage)
+		stamina.adjust(-shock_damage)
 	if(!(flags & SHOCK_SUPPRESS_MESSAGE))
 		visible_message(
 			span_danger("[src] was shocked by \the [source]!"), \

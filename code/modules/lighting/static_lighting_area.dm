@@ -26,6 +26,7 @@ GLOBAL_LIST_INIT_TYPED(starlight_objects, /obj, list(starlight_object(0)))
 /// time updating them
 GLOBAL_LIST_INIT_TYPED(starlight_overlays, /obj, list(starlight_overlay(0)))
 
+<<<<<<< HEAD
 /proc/starlight_overlay(offset)
 	var/mutable_appearance/glow = new /mutable_appearance()
 	SET_PLANE_W_SCALAR(glow, LIGHTING_PLANE, offset)
@@ -33,6 +34,16 @@ GLOBAL_LIST_INIT_TYPED(starlight_overlays, /obj, list(starlight_overlay(0)))
 	glow.blend_mode = BLEND_ADD
 	glow.render_source = SPACE_OVERLAY_RENDER_TARGET(offset)
 	return glow
+=======
+/proc/create_fullbright_overlay(offset, color)
+	var/mutable_appearance/lighting_effect = mutable_appearance('icons/effects/alphacolors.dmi', "white")
+	SET_PLANE_W_SCALAR(lighting_effect, LIGHTING_PLANE, offset)
+	lighting_effect.layer = LIGHTING_PRIMARY_LAYER
+	lighting_effect.blend_mode = BLEND_ADD
+	if(color)
+		lighting_effect.color = color
+	return lighting_effect
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /area
 	///Whether this area allows static lighting and thus loads the lighting objects

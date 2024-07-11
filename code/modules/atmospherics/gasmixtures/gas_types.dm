@@ -215,11 +215,12 @@
 	specific_heat = 600
 	name = "Freon"
 	dangerous = TRUE
+	purchaseable = TRUE //monkestation edit
 	gas_overlay = "freon"
 	moles_visible = MOLES_GAS_VISIBLE *30
 	fusion_power = -5
 	rarity = 10
-	base_value = 5
+	base_value = 1.5 //MONKESTATION EDIT 5 ==> 1.5
 	desc = "A coolant gas. Mainly used for it's endothermic reaction with oxygen."
 	primary_color = "#afeeee"
 
@@ -228,6 +229,7 @@
 	specific_heat = 15
 	name = "Hydrogen"
 	dangerous = TRUE
+	purchaseable = TRUE //monkestation edit
 	fusion_power = 2
 	rarity = 600
 	base_value = 1
@@ -326,4 +328,7 @@
 /obj/effect/overlay/gas/Initialize(mapload)
 	. = ..()
 	SET_PLANE_W_SCALAR(src, initial(plane), plane_offset)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

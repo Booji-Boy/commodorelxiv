@@ -1,7 +1,7 @@
 /datum/round_event_control/morph
 	name = "Spawn Morph"
 	typepath = /datum/round_event/ghost_role/morph
-	weight = 0
+	weight = 5 //monke edit: 0 to 5
 	max_occurrences = 1
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Spawns a hungry shapeshifting blobby creature."
@@ -13,8 +13,13 @@
 	role_name = "morphling"
 
 /datum/round_event/ghost_role/morph/spawn_role()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_ALIEN, role = ROLE_ALIEN, alert_pic = /mob/living/basic/morph, role_name_text = "morph", amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_MORPH, role = ROLE_MORPH, pic_source = /mob/living/basic/morph, role_name_text = "morph")
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/datum/mind/player_mind = new /datum/mind(chosen_one.key)
 	player_mind.active = TRUE

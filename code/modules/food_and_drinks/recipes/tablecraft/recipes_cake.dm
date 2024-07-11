@@ -257,6 +257,7 @@
 	)
 	result = /obj/item/food/cake/wedding
 	category = CAT_CAKE
+<<<<<<< HEAD
 
 /datum/crafting_recipe/food/pineapple_cream_cake
 	name = "Pineapple cream cake"
@@ -267,3 +268,5 @@
 	)
 	result = /obj/item/food/cake/pineapple_cream_cake
 	category = CAT_CAKE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

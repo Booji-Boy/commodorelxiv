@@ -10,6 +10,7 @@ export const createHighlightSetting = (obj?: Record<string, any>) => ({
   highlightWholeMessage: true,
   matchWord: false,
   matchCase: false,
+  enabled: true,
   ...obj,
 });
 

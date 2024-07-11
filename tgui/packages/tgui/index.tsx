@@ -25,16 +25,35 @@ import './styles/themes/retro.scss';
 import './styles/themes/syndicate.scss';
 import './styles/themes/wizard.scss';
 import './styles/themes/admin.scss';
+// MONKESTATION ADDITION START
+import './styles/themes/clockwork.scss';
+// MONKESTATION ADDITION END
 
+<<<<<<< HEAD
+=======
+import './styles/themes/chicken_book.scss';
+import './styles/themes/generic-yellow.scss';
+import './styles/themes/generic.scss';
+
+import { configureStore } from './store';
+
+import { captureExternalLinks } from './links';
+import { createRenderer } from './renderer';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { perf } from 'common/perf';
 import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
 
 import { setGlobalStore } from './backend';
 import { setupGlobalEvents } from './events';
 import { setupHotKeys } from './hotkeys';
+<<<<<<< HEAD
 import { captureExternalLinks } from './links';
 import { createRenderer } from './renderer';
 import { configureStore } from './store';
+=======
+import { setupHotReloading } from 'tgui-dev-server/link/client.cjs';
+import { setGlobalStore } from './backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 perf.mark('inception', window.performance?.timing?.navigationStart);
 perf.mark('init');

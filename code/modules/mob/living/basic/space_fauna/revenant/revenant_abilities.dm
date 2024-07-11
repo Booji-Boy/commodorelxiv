@@ -67,6 +67,11 @@
 /datum/action/cooldown/spell/aoe/revenant/get_things_to_cast_on(atom/center)
 	return RANGE_TURFS(aoe_radius, center)
 
+<<<<<<< HEAD
+=======
+	return things
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/spell/aoe/revenant/before_cast(mob/living/basic/revenant/cast_on)
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
@@ -264,7 +269,7 @@
 					if(blight.stage < 5)
 						blight.stage++
 				if(!blightfound)
-					H.ForceContractDisease(new /datum/disease/revblight(), FALSE, TRUE)
+					//H.ForceContractDisease(new /datum/disease/revblight(), FALSE, TRUE)
 					to_chat(H, span_revenminor("You feel [pick("suddenly sick", "a surge of nausea", "like your skin is <i>wrong</i>")]."))
 			else
 				if(mob.reagents)
@@ -279,11 +284,14 @@
 		shroom.add_atom_colour("#823abb", TEMPORARY_COLOUR_PRIORITY)
 		new /obj/effect/temp_visual/revenant(shroom.loc)
 		QDEL_IN(shroom, 10)
-	for(var/obj/machinery/hydroponics/tray in victim)
+	for(var/atom/movable/tray in victim)
+		if(!tray.GetComponent(/datum/component/plant_growing))
+			continue
+
 		new /obj/effect/temp_visual/revenant(tray.loc)
-		tray.set_pestlevel(rand(8, 10))
-		tray.set_weedlevel(rand(8, 10))
-		tray.set_toxic(rand(45, 55))
+		SEND_SIGNAL(tray, COMSIG_GROWING_ADJUST_TOXIN, rand(45, 55))
+		SEND_SIGNAL(tray, COMSIG_GROWING_ADJUST_PEST, rand(8, 10))
+		SEND_SIGNAL(tray, COMSIG_GROWING_ADJUST_WEED, rand(8, 10))
 
 /datum/action/cooldown/spell/aoe/revenant/haunt_object
 	name = "Haunt Object"

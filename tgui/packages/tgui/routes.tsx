@@ -4,10 +4,18 @@
  * @license MIT
  */
 
+<<<<<<< HEAD
 import { useBackend } from './backend';
 import { useDebug } from './debug';
 import { LoadingScreen } from './interfaces/common/LoadingToolbox';
 import { Window } from './layouts';
+=======
+import { Store } from 'common/redux';
+import { Window } from './layouts';
+import { selectBackend } from './backend';
+import { selectDebug } from './debug/selectors';
+import { LoadingScreen } from './interfaces/common/LoadingToolbox';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const requireInterface = require.context('./interfaces');
 
@@ -73,8 +81,15 @@ export const getRoutedComponent = () => {
   const interfacePathBuilders = [
     (name: string) => `./${name}.tsx`,
     (name: string) => `./${name}.jsx`,
+<<<<<<< HEAD
     (name: string) => `./${name}/index.tsx`,
     (name: string) => `./${name}/index.jsx`,
+=======
+    (name: string) => `./${name}.js`,
+    (name: string) => `./${name}/index.tsx`,
+    (name: string) => `./${name}/index.jsx`,
+    (name: string) => `./${name}/index.js`,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ];
   let esModule;
   while (!esModule && interfacePathBuilders.length > 0) {

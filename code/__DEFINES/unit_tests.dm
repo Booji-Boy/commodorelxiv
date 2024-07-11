@@ -34,11 +34,20 @@
 	do { \
 		if(mapload) { \
 			var/turf/spawn_turf = get_turf(src); \
+<<<<<<< HEAD
 			if(is_station_level(spawn_turf?.z || 0)) { \
 				var/datum/required_item/existing_value = GLOB.required_map_items[type]; \
 				if(isnull(existing_value)) { \
 					var/datum/required_item/new_value = new(type, min, max); \
 					GLOB.required_map_items[type] = new_value; \
+=======
+			var/fixed_type = trim_directional_helper_suffix(type); \
+			if(is_station_level(spawn_turf?.z || 0)) { \
+				var/datum/required_item/existing_value = GLOB.required_map_items[fixed_type]; \
+				if(isnull(existing_value)) { \
+					var/datum/required_item/new_value = new(fixed_type, min, max); \
+					GLOB.required_map_items[fixed_type] = new_value; \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				} else { \
 					existing_value.total_amount += 1; \
 				}; \

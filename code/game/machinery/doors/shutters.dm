@@ -5,11 +5,16 @@
 	icon = 'icons/obj/doors/shutters.dmi'
 	layer = SHUTTER_LAYER
 	closingLayer = SHUTTER_LAYER
-	damage_deflection = 20
+	damage_deflection = 24
 	armor_type = /datum/armor/poddoor_shutters
-	max_integrity = 100
+	max_integrity = 200
 	recipe_type = /datum/crafting_recipe/shutters
+<<<<<<< HEAD
 	animation_sound = 'sound/machines/shutter.ogg'
+=======
+	open_sound = 'monkestation/sound/machines/poddoors/shutters_open.ogg'
+	close_sound = 'monkestation/sound/machines/poddoors/shutters_close.ogg'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/door/poddoor/shutters/preopen
 	icon_state = "open"

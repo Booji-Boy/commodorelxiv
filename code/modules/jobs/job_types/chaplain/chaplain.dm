@@ -68,6 +68,7 @@
 	var/new_deity = player_client?.prefs?.read_preference(/datum/preference/name/deity) || DEFAULT_DEITY
 	var/new_bible = player_client?.prefs?.read_preference(/datum/preference/name/bible) || DEFAULT_BIBLE
 
+<<<<<<< HEAD:code/modules/jobs/job_types/chaplain/chaplain.dm
 	holy_bible.deity_name = new_deity
 	switch(LOWER_TEXT(new_religion))
 		if("homosexuality", "gay", "penis", "ass", "cock", "cocks")
@@ -78,11 +79,19 @@
 				else
 					holy_bible.deity_name = pick("Gay Space Jesus", "Gandalf", "Dumbledore")
 			human_spawned.adjustOrganLoss(ORGAN_SLOT_BRAIN, 100) // starts off brain damaged as fuck
+=======
+	B.deity_name = new_deity
+
+	switch(lowertext(new_religion))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/jobs/job_types/chaplain.dm
 		if("lol", "wtf", "poo", "badmin", "shitmin", "deadmin", "meme", "memes")
-			new_bible = pick("Woody's Got Wood: The Aftermath", "Sweet Bro and Hella Jeff: Expanded Edition","F.A.T.A.L. Rulebook")
+			new_bible = pick("Sweet Bro and Hella Jeff: Expanded Edition","F.A.T.A.L. Rulebook")
 			switch(new_bible)
+<<<<<<< HEAD:code/modules/jobs/job_types/chaplain/chaplain.dm
 				if("Woody's Got Wood: The Aftermath")
 					holy_bible.deity_name = pick("Woody", "Andy", "Cherry Flavored Lube")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/jobs/job_types/chaplain.dm
 				if("Sweet Bro and Hella Jeff: Expanded Edition")
 					holy_bible.deity_name = pick("Sweet Bro", "Hella Jeff", "Stairs", "AH")
 				if("F.A.T.A.L. Rulebook")

@@ -44,8 +44,13 @@
 	/// List of unit tests that are skipped when running this map
 	var/list/skipped_tests
 
+<<<<<<< HEAD
 	/// Boolean that tells SSmapping to load all away missions in the codebase.
 	var/load_all_away_missions = FALSE
+=======
+	//List of particle_weather types for this map
+	var/particle_weathers = list() //Monkestation addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Proc that simply loads the default map config, which should always be functional.
@@ -162,6 +167,14 @@
 	else if (!isnull(traits))
 		log_world("map_config traits is not a list!")
 		return
+
+	//monkestation edit start
+	if ("particle_weathers" in json)
+		if(!islist(json["particle_weathers"]))
+			log_world("map_config \"particle_weathers\" field is missing or invalid!")
+			return
+		particle_weathers = json["particle_weathers"]
+	//monkestation edit end
 
 	var/temp = json["space_ruin_levels"]
 	if (isnum(temp))

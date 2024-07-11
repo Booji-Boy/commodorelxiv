@@ -85,7 +85,7 @@
 	specialised = TRUE
 	style = STYLE_SYNDICATE
 	bluespace = TRUE
-	explosionSize = list(0,0,1,2)
+	explosionSize = list(0,0,0,0) //monkestation edit: replaced list(0,0,1,2)
 	delays = list(POD_TRANSIT = 25, POD_FALLING = 4, POD_OPENING = 30, POD_LEAVING = 30)
 	reversing = TRUE
 	stay_after_drop = TRUE
@@ -377,7 +377,11 @@
 	if (openingSound)
 		playsound(get_turf(holder), openingSound, soundVolume, FALSE, FALSE) //Special admin sound to play
 	for (var/turf_type in turfs_in_cargo)
+<<<<<<< HEAD
 		turf_underneath.place_on_top(turf_type)
+=======
+		turf_underneath.PlaceOnTop(turf_type)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for (var/cargo in holder.contents)
 		var/atom/movable/movable_cargo = cargo
 		movable_cargo.forceMove(turf_underneath)
@@ -657,7 +661,7 @@
 	icon = 'icons/obj/supplypods_32x32.dmi'
 	icon_state = "LZ"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
-	light_range = 2
+	light_outer_range = 2
 	anchored = TRUE
 	alpha = 0
 	var/obj/structure/closet/supplypod/pod //The supplyPod that will be landing ontop of this pod_landingzone

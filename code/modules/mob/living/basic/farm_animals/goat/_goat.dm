@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+=======
+/obj/item/food/meat/slab/grassfed
+	name = "eco meat"
+	desc = "A slab of 100% grass fed award-winning farm meat."
+	food_reagents = list(
+		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/consumable/nutriment/vitamin = 1,
+	) // Marble
+
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// The Greatest (animal) Of All Time. Cud chewing, shin-kicking, kitchen-dwelling nuisance.
 /mob/living/basic/goat
 	name = "goat"
@@ -56,7 +68,11 @@
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
 	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_move))
 
+<<<<<<< HEAD
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(edibles))
+=======
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, edibles)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Called when we attack something in order to piece together the intent of the AI/user and provide desired behavior. The element might be okay here but I'd rather the fluff.
 /// Goats are really good at beating up plants by taking bites out of them, but we use the default attack for everything else
@@ -100,7 +116,11 @@
 /// Handles automagically eating a plant when we move into a turf that has one.
 /mob/living/basic/goat/proc/on_move(datum/source, atom/entering_loc)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(!isturf(entering_loc) || stat == DEAD)
+=======
+	if(!isturf(entering_loc))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/list/edible_plants = list()
@@ -110,10 +130,15 @@
 
 	INVOKE_ASYNC(src, PROC_REF(eat_plant), edible_plants)
 
+<<<<<<< HEAD
 /// When invoked, adds an udder when applicable. Male goats do not have udders.
 /mob/living/basic/goat/proc/add_udder()
 	if(gender == MALE)
 		return
+=======
+/// When invoked, adds an udder. Overridden on subtypes
+/mob/living/basic/goat/proc/add_udder()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(/datum/component/udder)
 
 /// Proc that handles dealing with the various types of plants we might eat. Assumes that a valid list of type(s) will be passed in.

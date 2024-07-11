@@ -92,6 +92,27 @@
 	/// When ordered in a restaurant, what custom order do we create?
 	var/restaurant_order = /datum/custom_order/reagent/drink
 
+	///Whether it will evaporate if left untouched on a liquids simulated puddle
+	var/evaporates = TRUE
+	///How much fire power does the liquid have, for burning on simulated liquids. Not enough fire power/unit of entire mixture may result in no fire
+	var/liquid_fire_power = 0
+	///How fast does the liquid burn on simulated turfs, if it does
+	var/liquid_fire_burnrate = 0
+	///Whether a fire from this requires oxygen in the atmosphere
+	var/fire_needs_oxygen = TRUE
+	///The opacity of the chems used to determine the alpha of liquid turfs
+	var/opacity = 175
+	///The rate of evaporation in units per call
+	var/evaporation_rate = 1
+	/// do we have a turf exposure (used to prevent liquids doing un-needed processes)
+	var/turf_exposure = FALSE
+	/// are we slippery?
+	var/slippery = TRUE
+	/// A list of traits to apply while the reagent is being metabolized.
+	var/list/metabolized_traits
+	/// A list of traits to apply while the reagent is in a mob.
+	var/list/added_traits
+
 /datum/reagent/New()
 	SHOULD_CALL_PARENT(TRUE)
 	. = ..()
@@ -138,6 +159,9 @@
 
 	return SEND_SIGNAL(src, COMSIG_REAGENT_EXPOSE_TURF, exposed_turf, reac_volume)
 
+/datum/reagent/proc/evaporate(turf/exposed_turf, reac_volume)
+	return
+
 ///Called whenever a reagent is on fire, or is in a holder that is on fire. (WIP)
 /datum/reagent/proc/burn(datum/reagents/holder)
 	return
@@ -181,6 +205,10 @@
 /datum/reagent/proc/on_burn_wound_processing(datum/wound/burn/flesh/burn_wound)
 	return
 
+/// Called in burns.dm *if* the reagent has the REAGENT_AFFECTS_WOUNDS process flag
+/datum/reagent/proc/on_burn_wound_processing(datum/wound/burn/flesh/burn_wound)
+	return
+
 /*
 Used to run functions before a reagent is transferred. Returning TRUE will block the transfer attempt.
 Primarily used in reagents/reaction_agents
@@ -193,6 +221,7 @@ Primarily used in reagents/reaction_agents
 	return
 
 /// Called when this reagent is first added to a mob
+<<<<<<< HEAD
 /datum/reagent/proc/on_mob_add(mob/living/affected_mob, amount)
 	overdose_threshold /= max(normalise_creation_purity(), 1) //Maybe??? Seems like it would help pure chems be even better but, if I normalised this to 1, then everything would take a 25% reduction
 	if(added_traits)
@@ -213,6 +242,32 @@ Primarily used in reagents/reaction_agents
 /datum/reagent/proc/on_mob_end_metabolize(mob/living/affected_mob)
 	SHOULD_CALL_PARENT(TRUE)
 	REMOVE_TRAITS_IN(affected_mob, "metabolize:[type]")
+=======
+/datum/reagent/proc/on_mob_add(mob/living/L, amount)
+	SHOULD_CALL_PARENT(TRUE)
+	// MONKESTATION REMOVAL START - Purity is disabled and we shouldn't change the overdose thresholds for things behind people's backs.
+	// overdose_threshold /= max(normalise_creation_purity(), 1) //Maybe??? Seems like it would help pure chems be even better but, if I normalised this to 1, then everything would take a 25% reduction
+	// MONKESTATION REMOVAL END
+	if(added_traits)
+		L.add_traits(added_traits, "added:[type]")
+
+/// Called when this reagent is removed while inside a mob
+/datum/reagent/proc/on_mob_delete(mob/living/L)
+	SHOULD_CALL_PARENT(TRUE)
+	REMOVE_TRAITS_IN(L, "added:[type]")
+	L.clear_mood_event("[type]_overdose")
+
+/// Called when this reagent first starts being metabolized by a liver
+/datum/reagent/proc/on_mob_metabolize(mob/living/L)
+	SHOULD_CALL_PARENT(TRUE)
+	if(metabolized_traits)
+		L.add_traits(metabolized_traits, "metabolized:[type]")
+
+/// Called when this reagent stops being metabolized by a liver
+/datum/reagent/proc/on_mob_end_metabolize(mob/living/L)
+	SHOULD_CALL_PARENT(TRUE)
+	REMOVE_TRAITS_IN(L, "metabolized:[type]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Called when a reagent is inside of a mob when they are dead if the reagent has the REAGENT_DEAD_PROCESS flag
@@ -240,13 +295,29 @@ Primarily used in reagents/reaction_agents
 	affected_mob.add_mood_event("[type]_overdose", /datum/mood_event/overdose, name)
 	return
 
+/datum/reagent/proc/generate_infusion_values(datum/reagents/chems)
+	if(!chems)
+		return
+
 /**
+<<<<<<< HEAD
  * Called when this chemical is processed in a hydroponics tray.
  *
  * Can affect plant's health, stats, or cause the plant to react in certain ways.
  */
 /datum/reagent/proc/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	return
+=======
+ * Specifically made for mutation reagent reactions
+ */
+/datum/reagent/proc/plant_mutation_reagent_apply(datum/reagents/chems, obj/machinery/hydroponics/mytray, mob/user, mr = 5, hm = 2)
+	if(chems.has_reagent(src.type, mr))
+		mytray.mutation_roll(user)
+	else if(chems.has_reagent(src.type, hm))
+		mytray.hardmutate()
+	else
+		mytray.mutate()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Should return a associative list where keys are taste descriptions and values are strength ratios
 /datum/reagent/proc/get_taste_description(mob/living/taster)
@@ -314,3 +385,6 @@ Primarily used in reagents/reaction_agents
 			reagent_strings += "[capitalize_names ? capitalize(reagent.name) : reagent.name][names_only ? null : ", [reagent.volume]"]"
 
 	return reagent_strings.Join(join_text)
+
+/datum/reagent/proc/feed_interaction(mob/living/basic/chicken/target, volume, mob/user)
+	return

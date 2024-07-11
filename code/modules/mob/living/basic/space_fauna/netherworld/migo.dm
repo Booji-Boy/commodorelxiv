@@ -77,6 +77,7 @@
 	. = Move(get_step(loc,pick(cdir, ccdir)))
 	if(!.)//Can't dodge there so we just carry on
 		. = Move(moving_to, move_direction)
+<<<<<<< HEAD
 
 /// The special hatsune miku themed mi-go.
 /mob/living/basic/migo/hatsune
@@ -96,3 +97,5 @@
 	. = ..()
 	var/static/list/death_loot = list(/obj/item/instrument/piano_synth)
 	AddElement(/datum/element/death_drops, death_loot)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

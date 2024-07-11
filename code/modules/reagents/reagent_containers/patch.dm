@@ -45,12 +45,15 @@
 	list_reagents = list(/datum/reagent/medicine/c2/synthflesh = 20)
 	icon_state = "bandaid_both"
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/pill/patch/ondansetron
 	name = "ondansetron patch"
 	desc = "Alleviates nausea. May cause drowsiness."
 	list_reagents = list(/datum/reagent/medicine/ondansetron = 10)
 	icon_state = "bandaid_toxin"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Patch styles for chem master
 
 /obj/item/reagent_containers/pill/patch/style

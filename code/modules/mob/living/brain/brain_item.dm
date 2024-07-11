@@ -158,11 +158,18 @@
 		// Hack, fucked dna needs to follow the brain to prevent memes, so we need to copy over the trait sources and shit
 		for(var/source in GET_TRAIT_SOURCES(L, TRAIT_BADDNA))
 			ADD_TRAIT(brainmob, TRAIT_BADDNA, source)
+<<<<<<< HEAD
 
 	if(L.mind && L.mind.current && !decoy_override)
 		L.mind.transfer_to(brainmob)
 		to_chat(brainmob, span_notice("You feel slightly disoriented. That's normal when you're just a brain."))
 
+=======
+	if(L.mind && L.mind.current)
+		L.mind.transfer_to(brainmob)
+	to_chat(brainmob, span_notice("You feel slightly disoriented. That's normal when you're just a brain."))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/organ/internal/brain/attackby(obj/item/item, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)
 
@@ -202,14 +209,23 @@
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/meatslap.ogg', 50)
 		set_organ_damage(maxHealth) //fails the brain as the brain was attacked, they're pretty fragile.
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		visible_message(span_danger("[user] hits [src] with [item]!"))
 		to_chat(user, span_danger("You hit [src] with [item]!"))
 
 /obj/item/organ/internal/brain/proc/check_for_repair(obj/item/item, mob/user)
+<<<<<<< HEAD
 	if(damage && item.is_drainable() && item.reagents.has_reagent(/datum/reagent/medicine/mannitol) && (organ_flags & ORGAN_ORGANIC)) //attempt to heal the brain
 		if(brainmob?.health <= HEALTH_THRESHOLD_DEAD) //if the brain is fucked anyway, do nothing
 			to_chat(user, span_warning("[src] is far too damaged, there's nothing else we can do for it!"))
 			return TRUE
+=======
+	if(damage && item.is_drainable() && item.reagents.has_reagent(/datum/reagent/medicine/mannitol) && (status == ORGAN_ORGANIC)) //attempt to heal the brain
+		// MONKESTATION NOTE: There was a check for the brain being completely dead here. But that's like, the only case when you'd want to do this. Pretty sure it isn't on tg, so I'm leaving this here for documentation.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		user.visible_message(span_notice("[user] starts to slowly pour the contents of [item] onto [src]."), span_notice("You start to slowly pour the contents of [item] onto [src]."))
 		if(!do_after(user, 3 SECONDS, src))
@@ -221,6 +237,10 @@
 		var/healto = max(0, damage - amount * 2)
 		item.reagents.remove_all(ROUND_UP(item.reagents.total_volume / amount * (damage - healto) * 0.5)) //only removes however much solution is needed while also taking into account how much of the solution is mannitol
 		set_organ_damage(healto) //heals 2 damage per unit of mannitol, and by using "set_organ_damage", we clear the failing variable if that was up
+<<<<<<< HEAD
+=======
+		cure_all_traumas(TRAUMA_RESILIENCE_SURGERY) // MONKESTATION EDIT: if you go out of your way to do this, then you shouldn't have to do brain surgery
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	return FALSE
 
@@ -519,7 +539,7 @@
 		log_game("[key_name_and_tag(owner)] has gained the following brain trauma: [trauma.type]")
 	if(resilience)
 		actual_trauma.resilience = resilience
-	SSblackbox.record_feedback("tally", "traumas", 1, actual_trauma.type)
+	SSblackbox.record_feedback("tally", "traumas", 1, actual_trauma)
 	return actual_trauma
 
 /// Adds the passed trauma instance to our list of traumas and links it to our brain.

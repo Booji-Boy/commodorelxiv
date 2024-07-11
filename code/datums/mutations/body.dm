@@ -129,6 +129,7 @@
 /datum/mutation/human/dwarfism/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
+	//We're leaving the size traits permanent until someone wants to separate the mutation from customization aspects
 	REMOVE_TRAIT(owner, TRAIT_DWARF, GENETIC_MUTATION)
 	owner.visible_message(span_danger("[owner] suddenly grows!"), span_notice("Everything around you seems to shrink.."))
 
@@ -214,7 +215,7 @@
 //Tourettes causes you to randomly stand in place and shout.
 /datum/mutation/human/tourettes
 	name = "Tourette's Syndrome"
-	desc = "A chronic twitch that forces the user to scream bad words." //definitely needs rewriting
+	desc = "A chronic twitch that forces the user to scream nonsense." //definitely needs rewriting
 	quality = NEGATIVE
 	instability = 0
 	text_gain_indication = "<span class='danger'>You twitch.</span>"
@@ -226,7 +227,7 @@
 			if(1)
 				owner.emote("twitch")
 			if(2 to 3)
-				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "CUNT", "COCKSUCKER", "MOTHERFUCKER", "TITS")]", forced=name)
+				owner.say("[prob(50) ? ";" : ""][pick("SHIT", "PISS", "FUCK", "MROW", "ANIMES", "LIZZZARD", "HELP")]", forced=name)
 		var/x_offset_old = owner.pixel_x
 		var/y_offset_old = owner.pixel_y
 		var/x_offset = owner.pixel_x + rand(-2,2)
@@ -287,10 +288,17 @@
 	desc = "You permanently emit a light with a random color and intensity."
 	quality = POSITIVE
 	text_gain_indication = "<span class='notice'>Your skin begins to glow softly.</span>"
+<<<<<<< HEAD
 	instability = POSITIVE_INSTABILITY_MINI
 	power_coeff = 1
 	conflicts = list(/datum/mutation/human/glow/anti)
 	var/glow_power = 2
+=======
+	instability = 5
+	power_coeff = 1
+	conflicts = list(/datum/mutation/human/glow/anti)
+	var/glow_power = 2.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/glow_range = 2.5
 	var/glow_color
 	var/obj/effect/dummy/lighting_obj/moblight/glow
@@ -324,6 +332,10 @@
 	name = "Anti-Glow"
 	desc = "Your skin seems to attract and absorb nearby light creating 'darkness' around you."
 	text_gain_indication = "<span class='notice'>The light around you seems to disappear.</span>"
+<<<<<<< HEAD
+=======
+	glow = -1.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	conflicts = list(/datum/mutation/human/glow)
 	instability = POSITIVE_INSTABILITY_MINOR
 	locked = TRUE
@@ -469,6 +481,34 @@
 			owner.visible_message(span_warning("[owner]'s skin bubbles and pops."), span_userdanger("Your bubbling flesh pops! It burns!"))
 			playsound(owner,'sound/weapons/sear.ogg', 50, TRUE)
 
+<<<<<<< HEAD
+=======
+/datum/mutation/human/gigantism
+	name = "Gigantism"
+	desc = "The cells within the subject spread out to cover more area, making the subject appear larger."
+	quality = MINOR_NEGATIVE
+	difficulty = 12
+	conflicts = list(/datum/mutation/human/dwarfism)
+	locked = TRUE
+
+/datum/mutation/human/gigantism/on_acquiring(mob/living/carbon/human/owner)
+	if(..())
+		return
+	ADD_TRAIT(owner, TRAIT_GIANT, GENETIC_MUTATION)
+	owner.update_transform(1.25)
+	owner.visible_message(span_danger("[owner] suddenly grows!"), span_notice("Everything around you seems to shrink.."))
+
+/datum/mutation/human/gigantism/on_losing(mob/living/carbon/human/owner)
+	if(..())
+		return
+	//We're leaving the size traits permanent until someone wants to separate the mutation from customization aspects
+	//REMOVE_TRAIT(owner, TRAIT_GIANT, GENETIC_MUTATION)
+	//handled in init_signals.dm
+	//REMOVE_TRAIT(owner, TRAIT_GIANT, GENETIC_MUTATION)
+	owner.update_transform(0.8)
+	owner.visible_message(span_danger("[owner] suddenly shrinks!"), span_notice("Everything around you seems to grow.."))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/mutation/human/spastic
 	name = "Spastic"
 	desc = "Subject suffers from muscle spasms."

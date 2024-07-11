@@ -37,8 +37,18 @@ type FishCatalogData = {
 export const FishCatalog = (props) => {
   const { act, data } = useBackend<FishCatalogData>();
   const { fish_info, sponsored_by } = data;
+<<<<<<< HEAD
   const fish_by_name = sortBy(fish_info || [], (fish: FishInfo) => fish.name);
   const [currentFish, setCurrentFish] = useState<FishInfo | null>(null);
+=======
+  const fish_by_name = flow([sortBy((fish: FishInfo) => fish.name)])(
+    fish_info || [],
+  );
+  const [currentFish, setCurrentFish] = useLocalState<FishInfo | null>(
+    'currentFish',
+    null,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window width={500} height={300}>
       <Window.Content>

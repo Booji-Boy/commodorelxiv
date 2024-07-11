@@ -196,7 +196,7 @@
 	name = "Cybernetic Revolution"
 	trait_type = STATION_TRAIT_POSITIVE
 	show_in_report = TRUE
-	weight = 1
+	weight = 2 // monkestation edit
 	report_message = "The new trends in cybernetics have come to the station! Everyone has some form of cybernetic implant."
 	trait_to_give = STATION_TRAIT_CYBERNETIC_REVOLUTION
 	/// List of all job types with the cybernetics they should receive.
@@ -217,7 +217,7 @@
 		/datum/job/coroner = /obj/item/organ/internal/tongue/bone, //hes got a bone to pick with you
 		/datum/job/curator = /obj/item/organ/internal/eyes/robotic/glow,
 		/datum/job/detective = /obj/item/organ/internal/lungs/cybernetic/tier3,
-		/datum/job/doctor = /obj/item/organ/internal/cyberimp/arm/surgery,
+		/datum/job/doctor = /obj/item/organ/internal/cyberimp/arm/item_set/surgery,
 		/datum/job/geneticist = /obj/item/organ/internal/fly, //we don't care about implants, we have cancer.
 		/datum/job/head_of_personnel = /obj/item/organ/internal/eyes/robotic,
 		/datum/job/head_of_security = /obj/item/organ/internal/eyes/robotic/thermals,
@@ -232,9 +232,14 @@
 		/datum/job/research_director = /obj/item/organ/internal/cyberimp/bci,
 		/datum/job/roboticist = /obj/item/organ/internal/cyberimp/eyes/hud/diagnostic,
 		/datum/job/scientist = /obj/item/organ/internal/ears/cybernetic,
-		/datum/job/security_officer = /obj/item/organ/internal/cyberimp/arm/flash,
+		/datum/job/security_officer = /obj/item/organ/internal/cyberimp/arm/item_set/flash,
 		/datum/job/shaft_miner = /obj/item/organ/internal/monster_core/rush_gland,
+<<<<<<< HEAD
 		/datum/job/station_engineer = /obj/item/organ/internal/cyberimp/arm/toolset,
+=======
+		/datum/job/station_engineer = /obj/item/organ/internal/cyberimp/arm/item_set/toolset,
+		/datum/job/virologist = /obj/item/organ/internal/lungs/cybernetic/tier2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/job/warden = /obj/item/organ/internal/cyberimp/eyes/hud/security,
 	)
 
@@ -270,14 +275,23 @@
 	name = "Advanced Medbots"
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
+<<<<<<< HEAD
 	cost = STATION_TRAIT_COST_LOW
 	show_in_report = TRUE
 	report_message = "Your station's medibots have received a hardware upgrade, enabling expanded healing capabilities."
+=======
+	show_in_report = TRUE
+	report_message = "Your station's medibots have recieved a hardware upgrade, enabling expanded healing capabilities."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	trait_to_give = STATION_TRAIT_MEDBOT_MANIA
 
 /datum/station_trait/random_event_weight_modifier/shuttle_loans
 	name = "Loaner Shuttle"
+<<<<<<< HEAD
 	report_message = "Due to an uptick in pirate attacks around your sector, there are few supply vessels in nearby space willing to assist with special requests. Expect to receive more shuttle loan opportunities, with slightly higher payouts."
+=======
+	report_message = "Due to an uptick in pirate attacks around your sector, there are few supply vessels in nearby space willing to assist with special requests. Expect to recieve more shuttle loan opportunities, with slightly higher payouts."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 4
 	event_control_path = /datum/round_event_control/shuttle_loan
@@ -294,6 +308,7 @@
 	weight_multiplier = 3
 	max_occurrences_modifier = 10 //lotta cows
 
+<<<<<<< HEAD
 /datum/station_trait/random_event_weight_modifier/wise_cows/get_pulsar_message()
 	var/advisory_string = "Advisory Level: <b>Cow Planet</b></center><BR>" //We're gonna go fast and we're gonna go far.
 	advisory_string += "Your sector's advisory level is Cow Planet. We don't really know what this one means -- the model we use to create these threat reports hasn't produced this result before. Watch out for cows, I guess? Good luck!"
@@ -308,6 +323,8 @@
 	trait_flags = STATION_TRAIT_PLANETARY
 	trait_to_give = STATION_TRAIT_BRIGHT_DAY
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/station_trait/shuttle_sale
 	name = "Shuttle Firesale"
 	report_message = "The Nanotrasen Emergency Dispatch team is celebrating a record number of shuttle calls in the recent quarter. Some of your emergency shuttle options have been discounted!"
@@ -321,7 +338,10 @@
 	report_message = "A repair technician left their wallet in a locker somewhere. They would greatly appreciate if you could locate and return it to them when the shift has ended."
 	trait_type = STATION_TRAIT_POSITIVE
 	weight = 5
+<<<<<<< HEAD
 	cost = STATION_TRAIT_COST_LOW
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	show_in_report = TRUE
 
 /datum/station_trait/missing_wallet/on_round_start()
@@ -356,6 +376,7 @@
 	trim_state = "trim_stationengineer"
 	department_color = COLOR_ASSISTANT_GRAY
 
+<<<<<<< HEAD
 /// Spawns assistants with some gear, either gimmicky or functional. Maybe, one day, it will inspire an assistant to do something productive or fun
 /datum/station_trait/assistant_gimmicks
 	name = "Geared Assistants Pilot"
@@ -370,3 +391,7 @@
 	var/advisory_string = "Advisory Level: <b>Grey Sky</b></center><BR>"
 	advisory_string += "Your sector's advisory level is Grey Sky. Our sensors detect abnormal activity among the assistants assigned to your station. We advise you to closely monitor the Tool Storage, Bridge, Tech Storage, and Brig for gathering crowds or petty thievery."
 	return advisory_string
+=======
+#undef PARTY_COOLDOWN_LENGTH_MIN
+#undef PARTY_COOLDOWN_LENGTH_MAX
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -52,6 +52,10 @@
 	return controller.blackboard[ability_key] && controller.blackboard[target_key]
 
 /datum/ai_behavior/make_carp_rift/perform(seconds_per_tick, datum/ai_controller/controller, ability_key, target_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/action/cooldown/mob_cooldown/lesser_carp_rift/ability = controller.blackboard[ability_key]
 	var/atom/target = controller.blackboard[target_key]
 

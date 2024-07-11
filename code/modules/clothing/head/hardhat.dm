@@ -14,7 +14,11 @@
 	resistance_flags = FIRE_PROOF
 
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_range = 4
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 0.8
 	light_color = "#ffcc99"
 	light_on = FALSE
@@ -92,7 +96,7 @@
 	desc = "By applying state of the art lighting technology to a fire helmet, and using photo-chemical hardening methods, this hardhat will protect you from robust workplace hazards."
 	icon_state = "hardhat0_purple"
 	inhand_icon_state = null
-	light_range = 5
+	light_outer_range = 5
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*2, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT, /datum/material/plastic = SHEET_MATERIAL_AMOUNT*1.5, /datum/material/silver = SMALL_MATERIAL_AMOUNT*5)
 	hat_type = "purple"
@@ -117,7 +121,7 @@
 /obj/item/clothing/head/utility/hardhat/welding
 	name = "welding hard hat"
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight AND welding shield! The bulb seems a little smaller though."
-	light_range = 3 //Needs a little bit of tradeoff
+	light_outer_range = 3 //Needs a little bit of tradeoff
 	dog_fashion = null
 	actions_types = list(/datum/action/item_action/toggle_helmet_light, /datum/action/item_action/toggle_welding_screen)
 	flash_protect = FLASH_PROTECTION_WELDER
@@ -167,7 +171,7 @@
 	desc = "A piece of headgear used in dangerous working conditions to protect the head. Comes with a built-in flashlight AND welding shield!" //This bulb is not smaller
 	icon_state = "hardhat0_white"
 	inhand_icon_state = null
-	light_range = 4 //Boss always takes the best stuff
+	light_outer_range = 4 //Boss always takes the best stuff
 	hat_type = "white"
 	clothing_flags = STOPSPRESSUREDAMAGE | STACKABLE_HELMET_EXEMPT
 	heat_protection = HEAD
@@ -215,7 +219,7 @@
 	clothing_flags = SNUG_FIT | STACKABLE_HELMET_EXEMPT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	armor_type = /datum/armor/none
-	light_range = 2 //luminosity when on
+	light_outer_range = 2 //luminosity when on
 	flags_cover = HEADCOVERSEYES
 	light_color = "#fff2bf"
 	worn_y_offset = 1
@@ -273,7 +277,12 @@
 	hat_type = "reindeer"
 	flags_inv = 0
 	armor_type = /datum/armor/none
+<<<<<<< HEAD
 	light_range = 1 //luminosity when on
 	clothing_traits = list()
+=======
+	light_outer_range = 1 //luminosity when on
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	dog_fashion = /datum/dog_fashion/head/reindeer

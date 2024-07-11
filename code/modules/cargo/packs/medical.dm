@@ -1,7 +1,11 @@
 /datum/supply_pack/medical
 	group = "Medical"
+<<<<<<< HEAD
 	access_view = ACCESS_MEDICAL
 	crate_type = /obj/structure/closet/crate/medical/department
+=======
+	crate_type = /obj/structure/closet/crate/medical
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/supply_pack/medical/bloodpacks
 	name = "Blood Pack Variety Crate"
@@ -16,6 +20,7 @@
 					/obj/item/reagent_containers/blood/o_minus,
 					/obj/item/reagent_containers/blood/lizard,
 					/obj/item/reagent_containers/blood/ethereal,
+					/obj/item/reagent_containers/blood/slime
 				)
 	crate_name = "blood freezer"
 	crate_type = /obj/structure/closet/crate/freezer
@@ -150,6 +155,7 @@
 	contains = list(/obj/machinery/iv_drip/saline)
 	crate_type = /obj/structure/closet/crate/large
 
+/* Monkestation Removal: Old Virology
 /datum/supply_pack/medical/virus
 	name = "Virus Crate"
 	desc = "Contains twelve different bottles of several viral samples for virology \
@@ -161,11 +167,7 @@
 					/obj/item/reagent_containers/cup/bottle/cold,
 					/obj/item/reagent_containers/cup/bottle/random_virus = 4,
 					/obj/item/reagent_containers/cup/bottle/fake_gbs,
-					/obj/item/reagent_containers/cup/bottle/magnitis,
-					/obj/item/reagent_containers/cup/bottle/pierrot_throat,
 					/obj/item/reagent_containers/cup/bottle/brainrot,
-					/obj/item/reagent_containers/cup/bottle/anxiety,
-					/obj/item/reagent_containers/cup/bottle/beesease,
 					/obj/item/storage/box/syringes,
 					/obj/item/storage/box/beakers,
 					/obj/item/reagent_containers/cup/bottle/mutagen,
@@ -173,6 +175,7 @@
 	crate_name = "virus crate"
 	crate_type = /obj/structure/closet/crate/secure/plasma
 	dangerous = TRUE
+End Monkestation Removal*/
 
 /datum/supply_pack/medical/cmoturtlenecks
 	name = "Chief Medical Officer Turtlenecks"

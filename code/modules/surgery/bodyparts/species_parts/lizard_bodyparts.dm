@@ -7,11 +7,15 @@
 /obj/item/bodypart/chest/lizard
 	icon_greyscale = 'icons/mob/human/species/lizard/bodyparts.dmi'
 	limb_id = SPECIES_LIZARD
+<<<<<<< HEAD
 	is_dimorphic = TRUE
 	wing_types = list(/obj/item/organ/external/wings/functional/dragon)
 
 /obj/item/bodypart/chest/lizard/get_butt_sprite()
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_LIZARD)
+=======
+	is_dimorphic = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/arm/left/lizard
 	icon_greyscale = 'icons/mob/human/species/lizard/bodyparts.dmi'
@@ -40,10 +44,14 @@
 /obj/item/bodypart/leg/left/lizard
 	icon_greyscale = 'icons/mob/human/species/lizard/bodyparts.dmi'
 	limb_id = SPECIES_LIZARD
+	can_be_digitigrade = TRUE
+	digitigrade_id = "digitigrade"
+	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 
 /obj/item/bodypart/leg/right/lizard
 	icon_greyscale = 'icons/mob/human/species/lizard/bodyparts.dmi'
 	limb_id = SPECIES_LIZARD
+<<<<<<< HEAD
 
 /obj/item/bodypart/leg/left/digitigrade
 	icon_greyscale = 'icons/mob/human/species/lizard/bodyparts.dmi'
@@ -96,3 +104,8 @@
 
 		else
 			limb_id = SPECIES_LIZARD
+=======
+	can_be_digitigrade = TRUE
+	digitigrade_id = "digitigrade"
+	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

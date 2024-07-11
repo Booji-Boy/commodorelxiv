@@ -51,13 +51,22 @@
 	. = ..()
 	death()
 
+<<<<<<< HEAD
 //Sets up our appearance
 /mob/living/basic/blob_minion/zombie/proc/set_up_zombie_appearance()
+=======
+/mob/living/basic/blob_minion/zombie/update_overlays()
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	copy_overlays(corpse, TRUE)
 	var/mutable_appearance/blob_head_overlay = mutable_appearance('icons/mob/nonhuman-player/blob.dmi', "blob_head")
 	blob_head_overlay.color = LAZYACCESS(atom_colours, FIXED_COLOUR_PRIORITY) || COLOR_WHITE
 	color = initial(color) // reversing what our component did lol, but we needed the value for the overlay
+<<<<<<< HEAD
 	overlays += blob_head_overlay
+=======
+	. += blob_head_overlay
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Create an explosion of spores on death
 /mob/living/basic/blob_minion/zombie/proc/death_burst()
@@ -68,12 +77,18 @@
 	if(new_corpse.wear_suit)
 		maxHealth += new_corpse.get_armor_rating(MELEE)
 		health = maxHealth
+<<<<<<< HEAD
 	new_corpse.set_facial_hairstyle("Shaved", update = FALSE)
 	new_corpse.set_hairstyle("Bald", update = TRUE)
 	new_corpse.forceMove(src)
 	corpse = new_corpse
 	update_appearance(UPDATE_ICON)
 	set_up_zombie_appearance()
+=======
+	new_corpse.forceMove(src)
+	corpse = new_corpse
+	update_appearance(UPDATE_ICON)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(corpse, COMSIG_LIVING_REVIVE, PROC_REF(on_corpse_revived))
 
 /// Dynamic changeling reentry
@@ -87,7 +102,11 @@
 
 /mob/living/basic/blob_minion/zombie/controlled/consume_corpse(mob/living/carbon/human/new_corpse)
 	. = ..()
+<<<<<<< HEAD
 	if (!isnull(client) || SSticker.current_state == GAME_STATE_FINISHED)
+=======
+	if (!isnull(client))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	AddComponent(\
 		/datum/component/ghost_direct_control,\

@@ -57,9 +57,16 @@
 		return FALSE
 	if(HAS_TRAIT(mob, TRAIT_NO_TRANSFORM))
 		return FALSE //This is sorta the goto stop mobs from moving trait
+<<<<<<< HEAD
 	if(!isliving(mob))
 		if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_NON_LIVING_MOVE, new_loc, direct) & COMSIG_MOB_CLIENT_BLOCK_PRE_NON_LIVING_MOVE)
 			return FALSE
+=======
+	if(mob.control_object)
+		return Move_object(direct)
+	if(!isliving(mob))
+		SEND_SIGNAL(src, COMSIG_MOB_CLIENT_MOVED_CLIENT_SEND, direct, new_loc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return mob.Move(new_loc, direct)
 	if(mob.stat == DEAD)
 		mob.ghostize()
@@ -114,7 +121,11 @@
 	//Basically an optional override for our glide size
 	//Sometimes you want to look like you're moving with a delay you don't actually have yet
 	visual_delay = 0
+<<<<<<< HEAD
 	var/old_dir = mob.dir
+=======
+	var/old_dir = dir
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	. = ..()
 
@@ -137,6 +148,10 @@
 		// At this point we've moved the client's attached mob. This is one of the only ways to guess that a move was done
 		// as a result of player input and not because they were pulled or any other magic.
 		SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_MOVED, direct, old_dir)
+<<<<<<< HEAD
+=======
+		SEND_SIGNAL(src, COMSIG_MOB_CLIENT_MOVED_CLIENT_SEND, direct, new_loc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/atom/movable/P = mob.pulling
 	if(P && !ismob(P) && P.density)
@@ -491,20 +506,33 @@
 	set name = "toggle-walk-run"
 	set hidden = TRUE
 	set instant = TRUE
+<<<<<<< HEAD
 	if(isliving(mob))
 		var/mob/living/user_mob = mob
 		user_mob.toggle_move_intent()
+=======
+	if(mob)
+		if(mob.m_intent != MOVE_INTENT_WALK)
+			mob.set_move_intent(MOVE_INTENT_WALK)
+		else
+			mob.set_move_intent(MOVE_INTENT_RUN)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Toggle the move intent of the mob
  *
  * triggers an update the move intent hud as well
  */
+<<<<<<< HEAD
 /mob/living/proc/toggle_move_intent()
 	if(move_intent == MOVE_INTENT_RUN)
 		move_intent = MOVE_INTENT_WALK
 	else
 		move_intent = MOVE_INTENT_RUN
+=======
+/mob/proc/set_move_intent(new_state)
+	m_intent = new_state
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(hud_used?.static_inventory)
 		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
 			selector.update_appearance()
@@ -517,9 +545,12 @@
 	set name = "Move Upwards"
 	set category = "IC"
 
+<<<<<<< HEAD
 	if(remote_control)
 		return remote_control.relaymove(src, UP)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/turf/current_turf = get_turf(src)
 	var/turf/above_turf = GET_TURF_ABOVE(current_turf)
 
@@ -555,7 +586,10 @@
 
 	var/turf/current_turf = get_turf(src)
 	var/turf/below_turf = GET_TURF_BELOW(current_turf)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!below_turf)
 		to_chat(src, span_warning("There's nowhere to go in that direction!"))
 		return
@@ -574,6 +608,14 @@
 
 /mob/abstract_move(atom/destination)
 	var/turf/new_turf = get_turf(destination)
+
+	var/atom/oldloc = loc
+	var/area/oldarea = get_area(oldloc)
+	var/area/newarea = get_area(destination)
+
+	if(oldarea != newarea)
+		newarea.Entered(src, oldarea)
+
 	if(new_turf && (istype(new_turf, /turf/cordon/secret) || is_secret_level(new_turf.z)) && !client?.holder)
 		return
 	return ..()

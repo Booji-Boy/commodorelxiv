@@ -35,6 +35,7 @@
 /turf/open/floor/glass/LateInitialize()
 	AddElement(/datum/element/turf_z_transparency)
 	setup_glow()
+	starlight_color = GLOB.starlight_color
 
 /turf/open/floor/glass/Destroy()
 	. = ..()
@@ -51,6 +52,7 @@
 		return
 
 	glow_stuff = partially_block_emissives(src, alpha_to_leave)
+<<<<<<< HEAD
 	if(!starlight_color)
 		RegisterSignal(SSdcs, COMSIG_STARLIGHT_COLOR_CHANGED, PROC_REF(starlight_changed))
 	else
@@ -60,6 +62,9 @@
 /turf/open/floor/glass/proc/starlight_changed(datum/source, old_star, new_star)
 	if(light_color == old_star)
 		set_light(l_color = new_star)
+=======
+	set_light(l_outer_range = 2, l_power = 0.75, l_color = starlight_color)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/floor/glass/make_plating()
 	return

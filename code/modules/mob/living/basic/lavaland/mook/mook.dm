@@ -12,14 +12,25 @@
 	maxHealth = 150
 	faction = list(FACTION_MINING, FACTION_NEUTRAL)
 	health = 150
+<<<<<<< HEAD
 	move_resist = MOVE_FORCE_VERY_STRONG
 	melee_damage_lower = 8
 	melee_damage_upper = 8
+=======
+	move_resist = MOVE_FORCE_OVERPOWERING
+	melee_damage_lower = 8
+	melee_damage_upper = 8
+	pass_flags_self = LETPASSTHROW
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_sound = 'sound/weapons/rapierhit.ogg'
 	attack_vis_effect = ATTACK_EFFECT_SLASH
 	death_sound = 'sound/voice/mook_death.ogg'
 	ai_controller = /datum/ai_controller/basic_controller/mook/support
 	speed = 5
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pixel_x = -16
 	base_pixel_x = -16
 	pixel_y = -16
@@ -47,12 +58,19 @@
 
 /mob/living/basic/mining/mook/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	AddElement(\
 		/datum/element/change_force_on_death,\
 		move_resist = MOVE_RESIST_DEFAULT,\
 	)
 	AddComponent(/datum/component/ai_retaliate_advanced, CALLBACK(src, PROC_REF(attack_intruder)))
 	grant_actions_by_list(get_innate_abilities())
+=======
+	AddComponent(/datum/component/ai_retaliate_advanced, CALLBACK(src, PROC_REF(attack_intruder)))
+	var/datum/action/cooldown/mob_cooldown/mook_ability/mook_jump/jump = new(src)
+	jump.Grant(src)
+	ai_controller.set_blackboard_key(BB_MOOK_JUMP_ABILITY, jump)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	ore_overlay = mutable_appearance(icon, "mook_ore_overlay")
 
@@ -66,6 +84,7 @@
 
 	AddComponent(/datum/component/obeys_commands, pet_commands)
 
+<<<<<<< HEAD
 /// Returns a list of actions and blackboard keys to pass into `grant_actions_by_list`.
 /mob/living/basic/mining/mook/proc/get_innate_abilities()
 	var/static/list/innate_abilities = list(
@@ -73,6 +92,8 @@
 	)
 	return innate_abilities
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/mining/mook/proc/grant_healer_abilities()
 	AddComponent(\
 		/datum/component/healing_touch,\
@@ -161,9 +182,12 @@
 /mob/living/basic/mining/mook/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
 
+<<<<<<< HEAD
 	if(.)
 		return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!istype(mover, /mob/living/basic/mining/mook))
 		return FALSE
 
@@ -203,6 +227,7 @@
 	neutral_stance = mutable_appearance(icon, "mook_axe_overlay")
 	attack_stance = mutable_appearance(icon, "axe_strike_overlay")
 	update_appearance()
+<<<<<<< HEAD
 
 /mob/living/basic/mining/mook/worker/get_innate_abilities()
 	var/static/list/worker_innate_abilites = null
@@ -215,6 +240,11 @@
 		)
 
 	return worker_innate_abilites
+=======
+	var/datum/action/cooldown/mob_cooldown/mook_ability/mook_leap/leap = new(src)
+	leap.Grant(src)
+	ai_controller.set_blackboard_key(BB_MOOK_LEAP_ABILITY, leap)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/mining/mook/worker/attack_sequence(atom/target)
 	. = ..()
@@ -257,6 +287,14 @@
 	ai_controller.set_blackboard_key(BB_SONG_INSTRUMENT, held_guitar)
 	update_appearance()
 
+<<<<<<< HEAD
+=======
+//Monkestation edit: Removes a harddel
+/mob/living/basic/mining/mook/worker/bard/Destroy()
+	QDEL_NULL(held_guitar)
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/mining/mook/worker/tribal_chief
 	name = "tribal chief"
 	desc = "Acknowledge him!"

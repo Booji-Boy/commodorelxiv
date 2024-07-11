@@ -85,7 +85,22 @@ const LabeledListItem = (props: LabeledListItemProps) => {
 
   return (
     <tr className={classes(['LabeledList__row', className])}>
+<<<<<<< HEAD
       {labelChild}
+=======
+      <Box
+        as="td"
+        color={labelColor}
+        className={classes([
+          'LabeledList__cell',
+          // Kinda flipped because we want nowrap as default. Cleaner CSS this way though.
+          !labelWrap && 'LabeledList__label--nowrap',
+        ])}
+        verticalAlign={verticalAlign}
+      >
+        {label ? (typeof label === 'string' ? label + ':' : label) : null}
+      </Box>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       <Box
         as="td"
         color={color}
@@ -116,8 +131,13 @@ const LabeledListDivider = (props: LabeledListDividerProps) => {
       <td
         colSpan={3}
         style={{
+<<<<<<< HEAD
           paddingTop: padding,
           paddingBottom: padding,
+=======
+          'padding-top': padding,
+          'padding-bottom': padding,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         <Divider />

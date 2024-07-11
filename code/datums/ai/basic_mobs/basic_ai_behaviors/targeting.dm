@@ -7,11 +7,19 @@ GLOBAL_LIST_INIT(target_interested_atoms, typecacheof(list(/mob, /obj/machinery/
 
 /datum/ai_behavior/find_potential_targets
 	action_cooldown = 2 SECONDS
+<<<<<<< HEAD
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// How far can we see stuff?
 	var/vision_range = 9
 	/// Blackboard key for aggro range, uses vision range if not specified
 	var/aggro_range_key = BB_AGGRO_RANGE
+<<<<<<< HEAD
+=======
+	/// Static typecache list of potentially dangerous objs
+	var/static/list/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/vehicle/sealed/mecha))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/find_potential_targets/get_cooldown(datum/ai_controller/cooldown_for)
 	if(cooldown_for.blackboard[BB_FIND_TARGETS_FIELD(type)])
@@ -27,11 +35,17 @@ GLOBAL_LIST_INIT(target_interested_atoms, typecacheof(list(/mob, /obj/machinery/
 
 	var/atom/current_target = controller.blackboard[target_key]
 	if (targeting_strategy.can_attack(living_mob, current_target, vision_range))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/aggro_range = controller.blackboard[aggro_range_key] || vision_range
 
 	controller.clear_blackboard_key(target_key)
+<<<<<<< HEAD
 
 	// If we're using a field rn, just don't do anything yeah?
 	if(controller.blackboard[BB_FIND_TARGETS_FIELD(type)])
@@ -46,17 +60,43 @@ GLOBAL_LIST_INIT(target_interested_atoms, typecacheof(list(/mob, /obj/machinery/
 	if(!potential_targets.len)
 		failed_to_find_anyone(controller, target_key, targeting_strategy_key, hiding_location_key)
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	var/list/potential_targets = hearers(aggro_range, controller.pawn) - living_mob //Remove self, so we don't suicide
+
+	// If we're using a field rn, just don't do anything yeah?
+	if(controller.blackboard[BB_FIND_TARGETS_FIELD(type)])
+		return
+
+	for(var/HM in typecache_filter_list(range(aggro_range, living_mob), hostile_machines)) //Can we see any hostile machines?
+		if(can_see(living_mob, HM, aggro_range))
+			potential_targets += HM
+
+	if(!potential_targets.len)
+		failed_to_find_anyone(controller, target_key, targeting_strategy_key, hiding_location_key)
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/filtered_targets = list()
 
 	for(var/atom/pot_target in potential_targets)
+<<<<<<< HEAD
+=======
+		if(SEND_SIGNAL(controller.pawn, COMSIG_FRIENDSHIP_CHECK_LEVEL, pot_target, FRIENDSHIP_FRIEND))
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(targeting_strategy.can_attack(living_mob, pot_target))//Can we attack it?
 			filtered_targets += pot_target
 			continue
 
 	if(!filtered_targets.len)
 		failed_to_find_anyone(controller, target_key, targeting_strategy_key, hiding_location_key)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/atom/target = pick_final_target(controller, filtered_targets)
 	controller.set_blackboard_key(target_key, target)
@@ -66,7 +106,11 @@ GLOBAL_LIST_INIT(target_interested_atoms, typecacheof(list(/mob, /obj/machinery/
 	if(potential_hiding_location) //If they're hiding inside of something, we need to know so we can go for that instead initially.
 		controller.set_blackboard_key(hiding_location_key, potential_hiding_location)
 
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/find_potential_targets/proc/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	var/aggro_range = controller.blackboard[aggro_range_key] || vision_range
@@ -147,7 +191,11 @@ GLOBAL_LIST_INIT(target_interested_atoms, typecacheof(list(/mob, /obj/machinery/
 		var/datum/proximity_monitor/field = controller.blackboard[BB_FIND_TARGETS_FIELD(type)]
 		qdel(field) // autoclears so it's fine
 		controller.CancelActions() // On retarget cancel any further queued actions so that they will setup again with new target
+<<<<<<< HEAD
 		controller.modify_cooldown(src, get_cooldown(controller))
+=======
+		controller.modify_cooldown(controller, get_cooldown(controller))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns the desired final target from the filtered list of targets
 /datum/ai_behavior/find_potential_targets/proc/pick_final_target(datum/ai_controller/controller, list/filtered_targets)

@@ -34,6 +34,9 @@
 	damage = 5
 
 /obj/projectile/temp/watcher/ice_wing/apply_status(mob/living/target)
+<<<<<<< HEAD
 	if(!HAS_TRAIT(target, TRAIT_RESISTCOLD))
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	target.apply_status_effect(/datum/status_effect/freon/watcher)

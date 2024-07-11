@@ -1,10 +1,19 @@
 import {
   CheckboxInput,
+<<<<<<< HEAD
   Feature,
   FeatureColorInput,
   FeatureToggle,
 } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
+=======
+  FeatureColorInput,
+  Feature,
+  FeatureDropdownInput,
+  FeatureToggle,
+} from '../base';
+import { multiline } from 'common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const asaycolor: Feature<string> = {
   name: 'Admin chat color',

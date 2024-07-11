@@ -349,7 +349,7 @@
 		pad.update_indicator()
 		pad.closed = FALSE
 		user.transferItemToLoc(src, pad, TRUE)
-		atom_storage.close_all()
+		atom_storage?.close_all() // monke edit: fix runtime
 
 /obj/item/storage/briefcase/launchpad/storage_insert_on_interacted_with(datum/storage, obj/item/inserted, mob/living/user)
 	if(istype(inserted, /obj/item/launchpad_remote))

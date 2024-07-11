@@ -101,7 +101,7 @@
 	if(damage > 0)
 		var/armor = victim.run_armor_check(limb.body_zone, MELEE, "Your armor has protected your [limb.plaintext_zone].", "Your armor has softened a hit to your [limb.plaintext_zone].",I.armour_penetration, weak_against_armour = I.weak_against_armour)
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, blocked=armor, wound_bonus = I.wound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
-		victim.adjustStaminaLoss(pain_stam_pct * damage)
+		victim.stamina.adjust(-pain_stam_pct * damage)
 
 /datum/component/embedded/Destroy()
 	var/mob/living/carbon/victim = parent
@@ -145,7 +145,7 @@
 
 	if(harmful && prob(pain_chance_current))
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, wound_bonus = CANT_WOUND)
-		victim.adjustStaminaLoss(pain_stam_pct * damage)
+		victim.stamina.adjust(-pain_stam_pct * damage)
 		to_chat(victim, span_userdanger("[weapon] embedded in your [limb.plaintext_zone] hurts!"))
 
 	var/fall_chance_current = SPT_PROB_RATE(fall_chance / 100, seconds_per_tick) * 100
@@ -172,7 +172,7 @@
 	if(harmful && prob(chance))
 		var/damage = weapon.w_class * jostle_pain_mult
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, wound_bonus = CANT_WOUND)
-		victim.adjustStaminaLoss(pain_stam_pct * damage)
+		victim.stamina.adjust(-pain_stam_pct * damage)
 		to_chat(victim, span_userdanger("[weapon] embedded in your [limb.plaintext_zone] jostles and stings!"))
 
 
@@ -183,7 +183,7 @@
 	if(harmful)
 		var/damage = weapon.w_class * remove_pain_mult
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, wound_bonus = CANT_WOUND)
-		victim.adjustStaminaLoss(pain_stam_pct * damage)
+		victim.stamina.adjust(-pain_stam_pct * damage)
 	victim.visible_message(span_danger("[weapon] falls [harmful ? "out" : "off"] of [victim.name]'s [limb.plaintext_zone]!"), span_userdanger("[weapon] falls [harmful ? "out" : "off"] of your [limb.plaintext_zone]!"))
 	safeRemove()
 
@@ -207,7 +207,14 @@
 		qdel(src)
 		return
 	if(harmful)
+<<<<<<< HEAD
 		damaging_removal(victim, I, limb)
+=======
+		var/damage = weapon.w_class * remove_pain_mult
+		limb.receive_damage(brute=(1-pain_stam_pct) * damage, sharpness=SHARP_EDGED) //It hurts to rip it out, get surgery you dingus. unlike the others, this CAN wound + increase slash bloodflow
+		victim.stamina.adjust(-pain_stam_pct * damage)
+		victim.emote("scream")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	victim.visible_message(span_notice("[victim] successfully rips [weapon] [harmful ? "out" : "off"] of [victim.p_their()] [limb.plaintext_zone]!"), span_notice("You successfully remove [weapon] from your [limb.plaintext_zone]."))
 	safeRemove(victim)
@@ -316,7 +323,11 @@
 	var/damage = weapon.w_class * remove_pain_mult
 	limb.receive_damage(brute=(1-pain_stam_pct) * damage * 1.5, sharpness=SHARP_EDGED) // Performs exit wounds and flings the user to the caster if nearby
 	victim.cause_wound_of_type_and_severity(WOUND_PIERCE, limb, WOUND_SEVERITY_MODERATE)
+<<<<<<< HEAD
 	victim.adjustStaminaLoss(pain_stam_pct * damage)
+=======
+	victim.stamina.adjust(-pain_stam_pct * damage)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	playsound(get_turf(victim), 'sound/effects/wounds/blood2.ogg', 50, TRUE)
 
 	var/dist = get_dist(caster, victim) //Check if the caster is close enough to yank them in

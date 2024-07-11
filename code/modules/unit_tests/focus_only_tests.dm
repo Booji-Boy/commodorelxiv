@@ -36,6 +36,7 @@
 /// Checks for bad icon / icon state setups in cooking crafting menu
 /datum/unit_test/focus_only/bad_cooking_crafting_icons
 
+<<<<<<< HEAD
 /// Ensures openspace never spawns on the bottom of a z stack
 /datum/unit_test/focus_only/openspace_clear
 
@@ -47,3 +48,7 @@
 
 /// Checks that maploaded mobs with either the `atmos_requirements` or `body_temp_sensitive`
 /datum/unit_test/focus_only/atmos_and_temp_requirements
+=======
+/// Checks that the contents of the fish_counts list are also present in fish_table
+/datum/unit_test/focus_only/fish_sources_tables
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

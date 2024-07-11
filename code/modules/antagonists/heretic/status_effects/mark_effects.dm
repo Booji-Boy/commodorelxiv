@@ -79,7 +79,7 @@
 /datum/status_effect/eldritch/ash/on_effect()
 	if(iscarbon(owner))
 		var/mob/living/carbon/carbon_owner = owner
-		carbon_owner.adjustStaminaLoss(6 * repetitions) // first one = 30 stam
+		carbon_owner.stamina.adjust(-6 * repetitions) // first one = 30 stam
 		carbon_owner.adjustFireLoss(3 * repetitions) // first one = 15 burn
 		for(var/mob/living/carbon/victim in shuffle(range(1, carbon_owner)))
 			if(IS_HERETIC(victim) || victim == carbon_owner)
@@ -227,6 +227,7 @@
 	owner.Paralyze(2 SECONDS)
 	return ..()
 
+<<<<<<< HEAD
 // MARK OF LOCK
 
 /datum/status_effect/eldritch/lock
@@ -238,6 +239,19 @@
 	ADD_TRAIT(owner, TRAIT_ALWAYS_NO_ACCESS, STATUS_EFFECT_TRAIT)
 
 /datum/status_effect/eldritch/lock/on_remove()
+=======
+// MARK OF KNOCK
+
+/datum/status_effect/eldritch/knock
+	effect_icon_state = "emark7"
+	duration = 10 SECONDS
+
+/datum/status_effect/eldritch/knock/on_apply()
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_ALWAYS_NO_ACCESS, STATUS_EFFECT_TRAIT)
+
+/datum/status_effect/eldritch/knock/on_remove()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	REMOVE_TRAIT(owner, TRAIT_ALWAYS_NO_ACCESS, STATUS_EFFECT_TRAIT)
 	return ..()
 

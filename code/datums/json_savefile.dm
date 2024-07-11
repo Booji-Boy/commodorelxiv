@@ -98,9 +98,21 @@ GENERAL_PROTECT_DATUM(/datum/json_savefile)
 	var/file_name = "[account_name ? "[account_name]_" : ""]preferences_[time2text(world.timeofday, "MMM_DD_YYYY_hh-mm-ss")].json"
 	var/temporary_file_storage = "data/preferences_export_working_directory/[file_name]"
 
+<<<<<<< HEAD
 	if(!text2file(json_encode(tree, JSON_PRETTY_PRINT), temporary_file_storage))
 		tgui_alert(requester, "Failed to export preferences to JSON! You might need to try again later.", "Export Preferences JSON")
 		return
+=======
+#if DM_VERSION >= 515
+	if(!text2file(json_encode(tree, JSON_PRETTY_PRINT), temporary_file_storage))
+		tgui_alert(requester, "Failed to export preferences to JSON! You might need to try again later.", "Export Preferences JSON")
+		return
+#else
+	if(!text2file(json_encode(tree), temporary_file_storage))
+		tgui_alert(requester, "Failed to export preferences to JSON! You might need to try again later.", "Export Preferences JSON")
+		return
+#endif
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/exportable_json = file(temporary_file_storage)
 

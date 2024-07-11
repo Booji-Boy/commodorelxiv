@@ -35,8 +35,13 @@ All ShuttleMove procs go here
 			SSblackbox.record_feedback("tally", "shuttle_gib", 1, living_thing.type)
 			log_shuttle("[key_name(living_thing)] was shuttle gibbed by [shuttle].")
 			living_thing.investigate_log("has been gibbed by [shuttle].", INVESTIGATE_DEATHS)
+<<<<<<< HEAD
 			living_thing.gib(DROP_ALL_REMAINS)
 		else if(!ismob(thing)) //non-living mobs shouldn't be affected by shuttles, which is why this is an else
+=======
+			living_thing.gib()
+		else if(!ismob(thing))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(!thing.anchored)
 				step(thing, shuttle_dir)
 			else
@@ -78,6 +83,9 @@ All ShuttleMove procs go here
 	if(rotation)
 		shuttleRotate(rotation) //see shuttle_rotate.dm
 
+	if(oldT.outdoor_effect)
+		oldT.outdoor_effect.process_state()
+
 	return TRUE
 
 /turf/proc/lateShuttleMove(turf/oldT)
@@ -85,6 +93,10 @@ All ShuttleMove procs go here
 	air_update_turf(TRUE, blocks_air)
 	oldT.blocks_air = initial(oldT.blocks_air)
 	oldT.air_update_turf(TRUE, oldT.blocks_air)
+
+	if(outdoor_effect)
+		oldT.outdoor_effect = null
+		oldT.get_sky_and_weather_states()
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +116,8 @@ All ShuttleMove procs go here
 		return
 
 	abstract_move(newT)
+
+	SSdemo.mark_dirty(src) //Monkestation Edit: Replays
 
 	return TRUE
 

@@ -19,10 +19,17 @@
 	icon_state = "demon"
 	icon_living = "demon"
 
+<<<<<<< HEAD
 	mob_biotypes = MOB_BEAST|MOB_HUMANOID
 	status_flags = CANPUSH
 
 	combat_mode = TRUE
+=======
+	mob_biotypes = MOB_UNDEAD|MOB_HUMANOID // undead is important because it means we can't be healed with sutures and the like. keep this in mind if you ever decide to change this
+	status_flags = CANPUSH
+
+	istate = ISTATE_HARM | ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_sound = 'sound/magic/demon_attack1.ogg'
 	attack_vis_effect = ATTACK_EFFECT_CLAW
 	faction = list(FACTION_HELL)
@@ -32,11 +39,18 @@
 	obj_damage = 40
 	melee_damage_lower = 10
 	melee_damage_upper = 15
+<<<<<<< HEAD
 	melee_attack_cooldown = CLICK_CD_MELEE
 	death_message = "screams in agony as it sublimates into a sulfurous smoke."
 	death_sound = 'sound/magic/demon_dies.ogg'
 
 	habitable_atmos = null
+=======
+	death_message = "screams in agony as it sublimates into a sulfurous smoke."
+	death_sound = 'sound/magic/demon_dies.ogg'
+
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = T0C - 25 //Weak to cold
 	maximum_survivable_temperature = INFINITY
 
@@ -61,9 +75,14 @@
 	return list()
 
 /// Proc that just sets up the demon's antagonism status.
+<<<<<<< HEAD
 /mob/living/basic/demon/mind_initialize()
 	. = ..()
 	if(isnull(antag_type) || mind.has_antag_datum(antag_type))
+=======
+/mob/living/basic/demon/proc/generate_antagonist_status()
+	if(isnull(antag_type))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return // we weren't built for this proc to run
 
 	mind.set_assigned_role(SSjob.GetJobType(/datum/job/slaughter_demon))

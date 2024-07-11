@@ -12,9 +12,19 @@
 	. = ..()
 	desc = "Even in the distant year [CURRENT_STATION_YEAR], Nanostrasen is still using REST APIs. How grim."
 
+<<<<<<< HEAD
 /obj/machinery/computer/quantum_console/post_machine_initialize()
 	. = ..()
 	find_server()
+=======
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/quantum_console/LateInitialize()
+	. = ..()
+
+	if(isnull(server_ref?.resolve()))
+		find_server()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/computer/quantum_console/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -22,6 +32,12 @@
 	if(!is_operational)
 		return
 
+<<<<<<< HEAD
+=======
+	if(isnull(server_ref?.resolve()))
+		find_server()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "QuantumConsole")
@@ -43,8 +59,11 @@
 	data["ready"] = server.is_ready && server.is_operational
 	data["scanner_tier"] = server.scanner_tier
 	data["retries_left"] = length(server.exit_turfs) - server.retries_spent
+<<<<<<< HEAD
 	data["broadcasting"] = server.broadcasting
 	data["broadcasting_on_cd"] = !COOLDOWN_FINISHED(server, broadcast_toggle_cd)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return data
 
@@ -55,7 +74,11 @@
 	if(isnull(server))
 		return data
 
+<<<<<<< HEAD
 	data["available_domains"] = SSbitrunning.get_available_domains(server.scanner_tier, server.points)
+=======
+	data["available_domains"] = server.get_available_domains()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	data["avatars"] = server.get_avatar_data()
 
 	return data
@@ -71,20 +94,35 @@
 
 	switch(action)
 		if("random_domain")
+<<<<<<< HEAD
 			server.cold_boot_map(server.get_random_domain_id())
+=======
+			var/map_id = server.get_random_domain_id()
+			if(!map_id)
+				return TRUE
+
+			server.cold_boot_map(usr, map_id)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 		if("refresh")
 			ui.send_full_update()
 			return TRUE
 		if("set_domain")
+<<<<<<< HEAD
 			server.cold_boot_map(params["id"])
+=======
+			server.cold_boot_map(usr, params["id"])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 		if("stop_domain")
 			server.begin_shutdown(usr)
 			return TRUE
+<<<<<<< HEAD
 		if("broadcast")
 			server.toggle_broadcast()
 			return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return FALSE
 

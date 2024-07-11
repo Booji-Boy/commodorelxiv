@@ -101,8 +101,14 @@
 	playsound(target_plating, 'sound/weapons/genhit.ogg', 50, TRUE)
 	return target_plating
 
+<<<<<<< HEAD
 /obj/item/stack/tile/handle_openspace_click(turf/target, mob/user, click_parameters)
 	target.attackby(src, user, click_parameters)
+=======
+/obj/item/stack/tile/handle_openspace_click(turf/target, mob/user, proximity_flag, click_parameters)
+	if(proximity_flag)
+		target.attackby(src, user, click_parameters)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Grass
 /obj/item/stack/tile/grass
@@ -1075,6 +1081,13 @@
 	inhand_icon_state = "tile-bcircuit"
 	turf_type = /turf/open/floor/circuit
 	merge_type = /obj/item/stack/tile/circuit
+	// Monkestation Addition Start: They stack, this is better imo than adding a new subtype and leaving this base as unused
+	tile_reskin_types = list(
+		/obj/item/stack/tile/circuit,
+		/obj/item/stack/tile/circuit/green,
+		/obj/item/stack/tile/circuit/red,
+	)
+	// End Monkestation Addition
 
 /obj/item/stack/tile/circuit/green
 	name = "green circuit tile"
@@ -1083,7 +1096,7 @@
 	icon_state = "tile_gcircuit"
 	inhand_icon_state = "tile-gcircuit"
 	turf_type = /turf/open/floor/circuit/green
-	merge_type = /obj/item/stack/tile/circuit/green
+	//merge_type = /obj/item/stack/tile/circuit/green Monkestation Edit: merges with all circuit floors
 
 /obj/item/stack/tile/circuit/green/anim
 	turf_type = /turf/open/floor/circuit/green/anim
@@ -1096,7 +1109,7 @@
 	icon_state = "tile_rcircuit"
 	inhand_icon_state = "tile-rcircuit"
 	turf_type = /turf/open/floor/circuit/red
-	merge_type = /obj/item/stack/tile/circuit/red
+	//merge_type = /obj/item/stack/tile/circuit/red Monkestation Edit: merges with all circuit floors
 
 /obj/item/stack/tile/circuit/red/anim
 	turf_type = /turf/open/floor/circuit/red/anim

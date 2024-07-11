@@ -12,7 +12,10 @@
 	drop_sound = 'sound/items/handling/cloth_drop.ogg'
 	pickup_sound = 'sound/items/handling/cloth_pickup.ogg'
 	limb_integrity = 30
+<<<<<<< HEAD
 	interaction_flags_click = ALLOW_RESTING
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Has this undersuit been freshly laundered and, as such, imparts a mood bonus for wearing
 	var/freshly_laundered = FALSE
@@ -43,6 +46,7 @@
 	/// The overlay of the accessory we're demonstrating. Only index 1 will show up.
 	/// This is the overlay on the MOB, not the item itself.
 	var/mutable_appearance/accessory_overlay
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION
 
 /datum/armor/clothing_under
 	bio = 10
@@ -54,6 +58,7 @@
 		//make the sensor mode favor higher levels, except coords.
 		sensor_mode = pick(SENSOR_VITALS, SENSOR_VITALS, SENSOR_VITALS, SENSOR_LIVING, SENSOR_LIVING, SENSOR_COORDS, SENSOR_COORDS, SENSOR_OFF)
 	register_context()
+<<<<<<< HEAD
 	AddElement(/datum/element/update_icon_updates_onmob, flags = ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING|ITEM_SLOT_NECK, body = TRUE)
 
 /obj/item/clothing/under/setup_reskinning()
@@ -67,10 +72,17 @@
 	. = ..()
 
 	var/changed = FALSE
+=======
+	AddElement(/datum/element/update_icon_updates_onmob, flags = ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING, body = TRUE)
+
+/obj/item/clothing/under/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
+	. = NONE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(isnull(held_item) && has_sensor == HAS_SENSORS)
 		context[SCREENTIP_CONTEXT_RMB] = "Toggle suit sensors"
 		context[SCREENTIP_CONTEXT_CTRL_LMB] = "Set suit sensors to tracking"
+<<<<<<< HEAD
 		changed = TRUE
 
 	if(istype(held_item, /obj/item/clothing/accessory) && length(attached_accessories) < max_number_of_accessories)
@@ -91,6 +103,27 @@
 
 	return changed ? CONTEXTUAL_SCREENTIP_SET : .
 
+=======
+		. = CONTEXTUAL_SCREENTIP_SET
+
+	if(istype(held_item, /obj/item/clothing/accessory) && length(attached_accessories) < max_number_of_accessories)
+		context[SCREENTIP_CONTEXT_LMB] = "Attach accessory"
+		. = CONTEXTUAL_SCREENTIP_SET
+
+	if(LAZYLEN(attached_accessories))
+		context[SCREENTIP_CONTEXT_ALT_RMB] = "Remove accessory"
+		. = CONTEXTUAL_SCREENTIP_SET
+
+	if(istype(held_item, /obj/item/stack/cable_coil) && has_sensor == BROKEN_SENSORS)
+		context[SCREENTIP_CONTEXT_LMB] = "Repair suit sensors"
+		. = CONTEXTUAL_SCREENTIP_SET
+
+	if(can_adjust)
+		context[SCREENTIP_CONTEXT_ALT_LMB] =  "Wear [adjusted == ALT_STYLE ? "normally" : "casually"]"
+		. = CONTEXTUAL_SCREENTIP_SET
+
+	return .
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/under/worn_overlays(mutable_appearance/standing, isinhands = FALSE)
 	. = ..()
@@ -162,12 +195,20 @@
 	if(adjusted == ALT_STYLE)
 		adjust_to_normal()
 
+/*	 MONKESTATION EDIT
 	if((supports_variations_flags & CLOTHING_DIGITIGRADE_VARIATION) && ishuman(user))
 		var/mob/living/carbon/human/wearer = user
+<<<<<<< HEAD
 		if(wearer.bodyshape & BODYSHAPE_DIGITIGRADE)
 			adjusted = DIGITIGRADE_STYLE
 			update_appearance()
 
+=======
+		if(wearer.dna.species.bodytype & BODYTYPE_DIGITIGRADE)
+			adjusted = DIGITIGRADE_STYLE
+			update_appearance()
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/under/equipped(mob/living/user, slot)
 	..()
 	if((slot & ITEM_SLOT_ICLOTHING) && freshly_laundered)
@@ -240,6 +281,7 @@
 		create_accessory_overlay()
 
 	update_appearance()
+<<<<<<< HEAD
 
 /// Handles creating the worn overlay mutable appearance
 /// Only the first accessory attached is displayed (currently)
@@ -257,6 +299,16 @@
 	cut_overlay(accessory_overlay)
 	create_accessory_overlay()
 	update_appearance() // so we update the suit inventory overlay too
+=======
+
+/// Handles creating the worn overlay mutable appearance
+/// Only the first accessory attached is displayed (currently)
+/obj/item/clothing/under/proc/create_accessory_overlay()
+	var/obj/item/clothing/accessory/prime_accessory = attached_accessories[1]
+	accessory_overlay = mutable_appearance(prime_accessory.worn_icon, prime_accessory.icon_state)
+	accessory_overlay.alpha = prime_accessory.alpha
+	accessory_overlay.color = prime_accessory.color
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/under/Exited(atom/movable/gone, direction)
 	. = ..()
@@ -339,6 +391,7 @@
 		if(H.w_uniform == src)
 			H.update_suit_sensors()
 
+<<<<<<< HEAD
 /obj/item/clothing/under/item_ctrl_click(mob/user)
 	if(!can_toggle_sensors(user))
 		return CLICK_ACTION_BLOCKING
@@ -381,6 +434,62 @@
 	if(!LAZYLEN(attached_accessories))
 		balloon_alert(user, "no accessories to remove!")
 		return
+=======
+/obj/item/clothing/under/CtrlClick(mob/user)
+	. = ..()
+	if(.)
+		return
+	if(!can_toggle_sensors(user))
+		return
+
+	sensor_mode = SENSOR_COORDS
+	balloon_alert(user, "set to tracking")
+
+/// Checks if the toggler is allowed to toggle suit sensors currently
+/obj/item/clothing/under/proc/can_toggle_sensors(mob/toggler)
+	if(!can_use(toggler) || toggler.stat == DEAD) //make sure they didn't hold the window open.
+		return FALSE
+	if(get_dist(toggler, src) > 1)
+		balloon_alert(toggler, "too far!")
+		return FALSE
+
+	switch(has_sensor)
+		if(LOCKED_SENSORS)
+			balloon_alert(toggler, "sensor controls locked!")
+			return FALSE
+		if(BROKEN_SENSORS)
+			balloon_alert(toggler, "sensors shorted!")
+			return FALSE
+		if(NO_SENSORS)
+			balloon_alert(toggler, "no sensors to ajdust!")
+			return FALSE
+
+	return TRUE
+
+/obj/item/clothing/under/AltClick(mob/user)
+	. = ..()
+	if(.)
+		return
+
+	if(!can_adjust)
+		balloon_alert(user, "can't be adjusted!")
+		return
+	if(!can_use(user))
+		return
+	rolldown()
+
+/obj/item/clothing/under/alt_click_secondary(mob/user)
+	. = ..()
+	if(.)
+		return
+
+	if(!LAZYLEN(attached_accessories))
+		balloon_alert(user, "no accessories to remove!")
+		return
+	if(!user.can_perform_action(src, NEED_DEXTERITY))
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pop_accessory(user)
 
 /obj/item/clothing/under/verb/jumpsuit_adjust()
@@ -407,9 +516,16 @@
 /// Returns the new state
 /obj/item/clothing/under/proc/toggle_jumpsuit_adjust()
 	switch(adjusted)
+<<<<<<< HEAD
 		if(DIGITIGRADE_STYLE)
 			return
 
+=======
+/* MONKESTATION EDIT
+		if(DIGITIGRADE_STYLE)
+			return
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(NORMAL_STYLE)
 			adjust_to_alt()
 
@@ -435,6 +551,11 @@
 /// Helper to adjust to alt jumpsuit state
 /obj/item/clothing/under/proc/adjust_to_alt()
 	adjusted = ALT_STYLE
+<<<<<<< HEAD
+=======
+	if(alt_covers_chest) //For snowflake suits that do NOT expose the chest. //MONKESTATION EDIT
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!(female_sprite_flags & FEMALE_UNIFORM_TOP_ONLY))
 		female_sprite_flags = NO_FEMALE_UNIFORM
 	if(!alt_covers_chest) // for the special snowflake suits that expose the chest when adjusted (and also the arms, realistically)

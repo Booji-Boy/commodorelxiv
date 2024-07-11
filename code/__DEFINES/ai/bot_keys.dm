@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //bitfield defines
 
 ///can honkbots slip people?
@@ -17,6 +18,8 @@ DEFINE_BITFIELD(honkbot_flags, list(
 ))
 
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // bot keys
 ///The first beacon we find
 #define BB_BEACON_TARGET "beacon_target"
@@ -34,6 +37,11 @@ DEFINE_BITFIELD(honkbot_flags, list(
 #define BB_RADIO_CHANNEL "radio_channel"
 ///list of unreachable things we will temporarily ignore
 #define BB_TEMPORARY_IGNORE_LIST "temporary_ignore_list"
+<<<<<<< HEAD
+=======
+///Last thing we attempted to reach
+#define BB_LAST_ATTEMPTED_PATHING "last_attempted_pathing"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // medbot keys
 ///the patient we must heal
@@ -52,10 +60,13 @@ DEFINE_BITFIELD(honkbot_flags, list(
 #define BB_NEAR_DEATH_SPEECH "near_death_speech"
 ///in crit patient we must alert medbay about
 #define BB_PATIENT_IN_CRIT "patient_in_crit"
+<<<<<<< HEAD
 ///how much time interval before we clear list
 #define BB_UNREACHABLE_LIST_COOLDOWN "unreachable_list_cooldown"
 ///can we clear the list now
 #define	BB_CLEAR_LIST_READY "clear_list_ready"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // cleanbots
 ///key that holds the foaming ability
@@ -92,6 +103,7 @@ DEFINE_BITFIELD(honkbot_flags, list(
 #define BB_WASH_FRUSTRATION "wash_frustration"
 ///key that holds cooldown after we finish cleaning something, so we dont immediately run off to patrol
 #define BB_POST_CLEAN_COOLDOWN "post_clean_cooldown"
+<<<<<<< HEAD
 
 //Honkbots
 ///key that holds all possible clown friends
@@ -109,3 +121,5 @@ DEFINE_BITFIELD(honkbot_flags, list(
 ///key that holds our honk ability
 #define BB_HONK_ABILITY "honk_ability"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

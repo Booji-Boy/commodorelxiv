@@ -25,7 +25,11 @@
 	RegisterSignal(parent, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(try_transfer_soul))
 
 /datum/component/soul_stealer/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ITEM_AFTERATTACK, COMSIG_ITEM_INTERACTING_WITH_ATOM))
+=======
+	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ITEM_AFTERATTACK))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///signal called on parent being examined
 /datum/component/soul_stealer/proc/on_examine(datum/source, mob/user, list/examine_list)

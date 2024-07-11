@@ -74,6 +74,14 @@
 		if(!QDELING(src))
 			qdel(src) //we're now a poster, huzzah!
 
+<<<<<<< HEAD
+=======
+/obj/item/poster/handle_atom_del(atom/deleting_atom)
+	if(deleting_atom == poster_structure)
+		poster_structure.moveToNullspace() //get it the fuck out of us since atom/destroy qdels contents and it'll cause a qdel loop
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/poster/Destroy(force)
 	QDEL_NULL(poster_structure)
 	return ..()
@@ -184,6 +192,7 @@
 
 /obj/structure/sign/poster/attack_hand(mob/user, list/modifiers)
 	. = ..()
+<<<<<<< HEAD
 	if(. || !check_tearability())
 		return
 	tear_poster(user)
@@ -195,6 +204,14 @@
 		return FALSE
 	return TRUE
 
+=======
+	if(.)
+		return
+	if(ruined)
+		return
+	tear_poster(user)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/sign/poster/proc/spring_trap(mob/user)
 	var/obj/item/shard/payload = trap?.resolve()
 	if (!payload)
@@ -269,10 +286,17 @@
 	playsound(src.loc, 'sound/items/poster_ripped.ogg', 100, TRUE)
 	spring_trap(user)
 
+<<<<<<< HEAD
 	var/obj/structure/sign/poster/ripped/torn_poster = new(loc)
 	torn_poster.pixel_y = pixel_y
 	torn_poster.pixel_x = pixel_x
 	torn_poster.add_fingerprint(user)
+=======
+	var/obj/structure/sign/poster/ripped/R = new(loc)
+	R.pixel_y = pixel_y
+	R.pixel_x = pixel_x
+	R.add_fingerprint(user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(src)
 
 // Various possible posters follow

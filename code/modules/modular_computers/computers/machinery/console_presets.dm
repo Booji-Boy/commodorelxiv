@@ -80,16 +80,28 @@
 
 // ===== CARGO CHAT CONSOLES =====
 /obj/machinery/modular_computer/preset/cargochat
+<<<<<<< HEAD
 	name = "cargo interfacing console"
 	desc = "A stationary computer that comes pre-loaded with software to interface with the cargo department."
+=======
+	name = "cargo chatroom console"
+	desc = "A stationary computer. This one comes preloaded with a chatroom for your cargo requests."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	starting_programs = list(
 		/datum/computer_file/program/chatclient,
 	)
 	/// What department type is assigned to this console?
 	var/datum/job_department/department_type
 
+<<<<<<< HEAD
 /obj/machinery/modular_computer/preset/cargochat/Initialize(mapload)
 	add_starting_software()
+=======
+	///Used in Initialize to set the chat client name.
+	var/console_department
+
+/obj/machinery/modular_computer/preset/cargochat/Initialize(mapload)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	setup_starting_software()
 	REGISTER_REQUIRED_MAP_ITEM(1, 1)
@@ -141,17 +153,51 @@
 
 /obj/machinery/modular_computer/preset/cargochat/cargo/setup_starting_software()
 	var/datum/computer_file/program/chatclient/chatprogram = cpu.find_file_by_name("ntnrc_client")
+<<<<<<< HEAD
+=======
+	chatprogram.username = "[lowertext(console_department)]_department"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	cpu.active_program = chatprogram
 	update_appearance(UPDATE_ICON)
 	// Rest of the chat program setup is done in LateInit
 
+<<<<<<< HEAD
 /obj/machinery/modular_computer/preset/cargochat/cargo/post_machine_initialize()
+=======
+/obj/machinery/modular_computer/preset/cargochat/service
+	console_department = "Service"
+
+/obj/machinery/modular_computer/preset/cargochat/engineering
+	console_department = "Engineering"
+
+/obj/machinery/modular_computer/preset/cargochat/science
+	console_department = "Science"
+
+/obj/machinery/modular_computer/preset/cargochat/security
+	console_department = "Security"
+
+/obj/machinery/modular_computer/preset/cargochat/medical
+	console_department = "Medical"
+
+
+//ONE PER MAP PLEASE, IT MAKES A CARGOBUS FOR EACH ONE OF THESE
+/obj/machinery/modular_computer/preset/cargochat/cargo
+	console_department = "Cargo"
+	name = "department chatroom console"
+	desc = "A stationary computer. This one comes preloaded with a chatroom for incoming cargo requests. You may moderate it from this computer."
+
+/obj/machinery/modular_computer/preset/cargochat/cargo/LateInitialize()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	var/datum/computer_file/program/chatclient/chatprogram = cpu.find_file_by_name("ntnrc_client")
 	chatprogram.username = "cargo_requests_operator"
 
 	var/datum/ntnet_conversation/cargochat = chatprogram.create_new_channel("#cargobus", strong = TRUE)
+<<<<<<< HEAD
 	for(var/obj/machinery/modular_computer/preset/cargochat/cargochat_console as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/modular_computer/preset/cargochat))
+=======
+	for(var/obj/machinery/modular_computer/preset/cargochat/cargochat_console in GLOB.machines)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(cargochat_console == src)
 			continue
 		var/datum/computer_file/program/chatclient/other_chatprograms = cargochat_console.cpu.find_file_by_name("ntnrc_client")

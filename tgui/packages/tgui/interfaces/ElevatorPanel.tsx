@@ -3,8 +3,13 @@ import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
 import {
+<<<<<<< HEAD
   Blink,
   Box,
+=======
+  Box,
+  Blink,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Button,
   Dimmer,
   Icon,
@@ -193,9 +198,15 @@ const FloorPanel = (props) => {
         <Box
           textColor="white"
           style={{
+<<<<<<< HEAD
             fontFamily: 'Monospace',
             fontSize: '50px',
             fontWeight: 'bold',
+=======
+            'font-family': 'Monospace',
+            'font-size': '50px',
+            'font-weight': 'bold',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           {current_floor - 1}

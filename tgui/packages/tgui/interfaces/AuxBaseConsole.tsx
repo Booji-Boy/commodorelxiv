@@ -29,6 +29,7 @@ const STATUS_COLOR_KEYS = {
   'All Clear': 'good',
 } as const;
 
+<<<<<<< HEAD
 enum TAB {
   Shuttle = 1,
   Aux,
@@ -37,6 +38,11 @@ enum TAB {
 export const AuxBaseConsole = (props) => {
   const { data } = useBackend<Data>();
   const [tab, setTab] = useState(TAB.Shuttle);
+=======
+export const AuxBaseConsole = (props) => {
+  const { data } = useBackend<Data>();
+  const [tab, setTab] = useLocalState('tab', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { type, blind_drop, turrets = [] } = data;
 
   return (
@@ -49,16 +55,26 @@ export const AuxBaseConsole = (props) => {
           <Tabs.Tab
             icon="list"
             lineHeight="23px"
+<<<<<<< HEAD
             selected={tab === TAB.Shuttle}
             onClick={() => setTab(TAB.Shuttle)}
+=======
+            selected={tab === 1}
+            onClick={() => setTab(1)}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             {type === 'shuttle' ? 'Shuttle Launch' : 'Base Launch'}
           </Tabs.Tab>
           <Tabs.Tab
             icon="list"
             lineHeight="23px"
+<<<<<<< HEAD
             selected={tab === TAB.Aux}
             onClick={() => setTab(TAB.Aux)}
+=======
+            selected={tab === 2}
+            onClick={() => setTab(2)}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             Turrets ({turrets.length})
           </Tabs.Tab>

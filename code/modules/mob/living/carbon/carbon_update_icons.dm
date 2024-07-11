@@ -3,6 +3,7 @@
 	if(obscured_flags & (HIDEEARS|HIDEEYES|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT|HIDEMUTWINGS))
 		update_body()
 
+<<<<<<< HEAD
 /// Updates features and clothing attached to a specific limb with limb-specific offsets
 /mob/living/carbon/proc/update_features(feature_key)
 	switch(feature_key)
@@ -38,6 +39,8 @@
 		if(OFFSET_HELD)
 			update_held_items()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon
 	var/list/overlays_standing[TOTAL_LAYERS]
 
@@ -382,17 +385,28 @@
 
 	apply_overlay(BACK_LAYER)
 
+<<<<<<< HEAD
 /mob/living/carbon/update_worn_legcuffs(update_obscured = TRUE)
 	remove_overlay(LEGCUFF_LAYER)
 	clear_alert("legcuffed")
 	if(legcuffed)
 		if(update_obscured)
 			update_obscured_slots(legcuffed.flags_inv)
+=======
+/mob/living/carbon/update_worn_legcuffs()
+	remove_overlay(LEGCUFF_LAYER)
+	clear_alert("legcuffed")
+	if(legcuffed)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		overlays_standing[LEGCUFF_LAYER] = mutable_appearance('icons/mob/simple/mob.dmi', "legcuff1", -LEGCUFF_LAYER)
 		apply_overlay(LEGCUFF_LAYER)
 		throw_alert("legcuffed", /atom/movable/screen/alert/restrained/legcuffed, new_master = src.legcuffed)
 
+<<<<<<< HEAD
 /mob/living/carbon/update_worn_head(update_obscured = TRUE)
+=======
+/mob/living/carbon/update_worn_head()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	remove_overlay(HEAD_LAYER)
 
 	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
@@ -459,7 +473,11 @@
 	RETURN_TYPE(/list)
 
 	. = list()
+<<<<<<< HEAD
 	if(blocks_emissive != EMISSIVE_BLOCK_NONE)
+=======
+	if(blocks_emissive != EMISSIVE_BLOCK_NONE && standing)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		. += emissive_blocker(standing.icon, standing.icon_state, src, alpha = standing.alpha)
 	SEND_SIGNAL(src, COMSIG_ITEM_GET_WORN_OVERLAYS, ., standing, isinhands, icon_file)
 
@@ -502,6 +520,10 @@
 
 	if(new_limbs.len)
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
+
+	if(istype(src, /mob/living/carbon/human/dummy/extra_tall))
+		var/mob/living/carbon/human/dummy/extra_tall/bleh = src
+		overlays_standing[BODYPARTS_LAYER] += bleh.extra_bodyparts
 
 	apply_overlay(BODYPARTS_LAYER)
 

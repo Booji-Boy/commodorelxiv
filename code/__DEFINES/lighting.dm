@@ -1,5 +1,6 @@
 /// Object doesn't use any of the light systems. Should be changed to add a light source to the object.
 #define NO_LIGHT_SUPPORT 0
+<<<<<<< HEAD
 /// Light made with the lighting datums, applying a matrix.
 #define COMPLEX_LIGHT 1
 /// Light made by masking the lighting darkness plane.
@@ -8,6 +9,16 @@
 #define OVERLAY_LIGHT_DIRECTIONAL 3
 ///Light made by masking the lighting darkness plane, and is a directionally focused beam.
 #define OVERLAY_LIGHT_BEAM 4
+=======
+///Light made with the lighting datums, applying a matrix.
+#define COMPLEX_LIGHT 1
+///Light made by masking the lighting darkness plane.
+#define OVERLAY_LIGHT 2
+///Light made by masking the lighting darkness plane, and is directional.
+#define OVERLAY_LIGHT_DIRECTIONAL 3
+///Light made by masking the lighting darkness plane, and is a directionally focused beam.
+#define MOVABLE_LIGHT_BEAM 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Nonesensical value for light color, used for null checks.
 #define NONSENSICAL_VALUE -99999
 
@@ -20,21 +31,24 @@
 
 #define MINIMUM_USEFUL_LIGHT_RANGE 1.4
 
+<<<<<<< HEAD
 /// light UNDER the floor. primarily used for starlight, shouldn't fuck with this
 #define LIGHTING_HEIGHT_SPACE -0.5
 /// light ON the floor
 #define LIGHTING_HEIGHT_FLOOR 0
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// height off the ground of light sources on the pseudo-z-axis, you should probably leave this alone
 #define LIGHTING_HEIGHT 1
 /// Value used to round lumcounts, values smaller than 1/129 don't matter (if they do, thanks sinking points), greater values will make lighting less precise, but in turn increase performance, VERY SLIGHTLY.
-#define LIGHTING_ROUND_VALUE (1 / 64)
+#define LIGHTING_ROUND_VALUE (1 / 128)
 
 /// icon used for lighting shading effects
 #define LIGHTING_ICON 'icons/effects/lighting_object.dmi'
 
 /// If the max of the lighting lumcounts of each spectrum drops below this, disable luminosity on the lighting objects.
 /// Set to zero to disable soft lighting. Luminosity changes then work if it's lit at all.
-#define LIGHTING_SOFT_THRESHOLD 0
+#define LIGHTING_SOFT_THRESHOLD 0.05
 
 ///How many tiles standard fires glow.
 #define LIGHT_RANGE_FIRE 3
@@ -98,13 +112,55 @@ GLOBAL_LIST_INIT(em_mask_matrix, EM_MASK_MATRIX)
 #define PARSE_LIGHT_COLOR(source) \
 do { \
 	if (source.light_color != COLOR_WHITE) { \
+<<<<<<< HEAD
 		var/list/color_parts = rgb2num(source.light_color); \
 		source.lum_r = color_parts[1] / 255; \
 		source.lum_g = color_parts[2] / 255; \
 		source.lum_b = color_parts[3] / 255; \
+=======
+		var/list/color_map = rgb2num(source.light_color); \
+		source.lum_r = color_map[1] / 255; \
+		source.lum_g = color_map[2] / 255; \
+		source.lum_b = color_map[3] / 255; \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	} else { \
 		source.lum_r = 1; \
 		source.lum_g = 1; \
 		source.lum_b = 1; \
 	}; \
 } while (FALSE)
+
+
+/// The default falloff curve for all atoms. It's a magic number you should adjust until it looks good.
+#define LIGHTING_DEFAULT_FALLOFF_CURVE 2.36 //3
+
+/// Include this to have lights randomly break on initialize.
+#define LIGHTS_RANDOMLY_BROKEN
+
+//Monkestation start
+//Sunlight states
+#define SKY_BLOCKED   0
+#define SKY_VISIBLE  1
+#define SKY_VISIBLE_BORDER   2
+
+#define SUNLIGHT_DARK_MATRIX \
+	list                     \
+	(                        \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 0, \
+		0, 0, 0, 1           \
+	)
+
+/// If I were you I'd leave this alone.
+#define LIGHTING_BASE_MATRIX \
+	list                     \
+	(                        \
+		1, 1, 1, 0, \
+		1, 1, 1, 0, \
+		1, 1, 1, 0, \
+		1, 1, 1, 0, \
+		0, 0, 0, 1           \
+	)                        \
+//monkestation end

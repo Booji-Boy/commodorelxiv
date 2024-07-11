@@ -12,7 +12,7 @@
 	attack_verb_simple = list("whip", "lash", "discipline")
 	max_integrity = 300
 	equip_sound = 'sound/items/equip/toolbelt_equip.ogg'
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_NORMAL
 	var/content_overlays = FALSE //If this is true, the belt will gain overlays based on what it's holding
 
 /obj/item/storage/belt/suicide_act(mob/living/carbon/user)
@@ -74,8 +74,14 @@
 		/obj/item/weldingtool,
 		/obj/item/wirecutters,
 		/obj/item/wrench,
+<<<<<<< HEAD
 		/obj/item/spess_knife,
 		/obj/item/melee/sickly_blade/lock,
+=======
+		/obj/item/melee/sickly_blade/knock,
+		/obj/item/clockwork/replica_fabricator, //monkestation edit
+		/obj/item/clockwork/clockwork_slab, //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	))
 
 /obj/item/storage/belt/utility/chief
@@ -364,6 +370,7 @@
 		/obj/item/clothing/gloves,
 		/obj/item/flashlight/seclite,
 		/obj/item/food/donut,
+		/obj/item/food/spaghetti/security, //monkestation change: tactical belt spaghetti
 		/obj/item/grenade,
 		/obj/item/holosign_creator/security,
 		/obj/item/knife/combat,
@@ -372,6 +379,7 @@
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/restraints/handcuffs,
 		/obj/item/restraints/legcuffs/bola,
+		/obj/item/stock_parts/cell/microfusion, //monkestation edit
 	))
 
 /obj/item/storage/belt/security/full/PopulateContents()

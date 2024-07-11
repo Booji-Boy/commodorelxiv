@@ -1,6 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "a" = (
 /turf/closed/indestructible/binary,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "c" = (
 /obj/structure/flora/coconuts,
@@ -28,6 +29,27 @@
 /obj/effect/landmark/bitrunning/loot_signal,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"d" = (
+/obj/structure/chair/wood,
+/turf/open/floor/wood/large,
+/area/virtual_domain/powered)
+"e" = (
+/turf/open/floor/carpet/red,
+/area/virtual_domain/powered)
+"g" = (
+/obj/item/toy/beach_ball/branded,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"i" = (
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+"k" = (
+/obj/effect/landmark/bitrunning/loot_signal,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "m" = (
 /obj/item/fishing_rod{
 	pixel_x = 5;
@@ -40,6 +62,7 @@
 	},
 /obj/structure/table/wood,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "o" = (
 /obj/structure/flora/tree/jungle/style_5,
@@ -61,11 +84,33 @@
 /obj/modular_map_root/safehouse{
 	key = "wood"
 	},
+=======
+/area/virtual_domain/powered)
+"o" = (
+/obj/structure/flora/tree/jungle/style_5,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"p" = (
+/turf/open/floor/carpet/blue,
+/area/virtual_domain/powered)
+"s" = (
+/obj/structure/fluff/beach_umbrella/cap,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"t" = (
+/obj/structure/fluff/beach_umbrella/syndi,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"v" = (
+/obj/effect/baseturf_helper/virtual_domain,
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "y" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "z" = (
 /mob/living/basic/crab,
@@ -94,16 +139,54 @@
 /obj/structure/flora/tree/jungle/style_4,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"z" = (
+/mob/living/basic/crab,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"B" = (
+/obj/structure/flora/tree/jungle/style_6,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"C" = (
+/obj/structure/flora/tree/jungle/style_2,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"D" = (
+/turf/open/floor/carpet/green,
+/area/virtual_domain/powered)
+"F" = (
+/obj/structure/fluff/beach_umbrella/engine,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"G" = (
+/obj/structure/flora/bush/jungle/a/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"H" = (
+/obj/structure/flora/tree/jungle/style_4,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "I" = (
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "J" = (
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "K" = (
 /obj/structure/flora/tree/jungle,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"K" = (
+/obj/structure/flora/tree/jungle,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "L" = (
 /obj/item/fishing_line,
 /obj/item/fishing_hook,
@@ -111,6 +194,7 @@
 /obj/item/fishing_hook,
 /obj/structure/closet/crate,
 /obj/item/bait_can/worm,
+<<<<<<< HEAD
 /obj/item/bait_can/worm,
 /obj/item/bait_can/worm,
 /turf/open/misc/beach/sand,
@@ -130,6 +214,21 @@
 /obj/structure/flora/bush/stalky/style_random,
 /turf/open/water/beach,
 /area/virtual_domain/fullbright)
+=======
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"O" = (
+/obj/structure/flora/rock/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"P" = (
+/turf/open/floor/holofloor/beach/coast_t,
+/area/virtual_domain/powered)
+"Q" = (
+/obj/structure/flora/bush/stalky/style_random,
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "R" = (
 /obj/structure/closet/crate/freezer{
 	name = "Cooler"
@@ -154,6 +253,7 @@
 /obj/item/reagent_containers/cup/glass/bottle/beer/light,
 /obj/item/clothing/head/soft/fishing_hat,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "S" = (
 /obj/structure/flora/tree/jungle/style_3,
@@ -178,6 +278,24 @@
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/closed/indestructible/binary,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"S" = (
+/obj/structure/flora/tree/jungle/style_3,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"U" = (
+/obj/structure/flora/tree/palm/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"X" = (
+/turf/open/floor/wood/large,
+/area/virtual_domain/powered)
+"Z" = (
+/obj/effect/baseturf_helper/virtual_domain,
+/turf/closed/indestructible/binary,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 (1,1,1) = {"
 a
@@ -212,12 +330,20 @@ K
 G
 y
 J
+<<<<<<< HEAD
 T
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 J
 J
 J
 J
+<<<<<<< HEAD
 T
+=======
+J
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 z
 P
 i
@@ -238,14 +364,22 @@ a
 J
 O
 J
+<<<<<<< HEAD
 h
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 I
 I
 I
 I
 I
 v
+<<<<<<< HEAD
 N
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 P
 Q
 i
@@ -400,14 +534,22 @@ a
 G
 y
 J
+<<<<<<< HEAD
 h
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 I
 I
 I
 I
 I
 I
+<<<<<<< HEAD
 N
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 P
 i
 i
@@ -428,12 +570,20 @@ o
 J
 J
 J
+<<<<<<< HEAD
 Y
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 J
 J
 J
 J
+<<<<<<< HEAD
 Y
+=======
+J
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 J
 P
 i
@@ -485,7 +635,11 @@ J
 J
 J
 U
+<<<<<<< HEAD
 c
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 J
 J
 J
@@ -729,7 +883,11 @@ J
 J
 J
 J
+<<<<<<< HEAD
 c
+=======
+J
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 J
 J
 P

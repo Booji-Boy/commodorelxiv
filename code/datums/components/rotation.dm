@@ -19,6 +19,7 @@
 	source.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
 
 	src.rotation_flags = rotation_flags
+<<<<<<< HEAD
 	src.post_rotation = post_rotation || CALLBACK(src, PROC_REF(default_post_rotation))
 
 /datum/component/simple_rotation/RegisterWithParent()
@@ -26,6 +27,21 @@
 	RegisterSignal(parent, COMSIG_CLICK_ALT_SECONDARY, PROC_REF(rotate_right))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(ExamineMessage))
 	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
+=======
+	src.AfterRotation = AfterRotation || CALLBACK(src, PROC_REF(DefaultAfterRotation))
+
+/datum/component/simple_rotation/proc/AddSignals()
+	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(RotateLeft))
+	RegisterSignal(parent, COMSIG_CLICK_ALT_SECONDARY, PROC_REF(RotateRight))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(ExamineMessage))
+	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
+
+/datum/component/simple_rotation/proc/RemoveSignals()
+	UnregisterSignal(parent, list(COMSIG_CLICK_ALT, COMSIG_CLICK_ALT_SECONDARY, COMSIG_ATOM_EXAMINE, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM))
+
+/datum/component/simple_rotation/RegisterWithParent()
+	AddSignals()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/component/simple_rotation/PostTransfer()
@@ -35,6 +51,7 @@
 	return COMPONENT_NOTRANSFER
 
 /datum/component/simple_rotation/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(
 		COMSIG_CLICK_ALT,
 		COMSIG_CLICK_ALT_SECONDARY,
@@ -45,6 +62,17 @@
 
 /datum/component/simple_rotation/Destroy()
 	post_rotation = null
+=======
+	RemoveSignals()
+	return ..()
+
+/datum/component/simple_rotation/Destroy()
+	AfterRotation = null
+	//Signals + verbs removed via UnRegister
+	return ..()
+
+/datum/component/simple_rotation/ClearFromParent()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/component/simple_rotation/proc/ExamineMessage(datum/source, mob/user, list/examine_list)

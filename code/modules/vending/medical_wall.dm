@@ -15,7 +15,10 @@
 		/obj/item/reagent_containers/medigel/sterilizine = 1,
 		/obj/item/healthanalyzer/simple = 2,
 		/obj/item/stack/medical/bone_gel = 2,
+<<<<<<< HEAD
 		/obj/item/storage/box/bandages = 1,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	contraband = list(
 		/obj/item/reagent_containers/pill/tox = 2,

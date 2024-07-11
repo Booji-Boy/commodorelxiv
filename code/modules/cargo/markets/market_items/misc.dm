@@ -110,7 +110,10 @@
 /datum/market_item/misc/jawed_hook
 	name = "Jawed Fishing Hook"
 	desc = "The thing ya use if y'are strugglin' with fishes. Just rememeber to whoop yer rod before it's too late, 'cause this thing's gonna hurt them like an Arkansas toothpick."
+<<<<<<< HEAD
 	item = /obj/item/fishing_hook/jaws
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	price_min = CARGO_CRATE_VALUE * 0.75
 	price_max = CARGO_CRATE_VALUE * 2
 	stock_max = 3
@@ -134,6 +137,7 @@
 	stock_min = 3
 	stock_max = 8
 	availability_prob = 90
+<<<<<<< HEAD
 
 /datum/market_item/misc/giant_wrench_parts
 	name = "Big Slappy parts"
@@ -143,3 +147,5 @@
 	price_max = CARGO_CRATE_VALUE * 5
 	stock_max = 1
 	availability_prob = 25
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

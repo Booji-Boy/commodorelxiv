@@ -34,9 +34,15 @@ GLOBAL_LIST_EMPTY(heretic_sacrifice_landmarks)
 	name = "rust heretic sacrifice landmark"
 	for_heretic_path = PATH_RUST
 
+<<<<<<< HEAD
 /obj/effect/landmark/heretic/lock
 	name = "lock heretic sacrifice landmark"
 	for_heretic_path = PATH_LOCK
+=======
+/obj/effect/landmark/heretic/knock
+	name = "knock heretic sacrifice landmark"
+	for_heretic_path = PATH_KNOCK
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // A fluff signpost object that doesn't teleport you somewhere when you touch it.
 /obj/structure/no_effect_signpost
@@ -58,14 +64,19 @@ GLOBAL_LIST_EMPTY(heretic_sacrifice_landmarks)
 
 /obj/structure/no_effect_signpost/void/Initialize(mapload)
 	. = ..()
-	set_light(range, power)
+	set_light(l_outer_range = range, l_power = power)
 
 // Some VERY dim lights, used for the void sacrifice realm.
 /obj/machinery/light/very_dim
 	nightshift_allowed = FALSE
 	bulb_colour = "#d6b6a6ff"
+<<<<<<< HEAD
 	brightness = 3
 	fire_brightness = 3.5
+=======
+	bulb_inner_range = 3
+	fire_brightness = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bulb_power = 0.5
 
 /obj/machinery/light/very_dim/directional/north
@@ -111,7 +122,12 @@ GLOBAL_LIST_EMPTY(heretic_sacrifice_landmarks)
 	ambience_index = AMBIENCE_REEBE
 	sound_environment = SOUND_ENVIRONMENT_SEWER_PIPE
 
+<<<<<<< HEAD
 /area/centcom/heretic_sacrifice/lock
 	name = "Mansus Lock Gate"
+=======
+/area/centcom/heretic_sacrifice/knock
+	name = "Mansus Knock Gate"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ambience_index = AMBIENCE_DANGER
 	sound_environment = SOUND_ENVIRONMENT_PSYCHOTIC

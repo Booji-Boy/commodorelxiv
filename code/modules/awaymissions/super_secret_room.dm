@@ -105,7 +105,10 @@
 /obj/structure/speaking_tile/attack_ai(mob/user)
 	return interact(user)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/speaking_tile/attack_animal(mob/user, list/modifiers)
 	return interact(user)
 

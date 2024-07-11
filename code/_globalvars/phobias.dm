@@ -52,6 +52,11 @@ GLOBAL_LIST_INIT(phobia_regexes, list(
 	"spiders" = construct_phobia_regex("spiders"),
 	"strangers" = construct_phobia_regex("strangers"),
 	"the supernatural" = construct_phobia_regex("the supernatural"),
+<<<<<<< HEAD
+=======
+	"blood" = construct_phobia_regex("blood"),
+	"christian minecraft" = construct_phobia_regex("christian minecraft"), //monkestation edit: added for new smite. -dexee 05/24/24
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ))
 
 GLOBAL_LIST_INIT(phobia_mobs, list(
@@ -65,10 +70,13 @@ GLOBAL_LIST_INIT(phobia_mobs, list(
 		/mob/living/basic/chicken,
 		/mob/living/basic/parrot,
 		/mob/living/basic/pet/penguin,
+<<<<<<< HEAD
 		/mob/living/simple_animal/hostile/retaliate/goose,
 	)),
 	"carps" = typecacheof(list(
 		/mob/living/basic/carp,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)),
 	"conspiracies" = typecacheof(list(
 		/mob/living/basic/drone,
@@ -84,6 +92,10 @@ GLOBAL_LIST_INIT(phobia_mobs, list(
 		/mob/living/basic/bee,
 	)),
 	"lizards" = typecacheof(list(/mob/living/basic/lizard)),
+<<<<<<< HEAD
+=======
+	"skeletons" = typecacheof(list(/mob/living/basic/skeleton)),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"robots" = typecacheof(list(
 		/mob/living/basic/drone,
 		/mob/living/silicon/ai,
@@ -109,14 +121,127 @@ GLOBAL_LIST_INIT(phobia_mobs, list(
 		/mob/living/simple_animal/bot/mulebot/paranormal,
 		/mob/living/simple_animal/hostile/dark_wizard,
 		/mob/living/simple_animal/hostile/zombie,
+<<<<<<< HEAD
+=======
+	)),
+	"aliens" = typecacheof(list(
+		/mob/living/carbon/alien,
+		/mob/living/basic/slime,
+	)),
+	"conspiracies" = typecacheof(list(
+		/mob/living/simple_animal/bot/secbot,
+		/mob/living/basic/drone,
+		/mob/living/basic/pet/penguin,
+	)),
+	"birds" = typecacheof(list(
+		/mob/living/basic/chick,
+		/mob/living/basic/chicken,
+		/mob/living/basic/parrot,
+		/mob/living/basic/pet/penguin,
+	)),
+	"anime" = typecacheof(list(/mob/living/basic/guardian)),
+	"insects" = typecacheof(list(
+		/mob/living/basic/cockroach,
+		/mob/living/basic/bee,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)),
 ))
 
 GLOBAL_LIST_INIT(phobia_objs, list(
+<<<<<<< HEAD
 	"aliens" = typecacheof(list(
 		/obj/item/abductor,
 		/obj/item/cautery/alien,
 		/obj/item/circular_saw/alien,
+=======
+	"snakes" = typecacheof(list(
+		/obj/item/rod_of_asclepius,
+		/obj/item/toy/plush/snakeplushie,
+	)),
+	"spiders" = typecacheof(list(/obj/structure/spider)),
+	"security" = typecacheof(list(
+		/obj/effect/client_image_holder/securitron,
+		/obj/item/clothing/under/rank/security/detective,
+		/obj/item/clothing/under/rank/security/head_of_security,
+		/obj/item/clothing/under/rank/security/officer,
+		/obj/item/clothing/under/rank/security/warden,
+		/obj/item/gun/energy/taser,
+		/obj/item/megaphone/sec,
+		/obj/item/melee/baton,
+		/obj/item/restraints/handcuffs,
+		/obj/item/stamp/head/hos,
+		/obj/item/toy/figure/hos,
+		/obj/item/toy/figure/secofficer,
+		/obj/machinery/door/airlock/security,
+		/obj/structure/statue/gold/hos,
+		/obj/structure/statue/silver/sec,
+		/obj/structure/statue/silver/secborg,
+	)),
+
+	"clowns" = typecacheof(list(
+		/obj/item/bedsheet/clown,
+		/obj/item/clothing/head/chaplain/clownmitre,
+		/obj/item/clothing/mask/gas/clown_hat,
+		/obj/item/clothing/shoes/clown_shoes,
+		/obj/item/clothing/suit/chaplainsuit/clownpriest,
+		/obj/item/clothing/under/plasmaman/clown,
+		/obj/item/clothing/under/rank/civilian/clown,
+		/obj/item/food/cheesiehonkers,
+		/obj/item/food/pie/cream,
+		/obj/item/grown/bananapeel,
+		/obj/item/gun/magic/staff/honk,
+		/obj/item/instrument/bikehorn,
+		/obj/item/megaphone/clown,
+		/obj/item/modular_computer/pda/clown,
+		/obj/item/pneumatic_cannon/pie,
+		/obj/item/stack/ore/bananium,
+		/obj/item/stack/tile/mineral/bananium,
+		/obj/item/stamp/clown,
+		/obj/item/storage/backpack/clown,
+		/obj/item/storage/backpack/duffelbag/clown,
+		/obj/item/storage/backpack/ert/clown,
+		/obj/item/toy/crayon/rainbow,
+		/obj/item/toy/mecha/darkhonk,
+		/obj/item/toy/mecha/honk,
+		/obj/item/trash/cheesie,
+		/obj/machinery/door/airlock/bananium,
+		/obj/structure/falsewall/bananium,
+		/obj/structure/mecha_wreckage/honker,
+		/obj/structure/statue/bananium,
+		/obj/vehicle/sealed/car/clowncar,
+		/obj/vehicle/sealed/mecha/honker,
+	)),
+
+	"greytide" = (typecacheof(list(
+		/obj/item/clothing/under/color/grey,
+		/obj/item/melee/baton/security/cattleprod,
+		/obj/item/spear,
+		/obj/item/toy/figure/assistant,
+		/obj/structure/statue/sandstone/assistant,
+	)) + typecacheof(list(/obj/item/clothing/mask/gas), ignore_root_path = FALSE, only_root_path = TRUE // to match only specific items in this phobia and not subtypes, use an additional typecacheof w/ ignore_root_path set FALSE and only_root_patch set TRUE
+	)),
+
+	"lizards" = typecacheof(list(
+		/obj/item/clothing/head/costume/lizard,
+		/obj/item/clothing/shoes/cowboy/lizard,
+		/obj/item/food/kebab/tail,
+		/obj/item/organ/external/tail/lizard,
+		/obj/item/reagent_containers/cup/glass/bottle/lizardwine,
+		/obj/item/toy/plush/lizard_plushie,
+	)),
+
+	"skeletons" = typecacheof(list(
+		/obj/effect/decal/remains/human,
+		/obj/item/clothing/suit/armor/bone,
+		/obj/item/food/meat/slab/human/mutant/skeleton,
+		/obj/item/organ/internal/tongue/bone,
+		/obj/item/stack/sheet/bone,
+	)),
+
+	"conspiracies" = typecacheof(list(
+		/obj/item/abductor/gizmo,
+		/obj/item/abductor/silencer,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/clothing/head/helmet/abductor,
 		/obj/item/clothing/mask/facehugger,
 		/obj/item/clothing/suit/armor/abductor,
@@ -124,6 +249,7 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/gun/energy/alien,
 		/obj/item/hemostat/alien,
 		/obj/item/melee/baton/abductor,
+<<<<<<< HEAD
 		/obj/item/organ/internal/body_egg/alien_embryo,
 		/obj/item/organ/internal/heart/gland,
 		/obj/item/radio/headset/abductor,
@@ -133,6 +259,19 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/stack/sheet/mineral/abductor,
 		/obj/item/surgicaldrill/alien,
 		/obj/item/toy/toy_xeno,
+=======
+		/obj/item/stamp/centcom,
+		/obj/item/stamp/head,
+		/obj/item/storage/belt/military/abductor,
+		/obj/item/toy/figure/captain,
+		/obj/item/toy/figure/ce,
+		/obj/item/toy/figure/cmo,
+		/obj/item/toy/figure/dsquad,
+		/obj/item/toy/figure/hop,
+		/obj/item/toy/figure/hos,
+		/obj/item/toy/figure/rd,
+		/obj/item/toy/figure/qm,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/toy/plush/abductor,
 		/obj/item/toy/plush/abductor/agent,
 		/obj/item/weldingtool/abductor,
@@ -165,6 +304,7 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/structure/mineral_door/paperframe,
 		/obj/structure/window/paperframe,
 	)),
+<<<<<<< HEAD
 	"authority" = typecacheof(list(
 		/obj/item/card/id/advanced/centcom,
 		/obj/item/card/id/advanced/gold,
@@ -176,6 +316,118 @@ GLOBAL_LIST_INIT(phobia_objs, list(
 		/obj/item/clothing/under/rank/engineering/chief_engineer,
 		/obj/item/clothing/under/rank/medical/chief_medical_officer,
 		/obj/item/clothing/under/rank/rnd/research_director,
+=======
+
+	"doctors" = typecacheof(list(
+		/obj/item/cautery,
+		/obj/item/circular_saw,
+		/obj/item/clothing/head/bio_hood/plague,
+		/obj/item/clothing/mask/gas/plaguedoctor,
+		/obj/item/clothing/suit/bio_suit/plaguedoctorsuit,
+		/obj/item/clothing/under/rank/medical,
+		/obj/item/healthanalyzer,
+		/obj/item/hemostat,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/reagent_containers/pill/,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/retractor,
+		/obj/item/scalpel,
+		/obj/item/storage/medkit,
+		/obj/item/storage/pill_bottle,
+		/obj/item/surgical_drapes,
+		/obj/item/surgicaldrill,
+		/obj/machinery/atmospherics/components/unary/cryo_cell,
+		/obj/machinery/dna_scannernew,
+		/obj/machinery/door/airlock/medical,
+		/obj/machinery/sleeper,
+		/obj/machinery/stasis,
+		/obj/structure/sign/departments/medbay,
+	)),
+	"greytide" = (typecacheof(list(
+		/obj/item/clothing/under/color/grey,
+		/obj/item/melee/baton/security/cattleprod,
+		/obj/item/spear,
+		/obj/item/toy/figure/assistant,
+		/obj/structure/statue/sandstone/assistant,
+	)) + typecacheof(list(/obj/item/clothing/mask/gas), ignore_root_path = FALSE, only_root_path = TRUE // to match only specific items in this phobia and not subtypes, use an additional typecacheof w/ ignore_root_path set FALSE and only_root_patch set TRUE
+	)),
+	"guns" = typecacheof(list(
+		/obj/item/ammo_box,
+		/obj/item/ammo_casing,
+		/obj/item/gun/ballistic,
+		/obj/item/gun/blastcannon,
+		/obj/item/gun/chem,
+		/obj/item/gun/energy,
+		/obj/item/gun/grenadelauncher,
+		/obj/item/gun/syringe,
+		/obj/item/mecha_ammo,
+		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic,
+		/obj/item/mecha_parts/mecha_equipment/weapon/energy,
+		/obj/item/storage/belt/bandolier,
+		/obj/item/storage/belt/holster,
+		/obj/machinery/porta_turret,
+		/obj/machinery/power/emitter,
+	)),
+	"heresy" = typecacheof(list(
+		/obj/effect/floating_blade,
+		/obj/effect/forcefield/cosmic_field,
+		/obj/effect/forcefield/wizard/heretic,
+		/obj/effect/heretic_influence,
+		/obj/effect/heretic_rune,
+		/obj/effect/knock_portal,
+		/obj/effect/visible_heretic_influence,
+		/obj/item/ammo_box/a762/lionhunter,
+		/obj/item/ammo_casing/a762/lionhunter,
+		/obj/item/clothing/mask/madness_mask,
+		/obj/item/clothing/neck/eldritch_amulet,
+		/obj/item/clothing/neck/fake_heretic_amulet,
+		/obj/item/clothing/neck/heretic_focus,
+		/obj/item/clothing/suit/hooded/cultrobes/eldritch,
+		/obj/item/codex_cicatrix,
+		/obj/item/coin/eldritch,
+		/obj/item/gun/ballistic/rifle/lionhunter,
+		/obj/item/heretic_lintel,
+		/obj/item/melee/rune_carver,
+		/obj/item/melee/sickly_blade,
+		/obj/item/melee/touch_attack/mansus_fist,
+		/obj/item/reagent_containers/cup/beaker/eldritch,
+		/obj/item/toy/eldritch_book,
+		/obj/item/toy/reality_pierce,
+		/obj/projectile/curse_hand,
+		/obj/structure/destructible/eldritch_crucible,
+		/obj/structure/knock_tear,
+	)),
+	"insects" = typecacheof(list(
+		/obj/item/clothing/mask/animal/small/bee,
+		/obj/item/clothing/suit/hooded/bee_costume,
+		/obj/item/toy/plush/beeplushie,
+		/obj/item/toy/plush/moth,
+		/obj/structure/beebox,
+	)),
+	"lizards" = typecacheof(list(
+		/obj/item/clothing/head/costume/lizard,
+		/obj/item/clothing/shoes/cowboy/lizard,
+		/obj/item/food/kebab/tail,
+		/obj/item/organ/external/tail/lizard,
+		/obj/item/reagent_containers/cup/glass/bottle/lizardwine,
+		/obj/item/toy/plush/lizard_plushie,
+	)),
+	"robots" = typecacheof(list(
+		/obj/item/ai_module,
+		/obj/item/aicard,
+		/obj/item/toy/figure/borg,
+		/obj/item/toy/talking/ai,
+		/obj/machinery/computer/upload,
+		/obj/machinery/recharge_station,
+		/obj/structure/statue/diamond/ai1,
+		/obj/structure/statue/diamond/ai2,
+		/obj/structure/statue/silver/medborg,
+		/obj/structure/statue/silver/secborg,
+	)),
+	"security" = typecacheof(list(
+		/obj/effect/client_image_holder/securitron,
+		/obj/item/clothing/under/rank/security/detective,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/clothing/under/rank/security/head_of_security,
 		/obj/item/clothing/under/rank/cargo/qm,
 		/obj/item/clothing/neck/cloak/qm,
@@ -550,8 +802,8 @@ GLOBAL_LIST_INIT(phobia_species, list(
 		/datum/species/jelly,
 		/datum/species/pod,
 		/datum/species/shadow,
+		/datum/species/oozeling,
 	)),
-	"anime" = typecacheof(list(/datum/species/human/felinid)),
 	"conspiracies" = typecacheof(list(
 		/datum/species/abductor,
 		/datum/species/lizard,

@@ -40,12 +40,19 @@
 	total_requirement = 3
 	max_requirement_per_type = 2
 	possible_types = list(
+<<<<<<< HEAD
 		/mob/living/basic/pet/cat,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/mob/living/basic/carp,
 		/mob/living/basic/chicken,
 		/mob/living/basic/cow,
 		/mob/living/basic/pet/dog/corgi,
 		/mob/living/basic/snake,
+<<<<<<< HEAD
+=======
+		/mob/living/simple_animal/pet/cat,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/experiment/scanning/random/cytology/medium/one
@@ -226,11 +233,9 @@
 	required_atoms = list(
 		/obj/machinery/autolathe = 1,
 		/obj/machinery/rnd/production/circuit_imprinter/department/science = 1,
-		/obj/machinery/monkey_recycler = 1,
-		/obj/machinery/processor/slime = 1,
 		/obj/machinery/processor = 2,
 		/obj/machinery/reagentgrinder = 2,
-		/obj/machinery/hydroponics = 2,
+		/obj/machinery/growing/tray = 2,
 		/obj/machinery/biogenerator = 3,
 		/obj/machinery/gibber = 3,
 		/obj/machinery/chem_master = 3,
@@ -257,7 +262,6 @@
 	required_points = 10
 	required_atoms = list(
 		/obj/machinery/mecha_part_fabricator = 1,
-		/obj/machinery/rnd/experimentor = 1,
 		/obj/machinery/dna_scannernew = 1,
 		/obj/machinery/microwave = 2,
 		/obj/machinery/deepfryer = 2,
@@ -288,7 +292,6 @@
 	required_points = 6
 	required_atoms = list(
 		/obj/machinery/dna_scannernew = 1,
-		/obj/machinery/rnd/experimentor = 1,
 		/obj/machinery/medical_kiosk = 2,
 		/obj/machinery/piratepad/civilian = 2,
 	)
@@ -314,7 +317,6 @@
 	required_atoms = list(
 		/obj/machinery/mecha_part_fabricator = 1,
 		/obj/machinery/microwave = 1,
-		/obj/machinery/rnd/experimentor = 1,
 		/obj/machinery/atmospherics/components/unary/thermomachine/freezer = 2,
 		/obj/machinery/power/emitter = 2,
 		/obj/machinery/chem_heater = 2,
@@ -331,6 +333,7 @@
 	///Damage percent that each mech needs to be at for a scan to work.
 	var/damage_percent
 
+<<<<<<< HEAD
 /datum/experiment/scanning/random/mecha_equipped_scan
 	name = "Exosuit Materials: Load Strain Test"
 	description = "Exosuit equipment places unique strain upon the structure of the vehicle. Scan exosuits you have assembled from your exosuit fabricator and fully equipped to accelerate our structural stress simulations."
@@ -348,6 +351,9 @@
 	var/organic_only = TRUE
 
 /datum/experiment/scanning/people/novel_organs/is_valid_scan_target(mob/living/carbon/human/check)
+=======
+/datum/experiment/scanning/random/mecha_damage_scan/New(datum/techweb/techweb)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if (!.)
 		return

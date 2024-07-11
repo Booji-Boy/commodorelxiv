@@ -20,7 +20,10 @@
 	var/mech_damage = 45
 
 /datum/action/cooldown/mob_cooldown/fire_breath/Activate(atom/target_atom)
+<<<<<<< HEAD
 	disable_cooldown_actions()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_sequence(target_atom)
 	StartCooldown()
 	enable_cooldown_actions()
@@ -93,7 +96,11 @@
 	button_icon = 'icons/effects/fire.dmi'
 	button_icon_state = "1"
 	desc = "Breathe flames in all directions."
+<<<<<<< HEAD
 	cooldown_time = 10.5 SECONDS
+=======
+	cooldown_time = 3 SECONDS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	click_to_activate = FALSE
 	/// How many fire lines do we produce to turn a full circle?
 	var/sectors = 12

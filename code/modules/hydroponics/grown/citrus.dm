@@ -17,11 +17,11 @@
 	product = /obj/item/food/grown/citrus/lime
 	lifespan = 55
 	endurance = 50
-	yield = 4
+	yield = 40
 	potency = 15
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/orange)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/orange)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/food/grown/citrus/lime
@@ -41,13 +41,13 @@
 	product = /obj/item/food/grown/citrus/orange
 	lifespan = 60
 	endurance = 50
-	yield = 5
+	yield = 50
 	potency = 20
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
 	icon_grow = "lime-grow"
 	icon_dead = "lime-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/lime, /obj/item/seeds/orange_3d)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/lime, /datum/hydroponics/plant_mutation/dimension_orange)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/food/grown/citrus/orange
@@ -69,12 +69,17 @@
 	product = /obj/item/food/grown/citrus/lemon
 	lifespan = 55
 	endurance = 45
+<<<<<<< HEAD
 	yield = 4
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	yield = 40
+	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "lime-grow"
 	icon_dead = "lime-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/firelemon)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/fire_lemon)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/food/grown/citrus/lemon
@@ -92,13 +97,17 @@
 	species = "firelemon"
 	plantname = "Combustible Lemon Tree"
 	product = /obj/item/food/grown/firelemon
+<<<<<<< HEAD
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	//growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "lime-grow"
 	icon_dead = "lime-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/bomb_plant/potency_based)
 	lifespan = 55
 	endurance = 45
-	yield = 4
+	yield = 40
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/fuel = 0.05)
 
 /obj/item/food/grown/firelemon
@@ -120,10 +129,14 @@
 	product = /obj/item/food/grown/citrus/orange_3d
 	lifespan = 60
 	endurance = 50
-	yield = 5
+	yield = 50
 	potency = 20
+<<<<<<< HEAD
 	instability = 64
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "lime-grow"
 	icon_dead = "lime-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)

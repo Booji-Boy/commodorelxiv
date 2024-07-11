@@ -18,10 +18,13 @@ SUBSYSTEM_DEF(events)
 	var/wizardmode = FALSE
 
 /datum/controller/subsystem/events/Initialize()
-	for(var/type in typesof(/datum/round_event_control))
-		var/datum/round_event_control/event = new type()
-		if(!event.typepath || !event.valid_for_map())
-			continue //don't want this one! leave it for the garbage collector
+	for(var/datum/round_event_control/event_type as anything in typesof(/datum/round_event_control))
+		if(!event_type::typepath || !event_type::name)
+			continue
+		var/datum/round_event_control/event = new event_type
+		if(!event.valid_for_map())
+			qdel(event)
+			continue
 		control += event //add it to the list of all events (controls)
 
 	frequency_lower = CONFIG_GET(number/events_frequency_lower)
@@ -105,7 +108,12 @@ SUBSYSTEM_DEF(events)
 	if(. == EVENT_CANT_RUN)//we couldn't run this event for some reason, set its max_occurrences to 0
 		event_to_trigger.max_occurrences = 0
 	else if(. == EVENT_READY)
+<<<<<<< HEAD
 		event_to_trigger.run_event(random = TRUE)
+=======
+		E.run_event(random = TRUE)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Toggles whether or not wizard events will be in the event pool, and sends a notification to the admins.
 /datum/controller/subsystem/events/proc/toggleWizardmode()
@@ -130,7 +138,7 @@ SUBSYSTEM_DEF(events)
  * simply make a random event normally, then assign it a holidayID string which matches the holiday's name.
  * Anything with a holidayID, which isn't in the holidays list, will never occur.
  *
- * Please, Don't spam stuff up with stupid stuff (key example being april-fools Pooh/ERP/etc),
+ * Please, Don't spam stuff up with stupid stuff (key example being april-fools Pooh/etc),
  * and don't forget: CHECK YOUR CODE!!!! We don't want any zero-day bugs which happen only on holidays and never get found/fixed!
  */
 GLOBAL_LIST(holidays)

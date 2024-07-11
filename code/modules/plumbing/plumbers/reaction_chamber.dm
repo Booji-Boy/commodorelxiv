@@ -34,7 +34,10 @@
 /// Handles properly detaching signal hooks.
 /obj/machinery/plumbing/reaction_chamber/proc/on_reagents_del(datum/reagents/reagents)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	UnregisterSignal(reagents, list(COMSIG_REAGENTS_REM_REAGENT, COMSIG_REAGENTS_DEL_REAGENT, COMSIG_REAGENTS_CLEAR_REAGENTS, COMSIG_REAGENTS_REACTED, COMSIG_QDELETING))
 	return NONE
 

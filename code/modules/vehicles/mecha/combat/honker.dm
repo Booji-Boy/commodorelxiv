@@ -11,7 +11,12 @@
 	max_temperature = 25000
 	destruction_sleep_duration = 40
 	exit_delay = 40
+<<<<<<< HEAD
 	accesses = list(ACCESS_MECH_SCIENCE, ACCESS_THEATRE)
+=======
+	encumbrance_gap = 2
+	internal_damage_threshold = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	wreckage = /obj/structure/mecha_wreckage/honker
 	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | MMI_COMPATIBLE
 	mech_type = EXOSUIT_MODULE_HONK
@@ -20,7 +25,7 @@
 		MECHA_R_ARM = 1,
 		MECHA_UTILITY = 4,
 		MECHA_POWER = 1,
-		MECHA_ARMOR = 0,
+		MECHA_ARMOR = 1,
 	)
 	var/squeak = TRUE
 

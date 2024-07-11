@@ -168,11 +168,14 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "eI" = (
+<<<<<<< HEAD
 /obj/item/ammo_casing/a357/spent{
 	dir = 1;
 	pixel_x = -1;
 	pixel_y = 5
 	},
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/trooper/syndicate/melee/space,
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
@@ -737,6 +740,17 @@
 /obj/effect/turf_decal/stripes/full,
 /mob/living/basic/mining_drone,
 /obj/item/grenade/c4,
+<<<<<<< HEAD
+=======
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mob_spawn/corpse/human/russian,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/full,
+/mob/living/basic/mining_drone,
+/obj/item/grenade/c4,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "Do" = (

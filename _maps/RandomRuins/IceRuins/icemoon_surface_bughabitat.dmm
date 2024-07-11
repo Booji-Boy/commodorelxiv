@@ -34,6 +34,15 @@
 	},
 /turf/open/floor/plastic,
 /area/ruin/bughabitat)
+<<<<<<< HEAD
+=======
+"cK" = (
+/mob/living/basic/ant{
+	environment_smash = 0
+	},
+/turf/open/floor/grass,
+/area/ruin/bughabitat)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "eM" = (
 /obj/structure/chair/pew/right{
 	dir = 8
@@ -306,7 +315,7 @@
 /turf/open/floor/carpet/neon/simple/lime,
 /area/ruin/bughabitat)
 "IX" = (
-/obj/machinery/hydroponics/constructable,
+/obj/machinery/growing/tray,
 /turf/open/floor/plastic,
 /area/ruin/bughabitat)
 "Jr" = (

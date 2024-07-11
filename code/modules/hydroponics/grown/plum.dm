@@ -8,12 +8,17 @@
 	product = /obj/item/food/grown/plum
 	lifespan = 55
 	endurance = 35
+<<<<<<< HEAD
 	yield = 5
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	yield = 50
+	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "plum-grow"
 	icon_dead = "plum-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/one_bite)
-	mutatelist = list(/obj/item/seeds/plum/plumb)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/plumb)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1, /datum/reagent/impurity/rosenol = 0.04)
 
 /obj/item/food/grown/plum
@@ -35,7 +40,7 @@
 	plantname = "Plumb Tree"
 	product = /obj/item/food/grown/plum/plumb
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1, /datum/reagent/lead = 0.04)
 	rarity = 30
 

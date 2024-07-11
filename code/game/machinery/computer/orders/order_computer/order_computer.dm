@@ -95,7 +95,11 @@ GLOBAL_LIST_EMPTY(order_console_products)
 		var/mob/living/living_user = user
 		var/obj/item/card/id/id_card = living_user.get_idcard(TRUE)
 		if(id_card)
+<<<<<<< HEAD
 			data["points"] = retrieve_points(id_card)
+=======
+			data["points"] = retrive_points(id_card)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return data
 

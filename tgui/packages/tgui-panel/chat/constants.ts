@@ -28,6 +28,7 @@ export const MESSAGE_TYPE_INFO = 'info';
 export const MESSAGE_TYPE_WARNING = 'warning';
 export const MESSAGE_TYPE_DEADCHAT = 'deadchat';
 export const MESSAGE_TYPE_OOC = 'ooc';
+export const MESSAGE_TYPE_LOOC = 'looc'; // monkestation edit: looc
 export const MESSAGE_TYPE_ADMINPM = 'adminpm';
 export const MESSAGE_TYPE_COMBAT = 'combat';
 export const MESSAGE_TYPE_ADMINCHAT = 'adminchat';
@@ -60,7 +61,8 @@ export const MESSAGE_TYPES = [
     name: 'Radio',
     description: 'All departments of radio messages',
     selector:
-      '.alert, .minorannounce, .syndradio, .centcomradio, .aiprivradio, .comradio, .secradio, .gangradio, .engradio, .medradio, .sciradio, .suppradio, .servradio, .radio, .deptradio, .binarysay, .newscaster, .resonate, .abductor, .alien, .changeling',
+      //      '.alert, .minorannounce, .syndradio, .centcomradio, .aiprivradio, .comradio, .secradio, .gangradio, .engradio, .medradio, .sciradio, .suppradio, .servradio, .radio, .deptradio, .binarysay, .newscaster, .resonate, .abductor, .alien, .changeling', MONKESTATION EDIT CHANGE OLD
+      '.alert, .minorannounce, .syndradio, .centcomradio, .aiprivradio, .comradio, .secradio, .gangradio, .engradio, .medradio, .sciradio, .suppradio, .servradio, .radio, .deptradio, .binarysay, .newscaster, .resonate, .abductor, .alien, .changeling, .radioradio', // MONKESTATION EDIT CHANGE NEW
   },
   {
     type: MESSAGE_TYPE_INFO,
@@ -89,6 +91,12 @@ export const MESSAGE_TYPES = [
     selector: '.ooc, .adminooc, .adminobserverooc, .oocplain',
   },
   {
+    type: MESSAGE_TYPE_LOOC,
+    name: 'LOOC',
+    description: 'Local Out Of Character',
+    selector: '.looc',
+  },
+  {
     type: MESSAGE_TYPE_ADMINPM,
     name: 'Admin PMs',
     description: 'Messages to/from admins (adminhelp)',
@@ -101,6 +109,12 @@ export const MESSAGE_TYPES = [
     selector: '.danger',
   },
   {
+    type: MESSAGE_TYPE_MODCHAT,
+    name: 'Mentor Chat',
+    description: 'MSAY (Mentor) chat',
+    selector: '.modchat',
+  },
+  {
     type: MESSAGE_TYPE_UNKNOWN,
     name: 'Unsorted',
     description: 'Everything we could not sort, always enabled',
@@ -111,13 +125,6 @@ export const MESSAGE_TYPES = [
     name: 'Admin Chat',
     description: 'ASAY messages',
     selector: '.admin_channel, .adminsay',
-    admin: true,
-  },
-  {
-    type: MESSAGE_TYPE_MODCHAT,
-    name: 'Mod Chat',
-    description: 'MSAY messages',
-    selector: '.mod_channel',
     admin: true,
   },
   {

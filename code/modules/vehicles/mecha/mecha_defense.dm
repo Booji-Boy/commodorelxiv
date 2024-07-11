@@ -115,6 +115,7 @@
 	return ..()
 
 /obj/vehicle/sealed/mecha/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit) //wrapper
+<<<<<<< HEAD
 	//allows bullets to hit the pilot of open-canopy mechs
 	if(!(mecha_flags & IS_ENCLOSED) \
 		&& LAZYLEN(occupants) \
@@ -124,6 +125,20 @@
 		return hitmob.bullet_act(hitting_projectile, def_zone, piercing_hit) //If the sides are open, the occupant can be hit
 
 	. = ..()
+=======
+	. = ..()
+	if(. != BULLET_ACT_HIT)
+		return .
+
+	//allows bullets to hit the pilot of open-canopy mechs
+	if(!enclosed \
+		&& LAZYLEN(occupants) \
+		&& !(mecha_flags & SILICON_PILOT) \
+		&& (def_zone == BODY_ZONE_HEAD || def_zone == BODY_ZONE_CHEST))
+		for(var/mob/living/hitmob as anything in occupants)
+			hitmob.bullet_act(hitting_projectile, def_zone, piercing_hit) //If the sides are open, the occupant can be hit
+		return BULLET_ACT_HIT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	log_message("Hit by projectile. Type: [hitting_projectile]([hitting_projectile.damage_type]).", LOG_MECHA, color="red")
 	// yes we *have* to run the armor calc proc here I love tg projectile code too
@@ -134,7 +149,10 @@
 		attack_dir = REVERSE_DIR(hitting_projectile.dir),
 		armour_penetration = hitting_projectile.armour_penetration,
 	), def_zone)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/vehicle/sealed/mecha/ex_act(severity, target)
 	log_message("Affected by explosion of severity: [severity].", LOG_MECHA, color="red")
@@ -211,8 +229,13 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 
+<<<<<<< HEAD
 /obj/vehicle/sealed/mecha/attackby(obj/item/weapon, mob/living/user, params)
 	if(user.combat_mode)
+=======
+/obj/vehicle/sealed/mecha/attackby(obj/item/W, mob/living/user, params)
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 	if(istype(weapon, /obj/item/mmi))
 		if(mmi_move_inside(weapon,user))
@@ -397,7 +420,7 @@
 	balloon_alert(user, "no parts!")
 
 /obj/vehicle/sealed/mecha/welder_act(mob/living/user, obj/item/W)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	. = TRUE
 	if(DOING_INTERACTION(user, src))

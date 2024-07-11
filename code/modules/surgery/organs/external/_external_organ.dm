@@ -15,18 +15,16 @@
 	///If not null, overrides the appearance with this sprite accessory datum
 	var/sprite_accessory_override
 
-	/// The savefile_key of the preference this relates to. Used for the preferences UI.
-	var/preference
-	///With what DNA block do we mutate in mutate_feature() ? For genetics
-	var/dna_block
-
 	///Set to EXTERNAL_BEHIND, EXTERNAL_FRONT or EXTERNAL_ADJACENT if you want to draw one of those layers as the object sprite. FALSE to use your own
 	///This will not work if it doesn't have a limb to generate it's icon with
 	var/use_mob_sprite_as_obj_sprite = FALSE
+<<<<<<< HEAD:code/modules/surgery/organs/external/_external_organ.dm
 	///Does this organ have any bodytypes to pass to it's bodypart_owner?
 	var/external_bodytypes = NONE
 	///Does this organ have any bodyshapes to pass to it's bodypart_owner?
 	var/external_bodyshapes = NONE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/external/_external_organs.dm
 	///Which flags does a 'modification tool' need to have to restyle us, if it all possible (located in code/_DEFINES/mobs)
 	var/restyle_flags = NONE
 
@@ -92,6 +90,31 @@
 		organ_owner.synchronize_bodytypes()
 		organ_owner.synchronize_bodyshapes()
 		organ_owner.update_body_parts()
+<<<<<<< HEAD:code/modules/surgery/organs/external/_external_organ.dm
+=======
+
+
+/obj/item/organ/external/on_remove(mob/living/carbon/organ_owner, special)
+	. = ..()
+	color = bodypart_overlay.draw_color // so a pink felinid doesn't drop a gray tail
+
+///Transfers the organ to the limb, and to the limb's owner, if it has one.
+/obj/item/organ/external/transfer_to_limb(obj/item/bodypart/bodypart, mob/living/carbon/bodypart_owner)
+	if(owner)
+		Remove(owner, moving = TRUE)
+	else if(ownerlimb)
+		remove_from_limb()
+
+	if(bodypart_owner)
+		Insert(bodypart_owner, TRUE)
+	else
+		add_to_limb(bodypart)
+
+/obj/item/organ/external/add_to_limb(obj/item/bodypart/bodypart)
+	bodypart.external_organs += src
+	ownerlimb = bodypart
+	ownerlimb.add_bodypart_overlay(bodypart_overlay)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/external/_external_organs.dm
 	return ..()
 
 /obj/item/organ/external/on_bodypart_insert(obj/item/bodypart/bodypart)
@@ -217,9 +240,15 @@
 	desc = "Take a closer look at that snout!"
 	icon_state = "snout"
 
+	organ_flags = ORGAN_UNREMOVABLE | ORGAN_EDIBLE
+	visual = TRUE
+	cosmetic_only = TRUE
+
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_SNOUT
+	layers = list(BODY_ADJ_LAYER)
 
+	feature_key = "snout"
 	preference = "feature_lizard_snout"
 	external_bodyshapes = BODYSHAPE_SNOUTED
 

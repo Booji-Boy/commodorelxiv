@@ -19,8 +19,8 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 /obj/item/food/egg
 	name = "egg"
 	desc = "An egg!"
-	icon = 'icons/obj/food/egg.dmi'
-	icon_state = "egg"
+	icon_state = "chicken"
+	icon = 'monkestation/icons/obj/ranching/eggs.dmi'
 	inhand_icon_state = "egg"
 	food_reagents = list(/datum/reagent/consumable/eggyolk = 2, /datum/reagent/consumable/eggwhite = 4)
 	foodtypes = MEAT | RAW
@@ -30,6 +30,16 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	decomp_req_handle = TRUE //so laid eggs can actually become chickens
 	/// How likely is it that a chicken will come out of here if we throw it?
 	var/chick_throw_prob = 13
+	bite_consumption = 100 // whole ass egg all at once
+	food_buffs = STATUS_EFFECT_FOOD_STAM_TINY
+
+/obj/item/food/egg/Initialize(mapload)
+	. = ..()
+	RegisterSignal(src, COMSIG_FOOD_EATEN, PROC_REF(consumed_egg))
+
+/obj/item/food/egg/proc/consumed_egg(datum/source, mob/living/eater, mob/living/feeder)
+	SIGNAL_HANDLER
+	return
 
 /obj/item/food/egg/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/boiledegg, rand(15 SECONDS, 20 SECONDS), TRUE, TRUE)
@@ -69,10 +79,17 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 
 	var/turf/hit_turf = get_turf(hit_atom)
 	new /obj/effect/decal/cleanable/food/egg_smudge(hit_turf)
+<<<<<<< HEAD
 	if (prob(chick_throw_prob))
 		spawn_impact_chick(hit_turf)
+=======
+	//Chicken code uses this MAX_CHICKENS variable, so I figured that I'd use it again here. Even this check and the check in chicken code both use the MAX_CHICKENS variable, they use independent counter variables and thus are independent of each other.
+	if(prob(chick_throw_prob) && GLOB.chicks_from_eggs < MAX_CHICKENS) //Roughly a 1/8 (12.5%) chance to make a chick, as in Minecraft. I decided not to include the chances for the creation of multiple chicks from the impact of one egg, since that'd probably require nested prob()s or something (and people might think that it was a bug, anyway).
+		pre_hatch()
+		GLOB.chicks_from_eggs++
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	reagents.expose(hit_atom, TOUCH)
-	qdel(src)
 
 /// Spawn a baby chicken from throwing an egg
 /obj/item/food/egg/proc/spawn_impact_chick(turf/spawn_turf)
@@ -163,8 +180,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	inhand_icon_state = "egg-purple"
 
 /obj/item/food/egg/rainbow
-	icon_state = "egg-rainbow"
-	inhand_icon_state = "egg-rainbow"
+	icon_state = "chicken"
 
 /obj/item/food/egg/red
 	icon_state = "egg-red"
@@ -243,7 +259,11 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	w_class = WEIGHT_CLASS_SMALL
 	ant_attracting = FALSE
 	decomp_type = /obj/item/food/boiledegg/rotten
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_1
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/eggsausage
 	name = "egg with sausage"
@@ -276,7 +296,11 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	tastes = list("egg" = 1, "cheese" = 1)
 	foodtypes = MEAT | BREAKFAST | DAIRY
 	venue_value = FOOD_PRICE_CHEAP
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/omelette/attackby(obj/item/item, mob/user, params)
 	if(istype(item, /obj/item/kitchen/fork))
@@ -310,7 +334,11 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 	tastes = list("egg" = 1, "bacon" = 1, "bun" = 1)
 	foodtypes = MEAT | BREAKFAST | GRAIN
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/eggwrap
 	name = "egg wrap"

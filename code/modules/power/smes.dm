@@ -423,6 +423,7 @@
 
 /obj/machinery/power/smes/emp_act(severity)
 	. = ..()
+<<<<<<< HEAD
 	if(. & EMP_PROTECT_SELF)
 		return
 	input_attempt = rand(0,1)
@@ -436,6 +437,9 @@
 		charge = 0
 	update_appearance()
 	log_smes()
+=======
+	return //monke edit: removed to prevent random singulooses/teslooses
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Variant of SMES that starts with super power cells for higher longevity
 /obj/machinery/power/smes/super

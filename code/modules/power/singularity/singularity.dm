@@ -9,7 +9,7 @@
 	move_resist = INFINITY
 	plane = MASSIVE_OBJ_PLANE
 	plane = ABOVE_LIGHTING_PLANE
-	light_range = 6
+	light_outer_range = 6
 	appearance_flags = LONG_GLIDE
 
 	/// the prepended string to the icon state (singularity_s1, dark_matter_s1, etc)
@@ -167,6 +167,11 @@
 		if(prob(event_chance))
 			event()
 	dissipate(seconds_per_tick)
+	radiation_pulse(src, 4, intensity = min(5000, (energy * 4.5) + 1000), should_rad_act = FALSE)
+	for(var/obj/collector in range(5, src))
+		if(!istype(collector, /obj/machinery/power/rad_collector) && !isartifact(collector))
+			continue
+		collector.rad_act(intensity = min(2500, (energy * 2) + 500))
 	check_energy()
 
 /obj/singularity/proc/dissipate(seconds_per_tick)
@@ -499,6 +504,7 @@
 /// Special singularity that spawns for shuttle events only
 /obj/singularity/shuttle_event
 	anchored = FALSE
+<<<<<<< HEAD
 
 /// Special singularity spawned by being sucked into a black hole during emagged orion trail.
 /obj/singularity/orion
@@ -512,3 +518,5 @@
 /obj/singularity/orion/process(seconds_per_tick)
 	if(SPT_PROB(0.5, seconds_per_tick))
 		mezzer()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

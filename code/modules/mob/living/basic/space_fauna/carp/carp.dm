@@ -23,7 +23,7 @@
 	health = 25
 	maxHealth = 25
 	pressure_resistance = 200
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	obj_damage = 50
 	melee_damage_lower = 20
 	melee_damage_upper = 20
@@ -103,13 +103,25 @@
 	teleport.Grant(src)
 	ai_controller.set_blackboard_key(BB_CARP_RIFT, teleport)
 	ai_controller.set_blackboard_key(BB_OBSTACLE_TARGETING_WHITELIST, allowed_obstacle_targets)
+<<<<<<< HEAD
+=======
+
+
+/mob/living/basic/carp/Destroy()
+	QDEL_NULL(teleport)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Tell the elements and the blackboard what food we want to eat
 /mob/living/basic/carp/proc/setup_eating()
 	AddElement(/datum/element/basic_eating, food_types = desired_food)
 	AddElement(/datum/element/basic_eating, heal_amt = 0, damage_amount = 10, damage_type = BRUTE, food_types = desired_trash) // We are killing our planet
+<<<<<<< HEAD
 	var/list/foods_list = desired_food + desired_trash
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(foods_list))
+=======
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, desired_food + desired_trash)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Set a random colour on the carp, override to do something else
 /mob/living/basic/carp/proc/apply_colour()
@@ -133,8 +145,11 @@
 
 /// Gives the carp a list of weakrefs of destinations to try and travel between when it has nothing better to do
 /mob/living/basic/carp/proc/migrate_to(list/datum/weakref/migration_points)
+<<<<<<< HEAD
 	ai_controller.can_idle = FALSE
 	ai_controller.set_ai_status(AI_STATUS_ON) // We need htem to actually walk to the station
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/actual_points = list()
 	for(var/datum/weakref/point_ref as anything in migration_points)
 		var/turf/point_resolved = point_ref.resolve()
@@ -254,6 +269,7 @@
 
 #undef RARE_CAYENNE_CHANCE
 
+<<<<<<< HEAD
 ///Carp-parasite from carpellosis disease
 /mob/living/basic/carp/ella
 	name = "Ella"
@@ -265,6 +281,8 @@
 	. = ..()
 	death() // It comes into the world dead when the disease is cured
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Wild carp that just vibe ya know
 /mob/living/basic/carp/passive
 	name = "passive carp"

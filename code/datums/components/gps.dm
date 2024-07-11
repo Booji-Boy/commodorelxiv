@@ -50,7 +50,11 @@ GLOBAL_LIST_EMPTY(GPS_list)
 	if(!emp_proof)
 		RegisterSignal(parent, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp_act))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(on_click_alt))
+=======
+	RegisterSignal(parent, COMSIG_CLICK_ALT, PROC_REF(on_AltClick))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Called on COMSIG_ITEM_ATTACK_SELF
 /datum/component/gps/item/proc/interact(datum/source, mob/user)

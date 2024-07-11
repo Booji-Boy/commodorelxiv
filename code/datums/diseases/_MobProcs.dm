@@ -64,7 +64,11 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/infecting_human = src
 
+<<<<<<< HEAD
 		if(HAS_TRAIT(infecting_human, TRAIT_VIRUS_RESISTANCE) && prob(75))
+=======
+		if(infecting_human.reagents.has_reagent(/datum/reagent/medicine/antipathogenic/spaceacillin) && prob(75))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 
 		switch(target_zone)
@@ -94,6 +98,7 @@
 	if(passed)
 		disease.try_infect(src)
 
+<<<<<<< HEAD
 /**
  * Handle being contracted a disease via airborne transmission
  *
@@ -107,6 +112,24 @@
 	if(!disease.has_required_infectious_organ(src, ORGAN_SLOT_LUNGS))
 		return FALSE
 	return ForceContractDisease(disease)
+=======
+/mob/living/proc/AirborneContractDisease(datum/disease/disease, force_spread)
+	if(ishuman(src))
+		var/mob/living/carbon/human/infecting_human = src
+		if(infecting_human.reagents.has_reagent(/datum/reagent/medicine/antipathogenic/spaceacillin) && prob(75))
+			return
+
+	if(((disease.spread_flags & DISEASE_SPREAD_AIRBORNE) || force_spread) && prob((50*disease.spreading_modifier) - 1))
+		ForceContractDisease(disease)
+
+/mob/living/carbon/AirborneContractDisease(datum/disease/D, force_spread)
+	if(internal)
+		return
+	if(HAS_TRAIT(src, TRAIT_NOBREATH))
+		return
+	..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Proc to use when you 100% want to try to infect someone (ignoreing protective clothing and such), as long as they aren't immune
 /mob/living/proc/ForceContractDisease(datum/disease/D, make_copy = TRUE, del_on_fail = FALSE)

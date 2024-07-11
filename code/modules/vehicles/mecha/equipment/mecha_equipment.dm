@@ -35,6 +35,10 @@
 	///Sound file: Sound to play when this equipment is destroyed while still attached to the mech
 	var/destroy_sound = 'sound/mecha/critdestr.ogg'
 
+	///what equipment flags does this have
+	var/equipment_flags
+	var/movedelay = 0
+
 /obj/item/mecha_parts/mecha_equipment/Destroy()
 	if(chassis)
 		if(LAZYLEN(chassis.occupants))
@@ -62,7 +66,12 @@
 		return
 	switch(action)
 		if("detach")
+<<<<<<< HEAD
 			chassis.ui_selected_module_index = null
+=======
+			if(equipment_flags & NOT_ABLE_TO_REMOVE_FROM_MECHA) //monkestation edit
+				return //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			detach(get_turf(src))
 			. = TRUE
 		if("toggle")
@@ -114,7 +123,11 @@
 /obj/item/mecha_parts/mecha_equipment/proc/action(mob/source, atom/target, list/modifiers)
 	TIMER_COOLDOWN_START(chassis, COOLDOWN_MECHA_EQUIPMENT(type), equip_cooldown)//Cooldown is on the MECH so people dont bypass it by switching equipment
 	SEND_SIGNAL(source, COMSIG_MOB_USED_MECH_EQUIPMENT, chassis)
+<<<<<<< HEAD
 	chassis.use_energy(energy_drain)
+=======
+	chassis.use_power(energy_drain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /**
@@ -245,3 +258,7 @@
 /// AI mech pilot: returns TRUE if the Ai should try to reload the mecha
 /obj/item/mecha_parts/mecha_equipment/proc/needs_rearm()
 	return FALSE
+
+/// Equipment returns its slowdown or speedboost.
+/obj/item/mecha_parts/mecha_equipment/proc/get_movedelay()
+	return movedelay

@@ -314,6 +314,7 @@
 /obj/item/storage/toolbox/haunted
 	name = "old toolbox"
 	custom_materials = list(/datum/material/hauntium = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 
 /obj/item/storage/toolbox/guncase
 	name = "gun case"
@@ -509,3 +510,5 @@
 	new /obj/item/food/grown/banana/bunch/monkeybomb(src)
 	// Somewhere to store it all.
 	new /obj/item/storage/backpack/messenger(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

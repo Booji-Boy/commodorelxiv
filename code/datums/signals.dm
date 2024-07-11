@@ -38,7 +38,11 @@
 
 	if(exists)
 		if(!override)
+<<<<<<< HEAD
 			var/override_message = "[signal_type] overridden. Use override = TRUE to suppress this warning.\nTarget: [target] ([target.type]) Existing Proc: [exists] New Proc: [proctype]"
+=======
+			var/override_message = "[signal_type] overridden. Use override = TRUE to suppress this warning.\nTarget: [target] ([target.type]) Proc: [proctype]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			log_signal(override_message)
 			stack_trace(override_message)
 		return
@@ -69,7 +73,11 @@
  * * sig_typeor_types Signal string key or list of signal keys to stop listening to specifically
  */
 /datum/proc/UnregisterSignal(datum/target, sig_type_or_types)
+<<<<<<< HEAD
 	var/list/lookup = target._listen_lookup
+=======
+	var/list/lookup = target?._listen_lookup
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!_signal_procs || !_signal_procs[target] || !lookup)
 		return
 	if(!islist(sig_type_or_types))

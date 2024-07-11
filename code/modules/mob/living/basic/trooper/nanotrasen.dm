@@ -2,15 +2,22 @@
 /mob/living/basic/trooper/nanotrasen
 	name = "\improper Nanotrasen Private Security Officer"
 	desc = "An officer of Nanotrasen's private security force. Seems rather unpleased to meet you."
+<<<<<<< HEAD
+=======
+	speed = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	faction = list(ROLE_DEATHSQUAD)
 	loot = list(/obj/effect/mob_spawn/corpse/human/nanotrasensoldier)
 	mob_spawner = /obj/effect/mob_spawn/corpse/human/nanotrasensoldier
 
+<<<<<<< HEAD
 /mob/living/basic/trooper/nanotrasen/assess_threat(judgement_criteria, lasercolor, datum/callback/weaponcheck)
 	return -10 // Respect our troops
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// A variant that calls for reinforcements on spotting a target
 /mob/living/basic/trooper/nanotrasen/screaming
 	ai_controller = /datum/ai_controller/basic_controller/trooper/calls_reinforcements
@@ -64,7 +71,11 @@
 	desc = "Pray for your life, syndicate. Run while you can."
 	maxHealth = 150
 	health = 150
+<<<<<<< HEAD
 	habitable_atmos = null
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	unsuitable_cold_damage = 0
 	casingtype = /obj/item/ammo_casing/energy/laser
 	burst_shots = 3

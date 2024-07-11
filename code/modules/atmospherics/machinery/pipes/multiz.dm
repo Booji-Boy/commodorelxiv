@@ -54,8 +54,13 @@
 	for(var/obj/machinery/atmospherics/pipe/multiz/above in GET_TURF_ABOVE(local_turf))
 		if(!is_connectable(above, piping_layer))
 			continue
+<<<<<<< HEAD
 		nodes[2] = above
 		above.nodes[3] = src //Two way travel :)
+=======
+		nodes += above
+		above.nodes += src //Two way travel :)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/obj/machinery/atmospherics/pipe/multiz/below in GET_TURF_BELOW(local_turf))
 		if(!is_connectable(below, piping_layer))
 			continue

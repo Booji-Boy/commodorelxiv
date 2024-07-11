@@ -265,11 +265,12 @@
 		ACCESS_BIT_DEN,
 		ACCESS_MINING,
 		ACCESS_MINING_STATION,
+		ACCESS_QM,
 		)
 	template_access = list(
 		ACCESS_CAPTAIN,
 		ACCESS_CHANGE_IDS,
-		ACCESS_QM,
+		ACCESS_HOP,
 		)
 	job = /datum/job/cargo_technician
 
@@ -536,7 +537,7 @@
 	assignment = "Geneticist"
 	trim_state = "trim_geneticist"
 	department_color = COLOR_SCIENCE_PINK
-	subdepartment_color = COLOR_SCIENCE_PINK
+	subdepartment_color = COLOR_MEDICAL_BLUE
 	sechud_icon_state = SECHUD_GENETICIST
 	minimal_access = list(
 		ACCESS_GENETICS,
@@ -652,7 +653,12 @@
 		ACCESS_SERVICE,
 		ACCESS_SHIPPING,
 		ACCESS_WEAPONS,
+<<<<<<< HEAD
 	)
+=======
+		ACCESS_PERMABRIG, // monkestation edit: add permabrig-only access
+		)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimal_wildcard_access = list(
 		ACCESS_HOS,
 	)
@@ -856,13 +862,20 @@
 	)
 	job = /datum/job/psychologist
 
+//Monkestation Edit Start - QM is not a head
+
 /datum/id_trim/job/quartermaster
 	assignment = "Quartermaster"
+<<<<<<< HEAD
 	intern_alt_name = "Quartermaster-in-Training"
 	trim_state = "trim_cargotechnician"
 	department_color = COLOR_COMMAND_BLUE
+=======
+	trim_state = "trim_quartermaster"
+	department_color = COLOR_CARGO_BROWN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	subdepartment_color = COLOR_CARGO_BROWN
-	department_state = "departmenthead"
+	department_state = "department"
 	sechud_icon_state = SECHUD_QUARTERMASTER
 	minimal_access = list(
 		ACCESS_AUX_BASE,
@@ -877,22 +890,16 @@
 		ACCESS_RC_ANNOUNCE,
 		ACCESS_SHIPPING,
 		ACCESS_VAULT,
-		ACCESS_KEYCARD_AUTH,
-		ACCESS_COMMAND,
-		ACCESS_EVA,
-		ACCESS_BRIG_ENTRANCE,
 		)
-	extra_access = list(
-		ACCESS_TELEPORTER,
-		)
-	minimal_wildcard_access = list(
-		ACCESS_QM,
-	)
+	extra_access = list()
 	template_access = list(
 		ACCESS_CAPTAIN,
 		ACCESS_CHANGE_IDS,
+		ACCESS_HOP,
 	)
 	job = /datum/job/quartermaster
+
+//Monkestation Edit End
 
 /datum/id_trim/job/research_director
 	assignment = "Research Director"
@@ -1014,6 +1021,7 @@
 		ACCESS_MINERAL_STOREROOM,
 		ACCESS_SECURITY,
 		ACCESS_WEAPONS,
+		ACCESS_PERMABRIG, // monkestation edit: add permabrig-only access
 		)
 	extra_access = list(
 		ACCESS_DETECTIVE,
@@ -1142,7 +1150,7 @@
 	template_access = list(
 		ACCESS_CAPTAIN,
 		ACCESS_CHANGE_IDS,
-		ACCESS_QM,
+		ACCESS_HOP,
 		)
 	job = /datum/job/shaft_miner
 
@@ -1187,12 +1195,21 @@
 		)
 	job = /datum/job/station_engineer
 
+<<<<<<< HEAD
 /datum/id_trim/job/veteran_advisor
 	assignment = "Veteran Security Advisor"
 	trim_state = "trim_veteranadvisor"
 	department_color = COLOR_SECURITY_RED
 	subdepartment_color = COLOR_COMMAND_BLUE
 	sechud_icon_state = SECHUD_VETERAN_ADVISOR
+=======
+/datum/id_trim/job/virologist
+	assignment = "Pathologist"
+	trim_state = "trim_virologist"
+	department_color = COLOR_MEDICAL_BLUE
+	subdepartment_color = COLOR_MEDICAL_BLUE
+	sechud_icon_state = SECHUD_VIROLOGIST
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimal_access = list(
 		ACCESS_COMMAND,
 		ACCESS_BRIG,
@@ -1233,6 +1250,7 @@
 		ACCESS_MINERAL_STOREROOM,
 		ACCESS_SECURITY,
 		ACCESS_WEAPONS,
+		ACCESS_PERMABRIG, // monkestation edit: add permabrig-only access
 		) // See /datum/job/warden/get_access()
 	extra_access = list(
 		ACCESS_DETECTIVE,

@@ -47,6 +47,7 @@ GLOBAL_VAR(restart_counter)
  *
  * GOT IT MEMORIZED?
  * - Dominion/Cyberboss
+<<<<<<< HEAD
  *
  * Where to put init shit quick guide:
  * If you need it to happen before the mc is created: world/Genesis.
@@ -56,6 +57,12 @@ GLOBAL_VAR(restart_counter)
 
 /**
  * THIS !!!SINGLE!!! PROC IS WHERE ANY FORM OF INIITIALIZATION THAT CAN'T BE PERFORMED IN SUBSYSTEMS OR WORLD/NEW IS DONE
+=======
+ */
+
+/**
+ * THIS !!!SINGLE!!! PROC IS WHERE ANY FORM OF INIITIALIZATION THAT CAN'T BE PERFORMED IN MASTER/NEW() IS DONE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
  * NOWHERE THE FUCK ELSE
  * I DON'T CARE HOW MANY LAYERS OF DEBUG/PROFILE/TRACE WE HAVE, YOU JUST HAVE TO DEAL WITH THIS PROC EXISTING
  * I'M NOT EVEN GOING TO TELL YOU WHERE IT'S CALLED FROM BECAUSE I'M DECLARING THAT FORBIDDEN KNOWLEDGE
@@ -77,6 +84,10 @@ GLOBAL_VAR(restart_counter)
 
 	// Write everything to this log file until we get to SetupLogs() later
 	_initialize_log_files("data/logs/config_error.[GUID()].log")
+<<<<<<< HEAD
+=======
+	GLOB.demo_log = "[GLOB.log_directory]/demo.txt" //Guh //Monkestation Edit: REPLAYS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Init the debugger first so we can debug Master
 	init_debugger()
@@ -123,7 +134,7 @@ GLOBAL_VAR(restart_counter)
 
 	// First possible sleep()
 	InitTgs()
-
+	SSmetrics.world_init_time = REALTIMEOFDAY
 	config.Load(params[OVERRIDE_CONFIG_DIRECTORY_PARAMETER])
 
 	ConfigLoaded()
@@ -152,6 +163,10 @@ GLOBAL_VAR(restart_counter)
 	SetupLogs()
 
 	load_admins()
+<<<<<<< HEAD
+=======
+	load_mentors()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	load_poll_data()
 
@@ -190,7 +205,11 @@ GLOBAL_VAR(restart_counter)
 	data["tick_usage"] = world.tick_usage
 	data["tick_lag"] = world.tick_lag
 	data["time"] = world.time
+<<<<<<< HEAD
 	data["timestamp"] = rustg_unix_timestamp()
+=======
+	data["timestamp"] = logger.unix_timestamp_string()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return data
 
 /world/proc/SetupLogs()
@@ -200,6 +219,7 @@ GLOBAL_VAR(restart_counter)
 		var/texttime = time2text(realtime, "YYYY/MM/DD")
 		GLOB.log_directory = "data/logs/[texttime]/round-"
 		GLOB.picture_logging_prefix = "L_[time2text(realtime, "YYYYMMDD")]_"
+		GLOB.demo_directory = "data/replays"
 		GLOB.picture_log_directory = "data/picture_logs/[texttime]/round-"
 		if(GLOB.round_id)
 			GLOB.log_directory += "[GLOB.round_id]"
@@ -215,6 +235,10 @@ GLOBAL_VAR(restart_counter)
 		GLOB.picture_logging_prefix = "O_[override_dir]_"
 		GLOB.picture_log_directory = "data/picture_logs/[override_dir]"
 
+<<<<<<< HEAD
+=======
+	GLOB.demo_log = "[GLOB.demo_directory]/[GLOB.round_id]_demo.txt" //Guh //Monkestation Edit: REPLAYS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	logger.init_logging()
 
 	var/latest_changelog = file("[global.config.directory]/../html/changelogs/archive/" + time2text(world.timeofday, "YYYY-MM") + ".yml")
@@ -238,9 +262,13 @@ GLOBAL_VAR(restart_counter)
 /world/Topic(T, addr, master, key)
 	TGS_TOPIC //redirect to server tools if necessary
 
+	/// This is kinda wonky but we first split the topic
 	var/static/list/topic_handlers = TopicHandlers()
 
 	var/list/input = params2list(T)
+	if(input[1] == "TWITCH-API")
+		SStwitch.handle_topic(input)
+
 	var/datum/world_topic/handler
 	for(var/I in topic_handlers)
 		if(I in input)
@@ -380,6 +408,7 @@ GLOBAL_VAR(restart_counter)
 	if(length(features))
 		new_status += ": [jointext(features, ", ")]"
 
+<<<<<<< HEAD
 	if(!SSticker || SSticker?.current_state == GAME_STATE_STARTUP)
 		new_status += "<br><b>STARTING</b>"
 	else if(SSticker)
@@ -393,6 +422,12 @@ GLOBAL_VAR(restart_counter)
 				new_status += " | Shuttle: <b>[SSshuttle.emergency.getModeStr()] [SSshuttle.emergency.getTimerStr()]</b>"
 		else if(SSticker.current_state == GAME_STATE_FINISHED)
 			new_status += "<br><b>RESTARTING</b>"
+=======
+	new_status += "<br>Beginner Friendly: <b>Learn to play SS13!</b>"
+	new_status += "<br>Roleplay: \[<b>Medium-Rare</b>\]"
+
+	new_status += "<br>Time: <b>[gameTimestamp("hh:mm")]</b>"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SSmapping.config)
 		new_status += "<br>Map: <b>[SSmapping.config.map_path == CUSTOM_MAP_PATH ? "Uncharted Territory" : SSmapping.config.map_name]</b>"
 	if(SSmapping.next_map_config)
@@ -422,6 +457,7 @@ GLOBAL_VAR(restart_counter)
 	if(!map_load_z_cutoff)
 		return
 	var/area/global_area = GLOB.areas_by_type[world.area] // We're guaranteed to be touching the global area, so we'll just do this
+<<<<<<< HEAD
 	LISTASSERTLEN(global_area.turfs_by_zlevel, map_load_z_cutoff, list())
 	for (var/zlevel in 1 to map_load_z_cutoff)
 		var/list/to_add = block(
@@ -430,6 +466,13 @@ GLOBAL_VAR(restart_counter)
 
 		global_area.turfs_by_zlevel[zlevel] += to_add
 
+=======
+	var/list/to_add = block(
+		locate(old_max + 1, 1, 1),
+		locate(maxx, maxy, map_load_z_cutoff))
+	global_area.contained_turfs += to_add
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /world/proc/increase_max_y(new_maxy, map_load_z_cutoff = maxz)
 	if(new_maxy <= maxy)
 		return
@@ -438,12 +481,19 @@ GLOBAL_VAR(restart_counter)
 	if(!map_load_z_cutoff)
 		return
 	var/area/global_area = GLOB.areas_by_type[world.area] // We're guarenteed to be touching the global area, so we'll just do this
+<<<<<<< HEAD
 	LISTASSERTLEN(global_area.turfs_by_zlevel, map_load_z_cutoff, list())
 	for (var/zlevel in 1 to map_load_z_cutoff)
 		var/list/to_add = block(
 			locate(1, old_maxy + 1, 1),
 			locate(maxx, maxy, map_load_z_cutoff))
 		global_area.turfs_by_zlevel[zlevel] += to_add
+=======
+	var/list/to_add = block(
+		locate(1, old_maxy + 1, 1),
+		locate(maxx, maxy, map_load_z_cutoff))
+	global_area.contained_turfs += to_add
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /world/proc/incrementMaxZ()
 	maxz++

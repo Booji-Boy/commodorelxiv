@@ -3,8 +3,8 @@
 	description = "Keep yourself occupied in permabrig."
 	department_head = list("The Security Team")
 	faction = FACTION_STATION
-	total_positions = 0
-	spawn_positions = 2
+	total_positions = 5
+	spawn_positions = 5
 	supervisors = "the security team"
 	exp_granted_type = EXP_TYPE_CREW
 	paycheck = PAYCHECK_LOWER
@@ -42,9 +42,15 @@
 		crime_name = pick(assoc_to_keys(GLOB.prisoner_crimes))
 
 	var/datum/prisoner_crime/crime = GLOB.prisoner_crimes[crime_name]
+<<<<<<< HEAD
 	var/datum/crime/past_crime = new(crime.name, crime.desc, "Central Command", "Indefinite.")
 	var/datum/record/crew/target_record = find_record(crewmember.real_name)
 	target_record.crimes += past_crime
+=======
+	var/datum/record/crew/target_record = crewmember.mind?.crewfile || find_record(crewmember.real_name)
+	var/datum/crime/past_crime = new(crime.name, crime.desc, "Central Command", "Indefinite.")
+	target_record?.crimes += past_crime
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	target_record.recreate_manifest_photos(add_height_chart = TRUE)
 	to_chat(crewmember, span_warning("You are imprisoned for \"[crime_name]\"."))
 	crewmember.add_mob_memory(/datum/memory/key/permabrig_crimes, crimes = crime_name)
@@ -70,7 +76,11 @@
 
 	var/crime_name = new_prisoner.client?.prefs?.read_preference(/datum/preference/choiced/prisoner_crime)
 	var/datum/prisoner_crime/crime = GLOB.prisoner_crimes[crime_name]
+<<<<<<< HEAD
 	if (isnull(crime))
+=======
+	if(!crime?.tattoos)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	var/list/limbs_to_tat = new_prisoner.bodyparts.Copy()
 	for(var/i in 1 to crime.tattoos)
@@ -79,3 +89,33 @@
 		var/obj/item/bodypart/tatted_limb = pick_n_take(limbs_to_tat)
 		var/list/tattoo = pick_n_take(SSpersistence.prison_tattoos_to_use)
 		tatted_limb.AddComponent(/datum/component/tattoo, tattoo["story"])
+
+
+//monkestation prisoner stuff
+
+/datum/job/prisoner/get_latejoin_spawn_point()
+	var/turf/open/picked_turf = get_random_open_turf_in_area()
+	return picked_turf
+
+/datum/job/prisoner/after_latejoin_spawn(mob/living/spawning)
+	. = ..()
+	var/obj/structure/closet/supplypod/washer_pod/washer_pod = new(null)
+	washer_pod.explosionSize = list(0,0,0,0)
+	washer_pod.bluespace = TRUE
+
+	var/turf/granter_turf = get_turf(spawning)
+	spawning.forceMove(washer_pod)
+	new /obj/effect/pod_landingzone(granter_turf, washer_pod)
+
+
+/// Iterates over all turfs in the target area and returns the first non-dense one
+/datum/job/prisoner/proc/get_random_open_turf_in_area()
+	var/list/turfs = get_area_turfs(/area/station/security/prison/)
+	var/turf/open/target_turf = null
+	var/sanity = 0
+	while(!target_turf && sanity < 100)
+		sanity++
+		var/turf/turf = pick(turfs)
+		if(!turf.density)
+			target_turf = turf
+	return target_turf

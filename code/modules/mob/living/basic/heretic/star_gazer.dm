@@ -6,7 +6,11 @@
 	icon_living = "star_gazer"
 	pixel_x = -32
 	base_pixel_x = -32
+<<<<<<< HEAD
 	mob_biotypes = MOB_HUMANOID | MOB_SPECIAL
+=======
+	mob_biotypes = MOB_HUMANOID | MOB_EPIC
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
 	speed = -0.2
@@ -24,7 +28,11 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	melee_attack_cooldown = 0.6 SECONDS
 	speak_emote = list("growls")
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 0.5, TOX = 0, STAMINA = 0, OXY = 0)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 0.5, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	death_sound = 'sound/magic/cosmic_expansion.ogg'
 
 	slowed_by_drag = FALSE
@@ -40,8 +48,12 @@
 
 /mob/living/basic/heretic_summon/star_gazer/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/static/list/death_loot = list(/obj/effect/temp_visual/cosmic_domain)
 	AddElement(/datum/element/death_drops, death_loot)
+=======
+	AddElement(/datum/element/death_drops, list(/obj/effect/temp_visual/cosmic_domain))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/death_explosion, 3, 6, 12)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_SHOE)
 	AddElement(/datum/element/wall_smasher, ENVIRONMENT_SMASH_RWALLS)
@@ -64,7 +76,11 @@
 		return
 
 	target.apply_status_effect(/datum/status_effect/star_mark)
+<<<<<<< HEAD
 	target.apply_damage(damage = 5, damagetype = BURN)
+=======
+	target.apply_damage(damage = 5, damagetype = CLONE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/targeting_strategy/target_confirmer = GET_TARGETING_STRATEGY(ai_controller.blackboard[BB_TARGETING_STRATEGY])
 	for(var/mob/living/nearby_mob in range(1, src))
 		if(target == nearby_mob || !target_confirmer?.can_attack(src, nearby_mob))
@@ -82,7 +98,7 @@
 		BB_PET_TARGETING_STRATEGY = /datum/targeting_strategy/basic/not_friends/attack_closed_turfs,
 	)
 
-	ai_movement = /datum/ai_movement/basic_avoidance
+	ai_movement = /datum/ai_movement/jps // monkestation edit: use JPS movement for star gazers
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/attack_obstacle_in_path/pet_target/star_gazer,

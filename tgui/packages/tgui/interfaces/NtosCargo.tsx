@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { CargoContent } from './Cargo.jsx';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { NtosWindow } from '../layouts';
 import { CargoContent } from './Cargo';
 

@@ -1,7 +1,12 @@
 import { map, sortBy } from 'common/collections';
+<<<<<<< HEAD
 import { capitalize } from 'common/string';
 import { useState } from 'react';
 
+=======
+import { flow } from 'common/fp';
+import { capitalize } from 'common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend, useLocalState } from '../backend';
 import {
   Box,
@@ -80,6 +85,7 @@ type Book = {
   category: string;
   title: string;
   id: number;
+<<<<<<< HEAD
 };
 
 type AdminBook = Book & {
@@ -88,6 +94,12 @@ type AdminBook = Book & {
 };
 
 type DisplayAdminBook = AdminBook & {
+=======
+  deleted: boolean;
+};
+
+type DisplayBook = Book & {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   key: number;
 };
 
@@ -123,6 +135,7 @@ const SearchAndDisplay = (props) => {
     view_raw,
     show_deleted,
   } = data;
+<<<<<<< HEAD
   const books = sortBy(
     map(
       pages,
@@ -135,6 +148,16 @@ const SearchAndDisplay = (props) => {
     ),
     (book) => book.key,
   );
+=======
+  const books = flow([
+    map<Book, DisplayBook>((book, i) => ({
+      ...book,
+      // Generate a unique id
+      key: i,
+    })),
+    sortBy<DisplayBook>((book) => book.key),
+  ])(pages);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <Stack justify="space-between">
@@ -143,7 +166,11 @@ const SearchAndDisplay = (props) => {
             <Stack.Item>
               <Input
                 value={book_id}
+<<<<<<< HEAD
                 placeholder={book_id === null ? 'ID' : String(book_id)}
+=======
+                placeholder={book_id === null ? 'ID' : book_id}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 width="70px"
                 onChange={(e, value) =>
                   act('set_search_id', {
@@ -345,7 +372,11 @@ const ModifyPage = (props) => {
   const { can_db_request, view_raw, history } = data;
   const [modifyMethod, setModifyMethod] = useLocalState('ModifyMethod', '');
   const [modifyTarget, setModifyTarget] = useLocalState('ModifyTarget', 0);
+<<<<<<< HEAD
   const [reason, setReason] = useState('null');
+=======
+  const [reason, setReason] = useLocalState('Reason', 'null');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const entries = history[modifyTarget.toString()]
     ? history[modifyTarget.toString()].sort((a, b) => b.id - a.id)
@@ -353,7 +384,11 @@ const ModifyPage = (props) => {
 
   return (
     <Window.Content scrollable>
+<<<<<<< HEAD
       <NoticeBox>
+=======
+      <NoticeBox warning>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         Heads Up! We do not allow you to fully delete books in game
         <br />
         What you&apos;re doing here is a &quot;don&apos;t show this to
@@ -465,7 +500,11 @@ const ModifyPage = (props) => {
             <Table.Cell
               className="LibraryAdmin_RecordCell"
               style={{
+<<<<<<< HEAD
                 whiteSpace: 'pre-wrap',
+=======
+                'white-space': 'pre-wrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               }}
             >
               {entry.reason}

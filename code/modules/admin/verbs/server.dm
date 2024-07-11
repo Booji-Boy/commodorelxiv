@@ -59,8 +59,17 @@ ADMIN_VERB(end_round, R_SERVER, "End Round", "Forcibly ends the round and allows
 	var/confirm = tgui_alert(user, "End the round and  restart the game world?", "End Round", list("Yes", "Cancel"))
 	if(confirm != "Yes")
 		return
+<<<<<<< HEAD
 	SSticker.force_ending = FORCE_END_ROUND
 	BLACKBOX_LOG_ADMIN_VERB("End Round")
+=======
+	var/confirm = tgui_alert(usr, "End the round and  restart the game world?", "End Round", list("Yes", "Cancel"))
+	if(confirm == "Cancel")
+		return
+	if(confirm == "Yes")
+		SSticker.force_ending = FORCE_END_ROUND
+		SSblackbox.record_feedback("tally", "admin_verb", 1, "End Round") // If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(toggle_ooc, R_ADMIN, "Toggle OOC", "Toggle the OOC channel on or off.", ADMIN_CATEGORY_SERVER)
 	toggle_ooc()

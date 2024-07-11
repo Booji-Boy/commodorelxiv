@@ -11,11 +11,24 @@
 	bare_wound_bonus = 15
 	sharpness = SHARP_EDGED
 
+<<<<<<< HEAD
 /obj/item/mutant_hand/zombie/afterattack(atom/target, mob/user, click_parameters)
 	if(ishuman(target))
 		try_to_zombie_infect(target, user, user.zone_selected)
 	else if(isliving(target))
 		check_feast(target, user)
+=======
+/obj/item/mutant_hand/zombie/afterattack(atom/target, mob/living/user, proximity_flag)
+	. = ..()
+	if(!proximity_flag)
+		return
+	else if(isliving(target))
+		if(ishuman(target))
+			try_to_zombie_infect(target, user, user.zone_selected)
+		else
+			. |= AFTERATTACK_PROCESSED_ITEM
+			check_feast(target, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /proc/try_to_zombie_infect(mob/living/carbon/human/target, mob/living/user, def_zone = BODY_ZONE_CHEST)
 	CHECK_DNA_AND_SPECIES(target)
@@ -24,12 +37,22 @@
 	if(!target.get_bodypart(BODY_ZONE_HEAD))
 		return
 
+<<<<<<< HEAD
 	if(HAS_TRAIT(target, TRAIT_NO_ZOMBIFY))
 		// cannot infect any TRAIT_NO_ZOMBIFY human
 		return
 
 	// spaceacillin has a 75% chance to block infection
 	if(HAS_TRAIT(target, TRAIT_VIRUS_RESISTANCE) && prob(75))
+=======
+	if((NOZOMBIE in target.dna.species.species_traits) || HAS_TRAIT(target, TRAIT_NO_ZOMBIFY))
+		// cannot infect any NOZOMBIE subspecies (such as high functioning
+		// zombies)
+		return
+
+	// spaceacillin has a 75% chance to block infection
+	if(istype(target) && target.reagents.has_reagent(/datum/reagent/medicine/antipathogenic/spaceacillin) && prob(75))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/obj/item/bodypart/actual_limb = target.get_bodypart(def_zone)
@@ -56,7 +79,11 @@
 	if(!infection)
 		infection = new()
 		infection.Insert(target)
+<<<<<<< HEAD
 		to_chat(user, span_alien("You see [target] twitch for a moment as [target.p_their()] head is covered in \a [infection] - [target.p_Theyve()] been infected."))
+=======
+		to_chat(user, span_alien("You see [target] twitch for a moment as [target.p_their()] head is covered in \a [infection] - [target.p_theyve()] been infected."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mutant_hand/zombie/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is ripping [user.p_their()] brains out! It looks like [user.p_theyre()] trying to commit suicide!"))

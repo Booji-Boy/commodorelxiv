@@ -23,6 +23,7 @@ export const PaintingMachine = (props) => {
         <Section
           title="PDA Painter"
           buttons={
+<<<<<<< HEAD
             <>
               <Button.Confirm
                 disabled={!hasPDA}
@@ -43,6 +44,18 @@ export const PaintingMachine = (props) => {
                 }}
               />
             </>
+=======
+            <Button.Confirm
+              disabled={!hasPDA}
+              content="Paint PDA"
+              confirmContent="Confirm?"
+              onClick={() =>
+                act('trim_pda', {
+                  selection: selectedPDA,
+                })
+              }
+            />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }
         >
           <Stack vertical>

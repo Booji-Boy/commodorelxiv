@@ -26,6 +26,7 @@
 	weapon_weight = WEAPON_HEAVY
 
 	pb_knockback = 2
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/shotgun/blow_up(mob/user)
 	. = 0
@@ -85,9 +86,12 @@
 	w_class = WEIGHT_CLASS_HUGE
 	semi_auto = TRUE
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/tube
+<<<<<<< HEAD
 	interaction_flags_click = NEED_DEXTERITY|NEED_HANDS|ALLOW_RESTING
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// If defined, the secondary tube is this type, if you want different shell loads
-	var/alt_mag_type
+	var/alt_accepted_magazine_type
 	/// If TRUE, we're drawing from the alternate_magazine
 	var/toggled = FALSE
 	/// The B tube
@@ -96,7 +100,7 @@
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/bounty
 	name = "bounty cycler shotgun"
 	desc = "An advanced shotgun with two separate magazine tubes. This one shows signs of bounty hunting customization, meaning it likely has a dual rubber shot/fire slug load."
-	alt_mag_type = /obj/item/ammo_box/magazine/internal/shot/tube/fire
+	alt_accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/tube/fire
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/deadly
 	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shot/tube/buckshot
@@ -108,8 +112,13 @@
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	alt_mag_type = alt_mag_type || spawn_magazine_type
 	alternate_magazine = new alt_mag_type(src)
+=======
+	alt_accepted_magazine_type = alt_accepted_magazine_type || accepted_magazine_type
+	alternate_magazine = new alt_accepted_magazine_type(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/Destroy()
 	QDEL_NULL(alternate_magazine)
@@ -173,7 +182,11 @@
 
 /obj/item/gun/ballistic/shotgun/bulldog/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	secondary_magazine_type = secondary_magazine_type || spawn_magazine_type
+=======
+	secondary_magazine_type = secondary_magazine_type || accepted_magazine_type
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	secondary_magazine = new secondary_magazine_type(src)
 	update_appearance()
 
@@ -202,7 +215,7 @@
 	else
 		. += "[icon_state]_no_secondary_mag"
 
-/obj/item/gun/ballistic/shotgun/bulldog/handle_chamber()
+/obj/item/gun/ballistic/shotgun/bulldog/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	if(!secondary_magazine)
 		return ..()
 	var/secondary_shells_left = LAZYLEN(secondary_magazine.stored_ammo)
@@ -296,12 +309,15 @@
 	desc = "A hunting shotgun used by the wealthy to hunt \"game\"."
 	sawn_desc = "A sawn-off hunting shotgun. In its new state, it's remarkably less effective at hunting... anything."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/dual/slugs
+<<<<<<< HEAD
 
 /obj/item/gun/ballistic/shotgun/doublebarrel/breacherslug
 	name = "breaching shotgun"
 	desc = "A normal double-barrel shotgun that has been rechambered to fit breaching shells. Useful in breaching airlocks and windows, not much else."
 	sawn_desc = "A sawn-off breaching shotgun, making for a more compact configuration while still having the same capability as before."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/dual/breacherslug
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/shotgun/hook
 	name = "hook modified sawn-off shotgun"

@@ -51,10 +51,16 @@
 	charging += charger
 	actively_moving = FALSE
 	SEND_SIGNAL(owner, COMSIG_STARTED_CHARGE)
+<<<<<<< HEAD
 	RegisterSignal(charger, COMSIG_MOVABLE_BUMP, PROC_REF(on_bump), override = TRUE)
 	RegisterSignal(charger, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_move), override = TRUE)
 	RegisterSignal(charger, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved), override = TRUE)
 	RegisterSignal(charger, COMSIG_LIVING_DEATH, PROC_REF(charge_end), override = TRUE)
+=======
+	RegisterSignal(charger, COMSIG_MOVABLE_BUMP, PROC_REF(on_bump), TRUE)
+	RegisterSignal(charger, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_move), TRUE)
+	RegisterSignal(charger, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved), TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	charger.setDir(dir)
 	do_charge_indicator(charger, target)
 
@@ -65,9 +71,15 @@
 	var/datum/move_loop/new_loop = GLOB.move_manager.home_onto(charger, target, delay = charge_speed, timeout = time_to_hit, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
 	if(!new_loop)
 		return
+<<<<<<< HEAD
 	RegisterSignal(new_loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move), override = TRUE)
 	RegisterSignal(new_loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move), override = TRUE)
 	RegisterSignal(new_loop, COMSIG_QDELETING, PROC_REF(charge_end), override = TRUE)
+=======
+	RegisterSignal(new_loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
+	RegisterSignal(new_loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
+	RegisterSignal(new_loop, COMSIG_QDELETING, PROC_REF(charge_end))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Yes this is disgusting. But we need to queue this stuff, and this code just isn't setup to support that right now. So gotta do it with sleeps
 	sleep(time_to_hit + charge_speed)
@@ -86,11 +98,16 @@
 
 /datum/action/cooldown/mob_cooldown/charge/proc/charge_end(datum/source)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	var/atom/movable/charger = source
 	if(istype(source, /datum/move_loop))
 		var/datum/move_loop/move_loop_source = source
 		charger = move_loop_source.moving
 	UnregisterSignal(charger, list(COMSIG_MOVABLE_BUMP, COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOVABLE_MOVED, COMSIG_LIVING_DEATH))
+=======
+	var/atom/movable/charger = source.moving
+	UnregisterSignal(charger, list(COMSIG_MOVABLE_BUMP, COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOVABLE_MOVED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(owner, COMSIG_FINISHED_CHARGE)
 	actively_moving = FALSE
 	charging -= charger
@@ -216,7 +233,11 @@
 	var/mob/living/living_target = target
 	if(ishuman(living_target))
 		var/mob/living/carbon/human/human_target = living_target
+<<<<<<< HEAD
 		if(human_target.check_block(source, 0, "the [source.name]", attack_type = LEAP_ATTACK) && living_source)
+=======
+		if(human_target.check_shields(source, 0, "the [source.name]", attack_type = LEAP_ATTACK) && living_source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			living_source.Stun(recoil_duration, ignore_canstun = TRUE)
 			return
 

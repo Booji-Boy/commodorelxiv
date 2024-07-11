@@ -118,6 +118,10 @@
 
 /datum/crafting_recipe/food/death_sandwich
 	name = "Death Sandwich"
+<<<<<<< HEAD
+=======
+	always_available = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	reqs = list(
 		/obj/item/food/breadslice/plain = 2,
 		/obj/item/food/salami = 4,
@@ -126,7 +130,10 @@
 	)
 	result = /obj/item/food/sandwich/death
 	category = CAT_SANDWICH
+<<<<<<< HEAD
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/food/toast_sandwich
 	name = "Toast Sandwich"

@@ -5,7 +5,7 @@
 	max_occurrences = 1
 	earliest_start = 1 HOURS
 	min_players = 20
-	dynamic_should_hijack = TRUE
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Spawns a slaughter demon, to hunt by travelling through pools of blood."
 	min_wizard_trigger_potency = 6
@@ -16,8 +16,13 @@
 	role_name = "slaughter demon"
 
 /datum/round_event/ghost_role/slaughter/spawn_role()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_ALIEN, role = ROLE_ALIEN, alert_pic = /mob/living/basic/demon/slaughter, role_name_text = role_name, amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SLAUGHTER_DEMON, role = ROLE_SLAUGHTER_DEMON, pic_source = /mob/living/basic/demon/slaughter, role_name_text = role_name)
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/datum/mind/player_mind = new /datum/mind(chosen_one.key)
 	player_mind.active = TRUE
@@ -29,6 +34,10 @@
 	new /obj/effect/dummy/phased_mob(spawn_location, spawned)
 
 	player_mind.transfer_to(spawned)
+<<<<<<< HEAD
+=======
+	spawned.generate_antagonist_status()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	message_admins("[ADMIN_LOOKUPFLW(spawned)] has been made into a slaughter demon by an event.")
 	spawned.log_message("was spawned as a slaughter demon by an event.", LOG_GAME)

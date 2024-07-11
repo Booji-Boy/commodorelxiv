@@ -15,6 +15,7 @@
 	var/spin_delay = 10
 	var/recent_spin = 0
 	var/last_fire = 0
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/revolver/process_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread)
 	..()
@@ -216,7 +217,7 @@
 	var/tk_controlled = FALSE
 	if(flag)
 		if(!(target in user.contents) && ismob(target))
-			if(user.combat_mode) // Flogging action
+			if((user.istate & ISTATE_HARM)) // Flogging action
 				return
 	else if (HAS_TRAIT_FROM_ONLY(src, TRAIT_TELEKINESIS_CONTROLLED, REF(user))) // if we're far away, you can still fire it at yourself if you have TK.
 		tk_controlled = TRUE

@@ -3,12 +3,13 @@
 
 /obj/machinery/computer/operating
 	name = "operating computer"
-	desc = "Monitors patient vitals and displays surgery steps. Can be loaded with surgery disks to perform experimental procedures. Automatically syncs to operating tables within its line of sight for surgical tech advancement."
+	desc = "Monitors patient vitals and displays surgery steps. Can be loaded with surgery disks to perform experimental procedures. Automatically syncs to operating tables or stasis bed within its line of sight for surgical tech advancement."
 	icon_screen = "crew"
 	icon_keyboard = "med_key"
 	circuit = /obj/item/circuitboard/computer/operating
 
 	var/obj/structure/table/optable/table
+	var/obj/machinery/stasis/sbed
 	var/list/advanced_surgeries = list()
 	var/datum/techweb/linked_techweb
 	light_color = LIGHT_COLOR_BLUE
@@ -22,18 +23,27 @@
 
 /obj/machinery/computer/operating/post_machine_initialize()
 	. = ..()
+<<<<<<< HEAD
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !linked_techweb)
 		CONNECT_TO_RND_SERVER_ROUNDSTART(linked_techweb, src)
 
 	var/list/operating_signals = list(
 		COMSIG_OPERATING_COMPUTER_AUTOPSY_COMPLETE = TYPE_PROC_REF(/datum/component/experiment_handler, try_run_autopsy_experiment),
+=======
+	var/static/list/dissection_signals = list(
+		COMSIG_OPERATING_COMPUTER_DISSECTION_COMPLETE = TYPE_PROC_REF(/datum/component/experiment_handler, try_run_dissection_experiment)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	experiment_handler = AddComponent(
 		/datum/component/experiment_handler, \
 		allowed_experiments = list(/datum/experiment/autopsy), \
 		config_flags = EXPERIMENT_CONFIG_ALWAYS_ACTIVE, \
 		config_mode = EXPERIMENT_CONFIG_ALTCLICK, \
+<<<<<<< HEAD
 		experiment_signals = operating_signals, \
+=======
+		experiment_signals = dissection_signals, \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /obj/machinery/computer/operating/Destroy()
@@ -41,6 +51,10 @@
 		table = locate(/obj/structure/table/optable) in get_step(src, direction)
 		if(table && table.computer == src)
 			table.computer = null
+		else
+			sbed = locate(/obj/machinery/stasis) in get_step(src, direction)
+			if(sbed && sbed.op_computer == src)
+				sbed.op_computer = null
 	QDEL_NULL(experiment_handler)
 	return ..()
 
@@ -75,6 +89,11 @@
 		if(table)
 			table.computer = src
 			break
+		else
+			sbed = locate(/obj/machinery/stasis) in get_step(src, direction)
+			if(sbed)
+				sbed.op_computer = src
+				break
 
 /obj/machinery/computer/operating/ui_state(mob/user)
 	return GLOB.not_incapacitated_state
@@ -97,17 +116,30 @@
 	data["surgeries"] = all_surgeries
 
 	//If there's no patient just hop to it yeah?
-	if(!table)
+	if(!table && !sbed)
 		data["patient"] = null
 		return data
+	else if (table)
+		data["table"] = table
+		data["patient"] = list()
+		if(!table.patient)
+			return data
+	else
+		data["table"] = sbed
+		data["patient"] = list()
+		table = sbed  // so the rest of the data below knows its sbed.
+		if(!sbed.patient)
+			return data
 
+<<<<<<< HEAD
 	data["table"] = table
 	data["patient"] = list()
 	data["procedures"] = list()
 	if(!table.patient)
 		return data
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/carbon/patient = table.patient
-
 	switch(patient.stat)
 		if(CONSCIOUS)
 			data["patient"]["stat"] = "Conscious"

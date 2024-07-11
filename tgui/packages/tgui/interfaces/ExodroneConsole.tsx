@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Dimmer,
+  Icon,
+  LabeledList,
+  Modal,
+  ProgressBar,
+  Section,
+  Stack,
+} from '../components';
+import { Window } from '../layouts';
+import { resolveAsset } from '../assets';
+import { formatTime } from '../format';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { capitalize } from 'common/string';
 import {
   createContext,
@@ -166,15 +185,25 @@ type ToolData = {
   icon: string;
 };
 
+<<<<<<< HEAD
 const ToolContext = createContext<
   [boolean, React.Dispatch<SetStateAction<boolean>>]
 >([false, (_) => {}]);
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 export const ExodroneConsole = (props) => {
   const { data } = useBackend<ExodroneConsoleData>();
   const { signal_lost } = data;
 
+<<<<<<< HEAD
   const [choosingTools, setChoosingTools] = useState(false);
+=======
+  const [choosingTools, setChoosingTools] = useLocalState(
+    'choosingTools',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window width={750} height={600}>
@@ -198,14 +227,22 @@ const SignalLostModal = (props) => {
       width={30}
       height={22}
       p={0}
+<<<<<<< HEAD
       style={{ borderRadius: '5%' }}
+=======
+      style={{ 'border-radius': '5%' }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     >
       <img src={nt_logo} width={64} height={64} />
       <Box
         backgroundColor="black"
         textColor="red"
         fontSize={2}
+<<<<<<< HEAD
         style={{ borderRadius: '-10%' }}
+=======
+        style={{ 'border-radius': '-10%' }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       >
         CONNECTION LOST
       </Box>
@@ -275,7 +312,14 @@ const ToolSelectionModal = (props) => {
   const { act, data } = useBackend<ExodroneConsoleData>();
   const { all_tools = {} } = data;
 
+<<<<<<< HEAD
   const [choosingTools, setChoosingTools] = useContext(ToolContext);
+=======
+  const [choosingTools, setChoosingTools] = useLocalState(
+    'choosingTools',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const toolData = Object.keys(all_tools);
   return (
@@ -401,9 +445,16 @@ const EquipmentBox = (props: { cargo: CargoData; drone: DroneData }) => {
 const EquipmentGrid = (props: { drone: ActiveDrone & DroneData }) => {
   const { act } = useBackend<ExodroneConsoleData>();
   const { cargo, configurable } = props.drone;
+<<<<<<< HEAD
 
   const [_, setChoosingTools] = useContext(ToolContext);
 
+=======
+  const [choosingTools, setChoosingTools] = useLocalState(
+    'choosingTools',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Stack vertical fill>
       <Stack.Item grow>
@@ -509,7 +560,10 @@ const NoSiteDimmer = () => {
 const TravelTargetSelectionScreen = (props: {
   drone: (DroneExploration | DroneIdle | DroneTravel) & DroneData;
   showCancelButton?: boolean;
+<<<<<<< HEAD
   onSelectionDone: () => void;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 }) => {
   // List of sites and eta travel times to each
   const { act, data } = useBackend<ExodroneConsoleData>();
@@ -530,10 +584,24 @@ const TravelTargetSelectionScreen = (props: {
       return target_site.distance * drone_travel_coefficent;
     }
   };
+<<<<<<< HEAD
   const [choosingTools, _] = useContext(ToolContext);
 
   const travel_to = (ref) => {
     props.onSelectionDone();
+=======
+  const [choosingTools, setChoosingTools] = useLocalState(
+    'choosingTools',
+    false,
+  );
+  const [TravelDimmerShown, setTravelDimmerShown] = useLocalState(
+    'TravelDimmerShown',
+    false,
+  );
+
+  const travel_to = (ref) => {
+    setTravelDimmerShown(false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     act('start_travel', { target_site: ref });
   };
 
@@ -669,7 +737,14 @@ const ExplorationScreen = (props: { drone: DroneExploration & DroneData }) => {
   const { drone } = props;
   const { site } = drone;
 
+<<<<<<< HEAD
   const [TravelDimmerShown, setTravelDimmerShown] = useState(false);
+=======
+  const [TravelDimmerShown, setTravelDimmerShown] = useLocalState(
+    'TravelDimmerShown',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   if (TravelDimmerShown) {
     return (
@@ -811,7 +886,11 @@ export const AdventureScreen = (props: {
         </Stack.Item>
         <Stack.Divider />
         <Stack.Item>
+<<<<<<< HEAD
           <Image src={imgSource} height="100px" width="200px" />
+=======
+          <img src={imgSource} height="100px" width="200px" />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           <Stack vertical>
             <Stack.Divider />
             <Stack.Item grow />

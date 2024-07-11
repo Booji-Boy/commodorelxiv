@@ -51,8 +51,12 @@ module.exports = (env = {}, argv) => {
     module: {
       rules: [
         {
+<<<<<<< HEAD
           test: /\.([tj]s(x)?|cjs)$/,
           exclude: /node_modules[\\/]core-js/,
+=======
+          test: /\.(js|jsx|cjs|ts|tsx)$/,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           use: [
             {
               loader: require.resolve('swc-loader'),
@@ -134,7 +138,11 @@ module.exports = (env = {}, argv) => {
     const { EsbuildPlugin } = require('esbuild-loader');
     config.optimization.minimizer = [
       new EsbuildPlugin({
+<<<<<<< HEAD
         target: 'ie11',
+=======
+        target: 'ie8',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         css: true,
       }),
     ];

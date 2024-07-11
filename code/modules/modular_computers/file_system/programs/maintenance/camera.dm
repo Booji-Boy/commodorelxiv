@@ -51,8 +51,13 @@
 
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/maintenance/camera/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/maintenance/camera/ui_act(action, params, datum/tgui/ui)
+	var/mob/living/user = usr
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("print_photo")
 			if(computer.stored_paper <= 0)

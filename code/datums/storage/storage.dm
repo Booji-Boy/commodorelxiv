@@ -57,7 +57,12 @@
 	/// Whether the storage is currently locked (inaccessible). See [code/__DEFINES/storage.dm]
 	var/locked = STORAGE_NOT_LOCKED
 
+<<<<<<< HEAD
 	/// Whether we open when attack_handed (clicked on with an empty hand).
+=======
+	var/locked = STORAGE_NOT_LOCKED
+	/// whether or not we should open when clicked
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/attack_hand_interact = TRUE
 
 	/// Whether we allow storage objects of the same size inside.
@@ -137,9 +142,32 @@
 	set_parent(parent)
 	set_real_location(parent)
 
+<<<<<<< HEAD
 	src.max_slots = max_slots
 	src.max_specific_storage = max_specific_storage
 	src.max_total_storage = max_total_storage
+=======
+	RegisterSignal(resolve_parent, COMSIG_ATOM_EMP_ACT, PROC_REF(on_emp_act))
+	RegisterSignal(resolve_parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
+	RegisterSignal(resolve_parent, COMSIG_ITEM_PRE_ATTACK, PROC_REF(on_preattack))
+	RegisterSignal(resolve_parent, COMSIG_OBJ_DECONSTRUCT, PROC_REF(on_deconstruct))
+
+	RegisterSignal(resolve_parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(mass_empty))
+
+	RegisterSignals(resolve_parent, list(COMSIG_CLICK_ALT, COMSIG_ATOM_ATTACK_GHOST, COMSIG_ATOM_ATTACK_HAND_SECONDARY), PROC_REF(open_storage_on_signal))
+	RegisterSignal(resolve_parent, COMSIG_ATOM_ATTACKBY_SECONDARY, PROC_REF(open_storage_attackby_secondary))
+
+	RegisterSignal(resolve_location, COMSIG_ATOM_ENTERED, PROC_REF(handle_enter))
+	RegisterSignal(resolve_location, COMSIG_ATOM_EXITED, PROC_REF(handle_exit))
+	RegisterSignal(resolve_parent, COMSIG_MOVABLE_MOVED, PROC_REF(close_distance))
+	RegisterSignal(resolve_parent, COMSIG_ITEM_EQUIPPED, PROC_REF(update_actions))
+
+	RegisterSignal(resolve_parent, COMSIG_TOPIC, PROC_REF(topic_handle))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
+	// monke edit: bluespace compression kit
+	RegisterSignal(resolve_parent, COMSIG_ITEM_PRE_COMPRESS, PROC_REF(attempt_compression))
+	// monke end
 
 	orient_to_hud()
 
@@ -353,7 +381,19 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
  * * force - bypass locked storage up to a certain level. See [code/__DEFINES/storage.dm]
  */
 /datum/storage/proc/can_insert(obj/item/to_insert, mob/user, messages = TRUE, force = STORAGE_NOT_LOCKED)
+<<<<<<< HEAD
 	if(QDELETED(to_insert) || !istype(to_insert))
+=======
+	var/obj/item/resolve_parent = parent?.resolve()
+	if(!resolve_parent)
+		return
+
+	var/obj/item/resolve_location = real_location?.resolve()
+	if(!resolve_location)
+		return
+
+	if(QDELETED(to_insert))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	//stops you from putting stuff like off-hand thingy inside. Hologram storages can accept only hologram items
@@ -366,6 +406,15 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		return FALSE
 
 	if(locked > force)
+<<<<<<< HEAD
+=======
+		return FALSE
+
+	if((to_insert == resolve_parent) || (to_insert == real_location))
+		return FALSE
+
+	if(to_insert.w_class > max_specific_storage && !is_type_in_typecache(to_insert, exception_hold))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(messages && user)
 			user.balloon_alert(user, "closed!")
 		return FALSE
@@ -458,7 +507,29 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 	SEND_SIGNAL(src, COMSIG_STORAGE_STORED_ITEM, to_insert, user, force)
 	to_insert.forceMove(real_location)
 	item_insertion_feedback(user, to_insert, override)
+<<<<<<< HEAD
 	parent.update_appearance()
+=======
+	resolve_location.update_appearance()
+	SEND_SIGNAL(to_insert, COMSIG_ITEM_STORED)
+	return TRUE
+
+/**
+ * Attempts to insert an item into the storage
+ *
+ * @param datum/source used by the signal handler
+ * @param obj/item/to_insert the item we're inserting
+ * @param force bypass locked storage
+ */
+/datum/storage/proc/attempt_insert_nonmob(obj/item/to_insert, force = FALSE)
+	var/obj/item/resolve_location = real_location?.resolve()
+	if(!resolve_location)
+		return FALSE
+
+	to_insert.item_flags |= IN_STORAGE
+	to_insert.forceMove(resolve_location)
+	resolve_location.update_appearance()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /**
@@ -967,7 +1038,7 @@ GLOBAL_LIST_EMPTY(cached_storage_typecaches)
 		parent.balloon_alert(to_show, "can't reach!")
 		return FALSE
 
-	if(!isliving(to_show) || to_show.incapacitated())
+	if(!isliving(to_show) || to_show.incapacitated(IGNORE_CRIT))
 		return FALSE
 
 	if(locked)

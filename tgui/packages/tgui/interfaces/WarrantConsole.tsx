@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+=======
+import { useBackend, useLocalState } from '../backend';
+import { Window } from '../layouts';
+import {
+  BlockQuote,
+  Button,
+  Collapsible,
+  LabeledList,
+  NoticeBox,
+  RestrictedInput,
+  Section,
+  Stack,
+  Tabs,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { sortBy } from 'common/collections';
 import { useState } from 'react';
 
@@ -145,7 +161,11 @@ const CitationManager = (props) => {
 
   const { crew_ref } = foundRecord;
 
+<<<<<<< HEAD
   const [paying, setPaying] = useState(5);
+=======
+  const [paying, setPaying] = useLocalState('citationAmount', 5);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Collapsible

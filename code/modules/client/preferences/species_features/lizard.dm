@@ -34,8 +34,12 @@
 /datum/preference/choiced/lizard_body_markings/init_possible_values()
 	return assoc_to_keys_features(SSaccessories.lizard_markings_list)
 
+<<<<<<< HEAD
 /datum/preference/choiced/lizard_body_markings/icon_for(value)
 	var/datum/sprite_accessory/sprite_accessory = SSaccessories.lizard_markings_list[value]
+=======
+	var/icon/lizard = icon('icons/mob/species/lizard/bodyparts.dmi', "lizard_chest")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/icon/final_icon = icon('icons/mob/human/species/lizard/bodyparts.dmi', "lizard_chest_m")
 
@@ -89,7 +93,9 @@
 /datum/preference/choiced/lizard_horns/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["horns"] = value
 
-/datum/preference/choiced/lizard_legs
+//Monkestation Removal
+
+/*/datum/preference/choiced/lizard_legs
 	savefile_key = "feature_lizard_legs"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
@@ -100,6 +106,9 @@
 
 /datum/preference/choiced/lizard_legs/apply_to_human(mob/living/carbon/human/target, value)
 	target.dna.features["legs"] = value
+*/
+
+//Monkestation Removal End
 
 /datum/preference/choiced/lizard_snout
 	savefile_key = "feature_lizard_snout"

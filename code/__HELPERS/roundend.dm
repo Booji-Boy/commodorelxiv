@@ -3,6 +3,11 @@
 #define POPCOUNT_SHUTTLE_ESCAPEES "shuttle_escapees" //Emergency shuttle only.
 #define PERSONAL_LAST_ROUND "personal last round"
 #define SERVER_LAST_ROUND "server last round"
+#define DISCORD_SUPPRESS_NOTIFICATIONS (1 << 12) // monke edit: discord flag for silent messages
+
+GLOBAL_LIST_INIT(achievements_unlocked, list())
+
+GLOBAL_LIST_INIT(round_end_images, world.file2list("data/image_urls.txt")) // MONKEYSTATION EDIT ADDITION PR #11 - update roundend.dm
 
 GLOBAL_LIST_INIT(achievements_unlocked, list())
 
@@ -190,6 +195,7 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	if(!human_mob.hardcore_survival_score) ///no score no glory
 		return FALSE
 
+<<<<<<< HEAD
 	if(human_mob.mind && (length(human_mob.mind.antag_datums) > 0))
 		for(var/datum/antagonist/antag_datums as anything in human_mob.mind.antag_datums)
 			if(!antag_datums.hardcore_random_bonus) //dont give bonusses to dumb stuff like revs or hypnos
@@ -209,6 +215,17 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 				return
 
 	if(considered_escaped(human_mob.mind))
+=======
+	if(human_mob.mind && (human_mob.mind.special_role || length(human_mob.mind.antag_datums) > 0))
+		for(var/datum/antagonist/antag_datums as anything in human_mob.mind.antag_datums)
+			if(initial(antag_datums.can_assign_self_objectives) && !antag_datums.can_assign_self_objectives)
+				return FALSE // You don't get a prize if you picked your own objective, you can't fail those
+			for(var/datum/objective/objective_datum as anything in antag_datums.objectives)
+				if(!objective_datum.check_completion())
+					return FALSE
+		player_client.give_award(/datum/award/score/hardcore_random, human_mob, round(human_mob.hardcore_survival_score * 2))
+	else if(considered_escaped(human_mob))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		player_client.give_award(/datum/award/score/hardcore_random, human_mob, round(human_mob.hardcore_survival_score))
 		log_admin("[player_client] gained [round(human_mob.hardcore_survival_score)] hardcore random points.")
 
@@ -242,7 +259,13 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	CHECK_TICK
 
 	//Set news report and mode result
+<<<<<<< HEAD
 	SSdynamic.set_round_result()
+=======
+	mode.set_round_result()
+	SSgamemode.round_end_report()
+	SSgamemode.store_roundend_data() // store data on roundend for next round
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	to_chat(world, span_infoplain(span_big(span_bold("<BR><BR><BR>The round has ended."))))
 	log_game("The round has ended.")
@@ -288,9 +311,63 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 
+	// monkestation start: token backups, monkecoin rewards, challenges, and roundend webhook
+	save_tokens()
+	distribute_rewards()
 	sleep(5 SECONDS)
 	ready_for_reboot = TRUE
+	var/datum/discord_embed/embed = format_roundend_embed("<@&999008528595419278>")
+	send2roundend_webhook(embed)
+	// monkestation end
 	standard_reboot()
+
+/datum/controller/subsystem/ticker/proc/format_roundend_embed(message)
+	var/datum/discord_embed/embed = new()
+	embed.title = "Round End"
+	embed.description = @"[Join Server!](http://play.monkestation.com:7420)"
+	embed.author = "Round Controller"
+	embed.content = "<@&999008528595419278>"
+	if(GLOB.round_end_images.len)
+		embed.image = pick(GLOB.round_end_images)
+	var/round_state = "Round has ended"
+
+	var/player_count = "**Total**: [length(GLOB.clients)], **Living**: [length(GLOB.alive_player_list)], **Dead**: [length(GLOB.dead_player_list)], **Observers**: [length(GLOB.current_observers_list)]"
+	embed.fields = list(
+		"PLAYERS" = player_count,
+		"ROUND STATE" = round_state,
+		"ROUND ID" = GLOB.round_id,
+		"ROUND TIME" = ROUND_TIME(),
+		"MESSAGE" = message,
+	)
+	return embed
+
+/datum/controller/subsystem/ticker/proc/send2roundend_webhook(message_or_embed)
+	var/webhook = CONFIG_GET(string/regular_roundend_webhook_url)
+
+	if(!webhook)
+		return
+	var/list/webhook_info = list()
+	if(istext(message_or_embed))
+		var/message_content = replacetext(replacetext(message_or_embed, "\proper", ""), "\improper", "")
+		message_content = GLOB.has_discord_embeddable_links.Replace(replacetext(message_content, "`", ""), " ```$1``` ")
+		webhook_info["content"] = message_content
+	else
+		var/datum/discord_embed/embed = message_or_embed
+		webhook_info["embeds"] = list(embed.convert_to_list())
+		if(embed.content)
+			webhook_info["content"] = embed.content
+	if(CONFIG_GET(string/mentorhelp_webhook_name))
+		webhook_info["username"] = CONFIG_GET(string/roundend_webhook_name)
+	if(CONFIG_GET(string/mentorhelp_webhook_pfp))
+		webhook_info["avatar_url"] = CONFIG_GET(string/roundend_webhook_pfp)
+	webhook_info["flags"] = DISCORD_SUPPRESS_NOTIFICATIONS // monke edit: @silent roundend pings
+	// Uncomment when servers are moved to TGS4
+	// send2chat(new /datum/tgs_message_conent("[initiator_ckey] | [message_content]"), "ahelp", TRUE)
+	var/list/headers = list()
+	headers["Content-Type"] = "application/json"
+	var/datum/http_request/request = new()
+	request.prepare(RUSTG_HTTP_METHOD_POST, webhook, json_encode(webhook_info), headers, "tmp/response.json")
+	request.begin_async()
 
 /datum/controller/subsystem/ticker/proc/standard_reboot()
 	if(ready_for_reboot)
@@ -305,6 +382,9 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 /datum/controller/subsystem/ticker/proc/build_roundend_report()
 	var/list/parts = list()
 
+	//might want to make this a full section
+	parts += "<div class='panel stationborder'><span class='header'>[("Storyteller: [SSgamemode.storyteller ? SSgamemode.storyteller.name : "N/A"]")]</span></div>" //monkestation edit
+
 	//AI laws
 	parts += law_report()
 
@@ -312,6 +392,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 
 	//Antagonists
 	parts += antag_report()
+
+	parts += opfor_report()
 
 	parts += hardcore_random_report()
 
@@ -604,9 +686,15 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	var/list/all_antagonists = list()
 
 	for(var/datum/team/team as anything in GLOB.antagonist_teams)
+		if(!istype(team))
+			stack_trace("Non-team ([team?.type]) found in GLOB.antagonist_teams!")
+			continue
 		all_teams |= team
 
 	for(var/datum/antagonist/antagonists as anything in GLOB.antagonists)
+		if(!istype(antagonists))
+			stack_trace("Non-antagonist ([antagonists?.type]) found in GLOB.antagonists!")
+			continue
 		if(!antagonists.owner)
 			continue
 		all_antagonists |= antagonists
@@ -615,9 +703,11 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		//check if we should show the team
 		if(!active_teams.show_roundend_report)
 			continue
-
 		//remove the team's individual antag reports, if the team actually shows up in the report.
 		for(var/datum/mind/team_minds as anything in active_teams.members)
+			if(!istype(team_minds))
+				stack_trace("Non-mind ([team_minds?.type]) found in team.members!")
+				continue
 			if(!isnull(team_minds.antag_datums)) // is_special_character passes if they have a special role instead of an antag
 				all_antagonists -= team_minds.antag_datums
 
@@ -645,8 +735,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		result += "<br><br>"
 		CHECK_TICK
 
-	if(all_antagonists.len)
-		var/datum/antagonist/last = all_antagonists[all_antagonists.len]
+	if(length(all_antagonists))
+		var/datum/antagonist/last = all_antagonists[length(all_antagonists)]
 		result += last.roundend_report_footer()
 		result += "</div>"
 
@@ -734,6 +824,70 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 		parts += "</ul>"
 		return "<div class='panel greenborder'><ul>[parts.Join()]</ul></div>"
 
+<<<<<<< HEAD
+=======
+	for(var/admin_ckey in GLOB.admin_datums + GLOB.deadmins)
+		var/datum/admins/admin = GLOB.admin_datums[admin_ckey]
+
+		if(!admin)
+			admin = GLOB.deadmins[admin_ckey]
+			if (!admin)
+				continue
+
+		file_data["admins"][admin_ckey] = admin.rank_names()
+
+		if (admin.owner)
+			file_data["connections"][admin_ckey] = list(
+				"cid" = admin.owner.computer_id,
+				"ip" = admin.owner.address,
+			)
+
+	fdel(json_file)
+	WRITE_FILE(json_file, json_encode(file_data))
+
+/datum/controller/subsystem/ticker/proc/update_everything_flag_in_db()
+	for(var/datum/admin_rank/R in GLOB.admin_ranks)
+		var/list/flags = list()
+		if(R.include_rights == R_EVERYTHING)
+			flags += "flags"
+		if(R.exclude_rights == R_EVERYTHING)
+			flags += "exclude_flags"
+		if(R.can_edit_rights == R_EVERYTHING)
+			flags += "can_edit_flags"
+		if(!flags.len)
+			continue
+		var/flags_to_check = flags.Join(" != [R_EVERYTHING] AND ") + " != [R_EVERYTHING]"
+		var/datum/db_query/query_check_everything_ranks = SSdbcore.NewQuery(
+			"SELECT flags, exclude_flags, can_edit_flags FROM [format_table_name("admin_ranks")] WHERE rank = :rank AND ([flags_to_check])",
+			list("rank" = R.name)
+		)
+		if(!query_check_everything_ranks.Execute())
+			qdel(query_check_everything_ranks)
+			return
+		if(query_check_everything_ranks.NextRow()) //no row is returned if the rank already has the correct flag value
+			var/flags_to_update = flags.Join(" = [R_EVERYTHING], ") + " = [R_EVERYTHING]"
+			var/datum/db_query/query_update_everything_ranks = SSdbcore.NewQuery(
+				"UPDATE [format_table_name("admin_ranks")] SET [flags_to_update] WHERE rank = :rank",
+				list("rank" = R.name)
+			)
+			if(!query_update_everything_ranks.Execute())
+				qdel(query_update_everything_ranks)
+				return
+			qdel(query_update_everything_ranks)
+		qdel(query_check_everything_ranks)
+
+/datum/controller/subsystem/ticker/proc/cheevo_report()
+	var/list/parts = list()
+	if(length(GLOB.achievements_unlocked))
+		parts += "<span class='header'>Achievement Get!</span><BR>"
+		parts += "<span class='infoplain'>Total Achievements Earned: <B>[length(GLOB.achievements_unlocked)]!</B></span><BR>"
+		parts += "<ul class='playerlist'>"
+		for(var/datum/achievement_report/cheevo_report in GLOB.achievements_unlocked)
+			parts += "<BR>[cheevo_report.winner_key] was <b>[cheevo_report.winner]</b>, who earned the [span_greentext("'[cheevo_report.cheevo]'")] achievement at [cheevo_report.award_location]!<BR>"
+		parts += "</ul>"
+		return "<div class='panel greenborder'><ul>[parts.Join()]</ul></div>"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///A datum containing the info necessary for an achievement readout, reported and added to the global list in /datum/award/achievement/on_unlock(mob/user)
 /datum/achievement_report
 	///The winner of this achievement.
@@ -744,3 +898,8 @@ GLOBAL_LIST_INIT(achievements_unlocked, list())
 	var/winner_key
 	///The name of the area we earned this cheevo in
 	var/award_location
+<<<<<<< HEAD
+=======
+
+#undef DISCORD_SUPPRESS_NOTIFICATIONS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

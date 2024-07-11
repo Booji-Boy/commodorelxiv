@@ -53,7 +53,10 @@
 	hitsound_on = 'sound/weapons/blade1.ogg',
 	w_class_on = WEIGHT_CLASS_BULKY,
 	clumsy_check = TRUE,
+<<<<<<< HEAD
 	clumsy_damage = 10,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	list/attack_verb_continuous_on,
 	list/attack_verb_simple_on,
 	inhand_icon_change = TRUE,
@@ -270,6 +273,7 @@
 			span_warning("[user] triggers [parent] while holding it backwards and [hurt_self_verb_continuous] themself, like a doofus!"),
 			span_warning("You trigger [parent] while holding it backwards and [hurt_self_verb_simple] yourself, like a doofus!"),
 		)
+<<<<<<< HEAD
 		var/obj/item/item_parent = parent
 		switch(item_parent.damtype)
 			if(STAMINA)
@@ -283,6 +287,9 @@
 			if(BURN)
 				user.take_bodypart_damage(burn=clumsy_damage)
 
+=======
+		user.take_bodypart_damage(10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 	return FALSE

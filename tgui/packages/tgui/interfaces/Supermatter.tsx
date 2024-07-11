@@ -1,9 +1,14 @@
 import { filter, sortBy } from 'common/collections';
 import { toFixed } from 'common/math';
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { ReactNode, useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { InfernoNode } from 'inferno';
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -75,8 +80,12 @@ const SupermatterEntry = (props: SupermatterEntryProps) => {
       </Stack.Item>
     );
   }
+<<<<<<< HEAD
   const [activeDetail, setActiveDetail] = useState(false);
 
+=======
+  const [activeDetail, setActiveDetail] = useLocalState(title, false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <>
       <Stack.Item>
@@ -121,6 +130,7 @@ export const SupermatterContent = (props: SupermatterProps) => {
     gas_total_moles,
     gas_metadata,
   } = props;
+<<<<<<< HEAD
   const [allGasActive, setAllGasActive] = useState(false);
   let gas_composition = Object.entries(props.gas_composition);
   if (!allGasActive) {
@@ -131,6 +141,13 @@ export const SupermatterContent = (props: SupermatterProps) => {
   }
   gas_composition = sortBy(gas_composition, ([gas_path, amount]) => -amount);
 
+=======
+  const [allGasActive, setAllGasActive] = useLocalState('allGasActive', false);
+  const gas_composition: [gas_path: string, amount: number][] = flow([
+    !allGasActive && filter(([gas_path, amount]) => amount !== 0),
+    sortBy(([gas_path, amount]) => -amount),
+  ])(Object.entries(props.gas_composition));
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Stack height="100%">
       <Stack.Item grow>
@@ -188,8 +205,12 @@ export const SupermatterContent = (props: SupermatterProps) => {
                     bad: [7000, Infinity],
                   }}
                 >
+<<<<<<< HEAD
                   {toFixed(internal_energy_coefficient, 3) +
                     internal_energy_unit}
+=======
+                  {toFixed(internal_energy) + ' MeV/cm3'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </ProgressBar>
               }
               detail={
@@ -219,6 +240,7 @@ export const SupermatterContent = (props: SupermatterProps) => {
                   minValue={0}
                   maxValue={1e7}
                   ranges={{
+<<<<<<< HEAD
                     teal: [1e7, Infinity],
                     good: [2e6, 1e7],
                     average: [1e6, 2e6],
@@ -227,6 +249,14 @@ export const SupermatterContent = (props: SupermatterProps) => {
                 >
                   {toFixed(zap_transmission_coefficient, 2) +
                     zap_transmission_unit}
+=======
+                    good: [1.2, Infinity],
+                    average: [0.8, 1.2],
+                    bad: [-Infinity, 0.8],
+                  }}
+                >
+                  {toFixed(zap_multiplier, 2) + ' x'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </ProgressBar>
               }
               detail={

@@ -175,7 +175,6 @@
 		"second shooter",
 		"steel beam",
 		"ufo",
-		"globo-homo",
 		"xeno"
 	],
 
@@ -224,6 +223,7 @@
 		"viva"
 	],
 
+<<<<<<< HEAD
 	"guns": [
 		"10mm",
 		"357",
@@ -280,6 +280,8 @@
 		"wt550"
 	],
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"heresy": [
 		"armsy",
 		"ash",
@@ -317,6 +319,7 @@
 		"worm"
 	],
 
+<<<<<<< HEAD
 	"insects": [
 		"bee",
 		"buzz",
@@ -331,6 +334,8 @@
 		"sting"
 	],
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"lizards": [
 		"hiss",
 		"hissed",
@@ -452,10 +457,32 @@
 		"spess"
 	],
 
+<<<<<<< HEAD
 	"spiders": [
 		"spider",
 		"web",
 		"arachnid"
+=======
+	"doctors": [
+		"chem",
+		"chemist",
+		"chemistry",
+		"chief medical officer",
+		"cloning",
+		"cmo",
+		"cryo",
+		"doc",
+		"geneticist",
+		"genetics",
+		"healing",
+		"md",
+		"medicine",
+		"nurse",
+		"sleeper",
+		"viro",
+		"pathologist",
+		"pathology"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	],
 
 	"strangers": [
@@ -499,9 +526,262 @@
 		"wiz",
 		"wizard",
 		"zombie"
+<<<<<<< HEAD
 	]
 
 
 
 
+=======
+		],
+
+"aliens": [
+		"abductee",
+		"abductor",
+		"alien",
+		"ayy lmao",
+		"ayys",
+		"facehugger",
+		"greys",
+		"jelly",
+		"lusty",
+		"mothership",
+		"resin",
+		"slime",
+		"xeno",
+		"xenobiology",
+		"xenomorph"
+	],
+
+"strangers": [
+		"as (unknown)",
+		"unidentified",
+		"unknown",
+		"stranger"
+	],
+
+"birds": [
+		"avian",
+		"aviary",
+		"beak",
+		"bird",
+		"birdemic",
+		"chick",
+		"claw",
+		"cracker",
+		"eagle",
+		"feather",
+		"flap",
+		"fowl",
+		"griffin",
+		"ka kaw",
+		"kakaw",
+		"ki ki ya ya",
+		"kiki yaya",
+		"owl",
+		"peck",
+		"poly",
+		"vox",
+		"wing"
+	],
+
+"falling": [
+		"chasm",
+		"fall",
+		"fell",
+		"hang in there",
+		"hold on",
+		"hole",
+		"i'll catch you",
+		"let go",
+		"pit",
+		"slip"
+	],
+"anime": [
+		"~",
+		"anime",
+		"baka",
+		"best girl",
+		"catgirl",
+		"catgirls",
+		"cosplay",
+		"desu",
+		"dubs",
+		"husbando",
+		"katana",
+		"manga",
+		"neet",
+		"ninja",
+		"nya",
+		"nyaa",
+		"ora",
+		"otaku",
+		"season two when",
+		"subs",
+		"sugoi",
+		"uguu",
+		"waifu",
+		"weeb",
+		"worst girl"
+	],
+"insects": [
+		"bee",
+		"buzz",
+		"cockroach",
+		"flutter",
+		"fly",
+		"glockroach",
+		"insect",
+		"moff",
+		"moth",
+		"roach",
+		"sting"
+	],
+"ocky icky": [
+		"admeme",
+		"admin",
+		"ahelp",
+		"antag",
+		"antagonist",
+		"ban",
+		"banned",
+		"click",
+		"discord",
+		"fanum",
+		"forum",
+		"gyat",
+		"gyatt",
+		"ick ock",
+		"k",
+		"kek",
+		"leddit",
+		"mew",
+		"mewing",
+		"mewed",
+		"moderator",
+		"mods",
+		"ocky",
+		"ohio",
+		"ooc",
+		"owo",
+		"pwn",
+		"reddit",
+		"rizzler",
+		"round",
+		"rule",
+		"self antag",
+		"selfantag",
+		"shitcurity",
+		"shitsec",
+		"skibidi",
+		"skibidy",
+		"u",
+		"uwa",
+		"uwu",
+		"valid",
+		"y"
+	],
+"guns": [
+	"10mm",
+	"357",
+	"45",
+	"9mm",
+	"ammo",
+	"armory",
+	"ballistic",
+	"beam",
+	"buckshot",
+	"bulldog",
+	"bullet",
+	"c20",
+	"cannon",
+	"carbine",
+	"cartridge",
+	"casing",
+	"dart",
+	"deagle",
+	"emitter",
+	"firearm",
+	"fired",
+	"gun",
+	"handgun",
+	"hitscan",
+	"incendiary",
+	"l6",
+	"laser",
+	"lmg",
+	"m1911",
+	"mag",
+	"magazine",
+	"mateba",
+	"mosin",
+	"musket",
+	"nagant",
+	"pistol",
+	"projectile",
+	"pulse",
+	"revolver",
+	"rifle",
+	"shell",
+	"shoot",
+	"shooter",
+	"shot",
+	"shotgun",
+	"slug",
+	"smg",
+	"sniper",
+	"speed loader",
+	"speedloader",
+	"turret",
+	"uzi",
+	"wt550"
+	],
+"blood": [
+	"bled",
+	"bleed",
+	"bleeding",
+	"blood",
+	"bloodloss",
+	"bloody",
+	"dialysis",
+	"gib",
+	"gibbed",
+	"gibs",
+	"gore",
+	"hemorrhage",
+	"hemorrhaged",
+	"hemorrhaging",
+	"iv",
+	"transfusion"
+	],
+"christian minecraft": [
+	"balls",
+	"bitch",
+	"butt",
+	"cock",
+	"cunt",
+	"damn",
+	"dang",
+	"darn",
+	"dick",
+	"felinid",
+	"frack",
+	"frick",
+	"fornicate",
+	"fuc",
+	"fuccboi",
+	"fuck",
+	"fucker",
+	"fucking",
+	"fuckest",
+	"hell",
+	"heck",
+	"make love",
+	"sex",
+	"shit",
+	"shitter",
+	"shitty",
+	"weiner"
+]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 }

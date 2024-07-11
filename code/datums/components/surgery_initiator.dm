@@ -101,7 +101,12 @@
 				continue
 			if((surgery.surgery_flags & SURGERY_REQUIRES_REAL_LIMB) && (affecting.bodypart_flags & BODYPART_PSEUDOPART))
 				continue
+<<<<<<< HEAD
 
+=======
+		else if(carbon_target && (surgery.surgery_flags & SURGERY_REQUIRE_LIMB)) //mob with no limb in surgery zone when we need a limb
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(IS_IN_INVALID_SURGICAL_POSITION(target, surgery))
 			continue
 		if(!surgery.can_start(user, target))
@@ -182,6 +187,9 @@
 	if (!ui)
 		ui = new(user, src, "SurgeryInitiator")
 		ui.open()
+
+/datum/component/surgery_initiator/ui_state(mob/user)
+	return GLOB.not_incapacitated_state
 
 /datum/component/surgery_initiator/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()

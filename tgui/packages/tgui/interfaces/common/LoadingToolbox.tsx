@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Dimmer, Icon, Stack } from '../../components';
+=======
+import { Stack, Icon, Dimmer } from '../../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /** Spinner that represents loading states.
  *

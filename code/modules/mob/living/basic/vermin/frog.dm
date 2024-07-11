@@ -119,7 +119,10 @@
 		/datum/ai_planning_subtree/target_retaliate,
 		/datum/ai_planning_subtree/random_speech/frog,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/go_for_swim,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/ai_controller/basic_controller/frog/trash
@@ -128,10 +131,13 @@
 		/datum/ai_planning_subtree/random_speech/frog,
 		/datum/ai_planning_subtree/simple_find_target,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+<<<<<<< HEAD
 	)
 
 /datum/ai_controller/basic_controller/frog/suicide_frog
 	planning_subtrees = list(
 		/datum/ai_planning_subtree/simple_find_target,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)

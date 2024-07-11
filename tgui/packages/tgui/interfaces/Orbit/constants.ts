@@ -4,6 +4,7 @@ export const ANTAG2COLOR = {
   Biohazards: 'brown',
   'Bounty Hunters': 'yellow',
   CentCom: 'teal',
+<<<<<<< HEAD
   'Digital Anomalies': 'teal',
   'Emergency Response Team': 'teal',
   'Escaped Fugitives': 'orange',
@@ -11,6 +12,12 @@ export const ANTAG2COLOR = {
   'Spacetime Aberrations': 'white',
   'Deviant Crew': 'white',
   'Invasive Overgrowth': 'green',
+=======
+  'Cyber Authority': 'teal',
+  'Emergency Response Team': 'teal',
+  'Escaped Fugitives': 'orange',
+  'Xenomorph Infestation': 'violet',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } as const;
 
 type Department = {

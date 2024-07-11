@@ -85,7 +85,14 @@
 
 	SEND_SIGNAL(src, COMSIG_GLASS_DRANK, target_mob, user)
 	var/fraction = min(gulp_size/reagents.total_volume, 1)
+<<<<<<< HEAD
 	reagents.trans_to(target_mob, gulp_size, transferred_by = user, methods = INGEST)
+=======
+	var/obj/item/organ/internal/bladder/contained_bladder = target_mob.get_organ_slot(ORGAN_SLOT_BLADDER)
+	if(contained_bladder)
+		contained_bladder.consume_act(reagents, gulp_size * 0.2)
+	reagents.trans_to(target_mob, gulp_size, transfered_by = user, methods = INGEST)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	checkLiked(fraction, target_mob)
 	playsound(target_mob.loc,'sound/items/drink.ogg', rand(10,50), TRUE)
 	if(!iscarbon(target_mob))
@@ -101,7 +108,65 @@
 	if(LAZYLEN(diseases_to_add))
 		AddComponent(/datum/component/infective, diseases_to_add)
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/cup/interact_with_atom(atom/target, mob/living/user, list/modifiers)
+=======
+/obj/item/reagent_containers/cup/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	if(!isliving(over))
+		return
+
+	if(!spillable)
+		return
+
+	var/mob/living/chugger = over
+	var/chugging = TRUE //guys this is literally so fucking epic. We are really chugging shit
+	var/chug_time = 2 SECONDS /// guys we are literally chugging
+	while(chugging)
+		if(!reagents.total_volume)
+			chugging = FALSE
+			return
+
+		if(!do_after(chugger, chug_time, src))
+			chugging = FALSE
+			return
+		chug_time = max(0.5 SECONDS, chug_time - 0.2 SECONDS)
+
+		to_chat(chugger, span_notice("You swallow a gulp of [src]."))
+
+		SEND_SIGNAL(src, COMSIG_GLASS_DRANK, chugger, chugger)
+		var/fraction = min(gulp_size/reagents.total_volume, 1)
+		var/obj/item/organ/internal/bladder/contained_bladder = chugger.get_organ_slot(ORGAN_SLOT_BLADDER)
+		if(contained_bladder)
+			contained_bladder.consume_act(reagents, gulp_size * 0.2)
+		reagents.trans_to(chugger, gulp_size, transfered_by = chugger, methods = INGEST)
+		checkLiked(fraction, chugger)
+		playsound(chugger.loc,'sound/items/drink.ogg', rand(10,50), TRUE)
+		if(!iscarbon(chugger))
+			continue
+		var/mob/living/carbon/carbon_drinker = chugger
+		var/list/diseases = carbon_drinker.get_static_viruses()
+		if(!LAZYLEN(diseases))
+			continue
+		var/list/datum/disease/diseases_to_add = list()
+		for(var/datum/disease/malady as anything in diseases)
+			if(malady.spread_flags & DISEASE_SPREAD_CONTACT_FLUIDS)
+				diseases_to_add += malady
+		if(LAZYLEN(diseases_to_add))
+			AddComponent(/datum/component/infective, diseases_to_add)
+
+
+/obj/item/reagent_containers/cup/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!proximity_flag)
+		return
+
+	if(SEND_SIGNAL(src, COMSIG_TRY_EAT_TRAIT, target))
+		return
+
+	. |= AFTERATTACK_PROCESSED_ITEM
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!check_allowed_items(target, target_self = TRUE))
 		return NONE
 	if(!spillable)
@@ -116,11 +181,17 @@
 			to_chat(user, span_warning("[target] is full."))
 			return ITEM_INTERACT_BLOCKING
 
+<<<<<<< HEAD
 		var/trans = reagents.trans_to(target, amount_per_transfer_from_this, transferred_by = user)
 		to_chat(user, span_notice("You transfer [trans] unit\s of the solution to [target]."))
 		SEND_SIGNAL(src, COMSIG_REAGENTS_CUP_TRANSFER_TO, target)
 		target.update_appearance()
 		return ITEM_INTERACT_SUCCESS
+=======
+		var/trans = reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user)
+		if(trans)
+			to_chat(user, span_notice("You transfer [trans] unit\s of the solution to [target]."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(target.is_drainable()) //A dispenser. Transfer FROM it TO us.
 		if(!target.reagents.total_volume)
@@ -350,8 +421,16 @@
 	inhand_icon_state = "bucket"
 	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/custodial_righthand.dmi'
+<<<<<<< HEAD
 	fill_icon_state = "bucket"
 	fill_icon_thresholds = list(50, 90)
+=======
+	greyscale_colors = "#0085e5" //matches 1:1 with the original sprite color before gag-ification.
+	greyscale_config = /datum/greyscale_config/buckets
+	greyscale_config_worn = /datum/greyscale_config/buckets_worn
+	greyscale_config_inhand_left = /datum/greyscale_config/buckets_inhands_left
+	greyscale_config_inhand_right = /datum/greyscale_config/buckets_inhands_right
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT * 2)
 	w_class = WEIGHT_CLASS_NORMAL
 	amount_per_transfer_from_this = 20
@@ -381,6 +460,14 @@
 	name = "wooden bucket"
 	icon_state = "woodbucket"
 	inhand_icon_state = "woodbucket"
+<<<<<<< HEAD
+=======
+	greyscale_colors = null
+	greyscale_config = null
+	greyscale_config_worn = null
+	greyscale_config_inhand_left = null
+	greyscale_config_inhand_right = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT * 2)
 	resistance_flags = FLAMMABLE
 	armor_type = /datum/armor/bucket_wooden
@@ -406,6 +493,24 @@
 		return
 
 	return ..()
+
+/obj/item/reagent_containers/cup/bucket/attackby_secondary(obj/item/weapon, mob/user, params)
+	. = ..()
+	if(istype(weapon, /obj/item/mop))
+		if(reagents.total_volume == volume)
+			to_chat(user, "The [src.name] can't hold anymore liquids")
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+		var/obj/item/mop/attacked_mop = weapon
+
+		if(attacked_mop.reagents.total_volume < 0.1)
+			to_chat(user, span_warning("Your [attacked_mop.name] is already dry!"))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+		to_chat(user, "You wring out the [attacked_mop.name] into the [src.name].")
+		attacked_mop.reagents.trans_to(src, attacked_mop.max_reagent_volume * 0.25)
+		attacked_mop.reagents.remove_all(attacked_mop.max_reagent_volume)
+		return SECONDARY_ATTACK_CONTINUE_CHAIN
 
 /obj/item/reagent_containers/cup/bucket/equipped(mob/user, slot)
 	. = ..()
@@ -463,7 +568,7 @@
 	..()
 	if(istype(I,/obj/item/pestle))
 		if(grinded)
-			if(user.getStaminaLoss() > 50)
+			if(user.stamina.loss > 50)
 				to_chat(user, span_warning("You are too tired to work!"))
 				return
 			var/list/choose_options = list(
@@ -473,8 +578,13 @@
 			var/picked_option = show_radial_menu(user, src, choose_options, radius = 38, require_near = TRUE)
 			if(grinded && in_range(src, user) && user.is_holding(I) && picked_option)
 				to_chat(user, span_notice("You start grinding..."))
+<<<<<<< HEAD
 				if(do_after(user, 2.5 SECONDS, target = src))
 					user.adjustStaminaLoss(40)
+=======
+				if(do_after(user, 25, target = src))
+					user.stamina.adjust(-40)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 					switch(picked_option)
 						if("Juice")
 							return juice_item(grinded, user)
@@ -548,7 +658,11 @@
 	icon_state = "test_tube"
 	fill_icon_state = "tube"
 	inhand_icon_state = "atoxinbottle"
+<<<<<<< HEAD
 	worn_icon_state = "beaker"
+=======
+	worn_icon_state = "test_tube"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possible_transfer_amounts = list(5, 10, 15, 30)
 	volume = 30
 	fill_icon_thresholds = list(0, 1, 20, 40, 60, 80, 100)

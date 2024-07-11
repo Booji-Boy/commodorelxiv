@@ -39,10 +39,19 @@
 	var/mob/living/big_guy = controller.pawn //he was molded by the darkness
 
 	if(QDELETED(batman) || get_dist(batman, big_guy) >= give_up_distance)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 
 	if(batman.stat != CONSCIOUS)
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE, target_key)
+		return
+
+	if(batman.stat != CONSCIOUS)
+		finish_action(controller, TRUE, target_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	big_guy.start_pulling(batman)
 	big_guy.face_atom(batman)
@@ -98,8 +107,14 @@
 	var/mob/living/pawn = controller.pawn
 	var/obj/item/held_item = pawn.get_item_by_slot(pawn.get_active_hand())
 	var/atom/target = controller.blackboard[target_key]
+<<<<<<< HEAD
 	if(QDELETED(target))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	if(QDELETED(target) || !pawn.CanReach(target))
+		finish_action(controller, FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	pawn.set_combat_mode(FALSE)
 	if(held_item)
@@ -181,7 +196,11 @@
 	var/mob/living/living_pawn = controller.pawn
 	var/obj/item/target = controller.blackboard[target_key]
 	if(QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!(target in living_pawn.held_items))
 		if(!living_pawn.get_empty_held_indexes() || !living_pawn.put_in_hands(target))
@@ -223,7 +242,12 @@
 
 	var/atom/movable/attack_target = controller.blackboard[BB_ATTACK_TARGET]
 	if(!attack_target || !can_see(living_pawn, attack_target, length = controller.blackboard[BB_VISION_RANGE]))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mob/living/living_target = attack_target
 	if(istype(living_target) && (living_target.stat == DEAD))
@@ -290,22 +314,38 @@
 	living_pawn.say(speech, forced = "AI Controller")
 	if(speech_sound)
 		playsound(living_pawn, speech_sound, 80, vary = TRUE)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/perform_speech_radio
 
 /datum/ai_behavior/perform_speech_radio/perform(seconds_per_tick, datum/ai_controller/controller, speech, obj/item/radio/speech_radio, list/try_channels = list(RADIO_CHANNEL_COMMON))
 	var/mob/living/living_pawn = controller.pawn
 	if(!istype(living_pawn) || !istype(speech_radio) || QDELETED(speech_radio) || !length(try_channels))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	speech_radio.talk_into(living_pawn, speech, pick(try_channels))
 	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE)
+		return
+	speech_radio.talk_into(living_pawn, speech, pick(try_channels))
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //song behaviors
 
 /datum/ai_behavior/setup_instrument
 
 /datum/ai_behavior/setup_instrument/perform(seconds_per_tick, datum/ai_controller/controller, song_instrument_key, song_lines_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/instrument/song_instrument = controller.blackboard[song_instrument_key]
 	var/datum/song/song = song_instrument.song
 	var/song_lines = controller.blackboard[song_lines_key]
@@ -320,6 +360,11 @@
 /datum/ai_behavior/play_instrument
 
 /datum/ai_behavior/play_instrument/perform(seconds_per_tick, datum/ai_controller/controller, song_instrument_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/instrument/song_instrument = controller.blackboard[song_instrument_key]
 	var/datum/song/song = song_instrument.song
 
@@ -341,6 +386,12 @@
 				continue
 		possible_targets += thing
 	if(!possible_targets.len)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 	controller.set_blackboard_key(target_key, pick(possible_targets))
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE)
+	controller.set_blackboard_key(target_key, pick(possible_targets))
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

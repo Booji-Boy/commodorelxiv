@@ -27,7 +27,11 @@
 				mw.vampire_charging_enabled = !mw.vampire_charging_enabled
 
 /datum/wires/microwave/on_cut(wire, mend, source)
+<<<<<<< HEAD
 	var/obj/machinery/microwave/mw = holder
+=======
+	var/obj/machinery/microwave/M = holder
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(wire)
 		if(WIRE_ACTIVATE)
 			mw.wire_disabled = !mend

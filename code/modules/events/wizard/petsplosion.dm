@@ -12,12 +12,17 @@ GLOBAL_LIST_INIT(petsplosion_candidates, typecacheof(list(
 	/mob/living/basic/parrot,
 	/mob/living/basic/pet,
 	/mob/living/basic/pig,
+	/mob/living/basic/chicken,
 	/mob/living/basic/rabbit,
 	/mob/living/basic/sheep,
 	/mob/living/basic/sloth,
 	/mob/living/basic/snake,
 	/mob/living/basic/spider/giant/sgt_araneus,
 	/mob/living/simple_animal/hostile/retaliate/goose/vomit,
+<<<<<<< HEAD
+=======
+	/mob/living/simple_animal/pet,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 )))
 
 /datum/round_event_control/wizard/petsplosion //the horror

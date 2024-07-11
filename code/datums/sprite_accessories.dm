@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
  *	Hello and welcome to sprite_accessories: For sprite accessories, such as hair,
  *	facial hair, and possibly tattoos and stuff somewhere along the line. This file is
  *	intended to be friendly for people with little to no actual coding experience.
@@ -15,6 +16,58 @@
  *	from doing this unless you absolutely know what you are doing, and have defined a
  *	conversion in savefile.dm
  */
+=======
+
+	Hello and welcome to sprite_accessories: For sprite accessories, such as hair,
+	facial hair, and possibly tattoos and stuff somewhere along the line. This file is
+	intended to be friendly for people with little to no actual coding experience.
+	The process of adding in new hairstyles has been made pain-free and easy to do.
+	Enjoy! - Doohl
+
+
+	Notice: This all gets automatically compiled in a list in dna.dm, so you do not
+	have to define any UI values for sprite accessories manually for hair and facial
+	hair. Just add in new hair types and the game will naturally adapt.
+
+	!!WARNING!!: changing existing hair information can be VERY hazardous to savefiles,
+	to the point where you may completely corrupt a server's savefiles. Please refrain
+	from doing this unless you absolutely know what you are doing, and have defined a
+	conversion in savefile.dm
+*/
+/proc/init_sprite_accessory_subtypes(prototype, list/L, list/male, list/female, add_blank, roundstart = FALSE)//Roundstart argument builds a specific list for roundstart parts where some parts may be locked
+	if(!istype(L))
+		L = list()
+	if(!istype(male))
+		male = list()
+	if(!istype(female))
+		female = list()
+
+	for(var/path in subtypesof(prototype))
+		if(roundstart)
+			var/datum/sprite_accessory/P = path
+			if(initial(P.locked))
+				continue
+
+		var/datum/sprite_accessory/D = new path()
+
+		if(D.icon_state)
+			L[D.name] = D
+		else
+			L += D.name
+
+		switch(D.gender)
+			if(MALE)
+				male += D.name
+			if(FEMALE)
+				female += D.name
+			else
+				male += D.name
+				female += D.name
+	if(add_blank)
+		L["None"] = new /datum/sprite_accessory/blank
+
+	return L
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 
 /datum/sprite_accessory
 	/// The icon file the accessory is located in.
@@ -1547,11 +1600,12 @@
 /datum/sprite_accessory/socks/bee_knee
 	name = "Knee-high (Bee)"
 	icon_state = "bee_knee"
-
+/*
+MONKESTATION EDIT
 /datum/sprite_accessory/socks/black_knee
 	name = "Knee-high (Black)"
 	icon_state = "black_knee"
-
+*/
 /datum/sprite_accessory/socks/commie_knee
 	name = "Knee-High (Commie)"
 	icon_state = "commie_knee"
@@ -1584,13 +1638,17 @@
 	name = "Knee-high (White)"
 	icon_state = "white_knee"
 
+
 /datum/sprite_accessory/socks/fishnet_knee
 	name = "Knee-high (Fishnet)"
 	icon_state = "fishnet_knee"
 
+/*
+MONKESTATION EDIT
 /datum/sprite_accessory/socks/black_norm
 	name = "Normal (Black)"
 	icon_state = "black_norm"
+*/
 
 /datum/sprite_accessory/socks/white_norm
 	name = "Normal (White)"
@@ -1599,11 +1657,12 @@
 /datum/sprite_accessory/socks/pantyhose
 	name = "Pantyhose"
 	icon_state = "pantyhose"
-
+/*
+MONKESTATION EDIT
 /datum/sprite_accessory/socks/black_short
 	name = "Short (Black)"
 	icon_state = "black_short"
-
+*/
 /datum/sprite_accessory/socks/white_short
 	name = "Short (White)"
 	icon_state = "white_short"
@@ -1651,11 +1710,11 @@
 /datum/sprite_accessory/socks/bee_thigh
 	name = "Thigh-high (Bee)"
 	icon_state = "bee_thigh"
-
+/*
 /datum/sprite_accessory/socks/black_thigh
 	name = "Thigh-high (Black)"
 	icon_state = "black_thigh"
-
+*/
 /datum/sprite_accessory/socks/commie_thigh
 	name = "Thigh-high (Commie)"
 	icon_state = "commie_thigh"
@@ -1710,11 +1769,15 @@
 /datum/sprite_accessory/lizard_markings/dtiger
 	name = "Dark Tiger Body"
 	icon_state = "dtiger"
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
 	gender_specific = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 
 /datum/sprite_accessory/lizard_markings/ltiger
 	name = "Light Tiger Body"
 	icon_state = "ltiger"
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
 	gender_specific = TRUE
 
 /datum/sprite_accessory/lizard_markings/lbelly
@@ -1722,6 +1785,14 @@
 	icon_state = "lbelly"
 	gender_specific = TRUE
 
+=======
+/*
+/datum/sprite_accessory/body_markings/lbelly
+	name = "Light Belly"
+	icon_state = "lbelly"
+	gender_specific = 1
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 /datum/sprite_accessory/tails
 	em_block = TRUE
 	/// Describes which tail spine sprites to use, if any.
@@ -1750,7 +1821,10 @@
 /datum/sprite_accessory/tails/lizard/short
 	name = "Short"
 	icon_state = "short"
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
 	spine_key = NONE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 
 /datum/sprite_accessory/tails/human/cat
 	name = "Cat"
@@ -1760,8 +1834,12 @@
 
 /datum/sprite_accessory/tails/monkey/default
 	name = "Monkey"
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
 	icon = 'icons/mob/human/species/monkey/monkey_tail.dmi'
 	icon_state = "default"
+=======
+	icon_state = "monkey"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 	color_src = FALSE
 
 /datum/sprite_accessory/pod_hair
@@ -2077,6 +2155,7 @@
 	name = "None"
 	icon_state = "none"
 
+<<<<<<< HEAD:code/datums/sprite_accessories.dm
 /datum/sprite_accessory/spines/short
 	name = "Short"
 	icon_state = "short"
@@ -2117,6 +2196,8 @@
 	name = "Aquatic"
 	icon_state = "aqua"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/mob/dead/new_player/sprite_accessories.dm
 /datum/sprite_accessory/legs //legs are a special case, they aren't actually sprite_accessories but are updated with them.
 	icon = null //These datums exist for selecting legs on preference, and little else
 	em_block = TRUE
@@ -2140,6 +2221,10 @@
 	icon = 'icons/mob/human/species/moth/moth_wings.dmi'
 	color_src = null
 	em_block = TRUE
+
+/datum/sprite_accessory/moth_wings/none
+	name = "None"
+	icon_state = "none"
 
 /datum/sprite_accessory/moth_wings/plain
 	name = "Plain"
@@ -2180,7 +2265,6 @@
 /datum/sprite_accessory/moth_wings/burnt_off
 	name = "Burnt Off"
 	icon_state = "burnt_off"
-	locked = TRUE
 
 /datum/sprite_accessory/moth_wings/firewatch
 	name = "Firewatch"
@@ -2245,6 +2329,10 @@
 /datum/sprite_accessory/moth_antennae //Finally splitting the sprite
 	icon = 'icons/mob/human/species/moth/moth_antennae.dmi'
 	color_src = null
+
+/datum/sprite_accessory/moth_antennae/none
+	name = "None"
+	icon_state = "none"
 
 /datum/sprite_accessory/moth_antennae/plain
 	name = "Plain"

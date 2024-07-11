@@ -91,12 +91,16 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 
 		//Buttons for helpful stuff. This is where people land in the tgui
 		if("clear_virus")
-			var/choice = tgui_alert(usr, "Are you sure you want to cure all disease?",, list("Yes", "Cancel"))
+			var/choice = tgui_alert(usr, "Are you sure you want to cure all disease (Only clears players diseases)?",, list("Yes", "Cancel"))
 			if(choice == "Yes")
 				message_admins("[key_name_admin(holder)] has cured all diseases.")
-				for(var/thing in SSdisease.active_diseases)
-					var/datum/disease/D = thing
-					D.cure(0)
+				for(var/mob/living/living as anything in GLOB.alive_mob_list)
+					if(!isliving(living))
+						continue
+					if(!length(living.diseases))
+						continue
+					for(var/datum/disease/advanced/disease as anything in living.diseases)
+						disease.cure(target = living)
 
 		if("list_bombers")
 			holder.holder.list_bombers()
@@ -205,6 +209,7 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 			switch(prompt)
 				if("Make Your Own")
 					AdminCreateVirus(holder)
+<<<<<<< HEAD
 				if("Advanced")
 					event = locate(/datum/round_event_control/disease_outbreak/advanced) in SSevents.control
 				if("Simple")
@@ -219,6 +224,16 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 			message_admins("[key_name_admin(usr)] has triggered an event. ([event.name])")
 			log_admin("[key_name(usr)] has triggered an event. ([event.name])")
 
+=======
+				if("Random")
+					force_event(/datum/round_event_control/disease_outbreak)
+				if("Choose")
+					var/virus = input("Choose the virus to spread", "BIOHAZARD") as null|anything in sort_list(typesof(/datum/disease), GLOBAL_PROC_REF(cmp_typepaths_asc))
+					var/datum/round_event_control/disease_outbreak/DC = locate(/datum/round_event_control/disease_outbreak) in SSevents.control
+					var/datum/round_event/disease_outbreak/DO = DC.run_event()
+					DO.virus_type = virus
+					E = DO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("allspecies")
 			if(!is_funmin)
 				return
@@ -402,7 +417,11 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 				var/list/candidates = list()
 
 				if (prefs["offerghosts"]["value"] == "Yes")
+<<<<<<< HEAD
 					candidates = SSpolling.poll_ghost_candidates(replacetext(prefs["ghostpoll"]["value"], "%TYPE%", initial(pathToSpawn.name)), check_jobban = ROLE_TRAITOR, alert_pic = pathToSpawn, role_name_text = "portal storm")
+=======
+					candidates = SSpolling.poll_ghost_candidates(replacetext(prefs["ghostpoll"]["value"], "%TYPE%", initial(pathToSpawn.name)), check_jobban = ROLE_TRAITOR, pic_source = pathToSpawn, role_name_text = "portal storm")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 				if (prefs["playersonly"]["value"] == "Yes" && length(candidates) < prefs["minplayers"]["value"])
 					message_admins("Not enough players signed up to create a portal storm, the minimum was [prefs["minplayers"]["value"]] and the number of signups [length(candidates)]")
@@ -533,20 +552,6 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 							ADD_TRAIT(I, TRAIT_NODROP, ADMIN_TRAIT)
 				else
 					to_chat(H, span_warning("You're not kawaii enough for this!"), confidential = TRUE)
-		if("masspurrbation")
-			if(!is_funmin)
-				return
-			mass_purrbation()
-			message_admins("[key_name_admin(holder)] has put everyone on \
-				purrbation!")
-			log_admin("[key_name(holder)] has put everyone on purrbation.")
-		if("massremovepurrbation")
-			if(!is_funmin)
-				return
-			mass_remove_purrbation()
-			message_admins("[key_name_admin(holder)] has removed everyone from \
-				purrbation.")
-			log_admin("[key_name(holder)] has removed everyone from purrbation.")
 		if("massimmerse")
 			if(!is_funmin)
 				return
@@ -573,7 +578,11 @@ ADMIN_VERB(secrets, R_NONE, "Secrets", "Abuse harder than you ever have before w
 			if(teamsize <= 0)
 				return FALSE
 
+<<<<<<< HEAD
 			candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a [span_notice("Nanotrasen emergency response drone")]?", check_jobban = ROLE_DRONE, alert_pic = /mob/living/basic/drone/classic, role_name_text = "nanotrasen emergency response drone")
+=======
+			candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a Nanotrasen emergency response drone?", check_jobban = ROLE_DRONE, pic_source = /mob/living/basic/drone/classic, role_name_text = "nanotrasen emergency response drone")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			if(length(candidates) == 0)
 				return FALSE

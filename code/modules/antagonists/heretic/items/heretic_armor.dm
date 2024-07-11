@@ -108,12 +108,20 @@
 	. = ..()
 	UnregisterSignal(user, list(COMSIG_MOB_UNEQUIPPED_ITEM, COMSIG_MOB_EQUIPPED_ITEM))
 
+<<<<<<< HEAD
 /obj/item/clothing/suit/hooded/cultrobes/void/proc/hide_item(datum/source, obj/item/item, slot)
+=======
+/obj/item/clothing/suit/hooded/cultrobes/void/proc/hide_item(obj/item/item, slot)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 	if(slot & ITEM_SLOT_SUITSTORE)
 		ADD_TRAIT(item, TRAIT_NO_STRIP, REF(src)) // i'd use examine hide but its a flag and yeah
 
+<<<<<<< HEAD
 /obj/item/clothing/suit/hooded/cultrobes/void/proc/show_item(datum/source, obj/item/item, slot)
+=======
+/obj/item/clothing/suit/hooded/cultrobes/void/proc/show_item(obj/item/item, slot)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 	REMOVE_TRAIT(item, TRAIT_NO_STRIP, REF(src))
 

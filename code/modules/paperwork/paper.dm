@@ -30,7 +30,10 @@
 	grind_results = list(/datum/reagent/cellulose = 3)
 	color = COLOR_WHITE
 	item_flags = SKIP_FANTASY_ON_SPAWN
+<<<<<<< HEAD
 	interaction_flags_click = NEED_DEXTERITY|NEED_HANDS|ALLOW_RESTING
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Lazylist of raw, unsanitised, unparsed text inputs that have been made to the paper.
 	var/list/datum/paper_input/raw_text_inputs
@@ -63,9 +66,12 @@
 
 	///If TRUE, staff can read paper everywhere, but usually from requests panel.
 	var/request_state = FALSE
+	///is this considered thermal paper?
+	var/thermal_paper = FALSE
 
 /obj/item/paper/Initialize(mapload)
 	. = ..()
+	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/clothing/mask/cigarette/rollie, CUSTOM_INGREDIENT_ICON_NOCHANGE, ingredient_type=CUSTOM_INGREDIENT_TYPE_DRYABLE, max_ingredients=2, job_xp = 1, job = JOB_BOTANIST)
 	pixel_x = base_pixel_x + rand(-9, 9)
 	pixel_y = base_pixel_y + rand(-8, 8)
 
@@ -464,8 +470,13 @@
 	return ..()
 
 /// Secondary right click interaction to quickly stamp things
+<<<<<<< HEAD
 /obj/item/paper/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
 	var/list/writing_stats = tool.get_writing_implement_details()
+=======
+/obj/item/paper/attackby_secondary(obj/item/attacking_item, mob/living/user, params)
+	var/list/writing_stats = attacking_item.get_writing_implement_details()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!length(writing_stats))
 		return NONE
@@ -476,12 +487,21 @@
 
 	add_stamp(writing_stats["stamp_class"], rand(1, 300), rand(1, 400), stamp_icon_state = writing_stats["stamp_icon_state"])
 	user.visible_message(
+<<<<<<< HEAD
 		span_notice("[user] quickly stamps [src] with [tool] without looking."),
 		span_notice("You quickly stamp [src] with [tool] without looking."),
 	)
 	playsound(src, 'sound/items/handling/standard_stamp.ogg', 50, vary = TRUE)
 
 	return ITEM_INTERACT_BLOCKING // Stop the UI from opening.
+=======
+		span_notice("[user] quickly stamps [src] with [attacking_item] without looking."),
+		span_notice("You quickly stamp [src] with [attacking_item] without looking."),
+	)
+	playsound(src, 'sound/items/handling/standard_stamp.ogg', 50, vary = TRUE)
+
+	return TOOL_ACT_SIGNAL_BLOCKING // Stop the UI from opening.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Attempts to ui_interact the paper to the given user, with some sanity checking
  * to make sure the camera still exists via the weakref and that this paper is still

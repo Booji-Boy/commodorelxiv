@@ -1,10 +1,75 @@
+<<<<<<< HEAD
+=======
+//Preferences stuff
+	//Hairstyles
+GLOBAL_LIST_EMPTY(roundstart_hairstyles_list)
+GLOBAL_LIST_EMPTY(hairstyles_list) //stores /datum/sprite_accessory/hair indexed by name
+GLOBAL_LIST_EMPTY(hairstyles_male_list) //stores only hair names
+GLOBAL_LIST_EMPTY(hairstyles_female_list) //stores only hair names
+GLOBAL_LIST_EMPTY(facial_hairstyles_list) //stores /datum/sprite_accessory/facial_hair indexed by name
+GLOBAL_LIST_EMPTY(facial_hairstyles_male_list) //stores only hair names
+GLOBAL_LIST_EMPTY(facial_hairstyles_female_list) //stores only hair names
+GLOBAL_LIST_EMPTY(hair_gradients_list) //stores /datum/sprite_accessory/hair_gradient indexed by name
+GLOBAL_LIST_EMPTY(facial_hair_gradients_list) //stores /datum/sprite_accessory/facial_hair_gradient indexed by name
+	//Underwear
+GLOBAL_LIST_EMPTY(underwear_list) //stores /datum/sprite_accessory/underwear indexed by name
+GLOBAL_LIST_EMPTY(underwear_m) //stores only underwear name
+GLOBAL_LIST_EMPTY(underwear_f) //stores only underwear name
+	//Undershirts
+GLOBAL_LIST_EMPTY(undershirt_list) //stores /datum/sprite_accessory/undershirt indexed by name
+GLOBAL_LIST_EMPTY(undershirt_m)  //stores only undershirt name
+GLOBAL_LIST_EMPTY(undershirt_f)  //stores only undershirt name
+	//Socks
+GLOBAL_LIST_EMPTY(socks_list) //stores /datum/sprite_accessory/socks indexed by name
+	//Lizard Bits (all datum lists indexed by name)
+GLOBAL_LIST_EMPTY(body_markings_list)
+GLOBAL_LIST_EMPTY(snouts_list)
+GLOBAL_LIST_EMPTY(horns_list)
+GLOBAL_LIST_EMPTY(frills_list)
+GLOBAL_LIST_EMPTY(spines_list)
+GLOBAL_LIST_EMPTY(legs_list)
+GLOBAL_LIST_EMPTY(animated_spines_list)
+
+	//Mutant Human bits
+GLOBAL_LIST_EMPTY(tails_list)
+GLOBAL_LIST_EMPTY(tails_list_human) //Only exists for preference choices. Use "tails_list" otherwise.
+GLOBAL_LIST_EMPTY(tails_list_lizard) //See above!
+GLOBAL_LIST_EMPTY(ears_list)
+GLOBAL_LIST_EMPTY(wings_list)
+GLOBAL_LIST_EMPTY(wings_open_list)
+GLOBAL_LIST_EMPTY(moth_wings_list)
+GLOBAL_LIST_EMPTY(moth_antennae_list)
+GLOBAL_LIST_EMPTY(moth_markings_list)
+GLOBAL_LIST_EMPTY(apid_antenna_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(ipc_screens_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(ipc_antennas_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(ipc_chassis_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(apid_wings_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(caps_list)
+GLOBAL_LIST_EMPTY(pod_hair_list)
+GLOBAL_LIST_EMPTY(ethereal_horns_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(ethereal_tail_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(tails_list_monkey) //Monkestation Addition
+GLOBAL_LIST_EMPTY(anime_top_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(anime_middle_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(anime_bottom_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(arachnid_appendages_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(arachnid_chelicerae_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(goblin_ears_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(floran_leaves_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(satyr_fluff_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(satyr_tail_list) //Monkestation Addition
+GLOBAL_LIST_EMPTY(satyr_horns_list) //Monkestation Addition
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 GLOBAL_LIST_INIT(color_list_ethereal, list(
 	"Blue" = "#3399ff",
 	"Bright Yellow" = "#ffff99",
 	"Burnt Orange" = "#cc4400",
 	"Cyan Blue" = "#00ffff",
 	"Dark Blue" = "#6666ff",
-	"Dark Fuschia" = "#cc0066",
+	"Dark Fuschia" = "#C70064", //Monkestation Edit: #CC0066 TO #C70064
+
 	"Dark Green" = "#37835b",
 	"Dark Red" = "#9c3030",
 	"Dull Yellow" = "#fbdf56",
@@ -18,6 +83,8 @@ GLOBAL_LIST_INIT(color_list_ethereal, list(
 	"Red" = "#ff4d4d",
 	"Seafoam Green" = "#00fa9a",
 	"White" = "#f2f2f2",
+	"Fuschia" = "#FF0066", //Monkestation Addition
+	"Dark Purple" = "#502A77", //Monkestation Addition
 ))
 
 GLOBAL_LIST_INIT(color_list_lustrous, list(
@@ -88,6 +155,78 @@ GLOBAL_LIST_INIT(ghost_forms_with_accessories_list, list(
 ))
 //stores the ghost forms that support hair and other such things
 
+<<<<<<< HEAD
+=======
+GLOBAL_LIST_INIT(ai_core_display_screens, sort_list(list(
+	":thinking:",
+	"Alien",
+	"Angel",
+	"Banned",
+	"Bliss",
+	"Blue",
+	"Boxfort",
+	"Boy",
+	"Clown",
+	"Database",
+	"Dorf",
+	"Firewall",
+	"Fuzzy",
+	"Gentoo",
+	"Girl",
+	"Glitchman",
+	"Gondola",
+	"Goon",
+	"Hades",
+	"HAL 9000",
+	"Heartline",
+	"Helios",
+	"Hotdog",
+	"House",
+	"Inverted",
+	"Matrix",
+	"Monochrome",
+	"Murica",
+	"Nanotrasen",
+	"Not Malf",
+	"Portrait",
+	"President",
+	"Rainbow",
+	"Random",
+	"Red October",
+	"Red",
+	"Static",
+	"Syndicat Meow",
+	"Terminal",
+	"Text",
+	"Too Deep",
+	"Triumvirate-M",
+	"Triumvirate",
+	"Weird",
+	"Yes-Man",
+	"Randomgod", //MONKEYSTATION ADDITION
+)))
+
+/// A form of resolve_ai_icon that is guaranteed to never sleep.
+/// Not always accurate, but always synchronous.
+/proc/resolve_ai_icon_sync(input)
+	SHOULD_NOT_SLEEP(TRUE)
+
+	if(!input || !(input in GLOB.ai_core_display_screens))
+		return "ai"
+	else
+		if(input == "Random")
+			input = pick(GLOB.ai_core_display_screens - "Random")
+		return "ai-[lowertext(input)]"
+
+/proc/resolve_ai_icon(input)
+	if (input == "Portrait")
+		var/datum/portrait_picker/tgui = new(usr)//create the datum
+		tgui.ui_interact(usr)//datum has a tgui component, here we open the window
+		return "ai-portrait" //just take this until they decide
+
+	return resolve_ai_icon_sync(input)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 GLOBAL_LIST_INIT(security_depts_prefs, sort_list(list(
 	SEC_DEPT_ENGINEERING,
 	SEC_DEPT_MEDICAL,
@@ -130,6 +269,8 @@ GLOBAL_LIST_INIT(backpacklist, list(
 
 	//Female Uniforms
 GLOBAL_LIST_EMPTY(female_clothing_icons)
+	//Auto-generated 'fallback' clothing icons
+GLOBAL_LIST_EMPTY(fallback_clothing_icons)
 
 GLOBAL_LIST_INIT(scarySounds, list(
 	'sound/effects/footstep/clownstep1.ogg',
@@ -202,7 +343,7 @@ GLOBAL_LIST_INIT(TAGGERLOCATIONS, list("Disposals",
 	"CMO Office", "Chemistry", "Research", "RD Office",
 	"Robotics", "HoP Office", "Library", "Chapel", "Theatre",
 	"Bar", "Kitchen", "Hydroponics", "Janitor Closet","Genetics",
-	"Experimentor Lab", "Ordnance", "Dormitories", "Virology",
+	"Experimentor Lab", "Ordnance", "Dormitories", "Pathology",
 	"Xenobiology", "Law Office","Detective's Office"))
 
 GLOBAL_LIST_INIT(station_prefixes, world.file2list("strings/station_prefixes.txt"))

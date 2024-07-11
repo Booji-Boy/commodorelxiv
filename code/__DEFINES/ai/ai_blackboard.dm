@@ -6,6 +6,11 @@
 #define BB_NEXT_HUNGRY "BB_NEXT_HUNGRY"
 ///what we're going to eat next
 #define BB_FOOD_TARGET "bb_food_target"
+<<<<<<< HEAD
+=======
+///Path we should use next time we use the JPS movement datum
+#define BB_PATH_TO_USE "BB_path_to_use"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///How close a mob must be for us to select it as a target, if that is less than how far we can maintain it as a target
 #define BB_AGGRO_RANGE "BB_aggro_range"
 ///are we hungry? determined by the udder compnent
@@ -14,6 +19,7 @@
 #define BB_BREED_READY "BB_breed_ready"
 ///maximum kids we can have
 #define BB_MAX_CHILDREN "BB_max_children"
+<<<<<<< HEAD
 ///our current happiness level
 #define BB_BASIC_HAPPINESS "BB_basic_happiness"
 ///can this mob heal?
@@ -24,6 +30,8 @@
 ///the list of interactions we can have with the owner
 #define BB_INTERACTIONS_WITH_OWNER "BB_interactions_with_owner"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Store a single or list of emotes at this key
 #define BB_EMOTE_KEY "BB_emotes"
@@ -80,7 +88,12 @@
 #define DEFAULT_BASIC_FLEE_DISTANCE 9
 
 /// Generic key for a non-specific targeted action
+<<<<<<< HEAD
 #define BB_TARGETED_ACTION "BB_TARGETED_action"
+=======
+#define BB_TARGETED_ACTION "BB_targeted_action"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Generic key for a non-specific action
 #define BB_GENERIC_ACTION "BB_generic_action"
 
@@ -131,6 +144,10 @@
 ///Range for a MOD AI controller.
 #define MOD_AI_RANGE 200
 
+<<<<<<< HEAD
+=======
+#define BB_GROUP_DATUM "BB_group_datum"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///should we skip the faction check for the targeting strategy?
 #define BB_ALWAYS_IGNORE_FACTION "BB_always_ignore_factions"
 ///are we in some kind of temporary state of ignoring factions when targeting? can result in volatile results if multiple behaviours touch this
@@ -149,6 +166,7 @@
 /// The next time at which this mob can call for reinforcements
 #define BB_BASIC_MOB_REINFORCEMENTS_COOLDOWN "BB_basic_mob_reinforcements_cooldown"
 
+<<<<<<< HEAD
 /// the direction we started when executing stare at things
 #define BB_STARTING_DIRECTION "BB_startdir"
 
@@ -158,6 +176,11 @@
 ///our fishing target
 #define BB_FISHING_TARGET "fishing_target"
 
+=======
+///Text we display when we befriend someone
+#define BB_FRIENDLY_MESSAGE "friendly_message"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Keys used by one and only one behavior
 // Used to hold state without making bigass lists
 /// For /datum/ai_behavior/find_potential_targets, what if any field are we using currently

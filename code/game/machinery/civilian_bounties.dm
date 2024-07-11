@@ -97,7 +97,7 @@
 /**
  * This fully rewrites base behavior in order to only check for bounty objects, and no other types of objects like pirate-pads do.
  */
-/obj/machinery/computer/piratepad_control/civilian/send()
+/obj/machinery/computer/piratepad_control/civilian/send(mob/user)
 	playsound(loc, 'sound/machines/wewewew.ogg', 70, TRUE)
 	if(!sending)
 		return
@@ -132,6 +132,9 @@
 		var/obj/item/bounty_cube/reward = new /obj/item/bounty_cube(drop_location())
 		reward.set_up(curr_bounty, inserted_scan_id)
 
+
+		usr.client.prefs.adjust_metacoins(usr.ckey, round(curr_bounty.reward * 0.1), "completed a bounty", respects_roundcap = TRUE)
+
 	pad.visible_message(span_notice("[pad] activates!"))
 	flick(pad.sending_state,pad)
 	pad.icon_state = pad.idle_state
@@ -153,7 +156,11 @@
 	var/list/datum/bounty/crumbs = list(random_bounty(pot_acc.account_job.bounty_types), // We want to offer 2 bounties from their appropriate job catagories
 										random_bounty(pot_acc.account_job.bounty_types), // and 1 guarenteed assistant bounty if the other 2 suck.
 										random_bounty(CIV_JOB_BASIC))
+<<<<<<< HEAD
 	COOLDOWN_START(pot_acc, bounty_timer, (5 MINUTES) - cooldown_reduction)
+=======
+	COOLDOWN_START(pot_acc, bounty_timer, 1 MINUTES)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pot_acc.bounties = crumbs
 
 /**
@@ -216,7 +223,7 @@
 		if("recalc")
 			recalc()
 		if("send")
-			start_sending()
+			start_sending(usr)
 		if("stop")
 			stop_sending()
 		if("pick")

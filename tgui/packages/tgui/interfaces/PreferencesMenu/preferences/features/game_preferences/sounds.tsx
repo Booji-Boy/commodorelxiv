@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   CheckboxInput,
   Feature,
@@ -6,6 +7,15 @@ import {
   FeatureToggle,
 } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
+=======
+import { multiline } from 'common/string';
+import {
+  CheckboxInput,
+  FeatureChoiced,
+  FeatureDropdownInput,
+  FeatureToggle,
+} from '../base';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const sound_ambience: FeatureToggle = {
   name: 'Enable ambience',
@@ -86,6 +96,7 @@ export const sound_ship_ambience: FeatureToggle = {
   component: CheckboxInput,
 };
 
+<<<<<<< HEAD
 export const sound_elevator: FeatureToggle = {
   name: 'Enable elevator music',
   category: 'SOUND',
@@ -96,8 +107,27 @@ export const sound_achievement: FeatureChoiced = {
   name: 'Achievement unlock sound',
   category: 'SOUND',
   description: `
+=======
+export const sound_achievement: FeatureChoiced = {
+  name: 'Achievement unlock sound',
+  category: 'SOUND',
+  description: multiline`
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     The sound that's played when unlocking an achievement.
     If disabled, no sound will be played.
   `,
   component: FeatureDropdownInput,
 };
+<<<<<<< HEAD
+=======
+
+// monke edit start - AI vox announcement toggle
+export const sound_vox: FeatureToggle = {
+  name: 'Enable AI VOX announcements',
+  category: 'SOUND',
+  subcategory: 'IC',
+  description: 'When enabled, hear AI VOX (text-to-speech) announcements.',
+  component: CheckboxInput,
+};
+// monke edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

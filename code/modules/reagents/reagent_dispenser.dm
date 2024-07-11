@@ -179,7 +179,7 @@
 		visible_message(span_danger("\The [src] explodes!"))
 		// old code for reference:
 		// standard fuel tank = 1000 units = heavy_impact_range = 1, light_impact_range = 5, flame_range = 5
-		// big fuel tank = 5000 units = devastation_range = 1, heavy_impact_range = 2, light_impact_range = 7, flame_range = 12
+		// big fuel tank =SHEET_MATERIAL_AMOUNT * 2.5 units = devastation_range = 1, heavy_impact_range = 2, light_impact_range = 7, flame_range = 12
 		// It did not account for how much fuel was actually in the tank at all, just the size of the tank.
 		// I encourage others to better scale these numbers in the future.
 		// As it stands this is a minor nerf in exchange for an easy bombing technique working that has been broken for a while.
@@ -196,9 +196,23 @@
 				explosion(src, devastation_range = 1, heavy_impact_range = 2, light_impact_range = 6, flame_range = 8)
 	qdel(src)
 
+<<<<<<< HEAD
 /obj/structure/reagent_dispensers/atom_deconstruct(disassembled = TRUE)
 	if(!disassembled)
 		boom()
+=======
+/obj/structure/reagent_dispensers/relaymove(mob/living/user, direction)
+	. = ..()
+	if(buckled_mobs)
+		relaydrive(user, direction)
+
+/obj/structure/reagent_dispensers/deconstruct(disassembled = TRUE)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		if(!disassembled)
+			boom()
+	else
+		qdel(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/reagent_dispensers/proc/tank_leak()
 	if(leaking && reagents && reagents.total_volume >= amount_to_leak)
@@ -235,8 +249,22 @@
 	desc = "A water tank."
 	icon_state = "water"
 	openable = TRUE
+<<<<<<< HEAD
 	climbable = TRUE
+=======
+	can_buckle = TRUE //Monkestation edit start
+	buckle_lying = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
+/obj/structure/reagent_dispensers/watertank/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/ridable, /datum/component/riding/structure/tank)
+
+/obj/structure/reagent_dispensers/watertank/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, 1)//Monkestation edit end
+		
 /obj/structure/reagent_dispensers/watertank/high
 	name = "high-capacity water tank"
 	desc = "A highly pressurized water tank made to hold gargantuan amounts of water."
@@ -250,7 +278,21 @@
 	reagent_id = /datum/reagent/firefighting_foam
 	tank_volume = 500
 	openable = TRUE
+<<<<<<< HEAD
 	climbable = TRUE
+=======
+	can_buckle = TRUE //Monkestation edit start
+	buckle_lying = 0
+
+/obj/structure/reagent_dispensers/foamtank/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/ridable, /datum/component/riding/structure/tank)
+
+/obj/structure/reagent_dispensers/foamtank/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, 1)//Monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fuel tank"
@@ -259,11 +301,21 @@
 	reagent_id = /datum/reagent/fuel
 	openable = TRUE
 	accepts_rig = TRUE
+<<<<<<< HEAD
 	climbable = TRUE
+=======
+	can_buckle = TRUE //Monkestation edit start
+	buckle_lying = 0
+
+/obj/structure/reagent_dispensers/fueltank/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, 1)//Monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/reagent_dispensers/fueltank/Initialize(mapload)
 	. = ..()
-
+	AddElement(/datum/element/ridable, /datum/component/riding/structure/tank)
 	if(check_holidays(APRIL_FOOLS))
 		icon_state = "fuel_fools"
 
@@ -318,7 +370,7 @@
 	name = "high capacity fuel tank"
 	desc = "A tank full of a high quantity of welding fuel. Keep away from open flames."
 	icon_state = "fuel_high"
-	tank_volume = 5000
+	tank_volume =SHEET_MATERIAL_AMOUNT * 2.5
 
 /// Wall mounted dispeners, like pepper spray or virus food. Not a normal tank, and shouldn't be able to be turned into a plumbed stationary one.
 /obj/structure/reagent_dispensers/wall

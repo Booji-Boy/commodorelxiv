@@ -1,6 +1,10 @@
 // tgstation-server DMAPI
 
+<<<<<<< HEAD
 #define TGS_DMAPI_VERSION "7.1.2"
+=======
+#define TGS_DMAPI_VERSION "7.1.1"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // All functions and datums outside this document are subject to change with any version and should not be relied on.
 
@@ -515,7 +519,11 @@
 /*
 The MIT License
 
+<<<<<<< HEAD
 Copyright (c) 2017-2024 Jordan Brown
+=======
+Copyright (c) 2017-2023 Jordan Brown
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 Permission is hereby granted, free of charge,
 to any person obtaining a copy of this software and

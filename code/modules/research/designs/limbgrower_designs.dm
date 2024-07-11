@@ -122,7 +122,7 @@
 	id = "monkeytail"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 20)
-	build_path = /obj/item/organ/external/tail/monkey
+	build_path = /obj/item/organ/external/tail/simian
 	category = list(RND_CATEGORY_LIMBS_OTHER, RND_CATEGORY_INITIAL)
 
 /datum/design/cat_tail
@@ -177,7 +177,7 @@
 	name = "Biological Battery"
 	id = "etherealstomach"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity/enriched = 20)
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/stomach/ethereal
 	category = list(SPECIES_ETHEREAL)
 
@@ -185,7 +185,7 @@
 	name = "Electrical Discharger"
 	id = "etherealtongue"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity/enriched = 20)
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/tongue/ethereal
 	category = list(SPECIES_ETHEREAL)
 
@@ -193,7 +193,7 @@
 	name = "Aeration Reticulum"
 	id = "ethereallungs"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity/enriched = 20)
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/lungs/ethereal
 	category = list(SPECIES_ETHEREAL)
 
@@ -202,7 +202,7 @@
 	name = "Crystal Core"
 	id = "etherealheart"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity/enriched = 20)
+	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10, /datum/reagent/consumable/liquidelectricity = 20)
 	build_path = /obj/item/organ/internal/heart/ethereal
 	category = list(SPECIES_ETHEREAL)
 
@@ -239,17 +239,6 @@
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_MEDICAL
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
-
-/obj/item/disk/design_disk/limbs/felinid
-	name = "Felinid Organ Design Disk"
-	limb_designs = list(/datum/design/cat_tail, /datum/design/cat_ears)
-
-/datum/design/limb_disk/felinid
-	name = "Felinid Organ Design Disk"
-	desc = "Contains designs for felinid organs for the limbgrower - Felinid ears and tail."
-	id = "limbdesign_felinid"
-	build_path = /obj/item/disk/design_disk/limbs/felinid
-
 /obj/item/disk/design_disk/limbs/lizard
 	name = "Lizard Organ Design Disk"
 	limb_designs = list(/datum/design/lizard_tail, /datum/design/lizard_tongue)

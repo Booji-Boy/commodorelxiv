@@ -1,11 +1,20 @@
+<<<<<<< HEAD
 /// A bespoke element that adds a set of traits to the turf while occupied by at least one attached movabled.
+=======
+///A bespoke element that adds a set of traits to the turf while occupied by at least one attached movabled.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/element/give_turf_traits
 	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY|ELEMENT_BESPOKE
 	argument_hash_start_idx = 2
 	///A list of traits that are added to the turf while occupied.
 	var/list/traits
+<<<<<<< HEAD
 	///List of sources we are using to reapply traits when turf changes
 	var/list/trait_sources = list()
+=======
+	///The list of occupied turfs: Assoc value is a list of movables with this element that are occupying the turf.
+	var/list/occupied_turfs = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/element/give_turf_traits/Attach(atom/movable/target, list/traits)
 	. = ..()
@@ -24,7 +33,11 @@
 		remove_from_occupied_turfs(source.loc, source)
 	return ..()
 
+<<<<<<< HEAD
 /// Removes the trait from the old turf and adds it to the new one.
+=======
+///Removes the trait from the old turf and adds it to the new one.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/element/give_turf_traits/proc/on_moved(atom/movable/source, atom/old_loc)
 	SIGNAL_HANDLER
 	if(isturf(old_loc))
@@ -38,6 +51,7 @@
  * Otherwise, it just adds the movable to the assoc value of lists occupying the turf.
  */
 /datum/element/give_turf_traits/proc/add_to_occupied_turfs(turf/location, atom/movable/source)
+<<<<<<< HEAD
 	var/trait_source = REF(source)
 	if(isnull(trait_sources) || isnull(trait_sources[location]))
 		RegisterSignal(location, COMSIG_TURF_CHANGE, PROC_REF(pre_change_turf))
@@ -46,6 +60,18 @@
 	var/update_movespeeds = (TRAIT_TURF_IGNORE_SLOWDOWN in traits) && !HAS_TRAIT(location, TRAIT_TURF_IGNORE_SLOWDOWN)
 	for(var/trait in traits)
 		ADD_TRAIT(location, trait,  trait_source)
+=======
+	if(occupied_turfs[location])
+		occupied_turfs[location] += source
+		return
+
+	occupied_turfs[location] = list(source)
+	RegisterSignal(location, COMSIG_TURF_CHANGE, PROC_REF(pre_change_turf))
+
+	var/update_movespeeds = (TRAIT_TURF_IGNORE_SLOWDOWN in traits) && !HAS_TRAIT(location, TRAIT_TURF_IGNORE_SLOWDOWN)
+	for(var/trait in traits)
+		ADD_TRAIT(location, trait, REF(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(update_movespeeds)
 		for(var/mob/living/living in location)
 			living.update_turf_movespeed()
@@ -55,6 +81,7 @@
  * Otherwise, it just removes the movable from the assoc value of lists occupying the turf.
  */
 /datum/element/give_turf_traits/proc/remove_from_occupied_turfs(turf/location, atom/movable/source)
+<<<<<<< HEAD
 	var/trait_source = REF(source)
 	LAZYREMOVEASSOC(trait_sources, location, trait_source)
 	if(isnull(trait_sources) || isnull(trait_sources[location]))
@@ -62,18 +89,39 @@
 
 	for(var/trait in traits)
 		REMOVE_TRAIT(location, trait, trait_source)
+=======
+	LAZYREMOVE(occupied_turfs[location], source)
+	if(occupied_turfs[location])
+		return
+
+	occupied_turfs -= location
+	UnregisterSignal(location, COMSIG_TURF_CHANGE)
+
+	for(var/trait in traits)
+		REMOVE_TRAIT(location, trait, REF(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if((TRAIT_TURF_IGNORE_SLOWDOWN in traits) && !HAS_TRAIT(location, TRAIT_TURF_IGNORE_SLOWDOWN))
 		for(var/mob/living/living in location)
 			living.update_turf_movespeed()
 
+<<<<<<< HEAD
 /// Signals and components are carried over when the turf is changed, so they've to be readded post-change.
+=======
+///Signals and components are carried over when the turf is changed, so they've to be readded post-change.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/element/give_turf_traits/proc/pre_change_turf(turf/changed, path, list/new_baseturfs, flags, list/post_change_callbacks)
 	SIGNAL_HANDLER
 	post_change_callbacks += CALLBACK(src, PROC_REF(reoccupy_turf))
 
+<<<<<<< HEAD
 /// Reapply turf traits to the provided turf
 /datum/element/give_turf_traits/proc/reoccupy_turf(turf/changed)
 	for(var/trait in traits)
 		for(var/source in trait_sources[changed])
 			ADD_TRAIT(changed, trait, source)
+=======
+/datum/element/give_turf_traits/proc/reoccupy_turf(turf/changed)
+	for(var/trait in traits)
+		ADD_TRAIT(changed, trait, REF(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

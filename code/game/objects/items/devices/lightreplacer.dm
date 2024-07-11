@@ -166,6 +166,15 @@
 		user.balloon_alert(user, "lights inserted")
 		return TRUE
 
+<<<<<<< HEAD
+=======
+		if(!replaced_something && src.uses == max_uses)
+			to_chat(user, span_warning("\The [src] is full!"))
+			return
+
+		to_chat(user, span_notice("You fill \the [src] with lights from \the [storage_to_empty]. " + status_string() + ""))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/lightreplacer/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		return FALSE
@@ -310,7 +319,8 @@
 	var/obj/item/light/old_light = new target.light_type()
 	target.status = old_light.status
 	target.switchcount = old_light.switchcount
-	target.brightness = old_light.brightness
+	target.bulb_inner_range = old_light.bulb_inner_range
+	target.bulb_outer_range = old_light.bulb_outer_range
 	if(obj_flags & EMAGGED)
 		target.create_reagents(LIGHT_REAGENT_CAPACITY, SEALED_CONTAINER | TRANSPARENT)
 		target.reagents.add_reagent(/datum/reagent/toxin/plasma, 10)

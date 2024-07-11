@@ -6,7 +6,11 @@
 	canSmoothWith = null
 	rcd_memory = null
 	material_flags = MATERIAL_EFFECTS
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+	wall_trim = null //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/gold
 	name = "gold wall"
@@ -20,7 +24,10 @@
 	smoothing_groups = SMOOTH_GROUP_GOLD_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_GOLD_WALLS
 	custom_materials = list(/datum/material/gold = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/silver
 	name = "silver wall"
@@ -49,7 +56,10 @@
 	smoothing_groups = SMOOTH_GROUP_DIAMOND_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_DIAMOND_WALLS
 	custom_materials = list(/datum/material/diamond = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_REINFORCED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/diamond/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 41)
 	return ..()
@@ -66,7 +76,10 @@
 	smoothing_groups = SMOOTH_GROUP_BANANIUM_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_BANANIUM_WALLS
 	custom_materials = list(/datum/material/bananium = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/sandstone
 	name = "sandstone wall"
@@ -81,7 +94,10 @@
 	smoothing_groups = SMOOTH_GROUP_SANDSTONE_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_SANDSTONE_WALLS
 	custom_materials = list(/datum/material/sandstone = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/uranium
 	article = "a"
@@ -96,7 +112,10 @@
 	smoothing_groups = SMOOTH_GROUP_URANIUM_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_URANIUM_WALLS
 	custom_materials = list(/datum/material/uranium = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_REINFORCED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Mutex to prevent infinite recursion when propagating radiation pulses
 	var/active = null
@@ -154,7 +173,10 @@
 	smoothing_groups = SMOOTH_GROUP_PLASMA_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_PLASMA_WALLS
 	custom_materials = list(/datum/material/plasma = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/wood
 	name = "wooden wall"
@@ -170,7 +192,10 @@
 	smoothing_groups = SMOOTH_GROUP_WOOD_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_WOOD_WALLS
 	custom_materials = list(/datum/material/wood = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/wood/attackby(obj/item/W, mob/user)
 	if(W.get_sharpness() && W.force)
@@ -216,7 +241,10 @@
 	smoothing_groups = SMOOTH_GROUP_IRON_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_IRON_WALLS
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/snow
 	name = "packed snow wall"
@@ -234,7 +262,10 @@
 	bullet_sizzle = TRUE
 	bullet_bounce_sound = null
 	custom_materials = list(/datum/material/snow = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/snow/hulk_recoil(obj/item/bodypart/arm, mob/living/carbon/human/hulkman, damage = 0)
 	return ..() //No recoil damage, snow is weak
@@ -253,7 +284,10 @@
 	smoothing_groups = SMOOTH_GROUP_ABDUCTOR_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_ABDUCTOR_WALLS
 	custom_materials = list(/datum/material/alloy/alien = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_ORGANIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /////////////////////Titanium walls/////////////////////
 
@@ -272,7 +306,10 @@
 	smoothing_groups = SMOOTH_GROUP_TITANIUM_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_TITANIUM_WALLS
 	custom_materials = list(/datum/material/titanium = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/closed/wall/mineral/titanium/rust_turf()
 	if(HAS_TRAIT(src, TRAIT_RUSTY))
@@ -342,6 +379,7 @@
 	smoothing_groups = SMOOTH_GROUP_PLASTITANIUM_WALLS + SMOOTH_GROUP_WALLS + SMOOTH_GROUP_CLOSED_TURFS
 	canSmoothWith = SMOOTH_GROUP_SHUTTLE_PARTS + SMOOTH_GROUP_AIRLOCK + SMOOTH_GROUP_PLASTITANIUM_WALLS + SMOOTH_GROUP_SYNDICATE_WALLS
 	custom_materials = list(/datum/material/alloy/plastitanium = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_TITANIUM
 
 /turf/closed/wall/mineral/plastitanium/rust_turf()
@@ -349,6 +387,8 @@
 		ChangeTurf(/turf/closed/wall/rust)
 		return
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /turf/closed/wall/mineral/plastitanium/nodiagonal

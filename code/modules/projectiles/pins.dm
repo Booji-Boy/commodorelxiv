@@ -25,6 +25,7 @@
 	if(isgun(newloc))
 		gun = newloc
 
+<<<<<<< HEAD
 /obj/item/firing_pin/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!isgun(interacting_with))
 		return NONE
@@ -37,6 +38,32 @@
 		else
 			old_pin.forceMove(targeted_gun.drop_location())
 		old_pin.gun_remove(user)
+=======
+/obj/item/firing_pin/afterattack(atom/target, mob/user, proximity_flag)
+	. = ..()
+	if(proximity_flag)
+		if(isgun(target))
+			. |= AFTERATTACK_PROCESSED_ITEM
+			var/obj/item/gun/targeted_gun = target
+			var/obj/item/firing_pin/old_pin = targeted_gun.pin
+			if(old_pin?.pin_removable && (force_replace || old_pin.pin_hot_swappable))
+				if(Adjacent(user))
+					user.put_in_hands(old_pin)
+				else
+					old_pin.forceMove(targeted_gun.drop_location())
+				old_pin.gun_remove(user)
+
+			if(!targeted_gun.pin)
+				if(!user.temporarilyRemoveItemFromInventory(src))
+					return .
+				if(gun_insert(user, targeted_gun))
+					if(old_pin)
+						balloon_alert(user, "swapped firing pin")
+					else
+						balloon_alert(user, "inserted firing pin")
+			else
+				to_chat(user, span_notice("This firearm already has a firing pin installed."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!targeted_gun.pin)
 		if(!user.temporarilyRemoveItemFromInventory(src))
@@ -49,8 +76,11 @@
 	else
 		to_chat(user, span_notice("This firearm already has a firing pin installed."))
 
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/firing_pin/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		return FALSE

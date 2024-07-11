@@ -104,7 +104,11 @@
 	},
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/all_access,
+<<<<<<< HEAD
 /obj/item/surgery_tray/full{
+=======
+/obj/item/storage/backpack/duffelbag/med/surgery{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pixel_y = 4
 	},
 /obj/item/clothing/suit/apron/surgical,
@@ -408,7 +412,11 @@
 /turf/open/floor/plating,
 /area/shuttle/abandoned/engine)
 "aV" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/south,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/machinery/light/small/built/directional/south,
@@ -565,7 +573,11 @@
 /obj/machinery/power/terminal{
 	dir = 4
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/machinery/light/small/built/directional/north,

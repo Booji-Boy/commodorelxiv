@@ -2,6 +2,12 @@
 /mob/living/basic/trooper/syndicate
 	name = "Syndicate Operative"
 	desc = "Death to Nanotrasen."
+<<<<<<< HEAD
+=======
+	speed = 1.1
+	melee_damage_lower = 10
+	melee_damage_upper = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	faction = list(ROLE_SYNDICATE)
 	loot = list(/obj/effect/mob_spawn/corpse/human/syndicatesoldier)
 	mob_spawner = /obj/effect/mob_spawn/corpse/human/syndicatesoldier
@@ -70,7 +76,7 @@
 	attack_sound = 'sound/weapons/blade1.ogg'
 	armour_penetration = 35
 	projectile_deflect_chance = 50
-	light_range = 2
+	light_outer_range = 2
 	light_power = 2.5
 	light_color = COLOR_SOFT_RED
 	r_hand = /obj/item/melee/energy/sword/saber/red
@@ -154,6 +160,7 @@
 	ranged_cooldown = 3 SECONDS
 	r_hand = /obj/item/gun/ballistic/automatic/c20r
 
+<<<<<<< HEAD
 ///Spawns from an emagged orion trail machine set to kill the player.
 /mob/living/basic/trooper/syndicate/ranged/smg/orion
 	name = "spaceport security"
@@ -161,6 +168,8 @@
 	faction = list(FACTION_ORION)
 	loot = list()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/trooper/syndicate/ranged/smg/pilot //caravan ambush ruin
 	name = "Syndicate Salvage Pilot"
 	loot = list(/obj/effect/mob_spawn/corpse/human/syndicatepilot)
@@ -219,7 +228,7 @@
 	icon_state = "viscerator_attack"
 	icon_living = "viscerator_attack"
 	pass_flags = PASSTABLE | PASSMOB
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	mob_biotypes = MOB_ROBOTIC
 	basic_mob_flags = DEL_ON_DEATH
 	unsuitable_atmos_damage = 0

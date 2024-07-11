@@ -7,7 +7,11 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*3, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 1.5)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = SURGICAL_TOOL
 	w_class = WEIGHT_CLASS_TINY
 	tool_behaviour = TOOL_RETRACTOR
@@ -32,7 +36,11 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/glass = SHEET_MATERIAL_AMOUNT*1.25)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = SURGICAL_TOOL
 	w_class = WEIGHT_CLASS_TINY
 	attack_verb_continuous = list("attacks", "pinches")
@@ -59,14 +67,21 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*1.25, /datum/material/glass = SMALL_MATERIAL_AMOUNT*7.5)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = SURGICAL_TOOL
 	w_class = WEIGHT_CLASS_TINY
 	attack_verb_continuous = list("burns")
 	attack_verb_simple = list("burn")
 	tool_behaviour = TOOL_CAUTERY
 	toolspeed = 1
+<<<<<<< HEAD
 	heat = 500
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// How this looks when placed in a surgical tray
 	var/surgical_tray_overlay = "cautery_normal"
 
@@ -94,8 +109,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	toolspeed = 0.7
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1.5
 	light_power = 0.4
+=======
+	light_outer_range = 1.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_SOFT_RED
 
 /obj/item/cautery/advanced/get_all_tool_behaviours()
@@ -146,7 +165,11 @@
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	hitsound = 'sound/weapons/circsawhit.ogg'
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/glass = SHEET_MATERIAL_AMOUNT*3)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = SURGICAL_TOOL
 	force = 15
 	demolition_mod = 0.5
@@ -276,6 +299,9 @@
 /obj/item/circular_saw/get_surgery_tool_overlay(tray_extended)
 	return surgical_tray_overlay
 
+/obj/item/circular_saw/get_surgery_tool_overlay(tray_extended)
+	return surgical_tray_overlay
+
 /obj/item/circular_saw/augment
 	desc = "A small but very fast spinning saw. It rips and tears until it is done."
 	w_class = WEIGHT_CLASS_SMALL
@@ -302,7 +328,11 @@
 /obj/item/surgical_processor //allows medical cyborgs to scan and initiate advanced surgeries
 	name = "surgical processor"
 	desc = "A device for scanning and initiating surgeries from a disk or operating computer."
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/scanner.dmi'
+=======
+	icon = 'icons/obj/device.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "surgical_processor"
 	item_flags = NOBLUDGEON
 	// List of surgeries downloaded into the device.
@@ -356,8 +386,17 @@
 		playsound(src, 'sound/machines/terminal_success.ogg', 25, TRUE)
 		downloaded = TRUE
 		update_appearance(UPDATE_OVERLAYS)
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
 	return ITEM_INTERACT_BLOCKING
+
+/obj/item/surgical_processor/update_overlays()
+	. = ..()
+	if(downloaded)
+		. += mutable_appearance(src.icon, "+downloaded")
+=======
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/surgical_processor/update_overlays()
 	. = ..()
@@ -386,8 +425,12 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	toolspeed = 0.7
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1.5
 	light_power = 0.4
+=======
+	light_outer_range = 1.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_BLUE
 	sharpness = SHARP_EDGED
 
@@ -496,7 +539,7 @@
 	custom_premium_price = PAYCHECK_CREW * 14
 
 /obj/item/shears/attack(mob/living/amputee, mob/living/user)
-	if(!iscarbon(amputee) || user.combat_mode)
+	if(!iscarbon(amputee) || (user.istate & ISTATE_HARM))
 		return ..()
 
 	if(user.zone_selected == BODY_ZONE_CHEST)
@@ -569,7 +612,11 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5,  /datum/material/glass = SHEET_MATERIAL_AMOUNT*1.25, /datum/material/silver = SHEET_MATERIAL_AMOUNT*1.25)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = SURGICAL_TOOL
 	w_class = WEIGHT_CLASS_SMALL
 	attack_verb_continuous = list("corrects", "properly sets")

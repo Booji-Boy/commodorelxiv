@@ -2,7 +2,11 @@
 //they are the easiest to cure, which means that if you want
 //to keep them, you can't cure your other traumas
 /datum/brain_trauma/special
+<<<<<<< HEAD
 	abstract_type = /datum/brain_trauma/special
+=======
+	clonable = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/brain_trauma/special/godwoken
 	name = "Godwoken Syndrome"
@@ -18,7 +22,7 @@
 			speak("unstun", TRUE)
 		else if(prob(60) && owner.health <= owner.crit_threshold)
 			speak("heal", TRUE)
-		else if(prob(30) && owner.combat_mode)
+		else if(prob(30) && (owner.istate & ISTATE_HARM))
 			speak("aggressive")
 		else
 			speak("neutral", prob(25))
@@ -394,7 +398,7 @@
 	if(get_dist(owner, beepsky) <= 1)
 		owner.playsound_local(owner, 'sound/weapons/egloves.ogg', 50)
 		owner.visible_message(span_warning("[owner]'s body jerks as if it was shocked."), span_userdanger("You feel the fist of the LAW."))
-		owner.adjustStaminaLoss(rand(40, 70))
+		owner.stamina.adjust(-rand(40, 70))
 		QDEL_NULL(beepsky)
 
 	if(prob(20) && get_dist(owner, beepsky) <= 8)

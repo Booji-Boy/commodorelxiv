@@ -309,6 +309,16 @@
 /obj/item/bikehorn/rubberducky,
 /turf/open/floor/holofloor/beach/water,
 /area/shuttle/escape/luxury)
+<<<<<<< HEAD
+=======
+"nC" = (
+/obj/item/food/sandwich/cheese/grilled{
+	pixel_y = 11
+	},
+/obj/structure/table/wood/fancy/black,
+/turf/open/floor/carpet/red,
+/area/shuttle/escape/luxury)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "od" = (
 /obj/item/food/honkdae{
 	pixel_y = 8
@@ -1024,9 +1034,24 @@
 /obj/machinery/vending/wallmed/directional/north,
 /turf/open/floor/carpet/red,
 /area/shuttle/escape/brig)
+<<<<<<< HEAD
 "Om" = (
 /turf/open/floor/holofloor/beach/coast{
 	dir = 4
+=======
+"Oc" = (
+/obj/effect/spawner/random/maintenance/eight,
+/obj/structure/closet/crate/engineering/electrical,
+/obj/effect/decal/cleanable/robot_debris,
+/obj/effect/turf_decal/delivery,
+/obj/effect/decal/cleanable/oil,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron,
+/area/shuttle/escape)
+"Oe" = (
+/obj/item/food/sandwich/notasandwich{
+	pixel_y = 11
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /area/shuttle/escape/luxury)
 "OC" = (

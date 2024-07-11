@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Component,
   createRef,
@@ -20,8 +21,26 @@ type State = {
 };
 
 export class FitText extends Component<Props, State> {
+=======
+import { Component, createRef, RefObject } from 'inferno';
+import type { Inferno } from 'inferno';
+
+const DEFAULT_ACCEPTABLE_DIFFERENCE = 5;
+
+export class FitText extends Component<
+  {
+    acceptableDifference?: number;
+    maxWidth: number;
+    maxFontSize: number;
+    native?: Inferno.HTMLAttributes<HTMLDivElement>;
+  },
+  {
+    fontSize: number;
+  }
+> {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ref: RefObject<HTMLDivElement> = createRef();
-  state: State = {
+  state = {
     fontSize: 0,
   };
 
@@ -86,10 +105,16 @@ export class FitText extends Component<Props, State> {
       <span
         ref={this.ref}
         style={{
+<<<<<<< HEAD
           fontSize: `${this.state.fontSize}px`,
           ...(typeof this.props.native?.style === 'object'
             ? this.props.native.style
             : {}),
+=======
+          'font-size': `${this.state.fontSize}px`,
+          ...(typeof this.props.native?.style === 'object' &&
+            this.props.native.style),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         {this.props.children}

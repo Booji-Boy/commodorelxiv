@@ -137,6 +137,16 @@
 	dir = 1;
 	name = "wooden railing"
 	},
+<<<<<<< HEAD
+=======
+/obj/effect/turf_decal/siding/wood{
+	dir = 5
+	},
+/obj/machinery/light/floor/has_bulb,
+/turf/open/floor/wood/airless,
+/area/shuttle/pirate/flying_dutchman)
+"aO" = (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/railing{
 	color = "#4C3117";
 	name = "wooden railing"
@@ -145,7 +155,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 1
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /turf/open/floor/wood/airless,
 /area/shuttle/pirate/flying_dutchman)
 "be" = (
@@ -359,6 +369,15 @@
 	},
 /turf/open/floor/carpet/blue/airless,
 /area/shuttle/pirate/flying_dutchman)
+<<<<<<< HEAD
+=======
+"ny" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/cable,
+/obj/machinery/light/floor/has_bulb,
+/turf/open/space/basic,
+/area/shuttle/pirate/flying_dutchman)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "pG" = (
 /obj/structure/window/reinforced/shuttle/survival_pod,
 /turf/open/floor/wood/airless,
@@ -559,7 +578,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
 	},
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /obj/structure/fluff{
 	density = 1;
 	desc = "Ha ha ha, you fool!";
@@ -590,10 +609,28 @@
 /obj/item/reagent_containers/cup/bucket/wooden,
 /turf/open/floor/wood/airless,
 /area/shuttle/pirate/flying_dutchman)
+<<<<<<< HEAD
 "Bc" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
+=======
+"BK" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 10
+	},
+/obj/machinery/light/floor/has_bulb,
+/obj/structure/rack{
+	icon = 'icons/obj/stationobjs.dmi';
+	icon_state = "minibar";
+	name = "skeletal minibar"
+	},
+/obj/item/reagent_containers/condiment/milk{
+	pixel_x = -5
+	},
+/obj/item/reagent_containers/condiment/milk{
+	pixel_x = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/wood/airless,
@@ -770,6 +807,32 @@
 /obj/structure/cable,
 /turf/open/space/basic,
 /area/shuttle/pirate/flying_dutchman)
+<<<<<<< HEAD
+=======
+"Op" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 6
+	},
+/obj/machinery/light/floor/has_bulb,
+/obj/docking_port/stationary{
+	dir = 8;
+	dwidth = 11;
+	height = 16;
+	shuttle_id = "pirate_home";
+	name = "Deep Space";
+	width = 17
+	},
+/obj/docking_port/mobile/pirate{
+	dir = 8;
+	launch_status = 0;
+	movement_force = list("KNOCKDOWN"=0,"THROW"=0);
+	name = "Pirate Ship";
+	port_direction = 4;
+	preferred_direction = 8
+	},
+/turf/open/floor/wood/airless,
+/area/shuttle/pirate/flying_dutchman)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "OL" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 8
@@ -949,7 +1012,11 @@
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 4
 	},
+<<<<<<< HEAD
 /obj/machinery/light/small/directional/south,
+=======
+/obj/machinery/light/floor/has_bulb,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/wood/airless,
 /area/shuttle/pirate/flying_dutchman)
 

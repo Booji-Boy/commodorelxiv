@@ -9,7 +9,11 @@
 		return TRUE
 	if(result_bitflags & COMPONENT_OBJ_DISALLOW) // override all other checks
 		return FALSE
+<<<<<<< HEAD
 	if(!isnull(accessor) && HAS_TRAIT(accessor, TRAIT_ALWAYS_NO_ACCESS))
+=======
+	if(!QDELETED(accessor) && HAS_TRAIT(accessor, TRAIT_ALWAYS_NO_ACCESS))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	//check if it doesn't require any access at all
 	if(check_access(null))
@@ -35,12 +39,22 @@
 				return FALSE
 		return TRUE //AI can do whatever it wants
 	//If the mob is holding a valid ID, we let them in. get_active_held_item() is on the mob level, so no need to copypasta everywhere.
+<<<<<<< HEAD
 	else if(check_access(accessor.get_active_held_item()) || check_access(accessor.get_inactive_held_item()))
+=======
+	else if(check_access(accessor.get_active_held_item()) && !istype(accessor.get_active_held_item(), /obj/item/card/id/fake_card))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	else if(ishuman(accessor))
 		var/mob/living/carbon/human/human_accessor = accessor
-		if(check_access(human_accessor.wear_id))
+		if(check_access(human_accessor.wear_id) && !istype(human_accessor.wear_id, /obj/item/card/id/fake_card))
 			return TRUE
+	//monkestation edit start
+	else if(istype(accessor, /mob/living/basic/possession_holder))
+		var/mob/living/basic/possession_holder/animal = accessor
+		if(check_access(animal.id))
+			return TRUE
+	//monkestation edit end
 	//if they have a hacky abstract animal ID with the required access, let them in i guess...
 	else if(isanimal(accessor))
 		var/mob/living/simple_animal/animal = accessor
@@ -81,8 +95,22 @@
 /obj/item/proc/GetID()
 	return null
 
+<<<<<<< HEAD
 /obj/item/proc/RemoveID()
 	return null
 
 /obj/item/proc/InsertID()
 	return FALSE
+=======
+	return id_card?.get_trim_sechud_icon_state() || SECHUD_NO_ID
+
+/// Returns the gun permit icon if the ID's access contain weapon permit
+/obj/item/proc/get_gun_permit_iconstate()
+	var/obj/item/card/id/id_card = GetID()
+
+	if(!id_card)
+		return "hudfan_no"
+	if(ACCESS_WEAPONS in id_card.GetAccess())
+		return "hud_permit"
+	return "hudfan_no"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -57,7 +57,10 @@
 	override_origin_pixel_y = null,
 	override_target_pixel_x = null,
 	override_target_pixel_y = null,
+<<<<<<< HEAD
 	beam_layer = ABOVE_ALL_MOB_LAYER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 )
 	src.origin = origin
 	src.target = target
@@ -184,6 +187,10 @@
 
 /obj/effect/ebeam
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+<<<<<<< HEAD
+=======
+	plane = GAME_PLANE_UPPER_FOV_HIDDEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	layer = ABOVE_ALL_MOB_LAYER
 	anchored = TRUE
 	var/emissive = TRUE

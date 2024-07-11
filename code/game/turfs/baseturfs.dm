@@ -53,6 +53,7 @@
 
 	var/list/old_baseturfs = baseturfs.Copy()
 	if(!isclosedturf(src))
+<<<<<<< HEAD
 		old_baseturfs += type
 
 	new_turf = ChangeTurf(added_layer, null, flags)
@@ -63,6 +64,19 @@
 	// The old baseturfs are put underneath, and we sort out the unwanted ones
 	new_turf.baseturfs = baseturfs_string_list(old_baseturfs + (new_turf.baseturfs - GLOB.blacklisted_automated_baseturfs), new_turf)
 	return new_turf
+=======
+		baseturfs = baseturfs_string_list(baseturfs + type, src)
+	var/turf/change_type
+	if(length(new_baseturfs))
+		change_type = new_baseturfs[new_baseturfs.len]
+		new_baseturfs.len--
+		if(new_baseturfs.len)
+			baseturfs = baseturfs_string_list(baseturfs + new_baseturfs, src)
+
+	else
+		change_type = new_baseturfs
+	return ChangeTurf(change_type, null, flags)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Copy an existing turf and put it on top
 // Returns the new turf

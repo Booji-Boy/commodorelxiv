@@ -36,6 +36,12 @@
 	var/cargo_account = ACCOUNT_CAR
 	///Interface name for the ui_interact call for different subtypes.
 	var/interface_type = "Cargo"
+	/// are we currently_sending to an ocean point?
+	var/currently_sending = FALSE
+
+	///department specific locks
+	var/can_send_shuttle = TRUE
+	var/can_remove_orders = TRUE
 
 /obj/machinery/computer/cargo/request
 	name = "supply request console"
@@ -64,6 +70,13 @@
 
 /obj/machinery/computer/cargo/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
+<<<<<<< HEAD
+=======
+		. |= EXPORT_EMAG
+
+/obj/machinery/computer/cargo/emag_act(mob/user, obj/item/card/emag/emag_card)
+	if(obj_flags & EMAGGED)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(user)
 		if (emag_card)
@@ -243,6 +256,7 @@
 		say("ERROR: Small crates may only be purchased by private accounts.")
 		return
 
+<<<<<<< HEAD
 	var/similar_count = SSshuttle.supply.get_order_count(pack)
 	if(similar_count == OVER_ORDER_LIMIT)
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, FALSE)
@@ -250,6 +264,10 @@
 		return
 
 	amount = clamp(amount, 1, CARGO_MAX_ORDER - similar_count)
+=======
+	var/amount = params["amount"]
+	amount = clamp(amount, 0, 100)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/count in 1 to amount)
 		var/obj/item/coupon/applied_coupon
 		for(var/obj/item/coupon/coupon_check in loaded_coupons)
@@ -259,6 +277,7 @@
 				applied_coupon = coupon_check
 				break
 
+<<<<<<< HEAD
 		var/datum/supply_order/order = new(
 			pack = pack ,
 			orderer = name,
@@ -269,6 +288,13 @@
 			coupon = applied_coupon,
 		)
 		working_list += order
+=======
+		var/datum/supply_order/SO = new(pack = pack ,orderer = name, orderer_rank = rank, orderer_ckey = ckey, reason = reason, paying_account = account, coupon = applied_coupon, account_to_charge = params["account_to_charge"])
+		if(requestonly && !self_paid)
+			SSshuttle.request_list += SO
+		else
+			SSshuttle.shopping_list += SO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(self_paid)
 		say("Order processed. The price will be charged to [account.account_holder]'s bank account on delivery.")
@@ -286,6 +312,9 @@
 	for(var/datum/supply_order/order in SSshuttle.shopping_list)
 		if(order.id != id)
 			continue
+		if(!can_remove_orders && order.account_to_charge != cargo_account)
+			say("ERROR: This console lacks permission to remove orders not added by them!")
+			return
 		if(order.department_destination)
 			say("Only the department that ordered this item may cancel it.")
 			return FALSE
@@ -314,6 +343,12 @@
 
 	switch(action)
 		if("send")
+			if(!can_send_shuttle)
+				say("ERROR: This console lacks permission to call or send the Shuttle")
+				return
+			if(currently_sending)
+				say("Contents are already on their way")
+				return
 			if(!SSshuttle.supply.canMove())
 				say(safety_warning)
 				return
@@ -321,6 +356,7 @@
 				say(blockade_warning)
 				return
 
+<<<<<<< HEAD
 			if(SSshuttle.supply.getDockedId() == docking_home)
 				SSshuttle.moveShuttle(cargo_shuttle, docking_away, TRUE)
 				say("The supply shuttle is departing.")
@@ -354,6 +390,109 @@
 				ui.user.investigate_log("called the supply shuttle.", INVESTIGATE_CARGO)
 				say("The supply shuttle has been called and will arrive in [SSshuttle.supply.timeLeft(600)] minutes.")
 				SSshuttle.moveShuttle(cargo_shuttle, docking_home, TRUE)
+=======
+			//create the paper from the SSshuttle.shopping_list
+			if(length(SSshuttle.shopping_list))
+				var/obj/item/paper/requisition_paper = new(get_turf(src))
+				requisition_paper.name = "requisition form"
+				var/requisition_text = "<h2>[station_name()] Supply Requisition</h2>"
+				requisition_text += "<hr/>"
+				requisition_text += "Time of Order: [station_time_timestamp()]<br/><br/>"
+				for(var/datum/supply_order/order as anything in SSshuttle.shopping_list)
+					requisition_text += "<b>[order.pack.name]</b></br>"
+					requisition_text += "- Order ID: [order.id]</br>"
+					var/restrictions = SSid_access.get_access_desc(order.pack.access)
+					if(restrictions)
+						requisition_text += "- Access Restrictions: [restrictions]</br>"
+					requisition_text += "- Ordered by: [order.orderer] ([order.orderer_rank])</br>"
+					var/paying_account = order.paying_account
+					if(paying_account)
+						requisition_text += "- Paid Privately by: [order.paying_account.account_holder]<br/>"
+					var/reason = order.reason
+					if(reason)
+						requisition_text += "- Reason Given: [reason]</br>"
+					requisition_text += "</br></br>"
+				requisition_paper.add_raw_text(requisition_text)
+				requisition_paper.update_appearance()
+
+			if(!length(SSmapping.levels_by_trait(ZTRAIT_OSHAN)))
+				if(SSshuttle.supply.getDockedId() == docking_home)
+					SSshuttle.supply.export_categories = get_export_categories()
+					SSshuttle.moveShuttle(cargo_shuttle, docking_away, TRUE)
+					say("The supply shuttle is departing.")
+					usr.investigate_log("sent the supply shuttle away.", INVESTIGATE_CARGO)
+				else
+					usr.investigate_log("called the supply shuttle.", INVESTIGATE_CARGO)
+					say("The supply shuttle has been called and will arrive in [SSshuttle.supply.timeLeft(600)] minutes.")
+					SSshuttle.moveShuttle(cargo_shuttle, docking_home, TRUE, cargo_account)
+			else
+				if(!length(GLOB.cargo_launch_points))
+					stack_trace("Erm, we are attempting to launch cargo crates on a map with no cargo landing points")
+					return
+				currently_sending = TRUE
+				var/list/goodies_by_buyer = list()
+				for(var/datum/supply_order/order as anything in SSshuttle.shopping_list)
+
+					var/price = order.pack.get_cost()
+					if(order.applied_coupon)
+						price *= (1 - order.applied_coupon.discount_pct_off)
+
+					var/datum/bank_account/paying_for_this
+					if(!order.department_destination && order.charge_on_purchase)
+						if(order.paying_account) //Someone paid out of pocket
+							var/list/current_buyer_orders = goodies_by_buyer[order.paying_account] // so we can access the length a few lines down
+							if(!order.pack.goody)
+								price *= 1.1 //TODO make this customizable by the quartermaster
+							else if(LAZYLEN(current_buyer_orders) == 5)
+								price += 700
+								paying_for_this.bank_card_talk("Goody order size exceeds free shipping limit: Assessing 700 credit S&H fee.")
+						else
+							paying_for_this = SSeconomy.get_dep_account(order.account_to_charge)
+							if(order.account_to_charge != ACCOUNT_CAR)
+								var/datum/bank_account/department/cargo = SSeconomy.get_dep_account(ACCOUNT_CAR)
+								cargo.adjust_money(order.pack.get_cost() * 0.1) // give some back for actually getting the crates
+						if(paying_for_this)
+							if(!paying_for_this.adjust_money(-price, "Cargo: [order.pack.name]"))
+								if(order.paying_account)
+									paying_for_this.bank_card_talk("Cargo order #[order.id] rejected due to lack of funds. Credits required: [price]")
+								continue
+
+					if(order.paying_account)
+						paying_for_this = order.paying_account
+						if(order.pack.goody)
+							LAZYADD(goodies_by_buyer[order.paying_account], order)
+						var/reciever_message = "Cargo order #[order.id] has been launched towards cargo."
+						if(order.charge_on_purchase)
+							reciever_message += " [price] credits have been charged to your bank account"
+						paying_for_this.bank_card_talk(reciever_message)
+						SSeconomy.track_purchase(paying_for_this, price, order.pack.name)
+						var/datum/bank_account/department/cargo = SSeconomy.get_dep_account(ACCOUNT_CAR)
+						cargo.adjust_money(price - order.pack.get_cost()) //Cargo gets the handling fee
+
+					sleep(3 SECONDS)
+					var/obj/effect/oshan_launch_point/cargo/picked_point = pick(GLOB.cargo_launch_points)
+					var/turf/open/spawning_turf = get_edge_target_turf(picked_point, picked_point.map_edge_direction)
+					var/obj/structure/closet/crate/new_atom = order.generate(spawning_turf)
+					SSshuttle.shopping_list -= order
+					var/distance = get_dist(spawning_turf, picked_point)
+					new_atom.throw_at(picked_point, distance + 4, 2)
+
+				if(prob(25))
+					var/obj/structure/closet/crate/mail/economy/new_create
+					var/obj/effect/oshan_launch_point/cargo/picked_point = pick(GLOB.cargo_launch_points)
+					var/turf/open/spawning_turf = get_edge_target_turf(picked_point, picked_point.map_edge_direction)
+					if(!SSeconomy.mail_crate)
+						new_create = new /obj/structure/closet/crate/mail/economy(spawning_turf)
+						SSeconomy.mail_crate = new_create
+					if(SSeconomy.mail_crate)
+						SSeconomy.mail_crate.forceMove(spawning_turf)
+						new_create = SSeconomy.mail_crate
+						var/distance = get_dist(spawning_turf, picked_point)
+						new_create.throw_at(picked_point, distance + 4, 2)
+						SSeconomy.mail_crate = null
+
+				currently_sending = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			. = TRUE
 		if("loan")
@@ -375,12 +514,22 @@
 				ui.user.log_message("accepted a shuttle loan event.", LOG_GAME)
 				. = TRUE
 		if("add")
+<<<<<<< HEAD
 			return add_item(ui.user, params["id"])
+=======
+			params += "account_to_charge"
+			params["account_to_charge"] = cargo_account
+			return add_item(params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("add_by_name")
 			var/supply_pack_id = name_to_id(params["order_name"])
 			if(!supply_pack_id)
 				return
+<<<<<<< HEAD
 			return add_item(ui.user, supply_pack_id)
+=======
+			return add_item(list("id" = supply_pack_id, "amount" = 1, "account_to_charge" = cargo_account))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("remove")
 			var/order_name = params["order_name"]
 			//try removing atleast one item with the specified name. An order may not be removed if it was from the department
@@ -408,7 +557,11 @@
 			var/supply_pack_id = name_to_id(order_name) //map order name to supply pack id for adding
 			if(!supply_pack_id)
 				return
+<<<<<<< HEAD
 			return add_item(ui.user, supply_pack_id, amount)
+=======
+			return add_item(list("id" = supply_pack_id, "amount" = amount, "account_to_charge" = cargo_account))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("clear")
 			//create copy of list else we will get runtimes when iterating & removing items on the same list SSshuttle.shopping_list
 			var/list/shopping_cart = SSshuttle.shopping_list.Copy()

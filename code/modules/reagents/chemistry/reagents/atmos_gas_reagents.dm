@@ -43,6 +43,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED|REAGENT_NO_RANDOM_RECIPE
 
 /datum/reagent/healium/on_mob_end_metabolize(mob/living/breather)
+<<<<<<< HEAD
 	. = ..()
 	breather.SetSleeping(1 SECONDS)
 
@@ -55,6 +56,17 @@
 	need_mob_update += breather.adjustBruteLoss(-2 * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+	breather.SetSleeping(1 SECONDS)
+	return ..()
+
+/datum/reagent/healium/on_mob_life(mob/living/breather, seconds_per_tick, times_fired)
+	breather.SetSleeping(30 SECONDS)
+	breather.adjustFireLoss(-2 * REM * seconds_per_tick, FALSE, required_bodytype = affected_bodytype)
+	breather.adjustToxLoss(-5 * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype)
+	breather.adjustBruteLoss(-2 * REM * seconds_per_tick, FALSE, required_bodytype = affected_bodytype)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/hypernoblium
 	name = "Hyper-Noblium"
@@ -83,12 +95,18 @@
 	metabolized_traits = list(TRAIT_SLEEPIMMUNE)
 
 /datum/reagent/nitrium_high_metabolization/on_mob_life(mob/living/carbon/breather, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	var/need_mob_update
 	need_mob_update = breather.adjustStaminaLoss(-4 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	need_mob_update += breather.adjustToxLoss(0.1 * (current_cycle-1) * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype) // 1 toxin damage per cycle at cycle 10
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+	breather.stamina.adjust(2 * REM * seconds_per_tick, FALSE)
+	breather.adjustToxLoss(0.1 * current_cycle * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype) // 1 toxin damage per cycle at cycle 10
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/nitrium_low_metabolization
 	name = "Nitrium"
@@ -139,8 +157,9 @@
 	chemical_flags = REAGENT_NO_RANDOM_RECIPE
 	affected_biotype = MOB_ORGANIC | MOB_MINERAL | MOB_PLANT // "toxic to all living beings"
 	affected_respiration_type = ALL
-
+///monke edit begin, nerfs damage numbers to breathing zauker
 /datum/reagent/zauker/on_mob_life(mob/living/breather, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	var/need_mob_update
 	need_mob_update = breather.adjustBruteLoss(6 * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
@@ -149,3 +168,11 @@
 	need_mob_update += breather.adjustToxLoss(2 * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+	breather.adjustBruteLoss(4 * REM * seconds_per_tick, FALSE, required_bodytype = affected_bodytype)
+	breather.adjustOxyLoss(0.7 * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype, required_respiration_type = affected_respiration_type)
+	breather.adjustFireLoss(1.5 * REM * seconds_per_tick, FALSE, required_bodytype = affected_bodytype)
+	breather.adjustToxLoss(1.5 * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype)
+	return ..()
+///monke edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

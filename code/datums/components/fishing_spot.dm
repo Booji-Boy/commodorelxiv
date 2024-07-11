@@ -19,10 +19,13 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE_MORE, PROC_REF(on_examined_more))
 	ADD_TRAIT(parent, TRAIT_FISHING_SPOT, REF(src))
 
+<<<<<<< HEAD
 /datum/component/fishing_spot/Destroy()
 	fish_source = null
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/component/fishing_spot/proc/handle_cast(datum/source, obj/item/fishing_rod/rod, mob/user)
 	SIGNAL_HANDLER
 	if(try_start_fishing(rod,user))

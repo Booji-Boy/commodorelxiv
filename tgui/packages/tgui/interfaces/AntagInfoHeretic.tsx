@@ -1,4 +1,5 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -8,6 +9,11 @@ import { Window } from '../layouts';
 import {
   Objective,
   ObjectivePrintout,
+=======
+import {
+  ObjectivePrintout,
+  Objective,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ReplaceObjectivesButton,
 } from './common/Objectives';
 
@@ -53,6 +59,7 @@ type KnowledgeInfo = {
 
 type Info = {
   charges: number;
+  side_charges: number;
   total_sacrifices: number;
   ascended: BooleanLike;
   objectives: Objective[];
@@ -185,7 +192,11 @@ const GuideSection = () => {
 
 const InformationSection = (props) => {
   const { data } = useBackend<Info>();
+<<<<<<< HEAD
   const { charges, total_sacrifices, ascended } = data;
+=======
+  const { charges, side_charges, total_sacrifices, ascended } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Stack.Item>
       <Stack vertical fill>
@@ -207,6 +218,13 @@ const InformationSection = (props) => {
           <span style={hereticBlue}>
             knowledge point{charges !== 1 ? 's' : ''}
           </span>
+          {!!side_charges && (
+            <span>
+              {' '}
+              and <b>{side_charges}</b> side point
+              {side_charges !== 1 ? 's' : ''}
+            </span>
+          )}{' '}
           .
         </Stack.Item>
         <Stack.Item>
@@ -281,7 +299,11 @@ const KnowledgeShop = (props) => {
 
 const ResearchInfo = (props) => {
   const { data } = useBackend<Info>();
+<<<<<<< HEAD
   const { charges } = data;
+=======
+  const { charges, side_charges } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Stack justify="space-evenly" height="100%" width="100%">
@@ -291,7 +313,14 @@ const ResearchInfo = (props) => {
             You have <b>{charges || 0}</b>&nbsp;
             <span style={hereticBlue}>
               knowledge point{charges !== 1 ? 's' : ''}
-            </span>{' '}
+            </span>
+            {!!side_charges && (
+              <span>
+                {' '}
+                and <b>{side_charges}</b> side point
+                {side_charges !== 1 ? 's' : ''}
+              </span>
+            )}{' '}
             to spend.
           </Stack.Item>
           <Stack.Item grow>
@@ -310,13 +339,21 @@ export const AntagInfoHeretic = (props) => {
   const { data } = useBackend<Info>();
   const { ascended } = data;
 
+<<<<<<< HEAD
   const [currentTab, setTab] = useState(0);
+=======
+  const [currentTab, setTab] = useLocalState('currentTab', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window width={675} height={635}>
       <Window.Content
         style={{
+<<<<<<< HEAD
           backgroundImage: 'none',
+=======
+          'background-image': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           background: ascended
             ? 'radial-gradient(circle, rgba(24,9,9,1) 54%, rgba(31,10,10,1) 60%, rgba(46,11,11,1) 80%, rgba(47,14,14,1) 100%);'
             : 'radial-gradient(circle, rgba(9,9,24,1) 54%, rgba(10,10,31,1) 60%, rgba(21,11,46,1) 80%, rgba(24,14,47,1) 100%);',

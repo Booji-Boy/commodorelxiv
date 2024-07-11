@@ -5,6 +5,7 @@
  */
 
 import { storage } from 'common/storage';
+<<<<<<< HEAD
 import DOMPurify from 'dompurify';
 
 import {
@@ -13,6 +14,14 @@ import {
   removeHighlightSetting,
   updateHighlightSetting,
   updateSettings,
+=======
+import {
+  loadSettings,
+  updateSettings,
+  addHighlightSetting,
+  removeHighlightSetting,
+  updateHighlightSetting,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../settings/actions';
 import { selectSettings } from '../settings/selectors';
 import {
@@ -21,8 +30,11 @@ import {
   changeScrollTracking,
   clearChat,
   loadChat,
+<<<<<<< HEAD
   moveChatPageLeft,
   moveChatPageRight,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   rebuildChat,
   removeChatPage,
   saveChatToDisk,

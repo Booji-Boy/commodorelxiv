@@ -8,8 +8,13 @@
 	product = /obj/item/food/grown/peanut
 	lifespan = 55
 	endurance = 35
+<<<<<<< HEAD
 	yield = 5
 	growing_icon = 'icons/obj/service/hydroponics/growing.dmi'
+=======
+	yield = 50
+	growing_icon = 'icons/obj/hydroponics/growing.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "peanut-grow"
 	icon_dead = "peanut-dead"
 	genes = list(/datum/plant_gene/trait/one_bite)

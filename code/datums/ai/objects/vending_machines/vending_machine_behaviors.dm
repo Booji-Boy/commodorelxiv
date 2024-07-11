@@ -45,4 +45,8 @@
 	if(controller.blackboard[BB_VENDING_LAST_HIT_SUCCESFUL])
 		controller.set_blackboard_key(BB_VENDING_TILT_COOLDOWN, world.time + succes_tilt_cooldown)
 	vendor_pawn.untilt()
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -205,6 +205,14 @@
 "bb" = (
 /turf/closed/wall/r_wall/syndicate,
 /area/ruin/space/has_grav/syndicate_forgotten_cargopod)
+<<<<<<< HEAD
+=======
+"bc" = (
+/obj/machinery/light/directional/south,
+/mob/living/basic/trooper/nanotrasen/ranged/assault,
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/syndicate_forgotten_ship)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bd" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -448,6 +456,14 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/syndicate_forgotten_ship)
+<<<<<<< HEAD
+=======
+"bP" = (
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/syndicate_forgotten_ship)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bQ" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
@@ -653,6 +669,18 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/syndicate_forgotten_ship)
+<<<<<<< HEAD
+=======
+"cy" = (
+/obj/machinery/light/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 10
+	},
+/obj/item/wrench,
+/mob/living/basic/trooper/nanotrasen/ranged/assault,
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/syndicate_forgotten_ship)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cz" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")

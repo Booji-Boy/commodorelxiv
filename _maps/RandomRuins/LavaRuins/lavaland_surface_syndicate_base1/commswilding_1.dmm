@@ -63,6 +63,7 @@
 /obj/effect/mapping_helpers/apc/syndicate_access,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
+/obj/structure/closet/crate/secure/freezer/commsagent,
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/telecomms)
 "v" = (
@@ -86,8 +87,15 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/telecomms)
+<<<<<<< HEAD
 "B" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+=======
+"A" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/machinery/light/small/directional/west,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/telecomms)
@@ -148,6 +156,10 @@
 /turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/ruin/syndicate_lava_base/telecomms)
 "W" = (
+/obj/machinery/computer/records/medical/syndie{
+	dir = 2;
+	req_access = list("syndicate")
+	},
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/telecomms)
 "Y" = (

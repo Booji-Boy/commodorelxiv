@@ -3,7 +3,11 @@ import { toFixed } from 'common/math';
 import { useState } from 'react';
 
 import { numberOfDecimalDigits } from '../../common/math';
+<<<<<<< HEAD
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -44,8 +48,12 @@ const FilterIntegerEntry = (props) => {
 const FilterFloatEntry = (props) => {
   const { value, name, filterName } = props;
   const { act } = useBackend();
+<<<<<<< HEAD
   const [step, setStep] = useState(0.01);
 
+=======
+  const [step, setStep] = useLocalState(`${filterName}-${name}`, 0.01);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <>
       <NumberInput
@@ -289,9 +297,14 @@ export const Filteriffic = (props) => {
   const filters = data.target_filter_data || {};
   const hasFilters = Object.keys(filters).length !== 0;
   const filterDefaults = data['filter_info'];
+<<<<<<< HEAD
   const [massApplyPath, setMassApplyPath] = useState('');
   const [hiddenSecret, setHiddenSecret] = useState(false);
 
+=======
+  const [massApplyPath, setMassApplyPath] = useLocalState('massApplyPath', '');
+  const [hiddenSecret, setHiddenSecret] = useLocalState('hidden', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window title="Filteriffic" width={500} height={500}>
       <Window.Content scrollable>

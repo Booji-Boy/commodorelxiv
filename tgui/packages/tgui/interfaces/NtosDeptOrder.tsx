@@ -1,9 +1,14 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
 import {
   Blink,
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
   Box,
   Button,
   Dimmer,
@@ -14,7 +19,11 @@ import {
   Tabs,
   Tooltip,
 } from '../components';
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
 import { NtosWindow } from '../layouts';
+=======
+import { Window } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
 
 // 15x crate value
 const COST_UPPER_BOUND = 3000;
@@ -58,6 +67,7 @@ const CooldownEstimate = (props) => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
 export const DepartmentOrderContent = (props) => {
   const { data } = useBackend<Info>();
   const { no_link, time_left } = data;
@@ -72,6 +82,11 @@ export const DepartmentOrderContent = (props) => {
     return <CooldownDimmer />;
   }
 
+=======
+export const DepartmentOrders = (props) => {
+  const { data } = useBackend<Info>();
+  const { time_left } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
   return (
     <Stack vertical fill>
       <Stack.Item grow>
@@ -94,6 +109,7 @@ export const DepartmentOrderContent = (props) => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
 export const NtosDeptOrder = () => {
   return (
     <NtosWindow title="Department Orders" width={620} height={580}>
@@ -105,6 +121,9 @@ export const NtosDeptOrder = () => {
 };
 
 const CooldownDimmer = () => {
+=======
+const CooldownDimmer = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
   const { act, data } = useBackend<Info>();
   const { can_override, time_left } = data;
   return (
@@ -138,6 +157,7 @@ const CooldownDimmer = () => {
   );
 };
 
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
 const NoLinkDimmer = () => {
   const { act, data } = useBackend<Info>();
   const { id_inside } = data;
@@ -167,6 +187,12 @@ const DepartmentCatalog = () => {
   const { supplies } = data;
   const [tabCategory, setTabCategory] = useState(supplies[0]);
 
+=======
+const DepartmentCatalog = (props) => {
+  const { act, data } = useBackend<Info>();
+  const { supplies } = data;
+  const [tabCategory, setTabCategory] = useLocalState('tabName', supplies[0]);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
   return (
     <Stack vertical fill>
       <Stack.Item>
@@ -193,7 +219,12 @@ const DepartmentCatalog = () => {
                       <Box
                         as="span"
                         style={{
+<<<<<<< HEAD:tgui/packages/tgui/interfaces/NtosDeptOrder.tsx
                           borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
+=======
+                          'border-bottom':
+                            '2px dotted rgba(255, 255, 255, 0.8)',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui/interfaces/DepartmentOrders.tsx
                         }}
                       >
                         {pack.name}

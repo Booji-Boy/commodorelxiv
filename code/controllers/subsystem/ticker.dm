@@ -37,7 +37,7 @@ SUBSYSTEM_DEF(ticker)
 	var/start_at
 
 	var/gametime_offset = 432000 //Deciseconds to add to world.time for station time.
-	var/station_time_rate_multiplier = 12 //factor of station time progressal vs real time.
+	var/station_time_rate_multiplier = 24 //factor of station time progressal vs real time.
 
 	/// Num of players, used for pregame stats on statpanel
 	var/totalPlayers = 0
@@ -66,6 +66,11 @@ SUBSYSTEM_DEF(ticker)
 
 	/// Why an emergency shuttle was called
 	var/emergency_reason
+
+	///add bitflags to this that should be rewarded monkecoins, example: DEPARTMENT_BITFLAG_SECURITY
+	var/list/bitflags_to_reward = list(DEPARTMENT_BITFLAG_SECURITY,)
+	///add jobs to this that should get rewarded monkecoins, example: JOB_SECURITY_OFFICER
+	var/list/jobs_to_reward = list(JOB_JANITOR,)
 
 /datum/controller/subsystem/ticker/Initialize()
 	var/list/byond_sound_formats = list(
@@ -206,7 +211,11 @@ SUBSYSTEM_DEF(ticker)
 		if(GAME_STATE_PLAYING)
 			check_queue()
 
+<<<<<<< HEAD
 			if(!roundend_check_paused && (check_finished() || force_ending))
+=======
+			if(!roundend_check_paused && (mode.check_finished() || force_ending))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				current_state = GAME_STATE_FINISHED
 				toggle_ooc(TRUE) // Turn it on
 				toggle_dooc(TRUE)
@@ -230,10 +239,23 @@ SUBSYSTEM_DEF(ticker)
 	to_chat(world, span_boldannounce("Starting game..."))
 	var/init_start = world.timeofday
 
+<<<<<<< HEAD
 	CHECK_TICK
 	//Configure mode and assign player to antagonists
 	var/can_continue = FALSE
 	can_continue = SSdynamic.pre_setup() //Choose antagonists
+=======
+	mode = new /datum/game_mode/dynamic
+	SSgamemode.init_storyteller() //monkestation addition
+	CHECK_TICK
+	//Configure mode and assign player to special mode stuff
+	var/can_continue = 0
+	//monkestation addition start
+	can_continue =	SSgamemode.pre_setup()
+	CHECK_TICK
+	//monkestation addition end
+	can_continue = src.mode.pre_setup() //Choose antagonists
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	CHECK_TICK
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PRE_JOBS_ASSIGNED, src)
 	can_continue = can_continue && SSjob.DivideOccupations() //Distribute jobs
@@ -281,8 +303,18 @@ SUBSYSTEM_DEF(ticker)
 	log_world("Game start took [(world.timeofday - init_start)/10]s")
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore,SetRoundStart))
 
+<<<<<<< HEAD
 	to_chat(world, span_notice(span_bold("Welcome to [station_name()], enjoy your stay!")))
 	SEND_SOUND(world, sound(SSstation.announcer.get_rand_welcome_sound()))
+=======
+	to_chat(world, span_notice("<B>Welcome to [station_name()], enjoy your stay!</B>"))
+
+	for(var/mob/M as anything in GLOB.player_list)
+		if(!M.client)
+			SEND_SOUND(M, sound(SSstation.announcer.get_rand_welcome_sound(), volume = 100))
+		else if("[CHANNEL_VOX]" in M.client.prefs.channel_volume)
+			SEND_SOUND(M, sound(SSstation.announcer.get_rand_welcome_sound(), volume = M.client.prefs.channel_volume["[CHANNEL_VOX]"] * (M.client.prefs.channel_volume["[CHANNEL_MASTER_VOLUME]"] * 0.01)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
@@ -299,7 +331,13 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/PostSetup()
 	set waitfor = FALSE
+<<<<<<< HEAD
 	SSdynamic.post_setup()
+=======
+	SSgamemode.storyteller.process(STORYTELLER_WAIT_TIME * 0.1) // we want this asap
+	SSgamemode.storyteller.round_started = TRUE
+	mode.post_setup()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	GLOB.start_state = new /datum/station_state()
 	GLOB.start_state.count()
 
@@ -323,6 +361,7 @@ SUBSYSTEM_DEF(ticker)
 
 		iter_human.increment_scar_slot()
 		iter_human.load_persistent_scars()
+		SSpersistence.load_modular_persistence(iter_human.get_organ_slot(ORGAN_SLOT_BRAIN))
 
 		if(!iter_human.hardcore_survival_score)
 			continue
@@ -354,7 +393,8 @@ SUBSYSTEM_DEF(ticker)
 		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
 			GLOB.joined_player_list += player.ckey
-			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
+			var/chosen_title = player.client?.prefs.alt_job_titles[player.mind.assigned_role.title] || player.mind.assigned_role.title
+			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point(chosen_title)
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
 				continue
 			player.create_character(destination)
@@ -407,7 +447,7 @@ SUBSYSTEM_DEF(ticker)
 		picked_spare_id_candidate = pick(spare_id_candidates)
 
 	for(var/mob/dead/new_player/new_player_mob as anything in GLOB.new_player_list)
-		if(QDELETED(new_player_mob) || !isliving(new_player_mob.new_character))
+		if(QDELETED(new_player_mob) || !isliving(new_player_mob.new_character) || !new_player_mob.client)
 			CHECK_TICK
 			continue
 		var/mob/living/new_player_living = new_player_mob.new_character
@@ -427,6 +467,17 @@ SUBSYSTEM_DEF(ticker)
 			if(new_player_mob.client?.prefs?.should_be_random_hardcore(player_assigned_role, new_player_living.mind))
 				new_player_mob.client.prefs.hardcore_random_setup(new_player_living)
 			SSquirks.AssignQuirks(new_player_living, new_player_mob.client)
+
+		if(ishuman(new_player_living))
+			for(var/datum/loadout_item/item as anything in loadout_list_to_datums(new_player_mob.client?.prefs?.loadout_list))
+				if (item.restricted_roles && length(item.restricted_roles) && !(player_assigned_role.title in item.restricted_roles))
+					continue
+				item.post_equip_item(new_player_mob.client?.prefs, new_player_living)
+
+		if(new_player_mob.client.readied_store)
+			if(new_player_mob.client.readied_store.bought_item)
+				new_player_mob.client.readied_store.finalize_purchase_spawn(new_player_mob, new_player_living)
+
 		CHECK_TICK
 
 	if(captainless)
@@ -474,6 +525,14 @@ SUBSYSTEM_DEF(ticker)
 				S.Fade(TRUE)
 				living.client.init_verbs()
 			livings += living
+			if(living.client && length(living.client?.active_challenges))
+				SSchallenges.apply_challenges(living.client)
+			for(var/processing_reward_bitflags in bitflags_to_reward)//you really should use department bitflags if possible
+				if(living.mind.assigned_role.departments_bitflags & processing_reward_bitflags)
+					living.client.reward_this_person += 150
+			for(var/processing_reward_jobs in jobs_to_reward)//just in case you really only want to reward a specific job
+				if(living.job == processing_reward_jobs)
+					living.client.reward_this_person += 150
 	if(livings.len)
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 3 SECONDS, TIMER_CLIENT_TIME)
 

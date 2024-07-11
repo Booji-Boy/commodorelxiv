@@ -29,7 +29,11 @@
 	src.pre_clean_callback = pre_clean_callback
 	src.on_cleaned_callback = on_cleaned_callback
 
+<<<<<<< HEAD
 /datum/component/cleaner/Destroy(force)
+=======
+/datum/component/cleaner/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pre_clean_callback = null
 	on_cleaned_callback = null
 	return ..()
@@ -50,16 +54,24 @@
  * Handles the COMSIG_LIVING_UNARMED_ATTACK signal used for cleanbots
  * Redirects to afterattack, while setting parent (the bot) as user.
  */
-/datum/component/cleaner/proc/on_unarmed_attack(datum/source, atom/target, proximity_flags, modifiers)
+/datum/component/cleaner/proc/on_unarmed_attack(datum/source, atom/target, proximity_flags)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(on_interaction(source, source, target, modifiers) & ITEM_INTERACT_ANY_BLOCKER)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	return NONE
+=======
+	return on_afterattack(source, target, parent, proximity_flags)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Handles the COMSIG_ITEM_INTERACTING_WITH_ATOM signal by calling the clean proc.
  */
+<<<<<<< HEAD
 /datum/component/cleaner/proc/on_interaction(datum/source, mob/living/user, atom/target, list/modifiers)
+=======
+/datum/component/cleaner/proc/on_afterattack(datum/source, atom/target, mob/user, proximity_flag)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 
 	// By default, give XP
@@ -117,14 +129,32 @@
 		cleaning_duration = (cleaning_duration * min(user.mind.get_skill_modifier(/datum/skill/cleaning, SKILL_SPEED_MODIFIER)+skill_duration_modifier_offset, 1))
 
 	//do the cleaning
+<<<<<<< HEAD
 	var/clean_succeeded = FALSE
 	if(do_after(user, cleaning_duration, target = target))
 		clean_succeeded = TRUE
+=======
+	user.visible_message(span_notice("[user] starts to clean [target]!"), span_notice("You start to clean [target]..."))
+	var/clean_succeeded = FALSE
+	if(do_after(user, cleaning_duration, target = target))
+		clean_succeeded = TRUE
+		user.visible_message(span_notice("[user] finishes cleaning [target]!"), span_notice("You finish cleaning [target]."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(clean_target)
 			for(var/obj/effect/decal/cleanable/cleanable_decal in target) //it's important to do this before you wash all of the cleanables off
 				user.mind?.adjust_experience(/datum/skill/cleaning, round(cleanable_decal.beauty / CLEAN_SKILL_BEAUTY_ADJUSTMENT))
 			if(target.wash(cleaning_strength))
 				user.mind?.adjust_experience(/datum/skill/cleaning, round(CLEAN_SKILL_GENERIC_WASH_XP))
+<<<<<<< HEAD
+=======
+		if(isitem(target))
+			var/obj/item/item= target
+			if(length(item.viruses))
+				for(var/datum/disease/advanced/D as anything in item.viruses)
+					item.remove_disease(D)
+
+	on_cleaned_callback?.Invoke(source, target, user, clean_succeeded)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	on_cleaned_callback?.Invoke(source, target, user, clean_succeeded)
 	//remove the cleaning overlay

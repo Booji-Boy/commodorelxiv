@@ -25,6 +25,8 @@
 	unarmed_damage_high = 3
 	unarmed_effectiveness = 0
 	bodypart_trait_source = HEAD_TRAIT
+	///does this have a mouth? needed for ingest
+	var/mouth = TRUE
 
 	/// Do we show the information about missing organs upon being examined? Defaults to TRUE, useful for Dullahan heads.
 	var/show_organs_on_examine = TRUE
@@ -168,6 +170,7 @@
 /obj/item/bodypart/head/get_limb_icon(dropped)
 	. = ..()
 
+<<<<<<< HEAD
 	. += get_hair_and_lips_icon(dropped)
 	// We need to get the eyes if we are dropped (ugh)
 	if(dropped)
@@ -181,6 +184,59 @@
 					eye_left.color = eyes.eye_color_left
 				if(eyes.eye_color_right)
 					eye_right.color = eyes.eye_color_right
+=======
+	if(dropped) //certain overlays only appear when the limb is being detached from its owner.
+
+		if(IS_ORGANIC_LIMB(src)) //having a robotic head hides certain features.
+			//facial hair
+			if(facial_hairstyle && (FACEHAIR in species_flags_list))
+				var/datum/sprite_accessory/sprite = GLOB.facial_hairstyles_list[facial_hairstyle]
+				if(sprite)
+					var/image/facial_overlay = image(sprite.icon, "[sprite.icon_state]", -HAIR_LAYER, SOUTH)
+					facial_overlay.color = facial_hair_color
+					facial_overlay.alpha = hair_alpha
+					. += facial_overlay
+
+			if(!eyes)
+				. += image('icons/mob/species/human/human_face.dmi', "eyes_missing", -FACE_LAYER, SOUTH)
+
+			//Applies the debrained overlay if there is no brain
+			if(!brain)
+				var/image/debrain_overlay = image(layer = -HAIR_LAYER, dir = SOUTH)
+				if(bodytype & BODYTYPE_ALIEN)
+					debrain_overlay.icon = 'icons/mob/species/alien/bodyparts.dmi'
+					debrain_overlay.icon_state = "debrained_alien"
+				else if(bodytype & BODYTYPE_LARVA_PLACEHOLDER)
+					debrain_overlay.icon = 'icons/mob/species/alien/bodyparts.dmi'
+					debrain_overlay.icon_state = "debrained_larva"
+				else if(!(TRAIT_NOBLOOD in species_flags_list))
+					debrain_overlay.icon = 'icons/mob/species/human/human_face.dmi'
+					debrain_overlay.icon_state = "debrained"
+				. += debrain_overlay
+			else
+				var/datum/sprite_accessory/sprite2 = GLOB.roundstart_hairstyles_list[hair_style]
+				if(sprite2 && (HAIR in species_flags_list))
+					var/image/hair_overlay = image(sprite2.icon, "[sprite2.icon_state]", -HAIR_LAYER, SOUTH)
+					hair_overlay.color = hair_color
+					hair_overlay.alpha = hair_alpha
+					. += hair_overlay
+
+
+		// lipstick
+		if(lip_style)
+			var/image/lips_overlay = image('icons/mob/species/human/human_face.dmi', "lips_[lip_style]", -FACE_LAYER, SOUTH)
+			lips_overlay.color = lip_color
+			. += lips_overlay
+
+		// eyes
+		if(eyes) // This is a bit of copy/paste code from eyes.dm:generate_body_overlay
+			var/image/eye_left = image('icons/mob/species/human/human_face.dmi', "[eyes.eye_icon_state]_l", -FACE_LAYER, SOUTH)
+			var/image/eye_right = image('icons/mob/species/human/human_face.dmi', "[eyes.eye_icon_state]_r", -FACE_LAYER, SOUTH)
+			if(eyes.eye_color_left)
+				eye_left.color = eyes.eye_color_left
+			if(eyes.eye_color_right)
+				eye_right.color = eyes.eye_color_right
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(eyes.overlay_ignore_lighting)
 				eye_left.overlays += emissive_appearance(eye_left.icon, eye_left.icon_state, src, alpha = eye_left.alpha)
 				eye_right.overlays += emissive_appearance(eye_right.icon, eye_right.icon_state, src, alpha = eye_right.alpha)
@@ -188,9 +244,12 @@
 				var/atom/location = loc || owner || src
 				eye_left.overlays += emissive_blocker(eye_left.icon, eye_left.icon_state, location, alpha = eye_left.alpha)
 				eye_right.overlays += emissive_blocker(eye_right.icon, eye_right.icon_state, location, alpha = eye_right.alpha)
+<<<<<<< HEAD
 			if(worn_face_offset)
 				worn_face_offset.apply_offset(eye_left)
 				worn_face_offset.apply_offset(eye_right)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			. += eye_left
 			. += eye_right
 		else if(!eyes && (head_flags & HEAD_EYEHOLES))

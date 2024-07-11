@@ -50,7 +50,6 @@
 	desc = "Gear up with three toolbelts, high-visibility vests, welding helmets, hardhats, \
 		and two pairs of meson goggles!"
 	cost = CARGO_CRATE_VALUE * 4
-	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/item/storage/belt/utility = 3,
 					/obj/item/clothing/suit/hazardvest = 3,
 					/obj/item/clothing/head/utility/welding = 3,
@@ -64,7 +63,6 @@
 	desc = "The backbone of modern society. Barely ever ordered for actual engineering. \
 		Contains three insulated gloves."
 	cost = CARGO_CRATE_VALUE * 8 //Made of pure-grade bullshittinium
-	access_view = ACCESS_ENGINE_EQUIP
 	contains = list(/obj/item/clothing/gloves/color/yellow = 3)
 	crate_name = "insulated gloves crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
@@ -83,7 +81,6 @@
 	desc = "Engineers can't set up the engine? Not an issue for you, once you get your hands \
 		on this P.A.C.M.A.N. Generator! Takes in plasma and spits out sweet sweet energy."
 	cost = CARGO_CRATE_VALUE * 5
-	access_view = ACCESS_ENGINEERING
 	contains = list(/obj/machinery/power/port_gen/pacman)
 	crate_name = "\improper PACMAN generator crate"
 	crate_type = /obj/structure/closet/crate/engineering/electrical
@@ -112,7 +109,6 @@
 	name = "Toolbox Crate"
 	desc = "Any robust spaceman is never far from their trusty toolbox. Contains three electrical \
 		toolboxes and three mechanical toolboxes."
-	access_view = ACCESS_ENGINE_EQUIP
 	contains = list(/obj/item/storage/toolbox/electrical = 3,
 					/obj/item/storage/toolbox/mechanical = 3,
 				)
@@ -124,7 +120,6 @@
 	desc = "Did someone let the air out of the shuttle again? We've got you covered. \
 		Contains two portable air pumps."
 	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
 	contains = list(/obj/machinery/portable_atmospherics/pump = 2)
 	crate_name = "portable air pump crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
@@ -133,7 +128,6 @@
 	name = "Portable Scrubber Crate"
 	desc = "Clean up that pesky plasma leak with your very own set of two portable scrubbers."
 	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
 	contains = list(/obj/machinery/portable_atmospherics/scrubber = 2)
 	crate_name = "portable scrubber crate"
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
@@ -307,6 +301,7 @@
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
 	dangerous = TRUE
 
+<<<<<<< HEAD
 /datum/supply_pack/engineering/rad_protection_modules
 	name = "Radiation Protection Modules"
 	desc = "Contains multiple radiation protections modules for MODsuits."
@@ -328,3 +323,16 @@
 	)
 	crate_name = "radioactive nebula shielding (IMPORTANT)"
 	crate_type = /obj/structure/closet/crate/engineering
+=======
+
+
+/datum/supply_pack/engine/collector
+	name = "Radiation Collector Crate"
+	desc = "Contains three radiation collectors. Useful for collecting energy off nearby Supermatter Crystals, Singularities or Teslas!"
+	cost = CARGO_CRATE_VALUE * 8
+	contains = list(/obj/machinery/power/rad_collector,
+					/obj/machinery/power/rad_collector,
+					/obj/machinery/power/rad_collector)
+	crate_name = "collector crate"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

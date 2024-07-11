@@ -4,7 +4,11 @@
 /obj/effect/turf_decal/siding/yellow/corner,
 /obj/effect/turf_decal/sand/plating,
 /obj/item/flashlight/glowstick{
+<<<<<<< HEAD
 	start_on = 1
+=======
+	on = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /turf/open/floor/plating,
 /area/virtual_domain/safehouse)
@@ -38,7 +42,11 @@
 /obj/item/flashlight/lantern{
 	pixel_y = 8;
 	pixel_x = 4;
+<<<<<<< HEAD
 	start_on = 1
+=======
+	on = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /turf/open/misc/asteroid,
 /area/virtual_domain/safehouse)
@@ -49,10 +57,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/misc/asteroid,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "s" = (
 /obj/modular_map_connector,
 /turf/closed/mineral/asteroid,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "u" = (
 /obj/effect/turf_decal/siding/yellow{
 	dir = 8
@@ -117,7 +128,11 @@ H
 A
 A
 H
+<<<<<<< HEAD
 s
+=======
+H
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 A

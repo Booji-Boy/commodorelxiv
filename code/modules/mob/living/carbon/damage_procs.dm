@@ -28,12 +28,15 @@
 
 	return .
 
+<<<<<<< HEAD
 /mob/living/carbon/human/get_damage_mod(damage_type)
 	if (!dna?.species?.damage_modifier)
 		return ..()
 	var/species_mod = (100 - dna.species.damage_modifier) / 100
 	return ..() * species_mod
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/apply_damage(
 	damage = 0,
 	damagetype = BRUTE,
@@ -72,6 +75,11 @@
 			final_mod *= physiology.tox_mod
 		if(OXY)
 			final_mod *= physiology.oxy_mod
+<<<<<<< HEAD
+=======
+		if(CLONE)
+			final_mod *= physiology.clone_mod
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(STAMINA)
 			final_mod *= physiology.stamina_mod
 		if(BRAIN)
@@ -95,6 +103,13 @@
 	return amount
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+<<<<<<< HEAD
+=======
+	var/area/target_area = get_area(src)
+	if(target_area)
+		if((target_area.area_flags & PASSIVE_AREA) && amount > 0)
+			return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!can_adjust_brute_loss(amount, forced, required_bodytype))
 		return 0
 	if(amount > 0)
@@ -112,6 +127,13 @@
 	return adjustBruteLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_bodytype)
+<<<<<<< HEAD
+=======
+	var/area/target_area = get_area(src)
+	if(target_area)
+		if((target_area.area_flags & PASSIVE_AREA) && amount > 0)
+			return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!can_adjust_fire_loss(amount, forced, required_bodytype))
 		return 0
 	if(amount > 0)
@@ -128,6 +150,7 @@
 		return FALSE
 	return adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
+<<<<<<< HEAD
 /mob/living/carbon/human/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype = ALL)
 	. = ..()
 	if(. >= 0) // 0 = no damage, + values = healed damage
@@ -148,6 +171,31 @@
 	. = ..()
 	if((maxHealth - current_level) <= crit_threshold && stat != DEAD)
 		apply_status_effect(/datum/status_effect/incapacitating/stamcrit)
+=======
+/mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype = ALL)
+	var/area/target_area = get_area(src)
+	if(target_area)
+		if((target_area.area_flags & PASSIVE_AREA) && amount > 0)
+			return FALSE
+	if(!can_adjust_tox_loss(amount, forced, required_biotype))
+		return 0
+	if(!forced && HAS_TRAIT(src, TRAIT_TOXINLOVER)) //damage becomes healing and healing becomes damage
+		amount = -amount
+		if(HAS_TRAIT(src, TRAIT_TOXIMMUNE)) //Prevents toxin damage, but not healing
+			amount = min(amount, 0)
+		if(amount > 0)
+			blood_volume = max(blood_volume - (5*amount), 0)
+		else
+			blood_volume = max(blood_volume - amount, 0)
+	else if(HAS_TRAIT(src, TRAIT_TOXIMMUNE)) //Prevents toxin damage, but not healing
+		amount = min(amount, 0)
+	return ..()
+
+/mob/living/carbon/pre_stamina_change(diff as num, forced)
+	if(!forced && (status_flags & GODMODE))
+		return 0
+	return diff
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * If an organ exists in the slot requested, and we are capable of taking damage (we don't have [GODMODE] on), call the damage proc on that organ.
@@ -246,7 +294,10 @@
  * It automatically updates health status
  */
 /mob/living/carbon/heal_bodypart_damage(brute = 0, burn = 0, updating_health = TRUE, required_bodytype = NONE, target_zone = null)
+<<<<<<< HEAD
 	. = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/obj/item/bodypart/parts = get_damaged_bodyparts(brute, burn, required_bodytype, target_zone)
 	if(!parts.len)
 		return

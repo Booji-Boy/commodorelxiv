@@ -1,6 +1,12 @@
 {
 	"eslint.nodePath": "./tgui/.yarn/sdks",
+<<<<<<< HEAD
 	"eslint.workingDirectories": ["./tgui"],
+=======
+	"eslint.workingDirectories": [
+		"./tgui"
+	],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"prettier.prettierPath": "./tgui/.yarn/sdks/prettier/index.cjs",
 	"typescript.tsdk": "./tgui/.yarn/sdks/typescript/lib",
   	"typescript.enablePromptUseWorkspaceTsdk": true,
@@ -13,38 +19,57 @@
 	},
 	"files.eol": "\n",
 	"files.insertFinalNewline": true,
+<<<<<<< HEAD
 	"files.trimTrailingWhitespace": true,
 	"editor.insertSpaces": false,
 	"git.branchProtection": ["master"],
 	"gitlens.advanced.blame.customArguments": ["-w"],
+=======
+	"gitlens.advanced.blame.customArguments": [
+		"-w"
+	],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"tgstationTestExplorer.project.resultsType": "json",
 	"[javascript]": {
-		"editor.rulers": [80],
+		"editor.rulers": [
+			80
+		],
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 	"[javascriptreact]": {
-		"editor.rulers": [80],
+		"editor.rulers": [
+			80
+		],
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 	"[typescript]": {
-		"editor.rulers": [80],
+		"editor.rulers": [
+			80
+		],
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 	"[typescriptreact]": {
-		"editor.rulers": [80],
+		"editor.rulers": [
+			80
+		],
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 	"[scss]": {
-		"editor.rulers": [80],
+		"editor.rulers": [
+			80
+		],
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
 	},
 	"workbench.editorAssociations": {
 		"*.dmi": "dmiEditor.dmiEditor"
 	},
-	"Lua.diagnostics.enable": false
+	"Lua.diagnostics.enable": false,
+	"git.branchProtection": [
+		"master"
+	]
 }

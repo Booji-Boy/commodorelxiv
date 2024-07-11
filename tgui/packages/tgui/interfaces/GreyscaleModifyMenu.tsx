@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ColorBox,
+<<<<<<< HEAD
   Divider,
   Flex,
   Icon,
@@ -12,6 +13,16 @@ import {
   Section,
   Stack,
   Table,
+=======
+  Flex,
+  Stack,
+  Icon,
+  Input,
+  LabeledList,
+  Section,
+  Table,
+  Divider,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 

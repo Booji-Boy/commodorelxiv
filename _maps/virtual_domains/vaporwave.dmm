@@ -83,7 +83,13 @@
 	},
 /area/ruin/space/has_grav/powered/virtual_domain)
 "ll" = (
+<<<<<<< HEAD
 /obj/structure/sign/poster/contraband/clown/directional/north,
+=======
+/obj/structure/sign/poster/contraband/clown{
+	pixel_y = 34
+	},
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron/vaporwave,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "lu" = (
@@ -168,7 +174,11 @@
 	},
 /area/ruin/space/has_grav/powered/virtual_domain)
 "HA" = (
+<<<<<<< HEAD
 /turf/open/floor/holofloor/beach/coast,
+=======
+/turf/open/floor/holofloor/beach/coast_t,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/powered/virtual_domain)
 "HV" = (
 /obj/structure/chair/comfy/black{
@@ -221,9 +231,13 @@
 /turf/open/misc/asteroid/airless,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Uy" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "shuttle_space"
 	},
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "UE" = (

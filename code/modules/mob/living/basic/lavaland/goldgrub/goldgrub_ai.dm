@@ -14,11 +14,18 @@
 		/datum/ai_planning_subtree/dig_away_from_danger,
 		/datum/ai_planning_subtree/flee_target,
 		/datum/ai_planning_subtree/find_and_hunt_target/hunt_ores,
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/find_and_hunt_target/break_boulders,
 		/datum/ai_planning_subtree/find_and_hunt_target/harvest_vents,
 		/datum/ai_planning_subtree/find_and_hunt_target/baby_egg,
 		/datum/ai_planning_subtree/mine_walls,
 	)
+=======
+		/datum/ai_planning_subtree/find_and_hunt_target/baby_egg,
+		/datum/ai_planning_subtree/mine_walls,
+	)
+	can_idle = FALSE // we want these to be running always
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_controller/basic_controller/babygrub
 	blackboard = list(
@@ -38,6 +45,10 @@
 		/datum/ai_planning_subtree/flee_target,
 		/datum/ai_planning_subtree/look_for_adult,
 	)
+<<<<<<< HEAD
+=======
+	can_idle = FALSE // we want these to be running always
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///consume food!
 /datum/ai_planning_subtree/find_and_hunt_target/hunt_ores
@@ -45,7 +56,11 @@
 	hunting_behavior = /datum/ai_behavior/hunt_target/unarmed_attack_target/hunt_ores
 	finding_behavior = /datum/ai_behavior/find_hunt_target/hunt_ores
 	hunt_targets = list(/obj/item/stack/ore)
+<<<<<<< HEAD
 	hunt_chance = 90
+=======
+	hunt_chance = 75
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hunt_range = 9
 
 /datum/ai_behavior/find_hunt_target/hunt_ores
@@ -68,6 +83,7 @@
 /datum/ai_behavior/hunt_target/unarmed_attack_target/hunt_ores
 	always_reset_target = TRUE
 
+<<<<<<< HEAD
 ///break boulders so that we can find more food!
 /datum/ai_planning_subtree/find_and_hunt_target/harvest_vents
 	target_key = BB_VENT_TARGET
@@ -112,6 +128,8 @@
 		return FALSE
 	return can_see(source, target, radius)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///find our child's egg and pull it!
 /datum/ai_planning_subtree/find_and_hunt_target/baby_egg
 	target_key = BB_LOW_PRIORITY_HUNTING_TARGET

@@ -2,6 +2,7 @@
 /obj/machinery/quantum_server/proc/add_threats(mob/living/threat)
 	spawned_threat_refs.Add(WEAKREF(threat))
 	SEND_SIGNAL(src, COMSIG_BITRUNNER_THREAT_CREATED)
+<<<<<<< HEAD
 	threat.AddComponent(/datum/component/virtual_entity, src)
 
 /// Choses which antagonist role is spawned based on threat
@@ -34,6 +35,8 @@
 	target_ref = pick(mutation_candidate_refs)
 	resolved = target_ref.resolve()
 	return resolved
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Finds any mobs with minds in the zones and gives them the bad news
 /obj/machinery/quantum_server/proc/notify_spawned_threats()
@@ -51,6 +54,7 @@
 		alert.desc = "The server is resetting. Oblivion awaits."
 
 		to_chat(baddie, span_userdanger("You have been flagged for deletion! Thank you for your service."))
+<<<<<<< HEAD
 
 /// Removes a specific threat - used when station spawning
 /obj/machinery/quantum_server/proc/remove_threat(mob/living/threat)
@@ -166,3 +170,5 @@
 	shuffle_inplace(mutation_candidate_refs)
 
 	return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

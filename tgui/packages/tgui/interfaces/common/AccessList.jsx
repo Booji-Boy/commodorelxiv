@@ -248,9 +248,14 @@ const RegionAccessList = (props) => {
   const selectedAccess = accesses.find(
     (access) => access.name === selectedAccessName,
   );
+<<<<<<< HEAD
   const selectedAccessEntries = sortBy(
     selectedAccess?.accesses || [],
     (entry) => entry.desc,
+=======
+  const selectedAccessEntries = sortBy((entry) => entry.desc)(
+    selectedAccess?.accesses || [],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 
   const allWildcards = Object.keys(wildcardSlots);

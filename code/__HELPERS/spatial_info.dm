@@ -100,7 +100,11 @@
 
 	var/list/assigned_oranges_ears = SSspatial_grid.assign_oranges_ears(hearables_from_grid)
 
+<<<<<<< HEAD
 	//this is the ENTIRE reason all this shit is worth it due to how view()-like procs and the contents list works and can be optimized
+=======
+	//this is the ENTIRE reason all this shit is worth it due to how view() and the contents list works and can be optimized
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//internally, the contents list is secretly two linked lists, one for /obj's and one for /mob's (/atom/movable counts as /obj here)
 	//by default, for(var/atom/name in view()) iterates through both the /obj linked list then the /mob linked list of each turf
 	//but because what we want are only a tiny proportion of all movables, most of the things in the /obj contents list are not what we're looking for
@@ -109,13 +113,17 @@
 	//1. making view() only go through the smallest of the two linked lists per turf, which contains the type we're looking for at the end
 	//2. typechecking all mobs in the output to only actually return mobs of type /mob/oranges_ear
 	//on a whole this can outperform iterating through all movables in view() by ~2x especially when hearables are a tiny percentage of movables in view
+<<<<<<< HEAD
 	//using hearers is a further optimization of that because for our purposes its the same as view except we dont have to set center's luminosity to 6 and then unset it
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/mob/oranges_ear/ear in hearers(view_radius, center_turf))
 		. += ear.references
 
 	for(var/mob/oranges_ear/remaining_ear as anything in assigned_oranges_ears)//we need to clean up our mess
 		remaining_ear.unassign()
 
+<<<<<<< HEAD
 	return .
 
 /**
@@ -150,6 +158,8 @@
 		if (get_dist(center_turf, hearable) <= range)
 			. += hearable
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return .
 
 /**
@@ -283,7 +293,7 @@
 	return atoms
 
 ///Returns the distance between two atoms
-/proc/get_dist_euclidian(atom/first_location as turf|mob|obj, atom/second_location as turf|mob|obj)
+/proc/get_dist_euclidean(atom/first_location as turf|mob|obj, atom/second_location as turf|mob|obj)
 	var/dx = first_location.x - second_location.x
 	var/dy = first_location.y - second_location.y
 

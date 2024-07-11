@@ -14,12 +14,20 @@
 	response_disarm_simple = "gently push aside"
 	initial_language_holder = /datum/language_holder/spider
 	melee_attack_cooldown = CLICK_CD_MELEE
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1.25, TOX = 1, STAMINA = 1, OXY = 1)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1.25, TOX = 1, CLONE = 1, STAMINA = 1, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	basic_mob_flags = FLAMMABLE_MOB
 	status_flags = NONE
 	unsuitable_cold_damage = 4
 	unsuitable_heat_damage = 4
+<<<<<<< HEAD
 	combat_mode = TRUE
+=======
+	istate = ISTATE_HARM | ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	faction = list(FACTION_SPIDER)
 	pass_flags = PASSTABLE
 	attack_verb_continuous = "bites"
@@ -36,8 +44,11 @@
 	var/poison_type = /datum/reagent/toxin/hunterspider
 	/// How much of a reagent the mob injects on attack
 	var/poison_per_bite = 0
+<<<<<<< HEAD
 	/// How tough is our bite?
 	var/bite_injection_flags = NONE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Multiplier to apply to web laying speed. Fractional numbers make it faster, because it's a multiplier.
 	var/web_speed = 1
 	/// Type of webbing ability to learn.
@@ -55,11 +66,17 @@
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_CLAW)
 	AddElement(/datum/element/nerfed_pulling, GLOB.typecache_general_bad_things_to_easily_move)
 	AddElement(/datum/element/prevent_attacking_of_types, GLOB.typecache_general_bad_hostile_attack_targets, "this tastes awful!")
+<<<<<<< HEAD
 	AddElement(/datum/element/cliff_walking)
 	AddComponent(/datum/component/health_scaling_effects, min_health_slowdown = 1.5)
 
 	if(poison_per_bite)
 		AddElement(/datum/element/venomous, poison_type, poison_per_bite, injection_flags = bite_injection_flags)
+=======
+
+	if(poison_per_bite)
+		AddElement(/datum/element/venomous, poison_type, poison_per_bite)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/datum/action/cooldown/mob_cooldown/lay_web/webbing = new web_type(src)
 	webbing.webbing_time *= web_speed

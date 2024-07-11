@@ -24,8 +24,13 @@ export const OutfitEditor = (props) => {
                 grow={1}
                 style={{
                   overflow: 'hidden',
+<<<<<<< HEAD
                   whiteSpace: 'nowrap',
                   textOverflow: 'ellipsis',
+=======
+                  'white-space': 'nowrap',
+                  'text-overflow': 'ellipsis',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 }}
               >
                 <Button
@@ -154,8 +159,13 @@ const OutfitSlot = (props) => {
         color="label"
         style={{
           overflow: 'hidden',
+<<<<<<< HEAD
           whiteSpace: 'nowrap',
           textOverflow: 'ellipsis',
+=======
+          'white-space': 'nowrap',
+          'text-overflow': 'ellipsis',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
         title={currItem?.path}
       >

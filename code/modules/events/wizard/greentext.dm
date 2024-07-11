@@ -68,8 +68,20 @@
 /obj/item/greentext/Destroy(force)
 	LAZYREMOVE(SSticker.round_end_events, roundend_callback)
 	roundend_callback = null //This ought to free the callback datum, and prevent us from harddeling
+<<<<<<< HEAD
 	if(LAZYLEN(color_altered_mobs))
 		INVOKE_ASYNC(src, PROC_REF(release_victims))
+=======
+	for(var/mob/all_player_mobs as anything in GLOB.player_list)
+		var/message = "<span class='warning'>A dark temptation has passed from this world"
+		if(all_player_mobs in color_altered_mobs)
+			message += " and you're finally able to forgive yourself"
+			if(all_player_mobs.color == "#FF0000" || all_player_mobs.color == "#00FF00")
+				all_player_mobs.remove_atom_colour(ADMIN_COLOUR_PRIORITY)
+		message += "...</span>"
+		if(!quiet)
+			to_chat(all_player_mobs, message)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/item/greentext/proc/release_victims()

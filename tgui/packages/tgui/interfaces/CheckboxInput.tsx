@@ -1,3 +1,17 @@
+<<<<<<< HEAD
+=======
+import {
+  Button,
+  Icon,
+  Input,
+  NoticeBox,
+  Section,
+  Stack,
+  Table,
+  Tooltip,
+} from '../components';
+import { TableCell, TableRow } from '../components/Table';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { createSearch, decodeHtmlEntities } from 'common/string';
 import { useState } from 'react';
 
@@ -38,9 +52,18 @@ export const CheckboxInput = (props) => {
     title,
   } = data;
 
+<<<<<<< HEAD
   const [selections, setSelections] = useState<string[]>([]);
 
   const [searchQuery, setSearchQuery] = useState('');
+=======
+  const [selections, setSelections] = useLocalState<string[]>('selections', []);
+
+  const [searchQuery, setSearchQuery] = useLocalState<string>(
+    'searchQuery',
+    '',
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const search = createSearch(searchQuery, (item: string) => item);
   const toDisplay = items.filter(search);
 

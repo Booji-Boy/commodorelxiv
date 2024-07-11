@@ -33,6 +33,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	var/jobspawn_override = FALSE
 	var/delete_after_roundstart = TRUE
 	var/used = FALSE
+	var/required_jobtitle
 
 /obj/effect/landmark/start/proc/after_round_start()
 	// We'd like to keep these around for unit tests, so we can check that they exist.
@@ -189,6 +190,12 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Chief Medical Officer"
 	icon_state = "Chief Medical Officer"
 
+<<<<<<< HEAD
+=======
+/obj/effect/landmark/start/virologist
+	name = "Pathologist"
+	icon_state = "Virologist"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/landmark/start/psychologist
 	name = "Psychologist"

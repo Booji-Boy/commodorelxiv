@@ -11,13 +11,23 @@
 	controller.behavior_cooldowns[src] = world.time + get_cooldown(controller)
 	var/mob/living/living_pawn = controller.pawn
 	if(!(isturf(living_pawn.loc) || HAS_TRAIT(living_pawn, TRAIT_AI_BAGATTACK))) // Void puppies can attack from inside bags
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, target_key, targeting_strategy_key, hiding_location_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Unfortunately going to repeat this check in parent call but what can you do
 	var/atom/target = controller.blackboard[target_key]
 	var/datum/targeting_strategy/targeting_strategy = GET_TARGETING_STRATEGY(controller.blackboard[targeting_strategy_key])
 	if (!targeting_strategy.can_attack(living_pawn, target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, target_key, targeting_strategy_key, hiding_location_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if (!living_pawn.Adjacent(target))
 		growl_at(living_pawn, target, seconds_per_tick)

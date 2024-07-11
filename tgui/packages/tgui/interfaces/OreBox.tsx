@@ -13,6 +13,18 @@ type Data = {
   materials: Material[];
 };
 
+<<<<<<< HEAD
+=======
+type Material = {
+  type: string;
+  name: string;
+  amount: number;
+};
+
+const OREBOX_INFO = `All ores will be placed in here when you are wearing a
+mining stachel on your belt or in a pocket while dragging the ore box.`;
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 export const OreBox = (props) => {
   const { act, data } = useBackend<Data>();
   const { materials } = data;
@@ -21,6 +33,7 @@ export const OreBox = (props) => {
     <Window width={335} height={415}>
       <Window.Content scrollable>
         <Section
+<<<<<<< HEAD
           title="Ores & Boulders"
           buttons={
             <Button
@@ -30,6 +43,10 @@ export const OreBox = (props) => {
               Empty
             </Button>
           }
+=======
+          title="Ores"
+          buttons={<Button content="Empty" onClick={() => act('removeall')} />}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <Table>
             <Table.Row header>

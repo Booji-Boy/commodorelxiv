@@ -8,11 +8,10 @@
 	product = /obj/item/food/grown/nettle
 	lifespan = 30
 	endurance = 40 // tuff like a toiger
-	yield = 4
-	instability = 25
+	yield = 40
 	growthstages = 5
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/plant_type/weed_hardy, /datum/plant_gene/trait/attack/nettle_attack, /datum/plant_gene/trait/backfire/nettle_burn)
-	mutatelist = list(/obj/item/seeds/nettle/death)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/death_nettle)
 	reagents_add = list(/datum/reagent/toxin/acid = 0.5)
 	graft_gene = /datum/plant_gene/trait/plant_type/weed_hardy
 
@@ -25,9 +24,9 @@
 	product = /obj/item/food/grown/nettle/death
 	endurance = 25
 	maturation = 8
-	yield = 2
+	yield = 20
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/plant_type/weed_hardy, /datum/plant_gene/trait/stinging, /datum/plant_gene/trait/attack/nettle_attack/death, /datum/plant_gene/trait/backfire/nettle_burn/death)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/toxin/acid/fluacid = 0.5, /datum/reagent/toxin/acid = 0.5)
 	rarity = PLANT_MODERATELY_RARE
 	graft_gene = /datum/plant_gene/trait/stinging

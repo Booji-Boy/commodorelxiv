@@ -185,8 +185,13 @@ GLOBAL_VAR(preset_station_message_server_key)
 /datum/signal/subspace/messaging/New(init_source, init_data)
 	source = init_source
 	data = init_data
+<<<<<<< HEAD
 	var/turf/origin_turf = get_turf(source)
 	levels = SSmapping.get_connected_levels(origin_turf)
+=======
+	var/turf/T = get_turf(source)
+	levels = SSmapping.get_connected_levels(T)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!("reject" in data))
 		data["reject"] = TRUE
 
@@ -227,6 +232,11 @@ GLOBAL_VAR(preset_station_message_server_key)
 
 // Request Console signal datum
 /datum/signal/subspace/messaging/rc/broadcast()
+<<<<<<< HEAD
+=======
+	if (!logged)  // Like /pda, only if logged
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/recipient_department = ckey(data["recipient_department"])
 	for (var/obj/machinery/requests_console/console in GLOB.req_console_all)
 		if(ckey(console.department) == recipient_department || (data["ore_update"] && console.receive_ore_updates))

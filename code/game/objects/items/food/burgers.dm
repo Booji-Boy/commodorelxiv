@@ -12,7 +12,11 @@
 	foodtypes = GRAIN | MEAT //lettuce doesn't make burger a vegetable.
 	eat_time = 15 //Quick snack
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_TINY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/plain
 	name = "plain burger"
@@ -86,7 +90,11 @@
 	tastes = list("bun" = 4, "grass" = 2)
 	foodtypes = GRAIN | MEAT | GORE
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_RESISTANCE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/fish
 	name = "fillet -o- carp sandwich"
@@ -100,7 +108,11 @@
 	tastes = list("bun" = 4, "fish" = 4)
 	foodtypes = GRAIN | SEAFOOD
 	venue_value = FOOD_PRICE_EXOTIC
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_RESISTANCE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/tofu
 	name = "tofu burger"
@@ -164,7 +176,11 @@
 	tastes = list("bun" = 2, "meat" = 2, "salmon" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_EXOTIC
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/clown
 	name = "clown burger"
@@ -178,7 +194,11 @@
 	tastes = list("bun" = 2, "a bad joke" = 4)
 	foodtypes = GRAIN | FRUIT
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SLIDE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/mime
 	name = "mime burger"
@@ -192,7 +212,11 @@
 	)
 	foodtypes = GRAIN
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/brain
 	name = "brainburger"
@@ -412,7 +436,11 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	foodtypes = GRAIN | MEAT | DAIRY
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_JOB_MINER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/jelly
 	name = "jelly burger"
@@ -476,7 +504,11 @@
 	tastes = list("extreme heat" = 4, "bun" = 2)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_FIREBURPS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/rat
 	name = "rat burger"
@@ -505,7 +537,11 @@
 	foodtypes = GRAIN | GROSS
 	custom_price = PAYCHECK_CREW * 0.8
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_RESISTANCE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/baconburger
 	name = "bacon burger"
@@ -520,7 +556,11 @@
 	foodtypes = GRAIN | MEAT
 	custom_premium_price = PAYCHECK_CREW * 1.6
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_LARGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/empoweredburger
 	name = "empowered burger"
@@ -530,7 +570,7 @@
 		/datum/reagent/consumable/nutriment = 5,
 		/datum/reagent/consumable/nutriment/protein = 5,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
-		/datum/reagent/consumable/liquidelectricity/enriched = 6,
+		/datum/reagent/consumable/liquidelectricity = 6,
 	)
 	tastes = list("bun" = 2, "pure electricity" = 4)
 	foodtypes = GRAIN | TOXIC
@@ -591,7 +631,11 @@
 	tastes = list("bun" = 2, "pork patty" = 4)
 	foodtypes = GRAIN | MEAT
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/mcguffin
 	name = "mcguffin"
@@ -606,7 +650,11 @@
 	tastes = list("muffin" = 2, "bacon" = 3)
 	foodtypes = GRAIN | MEAT | BREAKFAST
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/chicken
 	name = "chicken sandwich" //Apparently the proud people of Americlapstan object to this thing being called a burger. Apparently McDonald's just calls it a burger in Europe as to not scare and confuse us.
@@ -622,7 +670,11 @@
 	tastes = list("bun" = 2, "chicken" = 4, "God's covenant" = 1)
 	foodtypes = GRAIN | MEAT | FRIED
 	venue_value = FOOD_PRICE_NORMAL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/cheese
 	name = "cheese burger"
@@ -656,7 +708,11 @@
 	)
 	tastes = list("bun" = 2, "beef patty" = 4, "cheese" = 2, "beef soaked in chili" = 3, "a smoking flare" = 2)
 	foodtypes = GRAIN | MEAT | DAIRY
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_4
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_LARGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/burger/crazy/Initialize(mapload)
 	. = ..()

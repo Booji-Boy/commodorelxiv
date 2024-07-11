@@ -26,17 +26,27 @@
 			blood_volume = min(blood_volume + (BLOOD_REGEN_FACTOR * nutrition_ratio * seconds_per_tick), BLOOD_VOLUME_NORMAL)
 
 	//Effects of bloodloss
+<<<<<<< HEAD
 	if(!(sigreturn & HANDLE_BLOOD_NO_EFFECTS))
 		var/word = pick("dizzy","woozy","faint")
 		switch(blood_volume)
 			if(BLOOD_VOLUME_MAX_LETHAL to INFINITY)
+=======
+	var/word = pick("dizzy","woozy","faint")
+	if(!HAS_TRAIT(src, TRAIT_NO_BLOODLOSS_DAMAGE)) //monkestation addition
+		switch(blood_volume)
+			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				if(SPT_PROB(7.5, seconds_per_tick))
 					to_chat(src, span_userdanger("Blood starts to tear your skin apart. You're going to burst!"))
 					investigate_log("has been gibbed by having too much blood.", INVESTIGATE_DEATHS)
 					inflate_gib()
+<<<<<<< HEAD
 			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
 				if(SPT_PROB(5, seconds_per_tick))
 					to_chat(src, span_warning("You feel your skin swelling."))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 				if(SPT_PROB(5, seconds_per_tick))
 					to_chat(src, span_warning("You feel terribly bloated."))
@@ -64,8 +74,12 @@
 	for(var/obj/item/bodypart/iter_part as anything in bodyparts)
 		var/iter_bleed_rate = iter_part.get_modified_bleed_rate()
 		temp_bleed += iter_bleed_rate * seconds_per_tick
+		if(HAS_TRAIT(src, TRAIT_HEAVY_BLEEDER))
+			temp_bleed *= 2
 
 		if(iter_part.generic_bleedstacks) // If you don't have any bleedstacks, don't try and heal them
+			if(HAS_TRAIT(src, TRAIT_HEAVY_BLEEDER))
+				iter_part.adjustBleedStacks(-1, 0) /// we basically double up on bleedstacks
 			iter_part.adjustBleedStacks(-1, 0)
 
 	if(temp_bleed)
@@ -208,10 +222,10 @@
 			if(blood_id == /datum/reagent/blood) //normal blood
 				if(blood_data["viruses"])
 					for(var/thing in blood_data["viruses"])
-						var/datum/disease/D = thing
+						var/datum/disease/advanced/D = thing
 						if((D.spread_flags & DISEASE_SPREAD_SPECIAL) || (D.spread_flags & DISEASE_SPREAD_NON_CONTAGIOUS))
 							continue
-						C.ForceContractDisease(D)
+						C.infect_disease(D, TRUE, "Infected [key_name(C)] (Infected Blood 100% Infection)")
 				if(!(blood_data["blood_type"] in get_safe_blood(C.dna.blood_type)))
 					C.reagents.add_reagent(/datum/reagent/toxin, amount * 0.5)
 					return TRUE
@@ -235,6 +249,9 @@
 		for(var/thing in diseases)
 			var/datum/disease/D = thing
 			blood_data["viruses"] += D.Copy()
+
+		if (immune_system)
+			blood_data["immunity"] = immune_system.GetImmunity()
 
 		blood_data["blood_DNA"] = dna.unique_enzymes
 		if(LAZYLEN(disease_resistances))
@@ -311,17 +328,27 @@
 /mob/living/proc/add_splatter_floor(turf/T, small_drip)
 	if(get_blood_id() != /datum/reagent/blood)
 		return
-	if(!T)
+	if(!QDELETED(T))
 		T = get_turf(src)
+<<<<<<< HEAD
 	if(isclosedturf(T) || (isgroundlessturf(T) && !GET_TURF_BELOW(T)))
+=======
+	if(QDELETED(T) || isclosedturf(T) || (isgroundlessturf(T) && !GET_TURF_BELOW(T)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
+	var/datum/reagent/blood_type = get_blood_id()
 	var/list/temp_blood_DNA
 	if(small_drip)
+		if(!QDELETED(T.liquids))
+			var/list/blood_drop = list(get_blood_id() = 0.1)
+			T.add_liquid_list(blood_drop, FALSE, 300)
+			return
 		// Only a certain number of drips (or one large splatter) can be on a given turf.
 		var/obj/effect/decal/cleanable/blood/drip/drop = locate() in T
 		if(drop)
 			if(drop.drips < 5)
+				T?.pollute_turf(/datum/pollutant/metallic_scent, 5)
 				drop.drips++
 				drop.add_overlay(pick(drop.random_icon_states))
 				drop.transfer_mob_blood_dna(src)
@@ -330,9 +357,13 @@
 				temp_blood_DNA = GET_ATOM_BLOOD_DNA(drop) //we transfer the dna from the drip to the splatter
 				qdel(drop)//the drip is replaced by a bigger splatter
 		else
+			T?.pollute_turf(/datum/pollutant/metallic_scent, 5)
 			drop = new(T, get_static_viruses())
 			drop.transfer_mob_blood_dna(src)
 			return
+
+	// Create a bit of metallic pollution, as that's how blood smells
+	T.pollute_turf(/datum/pollutant/metallic_scent, 30)
 
 	// Find a blood decal or create a new one.
 	var/obj/effect/decal/cleanable/blood/B = locate() in T
@@ -344,6 +375,20 @@
 	B.transfer_mob_blood_dna(src) //give blood info to the blood decal.
 	if(temp_blood_DNA)
 		B.add_blood_DNA(temp_blood_DNA)
+
+	if(B.count < 10 )
+		if(blood_type)
+			B.color = initial(blood_type.color)
+		B.count ++
+		B.transfer_mob_blood_dna(src)
+	B.transfer_mob_blood_dna(src) //give blood info to the blood decal.
+	if(temp_blood_DNA)
+		B.add_blood_DNA(temp_blood_DNA)
+
+	if(B.count > 9)
+		qdel(B)
+		var/list/blood_large = list(get_blood_id() = 20)
+		T.add_liquid_list(blood_large, FALSE, 300)
 
 /mob/living/carbon/human/add_splatter_floor(turf/T, small_drip)
 	if(!HAS_TRAIT(src, TRAIT_NOBLOOD))

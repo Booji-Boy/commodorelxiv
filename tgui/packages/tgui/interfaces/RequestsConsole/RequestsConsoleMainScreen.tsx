@@ -1,15 +1,26 @@
 import { useBackend, useSharedState } from '../../backend';
 import { Icon, Stack, Tabs } from '../../components';
+<<<<<<< HEAD
 import { AnnouncementTab } from './AnnouncementTab';
 import { MessageViewTab } from './MessageViewTab';
 import { MessageWriteTab } from './MessageWriteTab';
 import { RequestsData, RequestTabs } from './types';
+=======
+import { RequestsData, RequestTabs } from './types';
+import { MessageViewTab } from './MessageViewTab';
+import { MessageWriteTab } from './MessageWriteTab';
+import { AnnouncementTab } from './AnnouncementTab';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const RequestMainScreen = (props) => {
   const { act, data } = useBackend<RequestsData>();
   const { can_send_announcements } = data;
+<<<<<<< HEAD
   const [tab, setTab] = useSharedState('tab', RequestTabs.MESSAGE_VIEW);
 
+=======
+  const [tab, setTab] = useSharedState('tab', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Stack.Item grow>
       <Stack vertical fill>

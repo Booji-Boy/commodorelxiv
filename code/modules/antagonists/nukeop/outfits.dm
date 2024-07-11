@@ -44,8 +44,6 @@
 	if(visualsOnly)
 		return
 
-	// We don't require the nukiebase be loaded to function, but lets go ahead and kick off loading just in case
-	INVOKE_ASYNC(SSmapping, TYPE_PROC_REF(/datum/controller/subsystem/mapping, lazy_load_template), LAZY_TEMPLATE_KEY_NUKIEBASE)
 	var/obj/item/radio/radio = nukie.ears
 	radio.set_frequency(FREQ_SYNDICATE)
 	radio.freqlock = RADIO_FREQENCY_LOCKED
@@ -114,6 +112,7 @@
 	r_hand = /obj/item/tank/internals/plasmaman/belt/full
 	tc = 0
 
+<<<<<<< HEAD
 /datum/outfit/syndicate/support/plasmaman
 	name = "Nuclear Operative Overwatch Agent (Plasmaman)"
 	back = /obj/item/storage/backpack/satchel
@@ -122,6 +121,8 @@
 	glasses = /obj/item/clothing/glasses/overwatch
 	r_hand = /obj/item/tank/internals/plasmaman/belt/full
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/outfit/syndicate/reinforcement/gorlex
 	name = "Syndicate Operative - Gorlex Reinforcement"
 	suit = /obj/item/clothing/suit/armor/vest/alt

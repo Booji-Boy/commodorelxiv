@@ -1,8 +1,8 @@
 /// Checks for RIGHT_CLICK in modifiers and runs resolve_right_click_attack if so. Returns TRUE if normal chain blocked.
-/mob/living/proc/right_click_attack_chain(atom/target, list/modifiers)
-	if (!LAZYACCESS(modifiers, RIGHT_CLICK))
+/mob/living/proc/right_click_attack_chain(atom/target)
+	if (!(istate & ISTATE_SECONDARY))
 		return
-	var/secondary_result = resolve_right_click_attack(target, modifiers)
+	var/secondary_result = resolve_right_click_attack(target)
 
 	if (secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
 		return TRUE
@@ -22,6 +22,16 @@
 	if(!.)
 		return FALSE
 
+<<<<<<< HEAD
+=======
+	Otherwise pretty standard.
+*/
+/mob/living/carbon/human/UnarmedAttack(atom/A, proximity_flag)
+	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED) && stat < SOFT_CRIT)
+		if(src == A)
+			check_self_for_injuries()
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!has_active_hand()) //can't attack without a hand.
 		var/obj/item/bodypart/check_arm = get_active_hand()
 		if(check_arm?.bodypart_disabled)
@@ -31,6 +41,7 @@
 		to_chat(src, span_notice("You look at your arm and sigh."))
 		return FALSE
 
+<<<<<<< HEAD
 	return TRUE
 
 /mob/living/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
@@ -71,16 +82,29 @@
 		return ..()
 
 	return attack_target.attack_hand(src, modifiers)
+=======
+	//This signal is needed to prevent gloves of the north star + hulk.
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return
+	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag)
+
+	if(!right_click_attack_chain(A) && !dna?.species?.spec_unarmedattack(src, A)) //Because species like monkeys dont use attack hand
+		//monkestation edit
+		. = A.attack_hand(src)
+		if(.)
+			animate_interact(A, INTERACT_GENERIC)
+		//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/carbon/human/resolve_right_click_attack(atom/target, list/modifiers)
 	return target.attack_hand_secondary(src, modifiers)
 
 /// Return TRUE to cancel other attack hand effects that respect it. Modifiers is the assoc list for click info such as if it was a right click.
-/atom/proc/attack_hand(mob/user, list/modifiers)
+/atom/proc/attack_hand(mob/user)
 	. = FALSE
 	if(!(interaction_flags_atom & INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND))
 		add_fingerprint(user)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		. = TRUE
 	if(interaction_flags_atom & INTERACT_ATOM_ATTACK_HAND)
 		. = _try_interact(user)
@@ -154,6 +178,20 @@
 	Animals & All Unspecified
 */
 
+<<<<<<< HEAD
+=======
+// If the UnarmedAttack chain is blocked
+#define LIVING_UNARMED_ATTACK_BLOCKED(target_atom) (HAS_TRAIT(src, TRAIT_HANDS_BLOCKED) \
+	|| SEND_SIGNAL(src, COMSIG_LIVING_UNARMED_ATTACK, target_atom, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
+
+/mob/living/UnarmedAttack(atom/attack_target, proximity_flag)
+	if(LIVING_UNARMED_ATTACK_BLOCKED(attack_target))
+		return FALSE
+	if(!right_click_attack_chain(attack_target))
+		resolve_unarmed_attack(attack_target)
+	return TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Called when the unarmed attack hasn't been stopped by the LIVING_UNARMED_ATTACK_BLOCKED macro or the right_click_attack_chain proc.
  * This will call an attack proc that can vary from mob type to mob type on the target.
@@ -243,6 +281,10 @@
 /atom/proc/attack_larva_secondary(mob/user, list/modifiers)
 	return SECONDARY_ATTACK_CALL_NORMAL
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /*
 	Drones
 */
@@ -269,7 +311,7 @@
 	Brain
 */
 
-/mob/living/brain/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)//Stops runtimes due to attack_animal being the default
+/mob/living/brain/UnarmedAttack(atom/attack_target, proximity_flag)//Stops runtimes due to attack_animal being the default
 	return
 
 
@@ -294,12 +336,38 @@
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /*
+<<<<<<< HEAD
+=======
+	Simple animals
+*/
+
+/mob/living/simple_animal/resolve_unarmed_attack(atom/attack_target, list/modifiers)
+	if((isitem(attack_target) || !(istate & ISTATE_HARM)))
+		attack_target.attack_hand(src, modifiers)
+		update_held_items()
+	else
+		return ..()
+
+/mob/living/simple_animal/resolve_right_click_attack(atom/target, list/modifiers)
+	if((isitem(target) || !(istate & ISTATE_HARM)))
+		. = target.attack_hand_secondary(src, modifiers)
+		update_held_items()
+	else
+		return ..()
+
+/*
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	Hostile animals
 */
 
 /mob/living/simple_animal/hostile/resolve_unarmed_attack(atom/attack_target, list/modifiers)
 	GiveTarget(attack_target)
 	INVOKE_ASYNC(src, PROC_REF(AttackingTarget), attack_target)
+<<<<<<< HEAD
+=======
+
+#undef LIVING_UNARMED_ATTACK_BLOCKED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
 	New Players:

@@ -15,8 +15,22 @@
 	to_chat(user, span_danger("You [hitverb] [src]!"))
 
 /mob/living/carbon/alien/adult/attack_hand(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	. = ..()
 	if(.)
+=======
+	if(!..() || !(user.istate & ISTATE_HARM))
+		return
+	if((istate & ISTATE_SECONDARY))
+		if (body_position == STANDING_UP)
+			if (prob(5))
+				Unconscious(40)
+				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+				log_combat(user, src, "pushed")
+				visible_message(span_danger("[user] pushes [src] down!"), \
+								span_userdanger("[user] pushes you down!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
+				to_chat(user, span_danger("You push [src] down!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	var/damage = rand(1, 9)
 	if (prob(90))

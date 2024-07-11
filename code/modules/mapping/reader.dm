@@ -344,6 +344,10 @@
 			sucessful = _dmm_load(x_offset, y_offset, z_offset, crop_map, no_changeturf, x_lower, x_upper, y_lower, y_upper, z_lower, z_upper, place_on_top, new_z)
 
 	// And we are done lads, call it off
+<<<<<<< HEAD
+=======
+	loading = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SSatoms.map_loader_stop(REF(src))
 	loading = FALSE
 
@@ -1068,7 +1072,10 @@ GLOBAL_LIST_EMPTY(map_model_default)
 	return text
 
 /datum/parsed_map/Destroy()
+<<<<<<< HEAD
 	..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SSatoms.map_loader_stop(REF(src)) // Just in case, I don't want to double up here
 	if(turf_blacklist)
 		turf_blacklist.Cut()
@@ -1076,7 +1083,7 @@ GLOBAL_LIST_EMPTY(map_model_default)
 	bounds.Cut()
 	grid_models.Cut()
 	gridSets.Cut()
-	return QDEL_HINT_HARDDEL_NOW
+	return ..()
 
 #undef MAP_DMM
 #undef MAP_TGM

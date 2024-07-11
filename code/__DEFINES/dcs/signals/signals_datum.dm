@@ -43,5 +43,14 @@
 /// From /datum/gas_mixture/proc/react: ()
 #define COMSIG_GASMIX_REACTED "comsig_gasmix_reacted"
 
+<<<<<<< HEAD
+=======
+// Modular computer's file signals. Tells the program datum something is going on.
+/// From /obj/item/modular_computer/proc/store_file: (datum/computer_file/file_source, obj/item/modular_computer/host)
+#define COMSIG_MODULAR_COMPUTER_FILE_STORE "comsig_modular_computer_file_store"
+/// From /obj/item/modular_computer/proc/store_file: ()
+#define COMSIG_MODULAR_COMPUTER_FILE_DELETED "comsig_modular_computer_file_deleted"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///from /datum/bank_account/pay_debt(), after a portion or all the debt has been paid.
 #define COMSIG_BANK_ACCOUNT_DEBT_PAID "bank_account_debt_paid"

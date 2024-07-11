@@ -159,6 +159,74 @@ SUBSYSTEM_DEF(atoms)
 		return
 	initialized = initialized_state[length(initialized_state)][2]
 
+<<<<<<< HEAD
+=======
+	switch(result)
+		if (INITIALIZE_HINT_NORMAL)
+			EMPTY_BLOCK_GUARD // Pass
+		if(INITIALIZE_HINT_LATELOAD)
+			if(arguments[1]) //mapload
+				late_loaders += A
+			else
+				A.LateInitialize()
+		if(INITIALIZE_HINT_QDEL)
+			qdel(A)
+			qdeleted = TRUE
+		else
+			BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
+
+	if(!A) //possible harddel
+		qdeleted = TRUE
+	else if(!(A.flags_1 & INITIALIZED_1))
+		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
+	else
+		SEND_SIGNAL(A, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE)
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_ATOM_AFTER_POST_INIT, A)
+		var/atom/location = A.loc
+		if(location)
+			/// Sends a signal that the new atom `src`, has been created at `loc`
+			SEND_SIGNAL(location, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, A, arguments[1])
+		if(created_atoms && from_template && ispath(the_type, /atom/movable))//we only want to populate the list with movables
+			created_atoms += A.get_all_contents()
+
+	return qdeleted || QDELING(A)
+
+/datum/controller/subsystem/atoms/proc/map_loader_begin(source)
+	set_tracked_initalized(INITIALIZATION_INSSATOMS, source)
+
+/datum/controller/subsystem/atoms/proc/map_loader_stop(source)
+	clear_tracked_initalize(source)
+
+/// Returns the source currently modifying SSatom's init behavior
+/datum/controller/subsystem/atoms/proc/get_initialized_source()
+	var/state_length = length(initialized_state)
+	if(!state_length)
+		return null
+	return initialized_state[state_length][1]
+
+/// Use this to set initialized to prevent error states where the old initialized is overriden, and we end up losing all context
+/// Accepts a state and a source, the most recent state is used, sources exist to prevent overriding old values accidentially
+/datum/controller/subsystem/atoms/proc/set_tracked_initalized(state, source)
+	if(!length(initialized_state))
+		base_initialized = initialized
+	initialized_state += list(list(source, state))
+	initialized = state
+
+/datum/controller/subsystem/atoms/proc/clear_tracked_initalize(source)
+	if(!length(initialized_state))
+		return
+	for(var/i in length(initialized_state) to 1 step -1)
+		if(initialized_state[i][1] == source)
+			initialized_state.Cut(i, i+1)
+			break
+
+	if(!length(initialized_state))
+		initialized = base_initialized
+		base_initialized = INITIALIZATION_INNEW_REGULAR
+		return
+	initialized = initialized_state[length(initialized_state)][2]
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Returns TRUE if anything is currently being initialized
 /datum/controller/subsystem/atoms/proc/initializing_something()
 	return length(initialized_state) > 1

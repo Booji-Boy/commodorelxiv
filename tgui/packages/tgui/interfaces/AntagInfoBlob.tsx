@@ -7,6 +7,11 @@ import {
   Section,
   Stack,
 } from '../components';
+<<<<<<< HEAD
+=======
+import { Objective } from './common/Objectives';
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 import { Objective } from './common/Objectives';
 

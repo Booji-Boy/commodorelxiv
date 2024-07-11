@@ -62,7 +62,11 @@ export class Blink extends Component {
           visibility: this.state.hidden ? 'hidden' : 'visible',
         }}
       >
+<<<<<<< HEAD
         {this.props.children}
+=======
+        {props.children}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </span>
     );
   }

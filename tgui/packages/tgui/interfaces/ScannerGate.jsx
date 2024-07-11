@@ -1,5 +1,10 @@
 import { useBackend } from '../backend';
+<<<<<<< HEAD
 import { Box, Button, LabeledList, Section } from '../components';
+=======
+import { Box, Button, LabeledList, NumberInput, Section } from '../components';
+import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 import { InterfaceLockNoticeBox } from './common/InterfaceLockNoticeBox';
 
@@ -110,6 +115,10 @@ const SCANNER_GATE_ROUTES = {
     title: 'Scanner Mode: Nutrition',
     component: () => ScannerGateNutrition,
   },
+  Nanites: {
+    title: 'Scanner Mode: Nanites',
+    component: () => ScannerGateNanites,
+  },
 };
 
 const ScannerGateControl = (props) => {
@@ -164,6 +173,10 @@ const ScannerGateOff = (props) => {
         <Button
           content="Nutrition"
           onClick={() => act('set_mode', { new_mode: 'Nutrition' })}
+        />
+        <Button
+          content="Nanites"
+          onClick={() => act('set_mode', { new_mode: 'Nanites' })}
         />
       </Box>
     </>
@@ -304,6 +317,41 @@ const ScannerGateNutrition = (props) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+const ScannerGateNanites = (props) => {
+  const { act, data } = useBackend();
+  const { reverse, nanite_cloud } = data;
+  return (
+    <>
+      <Box mb={2}>
+        Trigger if the person scanned {reverse ? 'does not have' : 'has'} nanite
+        cloud {nanite_cloud}.
+      </Box>
+      <Box mb={2}>
+        <LabeledList>
+          <LabeledList.Item label="Cloud ID">
+            <NumberInput
+              value={nanite_cloud}
+              width="65px"
+              minValue={1}
+              maxValue={100}
+              stepPixelSize={2}
+              onChange={(e, value) =>
+                act('set_nanite_cloud', {
+                  new_cloud: value,
+                })
+              }
+            />
+          </LabeledList.Item>
+        </LabeledList>
+      </Box>
+      <ScannerGateMode />
+    </>
+  );
+};
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 const ScannerGateMode = (props) => {
   const { act, data } = useBackend();
   const { reverse } = data;

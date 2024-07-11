@@ -61,6 +61,7 @@
 	new build_material(get_turf(src), number_of_mats)
 
 /obj/structure/lattice/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+<<<<<<< HEAD
 	if(the_rcd.mode == RCD_TURF)
 		return list("delay" = 0, "cost" = the_rcd.rcd_design_path == /obj/structure/lattice/catwalk ? 2 : 1)
 	return FALSE
@@ -76,6 +77,19 @@
 				return TRUE
 		if(design_structure == /obj/structure/lattice/catwalk)
 			var/turf/turf = loc
+=======
+	if(the_rcd.mode == RCD_FLOORWALL)
+		return list("mode" = RCD_FLOORWALL, "delay" = 0, "cost" = 1)
+	if(the_rcd.mode == RCD_CATWALK)
+		return list("mode" = RCD_CATWALK, "delay" = 0, "cost" = 2)
+
+/obj/structure/lattice/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
+	if(passed_mode == RCD_FLOORWALL)
+		to_chat(user, span_notice("You build a floor."))
+		var/turf/T = src.loc
+		if(isgroundlessturf(T))
+			T.PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			qdel(src)
 			new /obj/structure/lattice/catwalk(turf)
 			return TRUE
@@ -96,7 +110,11 @@
 	smoothing_groups = SMOOTH_GROUP_CATWALK + SMOOTH_GROUP_LATTICE + SMOOTH_GROUP_OPEN_FLOOR
 	canSmoothWith = SMOOTH_GROUP_CATWALK
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+<<<<<<< HEAD
 	give_turf_traits = list(TRAIT_TURF_IGNORE_SLOWDOWN, TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED, TRAIT_IMMERSE_STOPPED, TRAIT_HYPERSPACE_STOPPED)
+=======
+	give_turf_traits = list(TRAIT_TURF_IGNORE_SLOWDOWN, TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED, TRAIT_HYPERSPACE_STOPPED)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/lattice/catwalk/Initialize(mapload)
 	. = ..()
@@ -151,7 +169,11 @@
 	canSmoothWith = SMOOTH_GROUP_LATTICE
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 	resistance_flags = FIRE_PROOF | LAVA_PROOF
+<<<<<<< HEAD
 	give_turf_traits = list(TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED, TRAIT_IMMERSE_STOPPED, TRAIT_HYPERSPACE_STOPPED)
+=======
+	give_turf_traits = list(TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED, TRAIT_HYPERSPACE_STOPPED)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/lattice/lava/deconstruction_hints(mob/user)
 	return span_notice("The rods look like they could be <b>cut</b>, but the <i>heat treatment will shatter off</i>. There's space for a <i>tile</i>.")

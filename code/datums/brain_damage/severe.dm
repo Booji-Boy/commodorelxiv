@@ -35,8 +35,13 @@
 
 /datum/brain_trauma/severe/aphasia/on_lose()
 	if(!QDELING(owner))
+<<<<<<< HEAD
 		owner.remove_blocked_language(subtypesof(/datum/language), LANGUAGE_APHASIA)
 		owner.remove_language(/datum/language/aphasia, source = LANGUAGE_APHASIA)
+=======
+		owner.remove_blocked_language(subtypesof(/datum/language/), LANGUAGE_APHASIA)
+		owner.remove_language(/datum/language/aphasia, TRUE, TRUE, LANGUAGE_APHASIA)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	..()
 
@@ -145,6 +150,8 @@
 	var/drowsy = !!owner.has_status_effect(/datum/status_effect/drowsiness)
 	if(owner.move_intent == MOVE_INTENT_RUN)
 		sleep_chance += 2
+	else if(owner.m_intent == MOVE_INTENT_SPRINT)
+		sleep_chance += 5
 	if(drowsy)
 		sleep_chance += 3
 
@@ -206,7 +213,7 @@
 		if(2)
 			if(high_stress)
 				to_chat(owner, span_warning("You feel weak and scared! If only you weren't alone..."))
-				owner.adjustStaminaLoss(50)
+				owner.stamina.adjust(-50)
 			else
 				to_chat(owner, span_warning("You can't stop shaking..."))
 
@@ -419,7 +426,11 @@
 	desc = "Patient seems to oxidise things around them at random, and seem to believe they are aiding a creature in climbing a mountin."
 	scan_desc = "C_)L(#_I_##M;B"
 	gain_text = span_warning("The rusted climb shall finish at the peak")
+<<<<<<< HEAD
 	lose_text = span_notice("The rusted climb? What's that? An odd dream to be sure.")
+=======
+	lose_text = span_notice("The rusted climb? Whats that? An odd dream to be sure.")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	random_gain = FALSE
 
 /datum/brain_trauma/severe/rusting/on_life(seconds_per_tick, times_fired)
@@ -431,6 +442,7 @@
 	if(SPT_PROB(50, seconds_per_tick))
 		to_chat(owner, span_notice("You feel eldritch energies pulse from your body!"))
 		tile.rust_heretic_act()
+<<<<<<< HEAD
 
 /datum/brain_trauma/severe/kleptomaniac
 	name = "Kleptomania"
@@ -494,3 +506,5 @@
 	owner.setDir(pre_dir)
 	// Gives you a small buffer - not to avoid spam, but to make it more subtle / less predictable
 	COOLDOWN_START(src, steal_cd, 8 SECONDS)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

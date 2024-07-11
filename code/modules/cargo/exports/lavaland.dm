@@ -33,7 +33,10 @@
 	export_types = list(
 		/obj/item/dragons_blood,
 		/obj/item/guardian_creator/miner,
+<<<<<<< HEAD
 		/obj/item/drake_remains,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/lava_staff,
 		/obj/item/melee/ghost_sword,
 		/obj/item/prisoncube,

@@ -253,7 +253,11 @@
 /obj/item/food/spiderling
 	name = "spiderling"
 	desc = "It's slightly twitching in your hand. Ew..."
+<<<<<<< HEAD
 	icon = 'icons/mob/simple/arachnoid.dmi'
+=======
+	icon = 'icons/mob/simple/animal.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "spiderling_dead"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/protein = 2,
@@ -327,8 +331,12 @@
 	w_class = WEIGHT_CLASS_BULKY
 	tastes = list("cherry" = 1, "crepe" = 1)
 	foodtypes = GRAIN | FRUIT | SUGAR
+<<<<<<< HEAD
 	food_flags = FOOD_FINGER_FOOD
 	crafting_complexity = FOOD_COMPLEXITY_5
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SLIDE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/branrequests
 	name = "Bran Requests Cereal"

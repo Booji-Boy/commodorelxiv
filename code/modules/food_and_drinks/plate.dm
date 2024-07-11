@@ -78,7 +78,11 @@
 	removed_item.vis_flags &= ~VIS_INHERIT_PLANE
 	vis_contents -= removed_item
 	UnregisterSignal(removed_item, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING))
+<<<<<<< HEAD
 	// Reset item offsets
+=======
+	// Resettt
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	removed_item.pixel_x = removed_item.pixel_w
 	removed_item.pixel_y = removed_item.pixel_z
 	removed_item.pixel_w = 0

@@ -1,7 +1,11 @@
 import { toFixed } from 'common/math';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   Flex,
@@ -633,7 +637,11 @@ const FunForYouTab = (props) => {
 export const Secrets = (props) => {
   const { act, data } = useBackend();
   const { is_debugger, is_funmin } = data;
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(2);
+=======
+  const [tabIndex, setTabIndex] = useLocalState('tab-index', 2);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const TabComponent = TAB2NAME[tabIndex - 1].component();
 
   return (

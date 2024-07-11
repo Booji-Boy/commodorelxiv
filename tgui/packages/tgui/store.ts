@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+<<<<<<< HEAD
 import { flow } from 'common/fp';
 import {
   applyMiddleware,
@@ -15,6 +16,16 @@ import {
 } from 'common/redux';
 
 import { assetMiddleware } from './assets';
+=======
+import {
+  Middleware,
+  Reducer,
+  Store,
+  applyMiddleware,
+  combineReducers,
+  createStore,
+} from 'common/redux';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { backendMiddleware, backendReducer } from './backend';
 import { debugMiddleware, debugReducer, relayMiddleware } from './debug';
 import { createLogger } from './logging';

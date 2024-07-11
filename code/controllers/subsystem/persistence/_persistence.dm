@@ -20,6 +20,7 @@ SUBSYSTEM_DEF(persistence)
 	var/list/blocked_maps = list()
 	var/list/saved_trophies = list()
 	var/list/picture_logging_information = list()
+<<<<<<< HEAD
 
 	/// A json_database linking to data/photo_frames.json.
 	/// Schema is persistence_id => array of photo names.
@@ -45,6 +46,10 @@ SUBSYSTEM_DEF(persistence)
 
 	var/list/broken_piggy_banks
 
+=======
+	var/list/obj/structure/sign/picture_frame/photo_frames
+	var/list/obj/item/storage/photo_album/photo_albums
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/rounds_since_engine_exploded = 0
 	var/delam_highscore = 0
 	var/tram_hits_this_round = 0
@@ -70,6 +75,7 @@ SUBSYSTEM_DEF(persistence)
 	save_prisoner_tattoos()
 	collect_trophies()
 	collect_maps()
+<<<<<<< HEAD
 	save_randomized_recipes()
 	save_scars()
 	save_custom_outfits()
@@ -78,6 +84,18 @@ SUBSYSTEM_DEF(persistence)
 		for(var/datum/transport_controller/linear/tram/transport as anything in SStransport.transports_by_type[TRANSPORT_TYPE_TRAM])
 			save_tram_history(transport.specific_transport_id)
 		save_tram_counter()
+=======
+	save_photo_persistence() //THIS IS PERSISTENCE, NOT THE LOGGING PORTION.
+	save_randomized_recipes()
+	save_scars()
+	save_custom_outfits()
+	save_modular_persistence()
+	save_delamination_counter()
+	if(SStramprocess.can_fire)
+		save_tram_counter()
+	if(GLOB.interviews)
+		save_keys(GLOB.interviews.approved_ckeys)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Loads up Poly's speech buffer.
 /datum/controller/subsystem/persistence/proc/load_poly()
@@ -124,5 +142,16 @@ SUBSYSTEM_DEF(persistence)
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(file_data))
 
+<<<<<<< HEAD
+=======
+/datum/controller/subsystem/persistence/proc/save_keys(list/approved_ckeys)
+	var/json_file = file("data/approved_keys.json")
+	var/list/keys = list()
+	if(fexists(json_file))
+		fdel(json_file)
+	keys = json_encode(approved_ckeys)
+	WRITE_FILE(json_file, keys)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef FILE_RECENT_MAPS
 #undef KEEP_ROUNDS_MAP

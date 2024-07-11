@@ -39,6 +39,13 @@
 #define COMSIG_ATOM_SET_LIGHT_FLAGS "atom_set_light_flags"
 ///Called right after the atom changes the value of light_flags to a different one, from base of [/atom/proc/set_light_flags]: (old_flags)
 #define COMSIG_ATOM_UPDATE_LIGHT_FLAGS "atom_update_light_flags"
+<<<<<<< HEAD
 
 ///Called when an atom has a light template applied to it. Frombase of [/datum/light_template/proc/mirror_onto]: ()
 #define COMSIG_ATOM_LIGHT_TEMPLATE_MIRRORED "atom_light_template_mirrored"
+=======
+///Called right before the atom changes the value of light_falloff_curve to a different one, from base [atom/proc/set_light_cirve]: (new_curve)
+#define COMSIG_ATOM_SET_LIGHT_CURVE "atom_set_light_curve"
+///Called right after the atom changes the value of light_falloff_curve to a different one, from base of [/atom/proc/set_light_curve]: (old_curve)
+#define COMSIG_ATOM_UPDATE_LIGHT_CURVE "atom_update_light_curve"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

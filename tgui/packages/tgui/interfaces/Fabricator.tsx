@@ -1,5 +1,23 @@
+<<<<<<< HEAD
+=======
+import { useBackend } from '../backend';
+import {
+  Stack,
+  Section,
+  Icon,
+  Dimmer,
+  Box,
+  Tooltip,
+  Button,
+} from '../components';
+import { Window } from '../layouts';
+import { MaterialCostSequence } from './Fabrication/MaterialCostSequence';
+import { MaterialAccessBar } from './Fabrication/MaterialAccessBar';
+import { FabricatorData, Design, MaterialMap } from './Fabrication/Types';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { classes } from 'common/react';
 
+<<<<<<< HEAD
 import { useBackend } from '../backend';
 import {
   Box,
@@ -19,6 +37,11 @@ import { Design, FabricatorData, MaterialMap } from './Fabrication/Types';
 export const Fabricator = (props) => {
   const { act, data } = useBackend<FabricatorData>();
   const { fabName, onHold, designs, busy, SHEET_MATERIAL_AMOUNT } = data;
+=======
+export const Fabricator = (props) => {
+  const { act, data } = useBackend<FabricatorData>();
+  const { fabName, onHold, designs, busy } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   // Reduce the material count array to a map of actually available materials.
   const availableMaterials: MaterialMap = {};
@@ -36,6 +59,7 @@ export const Fabricator = (props) => {
               busy={!!busy}
               designs={Object.values(designs)}
               availableMaterials={availableMaterials}
+<<<<<<< HEAD
               buildRecipeElement={(design, availableMaterials) => (
                 <Recipe
                   design={design}
@@ -43,6 +67,13 @@ export const Fabricator = (props) => {
                   SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
                 />
               )}
+=======
+              buildRecipeElement={(
+                design,
+                availableMaterials,
+                onPrintDesign,
+              ) => <Recipe design={design} available={availableMaterials} />}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             />
           </Stack.Item>
           <Stack.Item>
@@ -75,8 +106,13 @@ type PrintButtonProps = {
 };
 
 const PrintButton = (props: PrintButtonProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<FabricatorData>();
   const { design, quantity, available, SHEET_MATERIAL_AMOUNT } = props;
+=======
+  const { act, data } = useBackend<FabricatorData>();
+  const { design, quantity, available } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const canPrint = !Object.entries(design.cost).some(
     ([material, amount]) =>
@@ -116,11 +152,17 @@ type CustomPrintProps = {
 const CustomPrint = (props: CustomPrintProps) => {
   const { act } = useBackend();
   const { design, available } = props;
+<<<<<<< HEAD
   let maxMult = Object.entries(design.cost).reduce(
     (accumulator: number, [material, required]) => {
       return Math.min(accumulator, (available[material] || 0) / required);
     },
     Infinity,
+=======
+  const canPrint = !Object.entries(design.cost).some(
+    ([material, amount]) =>
+      !available[material] || amount > (available[material] ?? 0),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
   maxMult = Math.min(Math.floor(maxMult), 50);
   const canPrint = maxMult > 0;
@@ -147,6 +189,7 @@ const CustomPrint = (props: CustomPrintProps) => {
   );
 };
 
+<<<<<<< HEAD
 type RecipeProps = {
   design: Design;
   available: MaterialMap;
@@ -156,6 +199,11 @@ type RecipeProps = {
 const Recipe = (props: RecipeProps) => {
   const { act } = useBackend<FabricatorData>();
   const { design, available, SHEET_MATERIAL_AMOUNT } = props;
+=======
+const Recipe = (props: { design: Design; available: MaterialMap }) => {
+  const { act, data } = useBackend<FabricatorData>();
+  const { design, available } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const canPrint = !Object.entries(design.cost).some(
     ([material, amount]) =>
@@ -190,9 +238,13 @@ const Recipe = (props: RecipeProps) => {
             'FabricatorRecipe__Title',
             !canPrint && 'FabricatorRecipe__Title--disabled',
           ])}
+<<<<<<< HEAD
           onClick={() =>
             canPrint && act('build', { ref: design.id, amount: 1 })
           }
+=======
+          onClick={() => act('build', { ref: design.id, amount: 1 })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <div className="FabricatorRecipe__Icon">
             <Box

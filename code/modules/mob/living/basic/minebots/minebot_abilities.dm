@@ -49,6 +49,7 @@
 
 	to_chat(owner, span_notice("You toggle your meson vision [(owner.sight & SEE_TURFS) ? "on" : "off"]."))
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/missile_launcher
 	name = "Launch Missile"
 	button_icon = 'icons/obj/weapons/guns/projectiles.dmi'
@@ -188,3 +189,5 @@
 	if(FACTION_NEUTRAL in stepped_mob.faction)
 		return FALSE
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

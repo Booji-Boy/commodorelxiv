@@ -20,7 +20,11 @@
 	pull_force = MOVE_FORCE_OVERPOWERING
 	mob_size = MOB_SIZE_HUGE
 	sentience_type = SENTIENCE_BOSS
+<<<<<<< HEAD
 	mob_biotypes = MOB_ORGANIC|MOB_SPECIAL
+=======
+	mob_biotypes = MOB_ORGANIC
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Previous segment in the chain, we hold onto this purely to keep track of how long we currently are and to attach new growth to the back
 	var/mob/living/basic/heretic_summon/armsy/back
 	///How many arms do we have to eat to expand?

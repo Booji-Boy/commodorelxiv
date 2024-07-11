@@ -5,7 +5,11 @@
 	icon_state = "fishbook"
 	starting_content = "Lot of fish stuff" //book wrappers could use cleaning so this is not necessary
 
+<<<<<<< HEAD
 /obj/item/book/manual/fish_catalog/ui_interact(mob/user, datum/tgui/ui)
+=======
+/obj/item/book/fish_catalog/ui_interact(mob/user, datum/tgui/ui)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "FishCatalog", name)

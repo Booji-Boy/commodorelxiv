@@ -47,7 +47,11 @@ type Gas = {
 };
 
 const GasSearchBar = (props: {
+<<<<<<< HEAD
   title: ReactNode;
+=======
+  title: InfernoNode;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   onChange: (inputValue: string) => void;
   activeInput: boolean;
   setActiveInput: (toggle: boolean) => void;
@@ -82,6 +86,13 @@ const GasHandbook = (props) => {
   const [activeReactionId, setActiveReactionId] = useLocalState(
     'activeReactionId',
     '',
+<<<<<<< HEAD
+=======
+  );
+  const [gasActiveInput, setGasActiveInput] = useLocalState(
+    'gasActiveInput',
+    false,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
   const [gasActiveInput, setGasActiveInput] = useState(false);
   const relevantGas = gasInfo.find((gas) => gas.id === activeGasId);
@@ -132,6 +143,13 @@ const ReactionHandbook = (props) => {
   const [activeReactionId, setActiveReactionId] = useLocalState(
     'activeReactionId',
     '',
+<<<<<<< HEAD
+=======
+  );
+  const [reactionActiveInput, setReactionActiveInput] = useLocalState(
+    'reactionActiveInput',
+    false,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
   const [reactionActiveInput, setReactionActiveInput] = useState(false);
   const relevantReaction = reactionInfo?.find(
@@ -176,7 +194,11 @@ const ReactionHandbook = (props) => {
                     <Tooltip content={factor.tooltip} position="top">
                       <Flex>
                         <Flex.Item
+<<<<<<< HEAD
                           style={{ borderBottom: 'dotted 2px' }}
+=======
+                          style={{ 'border-bottom': 'dotted 2px' }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                           shrink
                         >
                           {factor.factor_name + ':'}

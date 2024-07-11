@@ -3,7 +3,11 @@
 	guardian_type = GUARDIAN_GASEOUS
 	melee_damage_lower = 10
 	melee_damage_upper = 10
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 0)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	range = 7
 	playstyle_string = span_holoparasite("As a <b>gaseous</b> type, you have only light damage resistance, but you can expel gas in an area. In addition, your punches cause sparks, and you make your summoner inflammable.")
 	creator_name = "Gaseous"
@@ -132,8 +136,13 @@
 		owner.particles.position = list(-1, 8, 0)
 		owner.particles.fadein = 5
 		owner.particles.height = 200
+<<<<<<< HEAD
 	var/datum/gas/chosen_gas = active_gas // Casting it so that we can access gas vars in initial, it's still a typepath
 	owner.particles.color = initial(chosen_gas.primary_color)
+=======
+	//var/datum/gas/chosen_gas = active_gas // Casting it so that we can access gas vars in initial, it's still a typepath
+	owner.particles.color = COLOR_BLUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (!had_gas)
 		RegisterSignal(owner, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 

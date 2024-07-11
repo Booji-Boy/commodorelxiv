@@ -114,7 +114,7 @@
 		ui.open()
 
 /obj/item/canvas/attackby(obj/item/I, mob/living/user, params)
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		ui_interact(user)
 	else
 		return ..()
@@ -194,7 +194,11 @@
 				return FALSE
 			//I'd have this done inside the signal, but that'd have to be asynced,
 			//while we want the UI to be updated after the color is chosen, not before.
+<<<<<<< HEAD
 			var/chosen_color = input(user, "Pick new color", painting_implement, params["old_color"]) as color|null
+=======
+			var/chosen_color = tgui_color_picker(user, "Pick new color", painting_implement, params["old_color"])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(!chosen_color || IS_DEAD_OR_INCAP(user) || !user.is_holding(painting_implement))
 				return FALSE
 			SEND_SIGNAL(painting_implement, COMSIG_PAINTING_TOOL_PALETTE_COLOR_CHANGED, chosen_color, params["color_index"])

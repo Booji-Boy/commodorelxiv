@@ -79,7 +79,7 @@
 				/obj/item/seeds/wheat/rice = 3,
 				/obj/item/seeds/tea = 3,
 				/obj/item/seeds/tobacco = 3,
-				/obj/item/seeds/tower = 3,
+				/obj/item/seeds/tree = 3,
 				/obj/item/seeds/wheat = 3,
 			),
 		),
@@ -94,6 +94,8 @@
 		/obj/item/seeds/reishi = 2,
 		/obj/item/seeds/cannabis = 3,
 		/obj/item/seeds/starthistle = 2,
+		/obj/item/seeds/cocaleaf = 2, // MONKESTATION ADDITION
+		/obj/item/seeds/coconut = 3, // MONKESTATION ADDITION
 		/obj/item/seeds/random = 2,
 	)
 

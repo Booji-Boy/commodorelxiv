@@ -1,6 +1,10 @@
 import { binaryInsertWith, sortBy } from 'common/collections';
+<<<<<<< HEAD
 import { useState } from 'react';
 
+=======
+import { useLocalState } from '../../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -33,9 +37,15 @@ export const MultiNameInput = (props: {
   handleUpdateName: (nameType: string, value: string) => void;
   names: Record<string, string>;
 }) => {
+<<<<<<< HEAD
   const [currentlyEditingName, setCurrentlyEditingName] = useState<
     string | null
   >(null);
+=======
+  const [currentlyEditingName, setCurrentlyEditingName] = useLocalState<
+    string | null
+  >('currentlyEditingName', null);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <ServerPreferencesFetcher
@@ -160,9 +170,15 @@ export const NameInput = (props: {
   name: string;
   openMultiNameInput: () => void;
 }) => {
+<<<<<<< HEAD
   const [lastNameBeforeEdit, setLastNameBeforeEdit] = useState<string | null>(
     null,
   );
+=======
+  const [lastNameBeforeEdit, setLastNameBeforeEdit] = useLocalState<
+    string | null
+  >('lastNameBeforeEdit', null);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const editing = lastNameBeforeEdit === props.name;
 
   const updateName = (e, value) => {
@@ -185,7 +201,11 @@ export const NameInput = (props: {
           <Icon
             style={{
               color: 'rgba(255, 255, 255, 0.5)',
+<<<<<<< HEAD
               fontSize: '17px',
+=======
+              'font-size': '17px',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }}
             name="edit"
           />
@@ -251,7 +271,11 @@ export const NameInput = (props: {
                     style={{
                       position: 'relative',
                       left: '1px',
+<<<<<<< HEAD
                       minWidth: '0px',
+=======
+                      'min-width': '0px',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                   />
                 </Button>

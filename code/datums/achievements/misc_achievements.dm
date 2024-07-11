@@ -18,7 +18,11 @@
 	name = "Time waster"
 	desc = "Speak no evil, hear no evil, see just errors"
 	database_id = MEDAL_TIMEWASTE
+<<<<<<< HEAD
 	icon_state = "timewaste"
+=======
+	icon = "timewaste"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/award/achievement/misc/round_and_full
 	name = "Round and Full"
@@ -30,7 +34,11 @@
 	name = "The Best Driver"
 	desc = "100 honks later"
 	database_id = MEDAL_THANKSALOT
+<<<<<<< HEAD
 	icon_state = "clownthanks"
+=======
+	icon = "clownthanks"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/award/achievement/misc/getting_an_upgrade
 	name = "Getting an upgrade"
@@ -81,7 +89,11 @@
 	name = "Long shift"
 	desc = "Well, that didn't take long."
 	database_id = MEDAL_LONGSHIFT
+<<<<<<< HEAD
 	icon_state = "longshift"
+=======
+	icon = "longshift"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/award/achievement/misc/lookoutsir
 	name = "Look Out, Sir!"
@@ -99,7 +111,11 @@
 	name = "Ascension"
 	desc = "Caedite eos. Novit enim Dominus qui sunt eius."
 	database_id = MEDAL_ASCENSION
+<<<<<<< HEAD
 	icon_state = "ascension"
+=======
+	icon = "ascension"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/award/achievement/misc/ash_ascension
 	name = "Nightwatcher's Eyes"
@@ -155,6 +171,24 @@
 	database_id = MEDAL_ARCHMAGE
 	icon_state = "archmage"
 
+/datum/award/achievement/misc/moon_ascension
+	name = "The Last Act"
+	desc = "You managed to become the ringleader and slay the lie."
+	database_id = MEDAL_MOON_ASCENSION
+	icon = "moonascend"
+
+/datum/award/achievement/misc/grand_ritual_finale
+	name = "Archmage"
+	desc = "Made a big impression on the station with your phenomenal cosmic power."
+	database_id = MEDAL_ARCHMAGE
+	icon = "archmage"
+
+/datum/award/achievement/misc/knock_ascension
+	name = "Secrets behind the Spider Door"
+	desc = "You managed to open a gate into the mansus."
+	database_id = MEDAL_KNOCK_ASCENSION
+	icon = "knockascend"
+
 /datum/award/achievement/misc/toolbox_soul
 	name = "SOUL'd Out"
 	desc = "My eternal soul was destroyed to make a toolbox look funny and all I got was this achievement..."
@@ -207,6 +241,7 @@
 	name = "The Picture of Health"
 	desc = "Don't be such a baby, it's just a heart attack. You've bounced back from worse!"
 	database_id = MEDAL_HEALTHY
+<<<<<<< HEAD
 	icon_state = "picofhealth"
 
 /datum/award/achievement/misc/gods_wrath
@@ -220,11 +255,15 @@
 	desc = "...And the earth opened its mouth and swallowed them and their station- all the HOP's men and all their possessions."
 	database_id = MEDAL_EARTHQUAKE_VICTIM
 	icon_state = "earthquake"
+=======
+	icon = "picofhealth"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/award/achievement/misc/debt_extinguished
 	name = "Outdebted"
 	desc = "I've paid my dues, shift after shift... I've done my sentence but commited no griff..."
 	database_id = MEDAL_DEBT_EXTINGUISHED
+<<<<<<< HEAD
 	icon_state = "outdebted"
 
 /datum/award/achievement/misc/sisyphus
@@ -232,3 +271,7 @@
 	desc = "Successfully carry a boulder from Lavaland all the way to Centcom, without ever dropping it. We must imagine you're happy to unlock this."
 	database_id = MEDAL_SISYPHUS
 	icon_state = "sisyphus"
+=======
+	icon = "outdebted"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

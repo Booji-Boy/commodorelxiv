@@ -63,12 +63,15 @@
 	. += mutable_appearance(icon, "[collar_icon_state][stat_tag]collar")
 	. += mutable_appearance(icon, "[collar_icon_state][stat_tag]tag")
 
+<<<<<<< HEAD
 /mob/living/basic/pet/update_icon_state()
 	if(cult_icon_state && (FACTION_CULT in faction))
 		icon_state = cult_icon_state
 		icon_living = cult_icon_state
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/pet/gib()
 	remove_collar(drop_location(), update_visuals = FALSE)
 	return ..()

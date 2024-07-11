@@ -44,7 +44,11 @@
 	if(isitem(parent))
 		RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 		RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+<<<<<<< HEAD
 		RegisterSignals(parent, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_ATOM), PROC_REF(on_attack))
+=======
+		RegisterSignals(parent, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_OBJ), PROC_REF(on_attack))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(ismob(parent))
 		register_antimagic_signals(parent)
 	else
@@ -56,7 +60,11 @@
 	src.drain_antimagic = drain_antimagic
 	src.expiration = expiration
 
+<<<<<<< HEAD
 /datum/component/anti_magic/Destroy(force)
+=======
+/datum/component/anti_magic/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	drain_antimagic = null
 	expiration = null
 	return ..()
@@ -84,8 +92,14 @@
 		if(!(magic_spell.spell_requirements & SPELL_REQUIRES_NO_ANTIMAGIC))
 			continue
 
+<<<<<<< HEAD
 		if(!(antimagic_flags & magic_spell.antimagic_flags))
 			continue
+=======
+		user.mob_light(range = 2, color = antimagic_color, duration = 5 SECONDS)
+		user.add_overlay(antimagic_effect)
+		addtimer(CALLBACK(user, TYPE_PROC_REF(/atom, cut_overlay), antimagic_effect), 50)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		to_chat(equipper, span_warning("[parent] is interfering with your ability to cast magic!"))
 		alert_caster_on_equip = FALSE

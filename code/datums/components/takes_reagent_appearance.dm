@@ -43,7 +43,11 @@
 
 	src.base_container_type = base_container_type || parent.type
 
+<<<<<<< HEAD
 /datum/component/takes_reagent_appearance/Destroy(force)
+=======
+/datum/component/takes_reagent_appearance/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	on_icon_changed = null
 	on_icon_reset = null
 	return ..()

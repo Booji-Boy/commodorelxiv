@@ -926,6 +926,7 @@
 		"[antagonist_name] acts just a bit too friendly with [protagonist_name], moments away from converting them into a blood brother.",
 		"[protagonist_name] is brought into [antagonist_name]'s life of crime and espionage.",
 	)
+<<<<<<< HEAD
 
 /// Saw someone play Russian Roulette.
 /datum/memory/witnessed_gods_wrath
@@ -972,3 +973,5 @@
 		"is filled with regret",
 		"winces in despair"
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

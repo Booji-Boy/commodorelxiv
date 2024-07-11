@@ -142,7 +142,7 @@
 			if(isalienadult(living_user) || issilicon(living_user))
 				context[SCREENTIP_CONTEXT_LMB] = "Open"
 				return CONTEXTUAL_SCREENTIP_SET
-			if(!living_user.combat_mode)
+			if(!(living_user.istate & ISTATE_HARM))
 				if(ishuman(living_user))
 					context[SCREENTIP_CONTEXT_LMB] = "Knock"
 					return CONTEXTUAL_SCREENTIP_SET
@@ -488,7 +488,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		user.visible_message(span_notice("[user] knocks on [src]."), \
 			span_notice("You knock on [src]."))
 		playsound(src, knock_sound, 50, TRUE)
@@ -897,9 +897,15 @@
 
 /obj/structure/firelock_frame/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if(the_rcd.mode == RCD_DECONSTRUCT)
+<<<<<<< HEAD
 		return list("delay" = 5 SECONDS, "cost" = 16)
 	else if((constructionStep == CONSTRUCTION_NO_CIRCUIT) && (the_rcd.upgrade & RCD_UPGRADE_SIMPLE_CIRCUITS))
 		return list("delay" = 2 SECONDS, "cost" = 1)
+=======
+		return list("mode" = RCD_DECONSTRUCT, "delay" = 5 SECONDS, "cost" = 16)
+	else if((constructionStep == CONSTRUCTION_NO_CIRCUIT) && (the_rcd.upgrade & RCD_UPGRADE_SIMPLE_CIRCUITS))
+		return list("mode" = RCD_UPGRADE_SIMPLE_CIRCUITS, "delay" = 2 SECONDS, "cost" = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/firelock_frame/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)

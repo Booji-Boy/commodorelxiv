@@ -84,6 +84,7 @@
 
 /datum/action/cooldown/mob_cooldown/command_spiders/communication_spiders/format_message(mob/living/user, message)
 	return span_spiderscout("<b>Report from [user]:</b> [message]")
+<<<<<<< HEAD
 
 /**
  * Sends a smaller message to all currently living spiders.
@@ -97,3 +98,5 @@
 /datum/action/cooldown/mob_cooldown/command_spiders/warning_spiders/format_message(mob/living/user, message)
 	return span_spiderbreacher("<b>Warning from [user]:</b> [message]")
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

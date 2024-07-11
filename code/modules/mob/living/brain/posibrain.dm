@@ -43,6 +43,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 ///Notify ghosts that the posibrain is up for grabs
 /obj/item/mmi/posibrain/proc/ping_ghosts(msg, newlymade)
 	if(newlymade || GLOB.posibrain_notify_cooldown <= world.time)
+<<<<<<< HEAD
 		notify_ghosts(
 			"[name] [msg] in [get_area(src)]! [ask_role ? "Personality requested: \[[ask_role]\]" : ""]",
 			source = src,
@@ -53,6 +54,9 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 			notify_flags = (GHOST_NOTIFY_IGNORE_MAPLOAD),
 			notify_volume = 75,
 		)
+=======
+		notify_ghosts("[name] [msg] in [get_area(src)]! [ask_role ? "Personality requested: \[[ask_role]\]" : ""]", ghost_sound = !newlymade ? 'sound/effects/ghost2.ogg':null, notify_volume = 75, source = src, action = NOTIFY_PLAY, flashwindow = FALSE, ignore_key = POLL_IGNORE_POSIBRAIN, notify_suiciders = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!newlymade)
 			GLOB.posibrain_notify_cooldown = world.time + ask_delay
 

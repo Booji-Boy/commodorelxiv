@@ -26,7 +26,11 @@
 	tracking_holder = source
 	RegisterSignal(tracking_holder, COMSIG_MOB_RESET_PERSPECTIVE, PROC_REF(perspective_reset))
 
+<<<<<<< HEAD
 /datum/trackable/Destroy(force)
+=======
+/datum/trackable/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	tracking_holder = null
 	tracked_mob = null
 	STOP_PROCESSING(SSprocessing, src)
@@ -172,7 +176,11 @@
  *  tracked_mob_name - The person being tracked.
  */
 /datum/trackable/proc/track_name(mob/living/tracker, tracked_mob_name)
+<<<<<<< HEAD
 	if(!tracker || tracker.stat == DEAD)
+=======
+	if(!istext(tracked_mob_name) || QDELETED(tracker) || tracker.stat == DEAD)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	find_trackable_mobs() //this is in case the tracked mob is newly/no-longer in camera field of view.
@@ -192,7 +200,11 @@
  *  tracked - The person being tracked.
  */
 /datum/trackable/proc/track_mob(mob/living/tracker, mob/living/tracked)
+<<<<<<< HEAD
 	if(!tracker || tracker.stat == DEAD)
+=======
+	if(QDELETED(tracker) || QDELETED(tracked) || tracker.stat == DEAD)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	// Need to make sure the tracked mob is in our list
 	track_name(tracker, tracked.name)

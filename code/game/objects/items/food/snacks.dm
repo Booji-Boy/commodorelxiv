@@ -43,9 +43,30 @@
 
 /obj/item/food/candy/bronx/proc/on_consume(mob/living/eater)
 	if(ishuman(eater))
-		var/mob/living/carbon/human/carl = eater
-		var/datum/disease/disease = new /datum/disease/parasite()
-		carl.ForceContractDisease(disease, make_copy = FALSE, del_on_fail = TRUE)
+		var/datum/disease/advanced/parasite/disease = new
+		var/list/anti = list(
+			ANTIGEN_BLOOD	= 1,
+			ANTIGEN_COMMON	= 1,
+			ANTIGEN_RARE	= 0,
+			ANTIGEN_ALIEN	= 0,
+			)
+		var/list/bad = list(
+			EFFECT_DANGER_HELPFUL	= 1,
+			EFFECT_DANGER_FLAVOR	= 4,
+			EFFECT_DANGER_ANNOYING	= 4,
+			EFFECT_DANGER_HINDRANCE	= 0,
+			EFFECT_DANGER_HARMFUL	= 0,
+			EFFECT_DANGER_DEADLY	= 0,
+			)
+
+		disease.makerandom(list(30,55),list(0,50),anti,bad,null)
+
+		disease.log += "<br />[ROUND_TIME()] Infected [key_name(eater)]"
+		if(!length(eater.diseases))
+			eater.diseases = list()
+		eater.diseases += disease
+
+		disease.AddToGoggleView(eater)
 
 /obj/item/food/candy/bronx/examine(mob/user)
 	. = ..()
@@ -211,7 +232,7 @@
 	trash_type = /obj/item/trash/energybar
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
-		/datum/reagent/consumable/liquidelectricity/enriched = 3,
+		/datum/reagent/consumable/liquidelectricity = 3,
 	)
 	tastes = list("pure electricity" = 3, "fitness" = 2)
 	foodtypes = TOXIC
@@ -537,7 +558,11 @@ GLOBAL_LIST_INIT(safe_peanut_types, populate_safe_peanut_types())
 	foodtypes = JUNKFOOD | SUGAR | NUTS
 	junkiness = 25
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	grind_results = list(/datum/reagent/consumable/nutriment/fat/oil = 3, /datum/reagent/consumable/caramel = 2)
+=======
+	grind_results = list(/datum/reagent/consumable/cornoil = 3, /datum/reagent/consumable/caramel = 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/sticko
 	name = "\improper Sticko Classic"
@@ -625,7 +650,11 @@ GLOBAL_LIST_INIT(safe_peanut_types, populate_safe_peanut_types())
 	icon_state = "shok_roks_candy"
 	trash_type = /obj/item/trash/shok_roks
 	food_reagents = list(
+<<<<<<< HEAD
 		/datum/reagent/consumable/liquidelectricity/enriched = 2,
+=======
+		/datum/reagent/consumable/liquidelectricity = 2,  //Monkestation edit: no enriched
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/reagent/consumable/sugar = 3
 	)
 	tastes = list("sugar" = 1, "lightning" = 1)

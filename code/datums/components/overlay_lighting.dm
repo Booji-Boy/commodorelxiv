@@ -78,8 +78,13 @@
 		return COMPONENT_INCOMPATIBLE
 
 	var/atom/movable/movable_parent = parent
+<<<<<<< HEAD
 	if(movable_parent.light_system != OVERLAY_LIGHT && movable_parent.light_system != OVERLAY_LIGHT_DIRECTIONAL && movable_parent.light_system != OVERLAY_LIGHT_BEAM)
 		stack_trace("[type] added to [parent], with [movable_parent.light_system] value for the light_system var. Use [OVERLAY_LIGHT], [OVERLAY_LIGHT_DIRECTIONAL] or [OVERLAY_LIGHT_BEAM] instead.")
+=======
+	if(movable_parent.light_system != OVERLAY_LIGHT && movable_parent.light_system != OVERLAY_LIGHT_DIRECTIONAL && movable_parent.light_system != MOVABLE_LIGHT_BEAM)
+		stack_trace("[type] added to [parent], with [movable_parent.light_system] value for the light_system var. Use [OVERLAY_LIGHT], [OVERLAY_LIGHT_DIRECTIONAL] or [MOVABLE_LIGHT_BEAM] instead.")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return COMPONENT_INCOMPATIBLE
 
 	. = ..()
@@ -99,8 +104,8 @@
 	if(is_beam)
 		beam = TRUE
 	if(!isnull(_range))
-		movable_parent.set_light_range(_range)
-	set_range(parent, movable_parent.light_range)
+		movable_parent.set_light_range(_range, _range)
+	set_range(parent, movable_parent.light_inner_range, movable_parent.light_outer_range)
 	if(!isnull(_power))
 		movable_parent.set_light_power(_power)
 	set_power(parent, movable_parent.light_power)
@@ -170,6 +175,7 @@
 /datum/component/overlay_lighting/proc/clean_old_turfs()
 	for(var/turf/lit_turf as anything in affected_turfs)
 		lit_turf.dynamic_lumcount -= lum_power
+		SSdemo.mark_turf(lit_turf) //Monkestation Edit: REPLAYS
 	affected_turfs = null
 
 
@@ -180,6 +186,7 @@
 	. = list()
 	for(var/turf/lit_turf in view(lumcount_range, get_turf(current_holder)))
 		lit_turf.dynamic_lumcount += lum_power
+		SSdemo.mark_turf(lit_turf) //Monkestation Edit: REPLAYS
 		. += lit_turf
 	if(length(.))
 		affected_turfs = .
@@ -350,9 +357,9 @@
 
 
 ///Changes the range which the light reaches. 0 means no light, 6 is the maximum value.
-/datum/component/overlay_lighting/proc/set_range(atom/source, old_range)
+/datum/component/overlay_lighting/proc/set_range(atom/source, old_inner_range, old_outer_range)
 	SIGNAL_HANDLER
-	var/new_range = source.light_range
+	var/new_range = source.light_outer_range
 	if(range == new_range)
 		return
 	if(new_range == 0)

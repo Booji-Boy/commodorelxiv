@@ -87,8 +87,14 @@ export class BodyZoneSelector extends Component<
           position: 'relative',
         }}
       >
+<<<<<<< HEAD
         <Image
           src={resolveAsset(`body_zones.base_${theme}.png`)}
+=======
+        <Box
+          as="img"
+          src={resolveAsset('body_zones.base.png')}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           onClick={() => {
             const onClick = this.props.onClick;
             if (onClick && this.state.hoverZone) {
@@ -113,6 +119,10 @@ export class BodyZoneSelector extends Component<
             });
           }}
           style={{
+<<<<<<< HEAD
+=======
+            '-ms-interpolation-mode': 'nearest-neighbor',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             position: 'absolute',
             width: `${32 * scale}px`,
             height: `${32 * scale}px`,
@@ -123,7 +133,12 @@ export class BodyZoneSelector extends Component<
           <Image
             src={resolveAsset(`body_zones.${selectedZone}.png`)}
             style={{
+<<<<<<< HEAD
               pointerEvents: 'none',
+=======
+              '-ms-interpolation-mode': 'nearest-neighbor',
+              'pointer-events': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               position: 'absolute',
               width: `${32 * scale}px`,
               height: `${32 * scale}px`,
@@ -135,8 +150,14 @@ export class BodyZoneSelector extends Component<
           <Image
             src={resolveAsset(`body_zones.${hoverZone}.png`)}
             style={{
+<<<<<<< HEAD
               opacity: '0.5',
               pointerEvents: 'none',
+=======
+              '-ms-interpolation-mode': 'nearest-neighbor',
+              opacity: 0.5,
+              'pointer-events': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               position: 'absolute',
               width: `${32 * scale}px`,
               height: `${32 * scale}px`,

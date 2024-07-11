@@ -109,16 +109,37 @@
 	for(var/datum/quirk/target_quirk as anything in target.quirks)
 		LAZYADD(quirks, new target_quirk.type)
 
+<<<<<<< HEAD
 	voice = target.voice
 	voice_filter = target.voice_filter
 
 /// Make the targeted human look like this
+=======
+	hair_gradient_style = LAZYLISTDUPLICATE(target.grad_style)
+	hair_gradient_colours = LAZYLISTDUPLICATE(target.grad_color)
+
+//monkestation removal start
+/*	voice = target.voice
+	voice_filter = target.voice_filter*/
+//monkestation removal end
+
+/// Make the targetted human look like this
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/human_appearance_profile/proc/apply_to(mob/living/carbon/human/target)
 	target.real_name = name
 	target.age = age
 	target.physique = physique
+<<<<<<< HEAD
 	target.voice = voice
 	target.voice_filter = voice_filter
+=======
+	target.grad_style = LAZYLISTDUPLICATE(hair_gradient_style)
+	target.grad_color = LAZYLISTDUPLICATE(hair_gradient_colours)
+//monkestation removal start
+	/*target.voice = voice
+	target.voice_filter = voice_filter*/
+//monkestation removal end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for(var/datum/quirk/target_quirk as anything in quirks)
 		target_quirk.add_to_holder(target)
@@ -141,7 +162,13 @@
 	plane = GAME_PLANE
 	alpha = 0
 	color = COLOR_PALE_GREEN
+<<<<<<< HEAD
 	light_range = 2
+=======
+//	light_range = 2 //monkestation removal
+	light_inner_range = 1 //monkestation edit
+	light_outer_range = 2 //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_PALE_GREEN
 	resistance_flags = parent_type::resistance_flags | SHUTTLE_CRUSH_PROOF
 	/// Who are we reviving?

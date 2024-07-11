@@ -26,6 +26,9 @@
 	if(!air_gases)
 		return
 
+	if(liquids && liquids.liquid_group && !liquids.fire_state)
+		liquids.liquid_group.ignite_turf(src)
+
 	. = air_gases[/datum/gas/oxygen]
 	var/oxy = . ? .[MOLES] : 0
 	if (oxy < 0.5)
@@ -74,7 +77,11 @@
 	plane = ABOVE_GAME_PLANE
 	blend_mode = BLEND_ADD
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = LIGHT_RANGE_FIRE
+=======
+	light_outer_range = LIGHT_RANGE_FIRE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_color = LIGHT_COLOR_FIRE
 
@@ -152,6 +159,8 @@
 		for (var/reaction in SSair.hotspot_reactions)
 			volume += cached_results[reaction] * FIRE_GROWTH_RATE
 		temperature = reference.temperature
+
+	location.pollute_turf_list(list(/datum/pollutant/smoke = 15, /datum/pollutant/carbon_air_pollution = 5), POLLUTION_ACTIVE_EMITTER_CAP) //SKYRAT EDIT ADDITION
 
 	// Handles the burning of atoms.
 	if(cold_fire)

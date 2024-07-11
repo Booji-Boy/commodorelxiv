@@ -52,7 +52,11 @@
 	QDEL_NULL(soundloop)
 	return ..()
 
+<<<<<<< HEAD
 // Preset HUB
+=======
+//Preset HUB
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/telecomms/hub/preset
 	id = "Hub"

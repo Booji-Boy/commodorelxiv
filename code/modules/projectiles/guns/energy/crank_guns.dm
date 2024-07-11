@@ -10,11 +10,17 @@
 	can_bayonet = TRUE
 	knife_x_offset = 22
 	knife_y_offset = 11
+<<<<<<< HEAD
+=======
+	//monke edit: fully charges per crank because it was really confusing and unintuitive
+	//monke edit: increased cooldown time to compensate for increased charge
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/laser/musket/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/two_handed, require_twohands = TRUE, force_wielded = 10)
 	AddComponent( \
+<<<<<<< HEAD
 		/datum/component/crank_recharge, \
 		charging_cell = get_cell(), \
 		charge_amount = STANDARD_CELL_CHARGE * 0.5, \
@@ -26,6 +32,15 @@
 /obj/item/gun/energy/laser/musket/update_icon_state()
 	inhand_icon_state = "[initial(inhand_icon_state)][(get_charge_ratio() == 4 ? "charged" : "")]"
 	return ..()
+=======
+		/datum/component/gun_crank, \
+		charging_cell = get_cell(), \
+		charge_amount = 1000, \
+		cooldown_time = 3 SECONDS, \
+		charge_sound = 'sound/weapons/laser_crank.ogg', \
+		charge_sound_cooldown_time = 1.8 SECONDS, \
+		)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/laser/musket/prime
 	name = "heroic laser musket"
@@ -34,20 +49,43 @@
 	inhand_icon_state = "musket_prime"
 	worn_icon_state = "las_musket_prime"
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/musket/prime)
+<<<<<<< HEAD
 
 
 /obj/item/gun/energy/disabler/smoothbore
 	name = "smoothbore disabler"
 	desc = "A hand-crafted disabler, using a hard knock on an energy cell to fire the stunner laser. A lack of proper focusing means it has no accuracy whatsoever."
+=======
+	//monke edit: cooldown time reduced to 2 for the prime version
+/obj/item/gun/energy/laser/musket/prime/Initialize(mapload)
+	. = ..()
+	AddComponent( \
+		/datum/component/gun_crank, \
+		charging_cell = get_cell(), \
+		charge_amount = 1000, \
+		cooldown_time = 2 SECONDS, \
+		charge_sound = 'sound/weapons/laser_crank.ogg', \
+		charge_sound_cooldown_time = 1.8 SECONDS, \
+		)
+
+/obj/item/gun/energy/disabler/smoothbore
+	name = "smoothbore disabler"
+	desc = "A hand-crafted disabler, using a hard knock on an energy cell to fire the stunner laser. A lack of proper focusing means it has little accuracy."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "smoothbore"
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/smoothbore)
 	shaded_charge = 1
 	charge_sections = 1
+<<<<<<< HEAD
 	spread = 22.5
+=======
+	spread = 10 //monke edit: changed spread to 10 instead of 22.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/disabler/smoothbore/Initialize(mapload)
 	. = ..()
 	AddComponent( \
+<<<<<<< HEAD
 		/datum/component/crank_recharge, \
 		charging_cell = get_cell(), \
 		charge_amount = STANDARD_CELL_CHARGE, \
@@ -55,14 +93,27 @@
 		charge_sound = 'sound/weapons/laser_crank.ogg', \
 		charge_sound_cooldown_time = 1.8 SECONDS, \
 	)
+=======
+		/datum/component/gun_crank, \
+		charging_cell = get_cell(), \
+		charge_amount = 1000, \
+		cooldown_time = 2 SECONDS, \
+		charge_sound = 'sound/weapons/laser_crank.ogg', \
+		charge_sound_cooldown_time = 1.8 SECONDS, \
+		)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/disabler/smoothbore/add_seclight_point()
 	AddComponent(/datum/component/seclite_attachable, \
 		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
 		light_overlay = "flight", \
 		overlay_x = 18, \
+<<<<<<< HEAD
 		overlay_y = 12, \
 	) //i swear 1812 being the overlay numbers was accidental
+=======
+		overlay_y = 12) //i swear 1812 being the overlay numbers was accidental
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/disabler/smoothbore/prime //much stronger than the other prime variants, so dont just put this in as maint loot
 	name = "elite smoothbore disabler"
@@ -72,6 +123,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/smoothbore/prime)
 	charge_sections = 2
 	spread = 0 //could be like 5, but having just very tiny spread kinda feels like bullshit
+<<<<<<< HEAD
 
 //Inferno and Cryo Pistols
 
@@ -125,3 +177,5 @@
 		ammunition by manually spinning the weapon's nanite canister."
 	icon_state = "cryopistol"
 	ammo_type = list(/obj/item/ammo_casing/energy/nanite/cryo)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

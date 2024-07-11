@@ -156,6 +156,18 @@
 
 			infinite_recursion += 1
 
+<<<<<<< HEAD
+=======
+	else
+		// Organs are usually stored in nullspace
+		if(isorgan(item_to_retrieve))
+			var/obj/item/organ/organ = item_to_retrieve
+			if(organ.owner)
+				// If this code ever runs I will be happy
+				log_combat(caster, organ.owner, "magically removed [organ.name] from", addition="COMBAT MODE: [uppertext((caster.istate & ISTATE_HARM))]")
+				organ.Remove(organ.owner)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!item_to_retrieve)
 		return
 
@@ -170,10 +182,20 @@
 	SEND_SIGNAL(item_to_retrieve, COMSIG_MAGIC_RECALL, caster, item_to_retrieve)
 	playsound(get_turf(item_to_retrieve), 'sound/magic/summonitems_generic.ogg', 50, TRUE)
 
+<<<<<<< HEAD
+=======
+/* monkestation removal: get rid of the abductor batong recall
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/spell/summonitem/abductor
 	name =  "Baton Recall"
 	desc = "Activating this will trigger your baton's emergency translocation protocol, \
 		recalling it to your hand. Takes a long time for the translocation crystals to reset after use."
+<<<<<<< HEAD
+=======
+	button_icon = 'icons/obj/abductor.dmi'
+	button_icon_state = "wonderprodStun"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sound = 'sound/effects/phasein.ogg'
 
 	school = SCHOOL_UNSET
@@ -198,3 +220,7 @@
 /datum/action/cooldown/spell/summonitem/abductor/try_unlink_item(mob/living/caster)
 	to_chat(caster, span_warning("You can't unlink [marked_item]'s translocation crystals."))
 	return FALSE
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

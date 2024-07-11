@@ -34,6 +34,7 @@
 
 /// Attempts to get a ghost to play the personality
 /datum/brain_trauma/severe/split_personality/proc/get_ghost()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(
 		question = "Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice(poll_role)]?",
 		check_jobban = ROLE_PAI,
@@ -48,6 +49,23 @@
 /// Ghost poll has concluded
 /datum/brain_trauma/severe/split_personality/proc/schism(mob/dead/observer/ghost)
 	if(isnull(ghost))
+=======
+	set waitfor = FALSE
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		question = "Do you want to play as [owner.real_name]'s split personality?",
+		check_jobban = ROLE_PAI,
+		poll_time = 7.5 SECONDS,
+		ignore_category = POLL_IGNORE_SPLITPERSONALITY,
+		pic_source = owner,
+		role_name_text = "split personality"
+	)
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/C = pick(candidates)
+		stranger_backseat.key = C.key
+		stranger_backseat.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
+		message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
+	else
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		qdel(src)
 		return
 
@@ -215,9 +233,16 @@
 
 /datum/brain_trauma/severe/split_personality/brainwashing/get_ghost()
 	set waitfor = FALSE
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger("[owner.real_name]'s")] brainwashed mind?", poll_time = 7.5 SECONDS, checked_target = stranger_backseat, alert_pic = owner, role_name_text = "brainwashed mind")
 	if(chosen_one)
 		stranger_backseat.key = chosen_one.key
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob("Do you want to play as [owner.real_name]'s brainwashed mind?", poll_time = 7.5 SECONDS, target_mob = stranger_backseat, pic_source = owner, role_name_text = "brainwashed mind")
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/C = pick(candidates)
+		stranger_backseat.key = C.key
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		qdel(src)
 

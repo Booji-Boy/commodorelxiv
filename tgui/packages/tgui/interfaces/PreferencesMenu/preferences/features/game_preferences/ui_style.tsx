@@ -1,5 +1,14 @@
 import { classes } from 'common/react';
+<<<<<<< HEAD
 
+=======
+import {
+  FeatureChoiced,
+  FeatureChoicedServerData,
+  FeatureValueProps,
+  sortChoices,
+} from '../base';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Box, Dropdown, Stack } from '../../../../../components';
 import {
   FeatureChoiced,
@@ -44,8 +53,13 @@ const UIStyleInput = (
 
   return (
     <Dropdown
+      buttons
       selected={value}
       clipSelectedText={false}
+<<<<<<< HEAD
+=======
+      displayText={value ? choices[value] : null}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       onSelected={props.handleSetValue}
       width="100%"
       options={sortChoices(Object.entries(choices)).map(

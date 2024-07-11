@@ -50,7 +50,10 @@
 	RegisterSignal(server, COMSIG_BITRUNNER_QSRV_SEVER, PROC_REF(on_sever_connection))
 	RegisterSignal(server, COMSIG_BITRUNNER_SHUTDOWN_ALERT, PROC_REF(on_shutting_down))
 	RegisterSignal(server, COMSIG_BITRUNNER_THREAT_CREATED, PROC_REF(on_threat_created))
+<<<<<<< HEAD
 	RegisterSignal(server, COMSIG_BITRUNNER_STATION_SPAWN, PROC_REF(on_station_spawn))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #ifndef UNIT_TESTS
 	RegisterSignal(avatar.mind, COMSIG_MIND_TRANSFERRED, PROC_REF(on_mind_transfer))
 #endif
@@ -60,7 +63,11 @@
 		var/datum/action/avatar_domain_info/action = new(help_datum)
 		action.Grant(avatar)
 
+<<<<<<< HEAD
 	avatar.playsound_local(avatar, 'sound/magic/blink.ogg', 25, TRUE)
+=======
+	avatar.playsound_local(avatar, "sound/magic/blink.ogg", 25, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	avatar.set_static_vision(2 SECONDS)
 	avatar.set_temp_blindness(1 SECONDS)
 
@@ -83,12 +90,16 @@
 	 * - Click / Stand on the ladder
 	 */
 	RegisterSignals(parent, list(COMSIG_BITRUNNER_ALERT_SEVER, COMSIG_BITRUNNER_CACHE_SEVER, COMSIG_BITRUNNER_LADDER_SEVER), PROC_REF(on_safe_disconnect))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_LIVING_PILL_CONSUMED, PROC_REF(disconnect_if_red_pill))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_sever_connection))
 	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_linked_damage))
 
 /datum/component/avatar_connection/UnregisterFromParent()
 	REMOVE_TRAIT(parent, TRAIT_TEMPORARY_BODY, REF(src))
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(
 		COMSIG_BITRUNNER_ALERT_SEVER,
 		COMSIG_BITRUNNER_CACHE_SEVER,
@@ -97,6 +108,13 @@
 		COMSIG_LIVING_PILL_CONSUMED,
 		COMSIG_MOB_APPLY_DAMAGE,
 	))
+=======
+	UnregisterSignal(parent, COMSIG_BITRUNNER_ALERT_SEVER)
+	UnregisterSignal(parent, COMSIG_BITRUNNER_CACHE_SEVER)
+	UnregisterSignal(parent, COMSIG_BITRUNNER_LADDER_SEVER)
+	UnregisterSignal(parent, COMSIG_LIVING_DEATH)
+	UnregisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Disconnects the avatar and returns the mind to the old_body.
 /datum/component/avatar_connection/proc/full_avatar_disconnect(cause_damage = FALSE, datum/source)
@@ -124,7 +142,11 @@
 	avatar.throw_alert(
 		ALERT_BITRUNNER_COMPLETED,
 		/atom/movable/screen/alert/bitrunning/qserver_domain_complete,
+<<<<<<< HEAD
 		new_master = entered,
+=======
+		new_master = entered
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /// Transfers damage from the avatar to the old_body
@@ -166,7 +188,11 @@
 	var/atom/movable/screen/alert/bitrunning/alert = avatar.throw_alert(
 		ALERT_BITRUNNER_CROWBAR,
 		/atom/movable/screen/alert/bitrunning,
+<<<<<<< HEAD
 		new_master = intruder,
+=======
+		new_master = intruder
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	alert.name = "Netpod Breached"
 	alert.desc = "Someone is prying open the netpod. Find an exit."
@@ -179,17 +205,24 @@
 	var/atom/movable/screen/alert/bitrunning/alert = avatar.throw_alert(
 		ALERT_BITRUNNER_INTEGRITY,
 		/atom/movable/screen/alert/bitrunning,
+<<<<<<< HEAD
 		new_master = source,
+=======
+		new_master = source
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	alert.name = "Integrity Compromised"
 	alert.desc = "The netpod is damaged. Find an exit."
 
+<<<<<<< HEAD
 //if your bitrunning avatar somehow manages to acquire and consume a red pill, they will be ejected from the Matrix
 /datum/component/avatar_connection/proc/disconnect_if_red_pill(datum/source, obj/item/reagent_containers/pill/pill, mob/feeder)
 	SIGNAL_HANDLER
 	if(pill.icon_state == "pill4")
 		full_avatar_disconnect()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Triggers when a safe disconnect is called
 /datum/component/avatar_connection/proc/on_safe_disconnect(datum/source)
 	SIGNAL_HANDLER
@@ -216,6 +249,7 @@
 	alert.name = "Domain Rebooting"
 	alert.desc = "The domain is rebooting. Find an exit."
 
+<<<<<<< HEAD
 /// Triggers whenever an antag steps onto an exit turf and the server is emagged
 /datum/component/avatar_connection/proc/on_station_spawn(datum/source)
 	SIGNAL_HANDLER
@@ -230,6 +264,8 @@
 	alert.name = "Security Breach"
 	alert.desc = "A hostile entity is breaching the safehouse. Find an exit."
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Server has spawned a ghost role threat
 /datum/component/avatar_connection/proc/on_threat_created(datum/source)
 	SIGNAL_HANDLER

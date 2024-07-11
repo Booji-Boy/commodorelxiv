@@ -13,7 +13,7 @@
 	req_admin_notify = 1
 	minimal_player_age = 7
 	exp_required_type_department = EXP_TYPE_SCIENCE
-	exp_requirements = 180
+	exp_requirements = 900
 	exp_required_type = EXP_TYPE_CREW
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "RESEARCH_DIRECTOR"
@@ -76,7 +76,12 @@
 	messenger = /obj/item/storage/backpack/messenger/science
 
 	chameleon_extras = /obj/item/stamp/head/rd
+<<<<<<< HEAD
 	skillchips = list(/obj/item/skillchip/research_director, /obj/item/skillchip/job/roboticist)
+=======
+	skillchips = list(/obj/item/skillchip/job/research_director)
+	implants = list(/obj/item/implant/mindshield)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/outfit/job/rd/mod
 	name = "Research Director (MODsuit)"

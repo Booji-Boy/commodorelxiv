@@ -1,8 +1,13 @@
 import { createSearch, toTitleCase } from 'common/string';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
 import { Button, Flex, Image, Input, Section, Stack } from '../components';
+=======
+import { useBackend, useLocalState } from '../backend';
+import { Box, Button, Input, Stack, Flex, Section } from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 
 type Ores = {
@@ -24,11 +29,18 @@ type Data = {
 export const OreContainer = (props) => {
   const { act, data } = useBackend<Data>();
   const { ores = [] } = data;
+<<<<<<< HEAD
   const [searchItem, setSearchItem] = useState('');
   const search = createSearch(searchItem, (ore: Ores) => ore.name);
   const ores_filtered =
     searchItem.length > 0 ? ores.filter((ore) => search(ore)) : ores;
 
+=======
+  const [searchItem, setSearchItem] = useLocalState('searchItem', '');
+  const search = createSearch(searchItem, (ore: Ores) => ore.name);
+  const ores_filtered =
+    searchItem.length > 0 ? ores.filter((ore) => search(ore)) : ores;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window title="Ore Container" width={550} height={400}>
       <Window.Content>
@@ -36,7 +48,11 @@ export const OreContainer = (props) => {
           <Stack.Item>
             <Section>
               <Input
+<<<<<<< HEAD
                 autoFocus
+=======
+                autofocus
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 position="relative"
                 mt={0.5}
                 bottom="5%"
@@ -99,13 +115,23 @@ const RetrieveIcon = (props) => {
   }
 
   return (
+<<<<<<< HEAD
     <Image
+=======
+    <Box
+      as="img"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       m={1}
       src={`data:image/jpeg;base64,${icon_display.icon}`}
       height="64px"
       width="64px"
       style={{
+<<<<<<< HEAD
         verticalAlign: 'middle',
+=======
+        '-ms-interpolation-mode': 'nearest-neighbor',
+        'vertical-align': 'middle',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }}
     />
   );

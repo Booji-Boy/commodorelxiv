@@ -43,8 +43,7 @@
 		obj.forceMove(loc)
 
 /obj/structure/filingcabinet/attackby(obj/item/P, mob/living/user, params)
-	var/list/modifiers = params2list(params)
-	if(P.tool_behaviour == TOOL_WRENCH && LAZYACCESS(modifiers, RIGHT_CLICK))
+	if(P.tool_behaviour == TOOL_WRENCH && (user.istate & ISTATE_SECONDARY))
 		to_chat(user, span_notice("You begin to [anchored ? "unwrench" : "wrench"] [src]."))
 		if(P.use_tool(src, user, 20, volume=50))
 			to_chat(user, span_notice("You successfully [anchored ? "unwrench" : "wrench"] [src]."))
@@ -56,7 +55,7 @@
 		icon_state = "[initial(icon_state)]-open"
 		sleep(0.5 SECONDS)
 		icon_state = initial(icon_state)
-	else if(!user.combat_mode)
+	else if(!(user.istate & ISTATE_HARM))
 		to_chat(user, span_warning("You can't put [P] in [src]!"))
 	else
 		return ..()
@@ -191,9 +190,15 @@ GLOBAL_LIST_EMPTY(employmentCabinets)
 /obj/structure/filingcabinet/employment/proc/fillCurrent()
 	//This proc fills the cabinet with the current crew.
 	for(var/datum/record/locked/target in GLOB.manifest.locked)
+<<<<<<< HEAD
 		var/datum/mind/filed_mind = target.mind_ref.resolve()
 		if(filed_mind && ishuman(filed_mind.current))
 			addFile(filed_mind.current)
+=======
+		var/datum/mind/mind_ref = target.mind_ref?.resolve() // monkestation edit: weakreffed mind ref
+		if(ishuman(mind_ref?.current))
+			addFile(mind_ref.current)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/filingcabinet/employment/proc/addFile(mob/living/carbon/human/employee)
 	new /obj/item/paper/employment_contract(src, employee.mind.name)

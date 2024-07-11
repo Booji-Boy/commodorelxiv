@@ -16,6 +16,14 @@
 
 #define WOUND_CRITICAL_BLUNT_DISMEMBER_BONUS 15
 
+<<<<<<< HEAD
+=======
+// Applied into wounds when they're scanned with the wound analyzer, halves time to treat them manually.
+#define TRAIT_WOUND_SCANNED "wound_scanned"
+// I dunno lol
+#define ANALYZER_TRAIT "analyzer_trait"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/wound
 	/// What it's named
 	var/name = "Wound"
@@ -180,17 +188,24 @@
  * * attack_direction: For bloodsplatters, if relevant
  * * wound_source: The source of the wound, such as a weapon.
  */
+<<<<<<< HEAD
 /datum/wound/proc/apply_wound(obj/item/bodypart/L, silent = FALSE, datum/wound/old_wound = null, smited = FALSE, attack_direction = null, wound_source = "Unknown", replacing = FALSE)
+=======
+/datum/wound/proc/apply_wound(obj/item/bodypart/L, silent = FALSE, datum/wound/old_wound = null, smited = FALSE, attack_direction = null, wound_source = "Unknown")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if (!can_be_applied_to(L, old_wound))
 		qdel(src)
 		return FALSE
+<<<<<<< HEAD
 
 	if(isitem(wound_source))
 		var/obj/item/wound_item = wound_source
 		src.wound_source = wound_item.name
 	else
 		src.wound_source = wound_source
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	set_victim(L.owner)
 	set_limb(L, replacing)
@@ -215,13 +230,21 @@
 		var/msg = span_danger("[victim]'s [limb.plaintext_zone] [occur_text]!")
 		var/vis_dist = COMBAT_MESSAGE_RANGE
 
+<<<<<<< HEAD
 		if(severity > WOUND_SEVERITY_SEVERE)
+=======
+		if(severity > WOUND_SEVERITY_MODERATE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			msg = "<b>[msg]</b>"
 			vis_dist = DEFAULT_MESSAGE_RANGE
 
 		victim.visible_message(msg, span_userdanger("Your [limb.plaintext_zone] [occur_text]!"), vision_distance = vis_dist)
 		if(sound_effect)
+<<<<<<< HEAD
 			playsound(L.owner, sound_effect, sound_volume + (20 * severity), TRUE, falloff_exponent = SOUND_FALLOFF_EXPONENT + 2,  ignore_walls = FALSE, falloff_distance = 0)
+=======
+			playsound(L.owner, sound_effect, sound_volume + (20 * severity), TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	wound_injury(old_wound, attack_direction = attack_direction)
 	if(!demoted)
@@ -285,7 +308,11 @@
 	. = limb
 	if(limb) // if we're nulling limb, we're basically detaching from it, so we should remove ourselves in that case
 		UnregisterSignal(limb, COMSIG_QDELETING)
+<<<<<<< HEAD
 		UnregisterSignal(limb, list(COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_UNGAUZED))
+=======
+		UnregisterSignal(limb, list(COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_GAUZE_DESTROYED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		LAZYREMOVE(limb.wounds, src)
 		limb.update_wounds(replaced)
 		if (disabling)
@@ -297,7 +324,11 @@
 
 	if (limb)
 		RegisterSignal(limb, COMSIG_QDELETING, PROC_REF(source_died))
+<<<<<<< HEAD
 		RegisterSignals(limb, list(COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_UNGAUZED), PROC_REF(gauze_state_changed))
+=======
+		RegisterSignals(limb, list(COMSIG_BODYPART_GAUZED, COMSIG_BODYPART_GAUZE_DESTROYED), PROC_REF(gauze_state_changed))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if (disabling)
 			limb.add_traits(list(TRAIT_PARALYSIS, TRAIT_DISABLED_BY_WOUND), REF(src))
 
@@ -305,7 +336,11 @@
 			start_limping_if_we_should() // the status effect already handles removing itself
 			add_or_remove_actionspeed_mod()
 
+<<<<<<< HEAD
 		update_inefficiencies(replaced)
+=======
+		update_inefficiencies()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/wound/proc/add_or_remove_actionspeed_mod()
 	update_actionspeed_modifier()
@@ -366,7 +401,11 @@
 	already_scarred = TRUE
 	var/obj/item/bodypart/cached_limb = limb // remove_wound() nulls limb so we have to track it locally
 	remove_wound(replaced=TRUE)
+<<<<<<< HEAD
 	new_wound.apply_wound(cached_limb, old_wound = src, smited = smited, attack_direction = attack_direction, wound_source = wound_source, replacing = TRUE)
+=======
+	new_wound.apply_wound(cached_limb, old_wound = src, smited = smited, attack_direction = attack_direction, wound_source = wound_source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = new_wound
 	qdel(src)
 
@@ -421,7 +460,11 @@
 		update_inefficiencies()
 
 /// Updates our limping and interaction penalties in accordance with our gauze.
+<<<<<<< HEAD
 /datum/wound/proc/update_inefficiencies(replaced_or_replacing = FALSE)
+=======
+/datum/wound/proc/update_inefficiencies()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (wound_flags & ACCEPTS_GAUZE)
 		if(limb.body_zone in list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 			if(limb.current_gauze?.splint_factor)
@@ -430,16 +473,26 @@
 			else
 				limp_slowdown = initial(limp_slowdown)
 				limp_chance = initial(limp_chance)
+<<<<<<< HEAD
 		else if(limb.body_zone in GLOB.arm_zones)
+=======
+		else if(limb.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(limb.current_gauze?.splint_factor)
 				set_interaction_efficiency_penalty(1 + ((get_effective_actionspeed_modifier()) * limb.current_gauze.splint_factor))
 			else
 				set_interaction_efficiency_penalty(initial(interaction_efficiency_penalty))
 
 		if(initial(disabling))
+<<<<<<< HEAD
 			set_disabling(isnull(limb.current_gauze))
 
 		limb.update_wounds(replaced_or_replacing)
+=======
+			set_disabling(!limb.current_gauze)
+
+		limb.update_wounds()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	start_limping_if_we_should()
 
@@ -472,7 +525,7 @@
 
 	if(isliving(user))
 		var/mob/living/tendee = user
-		if(I.force && tendee.combat_mode)
+		if(I.force && (tendee.istate & ISTATE_HARM))
 			return FALSE
 
 	if(!item_can_treat(I, user))

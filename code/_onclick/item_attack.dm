@@ -8,8 +8,20 @@
  * * [/obj/item/proc/afterattack]. The return value does not matter.
  */
 /obj/item/proc/melee_attack_chain(mob/user, atom/target, params)
+<<<<<<< HEAD
 	var/list/modifiers = params2list(params)
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
+=======
+	var/is_right_clicking = (user.istate & ISTATE_SECONDARY)
+
+	//Monkestation edit: REPLAYS
+	SSdemo.mark_dirty(src)
+	if(isturf(target))
+		SSdemo.mark_turf(target)
+	else
+		SSdemo.mark_dirty(target)
+	//Monkestation edit: REPLAYS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/item_interact_result = target.base_item_interaction(user, src, modifiers)
 	if(item_interact_result & ITEM_INTERACT_SUCCESS)
@@ -72,6 +84,7 @@
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 	interact(user)
+	SSdemo.mark_dirty(src) //Monkestation Edit: Replays
 
 /// Called when the item is in the active hand, and right-clicked. Intended for alternate or opposite functions, such as lowering reagent transfer amount. At the moment, there is no verb or hotkey.
 /obj/item/proc/attack_self_secondary(mob/user, modifiers)
@@ -168,10 +181,36 @@
 
 	return NONE
 
+/mob/living/proc/can_perform_surgery(mob/living/user, params)
+	for(var/datum/surgery/operations as anything in surgeries)
+		if(user.istate & ISTATE_HARM)
+			break
+		if(IS_IN_INVALID_SURGICAL_POSITION(src, operations))
+			continue
+		if(!(operations.surgery_flags & SURGERY_SELF_OPERABLE) && (user == src))
+			continue
+		var/list/modifiers = params2list(params)
+		if(operations.next_step(user, modifiers))
+			return TRUE
+	return FALSE
+
+
 /mob/living/attackby(obj/item/attacking_item, mob/living/user, params)
+	if(can_perform_surgery(user, params))
+		return TRUE
+
 	if(..())
 		return TRUE
 	user.changeNext_move(attacking_item.attack_speed)
+	//monkestation edit - Stamina cost
+	if(attacking_item.stamina_cost && user.stamina)
+		var/swing_cost = attacking_item.stamina_cost
+		var/lowest_stamina_value = (user.stamina.maximum * STAMINA_EXHAUSTION_THRESHOLD_MODIFIER) - 5
+		if(user.stamina.current - attacking_item.stamina_cost < lowest_stamina_value)
+			swing_cost = max(user.stamina.current - lowest_stamina_value, 0)
+
+		user.stamina?.adjust(-swing_cost)
+	//monkestation edit - Stamina cost
 	return attacking_item.attack(src, user, params)
 
 /mob/living/attackby_secondary(obj/item/weapon, mob/living/user, params)
@@ -230,7 +269,48 @@
 	SEND_SIGNAL(target_mob, COMSIG_ATOM_AFTER_ATTACKEDBY, src, user, params)
 	afterattack(target_mob, user, params)
 
-	log_combat(user, target_mob, "attacked", src.name, "(COMBAT MODE: [uppertext(user.combat_mode)]) (DAMTYPE: [uppertext(damtype)])")
+	log_combat(user, target_mob, "attacked", src.name, "(ISTATE: [user.log_istate()]) (DAMTYPE: [uppertext(damtype)])")
+	add_fingerprint(user)
+
+
+/**
+ * Called from multi_hit component
+ *
+ * Arguments:
+ * * mob/living/target_mob - The mob being hit by this item
+ * * mob/living/user - The mob hitting with this item
+ * * params - Click params of this attack
+ */
+/obj/item/proc/multi_attack(mob/living/target_mob, mob/living/user, params, direction_traveled)
+	var/signal_return = SEND_SIGNAL(src, COMSIG_ITEM_ATTACK, target_mob, user, params)
+	if(signal_return & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
+	if(signal_return & COMPONENT_SKIP_ATTACK)
+		return
+
+	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK, target_mob, user, params)
+
+	if(item_flags & NOBLUDGEON)
+		return
+
+	if(damtype != STAMINA && force && HAS_TRAIT(user, TRAIT_PACIFISM))
+		to_chat(user, span_warning("You don't want to harm other living beings!"))
+		return
+
+	if(!force && !HAS_TRAIT(src, TRAIT_CUSTOM_TAP_SOUND))
+		playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), TRUE, -1)
+	else if(hitsound)
+		playsound(loc, hitsound, get_clamped_volume(), TRUE, extrarange = stealthy_audio ? SILENCED_SOUND_EXTRARANGE : -1, falloff_distance = 0)
+
+	target_mob.lastattacker = user.real_name
+	target_mob.lastattackerckey = user.ckey
+
+	if(force && target_mob == user && user.client)
+		user.client.give_award(/datum/award/achievement/misc/selfouch, user)
+
+	target_mob.attacked_by(src, user)
+
+	log_combat(user, target_mob, "attacked", src.name, "(ISTATE: [user.log_istate()]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)
 	return FALSE // unhandled
 
@@ -256,7 +336,11 @@
 	if(item_flags & NOBLUDGEON)
 		return FALSE
 	user.changeNext_move(attack_speed)
+<<<<<<< HEAD
 	if(get(src, /mob/living) == user) // telekinesis.
+=======
+	if(!is_reagent_container(src) || force)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.do_attack_animation(attacked_atom)
 	attacked_atom.attacked_by(src, user)
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTERATTACK, attacked_atom, user, params)

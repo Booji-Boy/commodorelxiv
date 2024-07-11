@@ -27,7 +27,7 @@
 	unsuitable_heat_damage = 0
 	speed = 0
 	density = FALSE
-	pass_flags = PASSTABLE | PASSMOB
+	pass_flags = PASSTABLE | PASSMOB | PASSDOORS //Monke, drones have PASSDOORS so they don't have to open doors to pass.
 	sight = SEE_TURFS | SEE_OBJS
 	status_flags = (CANPUSH | CANSTUN | CANKNOCKDOWN)
 	gender = NEUTER
@@ -43,6 +43,10 @@
 	unique_name = TRUE
 	faction = list(FACTION_NEUTRAL,FACTION_SILICON,FACTION_TURRET)
 	hud_type = /datum/hud/dextrous/drone
+<<<<<<< HEAD
+=======
+	dexterous = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Going for a sort of pale green here
 	lighting_cutoff_red = 30
 	lighting_cutoff_green = 35
@@ -179,15 +183,22 @@
 	AddElement(/datum/element/dextrous, hud_type = hud_type)
 	AddComponent(/datum/component/basic_inhands, y_offset = getItemPixelShiftY())
 	AddComponent(/datum/component/simple_access, SSid_access.get_region_access_list(list(REGION_ALL_GLOBAL)))
+<<<<<<< HEAD
 	AddComponent(/datum/component/personal_crafting) // Kind of hard to be a drone and not be able to make tiles
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(default_storage)
 		var/obj/item/storage = new default_storage(src)
 		equip_to_slot_or_del(storage, ITEM_SLOT_DEX_STORAGE)
 
 	for(var/holiday_name in GLOB.holidays)
+<<<<<<< HEAD
 		var/datum/holiday/holiday_today = GLOB.holidays[holiday_name]
 		var/obj/item/potential_hat = holiday_today.holiday_hat
+=======
+		var/obj/item/potential_hat
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!isnull(potential_hat) && isnull(default_headwear)) //If our drone type doesn't start with a hat, we take the holiday one.
 			default_headwear = potential_hat
 
@@ -264,9 +275,12 @@
 /mob/living/basic/drone/gib()
 	dust()
 
+<<<<<<< HEAD
 /mob/living/basic/drone/get_butt_sprite()
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_DRONE)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/drone/examine(mob/user)
 	. = list("<span class='info'>This is [icon2html(src, user)] \a <b>[src]</b>!")
 
@@ -349,7 +363,6 @@
 
 /mob/living/basic/drone/proc/shy_update()
 	var/list/drone_bad_areas = make_associative(drone_area_blacklist_flat) + typecacheof(drone_area_blacklist_recursive)
-	var/list/drone_good_items = make_associative(drone_item_whitelist_flat) + typecacheof(drone_item_whitelist_recursive)
 
 	var/list/drone_bad_machinery = make_associative(drone_machinery_blacklist_flat) + typecacheof(drone_machinery_blacklist_recursive)
 	var/list/drone_good_machinery = LAZYCOPY(drone_machinery_whitelist_flat) + typecacheof(drone_machinery_whitelist_recursive) // not a valid typecache, only intended for negation against drone_bad_machinery
@@ -359,10 +372,9 @@
 	if(shy)
 		REMOVE_TRAIT(src, TRAIT_CAN_STRIP, DRONE_SHY_TRAIT) // To shy to touch someone elses hat
 		ADD_TRAIT(src, TRAIT_PACIFISM, DRONE_SHY_TRAIT)
-		LoadComponent(/datum/component/shy, mob_whitelist=not_shy_of, shy_range=3, message="Your laws prevent this action near %TARGET.", keyless_shy=FALSE, clientless_shy=TRUE, dead_shy=FALSE, dead_shy_immediate=TRUE, machine_whitelist=shy_machine_whitelist)
+		LoadComponent(/datum/component/shy, mob_whitelist=not_shy_of, shy_range=1, message="Your laws prevent this action near %TARGET.", keyless_shy=FALSE, clientless_shy=FALSE, dead_shy=FALSE, dead_shy_immediate=TRUE, machine_whitelist=shy_machine_whitelist)
 		LoadComponent(/datum/component/shy_in_room, drone_bad_areas, "Touching anything in %ROOM could break your laws.")
-		LoadComponent(/datum/component/technoshy, 1 MINUTES, "%TARGET was touched by a being recently, using it could break your laws.")
-		LoadComponent(/datum/component/itempicky, drone_good_items, "Using %TARGET could break your laws.")
+		LoadComponent(/datum/component/technoshy, 5 SECONDS, "%TARGET was touched by a being recently, using it could break your laws.")
 		RegisterSignal(src, COMSIG_TRY_USE_MACHINE, PROC_REF(blacklist_on_try_use_machine))
 		RegisterSignal(src, COMSIG_TRY_WIRES_INTERACT, PROC_REF(blacklist_on_try_wires_interact))
 	else

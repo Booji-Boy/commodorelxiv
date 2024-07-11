@@ -9,6 +9,7 @@
 //movement intent defines for the move_intent var
 #define MOVE_INTENT_WALK "walk"
 #define MOVE_INTENT_RUN "run"
+#define MOVE_INTENT_SPRINT "sprint"
 
 //Blood levels
 #define BLOOD_VOLUME_MAX_LETHAL 2150
@@ -81,6 +82,7 @@
 ///A placeholder bodytype for xeno larva, so their limbs cannot be attached to anything.
 #define BODYTYPE_LARVA_PLACEHOLDER (1<<2)
 ///The limb is from a xenomorph.
+<<<<<<< HEAD
 #define BODYTYPE_ALIEN (1<<3)
 ///The limb is from a golem
 #define BODYTYPE_GOLEM (1<<4)
@@ -99,14 +101,26 @@
 
 #define BODYTYPE_BIOSCRAMBLE_INCOMPATIBLE (BODYTYPE_ROBOTIC | BODYTYPE_LARVA_PLACEHOLDER | BODYTYPE_GOLEM | BODYTYPE_PEG)
 #define BODYTYPE_CAN_BE_BIOSCRAMBLED(bodytype) (!(bodytype & BODYTYPE_BIOSCRAMBLE_INCOMPATIBLE))
+=======
+#define BODYTYPE_ALIEN (1<<7)
+///The limb fits a modular custom shape
+#define BODYTYPE_CUSTOM (1<<8)
+
+//Species gib types
+#define GIB_TYPE_HUMAN "human"
+#define GIB_TYPE_ROBOTIC "robotic"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Defines for Species IDs. Used to refer to the name of a species, for things like bodypart names or species preferences.
 #define SPECIES_ABDUCTOR "abductor"
 #define SPECIES_ANDROID "android"
 #define SPECIES_DULLAHAN "dullahan"
 #define SPECIES_ETHEREAL "ethereal"
+<<<<<<< HEAD
 #define SPECIES_ETHEREAL_LUSTROUS "lustrous"
 #define SPECIES_FELINE "felinid"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define SPECIES_FLYPERSON "fly"
 #define SPECIES_HUMAN "human"
 #define SPECIES_JELLYPERSON "jelly"
@@ -129,7 +143,12 @@
 #define SPECIES_ZOMBIE "zombie"
 #define SPECIES_ZOMBIE_INFECTIOUS "memezombie"
 #define SPECIES_ZOMBIE_KROKODIL "krokodil_zombie"
-
+#define SPECIES_OOZELING "oozeling"
+#define SPECIES_IPC "ipc"
+#define SPECIES_SIMIAN "simian" //Monkestation Addition
+#define SPECIES_GOBLIN "goblin" //Monkestation Addition
+#define SPECIES_FLORAN "floran" //Monkestation Addition
+#define SPECIES_SATYR "satyr" //Monkestation Addition
 // Like species IDs, but not specifically attached a species.
 #define BODYPART_ID_ALIEN "alien"
 #define BODYPART_ID_ROBOTIC "robotic"
@@ -294,6 +313,19 @@
 #define ETHEREAL_CHARGE_DANGEROUS (3 * STANDARD_CELL_CHARGE)
 
 
+//Monkestation Addition: Ethereal Blood Charge
+#define ETHEREAL_BLOOD_CHARGE_NONE 0
+#define ETHEREAL_BLOOD_CHARGE_LOWEST_PASSIVE 56
+#define ETHEREAL_BLOOD_CHARGE_LOW 140
+#define ETHEREAL_BLOOD_CHARGE_NORMAL 280
+#define ETHEREAL_BLOOD_CHARGE_ALMOSTFULL 420
+#define ETHEREAL_BLOOD_CHARGE_FULL 560
+#define ETHEREAL_BLOOD_CHARGE_OVERLOAD 700
+#define ETHEREAL_BLOOD_CHARGE_DANGEROUS 840
+
+#define ETHEREAL_BLOOD_CHARGE_FACTOR 0.224
+//End of Monkestation addition
+
 #define CRYSTALIZE_COOLDOWN_LENGTH (120 SECONDS)
 #define CRYSTALIZE_PRE_WAIT_TIME (40 SECONDS)
 #define CRYSTALIZE_DISARM_WAIT_TIME (120 SECONDS)
@@ -422,7 +454,12 @@
 #define OFFSET_BACK "back"
 #define OFFSET_SUIT "suit"
 #define OFFSET_NECK "neck"
+<<<<<<< HEAD
 #define OFFSET_HELD "held"
+=======
+#define OFFSET_ACCESSORY "accessory"
+#define OFFSET_HANDS "hands"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //MINOR TWEAKS/MISC
 #define AGE_MIN 17 //youngest a character can be
@@ -563,13 +600,21 @@
 
 /// Squashing will not occur if the mob is not lying down (bodyposition is LYING_DOWN)
 #define SQUASHED_SHOULD_BE_DOWN (1<<0)
+<<<<<<< HEAD
 /// If present, outright gibs the squashed mob instead of just dealing damage
 #define SQUASHED_SHOULD_BE_GIBBED (1<<1)
 /// If squashing always passes if the mob is dead
 #define SQUASHED_ALWAYS_IF_DEAD (1<<2)
 /// Don't squash our mob if its not located in a turf
 #define SQUASHED_DONT_SQUASH_IN_CONTENTS (1<<3)
+=======
+///Whether or not to gib when the squashed mob is moved over
+#define SQUASHED_SHOULD_BE_GIBBED (1<<1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
+
+/// Don't squash our mob if its not located in a turf
+#define SQUASHED_DONT_SQUASH_IN_CONTENTS (1<<3)
 /*
  * Defines for "AI emotions", allowing the AI to expression emotions
  * with status displays via emotes.
@@ -666,6 +711,7 @@ GLOBAL_LIST_INIT(human_heights_to_offsets, list(
 /// KEEP THIS UP-TO-DATE OR SHIT WILL BREAK
 /// Also consider updating layers_to_offset
 #define TOTAL_LAYERS 35
+<<<<<<< HEAD
 /// Mutations layer - Tk headglows, cold resistance glow, etc
 #define MUTATIONS_LAYER 35
 /// Mutantrace features (tail when looking south) that must appear behind the body parts
@@ -678,6 +724,24 @@ GLOBAL_LIST_INIT(human_heights_to_offsets, list(
 #define BODY_ADJ_LAYER 31
 /// Underwear, undershirts, socks, eyes, lips(makeup)
 #define BODY_LAYER 30
+=======
+/// Mutant race multiparts - Lbelly
+#define ACCESSORIES_LAYER 35
+/// Mutations layer - Tk headglows, cold resistance glow, etc
+#define MUTATIONS_LAYER 34
+/// Mutantrace features (tail when looking south) that must appear behind the body parts
+#define BODY_BEHIND_LAYER 33
+/// Layer for bodyparts that should appear behind every other bodypart - Mostly, legs when facing WEST or EAST
+#define BODYPARTS_LOW_LAYER 32
+/// Layer for most bodyparts, appears above BODYPARTS_LOW_LAYER and below BODYPARTS_HIGH_LAYER
+#define BODYPARTS_LAYER 31
+/// Mutantrace features (snout, body markings) that must appear above the body parts
+#define BODY_ADJ_LAYER 30
+// Eyes, lips(makeup)
+#define FACE_LAYER 29
+/// Underwear, undershirts, socks
+#define BODY_LAYER 28
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Mutations that should appear above body, body_adj and bodyparts layer (e.g. laser eyes)
 #define FRONT_MUTATIONS_LAYER 29
 /// Damage indicators (cuts and burns)
@@ -755,7 +819,11 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 	"[BELT_LAYER]" = LOWER_BODY,
 	// Everything below looks fine with or without a filter, so we can skip it and just offset
 	// (In practice they'd be fine if they got a filter but we can optimize a bit by not.)
+<<<<<<< HEAD
 	"[NECK_LAYER]" = UPPER_BODY,
+=======
+	/* monkestation edit: fix some weirdness with heights, most notably gloves
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	"[GLASSES_LAYER]" = UPPER_BODY,
 	"[LOW_NECK_LAYER]" = UPPER_BODY,
 	"[ABOVE_BODY_FRONT_GLASSES_LAYER]" = UPPER_BODY, // currently unused
@@ -766,7 +834,12 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 	"[ID_CARD_LAYER]" = UPPER_BODY, // unused
 	"[ID_LAYER]" = UPPER_BODY,
 	"[FACEMASK_LAYER]" = UPPER_BODY,
+<<<<<<< HEAD
 	"[LOW_FACEMASK_LAYER]" = UPPER_BODY,
+=======
+	monkestation end */
+	"[FACE_LAYER]" = UPPER_BODY,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// These two are cached, and have their appearance shared(?), so it's safer to just not touch it
 	"[MUTATIONS_LAYER]" = NO_MODIFY,
 	"[FRONT_MUTATIONS_LAYER]" = NO_MODIFY,
@@ -845,6 +918,7 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 /// Get the client from the var
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 
+<<<<<<< HEAD
 // Various flags for carbon mob vomiting
 /// Flag which makes a message send about the vomiting.
 #define MOB_VOMIT_MESSAGE (1<<0)
@@ -865,6 +939,13 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define VOMIT_CATEGORY_BLOOD (VOMIT_CATEGORY_DEFAULT | MOB_VOMIT_BLOOD)
 /// Another vomit variant that causes you to get knocked down instead of just only getting a stun. Standard otherwise.
 #define VOMIT_CATEGORY_KNOCKDOWN (VOMIT_CATEGORY_DEFAULT | MOB_VOMIT_KNOCKDOWN)
+=======
+/// The mob will vomit a green color
+#define VOMIT_TOXIC 1
+/// The mob will vomit a purple color
+#define VOMIT_PURPLE 2
+#define VOMIT_NANITE 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Possible value of [/atom/movable/buckle_lying]. If set to a different (positive-or-zero) value than this, the buckling thing will force a lying angle on the buckled.
 #define NO_BUCKLE_LYING -1
@@ -956,6 +1037,7 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 /// Flag which stops you from attacking while observed
 #define NO_OBSERVED_ATTACKS (1<<2)
 
+<<<<<<< HEAD
 /// Types of bullets that mining mobs take full damage from
 #define MINING_MOB_PROJECTILE_VULNERABILITY list(BRUTE)
 
@@ -978,3 +1060,15 @@ GLOBAL_LIST_INIT(layers_to_offset, list(
 #define BUTT_SPRITE_PLASMA "plasma"
 #define BUTT_SPRITE_FUZZY "fuzzy"
 #define BUTT_SPRITE_SLIME "slime"
+=======
+
+//Reagent Metabolization flags, defines the type of reagents that affect this mob
+#define PROCESS_ORGANIC 1		//Only processes reagents with "ORGANIC" or "ORGANIC | SYNTHETIC"
+#define PROCESS_SYNTHETIC 2		//Only processes reagents with "SYNTHETIC" or "ORGANIC | SYNTHETIC"
+
+// Reagent type flags, defines the types of mobs this reagent will affect
+#define ORGANIC 1
+#define SYNTHETIC 2
+/// Types of bullets that mining mobs take full damage from
+#define MINING_MOB_PROJECTILE_VULNERABILITY list(BRUTE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

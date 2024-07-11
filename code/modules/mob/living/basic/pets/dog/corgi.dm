@@ -11,7 +11,10 @@
 	butcher_results = list(/obj/item/food/meat/slab/corgi = 3, /obj/item/stack/sheet/animalhide/corgi = 1)
 	gold_core_spawnable = FRIENDLY_SPAWN
 	collar_icon_state = "corgi"
+<<<<<<< HEAD
 	cult_icon_state = "narsian"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller = /datum/ai_controller/basic_controller/dog/corgi
 	///Access card for the corgi.
 	var/obj/item/card/id/access_card = null
@@ -52,6 +55,7 @@
 	UnregisterSignal(src, list(COMSIG_BASICMOB_LOOK_ALIVE, COMSIG_BASICMOB_LOOK_DEAD))
 	return ..()
 
+<<<<<<< HEAD
 /mob/living/basic/pet/dog/corgi/Exited(atom/movable/gone, direction)
 	. = ..()
 	var/dropped_something = FALSE
@@ -67,16 +71,39 @@
 
 /mob/living/basic/pet/dog/corgi/gib()
 	undress_dog()
+=======
+/mob/living/basic/pet/dog/corgi/handle_atom_del(atom/deleting_atom)
+	if(deleting_atom == inventory_head)
+		inventory_head = null
+		update_corgi_fluff()
+		update_appearance(UPDATE_OVERLAYS)
+	if(deleting_atom == inventory_back)
+		inventory_back = null
+		update_corgi_fluff()
+		update_appearance(UPDATE_OVERLAYS)
+	return ..()
+
+/mob/living/basic/pet/dog/corgi/gib()
+	if(inventory_head)
+		inventory_head.forceMove(drop_location())
+		inventory_head = null
+	if(inventory_back)
+		inventory_back.forceMove(drop_location())
+		inventory_back = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(access_card)
 		access_card.forceMove(drop_location())
 		access_card = null
 	return ..()
 
+<<<<<<< HEAD
 /// Removes the hat and shirt (but not ID) of this corgi
 /mob/living/basic/pet/dog/corgi/proc/undress_dog()
 	inventory_head?.forceMove(drop_location())
 	inventory_back?.forceMove(drop_location())
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/pet/dog/corgi/examine(mob/user)
 	. = ..()
 	if(access_card)
@@ -206,6 +233,7 @@
 /mob/living/basic/pet/dog/corgi/proc/place_on_head(obj/item/item_to_add, mob/living/user)
 	if(inventory_head)
 		if(user)
+<<<<<<< HEAD
 			balloon_alert(user, "already wearing a hat!")
 		return FALSE
 
@@ -223,11 +251,45 @@
 
 	//Various hats and items (worn on his head) change Ian's behaviour. His attributes are reset when a hat is removed.
 	if(!ispath(item_to_add.dog_fashion, /datum/dog_fashion/head))
+=======
+			to_chat(user, span_warning("You can't put more than one hat on [src]!"))
+		return
+	if(!item_to_add)
+		user.visible_message(span_notice("[user] pets [src]."), span_notice("You rest your hand on [src]'s head for a moment."))
+		if(flags_1 & HOLOGRAM_1)
+			return
+		user.add_mood_event(REF(src), /datum/mood_event/pet_animal, src)
+		return
+
+	if(user && !user.temporarilyRemoveItemFromInventory(item_to_add))
+		to_chat(user, span_warning("\The [item_to_add] is stuck to your hand, you cannot put it on [src]'s head!"))
+		return
+
+	var/valid = FALSE
+	if(ispath(item_to_add.dog_fashion, /datum/dog_fashion/head))
+		valid = TRUE
+
+	//Various hats and items (worn on his head) change Ian's behaviour. His attributes are reset when a hat is removed.
+
+	if(valid)
+		if(user && (stat == DEAD || HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+			to_chat(user, span_notice("There is merely a dull, lifeless look in [real_name]'s eyes as you put \the [item_to_add] on [p_them()]."))
+		else if(user)
+			user.visible_message(span_notice("[user] puts [item_to_add] on [real_name]'s head. [src] looks at [user] and barks once."),
+				span_notice("You put [item_to_add] on [real_name]'s head. [src] gives you a peculiar look, then wags [p_their()] tail once and barks."),
+				span_hear("You hear a friendly-sounding bark."))
+		item_to_add.forceMove(src)
+		inventory_head = item_to_add
+		update_corgi_fluff()
+		update_appearance(UPDATE_OVERLAYS)
+	else
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("You set [item_to_add] on [src]'s head, but it falls off!"))
 		item_to_add.forceMove(drop_location())
 		if(prob(25))
 			step_rand(item_to_add)
 		dance_rotate(src, set_original_dir = TRUE)
+<<<<<<< HEAD
 		return FALSE
 
 	if (user)
@@ -242,6 +304,10 @@
 	update_corgi_fluff()
 	update_appearance(UPDATE_OVERLAYS)
 	return TRUE
+=======
+
+	return valid
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/pet/dog/corgi/proc/update_corgi_fluff()
 	// First, change back to defaults
@@ -354,9 +420,13 @@
 
 /mob/living/basic/pet/dog/corgi/ian/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	// Ensure Ian exists
 	REGISTER_REQUIRED_MAP_ITEM(1, 1)
 
+=======
+	REGISTER_REQUIRED_MAP_ITEM(1, 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//parent call must happen first to ensure IAN
 	//is not in nullspace when child puppies spawn
 	Read_Memory()
@@ -390,6 +460,7 @@
 		Write_Memory(TRUE)
 	return ..()
 
+<<<<<<< HEAD
 /mob/living/basic/pet/dog/corgi/ian/revive(full_heal_flags, excess_healing, force_grab_ghost)
 	. = ..()
 	if (!.)
@@ -398,6 +469,8 @@
 		inventory_head?.forceMove(drop_location())
 	place_on_head(new /obj/item/clothing/glasses/eyepatch/medical)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/pet/dog/corgi/ian/narsie_act()
 	playsound(src, 'sound/magic/demon_dies.ogg', 75, TRUE)
 	var/mob/living/basic/pet/dog/corgi/narsie/narsIan = new(loc)
@@ -471,6 +544,7 @@
 	can_be_shaved = FALSE
 	unique_pet = TRUE
 	held_state = "narsian"
+<<<<<<< HEAD
 	/// Mobs we will consume in the name of Nar'Sie
 	var/static/list/edible_types = list(/mob/living/basic/pet)
 
@@ -495,6 +569,32 @@
 		living_sacrifice.gib(DROP_ALL_REMAINS)
 	else
 		qdel(prey)
+=======
+
+//this could maybe be turned into an element
+/mob/living/basic/pet/dog/corgi/narsie/Life(seconds_per_tick = SSMOBS_DT, times_fired)
+	. = ..()
+	//consume simple_animal pets
+	for(var/mob/living/simple_animal/pet/simple_pet in range(1, src))
+		if(simple_pet != src && !istype(simple_pet, /mob/living/basic/pet/dog/corgi/narsie))
+			visible_message(span_warning("Dark magic resonating from [src] devours [simple_pet]!"), \
+			"<span class='cult big bold'>DELICIOUS SOULS</span>")
+			playsound(src, 'sound/magic/demon_attack1.ogg', 75, TRUE)
+			new /obj/effect/temp_visual/cult/sac(get_turf(simple_pet))
+			narsie_act()
+			simple_pet.investigate_log("has been gibbed by [src].", INVESTIGATE_DEATHS)
+			simple_pet.gib()
+	//consume basic pets
+	for(var/mob/living/basic/pet/basic_pet in range(1, src))
+		if(basic_pet != src && !istype(basic_pet, /mob/living/basic/pet/dog/corgi/narsie))
+			visible_message(span_warning("Dark magic resonating from [src] devours [basic_pet]!"), \
+			"<span class='cult big bold'>DELICIOUS SOULS</span>")
+			playsound(src, 'sound/magic/demon_attack1.ogg', 75, TRUE)
+			new /obj/effect/temp_visual/cult/sac(get_turf(basic_pet))
+			narsie_act()
+			basic_pet.investigate_log("has been gibbed by [src].", INVESTIGATE_DEATHS)
+			basic_pet.gib()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/pet/dog/corgi/narsie/update_corgi_fluff()
 	. = ..()
@@ -508,7 +608,11 @@
 /mob/living/basic/pet/dog/corgi/narsie/narsie_act()
 	if(stat == DEAD) //Nar'Sie loves her doggy
 		visible_message(span_warning("[src] arises again, revived by the dark magicks!"), \
+<<<<<<< HEAD
 		span_cult_large("RISE"))
+=======
+		span_cultlarge("RISE"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		revive(ADMIN_HEAL_ALL) //also means that a dead Nars-Ian can consume a pet and revive
 	adjustBruteLoss(-maxHealth)
 

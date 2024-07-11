@@ -560,6 +560,7 @@
 
 /obj/item/borg/upgrade/expand/action(mob/living/silicon/robot/borg, mob/living/user = usr)
 	. = ..()
+<<<<<<< HEAD
 	if(!. || HAS_TRAIT(borg, TRAIT_NO_TRANSFORM))
 		return FALSE
 
@@ -584,14 +585,47 @@
 	REMOVE_TRAIT(borg, TRAIT_NO_TRANSFORM, REF(src))
 	borg.hasExpanded = TRUE
 	borg.update_transform(2)
+=======
+	if(!. || HAS_TRAIT(robot, TRAIT_NO_TRANSFORM))
+		return FALSE
+
+	if(robot.hasExpanded)
+		to_chat(usr, span_warning("This unit already has an expand module installed!"))
+		return FALSE
+
+	ADD_TRAIT(robot, TRAIT_NO_TRANSFORM, REF(src))
+	var/prev_lockcharge = robot.lockcharge
+	robot.SetLockdown(TRUE)
+	robot.set_anchored(TRUE)
+	var/datum/effect_system/fluid_spread/smoke/smoke = new
+	smoke.set_up(1, holder = robot, location = robot.loc)
+	smoke.start()
+	sleep(0.2 SECONDS)
+	for(var/i in 1 to 4)
+		playsound(robot, pick('sound/items/drill_use.ogg', 'sound/items/jaws_cut.ogg', 'sound/items/jaws_pry.ogg', 'sound/items/welder.ogg', 'sound/items/ratchet.ogg'), 80, TRUE, -1)
+		sleep(1.2 SECONDS)
+	if(!prev_lockcharge)
+		robot.SetLockdown(FALSE)
+	robot.set_anchored(FALSE)
+	REMOVE_TRAIT(robot, TRAIT_NO_TRANSFORM, REF(src))
+	robot.hasExpanded = TRUE
+	robot.update_transform(2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/borg/upgrade/expand/deactivate(mob/living/silicon/robot/borg, mob/living/user = usr)
 	. = ..()
+<<<<<<< HEAD
 	if(!.)
 		return .
 	if (borg.hasExpanded)
 		borg.hasExpanded = FALSE
 		borg.update_transform(0.5)
+=======
+	if (.)
+		if (R.hasExpanded)
+			R.hasExpanded = FALSE
+			R.update_transform(0.5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/borg/upgrade/rped
 	name = "engineering cyborg RPED"

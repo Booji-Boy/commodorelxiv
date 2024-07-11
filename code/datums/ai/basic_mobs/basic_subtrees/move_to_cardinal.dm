@@ -51,6 +51,7 @@
 /datum/ai_behavior/move_to_cardinal/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/atom/target = controller.blackboard[target_key]
 	if (QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 	if (!(get_dir(controller.pawn, target) in GLOB.cardinals))
 		target_nearest_cardinal(controller, target)
@@ -62,6 +63,21 @@
 	if (distance_to_target > maximum_distance)
 		return AI_BEHAVIOR_INSTANT
 	return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller = controller, succeeded = FALSE, target_key = target_key)
+		return
+	if (!(get_dir(controller.pawn, target) in GLOB.cardinals))
+		target_nearest_cardinal(controller, target)
+		return
+	var/distance_to_target = get_dist(controller.pawn, target)
+	if (distance_to_target < minimum_distance)
+		target_nearest_cardinal(controller, target)
+		return
+	if (distance_to_target > maximum_distance)
+		return
+	finish_action(controller = controller, succeeded = TRUE, target_key = target_key)
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/move_to_cardinal/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	if (!succeeded)

@@ -67,8 +67,12 @@
 			data["gasmixes"] = last_gasmix_data
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/atmosscan/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/atmosscan/ui_act(action, list/params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("scantoggle")
 			if(atmozphere_mode == ATMOZPHERE_SCAN_CLICK)

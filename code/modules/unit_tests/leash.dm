@@ -1,6 +1,9 @@
 /datum/unit_test/leash
 	abstract_type = /datum/unit_test/leash
+<<<<<<< HEAD
 	priority = TEST_LONGER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/atom/movable/owner
 	var/atom/movable/pet
@@ -56,7 +59,11 @@
 	var/timed_out = FALSE
 
 /datum/leash_wait/New()
+<<<<<<< HEAD
 	addtimer(VARSET_CALLBACK(src, timed_out, TRUE), 80 SECONDS)
+=======
+	addtimer(VARSET_CALLBACK(src, timed_out, TRUE), 1 SECONDS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/leash_wait/proc/completed()
 	completed = TRUE

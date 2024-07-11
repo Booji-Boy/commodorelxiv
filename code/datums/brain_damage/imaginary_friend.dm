@@ -47,6 +47,7 @@
 
 /// Tries a poll for the imaginary friend
 /datum/brain_trauma/special/imaginary_friend/proc/get_ghost()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(
 		question = "Do you want to play as [span_danger("[owner.real_name]'s")] [span_notice("imaginary friend")]?",
 		check_jobban = ROLE_PAI,
@@ -61,6 +62,22 @@
 /// Yay more friends!
 /datum/brain_trauma/special/imaginary_friend/proc/add_friend(mob/dead/observer/ghost)
 	if(isnull(ghost))
+=======
+	set waitfor = FALSE
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		question = "Do you want to play as [owner.real_name]'s imaginary friend?",
+		check_jobban = ROLE_PAI,
+		poll_time = 10 SECONDS,
+		ignore_category = POLL_IGNORE_IMAGINARYFRIEND,
+		pic_source = owner,
+		role_name_text = "imaginary friend"
+	)
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/C = pick(candidates)
+		friend.key = C.key
+		friend_initialized = TRUE
+	else
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		qdel(src)
 		return
 

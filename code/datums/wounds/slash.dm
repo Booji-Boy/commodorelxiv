@@ -188,8 +188,13 @@
 	else if(istype(I, /obj/item/stack/medical/suture))
 		return suture(I, user)
 
+<<<<<<< HEAD
 /datum/wound/slash/flesh/try_handling(mob/living/user)
 	if(user.pulling != victim || !HAS_TRAIT(user, TRAIT_WOUND_LICKER) || !victim.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
+=======
+/datum/wound/slash/flesh/try_handling(mob/living/carbon/human/user)
+	if(user.pulling != victim || user.zone_selected != limb.body_zone || !victim.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(!isnull(user.hud_used?.zone_select) && user.zone_selected != limb.body_zone)
 		return FALSE
@@ -206,17 +211,16 @@
 			to_chat(user, span_warning("You can't lick wounds without a tongue!")) // f in chat
 			return
 
-	lick_wounds(user)
 	return TRUE
 
 /// if a felinid is licking this cut to reduce bleeding
 /datum/wound/slash/flesh/proc/lick_wounds(mob/living/carbon/human/user)
 	// transmission is one way patient -> felinid since google said cat saliva is antiseptic or whatever, and also because felinids are already risking getting beaten for this even without people suspecting they're spreading a deathvirus
 	for(var/i in victim.diseases)
-		var/datum/disease/iter_disease = i
+		var/datum/disease/advanced/iter_disease = i
 		if(iter_disease.spread_flags & (DISEASE_SPREAD_SPECIAL | DISEASE_SPREAD_NON_CONTAGIOUS))
 			continue
-		user.ForceContractDisease(iter_disease)
+		user.infect_disease(iter_disease, notes = "Spread via Licking (Blood)")
 
 	user.visible_message(span_notice("[user] begins licking the wounds on [victim]'s [limb.plaintext_zone]."), span_notice("You begin licking the wounds on [victim]'s [limb.plaintext_zone]..."), ignored_mobs=victim)
 	to_chat(victim, span_notice("[user] begins to lick the wounds on your [limb.plaintext_zone]."))
@@ -291,6 +295,10 @@
 /// If someone is using a suture to close this cut
 /datum/wound/slash/flesh/proc/suture(obj/item/stack/medical/suture/I, mob/user)
 	var/self_penalty_mult = (user == victim ? 1.4 : 1)
+<<<<<<< HEAD
+=======
+	user.visible_message(span_notice("[user] begins stitching [victim]'s [limb.plaintext_zone] with [I]..."), span_notice("You begin stitching [user == victim ? "your" : "[victim]'s"] [limb.plaintext_zone] with [I]..."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/treatment_delay = base_treat_time * self_penalty_mult
 
 	if(HAS_TRAIT(src, TRAIT_WOUND_SCANNED))

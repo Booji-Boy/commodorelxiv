@@ -349,7 +349,12 @@ Versioning
 		"brain" = L.get_organ_loss(ORGAN_SLOT_BRAIN) || BRAIN_DAMAGE_DEATH, //get_organ_loss returns null without a brain but a value is required for this column
 		"oxy" = L.getOxyLoss(),
 		"tox" = L.getToxLoss(),
+<<<<<<< HEAD
 		"stamina" = L.getStaminaLoss(),
+=======
+		"clone" = L.getCloneLoss(),
+		"stamina" = L.stamina.current,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		"x_coord" = L.x,
 		"y_coord" = L.y,
 		"z_coord" = L.z,

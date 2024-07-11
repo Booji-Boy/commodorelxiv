@@ -145,6 +145,7 @@
 	if(nightshift_lights == on)
 		return //no change
 	nightshift_lights = on
+<<<<<<< HEAD
 	for (var/list/zlevel_turfs as anything in area.get_zlevel_turf_lists())
 		for(var/turf/area_turf as anything in zlevel_turfs)
 			for(var/obj/machinery/light/night_light in area_turf)
@@ -152,3 +153,10 @@
 					night_light.nightshift_enabled = nightshift_lights
 					night_light.update(FALSE)
 				CHECK_TICK
+=======
+	for(var/obj/machinery/light/night_light in area.lights)
+		if(night_light.nightshift_allowed)
+			night_light.nightshift_enabled = nightshift_lights
+			night_light.update(FALSE)
+		CHECK_TICK
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

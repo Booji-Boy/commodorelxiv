@@ -94,6 +94,7 @@
 	new /obj/item/circuitboard/machine/techfab/department/medical(src)
 	new /obj/item/storage/photo_album/cmo(src)
 	new /obj/item/storage/lockbox/medal/med(src)
+//	new /obj/item/extrapolator(src) //MONKESTATION EDIT: extrapolators are not useful! missed this single case! -Dexee, 04/13/24
 
 /obj/structure/closet/secure_closet/chief_medical/populate_contents_immediate()
 	. = ..()
@@ -126,7 +127,11 @@
 	new /obj/item/storage/box/medigels(src)
 	new /obj/item/ph_booklet(src)
 	new /obj/item/reagent_containers/dropper(src)
+	//MONKESTATION REMOVAL START - FermiChem/pH chem is disabled, so having buffer bottles in the chemist lockers is a complete waste of time, space and processing power.
+	/*
 	new /obj/item/reagent_containers/cup/bottle/acidic_buffer(src) //hopefully they get the hint
+	*/
+	//MONKESTATION REMOVAL END
 
 /obj/structure/closet/secure_closet/chemical/heisenberg //contains one of each beaker, syringe etc.
 	name = "advanced chemical closet"

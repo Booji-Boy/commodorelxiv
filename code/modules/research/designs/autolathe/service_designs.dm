@@ -146,7 +146,11 @@
 	name = "Tongs"
 	id = "tongs"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2)
+=======
+	materials = list(/datum/material/iron = 1000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/kitchen/tongs
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -267,7 +271,11 @@
 	name = "Plant Analyzer"
 	id = "plant_analyzer"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.3, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+=======
+	materials = list(/datum/material/iron = 30, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/plant_analyzer
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -339,7 +347,11 @@
 	name = "Station Bounced Radio"
 	id = "bounced_radio"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+=======
+	materials = list(/datum/material/iron = 75, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.25)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/radio/off
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -363,7 +375,11 @@
 	name = "Pet Carrier"
 	id = "pet_carrier"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*3.75, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 7500, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/pet_carrier
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -387,7 +403,11 @@
 	name = "Box of Cap Gun Shots"
 	id = "capbox"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.2, /datum/material/glass = SMALL_MATERIAL_AMOUNT*0.1)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT*0.2, /datum/material/glass = 5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/toy/ammo/gun
 	category = list(
 		RND_CATEGORY_HACKED,
@@ -423,7 +443,11 @@
 	name = "Plastic Potted Plant"
 	id = "plastic_trees"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/plastic = SHEET_MATERIAL_AMOUNT*4)
+=======
+	materials = list(/datum/material/plastic = 8000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/kirbyplants/random/fullysynthetic
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -568,7 +592,11 @@
 	id = "telescreen_bar"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/bar
@@ -583,7 +611,11 @@
 	id = "telescreen_entertainment"
 	build_type = PROTOLATHE
 	materials = list(
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5,
+=======
+		/datum/material/iron = 10000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
 	)
 	build_path = /obj/item/wallframe/telescreen/entertainment

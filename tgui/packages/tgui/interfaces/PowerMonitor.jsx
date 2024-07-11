@@ -1,22 +1,36 @@
 import { map, sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 import { toFixed } from 'common/math';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { pureComponentHooks } from 'common/react';
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
   Chart,
   ColorBox,
+<<<<<<< HEAD
   Dimmer,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Flex,
   Icon,
   LabeledList,
   ProgressBar,
   Section,
+<<<<<<< HEAD
   Stack,
   Table,
+=======
+  Table,
+  Dimmer,
+  Stack,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -40,7 +54,11 @@ export const PowerMonitor = () => {
 export const PowerMonitorContent = (props) => {
   const { data } = useBackend();
   const { history = { supply: [], demand: [] } } = data;
+<<<<<<< HEAD
   const [sortByField, setSortByField] = useState(null);
+=======
+  const [sortByField, setSortByField] = useLocalState('sortByField', null);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const supply = history.supply[history.supply.length - 1] || 0;
   const demand = history.demand[history.demand.length - 1] || 0;
   const supplyData = history.supply.map((value, i) => [i, value]);
@@ -58,12 +76,19 @@ export const PowerMonitorContent = (props) => {
     sortByField === 'charge' &&
       ((areas) => sortBy(areas, (area) => -area.charge)),
     sortByField === 'draw' &&
+<<<<<<< HEAD
       ((areas) =>
         sortBy(
           areas,
           (area) => -powerRank(area.load),
           (area) => -parseFloat(area.load),
         )),
+=======
+      sortBy(
+        (area) => -powerRank(area.load),
+        (area) => -parseFloat(area.load),
+      ),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ])(data.areas);
   return (
     <>

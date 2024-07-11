@@ -5,7 +5,11 @@
 	icon = 'icons/mob/human/human.dmi'
 	icon_state = "human_basic"
 	appearance_flags = KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE|LONG_GLIDE
+<<<<<<< HEAD
 	hud_possible = list(HEALTH_HUD,STATUS_HUD,ID_HUD,WANTED_HUD,IMPLOYAL_HUD,IMPSEC_FIRST_HUD,IMPSEC_SECOND_HUD,ANTAG_HUD,GLAND_HUD,SENTIENT_DISEASE_HUD,FAN_HUD)
+=======
+	hud_possible = list(HEALTH_HUD,STATUS_HUD,ID_HUD,WANTED_HUD,IMPLOYAL_HUD,IMPCHEM_HUD,IMPTRACK_HUD,ANTAG_HUD,GLAND_HUD,SENTIENT_DISEASE_HUD,FAN_HUD,NANITE_HUD,DIAG_NANITE_FULL_HUD,PERMIT_HUD,SENSOR_HUD)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hud_type = /datum/hud/human
 	pressure_resistance = 25
 	can_buckle = TRUE
@@ -78,7 +82,11 @@
 		/mob/living/carbon/human,
 		/mob/living/basic/slime,
 	))
+<<<<<<< HEAD
 
+=======
+	var/lastpuke = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/account_id
 
 	var/hardcore_survival_score = 0

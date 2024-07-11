@@ -24,8 +24,13 @@ export const TrophyAdminPanel = (props) => {
               <Table.Row key={trophy.ref} className="candystripe">
                 <Table.Cell
                   style={{
+<<<<<<< HEAD
                     wordBreak: 'break-all',
                     wordWrap: 'break-word',
+=======
+                    'word-break': 'break-all',
+                    'word-wrap': 'break-word',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     color: !trophy.is_valid
                       ? 'rgba(255, 0, 0, 0.5)'
                       : 'inherit',
@@ -43,8 +48,13 @@ export const TrophyAdminPanel = (props) => {
                 </Table.Cell>
                 <Table.Cell
                   style={{
+<<<<<<< HEAD
                     wordBreak: 'break-all',
                     wordWrap: 'break-word',
+=======
+                    'word-break': 'break-all',
+                    'word-wrap': 'break-word',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }}
                 >
                   {decodeHtmlEntities(trophy.message)}
@@ -59,8 +69,13 @@ export const TrophyAdminPanel = (props) => {
                 </Table.Cell>
                 <Table.Cell
                   style={{
+<<<<<<< HEAD
                     wordBreak: 'break-all',
                     wordWrap: 'break-word',
+=======
+                    'word-break': 'break-all',
+                    'word-wrap': 'break-word',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }}
                 >
                   {decodeHtmlEntities(trophy.placer_key)}

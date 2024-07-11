@@ -3,11 +3,19 @@ import { BooleanLike } from 'common/react';
 import { useBackend } from '../backend';
 import {
   Box,
+<<<<<<< HEAD
   Button,
   Knob,
   LabeledList,
   ProgressBar,
   Stack,
+=======
+  ProgressBar,
+  NoticeBox,
+  Button,
+  LabeledList,
+  Section,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -18,6 +26,7 @@ type RegHolderData = {
   color: string;
 };
 
+<<<<<<< HEAD
 type Data = {
   flask: RegHolderData;
   beaker: RegHolderData;
@@ -42,6 +51,10 @@ export const ChemSeparator = (props) => {
     max_burner_knob_settings,
   } = data;
 
+=======
+export const ChemSeparator = (props) => {
+  const { act, data } = useBackend<Data>();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window width={370} height={215}>
       <Window.Content>
@@ -189,21 +202,35 @@ export const ChemSeparator = (props) => {
               <ProgressBar
                 height={2}
                 minValue={0}
+<<<<<<< HEAD
                 maxValue={fuel.maximum_volume}
                 value={fuel.total_volume}
                 color={fuel.color}
                 maxWidth="170px"
                 ml="25px"
+=======
+                maxValue={data.own_maximum_volume}
+                color={data.own_reagent_color}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               >
                 <Box
                   lineHeight={1.9}
                   style={{
+<<<<<<< HEAD
                     textShadow: '1px 1px 0 black',
                   }}
                 >
                   {`${Math.ceil(fuel.total_volume)} of ${
                     fuel.maximum_volume
                   } units at ${Math.ceil(fuel.temp)}K`}
+=======
+                    'text-shadow': '1px 1px 0 black',
+                  }}
+                >
+                  {`${Math.ceil(data.own_total_volume)} of ${
+                    data.own_maximum_volume
+                  } units at ${Math.ceil(data.temperature)}°C`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </Box>
               </ProgressBar>
             </LabeledList.Item>
@@ -212,14 +239,62 @@ export const ChemSeparator = (props) => {
             (flask.total_volume > 0 || beaker?.total_volume > 0) &&
             fuel?.total_volume > 0 && (
               <LabeledList.Item
+<<<<<<< HEAD
                 label={
+=======
+                label="Container"
+                buttons={
+                  <Box my={1}>
+                    <Button
+                      mr={2}
+                      width={6}
+                      lineHeight={2}
+                      align="center"
+                      content="Fill"
+                      icon="arrow-up"
+                      disabled={
+                        data.is_burning ||
+                        !data.beaker_total_volume ||
+                        data.own_total_volume >= data.own_maximum_volume
+                      }
+                      onClick={() => act('load')}
+                    />
+                    <Button
+                      width={6}
+                      lineHeight={2}
+                      align="center"
+                      icon="eject"
+                      content="Eject"
+                      disabled={data.is_burning}
+                      onClick={() => act('eject')}
+                    />
+                  </Box>
+                }
+              >
+                <ProgressBar
+                  height={2}
+                  value={data.beaker_total_volume}
+                  minValue={0}
+                  maxValue={data.beaker_maximum_volume}
+                  color={data.beaker_reagent_color}
+                >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   <Box
                     style={{
+<<<<<<< HEAD
                       transform: 'translate(20%, -20%)',
                       width: '57px',
                     }}
                   >
                     Cooling:
+=======
+                      'text-shadow': '1px 1px 0 black',
+                    }}
+                  >
+                    {`${Math.ceil(data.beaker_total_volume)} of ${
+                      data.beaker_maximum_volume
+                    } units`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 }
               >

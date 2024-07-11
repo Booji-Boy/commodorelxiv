@@ -37,7 +37,11 @@
 
 /obj/item/upgradescroll/pre_attack(obj/item/target, mob/living/user)
 	. = ..()
+<<<<<<< HEAD
 	if(. || !istype(target) || !user.combat_mode)
+=======
+	if(. || !istype(target) || !(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	target.AddComponent(/datum/component/fantasy, upgrade_amount, null, null, can_backfire, TRUE)
 	uses -= 1

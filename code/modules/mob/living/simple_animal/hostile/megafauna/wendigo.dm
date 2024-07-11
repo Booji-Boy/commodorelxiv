@@ -4,6 +4,8 @@
 
 Difficulty: Hard
 
+Warning the icebox version is being overridden in monkestation/code/modules/mob/living/simple_animal/megafauna/wendigo.dm
+
 */
 
 /mob/living/simple_animal/hostile/megafauna/wendigo
@@ -178,7 +180,112 @@ Difficulty: Hard
 				hit_mob.apply_damage(20, BRUTE, wound_bonus=CANT_WOUND)
 				shake_camera(hit_mob, 2, 1)
 			all_turfs -= stomp_turf
+<<<<<<< HEAD
 		SLEEP_CHECK_DEATH(delay, owner)
+=======
+		sleep(delay)
+
+/// Larger but slower ground stomp
+/mob/living/simple_animal/hostile/megafauna/wendigo/proc/heavy_stomp()
+	can_move = FALSE
+	wendigo_slam(5, 3 - WENDIGO_ENRAGED, 8)
+	update_cooldowns(list(COOLDOWN_UPDATE_SET_MELEE = 0 SECONDS, COOLDOWN_UPDATE_SET_RANGED = 0 SECONDS))
+	can_move = TRUE
+
+/// Teleports to a location 4 turfs away from the enemy in view
+/mob/living/simple_animal/hostile/megafauna/wendigo/proc/try_teleport()
+	teleport(6)
+	if(WENDIGO_ENRAGED)
+		playsound(loc, 'sound/magic/clockwork/invoke_general.ogg', 100, TRUE)
+		for(var/shots in 1 to WENDIGO_SHOTGUN_SHOTCOUNT)
+			var/spread = shots * 10 - 30
+			var/turf/startloc = get_step(get_turf(src), get_dir(src, target))
+			var/turf/endloc = get_turf(target)
+			if(!endloc)
+				break
+			var/obj/projectile/colossus/wendigo_shockwave/shockwave = new /obj/projectile/colossus/wendigo_shockwave(loc)
+			shockwave.speed = 8
+			shockwave.preparePixelProjectile(endloc, startloc, null, spread)
+			shockwave.firer = src
+			if(target)
+				shockwave.original = target
+			shockwave.fire()
+	update_cooldowns(list(COOLDOWN_UPDATE_SET_MELEE = 0 SECONDS, COOLDOWN_UPDATE_SET_RANGED = 0 SECONDS))
+
+/mob/living/simple_animal/hostile/megafauna/wendigo/proc/teleport(range = 6)
+	var/list/possible_ends = view(range, target.loc) - view(range - 1, target.loc)
+	for(var/turf/closed/cant_teleport_turf in possible_ends)
+		possible_ends -= cant_teleport_turf
+	if(!possible_ends.len)
+		return
+	var/turf/end = pick(possible_ends)
+	do_teleport(src, end, 0,  channel=TELEPORT_CHANNEL_BLUESPACE, forced = TRUE)
+
+/// Applies dizziness to all nearby enemies that can hear the scream and animates the wendigo shaking up and down as shockwave projectiles shoot outward
+/mob/living/simple_animal/hostile/megafauna/wendigo/proc/shockwave_scream()
+	can_move = FALSE
+	COOLDOWN_START(src, scream_cooldown, scream_cooldown_time)
+	SLEEP_CHECK_DEATH(5, src)
+	playsound(loc, 'sound/magic/demon_dies.ogg', 600, FALSE, 10)
+	var/pixel_shift = rand(5, 15)
+	animate(src, pixel_z = pixel_shift, time = 1, loop = 20, flags = ANIMATION_RELATIVE)
+	animate(pixel_z = -pixel_shift, time = 1, flags = ANIMATION_RELATIVE)
+	for(var/mob/living/dizzy_target in get_hearers_in_view(7, src) - src)
+		dizzy_target.set_dizzy_if_lower(12 SECONDS)
+		to_chat(dizzy_target, span_danger("The wendigo screams loudly!"))
+	SLEEP_CHECK_DEATH(1 SECONDS, src)
+	spiral_attack()
+	update_cooldowns(list(COOLDOWN_UPDATE_SET_MELEE = 3 SECONDS, COOLDOWN_UPDATE_SET_RANGED = 3 SECONDS))
+	SLEEP_CHECK_DEATH(3 SECONDS, src)
+	can_move = TRUE
+
+/// Shoots shockwave projectiles in a random preset pattern
+/mob/living/simple_animal/hostile/megafauna/wendigo/proc/spiral_attack()
+	var/list/choices = list("Alternating Circle", "Spiral")
+	if(WENDIGO_ENRAGED)
+		choices += "Wave"
+	var/spiral_type = pick(choices)
+	switch(spiral_type)
+		if("Alternating Circle")
+			var/shots_per = WENDIGO_CIRCLE_SHOTCOUNT
+			for(var/shoot_times in 1 to WENDIGO_CIRCLE_REPEATCOUNT)
+				var/offset = shoot_times % 2
+				for(var/shot in 1 to shots_per)
+					var/angle = shot * 360 / shots_per + (offset * 360 / shots_per) * 0.5
+					var/obj/projectile/colossus/wendigo_shockwave/shockwave = new /obj/projectile/colossus/wendigo_shockwave(loc)
+					shockwave.firer = src
+					shockwave.speed = 3 - WENDIGO_ENRAGED
+					shockwave.fire(angle)
+				SLEEP_CHECK_DEATH(6 - WENDIGO_ENRAGED * 2, src)
+		if("Spiral")
+			var/shots_spiral = WENDIGO_SPIRAL_SHOTCOUNT
+			var/angle_to_target = get_angle(src, target)
+			var/spiral_direction = pick(-1, 1)
+			for(var/shot in 1 to shots_spiral)
+				var/shots_per_tick = 5 - WENDIGO_ENRAGED * 3
+				var/angle_change = (5 + WENDIGO_ENRAGED * shot / 6) * spiral_direction
+				for(var/count in 1 to shots_per_tick)
+					var/angle = angle_to_target + shot * angle_change + count * 360 / shots_per_tick
+					var/obj/projectile/colossus/wendigo_shockwave/shockwave = new /obj/projectile/colossus/wendigo_shockwave(loc)
+					shockwave.firer = src
+					shockwave.damage = 15
+					shockwave.fire(angle)
+				SLEEP_CHECK_DEATH(1, src)
+		if("Wave")
+			var/shots_per = WENDIGO_WAVE_SHOTCOUNT
+			var/difference = 360 / shots_per
+			var/wave_direction = pick(-1, 1)
+			for(var/shoot_times in 1 to WENDIGO_WAVE_REPEATCOUNT)
+				for(var/shot in 1 to shots_per)
+					var/angle = shot * difference + shoot_times * 5 * wave_direction * -1
+					var/obj/projectile/colossus/wendigo_shockwave/shockwave = new /obj/projectile/colossus/wendigo_shockwave(loc)
+					shockwave.firer = src
+					shockwave.wave_movement = TRUE
+					shockwave.speed = 8
+					shockwave.wave_speed = 10 * wave_direction
+					shockwave.fire(angle)
+				SLEEP_CHECK_DEATH(2, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/hostile/megafauna/wendigo/death(gibbed, list/force_grant)
 	if(health > 0)
@@ -190,7 +297,7 @@ Difficulty: Hard
 	var/obj/effect/portal/permanent/one_way/exit = new /obj/effect/portal/permanent/one_way(starting)
 	exit.id = "wendigo arena exit"
 	exit.add_atom_colour(COLOR_RED_LIGHT, ADMIN_COLOUR_PRIORITY)
-	exit.set_light(20, 1, COLOR_SOFT_RED)
+	exit.set_light(l_outer_range = 20, l_power = 1, l_color = COLOR_SOFT_RED)
 	return ..()
 
 /obj/projectile/colossus/wendigo_shockwave

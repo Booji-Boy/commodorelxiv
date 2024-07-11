@@ -36,6 +36,7 @@
 	departmental_flags = DEPARTMENT_BITFLAG_MEDICAL
 
 // Science Designs
+<<<<<<< HEAD
 /datum/design/slime_scanner
 	name = "Slime Scanner"
 	id = "slime_scanner"
@@ -47,6 +48,8 @@
 		RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_XENOBIOLOGY,
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/design/petridish
 	name = "Petri Dish"

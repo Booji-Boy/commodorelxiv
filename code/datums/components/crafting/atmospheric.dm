@@ -25,7 +25,11 @@
 		/obj/item/assembly/igniter = 1,
 	)
 	blacklist = list(/obj/item/assembly/igniter/condenser)
+<<<<<<< HEAD
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF
+=======
+	one_per_turf = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	time = 2 SECONDS
 	category = CAT_ATMOSPHERIC
 
@@ -37,6 +41,17 @@
 		/obj/item/stack/sheet/iron = 1,
 		)
 	blacklist = list(/obj/item/analyzer/ranged)
+<<<<<<< HEAD
+=======
+
+/datum/crafting_recipe/pipe/on_craft_completion(mob/user, atom/result)
+	var/obj/item/pipe/crafted_pipe = result
+	crafted_pipe.pipe_type = /obj/machinery/atmospherics/pipe/smart
+	crafted_pipe.pipe_color = COLOR_VERY_LIGHT_GRAY
+	crafted_pipe.p_init_dir = ALL_CARDINALS
+	crafted_pipe.setDir(SOUTH)
+	crafted_pipe.update()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/layer_adapter
 	name = "Layer manifold fitting"

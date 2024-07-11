@@ -23,8 +23,13 @@
 		/area/shuttle/abandoned,
 		// Solars have lattices over space turfs, and are a valid placement for space turfs in a station area.
 		/area/station/solars,
+<<<<<<< HEAD
 		//Birdshot Atmos has a special area, so we'll exclude that from lints here.
 		/area/station/engineering/atmos/space_catwalk,
+=======
+		// magnet area is designed specifically to hold the asteroid
+		/area/station/cargo/mining/asteroid_magnet,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	))
 
 	// We aren't planetary, so let's check area placements and ensure stuff lines up.

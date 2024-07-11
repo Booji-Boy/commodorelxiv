@@ -53,13 +53,17 @@
 	category = LOG_CATEGORY_TELECOMMS
 	config_flag = /datum/config_entry/flag/log_telecomms
 
+<<<<<<< HEAD
 /datum/log_category/transport
 	category = LOG_CATEGORY_TRANSPORT
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/log_category/speech_indicator
 	category = LOG_CATEGORY_SPEECH_INDICATOR
 	config_flag = /datum/config_entry/flag/log_speech_indicators
 
+<<<<<<< HEAD
 // Logs seperately, printed into on server shutdown to store hard deletes and such
 /datum/log_category/qdel
 	category = LOG_CATEGORY_QDEL
@@ -68,3 +72,7 @@
 
 /datum/log_category/cave_generation
 	category = LOG_CATEGORY_CAVE_GENERATION
+=======
+/datum/log_category/silo
+	category = LOG_CATEGORY_SILO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

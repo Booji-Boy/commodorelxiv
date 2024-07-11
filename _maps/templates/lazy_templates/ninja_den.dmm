@@ -482,6 +482,22 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/holding)
+<<<<<<< HEAD
+=======
+"lp" = (
+/obj/structure/flora/rock/pile/jungle/style_random{
+	pixel_x = -12;
+	pixel_y = 15
+	},
+/obj/machinery/light/floor/has_bulb{
+	pixel_x = 4;
+	pixel_y = -4
+	},
+/turf/open/misc/ashplanet/wateryrock{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/centcom/central_command_areas/holding)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "lx" = (
 /obj/machinery/light/small/directional/north,
 /obj/structure/easel,
@@ -722,7 +738,7 @@
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/holding)
 "qi" = (
-/obj/machinery/hydroponics/constructable,
+/obj/machinery/growing/tray,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/holding)
 "ql" = (
@@ -770,6 +786,18 @@
 	},
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/holding)
+<<<<<<< HEAD
+=======
+"qK" = (
+/obj/machinery/light/floor/has_bulb{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/turf/open/misc/ashplanet/wateryrock{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/centcom/central_command_areas/holding)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "qT" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -920,10 +948,20 @@
 /obj/item/pen/fountain,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/holding)
+<<<<<<< HEAD
 "wc" = (
 /obj/effect/turf_decal/siding/wood,
 /obj/structure/chair/sofa/corp/left{
 	pixel_y = 6
+=======
+"wK" = (
+/obj/machinery/light/floor/has_bulb{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/turf/open/misc/ashplanet/wateryrock{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/carpet/black,
@@ -1076,7 +1114,7 @@
 /turf/open/floor/iron/sepia,
 /area/centcom/central_command_areas/holding)
 "Al" = (
-/obj/machinery/hydroponics/constructable,
+/obj/machinery/growing/tray,
 /obj/machinery/light/directional/east,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/holding)
@@ -2046,6 +2084,16 @@
 /obj/item/food/grown/redbeet,
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/holding)
+<<<<<<< HEAD
+=======
+"Wc" = (
+/obj/machinery/modular_computer/preset/research{
+	dir = 4
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/catwalk_floor,
+/area/centcom/central_command_areas/holding)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "We" = (
 /obj/machinery/vending/cigarette/syndicate,
 /obj/machinery/light/small/directional/south,
@@ -2155,6 +2203,28 @@
 /obj/item/toy/spinningtoy,
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/holding)
+<<<<<<< HEAD
+=======
+"Yl" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 1
+	},
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/item/storage/basket,
+/obj/machinery/light/directional/west,
+/obj/effect/turf_decal/tile/dark/fourcorners,
+/turf/open/floor/iron/sepia,
+/area/centcom/central_command_areas/holding)
+"Yu" = (
+/obj/machinery/light/floor/has_bulb{
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/turf/open/misc/ashplanet/wateryrock{
+	initial_gas_mix = "o2=22;n2=82;TEMP=293.15"
+	},
+/area/centcom/central_command_areas/holding)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "YQ" = (
 /turf/open/floor/bamboo/tatami{
 	dir = 4

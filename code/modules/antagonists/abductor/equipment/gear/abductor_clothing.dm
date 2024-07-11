@@ -5,17 +5,31 @@
 	icon_state = "abductor"
 	inhand_icon_state = "bl_suit"
 	worn_icon = 'icons/mob/clothing/under/syndicate.dmi'
+<<<<<<< HEAD
 	armor_type = /datum/armor/clothing_under/abductor
 	can_adjust = FALSE
 
 /datum/armor/clothing_under/abductor
 	bomb = 10
+=======
+	armor_type = /datum/armor/under_abductor
+	can_adjust = FALSE
+
+/datum/armor/under_abductor
+	bomb = 10
+	bio = 10
+	wound = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //AGENT VEST
 /obj/item/clothing/suit/armor/abductor/vest
 	name = "agent vest"
 	desc = "A vest outfitted with advanced stealth technology. It has two modes - combat and stealth."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "vest_stealth"
 	inhand_icon_state = "armor"
 	blood_overlay_type = "armor"
@@ -94,18 +108,25 @@
 	if(ishuman(loc))
 		var/mob/living/carbon/human/wearer = loc
 		new /obj/effect/temp_visual/dir_setting/ninja/cloak(get_turf(wearer), wearer.dir)
+<<<<<<< HEAD
 		RegisterSignal(wearer, COMSIG_HUMAN_GET_VISIBLE_NAME, PROC_REF(return_disguise_name))
+=======
+		wearer.name_override = disguise.name
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		wearer.icon = disguise.icon
 		wearer.icon_state = disguise.icon_state
 		wearer.cut_overlays()
 		wearer.add_overlay(disguise.overlays)
 		wearer.update_held_items()
 
+<<<<<<< HEAD
 /obj/item/clothing/suit/armor/abductor/vest/proc/return_disguise_name(mob/living/carbon/human/source, list/identity)
 	SIGNAL_HANDLER
 	identity[VISIBLE_NAME_FACE] = disguise.name
 	identity[VISIBLE_NAME_ID] = ""
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/suit/armor/abductor/vest/proc/DeactivateStealth()
 	if(!stealth_active)
 		return
@@ -113,7 +134,11 @@
 	if(ishuman(loc))
 		var/mob/living/carbon/human/wearer = loc
 		new /obj/effect/temp_visual/dir_setting/ninja(get_turf(wearer), wearer.dir)
+<<<<<<< HEAD
 		UnregisterSignal(wearer, COMSIG_HUMAN_GET_VISIBLE_NAME)
+=======
+		wearer.name_override = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		wearer.cut_overlays()
 		wearer.regenerate_icons()
 
@@ -139,7 +164,11 @@
 			to_chat(loc, span_warning("Combat injection is still recharging."))
 			return
 		var/mob/living/carbon/human/wearer = loc
+<<<<<<< HEAD
 		wearer.adjustStaminaLoss(-75)
+=======
+		wearer.stamina.adjust(75, forced = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		wearer.SetUnconscious(0)
 		wearer.SetStun(0)
 		wearer.SetKnockdown(0)
@@ -155,7 +184,11 @@
 
 /obj/item/clothing/suit/armor/abductor/Destroy()
 	STOP_PROCESSING(SSobj, src)
+<<<<<<< HEAD
 	for(var/obj/machinery/abductor/console/mothership_console as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/abductor/console))
+=======
+	for(var/obj/machinery/abductor/console/mothership_console in GLOB.machines)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(mothership_console.vest == src)
 			mothership_console.vest = null
 			break

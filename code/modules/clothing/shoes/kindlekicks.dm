@@ -5,7 +5,11 @@
 	inhand_icon_state = null
 	actions_types = list(/datum/action/item_action/kindle_kicks)
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 2
+=======
+	light_outer_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 3
 	light_on = FALSE
 	var/lightCycle = 0

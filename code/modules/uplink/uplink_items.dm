@@ -139,6 +139,7 @@
 	if(ispath(spawn_path))
 		spawned_item = new spawn_path(get_turf(user))
 	else
+<<<<<<< HEAD
 		spawned_item = spawn_path
 	if(refundable)
 		spawned_item.AddElement(/datum/element/uplink_reimburse, (refund_amount ? refund_amount : cost))
@@ -181,6 +182,18 @@
 ///For special overrides if an item can be bought or not.
 /datum/uplink_item/proc/can_be_bought(datum/uplink_handler/source)
 	return TRUE
+=======
+		A = spawn_path
+	if(refundable)
+		A.AddElement(/datum/element/uplink_reimburse, (refund_amount ? refund_amount : cost))
+	if(ishuman(user) && isitem(A))
+		var/mob/living/carbon/human/H = user
+		if(H.put_in_hands(A))
+			to_chat(H, span_boldnotice("[A] materializes into your hands!"))
+			return A
+	to_chat(user, span_boldnotice("[A] materializes onto the floor!"))
+	return A
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/uplink_category/discounts
 	name = "Discounted Gear"

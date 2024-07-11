@@ -82,7 +82,7 @@
 		. += span_notice("There is a small <i>paper</i> placard on the assembly, written on it is '[created_name]'.")
 
 /obj/structure/door_assembly/attackby(obj/item/W, mob/living/user, params)
-	if(istype(W, /obj/item/pen) && !user.combat_mode)
+	if(istype(W, /obj/item/pen) && !(user.istate & ISTATE_HARM))
 		var/t = tgui_input_text(user, "Enter the name for the door", "Airlock Renaming", created_name, MAX_NAME_LEN)
 		if(!t)
 			return
@@ -320,10 +320,13 @@
 	electronics.forceMove(door)
 	door.autoclose = TRUE
 	door.close()
+<<<<<<< HEAD
+=======
+	door.auto_dir_align() // monkestation edit: ensure doors get aligned properly on creation
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	door.update_appearance()
 
 	qdel(src)
-	return door
 
 /obj/structure/door_assembly/update_overlays()
 	. = ..()
@@ -380,7 +383,11 @@
 
 /obj/structure/door_assembly/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if(the_rcd.mode == RCD_DECONSTRUCT)
+<<<<<<< HEAD
 		return list("delay" = 5 SECONDS, "cost" = 16)
+=======
+		return list("mode" = RCD_DECONSTRUCT, "delay" = 5 SECONDS, "cost" = 16)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/door_assembly/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)

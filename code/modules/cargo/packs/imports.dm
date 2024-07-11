@@ -129,6 +129,7 @@
 	)
 	crate_name = "crate"
 
+<<<<<<< HEAD
 /datum/supply_pack/imports/wt550
 	name = "Smuggled WT-550 Autorifle Crate"
 	desc = "(*!&@#GOOD NEWS, OPERATIVE! WE CAN'T GET YOU THE BIG LEAGUE AUTOMATIC WEAPONS. BUT, BY \
@@ -154,6 +155,12 @@
 	)
 	crate_name = "emergency crate"
 	crate_type = /obj/structure/closet/crate/internals
+=======
+/datum/supply_pack/imports/contraband/fill(obj/structure/closet/crate/our_crate)
+	for(var/items in 1 to 10)
+		var/item = pick(contains)
+		new item(our_crate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/supply_pack/imports/shocktrooper
 	name = "Shocktrooper Crate"

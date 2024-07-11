@@ -27,6 +27,7 @@ const DIRECTION_TO_ICON = {
   northwest: 315,
 } as const;
 
+<<<<<<< HEAD
 enum TAB {
   Implant,
   Beacon,
@@ -34,20 +35,34 @@ enum TAB {
 
 export const BluespaceLocator = (props) => {
   const [tab, setTab] = useState(TAB.Implant);
+=======
+export const BluespaceLocator = (props) => {
+  const [tab, setTab] = useLocalState('tab', 'implant');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window width={300} height={300}>
       <Window.Content scrollable>
         <Tabs>
           <Tabs.Tab
+<<<<<<< HEAD
             selected={tab === TAB.Implant}
             onClick={() => setTab(TAB.Implant)}
+=======
+            selected={tab === 'implant'}
+            onClick={() => setTab('implant')}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             Implants
           </Tabs.Tab>
           <Tabs.Tab
+<<<<<<< HEAD
             selected={tab === TAB.Beacon}
             onClick={() => setTab(TAB.Beacon)}
+=======
+            selected={tab === 'beacon'}
+            onClick={() => setTab('beacon')}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             Teleporter Beacons
           </Tabs.Tab>

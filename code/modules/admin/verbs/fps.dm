@@ -1,5 +1,17 @@
+<<<<<<< HEAD
 ADMIN_VERB_VISIBILITY(set_server_fps, ADMIN_VERB_VISIBLITY_FLAG_MAPPING_DEBUG)
 ADMIN_VERB(set_server_fps, R_DEBUG, "Set Server FPS", "Sets game speed in frames-per-second. Can potentially break the game", ADMIN_CATEGORY_DEBUG)
+=======
+//replaces the old Ticklag verb, fps is easier to understand
+/client/proc/set_server_fps()
+	set category = "Debug"
+	set name = "Set Server FPS"
+	set desc = "Sets game speed in frames-per-second. Can potentially break the game"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/cfg_fps = CONFIG_GET(number/fps)
 	var/new_fps = round(input(user, "Sets game frames-per-second. Can potentially break the game (default: [cfg_fps])","FPS", world.fps) as num|null)
 

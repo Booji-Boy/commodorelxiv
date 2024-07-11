@@ -36,7 +36,10 @@
 			return "northwest"
 		if(SOUTHWEST)
 			return "southwest"
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return NONE
 
 //Turns text into proper directions
@@ -58,7 +61,10 @@
 			return SOUTHEAST
 		if("SOUTHWEST")
 			return SOUTHWEST
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return NONE
 
 //Converts an angle (degrees) into a ss13 direction

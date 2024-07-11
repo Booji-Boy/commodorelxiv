@@ -188,8 +188,13 @@ export const DreamMaker = async (dmeFile, options = {}) => {
   const { defines } = options;
   if (defines && defines.length > 0) {
     Juke.logger.info('Using defines:', defines.join(', '));
+<<<<<<< HEAD
   }
 
+=======
+
+  }
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   await runWithWarningChecks(dmPath, [...defines.map(def => `-D${def}`), dmeFile]);
 };
 

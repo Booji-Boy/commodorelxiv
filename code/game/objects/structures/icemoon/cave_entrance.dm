@@ -80,7 +80,11 @@ GLOBAL_LIST_INIT(ore_probability, list(
 	desc = "A portal that goes to another world, normal creatures couldn't survive there."
 	icon_state = "nether"
 	mob_types = list(/mob/living/basic/mining/ice_demon)
+<<<<<<< HEAD
 	light_range = 1
+=======
+	light_outer_range = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_SOFT_RED
 	mob_gps_id = "WT|B" // watcher | bluespace
 	spawner_gps_id = "Netheric Distortion"
@@ -169,22 +173,21 @@ GLOBAL_LIST_INIT(ore_probability, list(
 			new /obj/item/borg/upgrade/modkit/lifesteal(loc)
 			new /obj/item/bedsheet/cult(loc)
 		if(13)
-			new /obj/item/disk/design_disk/modkit_disc/mob_and_turf_aoe(loc)
+			new /obj/item/gun/magic/hook (loc)
 		if(14)
-			new /obj/item/disk/design_disk/modkit_disc/bounty(loc)
+			new /obj/item/guardian_creator/miner(loc)
 		if(15)
 			new /obj/item/ship_in_a_bottle(loc)
-			new /obj/item/oar(loc)
 		if(16)
 			new /mob/living/simple_animal/hostile/megafauna/blood_drunk_miner/doom(loc)
 		if(17)
-			new /obj/item/reagent_containers/cup/glass/drinkingglass/filled/nuka_cola(loc)
+			new /obj/item/book_of_babel(loc)
 		if(18)
 			new /obj/item/soulstone/anybody(loc)
 		if(19)
-			new /obj/item/disk/design_disk/modkit_disc/resonator_blast(loc)
+			new /obj/item/clothing/suit/hooded/berserker(loc)
 		if(20)
-			new /obj/item/disk/design_disk/modkit_disc/rapid_repeater(loc)
+			new /obj/item/clothing/gloves/gauntlets(loc)
 		if(21)
 			new /obj/item/slimepotion/transference(loc)
 		if(22)
@@ -196,6 +199,6 @@ GLOBAL_LIST_INIT(ore_probability, list(
 		if(25)
 			new /mob/living/basic/clown/clownhulk(loc)
 		if(26)
-			new /obj/item/clothing/shoes/winterboots/ice_boots(loc)
-		if(27)
 			new /obj/item/book/granter/action/spell/sacredflame(loc)
+		if(27)
+			new /obj/item/organ/internal/cyberimp/arm/item_set/katana(loc)

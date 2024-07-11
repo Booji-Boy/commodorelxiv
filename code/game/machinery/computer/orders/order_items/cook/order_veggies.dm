@@ -89,6 +89,7 @@
 	name = "Pickled Voltvine"
 	item_path = /obj/item/food/pickled_voltvine
 	cost_per_order = 5
+<<<<<<< HEAD
 
 /datum/orderable_item/veggies/chili
 	name = "Chili"
@@ -177,3 +178,5 @@
 	name = "Töchtaüse berries"
 	item_path = /obj/item/food/grown/toechtauese
 	cost_per_order = 15
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

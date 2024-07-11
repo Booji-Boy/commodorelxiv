@@ -230,7 +230,7 @@
 	icon = 'icons/mob/telegraphing/telegraph_holographic.dmi'
 	icon_state = "target_circle"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
-	light_range = 2
+	light_outer_range = 2
 	var/obj/effect/dumpeet_fall/DF
 	var/obj/structure/checkoutmachine/dump
 	var/mob/living/bogdanoff

@@ -21,6 +21,7 @@ Then the player gets the profit from selling his own wasted time.
 
 // Simple holder datum to pass export results around
 /datum/export_report
+<<<<<<< HEAD
 	///names of atoms sold/deleted by export
 	var/list/exported_atoms = list()
 	///export instance => total count of sold objects of its type, only exists if any were sold
@@ -33,6 +34,15 @@ Then the player gets the profit from selling his own wasted time.
 /// Makes sure the exports list is populated and that the report isn't null.
 /proc/init_export(datum/export_report/external_report)
 	if(!length(GLOB.exports_list))
+=======
+	var/list/exported_atoms = list() //names of atoms sold/deleted by export
+	var/list/total_amount = list() //export instance => total count of sold objects of its type, only exists if any were sold
+	var/list/total_value = list() //export instance => total value of sold objects
+	var/list/exported_atoms_source = list() /// atoms themselves being sold
+// external_report works as "transaction" object, pass same one in if you're doing more than one export in single go
+/proc/export_item_and_contents(atom/movable/AM, apply_elastic = TRUE, delete_unsold = TRUE, dry_run = FALSE, datum/export_report/external_report)
+	if(!GLOB.exports_list.len)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		setupExports()
 	if(isnull(external_report))
 		external_report = new
@@ -55,8 +65,21 @@ Then the player gets the profit from selling his own wasted time.
 	// We go backwards, so it'll be innermost objects sold first. We also make sure nothing is accidentally delete before everything is sold.
 	var/list/to_delete = list()
 	for(var/atom/movable/thing as anything in reverse_range(contents))
+<<<<<<< HEAD
 		var/sold = _export_loop(thing, apply_elastic, dry_run, external_report)
 		if(!dry_run && (sold || delete_unsold) && sold != EXPORT_SOLD_DONT_DELETE)
+=======
+		var/sold = FALSE
+		for(var/datum/export/export as anything in GLOB.exports_list)
+			if(export.applies_to(thing, apply_elastic))
+				if(!dry_run && (SEND_SIGNAL(thing, COMSIG_ITEM_PRE_EXPORT) & COMPONENT_STOP_EXPORT))
+					break
+				sold = export.sell_object(thing, report, dry_run, apply_elastic)
+				report.exported_atoms += " [thing.name]"
+				report.exported_atoms_source += thing
+				break
+		if(!dry_run && (sold || delete_unsold))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(ismob(thing))
 				thing.investigate_log("deleted through cargo export", INVESTIGATE_CARGO)
 			to_delete += thing
@@ -198,8 +221,13 @@ Then the player gets the profit from selling his own wasted time.
 	if(!dry_run)
 		if(apply_elastic)
 			cost *= NUM_E**(-1 * k_elasticity * export_amount) //marginal cost modifier
+<<<<<<< HEAD
 		SSblackbox.record_feedback("nested tally", "export_sold_cost", 1, list("[sold_item.type]", "[export_value]"))
 	return EXPORT_SOLD
+=======
+		SSblackbox.record_feedback("nested tally", "export_sold_cost", 1, list("[initial(sold_item.name)]", "[export_value]"))
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
 * Total printout for the cargo console.

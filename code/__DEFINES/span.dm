@@ -72,7 +72,10 @@
 #define span_linkify(str) ("<span class='linkify'>" + str + "</span>")
 #define span_looc(str) ("<span class='looc'>" + str + "</span>")
 #define span_major_announcement_text(str) ("<span class='major_announcement_text'>" + str + "</span>")
+<<<<<<< HEAD
 #define span_major_announcement_title(str) ("<span class='major_announcement_title'>" + str + "</span>")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define span_medal(str) ("<span class='medal'>" + str + "</span>")
 #define span_medradio(str) ("<span class='medradio'>" + str + "</span>")
 #define span_memo(str) ("<span class='memo'>" + str + "</span>")
@@ -122,8 +125,11 @@
 #define span_smallnoticeital(str) ("<span class='smallnoticeital'>" + str + "</span>")
 #define span_spiderbroodmother(str) ("<span class='spiderbroodmother'>" + str + "</span>")
 #define span_spiderscout(str) ("<span class='spiderscout'>" + str + "</span>")
+<<<<<<< HEAD
 #define span_spiderbreacher(str) ("<span class='spiderbreacher'>" + str + "</span>")
 #define span_subheader_announcement_text(str) ("<span class='subheader_announcement_text'>" + str + "</span>")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define span_suicide(str) ("<span class='suicide'>" + str + "</span>")
 #define span_suppradio(str) ("<span class='suppradio'>" + str + "</span>")
 #define span_syndradio(str) ("<span class='syndradio'>" + str + "</span>")
@@ -139,3 +145,5 @@
 // Spans that use embedded tgui components:
 // Sorted alphabetically
 #define span_tooltip(tip, main_text) ("<span data-component=\"Tooltip\" data-content=\"" + tip + "\" class=\"tooltip\">" + main_text + "</span>")
+
+#define span_doyourjobidiot(str) ("<span class='doyourjobidiot'>" + str + "</span>")

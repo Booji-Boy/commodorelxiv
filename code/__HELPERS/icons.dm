@@ -706,8 +706,13 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 
 	var/image/final_image = image(icon, icon_state=icon_state, loc = animal)
 
+<<<<<<< HEAD
 	if(ispath(simple_animal, /mob/living/basic/butterfly))
 		final_image.color = rgb(rand(0, 255), rand(0, 255), rand(0, 255))
+=======
+	if(ispath(SA, /mob/living/basic/butterfly))
+		final_image.color = rgb(rand(0,255), rand(0,255), rand(0,255))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// For debugging
 	final_image.text = initial(simple_animal.name)
@@ -756,7 +761,7 @@ GLOBAL_LIST_EMPTY(friendly_animal_types)
 	if(job)
 		body.dna.species.pre_equip_species_outfit(job, body, TRUE)
 	if(outfit)
-		body.equipOutfit(outfit, TRUE)
+		body.equip_outfit_and_loadout(outfit, prefs, TRUE)
 
 	var/icon/out_icon = icon('icons/effects/effects.dmi', "nothing")
 	for(var/direction in showDirs)
@@ -1183,6 +1188,7 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 			stack_trace("Icon Lookup for state: [state] in file [file] failed.")
 		return FALSE
 
+<<<<<<< HEAD
 /**
  * Returns the size of the sprite in tiles.
  * Takes the icon size and divides it by the world icon size (default 32).
@@ -1210,6 +1216,10 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 	else
 		bound_width = world.icon_size
 		bound_height = size * world.icon_size
+=======
+/// Cache of the width and height of icon files, to avoid repeating the same expensive operation
+GLOBAL_LIST_EMPTY(icon_dimensions)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns a list containing the width and height of an icon file
 /proc/get_icon_dimensions(icon_path)
@@ -1223,6 +1233,7 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 		var/icon/my_icon = icon(icon_path)
 		GLOB.icon_dimensions[icon_path] = list("width" = my_icon.Width(), "height" = my_icon.Height())
 	return GLOB.icon_dimensions[icon_path]
+<<<<<<< HEAD
 
 /// Fikou's fix for making toast alerts look nice - resets offsets, transforms to fit
 /proc/get_small_overlay(atom/source)
@@ -1247,3 +1258,5 @@ GLOBAL_LIST_EMPTY(transformation_animation_objects)
 	alert_overlay.transform = alert_overlay.transform.Scale(scale)
 
 	return alert_overlay
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

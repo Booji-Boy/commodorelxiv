@@ -251,7 +251,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/the_griffin, 3
 
 /obj/structure/sign/poster/contraband/lizard
 	name = "Lizard"
+<<<<<<< HEAD
 	desc = "This lewd poster depicts a lizard preparing to mate."
+=======
+	desc = "This poster depicts a popular pants-wearing lizard rap artist."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "lizard"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/lizard, 32)
@@ -509,7 +513,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/triumphal_arch
 	. = ..()
 	. += span_notice("<i>You browse some of the poster's information...</i>")
 	. += "\t[span_info("Va Lümla Commissary Menu (Spring 335)")]"
+<<<<<<< HEAD
 	. += "\t[span_info("Sparkweed Cigarettes, Half-Pack (6): 1 Ticket")]"
+=======
+	. += "\t[span_info("Windgrass Cigarettes, Half-Pack (6): 1 Ticket")]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. += "\t[span_info("Töchtaüse Schnapps, Bottle (4 Measures): 2 Tickets")]"
 	. += "\t[span_info("Activin Gum, Pack (4): 1 Ticket")]"
 	. += "\t[span_info("A18 Sustenance Bar, Breakfast, Bar (4): 1 Ticket")]"
@@ -618,6 +626,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/microwave, 32)
 	. += "\t[span_info("Rated M for mature. A Pangalactic Studios Picture.")]"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/blood_geometer, 32)
+<<<<<<< HEAD
 
 /obj/structure/sign/poster/contraband/singletank_bomb
 	name = "Single Tank Bomb Guide"
@@ -657,3 +666,5 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/singletank_bom
 
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/contraband/fake_bombable, 32)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

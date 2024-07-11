@@ -63,6 +63,7 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 	var/new_name = "[initial(name)] ([rand(1, 999)])"
 	name = new_name
 	real_name = new_name
+	update_name_tag() // monkestation edit: name tags
 	last_attack = world.time
 	var/datum/blobstrain/BS = pick(GLOB.valid_blobstrains)
 	set_strain(BS)
@@ -220,7 +221,11 @@ GLOBAL_LIST_EMPTY(blob_nodes)
 			check_area.icon = 'icons/mob/nonhuman-player/blob.dmi'
 			check_area.icon_state = "blob_shield"
 			check_area.layer = BELOW_MOB_LAYER
+<<<<<<< HEAD
 			check_area.SetInvisibility(INVISIBILITY_NONE)
+=======
+			check_area.invisibility = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			check_area.blend_mode = 0
 
 	var/datum/antagonist/blob/B = mind.has_antag_datum(/datum/antagonist/blob)

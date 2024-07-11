@@ -4,7 +4,11 @@
  * @license MIT
  */
 
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'tgui/backend';
+=======
+import { useDispatch, useSelector } from 'common/redux';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   Collapsible,
@@ -13,6 +17,7 @@ import {
   Section,
   Stack,
 } from 'tgui/components';
+<<<<<<< HEAD
 
 import {
   moveChatPageLeft,
@@ -27,6 +32,15 @@ import { selectCurrentChatPage } from './selectors';
 export const ChatPageSettings = (props) => {
   const page = useSelector(selectCurrentChatPage);
   const dispatch = useDispatch();
+=======
+import { removeChatPage, toggleAcceptedType, updateChatPage } from './actions';
+import { MESSAGE_TYPES } from './constants';
+import { selectCurrentChatPage } from './selectors';
+
+export const ChatPageSettings = (props, context) => {
+  const page = useSelector(context, selectCurrentChatPage);
+  const dispatch = useDispatch(context);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <Stack align="center">
@@ -60,6 +74,7 @@ export const ChatPageSettings = (props) => {
             }
           />
         </Stack.Item>
+<<<<<<< HEAD
         {!page.isMain ? (
           <Stack.Item>
             <Button
@@ -113,6 +128,22 @@ export const ChatPageSettings = (props) => {
         ) : (
           ''
         )}
+=======
+        <Stack.Item>
+          <Button
+            content="Remove"
+            icon="times"
+            color="red"
+            onClick={() =>
+              dispatch(
+                removeChatPage({
+                  pageId: page.id,
+                }),
+              )
+            }
+          />
+        </Stack.Item>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </Stack>
       <Divider />
       <Section title="Messages to display" level={2}>

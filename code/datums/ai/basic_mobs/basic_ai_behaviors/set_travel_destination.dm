@@ -1,6 +1,7 @@
 /datum/ai_behavior/set_travel_destination
 
 /datum/ai_behavior/set_travel_destination/perform(seconds_per_tick, datum/ai_controller/controller, target_key, location_key)
+<<<<<<< HEAD
 	var/atom/target = controller.blackboard[target_key]
 
 	if(QDELETED(target))
@@ -8,3 +9,15 @@
 
 	controller.set_blackboard_key(location_key, target)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	var/atom/target = controller.blackboard[target_key]
+
+	if(QDELETED(target))
+		finish_action(controller, FALSE, target_key)
+		return
+
+	controller.set_blackboard_key(location_key, target)
+
+	finish_action(controller, TRUE, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

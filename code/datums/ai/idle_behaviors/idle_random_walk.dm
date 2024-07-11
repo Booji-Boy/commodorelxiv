@@ -12,9 +12,14 @@
 		var/move_dir = pick(GLOB.alldirs)
 		var/turf/destination_turf = get_step(living_pawn, move_dir)
 		if(!destination_turf?.can_cross_safely(living_pawn))
+<<<<<<< HEAD
 			return FALSE
 		living_pawn.Move(destination_turf, move_dir)
 	return TRUE
+=======
+			return
+		living_pawn.Move(destination_turf, move_dir)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/idle_behavior/idle_random_walk/less_walking
 	walk_chance = 10

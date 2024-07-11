@@ -67,7 +67,11 @@
 /obj/item/wirecutters/abductor
 	name = "alien wirecutters"
 	desc = "Extremely sharp wirecutters, made out of a silvery-green metal."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/silver = SHEET_MATERIAL_AMOUNT*1.25, /datum/material/plasma =HALF_SHEET_MATERIAL_AMOUNT, /datum/material/titanium =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SHEET_MATERIAL_AMOUNT)
 	icon_state = "cutters"
 	toolspeed = 0.1

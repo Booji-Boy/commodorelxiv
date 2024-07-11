@@ -46,7 +46,11 @@
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/item/cardboard_cutout/attack_hand(mob/living/user, list/modifiers)
+<<<<<<< HEAD
 	if(!user.combat_mode || pushed_over || !isturf(loc))
+=======
+	if(!(user.istate & ISTATE_HARM) || pushed_over)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 	user.visible_message(span_warning("[user] pushes over [src]!"), span_danger("You push over [src]!"))
 	playsound(src, 'sound/weapons/genhit.ogg', 50, TRUE)
@@ -92,8 +96,15 @@
 	if((damage_flag == BULLET || damage_flag == MELEE) && (damage_type == BRUTE) && prob(damage_sustained))
 		push_over()
 
+<<<<<<< HEAD
 /obj/item/cardboard_cutout/atom_deconstruct(disassembled)
 	new /obj/item/stack/sheet/cardboard(loc, 1)
+=======
+/obj/item/cardboard_cutout/deconstruct(disassembled)
+	if(!(flags_1 & (HOLOGRAM_1|NODECONSTRUCT_1)))
+		new /obj/item/stack/sheet/cardboard(loc, 1)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /proc/get_cardboard_cutout_instance(datum/cardboard_cutout/cardboard_cutout)
 	ASSERT(ispath(cardboard_cutout), "[cardboard_cutout] is not a path of /datum/cardboard_cutout")

@@ -55,7 +55,11 @@
 /obj/item/antag_spawner/contract/proc/poll_for_student(mob/living/carbon/human/teacher, apprentice_school)
 	balloon_alert(teacher, "contacting apprentice...")
 	polling = TRUE
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger("[teacher]'s")] [span_notice("[apprentice_school] apprentice")]?", check_jobban = ROLE_WIZARD, role = ROLE_WIZARD, poll_time = 15 SECONDS, checked_target = src, alert_pic = /obj/item/clothing/head/wizard/red, jump_target = src, role_name_text = "wizard apprentice", chat_text_border_icon = /obj/item/clothing/head/wizard/red)
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates_for_mob("Do you want to play as a wizard's [apprentice_school] apprentice?", check_jobban = ROLE_WIZARD, role = ROLE_WIZARD, poll_time = 15 SECONDS, target_mob = src, pic_source = teacher, role_name_text = "wizard apprentice")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	polling = FALSE
 	if(isnull(chosen_one))
 		to_chat(teacher, span_warning("Unable to reach your apprentice! You can either attack the spellbook with the contract to refund your points, or wait and try again later."))
@@ -102,8 +106,15 @@
 	var/special_role_name = ROLE_NUCLEAR_OPERATIVE
 	/// The applied outfit
 	var/datum/outfit/syndicate/outfit = /datum/outfit/syndicate/reinforcement
+<<<<<<< HEAD
 	/// The antag datum applied
 	var/antag_datum = /datum/antagonist/nukeop/reinforcement
+=======
+	/// The outfit given to plasmaman operatives
+	var/datum/outfit/syndicate/plasma_outfit = /datum/outfit/syndicate/reinforcement/plasmaman
+	/// The antag datum applied
+	var/datum/antagonist/nukeop/antag_datum = /datum/antagonist/nukeop
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Style used by the droppod
 	var/pod_style = STYLE_SYNDICATE
 	/// Do we use a random subtype of the outfit?
@@ -132,8 +143,13 @@
 		return
 
 	to_chat(user, span_notice("You activate [src] and wait for confirmation."))
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates("Do you want to play as a reinforcement [special_role_name]?", check_jobban = ROLE_OPERATIVE, role = ROLE_OPERATIVE, poll_time = 15 SECONDS, ignore_category = POLL_IGNORE_SYNDICATE, alert_pic = src, role_name_text = special_role_name, amount_to_pick = 1)
 	if(chosen_one)
+=======
+	var/list/nuke_candidates = SSpolling.poll_ghost_candidates("Do you want to play as a syndicate [borg_to_spawn ? "[lowertext(borg_to_spawn)] cyborg":"operative"]?", check_jobban = ROLE_OPERATIVE, role = ROLE_OPERATIVE, poll_time = 15 SECONDS, ignore_category = POLL_IGNORE_SYNDICATE, pic_source = src, role_name_text = "syndicate [borg_to_spawn ? "[borg_to_spawn] cyborg":"operative"]")
+	if(LAZYLEN(nuke_candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(QDELETED(src) || !check_usability(user))
 			return
 		used = TRUE
@@ -145,6 +161,10 @@
 
 /obj/item/antag_spawner/nuke_ops/spawn_antag(client/our_client, turf/T, kind, datum/mind/user)
 	var/mob/living/carbon/human/nukie = new()
+<<<<<<< HEAD
+=======
+	var/obj/structure/closet/supplypod/pod = setup_pod()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	our_client.prefs.safe_transfer_prefs_to(nukie, is_antag = TRUE)
 	nukie.ckey = our_client.key
 	var/datum/mind/op_mind = nukie.mind
@@ -153,7 +173,14 @@
 	else
 		nukie.forceMove(locate(1,1,1))
 
+<<<<<<< HEAD
 	var/new_datum = new antag_datum()
+=======
+	antag_datum = new()
+	antag_datum.send_to_spawnpoint = FALSE
+
+	antag_datum.nukeop_outfit = use_subtypes ? pick(subtypesof(outfit)) : outfit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/datum/antagonist/nukeop/creator_op = user.has_antag_datum(/datum/antagonist/nukeop, TRUE)
 	op_mind.add_antag_datum(new_datum, creator_op ? creator_op.get_team() : null)
@@ -239,6 +266,7 @@
 	borg.mmi.brainmob.real_name = brainopsname
 	borg.mmi.brainmob.name = brainopsname
 	borg.real_name = borg.name
+	borg.update_name_tag() // monkestation edit: name tags
 
 	borg.key = C.key
 
@@ -265,8 +293,20 @@
 		return
 	if(used)
 		return
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_ALIEN, role = ROLE_ALIEN, poll_time = 5 SECONDS, checked_target = src, alert_pic = demon_type, jump_target = src, role_name_text = initial(demon_type.name))
 	if(chosen_one)
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as a [initial(demon_type.name)]?",
+		check_jobban = ROLE_SLAUGHTER_DEMON,
+		role = ROLE_SLAUGHTER_DEMON,
+		poll_time = 5 SECONDS,
+		pic_source = demon_type,
+		role_name_text = initial(demon_type.name)
+	)
+	if(LAZYLEN(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(used || QDELETED(src))
 			return
 		used = TRUE
@@ -284,6 +324,10 @@
 	new /obj/effect/dummy/phased_mob(T, spawned)
 
 	spawned.key = C.key
+<<<<<<< HEAD
+=======
+	spawned.generate_antagonist_status()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/antag_spawner/slaughter_demon/laughter
 	name = "vial of tickles"
@@ -294,6 +338,7 @@
 
 	veil_msg = span_warning("You sense an adorable presence lurking just beyond the veil...")
 	demon_type = /mob/living/basic/demon/slaughter/laughter
+<<<<<<< HEAD
 
 /**
  * A subtype meant for 'normal' antag spawner items so as to reduce the amount of required hardcoding.
@@ -451,3 +496,5 @@
 	belt = /obj/item/lighter/skull
 	r_hand = /obj/item/food/grown/banana
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

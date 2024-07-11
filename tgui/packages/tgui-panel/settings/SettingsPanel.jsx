@@ -7,21 +7,52 @@
 import { toFixed } from 'common/math';
 import { capitalize } from 'common/string';
 import { useLocalState } from 'tgui/backend';
+<<<<<<< HEAD
 import { useDispatch, useSelector } from 'tgui/backend';
+=======
+import { useDispatch, useSelector } from 'common/redux';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
   Collapsible,
   ColorBox,
   Divider,
+<<<<<<< HEAD
+=======
+  Stack,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Input,
   LabeledList,
   NumberInput,
   Section,
+<<<<<<< HEAD
   Stack,
   Tabs,
   TextArea,
 } from 'tgui/components';
+=======
+  Tabs,
+  TextArea,
+} from 'tgui/components';
+import { ChatPageSettings } from '../chat';
+import { clearChat, rebuildChat, saveChatToDisk } from '../chat/actions';
+import { THEMES } from '../themes';
+import {
+  changeSettingsTab,
+  updateSettings,
+  addHighlightSetting,
+  removeHighlightSetting,
+  updateHighlightSetting,
+} from './actions';
+import { SETTINGS_TABS, FONTS, MAX_HIGHLIGHT_SETTINGS } from './constants';
+import {
+  selectActiveTab,
+  selectSettings,
+  selectHighlightSettings,
+  selectHighlightSettingById,
+} from './selectors';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { ChatPageSettings } from '../chat';
 import { clearChat, rebuildChat, saveChatToDisk } from '../chat/actions';
@@ -76,11 +107,21 @@ export const SettingsPanel = (props) => {
   );
 };
 
+<<<<<<< HEAD
 export const SettingsGeneral = (props) => {
   const { theme, fontFamily, fontSize, lineHeight } =
     useSelector(selectSettings);
   const dispatch = useDispatch();
   const [freeFont, setFreeFont] = useLocalState('freeFont', false);
+=======
+export const SettingsGeneral = (props, context) => {
+  const { theme, fontFamily, fontSize, lineHeight } = useSelector(
+    context,
+    selectSettings,
+  );
+  const dispatch = useDispatch(context);
+  const [freeFont, setFreeFont] = useLocalState(context, 'freeFont', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <LabeledList>
@@ -266,6 +307,7 @@ const TextHighlightSetting = (props) => {
   const highlightSettingById = useSelector(selectHighlightSettingById);
   const dispatch = useDispatch();
   const {
+    enabled,
     highlightColor,
     highlightText,
     highlightWholeMessage,
@@ -276,6 +318,22 @@ const TextHighlightSetting = (props) => {
     <Stack.Item {...rest}>
       <Stack mb={1} color="label" align="baseline">
         <Stack.Item grow>
+<<<<<<< HEAD
+=======
+          <Button.Checkbox
+            checked={!!enabled}
+            content="Enabled"
+            mr="5px"
+            onClick={() =>
+              dispatch(
+                updateHighlightSetting({
+                  id: id,
+                  enabled: !enabled,
+                }),
+              )
+            }
+          />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           <Button
             content="Delete"
             color="transparent"

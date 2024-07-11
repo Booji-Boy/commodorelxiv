@@ -42,6 +42,7 @@
 	var/decomp_req_handle = FALSE
 	///Used to set custom decomposition times for food. Set to 0 to have it automatically set via the food's flags.
 	var/decomposition_time = 0
+<<<<<<< HEAD
 	///Used to set decomposition stink particles for food, will have no particles if null
 	var/decomposition_particles = /particles/stink
 	///Used to set custom starting reagent purity for synthetic and natural food. Ignored when set to null.
@@ -50,6 +51,12 @@
 	var/crafting_complexity = 0
 	///Buff given when a hand-crafted version of this item is consumed. Randomized according to crafting_complexity if not assigned.
 	var/datum/status_effect/food/crafted_food_buff = null
+=======
+	///If we want to still force feed food even on combat mode or harm intent - monkestation edit
+	var/force_feed_on_aggression = FALSE
+	///The food buffs the food has
+	var/food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/Initialize(mapload)
 	if(food_reagents)
@@ -82,7 +89,11 @@
 		eatverbs = eatverbs,\
 		bite_consumption = bite_consumption,\
 		junkiness = junkiness,\
+<<<<<<< HEAD
 		reagent_purity = starting_reagent_purity,\
+=======
+		food_buffs = food_buffs,\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 ///This proc handles processable elements, overwrite this if you want to add behavior such as slicing, forking, spooning, whatever, to turn the item into something else

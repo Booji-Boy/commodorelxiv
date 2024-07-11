@@ -7,10 +7,13 @@
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/pod,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "b" = (
 /obj/modular_map_connector,
 /turf/closed/wall,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "c" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/small/directional/east,
@@ -36,12 +39,15 @@
 	},
 /turf/open/floor/plating,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "l" = (
 /obj/structure/railing/corner/end{
 	dir = 4
 	},
 /turf/open/floor/pod/dark,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "p" = (
 /turf/open/floor/pod,
 /area/virtual_domain/safehouse)
@@ -54,7 +60,10 @@
 "u" = (
 /obj/structure/railing,
 /obj/effect/turf_decal/siding/dark,
+<<<<<<< HEAD
 /obj/structure/sign/poster/contraband/hacking_guide/directional/east,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/landmark/bitrunning/cache_goal_turf,
 /obj/effect/turf_decal/loading_area{
 	dir = 4
@@ -176,7 +185,11 @@ C
 C
 G
 G
+<<<<<<< HEAD
 b
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 W
@@ -205,7 +218,11 @@ i
 (5,1,1) = {"
 C
 M
+<<<<<<< HEAD
 l
+=======
+M
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 e
 I
 i

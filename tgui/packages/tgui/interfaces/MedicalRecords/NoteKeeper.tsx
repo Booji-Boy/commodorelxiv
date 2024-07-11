@@ -10,7 +10,10 @@ import {
   TextArea,
   Tooltip,
 } from 'tgui/components';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { getMedicalRecord } from './helpers';
 import { MedicalNote, MedicalRecordData } from './types';
 
@@ -117,7 +120,11 @@ const NoteTabs = (props) => {
         </Tabs.Tab>
       ))}
       <Tooltip
+<<<<<<< HEAD
         content={`Add a new note. Press enter or escape to exit view.`}
+=======
+        content={multiline`Add a new note. Press enter or escape to exit view.`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         position="bottom"
       >
         <Tabs.Tab onClick={composeNew} selected={writing}>

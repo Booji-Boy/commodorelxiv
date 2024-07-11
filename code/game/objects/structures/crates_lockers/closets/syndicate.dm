@@ -29,7 +29,10 @@
 	new /obj/item/clothing/under/syndicate/skirt(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/mod/module/plasma_stabilizer(src)
+<<<<<<< HEAD
 	new /obj/item/climbing_hook/syndicate(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/closet/syndicate/nuclear
 	desc = "It's a storage unit for a Syndicate boarding party."

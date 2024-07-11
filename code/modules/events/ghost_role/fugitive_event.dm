@@ -20,7 +20,11 @@
 	if(isnull(landing_turf))
 		return MAP_ERROR
 	var/list/possible_backstories = list()
+<<<<<<< HEAD
 	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_FUGITIVE, role = ROLE_FUGITIVE, alert_pic = /obj/item/card/id/advanced/prisoner, jump_target = landing_turf)
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_FUGITIVE, role = ROLE_FUGITIVE, pic_source = /obj/item/card/id/advanced/prisoner)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!length(candidates))
 		return NOT_ENOUGH_PLAYERS

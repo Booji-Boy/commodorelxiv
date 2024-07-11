@@ -17,8 +17,11 @@
 	var/infinite = FALSE
 	/// If TRUE, won't play a noise when injecting.
 	var/stealthy = FALSE
+<<<<<<< HEAD
 	/// If TRUE, the hypospray will be permanently unusable.
 	var/used_up = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/reagent_containers/hypospray/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -331,7 +334,7 @@
 	base_icon_state = "firstaid"
 	volume = 15
 	amount_per_transfer_from_this = 15
-	list_reagents = list(/datum/reagent/medicine/epinephrine = 12, /datum/reagent/medicine/coagulant = 2.5, /datum/reagent/medicine/spaceacillin = 0.5)
+	list_reagents = list(/datum/reagent/medicine/epinephrine = 12, /datum/reagent/medicine/coagulant = 2.5, /datum/reagent/medicine/antipathogenic/spaceacillin = 0.5)
 
 /obj/item/reagent_containers/hypospray/medipen/blood_loss
 	name = "hypovolemic-response autoinjector"

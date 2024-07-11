@@ -52,6 +52,7 @@
 	/// Native FOV that will be applied if a config is enabled
 	var/native_fov = FOV_90_DEGREES
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 /obj/item/organ/internal/eyes/Insert(mob/living/carbon/eye_recipient, special = FALSE, movement_flags = DELETE_IF_REPLACED)
 	// If we don't do this before everything else, heterochromia will be reset leading to eye_color_right no longer being accurate
 	if(ishuman(eye_recipient))
@@ -59,10 +60,14 @@
 		old_eye_color_left = human_recipient.eye_color_left
 		old_eye_color_right = human_recipient.eye_color_right
 
+=======
+/obj/item/organ/internal/eyes/Insert(mob/living/carbon/eye_recipient, special = FALSE, drop_if_replaced = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	. = ..()
 
 	if(!.)
 		return
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 
 	eye_recipient.cure_blind(NO_EYES)
 	apply_damaged_eye_effects()
@@ -71,6 +76,15 @@
 /// Refreshes the visuals of the eyes
 /// If call_update is TRUE, we also will call update_body
 /obj/item/organ/internal/eyes/proc/refresh(mob/living/carbon/eye_owner = owner, call_update = TRUE)
+=======
+	eye_recipient.cure_blind(NO_EYES)
+	apply_damaged_eye_effects()
+	refresh(eye_recipient, inserting = TRUE)
+
+/// Refreshes the visuals of the eyes
+/// If call_update is TRUE, we also will call update_body
+/obj/item/organ/internal/eyes/proc/refresh(mob/living/carbon/eye_owner = owner, inserting = FALSE, call_update = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	owner.update_sight()
 	owner.update_tint()
 
@@ -78,6 +92,12 @@
 		return
 
 	var/mob/living/carbon/human/affected_human = eye_owner
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
+=======
+	if(inserting) // we only want to be setting old_eye_color the one time
+		old_eye_color_left = affected_human.eye_color_left
+		old_eye_color_right = affected_human.eye_color_right
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	if(initial(eye_color_left))
 		affected_human.eye_color_left = eye_color_left
 	else
@@ -92,7 +112,11 @@
 		affected_human.add_fov_trait(type, native_fov)
 
 	if(call_update)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 		affected_human.update_body()
+=======
+		affected_human.dna?.species?.handle_body(affected_human) //updates eye icon
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 /obj/item/organ/internal/eyes/Remove(mob/living/carbon/eye_owner, special, movement_flags)
 	. = ..()
@@ -128,8 +152,16 @@
 	if(!istype(parent) || parent.get_organ_by_type(/obj/item/organ/internal/eyes) != src)
 		CRASH("Generating a body overlay for [src] targeting an invalid parent '[parent]'.")
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	if(isnull(eye_icon_state))
 		return list()
+=======
+	var/eye_icon = parent.dna?.species.eyes_icon || 'icons/mob/species/human/human_face.dmi'
+
+	var/mutable_appearance/eye_left = mutable_appearance(eye_icon, "[eye_icon_state]_l", -FACE_LAYER)
+	var/mutable_appearance/eye_right = mutable_appearance(eye_icon, "[eye_icon_state]_r", -FACE_LAYER)
+	var/list/overlays = list(eye_left, eye_right)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 	var/mutable_appearance/eye_left = mutable_appearance('icons/mob/human/human_face.dmi', "[eye_icon_state]_l", -BODY_LAYER)
 	var/mutable_appearance/eye_right = mutable_appearance('icons/mob/human/human_face.dmi', "[eye_icon_state]_r", -BODY_LAYER)
@@ -137,6 +169,7 @@
 
 	var/obscured = parent.check_obscured_slots(TRUE)
 	if(overlay_ignore_lighting && !(obscured & ITEM_SLOT_EYES))
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 		overlays += emissive_appearance(eye_left.icon, eye_left.icon_state, parent, -BODY_LAYER, alpha = eye_left.alpha)
 		overlays += emissive_appearance(eye_right.icon, eye_right.icon_state, parent, -BODY_LAYER, alpha = eye_right.alpha)
 	var/obj/item/bodypart/head/my_head = parent.get_bodypart(BODY_ZONE_HEAD)
@@ -147,6 +180,16 @@
 		if(my_head.worn_face_offset)
 			my_head.worn_face_offset.apply_offset(eye_left)
 			my_head.worn_face_offset.apply_offset(eye_right)
+=======
+		overlays += emissive_appearance_copy(eye_left, src, NONE)
+		overlays += emissive_appearance_copy(eye_right, src, NONE)
+
+	if(OFFSET_FACE in parent.dna?.species.offset_features)
+		var/offset = parent.dna.species.offset_features[OFFSET_FACE]
+		for(var/mutable_appearance/overlay in overlays)
+			overlay.pixel_x += offset[OFFSET_X]
+			overlay.pixel_y += offset[OFFSET_Y]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 	return overlays
 
@@ -370,7 +413,11 @@
 	eye.update_brightness(victim)
 	victim.become_blind(FLASHLIGHT_EYES)
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 /obj/item/organ/internal/eyes/robotic/flashlight/on_mob_remove(mob/living/carbon/victim)
+=======
+/obj/item/organ/internal/eyes/robotic/flashlight/on_remove(mob/living/carbon/victim)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	. = ..()
 	eye.set_light_on(FALSE)
 	eye.update_brightness(victim)
@@ -401,6 +448,7 @@
 	actions_types = list(/datum/action/item_action/organ_action/use, /datum/action/item_action/organ_action/toggle)
 	var/max_light_beam_distance = 5
 	var/obj/item/flashlight/eyelight/glow/eye
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	/// base icon state for eye overlays
 	var/base_eye_state = "eyes_glow_gs"
 	/// Whether or not to match the eye color to the light or use a custom selection
@@ -411,6 +459,22 @@
 	var/left_eye_color_string
 	/// The custom selected eye color for the right eye. Defaults to the mob's natural eye color
 	var/right_eye_color_string
+=======
+	/// The overlay that is used when both eyes are set to match the light color
+	var/mutable_appearance/eyes_overlay
+	/// The overlay that is used when custom color selection is enabled, for the left eye
+	var/mutable_appearance/eyes_overlay_left
+	/// The overlay that is used when custom color selection is enabled, for the right eye
+	var/mutable_appearance/eyes_overlay_right
+	/// Whether or not to match the eye color to the light or use a custom selection
+	var/eye_color_mode = MATCH_LIGHT_COLOR
+	/// The selected color for the light beam itself
+	var/current_color_string = "#ffffff"
+	/// The custom selected eye color for the left eye. Defaults to the mob's natural eye color
+	var/current_left_color_string
+	/// The custom selected eye color for the right eye. Defaults to the mob's natural eye color
+	var/current_right_color_string
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 /obj/item/organ/internal/eyes/robotic/glow/Initialize(mapload)
 	. = ..()
@@ -421,6 +485,7 @@
 	deactivate(close_ui = TRUE)
 	QDEL_NULL(eye)
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 /obj/item/organ/internal/eyes/robotic/glow/emp_act(severity)
 	. = ..()
 	if(!eye.light_on || . & EMP_PROTECT_SELF)
@@ -435,20 +500,48 @@
 	update_mob_eye_color(eye_recipient)
 
 /obj/item/organ/internal/eyes/robotic/glow/on_mob_insert(mob/living/carbon/eye_recipient)
+=======
+/obj/item/organ/internal/eyes/robotic/glow/emp_act()
+	. = ..()
+	if(!eye.on || . & EMP_PROTECT_SELF)
+		return
+	deactivate(close_ui = TRUE)
+
+/// We have to do this here because on_insert gets called before refresh(), which we need to have been called for old_eye_color vars to be set
+/obj/item/organ/internal/eyes/robotic/glow/Insert(mob/living/carbon/eye_recipient, special = FALSE, drop_if_replaced = FALSE)
+	. = ..()
+	current_left_color_string = old_eye_color_left
+	current_right_color_string = old_eye_color_right
+
+/obj/item/organ/internal/eyes/robotic/glow/on_insert(mob/living/carbon/eye_recipient)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	. = ..()
 	deactivate(close_ui = TRUE)
 	eye.forceMove(eye_recipient)
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 /obj/item/organ/internal/eyes/robotic/glow/on_mob_remove(mob/living/carbon/eye_owner)
 	deactivate(eye_owner, close_ui = TRUE)
 	if(!QDELETED(eye))
 		eye.forceMove(src)
+=======
+/obj/item/organ/internal/eyes/robotic/glow/on_remove(mob/living/carbon/eye_owner)
+	deactivate(eye_owner, close_ui = TRUE)
+	QDEL_NULL(eyes_overlay)
+	QDEL_NULL(eyes_overlay_left)
+	QDEL_NULL(eyes_overlay_right)
+	eye.forceMove(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	return ..()
 
 /obj/item/organ/internal/eyes/robotic/glow/ui_state(mob/user)
 	return GLOB.default_state
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 /obj/item/organ/internal/eyes/robotic/glow/ui_status(mob/user, datum/ui_state/state)
+=======
+/obj/item/organ/internal/eyes/robotic/glow/ui_status(mob/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 	if(!QDELETED(owner))
 		if(owner == user)
 			return min(
@@ -471,11 +564,19 @@
 	data["eyeColor"] = list(
 		mode = eye_color_mode,
 		hasOwner = owner ? TRUE : FALSE,
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 		left = left_eye_color_string,
 		right = right_eye_color_string,
 	)
 	data["lightColor"] = light_color_string
 	data["range"] = eye.light_range
+=======
+		left = current_left_color_string,
+		right = current_right_color_string,
+	)
+	data["lightColor"] = current_color_string
+	data["range"] = eye.light_outer_range
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 	return data
 
@@ -490,18 +591,31 @@
 			set_beam_range(new_range)
 			return TRUE
 		if("pick_color")
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 			var/new_color = input(
 				usr,
 				"Choose eye color color:",
 				"High Luminosity Eyes Menu",
 				light_color_string
 			) as color|null
+=======
+			var/new_color = tgui_color_picker(
+				usr,
+				"Choose eye color color:",
+				"High Luminosity Eyes Menu",
+				current_color_string
+			)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 			if(new_color)
 				var/to_update = params["to_update"]
 				set_beam_color(new_color, to_update)
 				return TRUE
 		if("enter_color")
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 			var/new_color = LOWER_TEXT(params["new_color"])
+=======
+			var/new_color = lowertext(params["new_color"])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 			var/to_update = params["to_update"]
 			set_beam_color(new_color, to_update, sanitize = TRUE)
 			return TRUE
@@ -525,25 +639,42 @@
  * Turns on the attached flashlight object, updates the mob overlay to be added.
  */
 /obj/item/organ/internal/eyes/robotic/glow/proc/activate()
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	if(eye.light_range)
 		eye.set_light_on(TRUE)
 	else
 		eye.light_on = TRUE // at range 0 we are just going to make the eyes glow emissively, no light overlay
 	update_mob_eye_color()
+=======
+	eye.on = TRUE
+	if(eye.light_outer_range) // at range 0 we are just going to make the eyes glow emissively, no light overlay
+		eye.set_light_on(TRUE)
+	update_mob_eyes_overlay()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 /**
  * Deactivates the light
  *
  * Turns off the attached flashlight object, closes UIs, updates the mob overlay to be removed.
  * Arguments:
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
  * * mob/living/carbon/eye_owner - the mob who the eyes belong to
+=======
+ * * mob/living/carbon/eye_owner - the mob who the eyes belong to, for passing to update_mob_eyes_overlay
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
  * * close_ui - whether or not to close the ui
  */
 /obj/item/organ/internal/eyes/robotic/glow/proc/deactivate(mob/living/carbon/eye_owner = owner, close_ui = FALSE)
 	if(close_ui)
 		SStgui.close_uis(src)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	eye.set_light_on(FALSE)
 	update_mob_eye_color(eye_owner)
+=======
+	eye.on = FALSE
+	eye.set_light_on(FALSE)
+	update_mob_eyes_overlay(eye_owner)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 /**
  * Randomizes the light color
@@ -567,11 +698,19 @@
  * * new_range - the new range to set
  */
 /obj/item/organ/internal/eyes/robotic/glow/proc/set_beam_range(new_range)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	var/old_light_range = eye.light_range
 	if(old_light_range == 0 && new_range > 0 && eye.light_on) // turn bring back the light overlay if we were previously at 0 (aka emissive eyes only)
 		eye.light_on = FALSE // this is stupid, but this has to be FALSE for set_light_on() to work.
 		eye.set_light_on(TRUE)
 	eye.set_light_range(clamp(new_range, 0, max_light_beam_distance))
+=======
+	var/old_light_range = eye.light_outer_range
+	if(old_light_range == 0 && new_range > 0 && eye.on) // turn bring back the light overlay if we were previously at 0 (aka emissive eyes only)
+		eye.light_on = FALSE // this is stupid, but this has to be FALSE for set_light_on() to work.
+		eye.set_light_on(TRUE)
+	eye.set_light_range(new_outer_range = clamp(new_range, 0, max_light_beam_distance))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 /**
  * Setter function for the light's color
@@ -590,12 +729,21 @@
 		newcolor_string = newcolor
 	switch(to_update)
 		if(UPDATE_LIGHT)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 			light_color_string = newcolor_string
 			eye.set_light_color(newcolor_string)
 		if(UPDATE_EYES_LEFT)
 			left_eye_color_string = newcolor_string
 		if(UPDATE_EYES_RIGHT)
 			right_eye_color_string = newcolor_string
+=======
+			current_color_string = newcolor_string
+			eye.set_light_color(newcolor_string)
+		if(UPDATE_EYES_LEFT)
+			current_left_color_string = newcolor_string
+		if(UPDATE_EYES_RIGHT)
+			current_right_color_string = newcolor_string
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 	update_mob_eye_color()
 
@@ -603,7 +751,11 @@
  * Toggle the attached flashlight object on or off
  */
 /obj/item/organ/internal/eyes/robotic/glow/proc/toggle_active()
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	if(eye.light_on)
+=======
+	if(eye.on)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 		deactivate()
 	else
 		activate()
@@ -627,15 +779,24 @@
 /obj/item/organ/internal/eyes/robotic/glow/proc/update_mob_eye_color(mob/living/carbon/eye_owner = owner)
 	switch(eye_color_mode)
 		if(MATCH_LIGHT_COLOR)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 			eye_color_left = light_color_string
 			eye_color_right = light_color_string
 		if(USE_CUSTOM_COLOR)
 			eye_color_left = left_eye_color_string
 			eye_color_right = right_eye_color_string
+=======
+			eye_color_left = current_color_string
+			eye_color_right = current_color_string
+		if(USE_CUSTOM_COLOR)
+			eye_color_left = current_left_color_string
+			eye_color_right = current_right_color_string
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 	if(QDELETED(eye_owner) || !ishuman(eye_owner)) //Other carbon mobs don't have eye color.
 		return
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/eyes/_eyes.dm
 	if(!eye.light_on)
 		eye_icon_state = initial(eye_icon_state)
 		overlay_ignore_lighting = FALSE
@@ -648,6 +809,45 @@
 	head.head_flags = previous_flags | HEAD_EYECOLOR
 	eye_owner.dna.species.handle_body(eye_owner)
 	head.head_flags = previous_flags
+=======
+	eye_owner.dna.species.handle_body(eye_owner)
+	update_mob_eyes_overlay()
+
+/**
+ * Updates the emissive mob eye overlay
+ *
+ * When the light is on, the overlay(s) are added. When it is disabled, they are cut.
+ * Adds one or two overlays depending on what the eye_color_mode toggle is set to.
+ * Arguments:
+ * * mob/living/carbon/eye_owner - the mob to add the overlay to
+ */
+/obj/item/organ/internal/eyes/robotic/glow/proc/update_mob_eyes_overlay(mob/living/carbon/eye_owner = owner)
+	if(QDELETED(eye_owner))
+		return
+
+	if(!ishuman(eye_owner))
+		return
+
+	eye_owner.cut_overlay(eyes_overlay)
+	eye_owner.cut_overlay(eyes_overlay_left)
+	eye_owner.cut_overlay(eyes_overlay_right)
+
+	if(!eye.on)
+		return
+
+	switch(eye_color_mode)
+		if(MATCH_LIGHT_COLOR)
+			eyes_overlay = emissive_appearance('icons/mob/species/human/human_face.dmi', "eyes_glow_gs", eye_owner, layer = -BODY_LAYER, alpha = owner.alpha)
+			eyes_overlay.color = current_color_string
+			eye_owner.add_overlay(eyes_overlay)
+		if(USE_CUSTOM_COLOR)
+			eyes_overlay_left = emissive_appearance('icons/mob/species/human/human_face.dmi', "eyes_glow_gs_left", eye_owner, layer = -BODY_LAYER, alpha = owner.alpha)
+			eyes_overlay_right = emissive_appearance('icons/mob/species/human/human_face.dmi', "eyes_glow_gs_right", eye_owner, layer = -BODY_LAYER, alpha = owner.alpha)
+			eyes_overlay_left.color = eye_color_left
+			eyes_overlay_right.color = eye_color_right
+			eye_owner.add_overlay(eyes_overlay_left)
+			eye_owner.add_overlay(eyes_overlay_right)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/eyes.dm
 
 #undef MATCH_LIGHT_COLOR
 #undef USE_CUSTOM_COLOR
@@ -661,6 +861,13 @@
 	eye_icon_state = "motheyes"
 	icon_state = "eyeballs-moth"
 	flash_protect = FLASH_PROTECTION_SENSITIVE
+	overlay_ignore_lighting = TRUE
+
+
+/obj/item/organ/internal/eyes/lizard
+	name = "lizard eyes"
+	desc = "These eyes seem to glow."
+	overlay_ignore_lighting = TRUE
 
 /obj/item/organ/internal/eyes/robotic/moth
 	name = "robotic moth eyes"

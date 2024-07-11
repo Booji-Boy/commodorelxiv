@@ -8,12 +8,22 @@ import { storage } from 'common/storage';
 
 import { setClientTheme } from '../themes';
 import {
+<<<<<<< HEAD
   addHighlightSetting,
   loadSettings,
   removeHighlightSetting,
   updateHighlightSetting,
   updateSettings,
 } from './actions';
+=======
+  loadSettings,
+  updateSettings,
+  addHighlightSetting,
+  removeHighlightSetting,
+  updateHighlightSetting,
+} from './actions';
+import { selectSettings } from './selectors';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { FONTS_DISABLED } from './constants';
 import { selectSettings } from './selectors';
 

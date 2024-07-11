@@ -208,9 +208,22 @@
 	)
 	on_poll_concluded(factory, chosen_one)
 
+<<<<<<< HEAD
 /// Called when the ghost poll concludes
 /mob/camera/blob/proc/on_poll_concluded(obj/structure/blob/special/factory/factory, mob/dead/observer/ghost)
 	if(isnull(ghost))
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as a [blobstrain.name] blobbernaut?",
+		check_jobban = ROLE_BLOB,
+		role = ROLE_BLOB,
+		poll_time = 5 SECONDS,
+		pic_source = /mob/living/basic/blob_minion/blobbernaut/minion,
+		role_name_text = "blobbernaut"
+	)
+
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(src, span_warning("You could not conjure a sentience for your blobbernaut. Your points have been refunded. Try again later."))
 		add_points(BLOBMOB_BLOBBERNAUT_RESOURCE_COST)
 		factory.assign_blobbernaut(null)
@@ -219,7 +232,12 @@
 	var/mob/living/basic/blob_minion/blobbernaut/minion/blobber = new(get_turf(factory))
 	assume_direct_control(blobber)
 	factory.assign_blobbernaut(blobber)
+<<<<<<< HEAD
 	blobber.assign_key(ghost.key, blobstrain)
+=======
+	var/mob/dead/observer/player = pick(candidates)
+	blobber.assign_key(player.key, blobstrain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(blobber, COMSIG_HOSTILE_POST_ATTACKINGTARGET, PROC_REF(on_blobbernaut_attacked))
 
 /// When one of our boys attacked something, we sometimes want to perform extra effects

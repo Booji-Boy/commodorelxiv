@@ -12,6 +12,8 @@ GLOBAL_VAR(station_nuke_source)
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	use_power = NO_POWER_USE
+	can_buckle = TRUE
+	buckle_lying = 0
 
 	/// What the timer is set to, in seconds
 	var/timer_set = 90
@@ -62,6 +64,7 @@ GLOBAL_VAR(station_nuke_source)
 	update_appearance()
 	SSpoints_of_interest.make_point_of_interest(src)
 	previous_level = SSsecurity_level.get_current_level_as_text()
+	AddElement(/datum/element/ridable, /datum/component/riding/structure/tank)
 
 /obj/machinery/nuclearbomb/Destroy()
 	safety = FALSE
@@ -523,7 +526,11 @@ GLOBAL_VAR(station_nuke_source)
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_NUKE_DEVICE_DETONATING, src)
 
+<<<<<<< HEAD
 	if(SSticker.HasRoundStarted())
+=======
+	if(SSticker?.mode)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		SSticker.roundend_check_paused = TRUE
 	addtimer(CALLBACK(src, PROC_REF(actually_explode)), 10 SECONDS)
 	return TRUE
@@ -552,6 +559,10 @@ GLOBAL_VAR(station_nuke_source)
 
 			detonation_status = DETONATION_NEAR_MISSED_STATION
 
+		// monkestation edit: if it's in a "safe" z level
+		else if(is_safe_level(bomb_location.z))
+			detonation_status = DETONATION_NEAR_MISSED_STATION
+
 		// Confirming good hits, the nuke hit the station
 		else
 			SSlag_switch.set_measure(DISABLE_NON_OBSJOBS, TRUE)
@@ -578,11 +589,18 @@ GLOBAL_VAR(station_nuke_source)
 	if(!isnull(cinematic))
 		play_cinematic(cinematic, world, CALLBACK(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, station_explosion_detonation), src))
 
+<<<<<<< HEAD
 	var/drop_level = TRUE
 	switch(detonation_status)
 		if(DETONATION_HIT_STATION)
 			nuke_effects(SSmapping.levels_by_trait(ZTRAIT_STATION))
 			drop_level = FALSE
+=======
+	var/turf/bomb_location = get_turf(src)
+	var/list/z_levels_to_blow = list()
+	if(detonation_status == DETONATION_HIT_STATION)
+		z_levels_to_blow |= SSmapping.levels_by_trait(ZTRAIT_STATION) - SSmapping.levels_by_trait(ZTRAIT_FORCED_SAFETY) // monkesation edit: allow escaping nuke by going to safe z-levels
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(DETONATION_HIT_SYNDIE_BASE)
 			priority_announce(

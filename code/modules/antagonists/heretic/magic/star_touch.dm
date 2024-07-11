@@ -197,7 +197,7 @@
 	current_beam = user.Beam(current_target, icon_state="cosmic_beam", time = 1 MINUTES, maxdistance = max_range, beam_type = /obj/effect/ebeam/cosmic)
 	RegisterSignal(current_beam, COMSIG_QDELETING, PROC_REF(beam_died))
 
-	SSblackbox.record_feedback("tally", "gun_fired", 1, type)
+	SSblackbox.record_feedback("tally", "gun_fired", 1, "Cosmic Beam")
 	if(current_target)
 		on_beam_hit(current_target)
 
@@ -234,6 +234,10 @@
 /datum/status_effect/cosmic_beam/proc/on_beam_hit(mob/living/target)
 	if(!istype(target, /mob/living/basic/heretic_summon/star_gazer))
 		target.AddElement(/datum/element/effect_trail, /obj/effect/forcefield/cosmic_field/fast)
+<<<<<<< HEAD
+=======
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// What to process when the beam is connected to a target
 /datum/status_effect/cosmic_beam/proc/on_beam_tick(mob/living/target)
@@ -244,3 +248,7 @@
 /datum/status_effect/cosmic_beam/proc/on_beam_release(mob/living/target)
 	if(!istype(target, /mob/living/basic/heretic_summon/star_gazer))
 		target.RemoveElement(/datum/element/effect_trail, /obj/effect/forcefield/cosmic_field/fast)
+<<<<<<< HEAD
+=======
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

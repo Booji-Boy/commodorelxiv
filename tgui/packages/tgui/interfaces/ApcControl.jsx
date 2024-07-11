@@ -8,10 +8,17 @@ import {
   Button,
   Dimmer,
   Icon,
+<<<<<<< HEAD
   Section,
   Stack,
   Table,
   Tabs,
+=======
+  Table,
+  Tabs,
+  Stack,
+  Section,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 import { AreaCharge, powerRank } from './PowerMonitor';
@@ -48,7 +55,11 @@ const ApcLoggedOut = (props) => {
 const ApcLoggedIn = (props) => {
   const { act, data } = useBackend();
   const { restoring } = data;
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(1);
+=======
+  const [tabIndex, setTabIndex] = useLocalState('tab-index', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Box>
       <Tabs>
@@ -169,12 +180,19 @@ const ApcControlScene = (props) => {
     sortByField === 'name' && ((apcs) => sortBy(apcs, (apc) => apc.name)),
     sortByField === 'charge' && ((apcs) => sortBy(apcs, (apc) => -apc.charge)),
     sortByField === 'draw' &&
+<<<<<<< HEAD
       ((apcs) =>
         sortBy(
           apcs,
           (apc) => -powerRank(apc.load),
           (apc) => -parseFloat(apc.load),
         )),
+=======
+      sortBy(
+        (apc) => -powerRank(apc.load),
+        (apc) => -parseFloat(apc.load),
+      ),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ])(data.apcs);
   return (
     <Box height={30}>

@@ -1,6 +1,7 @@
 import { filter, sortBy } from 'common/collections';
 import { BooleanLike, classes } from 'common/react';
 import { createSearch } from 'common/string';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -16,6 +17,22 @@ import {
   Tabs,
   Tooltip,
   VirtualList,
+=======
+import { flow } from 'common/fp';
+import { filter, sortBy } from 'common/collections';
+import { useBackend, useLocalState } from '../backend';
+import {
+  Divider,
+  Button,
+  Section,
+  Tabs,
+  Stack,
+  Box,
+  Input,
+  Icon,
+  Tooltip,
+  NoticeBox,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 import { Food } from './PreferencesMenu/data';
@@ -169,17 +186,27 @@ export const PersonalCrafting = (props) => {
     craftability,
     diet,
   } = data;
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
   const [pages, setPages] = useState(1);
   const DEFAULT_CAT_CRAFTING = Object.keys(CATEGORY_ICONS_CRAFTING)[1];
   const DEFAULT_CAT_COOKING = Object.keys(CATEGORY_ICONS_COOKING)[1];
   const [activeCategory, setCategory] = useState(
+=======
+  const [searchText, setSearchText] = useLocalState('searchText', '');
+  const [pages, setPages] = useLocalState('pages', 1);
+  const DEFAULT_CAT_CRAFTING = Object.keys(CATEGORY_ICONS_CRAFTING)[1];
+  const DEFAULT_CAT_COOKING = Object.keys(CATEGORY_ICONS_COOKING)[1];
+  const [activeCategory, setCategory] = useLocalState<string>(
+    'category',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     Object.keys(craftability).length
       ? 'Can Make'
       : mode === MODE.cooking
         ? DEFAULT_CAT_COOKING
         : DEFAULT_CAT_CRAFTING,
   );
+<<<<<<< HEAD
   const [activeType, setFoodType] = useState(
     Object.keys(craftability).length ? 'Can Make' : data.foodtypes[0],
   );
@@ -219,6 +246,47 @@ export const PersonalCrafting = (props) => {
       : Number(craftability[recipe.ref]),
     recipe.name.toLowerCase(),
   ]);
+=======
+  const [activeType, setFoodType] = useLocalState(
+    'foodtype',
+    Object.keys(craftability).length ? 'Can Make' : data.foodtypes[0],
+  );
+  const material_occurences = flow([
+    sortBy<Material>((material) => -material.occurences),
+  ])(data.material_occurences);
+  const [activeMaterial, setMaterial] = useLocalState(
+    'material',
+    material_occurences[0].atom_id,
+  );
+  const [tabMode, setTabMode] = useLocalState('tabMode', 0);
+  const searchName = createSearch(searchText, (item: Recipe) => item.name);
+  let recipes = flow([
+    filter<Recipe>(
+      (recipe) =>
+        // If craftable only is selected, then filter by craftability
+        (!display_craftable_only || Boolean(craftability[recipe.ref])) &&
+        // Ignore categories and types when searching
+        (searchText.length > 0 ||
+          // Is foodtype mode and the active type matches
+          (tabMode === TABS.foodtype &&
+            mode === MODE.cooking &&
+            ((activeType === 'Can Make' && Boolean(craftability[recipe.ref])) ||
+              recipe.foodtypes?.includes(activeType))) ||
+          // Is material mode and the active material or catalysts match
+          (tabMode === TABS.material &&
+            Object.keys(recipe.reqs).includes(activeMaterial)) ||
+          // Is category mode and the active categroy matches
+          (tabMode === TABS.category &&
+            ((activeCategory === 'Can Make' &&
+              Boolean(craftability[recipe.ref])) ||
+              recipe.category === activeCategory))),
+    ),
+    sortBy<Recipe>((recipe) => [
+      -Number(craftability[recipe.ref]),
+      recipe.name.toLowerCase(),
+    ]),
+  ])(data.recipes);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   if (searchText.length > 0) {
     recipes = filter(recipes, searchName);
   }
@@ -435,6 +503,7 @@ export const PersonalCrafting = (props) => {
                     onClick={() => act('toggle_compact')}
                   />
                 </Stack.Item>
+<<<<<<< HEAD
                 {!forced_mode && (
                   <Stack.Item>
                     <Stack textAlign="center">
@@ -485,6 +554,56 @@ export const PersonalCrafting = (props) => {
                     </Stack>
                   </Stack.Item>
                 )}
+=======
+                <Stack.Item>
+                  <Stack textAlign="center">
+                    <Stack.Item grow>
+                      <Button.Checkbox
+                        fluid
+                        lineHeight={2}
+                        content="Craft"
+                        checked={mode === MODE.crafting}
+                        icon="hammer"
+                        style={{
+                          border:
+                            '2px solid ' +
+                            (mode === MODE.crafting ? '#20b142' : '#333'),
+                        }}
+                        onClick={() => {
+                          if (mode === MODE.crafting) {
+                            return;
+                          }
+                          setTabMode(TABS.category);
+                          setCategory(DEFAULT_CAT_CRAFTING);
+                          act('toggle_mode');
+                        }}
+                      />
+                    </Stack.Item>
+                    <Stack.Item grow>
+                      <Button.Checkbox
+                        fluid
+                        lineHeight={2}
+                        content="Cook"
+                        checked={mode === MODE.cooking}
+                        icon="utensils"
+                        style={{
+                          border:
+                            '2px solid ' +
+                            (mode === MODE.cooking ? '#20b142' : '#333'),
+                        }}
+                        onClick={() => {
+                          if (mode === MODE.cooking) {
+                            return;
+                          }
+                          setTabMode(TABS.category);
+                          setCategory(DEFAULT_CAT_COOKING);
+                          act('toggle_mode');
+                        }}
+                      />
+                    </Stack.Item>
+                  </Stack>
+                </Stack.Item>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               </Stack>
             </Section>
           </Stack.Item>
@@ -494,6 +613,7 @@ export const PersonalCrafting = (props) => {
               pr={1}
               pt={1}
               mr={-1}
+<<<<<<< HEAD
               style={{ overflowY: 'auto' }}
             >
               {recipes.length > 0 ? (
@@ -527,6 +647,37 @@ export const PersonalCrafting = (props) => {
                       ),
                     )}
                 </VirtualList>
+=======
+              style={{ 'overflow-y': 'auto' }}
+            >
+              {recipes.length > 0 ? (
+                recipes
+                  .slice(0, displayLimit)
+                  .map((item) =>
+                    display_compact ? (
+                      <RecipeContentCompact
+                        key={item.ref}
+                        item={item}
+                        craftable={
+                          !item.non_craftable && Boolean(craftability[item.ref])
+                        }
+                        busy={busy}
+                        mode={mode}
+                      />
+                    ) : (
+                      <RecipeContent
+                        key={item.ref}
+                        item={item}
+                        craftable={
+                          !item.non_craftable && Boolean(craftability[item.ref])
+                        }
+                        busy={busy}
+                        mode={mode}
+                        diet={diet}
+                      />
+                    ),
+                  )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               ) : (
                 <NoticeBox m={1} p={1}>
                   No recipes found.
@@ -575,10 +726,17 @@ const MaterialContent = (props) => {
         lineHeight="32px"
         grow
         style={{
+<<<<<<< HEAD
           textTransform: 'capitalize',
           overflow: 'hidden',
           textOverflow: 'ellipsis',
           whiteSpace: 'nowrap',
+=======
+          'text-transform': 'capitalize',
+          overflow: 'hidden',
+          'text-overflow': 'ellipsis',
+          'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         {name}
@@ -769,7 +927,11 @@ const RecipeContent = ({ item, craftable, busy, mode, diet }) => {
           <Box width={'64px'} height={'64px'} mr={1}>
             <Box
               style={{
+<<<<<<< HEAD
                 transform: 'scale(1.5)',
+=======
+                transform: 'scale(2)',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               }}
               m={'16px'}
               className={item.icon}

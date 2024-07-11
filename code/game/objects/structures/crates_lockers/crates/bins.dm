@@ -9,7 +9,10 @@
 	horizontal = FALSE
 	delivery_icon = null
 	can_install_electronics = FALSE
+<<<<<<< HEAD
 	paint_jobs = null
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	elevation = 17
 	elevation_open = 17
 

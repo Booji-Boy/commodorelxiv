@@ -57,8 +57,12 @@
 	data["bountyText"] = bounty_text
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/bounty_board/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/bounty_board/ui_act(action, list/params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/current_ref_num = params["request"]
 	var/current_app_num = params["applicant"]
 	var/datum/bank_account/request_target
@@ -124,6 +128,7 @@
 			bounty_value = text2num(params["bountyval"])
 			if(!bounty_value)
 				bounty_value = 1
+			bounty_value = clamp(bounty_value, 0, 100000)
 			return TRUE
 		if("bountyText")
 			bounty_text = (params["bountytext"])

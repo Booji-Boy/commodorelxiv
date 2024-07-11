@@ -70,7 +70,11 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 	if(!rod.bait)
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
 		return
+<<<<<<< HEAD
 	if(HAS_TRAIT(rod.bait, TRAIT_OMNI_BAIT))
+=======
+	if(HAS_TRAIT(rod.bait, OMNI_BAIT_TRAIT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(HAS_TRAIT(rod.bait, TRAIT_GOOD_QUALITY_BAIT) || HAS_TRAIT(rod.bait, TRAIT_GREAT_QUALITY_BAIT))
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
@@ -115,7 +119,11 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 	if(!rod.bait)
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
 		return
+<<<<<<< HEAD
 	if(HAS_TRAIT(rod.bait, TRAIT_OMNI_BAIT))
+=======
+	if(HAS_TRAIT(rod.bait, OMNI_BAIT_TRAIT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(!istype(rod.bait, /obj/item/food))
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
@@ -134,7 +142,11 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 	if(!rod.bait)
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
 		return
+<<<<<<< HEAD
 	if(HAS_TRAIT(rod.bait, TRAIT_OMNI_BAIT))
+=======
+	if(HAS_TRAIT(rod.bait, OMNI_BAIT_TRAIT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(!istype(rod.bait, /obj/item/food/grown))
 		.[MULTIPLICATIVE_FISHING_MOD] = 0
@@ -213,10 +225,16 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 /datum/fish_trait/revival/proc/check_status(obj/item/fish/source)
 	SIGNAL_HANDLER
 	if(source.status == FISH_DEAD)
+<<<<<<< HEAD
 		addtimer(CALLBACK(src, PROC_REF(revive), WEAKREF(source)), rand(1 MINUTES, 2 MINUTES))
 
 /datum/fish_trait/revival/proc/revive(datum/weakref/fish_ref)
 	var/obj/item/fish/source = fish_ref.resolve()
+=======
+		addtimer(CALLBACK(src, PROC_REF(revive), source), rand(1 MINUTES, 2 MINUTES))
+
+/datum/fish_trait/revival/proc/revive(obj/item/fish/source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(QDELETED(source) || source.status != FISH_DEAD)
 		return
 	source.set_status(FISH_ALIVE)
@@ -313,7 +331,11 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 	name = "Aggressive"
 	inheritability = 80
 	diff_traits_inheritability = 40
+<<<<<<< HEAD
 	catalog_description = "This fish is aggressively territorial, and may attack fish that come close to it."
+=======
+	catalog_description = "This fish is agressively territorial, and may attack fish that come close to it."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/fish_trait/aggressive/apply_to_fish(obj/item/fish/fish)
 	RegisterSignal(fish, COMSIG_FISH_LIFE, PROC_REF(try_attack_fish))
@@ -364,7 +386,11 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 	catalog_description = "This fish is capable of substaining itself by producing its own sources of energy (food)."
 	incompatible_traits = list(/datum/fish_trait/predator, /datum/fish_trait/necrophage)
 
+<<<<<<< HEAD
 /datum/fish_trait/mixotroph/apply_to_fish(obj/item/fish/fish)
+=======
+/datum/fish_trait/antigrav/apply_to_fish(obj/item/fish/fish)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ADD_TRAIT(fish, TRAIT_FISH_NO_HUNGER, FISH_TRAIT_DATUM)
 
 /datum/fish_trait/antigrav
@@ -379,6 +405,7 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 
 /datum/fish_trait/antigrav/apply_to_fish(obj/item/fish/fish)
 	fish.AddElement(/datum/element/forced_gravity, NEGATIVE_GRAVITY)
+<<<<<<< HEAD
 
 ///Anxiety means the fish will die if in a location with more than 3 fish (including itself)
 ///This is just barely enough to crossbreed out of anxiety, but it severely limits the potential of
@@ -429,3 +456,5 @@ GLOBAL_LIST_INIT(fish_traits, init_subtypes_w_path_keys(/datum/fish_trait, list(
 		fish.attack_verb_continuous = fish::attack_verb_continuous
 		fish.attack_verb_simple = fish::attack_verb_simple
 		fish.hitsound = fish::hitsound
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

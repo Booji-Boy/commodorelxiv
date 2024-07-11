@@ -1,11 +1,19 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../backend';
 import { Icon, Section, Stack } from '../components';
 import { Window } from '../layouts';
 import {
+<<<<<<< HEAD
   Objective,
   ObjectivePrintout,
+=======
+  ObjectivePrintout,
+  Objective,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   ReplaceObjectivesButton,
 } from './common/Objectives';
 

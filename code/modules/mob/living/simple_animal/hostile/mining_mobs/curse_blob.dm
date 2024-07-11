@@ -119,6 +119,10 @@ IGNORE_PROC_IF_NOT_TARGET(attack_larva)
 
 IGNORE_PROC_IF_NOT_TARGET(attack_animal)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/simple_animal/hostile/asteroid/curseblob/bullet_act(obj/projectile/Proj)
 	if(Proj.firer != set_target)
 		return

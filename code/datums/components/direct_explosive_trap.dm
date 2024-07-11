@@ -46,7 +46,11 @@
 	if (!isnull(saboteur))
 		UnregisterSignal(saboteur, COMSIG_QDELETING)
 
+<<<<<<< HEAD
 /datum/component/direct_explosive_trap/Destroy(force)
+=======
+/datum/component/direct_explosive_trap/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (isnull(saboteur))
 		return ..()
 	UnregisterSignal(saboteur, COMSIG_QDELETING)

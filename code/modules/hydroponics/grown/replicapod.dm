@@ -10,16 +10,15 @@
 	product = /obj/item/food/grown/cabbage
 	lifespan = 50
 	endurance = 25
-	maturation = 3
+	maturation = 30
 	production = 5
-	yield = 4
-	instability = 10
+	yield = 40
 	growthstages = 1
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/replicapod)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/replica_pod)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1)
-	seed_flags = null
+	harvest_age =100
 
 /obj/item/food/grown/cabbage
 	seed = /obj/item/seeds/cabbage
@@ -42,8 +41,7 @@
 	endurance = 8
 	maturation = 10
 	production = 1
-	yield = 1 //seeds if there isn't a dna inside
-	instability = 15 //allows it to gain reagent genes from nearby plants
+	yield = 10
 	potency = 30
 	var/volume = 5
 	var/ckey
@@ -123,7 +121,7 @@
 		return null
 
 /obj/item/seeds/replicapod/harvest(mob/user) //now that one is fun -- Urist
-	var/obj/machinery/hydroponics/parent = loc
+	var/atom/movable/parent = loc
 	var/make_podman = FALSE
 	var/ckey_holder = null
 	var/list/result = list()
@@ -177,7 +175,6 @@
 			var/obj/item/seeds/replicapod/harvestseeds = src.Copy()
 			result.Add(harvestseeds)
 			harvestseeds.forceMove(output_loc)
-		parent.update_tray(user, seed_count)
 		return result
 
 	// Congratulations! %Do you want to build a pod man?%
@@ -213,5 +210,4 @@
 
 	podman.dna.species.exotic_blood = most_plentiful_reagent[1]
 	investigate_log("[key_name(mind)] cloned as a podman via [src] in [parent]", INVESTIGATE_BOTANY)
-	parent.update_tray(user, 1)
 	return result

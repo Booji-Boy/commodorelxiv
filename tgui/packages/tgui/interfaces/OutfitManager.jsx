@@ -44,16 +44,26 @@ export const OutfitManager = (props) => {
                     shrink={1}
                     style={{
                       overflow: 'hidden',
+<<<<<<< HEAD
                       whiteSpace: 'nowrap',
                       textOverflow: 'ellipsis',
+=======
+                      'white-space': 'nowrap',
+                      'text-overflow': 'ellipsis',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                   >
                     <Button
                       fluid
                       style={{
                         overflow: 'hidden',
+<<<<<<< HEAD
                         whiteSpace: 'nowrap',
                         textOverflow: 'ellipsis',
+=======
+                        'white-space': 'nowrap',
+                        'text-overflow': 'ellipsis',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       }}
                       content={outfit.name}
                       onClick={() => act('edit', { outfit: outfit.ref })}

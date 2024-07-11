@@ -9,6 +9,15 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 		option.info = span_boldnotice(initial(guardian_path.creator_desc))
 		.[guardian_path] = option
 
+<<<<<<< HEAD
+=======
+	//MONKESTATION EDIT START
+	// Hack to change Timestop Guardian's radial icon, since it's in a different DMI
+	var/datum/radial_menu_choice/timestop_opt = .[/mob/living/basic/guardian/standard/timestop]
+	timestop_opt.image = image(icon = 'monkestation/icons/bloodsuckers/timestop_guardian.dmi', icon_state = "timestop")
+	//MONKESTATION EDIT END
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// An item which grants you your very own soul buddy
 /obj/item/guardian_creator
 	name = "enchanted deck of tarot cards"
@@ -66,7 +75,11 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 	if(length(guardians) && !allow_multiple)
 		balloon_alert(user, "already have one!")
 		return
+<<<<<<< HEAD
 	if(IS_CHANGELING(user) && !allow_changeling)
+=======
+	if(user.mind && user.mind.has_antag_datum(/datum/antagonist/changeling) && !allow_changeling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, ling_failure)
 		return
 	if(used)
@@ -87,6 +100,7 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 	used = TRUE
 	to_chat(user, use_message)
 	var/guardian_type_name = random ? "Random" : capitalize(initial(guardian_path.creator_name))
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(
 		"Do you want to play as [span_danger("[user.real_name]'s")] [span_notice("[guardian_type_name] [mob_name]")]?",
 		check_jobban = ROLE_PAI,
@@ -100,6 +114,19 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 	if(chosen_one)
 		spawn_guardian(user, chosen_one, guardian_path)
 		used = TRUE
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as [user.real_name]'s [guardian_type_name] [mob_name]?",
+		check_jobban = ROLE_PAI,
+		poll_time = 10 SECONDS,
+		ignore_category = POLL_IGNORE_HOLOPARASITE,
+		pic_source = guardian_path,
+		role_name_text = "guardian spirit"
+	)
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/candidate = pick(candidates)
+		spawn_guardian(user, candidate, guardian_path)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		SEND_SIGNAL(src, COMSIG_TRAITOR_ITEM_USED(type))
 	else
 		to_chat(user, failure_message)

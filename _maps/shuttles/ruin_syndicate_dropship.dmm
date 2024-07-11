@@ -14,6 +14,7 @@
 	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/ruin/caravan/syndicate3)
 "bt" = (
@@ -164,6 +165,23 @@
 "nv" = (
 /turf/open/floor/iron/dark,
 /area/shuttle/ruin/caravan/syndicate3)
+<<<<<<< HEAD
+=======
+"nA" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/shuttle/ruin/caravan/syndicate3)
+"ox" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/pod/dark,
+/area/shuttle/ruin/caravan/syndicate3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "oW" = (
 /obj/machinery/light/small/directional/west,
 /obj/machinery/button/door/directional/west{
@@ -235,6 +253,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
+/obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/shuttle/ruin/caravan/syndicate3)
 "zB" = (
@@ -265,6 +284,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/ruin/caravan/syndicate3)
+<<<<<<< HEAD
+=======
+"ES" = (
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/iron/dark,
+/area/shuttle/ruin/caravan/syndicate3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "GU" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/neutral/fourcorners,

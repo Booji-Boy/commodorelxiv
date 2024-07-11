@@ -73,6 +73,8 @@
 #define COMSIG_GLOB_NUKE_DEVICE_ARMED "!nuclear_device_armed"
 /// global signal sent when a nuclear device is disarmed (/obj/machinery/nuclearbomb/nuke/disarmed_nuke)
 #define COMSIG_GLOB_NUKE_DEVICE_DISARMED "!nuclear_device_disarmed"
+/// global signal sent when a nuclear device is detonating (/obj/machinery/nuclearbomb/nuke/exploding_nuke)
+#define COMSIG_GLOB_NUKE_DEVICE_DETONATING "!nuclear_device_detonating"
 
 /// global signal sent when a nuclear device is detonating (/obj/machinery/nuclearbomb/nuke/exploding_nuke)
 #define COMSIG_GLOB_NUKE_DEVICE_DETONATING "!nuclear_device_detonating"
@@ -84,6 +86,7 @@
 /// (new_name, old_name)
 #define COMSIG_GLOB_STATION_NAME_CHANGED "!station_name_changed"
 
+<<<<<<< HEAD
 /// Global signal sent before we decide what job everyone has
 #define COMSIG_GLOB_PRE_JOBS_ASSIGNED "!pre_roles_assigned"
 
@@ -106,3 +109,12 @@
 
 /// Global signal sent when a mob is spawned from a ghost in a dynamic ruleset (mob/spawned_mob)
 #define COMSIG_RULESET_BODY_GENERATED_FROM_GHOSTS "!ruleset_body_generated_from_ghosts"
+=======
+
+//monkestation edit start
+// Used for smothering fires upon weather event start/stop
+#define COMSIG_GLOB_WEATHER_CHANGE "!weather_event_changed"
+
+#define COMSIG_GLOB_WEATHER_EFFECT "!weather_effect_update"
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -32,6 +32,7 @@
 	src.minimum_stat = minimum_stat
 	src.snip_chance = snip_chance
 	src.target_zones = target_zones
+<<<<<<< HEAD
 	RegisterSignals(target, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(try_amputate))
 
 /datum/element/amputating_limbs/Detach(datum/source)
@@ -42,6 +43,18 @@
 /datum/element/amputating_limbs/proc/try_amputate(mob/living/surgeon, atom/victim, proximity, modifiers)
 	SIGNAL_HANDLER
 	if (!proximity || !iscarbon(victim) || HAS_TRAIT(victim, TRAIT_NODISMEMBER) || !prob(snip_chance))
+=======
+	RegisterSignals(target, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(try_amputate))
+
+/datum/element/amputating_limbs/Detach(datum/source)
+	UnregisterSignal(source, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET))
+	return ..()
+
+/// Called when you click on literally anything with your hands, see if it is an injured carbon and then try to cut it up
+/datum/element/amputating_limbs/proc/try_amputate(mob/living/surgeon, atom/victim)
+	SIGNAL_HANDLER
+	if (!iscarbon(victim) || HAS_TRAIT(victim, TRAIT_NODISMEMBER) || !prob(snip_chance))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/mob/living/carbon/limbed_victim = victim

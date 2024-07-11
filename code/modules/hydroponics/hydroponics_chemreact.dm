@@ -6,10 +6,14 @@
 	///Contains the reagents within the tray.
 	if(myseed)
 		myseed.on_chem_reaction(reagents) //In case seeds have some special interactions with special chems, currently only used by vines
+<<<<<<< HEAD
 	for(var/datum/reagent/chem as anything in reagents.reagent_list)
 		if(chem.volume < 1)
 			continue
 		chem.on_hydroponics_apply(src, user)
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/hydroponics/proc/mutation_roll(mob/user)
 	switch(rand(100))
@@ -17,11 +21,16 @@
 			adjust_plant_health(-10)
 			visible_message(span_warning("\The [myseed.plantname] starts to wilt and burn!"))
 			return
-		if(41 to 90)
-			if(myseed && !self_sustaining) //Stability
-				myseed.adjust_instability(5)
-				return
-		if(21 to 40)
+		if(81 to 90)
+			mutatespecie_new()
+			return
+		if(66 to 80)
+			hardmutate()
+			return
+		if(41 to 65)
+			mutate()
+			return
+		if(21 to 41)
 			visible_message(span_notice("\The [myseed.plantname] appears unusually reactive..."))
 			return
 		if(11 to 20)
@@ -30,3 +39,5 @@
 		if(0 to 10)
 			mutatepest(user)
 			return
+		else
+			to_chat(user, "<span class='notice'>Nothing happens...</span>")

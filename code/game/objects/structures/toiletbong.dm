@@ -95,10 +95,22 @@
 	obj_flags |= EMAGGED
 	smokeradius = 2
 	playsound(src, 'sound/effects/fish_splash.ogg', 50)
+<<<<<<< HEAD
 	balloon_alert(user, "toilet broke")
 	if (emag_card)
 		to_chat(user, span_boldwarning("The [emag_card] falls into the toilet. You fish it back out. Looks like you broke the toilet."))
 	return TRUE
+=======
+	user.balloon_alert(user, "whoops!")
+	if(!emagged)
+		emagged = TRUE
+		smokeradius = 2
+		balloon_alert(user, "toilet broke")
+		if (emag_card)
+			to_chat(user, span_boldwarning("The [emag_card] falls into the toilet. You fish it back out. Looks like you broke the toilet."))
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/toiletbong/attackby(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/card/emag))

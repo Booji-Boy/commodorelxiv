@@ -214,7 +214,12 @@
 /mob/living/silicon/robot/model/syndicate/create_modularInterface()
 	if(!modularInterface)
 		modularInterface = new /obj/item/modular_computer/pda/silicon/cyborg/syndicate(src)
+<<<<<<< HEAD
 		modularInterface.imprint_id(job_name = "Cyborg")
+=======
+		modularInterface.saved_identification = real_name
+		modularInterface.saved_job = "Cyborg"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /mob/living/silicon/robot/model/syndicate/proc/show_playstyle()

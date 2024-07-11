@@ -6,6 +6,8 @@ GLOBAL_PROTECT(round_id)
 /// The directory in which ALL log files should be stored
 GLOBAL_VAR(log_directory)
 GLOBAL_PROTECT(log_directory)
+GLOBAL_VAR(demo_directory)
+GLOBAL_PROTECT(demo_directory)
 
 #define DECLARE_LOG_NAMED(log_var_name, log_file_name, start)\
 GLOBAL_VAR(##log_var_name);\
@@ -18,6 +20,7 @@ GLOBAL_PROTECT(##log_var_name);\
 	}\
 }
 
+<<<<<<< HEAD
 #define DECLARE_LOG(log_name, start) DECLARE_LOG_NAMED(##log_name, "[copytext(#log_name, 1, length(#log_name) - 3)]", start)
 #define START_LOG TRUE
 #define DONT_START_LOG FALSE
@@ -41,6 +44,30 @@ DECLARE_LOG_NAMED(harddel_log, "harddels", START_LOG)
 DECLARE_LOG_NAMED(test_log, "tests", START_LOG)
 #endif
 
+=======
+#define DECLARE_LOG(log_name, start) DECLARE_LOG_NAMED(##log_name, "[copytext(#log_name, 1, length(#log_name) - 4)]", start)
+#define START_LOG TRUE
+#define DONT_START_LOG FALSE
+
+/// Populated by log declaration macros to set log file names and start messages
+/world/proc/_initialize_log_files(temp_log_override = null)
+	// Needs to be here to avoid compiler warnings
+	SHOULD_CALL_PARENT(TRUE)
+	return
+
+// All individual log files.
+// These should be used where the log category cannot easily be a json log file.
+DECLARE_LOG(config_error_log, DONT_START_LOG)
+DECLARE_LOG(perf_log, DONT_START_LOG) // Declared here but name is set in time_track subsystem
+
+#ifdef REFERENCE_DOING_IT_LIVE
+DECLARE_LOG_NAMED(harddel_log, "harddels", START_LOG)
+#endif
+
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+DECLARE_LOG_NAMED(test_log, "tests", START_LOG)
+#endif
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Picture logging
 GLOBAL_VAR(picture_log_directory)
@@ -60,6 +87,7 @@ GLOBAL_PROTECT(admin_activities)
 GLOBAL_LIST_EMPTY(bombers)
 GLOBAL_PROTECT(bombers)
 
+<<<<<<< HEAD
 /// Investigate log for signaler usage, use the add_to_signaler_investigate_log proc
 GLOBAL_LIST_EMPTY(investigate_signaler)
 GLOBAL_PROTECT(investigate_signaler)
@@ -75,6 +103,20 @@ GLOBAL_PROTECT(investigate_signaler)
 /// Stores who uploaded laws to which silicon-based lifeform, and what the law was
 GLOBAL_LIST_EMPTY(lawchanges)
 GLOBAL_PROTECT(lawchanges)
+=======
+/// All signals here in format: "[src] used [REF(src)] @ location [src.loc]: [freq]/[code]"
+GLOBAL_LIST_EMPTY(lastsignalers)
+GLOBAL_PROTECT(lastsignalers)
+
+/// Stores who uploaded laws to which silicon-based lifeform, and what the law was
+GLOBAL_LIST_EMPTY(lawchanges)
+GLOBAL_PROTECT(lawchanges)
+
+//Monkestation Edit: REPLAYS
+GLOBAL_VAR(demo_log)
+GLOBAL_PROTECT(demo_log)
+//Monkestation Edit: REPLAYS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #undef DECLARE_LOG
 #undef DECLARE_LOG_NAMED

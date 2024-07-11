@@ -57,10 +57,15 @@
 	antag_flag_override = ROLE_TRAITOR
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_PERSONNEL,
 		JOB_HEAD_OF_SECURITY,
 		JOB_SECURITY_OFFICER,
+		JOB_SECURITY_ASSISTANT,
 		JOB_WARDEN,
 	)
 	restricted_roles = list(
@@ -70,8 +75,10 @@
 	required_candidates = 1
 	weight = 11
 	cost = 5
-	requirements = list(5,5,5,5,5,5,5,5,5,5)
+	requirements = list(30,20,10,5,5,5,5,5,5,5)
 	repeatable = TRUE
+
+	minimum_players = 10
 
 //////////////////////////////////////////////
 //                                          //
@@ -98,6 +105,7 @@
 		JOB_QUARTERMASTER,
 		JOB_RESEARCH_DIRECTOR,
 		JOB_SECURITY_OFFICER,
+		JOB_SECURITY_ASSISTANT,
 		JOB_WARDEN,
 	)
 	enemy_roles = list(
@@ -117,6 +125,9 @@
 	requirements = list(101,101,70,40,30,20,20,20,20,20)
 	flags = HIGH_IMPACT_RULESET
 	blocking_rules = list(/datum/dynamic_ruleset/roundstart/revs)
+
+	minimum_players = 100 //MONKESTATION EDIT Originally 30, changed to 100 so it's disabled for now
+
 	var/required_heads_of_staff = 3
 	var/finished = FALSE
 	var/datum/team/revolution/revolution
@@ -187,11 +198,16 @@
 	antag_flag_override = ROLE_HERETIC
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_PERSONNEL,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
+		JOB_SECURITY_ASSISTANT,
 		JOB_WARDEN,
 	)
 	restricted_roles = list(
@@ -203,6 +219,8 @@
 	cost = 6
 	requirements = list(101,101,50,10,10,10,10,10,10,10)
 	repeatable = TRUE
+
+	minimum_players = 25
 
 /datum/dynamic_ruleset/latejoin/heretic_smuggler/execute()
 	var/mob/picked_mob = pick(candidates)

@@ -128,6 +128,9 @@
 /obj/item/crowbar/power/get_all_tool_behaviours()
 	return list(TOOL_CROWBAR, TOOL_WIRECUTTER)
 
+/obj/item/crowbar/power/get_all_tool_behaviours()
+	return list(TOOL_CROWBAR, TOOL_WIRECUTTER)
+
 /obj/item/crowbar/power/Initialize(mapload)
 	. = ..()
 	AddComponent( \
@@ -153,10 +156,13 @@
 	if(user)
 		balloon_alert(user, "attached [active ? "cutting" : "prying"]")
 	playsound(src, 'sound/items/change_jaws.ogg', 50, TRUE)
+<<<<<<< HEAD
 	if(tool_behaviour == TOOL_CROWBAR)
 		RemoveElement(/datum/element/cuffsnapping, snap_time_weak_handcuffs, snap_time_strong_handcuffs)
 	else
 		AddElement(/datum/element/cuffsnapping, snap_time_weak_handcuffs, snap_time_strong_handcuffs)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return COMPONENT_NO_DEFAULT_MESSAGE
 
 /obj/item/crowbar/power/syndicate

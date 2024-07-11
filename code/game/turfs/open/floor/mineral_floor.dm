@@ -39,7 +39,10 @@
 	floor_tile = /obj/item/stack/tile/mineral/plasma
 	icons = list("plasma","plasma_dam")
 	custom_materials = list(/datum/material/plasma = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Plasma floor that can't be removed, for disco inferno
 
@@ -55,7 +58,10 @@
 	floor_tile = /obj/item/stack/tile/mineral/gold
 	icons = list("gold","gold_dam")
 	custom_materials = list(/datum/material/gold = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //SILVER
 
@@ -73,7 +79,10 @@
 	icon_state = "titanium"
 	floor_tile = /obj/item/stack/tile/mineral/titanium
 	custom_materials = list(/datum/material/titanium = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/floor/mineral/titanium/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
@@ -157,7 +166,10 @@
 	icon_state = "plastitanium"
 	floor_tile = /obj/item/stack/tile/mineral/plastitanium
 	custom_materials = list(/datum/material/alloy/plastitanium = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_TITANIUM
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/floor/mineral/plastitanium/broken_states()
 	return list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5")
@@ -184,7 +196,10 @@
 	floor_tile = /obj/item/stack/tile/mineral/bananium
 	icons = list("bananium","bananium_dam")
 	custom_materials = list(/datum/material/bananium = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_BASIC
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	material_flags = NONE //The slippery comp makes it unpractical for good clown decor. The custom mat one should still slip.
 	var/sound_cooldown = 0
 
@@ -231,7 +246,10 @@
 	floor_tile = /obj/item/stack/tile/mineral/diamond
 	icons = list("diamond","diamond_dam")
 	custom_materials = list(/datum/material/diamond = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_REINFORCED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //URANIUM
 
@@ -242,7 +260,10 @@
 	floor_tile = /obj/item/stack/tile/mineral/uranium
 	icons = list("uranium","uranium_dam")
 	custom_materials = list(/datum/material/uranium = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_REINFORCED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/last_event = 0
 	var/active = null
 
@@ -293,8 +314,11 @@
 	icons = list("alienpod1", "alienpod2", "alienpod3", "alienpod4", "alienpod5", "alienpod6", "alienpod7", "alienpod8", "alienpod9")
 	baseturfs = /turf/open/floor/plating/abductor2
 	custom_materials = list(/datum/material/alloy/alien = SMALL_MATERIAL_AMOUNT*5)
+<<<<<<< HEAD
 	rust_resistance = RUST_RESISTANCE_ORGANIC
 	damaged_dmi = null
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/floor/mineral/abductor/Initialize(mapload)
 	. = ..()

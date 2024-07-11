@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+import {
+  BlockQuote,
+  Collapsible,
+  LabeledList,
+  Modal,
+  Section,
+  Stack,
+  Tabs,
+} from '../components';
+import { useBackend } from '../backend';
+import { useLocalState } from '../backend';
+import { Window } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { BooleanLike } from 'common/react';
 import { useState } from 'react';
 
@@ -39,7 +54,11 @@ enum SCREENS {
 }
 
 export const AccountingConsole = (props) => {
+<<<<<<< HEAD
   const [screenmode, setScreenmode] = useState(SCREENS.users);
+=======
+  const [screenmode, setScreenmode] = useLocalState('tab_main', SCREENS.users);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window width={300} height={360}>

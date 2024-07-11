@@ -93,6 +93,12 @@
 	SIGNAL_HANDLER
 	if ((isnull(selected_experiment) && !(config_flags & EXPERIMENT_CONFIG_ALWAYS_ACTIVE)) || (config_flags & EXPERIMENT_CONFIG_SILENT_FAIL))
 		return
+<<<<<<< HEAD
+=======
+	. |= COMPONENT_AFTERATTACK_PROCESSED_ITEM
+	if ((selected_experiment == null && !(config_flags & EXPERIMENT_CONFIG_ALWAYS_ACTIVE)) || config_flags & EXPERIMENT_CONFIG_SILENT_FAIL)
+		return .
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	playsound(user, 'sound/machines/buzz-sigh.ogg', 25)
 	to_chat(user, span_notice("[target] is not related to your currently selected experiment."))
 
@@ -310,6 +316,35 @@
 
 	// Finally, check against the allowed experiment types
 	return is_type_in_list(experiment, allowed_experiments)
+<<<<<<< HEAD
+=======
+
+/**
+ * Goes through all techwebs and goes through their servers to find ones on a valid z-level
+ * Returns the full list of all techweb servers.
+ */
+/datum/component/experiment_handler/proc/get_available_servers()
+	var/list/local_servers = list()
+	for (var/datum/techweb/techwebs as anything in SSresearch.techwebs)
+		var/list/servers = find_valid_servers(techwebs)
+		if(length(servers))
+			local_servers += servers
+	return local_servers
+
+/**
+ * Goes through an individual techweb's servers and finds one on a valid z-level
+ * Returns a list of existing ones, or an empty list otherwise.
+ * Args:
+ * - checking_web - The techweb we're checking the servers of.
+ */
+/datum/component/experiment_handler/proc/find_valid_servers(datum/techweb/checking_web)
+	var/list/valid_servers = list()
+	for(var/obj/machinery/rnd/server/server as anything in checking_web.techweb_servers)
+		if(!is_valid_z_level(get_turf(server), get_turf(parent)))
+			continue
+		valid_servers += server
+	return valid_servers
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/experiment_handler/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ai_behavior/break_spine/bane/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	if(succeeded)
 		var/list/bane_quotes = strings("bane.json", "bane")

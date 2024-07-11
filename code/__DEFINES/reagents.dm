@@ -98,6 +98,7 @@
 #define REAGENT_CLEANS (1<<8)
 ///Does this reagent affect wounds? Used to check if some procs should be ran.
 #define REAGENT_AFFECTS_WOUNDS (1<<9)
+<<<<<<< HEAD
 /// If present, when metabolizing out of a mob, we divide by the mob's metabolism rather than multiply.
 /// Without this flag: Higher metabolism means the reagent exits the system faster.
 /// With this flag: Higher metabolism means the reagent exits the system slower.
@@ -105,6 +106,8 @@
 /// If present, this reagent will not be affected by the mob's metabolism at all, meaning it exits at a fixed rate for all mobs.
 /// Supercedes [REAGENT_REVERSE_METABOLISM].
 #define REAGENT_UNAFFECTED_BY_METABOLISM (1<<11)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Chemical reaction flags, for determining reaction specialties
 ///Convert into impure/pure on reaction completion
@@ -113,8 +116,8 @@
 #define REACTION_CLEAR_INVERSE (1<<1)
 ///Clear converted chems retain their purities/inverted purities. Requires 1 or both of the above.
 #define REACTION_CLEAR_RETAIN (1<<2)
-///Used to create instant reactions
-#define REACTION_INSTANT (1<<3)
+///Used to create timed reactions
+#define REACTION_NON_INSTANT (1<<3)
 ///Used to force reactions to create a specific amount of heat per 1u created. So if thermic_constant = 5, for 1u of reagent produced, the heat will be forced up arbitarily by 5 irresepective of other reagents. If you use this, keep in mind standard thermic_constant values are 100x what it should be with this enabled.
 #define REACTION_HEAT_ARBITARY (1<<4)
 ///Used to bypass the chem_master transfer block (This is needed for competitive reactions unless you have an end state programmed). More stuff might be added later. When defining this, please add in the comments the associated reactions that it competes with
@@ -123,6 +126,8 @@
 #define REACTION_PH_VOL_CONSTANT (1<<6)
 ///If a reaction will generate it's impure/inverse reagents in the middle of a reaction, as apposed to being determined on ingestion/on reaction completion
 #define REACTION_REAL_TIME_SPLIT (1<<7)
+///Should this reaction use purity
+#define REACTION_USES_PURITY (1<<8)
 
 ///Used for overheat_temp - This sets the overheat so high it effectively has no overheat temperature.
 #define NO_OVERHEAT 99999

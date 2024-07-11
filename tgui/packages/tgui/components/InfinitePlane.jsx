@@ -149,10 +149,17 @@ export class InfinitePlane extends Component {
             position: 'fixed',
             height: '100%',
             width: '100%',
+<<<<<<< HEAD
             backgroundImage: `url("${backgroundImage}")`,
             backgroundPosition: `${finalLeft}px ${finalTop}px`,
             backgroundRepeat: 'repeat',
             backgroundSize: `${zoom * imageWidth}px`,
+=======
+            'background-image': `url("${backgroundImage}")`,
+            'background-position': `${finalLeft}px ${finalTop}px`,
+            'background-repeat': 'repeat',
+            'background-size': `${zoom * imageWidth}px`,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         />
         <div
@@ -161,7 +168,11 @@ export class InfinitePlane extends Component {
           style={{
             position: 'fixed',
             transform: `translate(${finalLeft}px, ${finalTop}px) scale(${zoom})`,
+<<<<<<< HEAD
             transformOrigin: 'top left',
+=======
+            'transform-origin': 'top left',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             height: '100%',
             width: '100%',
           }}

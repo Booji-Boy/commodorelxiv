@@ -40,6 +40,20 @@
 		handled = FALSE
 	src.produce_ants = ant_attracting
 
+<<<<<<< HEAD
+=======
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(handle_movement))
+	RegisterSignals(parent, list(
+		COMSIG_ITEM_PICKUP, //person picks up an item
+		COMSIG_ATOM_ENTERED), //Object enters a storage object (boxes, etc.)
+		PROC_REF(picked_up))
+	RegisterSignals(parent, list(
+		COMSIG_ITEM_DROPPED, //Object is dropped anywhere
+		COMSIG_ATOM_EXITED), //Object exits a storage object (boxes, etc)
+		PROC_REF(dropped))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(custom_time) // We have a custom decomposition time, set it to that
 		original_time = custom_time
 	else if(decomp_flags & RAW) // Raw food overrides gross
@@ -63,10 +77,19 @@
 
 /datum/component/decomposition/UnregisterFromParent()
 	UnregisterSignal(parent, list(
+<<<<<<< HEAD
 		COMSIG_ATOM_GERM_EXPOSED,
 		COMSIG_ATOM_GERM_UNEXPOSED,
 		COMSIG_ATOM_EXAMINE
 	))
+=======
+		COMSIG_ITEM_PICKUP,
+		COMSIG_ATOM_ENTERED,
+		COMSIG_MOVABLE_MOVED,
+		COMSIG_ITEM_DROPPED,
+		COMSIG_ATOM_EXITED,
+		COMSIG_ATOM_EXAMINE))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/decomposition/proc/start_timer()
 	SIGNAL_HANDLER
@@ -91,6 +114,7 @@
 
 /// Returns the time remaining in decomp, either from our potential timer or our own value, whichever is more useful
 /datum/component/decomposition/proc/get_time()
+<<<<<<< HEAD
 	if(!decomp_timerid)
 		return time_remaining
 	return timeleft(decomp_timerid)
@@ -105,6 +129,18 @@
 		return
 	deltimer(stink_timerid)
 	stink_timerid = null
+=======
+	if(!timerid)
+		return time_remaining
+	return timeleft(timerid)
+
+/datum/component/decomposition/proc/remove_timer()
+	if(!timerid)
+		return
+	time_remaining = timeleft(timerid)
+	deltimer(timerid)
+	timerid = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/decomposition/proc/stink_up()
 	stink_timerid = null

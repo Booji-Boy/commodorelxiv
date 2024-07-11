@@ -5,8 +5,13 @@
 	button_icon_state = "lay_eggs"
 	background_icon_state = "bg_alien"
 	overlay_icon_state = "bg_alien_border"
+<<<<<<< HEAD
 	cooldown_time = 20 SECONDS
 	melee_cooldown_time = 5 SECONDS
+=======
+	cooldown_time = 0
+	melee_cooldown_time = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	shared_cooldown = NONE
 	click_to_activate = FALSE
 	///How long it takes for a broodmother to lay eggs.
@@ -60,6 +65,7 @@
 	if (spider_directive)
 		new_eggs.directive = spider_directive.current_directive
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/lay_eggs/abnormal
 	name = "Lay Abnormal Eggs"
 	desc = "Lay a cluster of eggs, which will soon grow into a uncommon spider."
@@ -67,6 +73,8 @@
 	cooldown_time = 180 SECONDS
 	egg_type = /obj/effect/mob_spawn/ghost_role/spider/abnormal
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/mob_cooldown/lay_eggs/enriched
 	name = "Lay Enriched Eggs"
 	desc = "Lay a cluster of eggs, which will soon grow into a rare spider.  Requires you drain a human per cluster of these eggs."

@@ -28,7 +28,17 @@
 
 	//Body temperature stability and damage
 	dna.species.handle_body_temperature(src, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
+=======
+
+	if(!HAS_TRAIT(src, TRAIT_STASIS))
+		if(.) //not dead
+
+			for(var/datum/mutation/human/HM in dna.mutations) // Handle active genes
+				HM.on_life(seconds_per_tick, times_fired)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(stat != DEAD)
 			//handle active mutations
 			for(var/datum/mutation/human/human_mutation as anything in dna.mutations)
@@ -46,6 +56,7 @@
 
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
+	update_name_tag(name) // monkestation edit: name tags
 
 	if(stat != DEAD)
 		return TRUE

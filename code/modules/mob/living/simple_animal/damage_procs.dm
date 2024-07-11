@@ -56,6 +56,7 @@
 	else if(damage_coeff[TOX])
 		. = adjustHealth(amount * damage_coeff[TOX] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
 
+<<<<<<< HEAD
 /mob/living/simple_animal/adjustStaminaLoss(amount, updating_stamina = TRUE, forced = FALSE, required_biotype)
 	if(!can_adjust_stamina_loss(amount, forced, required_biotype))
 		return 0
@@ -68,3 +69,15 @@
 
 /mob/living/simple_animal/received_stamina_damage(current_level, amount_actual, amount)
 	return
+=======
+/mob/living/simple_animal/adjustCloneLoss(amount, updating_health = TRUE, forced = FALSE, required_biotype)
+	if(!can_adjust_clone_loss(amount, forced, required_biotype))
+		return 0
+	if(forced)
+		. = adjustHealth(amount * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+	else if(damage_coeff[CLONE])
+		. = adjustHealth(amount * damage_coeff[CLONE] * CONFIG_GET(number/damage_multiplier), updating_health, forced)
+
+/mob/living/simple_animal/pre_stamina_change(diff as num, forced)
+	return diff * damage_coeff[STAMINA]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

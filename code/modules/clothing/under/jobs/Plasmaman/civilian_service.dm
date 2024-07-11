@@ -115,16 +115,26 @@
 	icon_state = "clown_envirosuit"
 	inhand_icon_state = null
 
+<<<<<<< HEAD
+=======
+/obj/item/clothing/under/plasmaman/clown/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CLOWN, CELL_VIRUS_TABLE_GENERIC, rand(2,3), 0)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/under/plasmaman/bitrunner
 	name = "bitrunner envirosuit"
 	desc = "An envirosuit specially designed for plasmamen with bad posture."
 	icon_state = "bitrunner_envirosuit"
 	inhand_icon_state = null
+<<<<<<< HEAD
 
 /obj/item/clothing/under/plasmaman/clown/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CLOWN, CELL_VIRUS_TABLE_GENERIC, rand(2,3), 0)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/under/plasmaman/prisoner
 	name = "prisoner envirosuit"
 	desc = "An orange envirosuit identifying and protecting a criminal plasmaman. Its suit sensors are stuck in the \"Fully On\" position."

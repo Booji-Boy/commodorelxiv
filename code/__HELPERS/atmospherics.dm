@@ -199,6 +199,7 @@ GLOBAL_LIST_EMPTY(gas_handbook)
 		if(boundaries && boundaries[1] > 0)
 			return FALSE
 	return TRUE
+<<<<<<< HEAD
 
 /proc/print_gas_mixture(datum/gas_mixture/gas_mixture)
 	var/message = "TEMPERATURE: [gas_mixture.temperature]K, QUANTITY: [gas_mixture.total_moles()] mols, VOLUME: [gas_mixture.volume]L; "
@@ -206,3 +207,5 @@ GLOBAL_LIST_EMPTY(gas_handbook)
 		var/list/gaslist = gas_mixture.gases[key]
 		message += "[gaslist[GAS_META][META_GAS_ID]]=[gaslist[MOLES]] mols;"
 	return message
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

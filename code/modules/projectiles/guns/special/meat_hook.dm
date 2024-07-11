@@ -62,9 +62,35 @@
 
 /obj/projectile/hook/fire(setAngle)
 	if(firer)
+<<<<<<< HEAD
 		initial_chain = firer.Beam(src, icon_state = "chain", emissive = FALSE)
 		ADD_TRAIT(firer, TRAIT_IMMOBILIZED, REF(src))
 		addtimer(TRAIT_CALLBACK_REMOVE(firer, TRAIT_IMMOBILIZED, REF(src)), IMMOBILIZATION_TIMER) // safety if we miss, if we get a hit we stay immobilized
+=======
+		chain = firer.Beam(src, icon_state = chain_iconstate, emissive = FALSE) //monkestation edit: replaced "chain" with chain_iconstate
+	..()
+	//TODO: root the firer until the chain returns
+
+/obj/projectile/hook/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
+	if(ismovable(target))
+		var/atom/movable/A = target
+		if(A.anchored)
+			return
+		A.visible_message(span_danger("[A] is snagged by [firer]'s hook!"))
+		//Should really be a movement loop, but I don't want to support moving 5 tiles a tick
+		//It just looks bad
+		new /datum/forced_movement(A, get_turf(firer), 5, TRUE)
+		if (isliving(target))
+			var/mob/living/fresh_meat = target
+			fresh_meat.Knockdown(knockdown_time)
+			return
+		//TODO: keep the chain beamed to A
+		//TODO: needs a callback to delete the chain
+
+/obj/projectile/hook/Destroy()
+	qdel(chain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/projectile/hook/on_hit(atom/target, blocked = 0, pierce_hit)

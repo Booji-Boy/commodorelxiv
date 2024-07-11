@@ -81,6 +81,7 @@
 	for(var/turf/cordon_turf as anything in cordon_turfs)
 		var/area/misc/cordon/cordon_area = GLOB.areas_by_type[/area/misc/cordon] || new
 		var/area/old_area = cordon_turf.loc
+<<<<<<< HEAD
 
 		LISTASSERTLEN(old_area.turfs_to_uncontain_by_zlevel, cordon_turf.z, list())
 		LISTASSERTLEN(cordon_area.turfs_by_zlevel, cordon_turf.z, list())
@@ -88,6 +89,11 @@
 		cordon_area.turfs_by_zlevel[cordon_turf.z] += cordon_turf
 		cordon_area.contents += cordon_turf
 
+=======
+		old_area.turfs_to_uncontain += cordon_turf
+		cordon_area.contained_turfs += cordon_turf
+		cordon_area.contents += cordon_turf
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		// Its no longer unused, but its also not "used"
 		cordon_turf.turf_flags &= ~UNUSED_RESERVATION_TURF
 		cordon_turf.ChangeTurf(/turf/cordon, /turf/cordon)
@@ -131,7 +137,10 @@
 
 	dump_in_space(enterer)
 
+<<<<<<< HEAD
 ///Only dump if we don't have the hyperspace cordon movement exemption trait
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/turf_reservation/transit/proc/space_dump_soft(atom/source, atom/movable/enterer)
 	SIGNAL_HANDLER
 

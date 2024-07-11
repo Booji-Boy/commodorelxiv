@@ -48,6 +48,7 @@
 	SIGNAL_HANDLER
 	LAZYADD(actions, new/datum/action/innate/bci_action(src, action_comp))
 
+<<<<<<< HEAD
 /obj/item/organ/internal/cyberimp/bci/proc/action_comp_unregistered(datum/source, obj/item/circuit_component/equipment_action/action_comp)
 	SIGNAL_HANDLER
 	var/datum/action/innate/bci_action/action = action_comp.granted_to[REF(src)]
@@ -55,12 +56,31 @@
 		return
 	LAZYREMOVE(actions, action)
 	QDEL_LIST_ASSOC_VAL(action_comp.granted_to)
+=======
+		bci.actions += list(bci_action)
+
+/obj/item/circuit_component/equipment_action/bci/unregister_shell(atom/movable/shell)
+	var/obj/item/organ/internal/cyberimp/bci/bci = shell
+	if(istype(bci))
+		bci.actions -= bci_action
+		QDEL_NULL(bci_action)
+	return ..()
+
+/obj/item/circuit_component/equipment_action/bci/input_received(datum/port/input/port)
+	if (!isnull(bci_action))
+		update_action()
+
+/obj/item/circuit_component/equipment_action/bci/update_action()
+	bci_action.name = button_name.value
+	// Change nanite -> bci if we get a set of bci action icons instead of nanite action icons
+	bci_action.button_icon_state = "nanite_[replacetextEx(lowertext(icon_options.value), " ", "_")]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/innate/bci_action
 	name = "Action"
 	button_icon = 'icons/mob/actions/actions_items.dmi'
 	check_flags = AB_CHECK_CONSCIOUS
-	button_icon_state = "bci_power"
+	button_icon_state = "nanite_power"
 
 	var/obj/item/organ/internal/cyberimp/bci/bci
 	var/obj/item/circuit_component/equipment_action/circuit_component
@@ -168,11 +188,14 @@
 /obj/item/circuit_component/bci_core/proc/on_organ_implanted(datum/source, mob/living/carbon/owner)
 	SIGNAL_HANDLER
 
-	update_charge_action()
-
 	user_port.set_output(owner)
 	user = WEAKREF(owner)
 
+<<<<<<< HEAD
+=======
+	update_charge_action()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(owner, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(owner, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, PROC_REF(on_borg_charge))
 	RegisterSignal(owner, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))

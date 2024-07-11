@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /obj/effect/lock_portal
+=======
+/obj/effect/knock_portal
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "crack in reality"
 	desc = "A crack in space, impossibly deep and painful to the eyes. Definitely not safe."
 	icon = 'icons/effects/eldritch.dmi'
@@ -7,18 +11,31 @@
 	light_power = 1
 	light_on = TRUE
 	light_color = COLOR_GREEN
+<<<<<<< HEAD
 	light_range = 3
+=======
+	light_inner_range = 1
+	light_outer_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	opacity = TRUE
 	density = FALSE //so we dont block doors closing
 	layer = OBJ_LAYER //under doors
 	///The knock portal we teleport to
+<<<<<<< HEAD
 	var/obj/effect/lock_portal/destination
+=======
+	var/obj/effect/knock_portal/destination
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///The airlock we are linked to, we delete if it is destroyed
 	var/obj/machinery/door/our_airlock
 	/// if true the heretic is teleported to a random airlock, nonheretics are sent to the target
 	var/inverted = FALSE
 
+<<<<<<< HEAD
 /obj/effect/lock_portal/Initialize(mapload, target, invert = FALSE)
+=======
+/obj/effect/knock_portal/Initialize(mapload, target, invert = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(target)
 		our_airlock = target
@@ -31,17 +48,29 @@
 	inverted = invert
 
 ///Deletes us and our destination portal if our_airlock is destroyed
+<<<<<<< HEAD
 /obj/effect/lock_portal/proc/delete_on_door_delete(datum/source)
+=======
+/obj/effect/knock_portal/proc/delete_on_door_delete(datum/source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 	qdel(src)
 
 ///Signal handler for when our location is entered, calls teleport on the victim, if their old_loc didnt contain a portal already (to prevent loops)
+<<<<<<< HEAD
 /obj/effect/lock_portal/proc/on_entered(datum/source, mob/living/loser, atom/old_loc)
+=======
+/obj/effect/knock_portal/proc/on_entered(datum/source, mob/living/loser, atom/old_loc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 	if(istype(loser) && !(locate(type) in old_loc))
 		teleport(loser)
 
+<<<<<<< HEAD
 /obj/effect/lock_portal/Destroy()
+=======
+/obj/effect/knock_portal/Destroy()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!isnull(destination) && !QDELING(destination))
 		QDEL_NULL(destination)
 
@@ -50,7 +79,11 @@
 	return ..()
 
 ///Teleports the teleportee, to a random airlock if the teleportee isnt a heretic, or the other portal if they are one
+<<<<<<< HEAD
 /obj/effect/lock_portal/proc/teleport(mob/living/teleportee)
+=======
+/obj/effect/knock_portal/proc/teleport(mob/living/teleportee)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(destination)) //dumbass
 		qdel(src)
 		return
@@ -67,7 +100,11 @@
 	INVOKE_ASYNC(src, PROC_REF(async_opendoor), doorstination)
 
 ///Returns a random airlock on the same Z level as our portal, that isnt our airlock
+<<<<<<< HEAD
 /obj/effect/lock_portal/proc/find_random_airlock()
+=======
+/obj/effect/knock_portal/proc/find_random_airlock()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/turf/possible_destinations = list()
 	for(var/obj/airlock as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/airlock))
 		if(airlock.z != z)
@@ -78,7 +115,11 @@
 	return pick(possible_destinations)
 
 ///Asynchronous proc to unbolt, then open the passed door
+<<<<<<< HEAD
 /obj/effect/lock_portal/proc/async_opendoor(obj/machinery/door/door)
+=======
+/obj/effect/knock_portal/proc/async_opendoor(obj/machinery/door/door)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(istype(door, /obj/machinery/door/airlock)) //they can create portals on ANY door, but we should unlock airlocks so they can actually open
 		var/obj/machinery/door/airlock/as_airlock = door
 		as_airlock.unbolt()
@@ -89,9 +130,15 @@
 	///List of IDs this card consumed
 	var/list/obj/item/card/id/fused_ids = list()
 	///The first portal in the portal pair, so we can clear it later
+<<<<<<< HEAD
 	var/obj/effect/lock_portal/portal_one
 	///The second portal in the portal pair, so we can clear it later
 	var/obj/effect/lock_portal/portal_two
+=======
+	var/obj/effect/knock_portal/portal_one
+	///The second portal in the portal pair, so we can clear it later
+	var/obj/effect/knock_portal/portal_two
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///The first door we are linking in the pair, so we can create a portal pair
 	var/datum/weakref/link
 	/// are our created portals inverted? (heretics get sent to a random airlock, crew get sent to the target)
@@ -118,12 +165,21 @@
 	var/obj/item/card/id/card = fused_ids[cardname]
 	shapeshift(card)
 
+<<<<<<< HEAD
 /obj/item/card/id/advanced/heretic/item_ctrl_click(mob/user)
 	if(!IS_HERETIC(user))
 		return CLICK_ACTION_BLOCKING
 	inverted = !inverted
 	balloon_alert(user, "[inverted ? "now" : "no longer"] creating inverted rifts")
 	return CLICK_ACTION_SUCCESS
+=======
+/obj/item/card/id/advanced/heretic/CtrlClick(mob/user)
+	. = ..()
+	if(!IS_HERETIC(user))
+		return
+	inverted = !inverted
+	balloon_alert(user, "[inverted ? "now" : "no longer"] creating inverted rifts")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Changes our appearance to the passed ID card
 /obj/item/card/id/advanced/heretic/proc/shapeshift(obj/item/card/id/advanced/card)
@@ -171,6 +227,7 @@
 	playsound(drop_location(),'sound/items/eatfood.ogg', rand(10,50), TRUE)
 	access += card.access
 
+<<<<<<< HEAD
 /obj/item/card/id/advanced/heretic/interact_with_atom(atom/target, mob/living/user, list/modifiers)
 	if(!IS_HERETIC(user))
 		return NONE
@@ -182,6 +239,22 @@
 	var/reference_resolved = link?.resolve()
 	if(reference_resolved == target)
 		return ITEM_INTERACT_BLOCKING
+=======
+/obj/item/card/id/advanced/heretic/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!proximity_flag || !IS_HERETIC(user))
+		return
+	if(istype(target, /obj/effect/knock_portal))
+		clear_portals()
+		return
+
+	if(!istype(target, /obj/machinery/door))
+		return
+
+	var/reference_resolved = link?.resolve()
+	if(reference_resolved == target)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(reference_resolved)
 		make_portal(user, reference_resolved, target)
@@ -191,7 +264,10 @@
 	else
 		link = WEAKREF(target)
 		balloon_alert(user, "link 1/2")
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/card/id/advanced/heretic/Destroy()
 	QDEL_LIST_ASSOC(fused_ids)

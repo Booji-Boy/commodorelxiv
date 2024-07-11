@@ -7,12 +7,17 @@
 /obj/item/bitrunning_disk
 	name = "generic bitrunning program"
 	desc = "A disk containing source code."
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
+=======
+	icon = 'icons/obj/assemblies/module.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	base_icon_state = "datadisk"
 	icon_state = "datadisk0"
 	/// Name of the choice made
 	var/choice_made
 
+<<<<<<< HEAD
 /obj/item/bitrunning_disk/Initialize(mapload)
 	. = ..()
 
@@ -32,6 +37,35 @@
 
 /obj/item/bitrunning_disk/ability
 	desc = "A disk containing source code. It can be used to preload abilities into the virtual domain. Duplicate abilities will be ignored."
+=======
+	var/monkeystation_override = FALSE // monkeystation change, override for disks with single powers/items
+
+/obj/item/bitrunning_disk/Initialize(mapload)
+	. = ..()
+	if(monkeystation_override) // monkeystation change, override for disks with single powers/items
+		return
+	icon_state = "[base_icon_state][rand(0, 7)]"
+	update_icon()
+	RegisterSignal(src, COMSIG_ATOM_EXAMINE, PROC_REF(on_examined))
+
+/obj/item/bitrunning_disk/proc/on_examined(datum/source, mob/examiner, list/examine_text)
+	SIGNAL_HANDLER
+
+	examine_text += span_infoplain("This disk must be carried on your person into a netpod to be used.")
+
+	if(monkeystation_override) // monkeystation change, override for disks with single powers/items
+		return
+
+	if(isnull(choice_made))
+		examine_text += span_notice("To make a selection, toggle the disk in hand.")
+		return
+
+	examine_text += span_info("It has been used to select: <b>[choice_made]</b>.")
+	examine_text += span_notice("It cannot make another selection.")
+
+/obj/item/bitrunning_disk/ability
+	desc = "A disk containing source code. It can be used to preload abilities into the virtual domain."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// The selected ability that this grants
 	var/datum/action/granted_action
 	/// The list of actions that this can grant
@@ -48,7 +82,11 @@
 		names += initial(thing.name)
 
 	var/choice = tgui_input_list(user, message = "Select an ability",  title = "Bitrunning Program", items = names)
+<<<<<<< HEAD
 	if(isnull(choice) || !user.is_holding(src))
+=======
+	if(isnull(choice))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	for(var/datum/action/thing as anything in selectable_actions)
@@ -59,7 +97,11 @@
 		return
 
 	balloon_alert(user, "selected")
+<<<<<<< HEAD
 	playsound(user, 'sound/items/click.ogg', 50, TRUE)
+=======
+	playsound(user, 'sound/machines/click.ogg', 50, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	choice_made = choice
 
 /// Tier 1 programs. Simple, funny, or helpful.
@@ -105,7 +147,11 @@
 		names += initial(thing.name)
 
 	var/choice = tgui_input_list(user, message = "Select an ability",  title = "Bitrunning Program", items = names)
+<<<<<<< HEAD
 	if(isnull(choice) || !user.is_holding(src))
+=======
+	if(isnull(choice))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	for(var/obj/thing as anything in selectable_items)
@@ -113,7 +159,11 @@
 			granted_item = thing
 
 	balloon_alert(user, "selected")
+<<<<<<< HEAD
 	playsound(user, 'sound/items/click.ogg', 50, TRUE)
+=======
+	playsound(user, 'sound/machines/click.ogg', 50, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	choice_made = choice
 
 /// Tier 1 items. Simple, funny, or helpful.
@@ -129,15 +179,22 @@
 /obj/item/bitrunning_disk/item/tier2
 	name = "bitrunning gear: complex"
 	selectable_items = list(
+<<<<<<< HEAD
 		/obj/item/reagent_containers/hypospray/medipen/survival/luxury,
 		/obj/item/gun/ballistic/automatic/pistol,
 		/obj/item/clothing/suit/armor/vest,
+=======
+		/obj/item/chainsaw,
+		/obj/item/gun/ballistic/automatic/pistol,
+		/obj/item/melee/energy/blade/hardlight,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /// Tier 3 items. Very powerful, game breaking.
 /obj/item/bitrunning_disk/item/tier3
 	name = "bitrunning gear: advanced"
 	selectable_items = list(
+<<<<<<< HEAD
 		/obj/item/gun/energy/e_gun/nuclear,
 		/obj/item/dualsaber/green,
 		/obj/item/grenade/syndieminibomb,
@@ -184,4 +241,9 @@
 		/obj/item/crusher_trophy/demon_claws,
 		/obj/item/crusher_trophy/vortex_talisman,
 		/obj/item/crusher_trophy/ice_demon_cube,
+=======
+		/obj/item/gun/energy/tesla_cannon,
+		/obj/item/dualsaber/green,
+		/obj/item/melee/beesword,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)

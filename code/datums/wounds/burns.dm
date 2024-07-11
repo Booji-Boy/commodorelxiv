@@ -50,9 +50,12 @@
 	for(var/datum/reagent/reagent as anything in victim.reagents.reagent_list)
 		if(reagent.chemical_flags & REAGENT_AFFECTS_WOUNDS)
 			reagent.on_burn_wound_processing(src)
+<<<<<<< HEAD
 
 	if(HAS_TRAIT(victim, TRAIT_VIRUS_RESISTANCE))
 		sanitization += 0.9
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(limb.current_gauze)
 		limb.seep_gauze(WOUND_BURN_SANITIZATION_RATE * seconds_per_tick)
@@ -205,7 +208,11 @@
 	user.visible_message(span_notice("[user] begins applying [I] to [victim]'s [limb.plaintext_zone]..."), span_notice("You begin applying [I] to [user == victim ? "your" : "[victim]'s"] [limb.plaintext_zone]..."))
 	if (I.amount <= 0)
 		return TRUE
+<<<<<<< HEAD
 	if(!do_after(user, (user == victim ? I.self_delay : I.other_delay), target = victim, extra_checks = CALLBACK(src, PROC_REF(still_exists))))
+=======
+	if(!do_after(user, (user == victim ? I.self_delay : I.other_delay), extra_checks = CALLBACK(src, PROC_REF(still_exists))))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 	limb.heal_damage(I.heal_brute, I.heal_burn)
@@ -290,7 +297,11 @@
 	flesh_damage = 5
 	scar_keyword = "burnmoderate"
 
+<<<<<<< HEAD
 	simple_desc = "Patient's skin is burned, weakening the limb and multiplying perceived damage!"
+=======
+	simple_desc = "Patient's skin is burned, weakening the limb and multiplying percieved damage!"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	simple_treat_text = "Ointment will speed up recovery, as will regenerative mesh. Risk of infection is negligible."
 	homemade_treat_text = "Healthy tea will speed up recovery. Salt, or preferably a salt-water mixture, will sanitize the wound, but the former will cause skin irritation, increasing the risk of infection."
 

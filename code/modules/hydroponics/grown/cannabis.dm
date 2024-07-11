@@ -7,19 +7,22 @@
 	species = "cannabis"
 	plantname = "Cannabis Plant"
 	product = /obj/item/food/grown/cannabis
-	maturation = 8
+	maturation = 40
 	potency = 20
 	growthstages = 1
+<<<<<<< HEAD
 	instability = 40
 	growing_icon = 'icons/obj/service/hydroponics/growing.dmi'
+=======
+	growing_icon = 'icons/obj/hydroponics/growing.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "cannabis-grow" // Uses one growth icons set for all the subtypes
 	icon_dead = "cannabis-dead" // Same for the dead icon
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/cannabis/rainbow,
-		/obj/item/seeds/cannabis/death,
-		/obj/item/seeds/cannabis/white,
-		/obj/item/seeds/cannabis/ultimate,
-	)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/death_weed,
+							  /datum/hydroponics/plant_mutation/life_weed,
+							  /datum/hydroponics/plant_mutation/omega_weed,
+							  /datum/hydroponics/plant_mutation/rainbow_weed)
 	reagents_add = list(/datum/reagent/drug/cannabis = 0.15)
 
 
@@ -31,7 +34,7 @@
 	species = "megacannabis"
 	plantname = "Rainbow Weed"
 	product = /obj/item/food/grown/cannabis/rainbow
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/colorful_reagent = 0.05, /datum/reagent/medicine/psicodine = 0.03, /datum/reagent/drug/happiness = 0.1, /datum/reagent/toxin/mindbreaker = 0.1, /datum/reagent/toxin/lipolicide = 0.15, /datum/reagent/drug/space_drugs = 0.15)
 	rarity = 40
 
@@ -43,7 +46,7 @@
 	species = "blackcannabis"
 	plantname = "Deathweed"
 	product = /obj/item/food/grown/cannabis/death
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/toxin/cyanide = 0.35, /datum/reagent/drug/cannabis = 0.15)
 	rarity = 40
 
@@ -54,9 +57,8 @@
 	icon_grow = "whitecannabis-grow"
 	species = "whitecannabis"
 	plantname = "Lifeweed"
-	instability = 30
 	product = /obj/item/food/grown/cannabis/white
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/medicine/omnizine = 0.35, /datum/reagent/drug/cannabis = 0.15)
 	rarity = 40
 
@@ -71,7 +73,7 @@
 	plantname = "Omega Weed"
 	product = /obj/item/food/grown/cannabis/ultimate
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/glow/green, /datum/plant_gene/trait/modified_volume/omega_weed)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/drug/cannabis = 0.3,
 		/datum/reagent/toxin/mindbreaker = 0.3,
 		/datum/reagent/mercury = 0.15,

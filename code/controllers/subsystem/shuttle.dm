@@ -265,8 +265,13 @@ SUBSYSTEM_DEF(shuttle)
 			sender_override = "Emergency Shuttle Uplink Alert",
 			color_override = "orange",
 		)
+<<<<<<< HEAD
 		if(emergency.timeLeft(1) > emergency_call_time * ALERT_COEFF_AUTOEVAC_CRITICAL)
 			emergency.request(null, set_coefficient = ALERT_COEFF_AUTOEVAC_CRITICAL)
+=======
+		if(emergency.timeLeft(1) > emergency_call_time * 0.4)
+			emergency.request(null, set_coefficient = 0.4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/controller/subsystem/shuttle/proc/block_recall(lockout_timer)
 	if(isnull(lockout_timer))
@@ -629,7 +634,11 @@ SUBSYSTEM_DEF(shuttle)
 	var/datum/turf_reservation/proposal = SSmapping.request_turf_block_reservation(
 		transit_width,
 		transit_height,
+<<<<<<< HEAD
 		z_size = 1, //if this is changed the turf uncontain code below has to be updated to support multiple zs
+=======
+		1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		reservation_type = /datum/turf_reservation/transit,
 		turf_type_override = transit_path,
 	)

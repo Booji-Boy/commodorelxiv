@@ -2,9 +2,15 @@ import { useBackend, useSharedState } from '../backend';
 import {
   Box,
   Button,
+<<<<<<< HEAD
   Icon,
   LabeledList,
   NoticeBox,
+=======
+  LabeledList,
+  NoticeBox,
+  Icon,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Section,
   Stack,
   Tabs,
@@ -68,7 +74,10 @@ export const NtosNetMonitor = (props) => {
 const MainPage = (props) => {
   const { ntnetrelays, idsalarm, idsstatus, ntnetlogs = [] } = props;
   const { act, data } = useBackend();
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <NoticeBox>

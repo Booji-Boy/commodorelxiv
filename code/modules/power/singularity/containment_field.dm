@@ -12,9 +12,13 @@
 	interaction_flags_atom = NONE
 	interaction_flags_machine = NONE
 	can_atmos_pass = ATMOS_PASS_NO
-	light_range = 4
+	light_outer_range = 4
 	layer = ABOVE_OBJ_LAYER
+<<<<<<< HEAD
 	explosion_block = INFINITY
+=======
+	pass_flags_self = parent_type::pass_flags_self & ~LETPASSCLICKS // monkestation edit: no you can't reach around the impenetrable shield
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///First of the generators producing the containment field
 	var/obj/machinery/field/generator/field_gen_1 = null
 	///Second of the generators producing the containment field

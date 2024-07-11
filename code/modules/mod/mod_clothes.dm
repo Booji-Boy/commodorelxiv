@@ -5,11 +5,16 @@
 	icon_state = "standard-helmet"
 	base_icon_state = "helmet"
 	worn_icon = 'icons/mob/clothing/modsuit/mod_clothing.dmi'
+	worn_icon_snouted = 'monkestation/icons/mob/mod.dmi'
 	armor_type = /datum/armor/none
 	body_parts_covered = HEAD
 	heat_protection = HEAD
 	cold_protection = HEAD
 	item_flags = IMMUTABLE_SLOW
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/suit/mod
 	name = "MOD chestplate"
@@ -18,6 +23,7 @@
 	icon_state = "standard-chestplate"
 	base_icon_state = "chestplate"
 	worn_icon = 'icons/mob/clothing/modsuit/mod_clothing.dmi'
+	worn_icon_digitigrade = 'monkestation/icons/mob/mod.dmi'
 	blood_overlay_type = "armor"
 	allowed = list(
 		/obj/item/tank/internals,
@@ -29,6 +35,10 @@
 	heat_protection = CHEST|GROIN
 	cold_protection = CHEST|GROIN
 	item_flags = IMMUTABLE_SLOW
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/gloves/mod
 	name = "MOD gauntlets"
@@ -42,6 +52,10 @@
 	heat_protection = HANDS|ARMS
 	cold_protection = HANDS|ARMS
 	item_flags = IMMUTABLE_SLOW
+<<<<<<< HEAD
+=======
+	supports_variations_flags = NONE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/shoes/mod
 	name = "MOD boots"
@@ -50,9 +64,16 @@
 	icon_state = "standard-boots"
 	base_icon_state = "boots"
 	worn_icon = 'icons/mob/clothing/modsuit/mod_clothing.dmi'
+	worn_icon_digitigrade = 'monkestation/icons/mob/mod.dmi'
 	armor_type = /datum/armor/none
 	body_parts_covered = FEET|LEGS
 	heat_protection = FEET|LEGS
 	cold_protection = FEET|LEGS
+<<<<<<< HEAD
 	item_flags = IGNORE_DIGITIGRADE | IMMUTABLE_SLOW
+=======
+	item_flags = IMMUTABLE_SLOW
+	item_flags = IGNORE_DIGITIGRADE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	can_be_tied = FALSE
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION

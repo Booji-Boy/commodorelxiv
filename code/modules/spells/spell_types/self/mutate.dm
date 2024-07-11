@@ -39,9 +39,14 @@
 /datum/action/cooldown/spell/apply_mutations/mutate
 	name = "Mutate"
 	desc = "This spell causes you to turn into a gigantic hulk and gain laser vision for a short while. Unlike the lesser nonmagical version, it works on non-humans and mantains hand dexterity as well!"
+<<<<<<< HEAD
 	cooldown_time = 40 SECONDS
 	cooldown_reduction_per_rank = 5 SECONDS
 	spell_max_level = 3
+=======
+	cooldown_time = 60 SECONDS //monkestation edit: from 40 to 60 seconds
+	cooldown_reduction_per_rank = 5 SECONDS //monkestation edit: from 2.5 to 5 seconds
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	invocation = "BIRUZ BENNAR"
 	invocation_type = INVOCATION_SHOUT
@@ -51,10 +56,17 @@
 
 /datum/action/cooldown/spell/apply_mutations/mutate/cast(mob/living/carbon/human/cast_on)
 	..()
+<<<<<<< HEAD
 	if(HAS_TRAIT(cast_on, TRAIT_USES_SKINTONES) || HAS_TRAIT(cast_on, TRAIT_MUTANT_COLORS))
 		return
 	// Our caster has a species that doesn't greenify when hulked, so we will do it manually.
 	cast_on.add_atom_colour(COLOR_VIBRANT_LIME, TEMPORARY_COLOUR_PRIORITY)
+=======
+	/*if(HAS_TRAIT(cast_on, TRAIT_USES_SKINTONES) || HAS_TRAIT(cast_on, TRAIT_MUTANT_COLORS))
+		return*/ //monkestation temp removal, we dont have this refactor yet
+	// Our caster has a species that doesn't greenify when hulked, so we will do it manually.
+	cast_on.add_atom_colour("#00FF00", TEMPORARY_COLOUR_PRIORITY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/cooldown/spell/apply_mutations/mutate/remove_mutations(mob/living/carbon/human/cast_on)
 	if(QDELETED(cast_on) || !is_valid_target(cast_on))

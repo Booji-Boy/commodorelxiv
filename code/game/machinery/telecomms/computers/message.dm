@@ -20,6 +20,7 @@
 	var/obj/machinery/telecomms/message_server/linkedServer = null
 	/// Sparks effect - For emag
 	var/datum/effect_system/spark_spread/spark_system
+<<<<<<< HEAD
 	/// Computer properties.
 	/// 0 = Main menu, 1 = Message Logs, 2 = Hacked screen, 3 = Custom Message
 	var/screen = MSG_MON_SCREEN_MAIN
@@ -30,6 +31,15 @@
 	/// Notice message to display in the interface.
 	var/notice_message = ""
 	/// Success message to display in the interface.
+=======
+	/// Computer properties
+	var/screen = MSG_MON_SCREEN_MAIN // 0 = Main menu, 1 = Message Logs, 2 = Hacked screen, 3 = Custom Message
+	var/message = "System bootup complete. Please select an option." // The message that shows on the main menu.
+	var/auth = FALSE // Are they authenticated?
+	/// Error, Success & Notice messages
+	var/error_message = ""
+	var/notice_message = ""
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/success_message = ""
 	/// Decrypt password
 	var/password = ""
@@ -93,7 +103,11 @@
 		"error_message" = error_message,
 		"notice_message" = notice_message,
 		"success_message" = success_message,
+<<<<<<< HEAD
 		"auth" = authenticated,
+=======
+		"auth" = auth,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		"server_status" = !LINKED_SERVER_NONRESPONSIVE,
 	)
 
@@ -113,7 +127,11 @@
 		if(MSG_MON_SCREEN_REQUEST_LOGS)
 			var/list/request_list = list()
 			for(var/datum/data_rc_msg/rc in linkedServer.rc_msgs)
+<<<<<<< HEAD
 				request_list += list(list("ref" = REF(rc), "message" = rc.message, "stamp" = rc.stamp, "id_auth" = rc.id_auth, "departament" = rc.sender_department))
+=======
+				request_list += list(list("ref" = REF(rc), "message" = rc.message, "stamp" = rc.stamp, "id_auth" = rc.id_auth, "departament" = rc.send_dpt))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			data["requests"] = request_list
 	return data
 
@@ -130,6 +148,7 @@
 		if("auth")
 			var/authPass = params["auth_password"]
 
+<<<<<<< HEAD
 			if(authenticated)
 				authenticated = FALSE
 				return TRUE
@@ -141,6 +160,19 @@
 			authenticated = TRUE
 			success_message = "YOU SUCCESFULLY LOGGED IN!"
 
+=======
+			if(auth)
+				auth = FALSE
+				return TRUE
+
+			if(linkedServer.decryptkey != authPass)
+				error_message = "ALERT: Incorrect decryption key!"
+				return TRUE
+
+			auth = TRUE
+			success_message = "YOU SUCCESFULLY LOGGED IN!"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 		if("link_server")
 			var/list/message_servers = list()
@@ -214,6 +246,7 @@
 			var/job = tgui_input_text(usr, "What is the sender's job?", "Job")
 
 			var/recipient
+<<<<<<< HEAD
 			var/list/tablet_to_messenger = list()
 			var/list/viewable_tablets = list()
 			for (var/messenger_ref in GLOB.pda_messengers)
@@ -224,6 +257,16 @@
 					continue
 				viewable_tablets += message_app.computer
 				tablet_to_messenger[message_app.computer] = message_app
+=======
+			var/list/viewable_tablets = list()
+			for (var/obj/item/modular_computer/tablet as anything in GLOB.TabletMessengers)
+				var/datum/computer_file/program/messenger/message_app = locate() in tablet.stored_files
+				if(!message_app || message_app.invisible)
+					continue
+				if(!tablet.saved_identification)
+					continue
+				viewable_tablets += tablet
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(length(viewable_tablets) > 0)
 				recipient = tgui_input_list(usr, "Select a tablet from the list", "Tablet Selection", viewable_tablets)
 			else
@@ -240,24 +283,43 @@
 				notice_message = "NOTICE: No message entered!"
 				return attack_hand(usr)
 
+<<<<<<< HEAD
 			var/datum/signal/subspace/messaging/tablet_message/signal = new(src, list(
 				"fakename" = "[sender]",
 				"fakejob" = "[job]",
 				"message" = message,
 				"targets" = list(tablet_to_messenger[recipient]),
+=======
+			var/datum/signal/subspace/messaging/tablet_msg/signal = new(src, list(
+				"name" = "[sender]",
+				"job" = "[job]",
+				"message" = html_decode(message),
+				"ref" = REF(src),
+				"targets" = list(recipient),
+				"rigged" = FALSE,
+				"automated" = FALSE,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			))
 			// This will log the signal and transmit it to the target
 			linkedServer.receive_information(signal, null)
 			usr.log_message("(Tablet: [name] | [usr.real_name]) sent \"[message]\" to [signal.format_target()]", LOG_PDA)
 			return TRUE
+<<<<<<< HEAD
 		// Malfunction AI and cyborgs can hack console. This will authenticate the console, but you need to wait password selection
+=======
+		// Malfunction AI and cyborgs can hack console. This will auth console, but you need to wait password selection
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("hack")
 			var/time = 10 SECONDS * length(linkedServer.decryptkey)
 			addtimer(CALLBACK(src, PROC_REF(unemag_console)), time)
 			screen = MSG_MON_SCREEN_HACKED
 			error_message = "%$&(£: Critical %$$@ Error // !RestArting! <lOadiNg backUp iNput ouTput> - ?pLeaSe wAit!"
 			linkedServer.toggled = FALSE
+<<<<<<< HEAD
 			authenticated = TRUE
+=======
+			auth = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 	return TRUE
 

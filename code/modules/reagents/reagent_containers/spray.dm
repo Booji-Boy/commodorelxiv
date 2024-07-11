@@ -26,8 +26,15 @@
 	possible_transfer_amounts = list(5,10)
 	var/spray_sound = 'sound/effects/spray2.ogg'
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/spray/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return try_spray(interacting_with, user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+=======
+/obj/item/reagent_containers/spray/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(istype(target, /obj/structure/sink) || istype(target, /obj/structure/mop_bucket/janitorialcart))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/reagent_containers/spray/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	// This is a hack to make spray bottles fillable from / transferable to these sources
@@ -97,6 +104,7 @@
 	reagent_puff.user = user
 	reagent_puff.sprayer = src
 	reagent_puff.stream = stream_mode
+<<<<<<< HEAD
 
 	var/turf/target_turf = get_turf(target)
 	var/turf/start_turf = get_turf(reagent_puff)
@@ -107,6 +115,8 @@
 		return
 
 	var/datum/move_loop/our_loop = GLOB.move_manager.move_towards_legacy(reagent_puff, target, wait_step, timeout = range * wait_step, flags = MOVEMENT_LOOP_START_FAST, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	reagent_puff.RegisterSignal(our_loop, COMSIG_QDELETING, TYPE_PROC_REF(/obj/effect/decal/chempuff, loop_ended))
 	reagent_puff.RegisterSignal(our_loop, COMSIG_MOVELOOP_POSTPROCESS, TYPE_PROC_REF(/obj/effect/decal/chempuff, check_move))
 

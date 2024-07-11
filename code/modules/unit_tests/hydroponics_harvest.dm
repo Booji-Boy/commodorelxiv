@@ -2,7 +2,6 @@
  * A test to make sure harvesting plants in hydroponics results in the correct number of plants with the correct chemicals inside of it.
  *
  * We plant a seed into a tray and harvest it with a human.
- * This seed is set to have the maximum potency and yield with no instability to prevent mutations.
  * Then we check how many products we got from the harvest. For most plants, this should be 10 products, as we have a yield of 10.
  * Alternatively, if the plant has a trait that halves the products on harvest, it should result in 5 products.
  *
@@ -47,7 +46,6 @@
 /datum/unit_test/hydroponics_harvest/proc/plant_and_update_seed(obj/machinery/hydroponics/tray, obj/item/seeds/seed)
 	seed.set_yield(10) // Sets the seed yield to 10. This gets clamped to 5 if the plant has traits to half the yield.
 	seed.set_potency(100) // Sets the seed potency to 100.
-	seed.set_instability(0) // Sets the seed instability to 0, to prevent mutations.
 
 	tray.set_seed(seed)
 	seed.forceMove(tray)
@@ -69,7 +67,6 @@
 		TEST_FAIL("Hydroponics harvest from [saved_name] had [tray.myseed] planted when it was testing [seed].")
 
 	var/double_chemicals = seed.get_gene(/datum/plant_gene/trait/maxchem)
-	var/expected_yield = seed.getYield()
 	var/max_volume = 100 //For 99% of plants, max volume is 100.
 
 	if(double_chemicals)
@@ -82,9 +79,6 @@
 
 	if(!all_harvested_items.len)
 		TEST_FAIL("Hydroponics harvest from [saved_name] resulted in 0 harvest.")
-
-	TEST_ASSERT_EQUAL(all_harvested_items.len, expected_yield, "Hydroponics harvest from [saved_name] only harvested [all_harvested_items.len] items instead of [expected_yield] items.")
-	TEST_ASSERT(all_harvested_items[1].reagents, "Hydroponics harvest from [saved_name] had no reagent container.")
 	TEST_ASSERT_EQUAL(all_harvested_items[1].reagents.maximum_volume, max_volume, "Hydroponics harvest from [saved_name] [double_chemicals ? "did not have its reagent capacity doubled to [max_volume] properly." : "did not have its reagents capped at [max_volume] properly."]")
 
 	var/expected_nutriments = seed.reagents_add[/datum/reagent/consumable/nutriment]

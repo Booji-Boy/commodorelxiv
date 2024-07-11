@@ -8,7 +8,7 @@
 	icon_living = "human_male"
 	icon_dead = "human_male"
 	gender = NEUTER
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	mob_biotypes = MOB_HUMANOID
 	gold_core_spawnable = NO_SPAWN
 
@@ -130,6 +130,10 @@
 /datum/ai_controller/basic_controller/statue
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+<<<<<<< HEAD
+=======
+		BB_LOW_PRIORITY_HUNTING_TARGET = null, // lights
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 	ai_movement = /datum/ai_movement/basic_avoidance
@@ -151,6 +155,24 @@
 	melee_damage_upper = 65
 	faction = list(FACTION_STATUE,FACTION_MINING)
 
+<<<<<<< HEAD
+=======
+/datum/ai_behavior/basic_melee_attack/statue
+	action_cooldown = 1 SECONDS
+
+/mob/living/basic/statue/frosty
+	name = "Frosty"
+	desc = "Just a snowman. Just a snowman. Oh god, it's just a snowman."
+	icon_dead = "snowman"
+	icon_living = "snowman"
+	icon_state = "snowman"
+	health = 5000
+	maxHealth = 5000
+	melee_damage_lower = 65
+	melee_damage_upper = 65
+	faction = list("statue","mining")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/statue/frosty/Initialize(mapload)
 	. = ..()
 	var/static/list/death_loot = list(/obj/item/dnainjector/geladikinesis)

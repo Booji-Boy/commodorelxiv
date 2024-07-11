@@ -24,8 +24,18 @@ Mineral Sheets
  */
 
 GLOBAL_LIST_INIT(sandstone_recipes, list ( \
+<<<<<<< HEAD
 	new/datum/stack_recipe("sandstone door", /obj/structure/mineral_door/sandstone, 10, time = 5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_DOORS), \
 	new/datum/stack_recipe("Breakdown into sand", /obj/item/stack/ore/glass, 1, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ON_SOLID_GROUND, category = CAT_MISC) \
+=======
+	new/datum/stack_recipe("pile of dirt", /obj/machinery/growing/soil, 3, time = 1 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_TOOLS), \
+	new/datum/stack_recipe("sandstone door", /obj/structure/mineral_door/sandstone, 10, time = 5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_DOORS), \
+	new/datum/stack_recipe("Breakdown into sand", /obj/item/stack/ore/glass, 1, one_per_turf = FALSE, on_solid_ground = TRUE, category = CAT_MISC), \
+
+	new/datum/stack_recipe("sandstone stool", /obj/structure/chair/stool/sandstone, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE), \
+	new/datum/stack_recipe("sandstone sarcophagus", /obj/structure/closet/crate/coffin/sandstonesarcophagus, 8, time = 5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE), \
+	new/datum/stack_recipe("sandstone table", /obj/structure/table/sandstone, 6, time = 5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE) \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	))
 
 /obj/item/stack/sheet/mineral/sandstone
@@ -181,6 +191,9 @@ GLOBAL_LIST_INIT(plasma_recipes, list ( \
 /obj/item/stack/sheet/mineral/plasma/five
 	amount = 5
 
+/obj/item/stack/sheet/mineral/plasma/twenty
+	amount = 20
+
 /obj/item/stack/sheet/mineral/plasma/thirty
 	amount = 30
 
@@ -211,6 +224,9 @@ GLOBAL_LIST_INIT(gold_recipes, list ( \
 	. = ..()
 	. += GLOB.gold_recipes
 
+/obj/item/stack/sheet/mineral/gold/five
+	amount = 5
+
 /*
  * Silver
  */
@@ -236,6 +252,9 @@ GLOBAL_LIST_INIT(silver_recipes, list ( \
 /obj/item/stack/sheet/mineral/silver/get_main_recipes()
 	. = ..()
 	. += GLOB.silver_recipes
+
+/obj/item/stack/sheet/mineral/silver/twenty
+	amount = 20
 
 /*
  * Clown
@@ -279,20 +298,34 @@ GLOBAL_LIST_INIT(bananium_recipes, list ( \
 	throw_range = 3
 	sheettype = "titanium"
 	mats_per_unit = list(/datum/material/titanium=SHEET_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	gulag_valid = TRUE
+=======
+	point_value = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	merge_type = /obj/item/stack/sheet/mineral/titanium
 	material_type = /datum/material/titanium
 	walltype = /turf/closed/wall/mineral/titanium
 
 GLOBAL_LIST_INIT(titanium_recipes, list ( \
+<<<<<<< HEAD
 	new /datum/stack_recipe("Titanium tile", /obj/item/stack/tile/mineral/titanium, 1, 4, 20, crafting_flags = NONE, category = CAT_TILES), \
 	new /datum/stack_recipe("Shuttle seat", /obj/structure/chair/comfy/shuttle, 2, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_FURNITURE), \
 	new /datum/stack_recipe("Material tram door assembly", /obj/structure/door_assembly/multi_tile/door_assembly_tram, 8, time = 5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND, category = CAT_DOORS), \
+=======
+	new/datum/stack_recipe("titanium tile", /obj/item/stack/tile/mineral/titanium, 1, 4, 20, check_density = FALSE, category = CAT_TILES), \
+	new/datum/stack_recipe("shuttle seat", /obj/structure/chair/comfy/shuttle, 2, one_per_turf = TRUE, on_solid_ground = TRUE, category = CAT_FURNITURE), \
+	new/datum/stack_recipe("remote smoke machine", /obj/structure/chemical_tank/smoke, 10, time = 2 SECONDS, check_density = TRUE, category = CAT_FURNITURE), \
+	new/datum/stack_recipe("remote liquid pump",/obj/structure/chemical_tank/liquid, 10, time = 2 SECONDS, check_density = TRUE, category = CAT_FURNITURE), \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	))
 
 /obj/item/stack/sheet/mineral/titanium/get_main_recipes()
 	. = ..()
 	. += GLOB.titanium_recipes
+
+/obj/item/stack/sheet/mineral/titanium/twenty
+	amount = 20
 
 /obj/item/stack/sheet/mineral/titanium/fifty
 	amount = 50
@@ -312,7 +345,11 @@ GLOBAL_LIST_INIT(titanium_recipes, list ( \
 	throw_range = 3
 	sheettype = "plastitanium"
 	mats_per_unit = list(/datum/material/alloy/plastitanium=SHEET_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	gulag_valid = TRUE
+=======
+	point_value = 45
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	material_type = /datum/material/alloy/plastitanium
 	merge_type = /obj/item/stack/sheet/mineral/plastitanium
 	material_flags = NONE
@@ -408,6 +445,7 @@ GLOBAL_LIST_INIT(adamantine_recipes, list(
 	novariants = TRUE
 	mats_per_unit = list(/datum/material/mythril=SHEET_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/mineral/mythril
+	material_type = /datum/material/mythril
 
 /*
  * Alien Alloy
@@ -487,7 +525,11 @@ GLOBAL_LIST_INIT(metalhydrogen_recipes, list(
 	singular_name = "metal hydrogen sheet"
 	w_class = WEIGHT_CLASS_NORMAL
 	resistance_flags = FIRE_PROOF | LAVA_PROOF | ACID_PROOF | INDESTRUCTIBLE
+<<<<<<< HEAD
 	gulag_valid = TRUE
+=======
+	point_value = 100
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mats_per_unit = list(/datum/material/metalhydrogen = SHEET_MATERIAL_AMOUNT)
 	material_type = /datum/material/metalhydrogen
 	merge_type = /obj/item/stack/sheet/mineral/metal_hydrogen
@@ -508,7 +550,11 @@ GLOBAL_LIST_INIT(zaukerite_recipes, list(
 	inhand_icon_state = "sheet-zaukerite"
 	singular_name = "zaukerite crystal"
 	w_class = WEIGHT_CLASS_NORMAL
+<<<<<<< HEAD
 	gulag_valid = TRUE
+=======
+	point_value = 120
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mats_per_unit = list(/datum/material/zaukerite = SHEET_MATERIAL_AMOUNT)
 	merge_type = /obj/item/stack/sheet/mineral/zaukerite
 	material_type = /datum/material/zaukerite

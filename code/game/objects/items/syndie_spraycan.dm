@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #define SYNDIE_DRAW_TIME 3 SECONDS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Extending the existing spraycan item was more trouble than it was worth, I don't want or need this to be able to draw arbitrary shapes.
 /obj/item/traitor_spraycan
 	name = "seditious spraycan"

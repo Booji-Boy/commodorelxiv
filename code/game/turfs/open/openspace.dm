@@ -24,8 +24,11 @@
 // I am so sorry
 /turf/open/openspace/Initialize(mapload) // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
+<<<<<<< HEAD
 	if(PERFORM_ALL_TESTS(focus_only/openspace_clear) && !GET_TURF_BELOW(src))
 		stack_trace("[src] was inited as openspace with nothing below it at ([x], [y], [z])")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(on_atom_created))
 	var/area/our_area = loc
 	if(istype(our_area, /area/space))
@@ -149,6 +152,12 @@
 		return TRUE
 	return FALSE
 
+<<<<<<< HEAD
+=======
+/turf/open/openspace/rust_heretic_act()
+	return FALSE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/openspace/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	var/atom/movable/our_movable = pass_info.caller_ref.resolve()
 	if(our_movable && !our_movable.can_z_move(DOWN, src, null, ZMOVE_FALL_FLAGS)) //If we can't fall here (flying/lattice), it's fine to path through
@@ -162,6 +171,9 @@
 	// Create plating under tiled floor we try to create directly onto the air
 	place_on_top(/turf/open/floor/plating, flags = flags)
 	place_on_top(new_floor_path, flags = flags)
+
+/turf/open/openspace/can_cross_safely(atom/movable/crossing)
+	return HAS_TRAIT(crossing, TRAIT_MOVE_FLYING)
 
 /turf/open/openspace/can_cross_safely(atom/movable/crossing)
 	return HAS_TRAIT(crossing, TRAIT_MOVE_FLYING)

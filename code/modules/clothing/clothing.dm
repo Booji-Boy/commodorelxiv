@@ -52,6 +52,13 @@
 	// such that you never actually cared about checking if something is *edible*.
 	var/obj/item/food/clothing/moth_snack
 
+
+	//MonkeStation Edit Start
+	//Alternative Scream/Laugh Vars
+	var/list/alternative_screams = list()
+	var/list/alternative_laughs = list()
+	//MonkeStation Edit End
+
 /obj/item/clothing/Initialize(mapload)
 	if(clothing_flags & VOICEBOX_TOGGLABLE)
 		actions_types += list(/datum/action/item_action/toggle_voice_box)
@@ -65,6 +72,20 @@
 
 /obj/item/clothing/mouse_drop_dragged(atom/over_object, mob/user, src_location, over_location, params)
 	var/mob/M = user
+
+//monkestation edit start, this is currently removed as it breaks things
+/*	if(istype(over_object, /atom/movable/screen/inventory))
+		var/atom/movable/screen/inventory/slot = over_object
+		if(M.get_item_by_slot(slot.slot_id))
+			var/obj/item/clothing/item = M.get_item_by_slot(slot.slot_id)
+			if(!M.temporarilyRemoveItemFromInventory(item))
+				return
+			if(!M.put_in_active_hand(item))
+				if(!M.put_in_inactive_hand(item))
+					if(!M.active_storage?.attempt_insert(item, M))
+						item.forceMove(get_turf(M))
+			item.equip_to_best_slot()*/
+//monkestation edit end
 
 	if(ismecha(M.loc)) // stops inventory actions in a mech
 		return
@@ -100,7 +121,7 @@
 		qdel(src)
 
 /obj/item/clothing/attack(mob/living/target, mob/living/user, params)
-	if(user.combat_mode || !ismoth(target) || ispickedupmob(src))
+	if((user.istate & ISTATE_HARM) || !ismoth(target) || ispickedupmob(src))
 		return ..()
 	if((clothing_flags & INEDIBLE_CLOTHING) || (resistance_flags & INDESTRUCTIBLE))
 		return ..()
@@ -245,6 +266,17 @@
 					user.vars[variable] = user_vars_remembered[variable]
 		user_vars_remembered = initial(user_vars_remembered) // Effectively this sets it to null.
 
+	//MonkeStation Edit Start
+	//Alternative Scream
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/wearer = user
+	if(alternative_screams.len)
+		wearer.alternative_screams -= alternative_screams
+	if(alternative_laughs.len)
+		wearer.alternative_laughs -= alternative_laughs
+	//MonkeStation Edit End
+
 /obj/item/clothing/equipped(mob/living/user, slot)
 	. = ..()
 	if (!istype(user))
@@ -263,6 +295,7 @@
 					LAZYSET(user_vars_remembered, variable, user.vars[variable])
 					user.vv_edit_var(variable, user_vars_to_edit[variable])
 
+<<<<<<< HEAD
 // If the item is a piece of clothing and is being worn, make sure it updates on the player
 /obj/item/clothing/update_greyscale()
 	. = ..()
@@ -273,6 +306,18 @@
 		return
 
 	wearer.update_clothing(slot_flags)
+=======
+		//MonkeStation Edit Start
+		//Alternative Scream
+		if(!ishuman(user))
+			return
+		var/mob/living/carbon/human/wearer = user
+		if(alternative_screams.len)
+			wearer.alternative_screams.Add(alternative_screams)
+		if(alternative_laughs.len)
+			wearer.alternative_laughs.Add(alternative_laughs)
+		//MonkeStation Edit End
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Inserts a trait (or multiple traits) into the clothing traits list
@@ -355,6 +400,13 @@
 
 	if(get_armor().has_any_armor() || (flags_cover & (HEADCOVERSMOUTH|PEPPERPROOF)))
 		. += span_notice("It has a <a href='?src=[REF(src)];list_armor=1'>tag</a> listing its protection classes.")
+
+	//MONKESTATION ADDITION START - Denotes some clothing traits when examining a clothing piece.
+	if(clothing_traits)
+		if(TRAIT_CHUNKYFINGERS in clothing_traits)
+			// Denotes that wearing makes your fingers chunky.
+			. += span_notice("Wearing [src] makes your fingers chunky, preventing use of most firearms, stun batons, and some computers.")
+	//MONKESTATION ADDITION
 
 /obj/item/clothing/Topic(href, href_list)
 	. = ..()
@@ -453,7 +505,6 @@
 		damaged_clothes_icon = icon(icon, icon_state, , 1)
 		damaged_clothes_icon.Blend("#fff", ICON_ADD) //fills the icon_state with white (except where it's transparent)
 		damaged_clothes_icon.Blend(icon('icons/effects/item_damage.dmi', "itemdamaged"), ICON_MULTIPLY) //adds damage effect and the remaining white areas become transparant
-		damaged_clothes_icon = fcopy_rsc(damaged_clothes_icon)
 		damaged_clothes_icons[index] = damaged_clothes_icon
 	. += damaged_clothes_icon
 
@@ -557,6 +608,11 @@ BLIND     // can't see anything
 	if(prob(0.2))
 		to_chat(L, span_warning("The damaged threads on your [src.name] chafe!"))
 
+<<<<<<< HEAD
+=======
+#undef MOTH_EATING_CLOTHING_DAMAGE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/apply_fantasy_bonuses(bonus)
 	. = ..()
 	set_armor(get_armor().generate_new_with_modifiers(list(ARMOR_ALL = bonus)))

@@ -10,9 +10,8 @@
 	endurance = 10
 	maturation = 6
 	production = 3
-	yield = 5
+	yield = 50
 	potency = 20
-	instability = 25
 	growthstages = 4
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_dead = "rainbowbunch-dead"

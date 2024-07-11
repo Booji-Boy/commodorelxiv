@@ -29,6 +29,8 @@
 	var/spawn_scatter_radius = 0
 	/// Whether the items should have a random pixel_x/y offset (maxium offset distance is ±16 pixels for x/y)
 	var/spawn_random_offset = FALSE
+	/// The pixel x/y divider offsets for spawn_loot_split (spaced 1 pixel apart by default)
+	var/spawn_loot_split_pixel_offsets = 2
 
 /obj/effect/spawner/random/Initialize(mapload)
 	. = ..()
@@ -68,6 +70,7 @@
 					spawn_loc = pick_n_take(spawn_locations)
 
 				var/atom/movable/spawned_loot = make_item(spawn_loc, lootspawn)
+				post_spawn(spawned_loot) //monkestation edit
 				spawned_loot.setDir(dir)
 
 				if (!spawn_loot_split && !spawn_random_offset)
@@ -151,3 +154,9 @@
 	stat_table += spawned_table
 	for(var/item in stat_table)
 		stat_table[item] /= loot_count
+
+//monkestation edit start
+//for applying effects post-spawn
+/obj/effect/spawner/random/proc/post_spawn(atom/movable/spawned_loot)
+	return
+//monkestation edit end

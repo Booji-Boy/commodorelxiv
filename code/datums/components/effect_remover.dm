@@ -41,7 +41,11 @@
 	src.effects_we_clear = typecacheof(effects_we_clear)
 	src.time_to_remove = time_to_remove
 
+<<<<<<< HEAD
 /datum/component/effect_remover/Destroy(force)
+=======
+/datum/component/effect_remover/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	on_clear_callback = null
 	return ..()
 

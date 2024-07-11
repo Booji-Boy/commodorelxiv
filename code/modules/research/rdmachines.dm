@@ -27,9 +27,14 @@
 /obj/machinery/rnd/post_machine_initialize()
 	. = ..()
 	if(!CONFIG_GET(flag/no_default_techweb_link) && !stored_research)
+<<<<<<< HEAD
 		CONNECT_TO_RND_SERVER_ROUNDSTART(stored_research, src)
 	if(stored_research)
 		on_connected_techweb()
+=======
+		connect_techweb(SSresearch.science_tech)
+	set_wires(new /datum/wires/rnd(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/rnd/Destroy()
 	if(stored_research)
@@ -153,3 +158,18 @@
 	if(loaded_item)
 		loaded_item.forceMove(drop_location())
 	..()
+<<<<<<< HEAD
+=======
+
+/obj/machinery/rnd/proc/AfterMaterialInsert(item_inserted, id_inserted, amount_inserted)
+	var/stack_name
+	if(istype(item_inserted, /obj/item/stack/ore/bluespace_crystal))
+		stack_name = "bluespace"
+		use_power(SHEET_MATERIAL_AMOUNT / 10)
+	else
+		var/obj/item/stack/S = item_inserted
+		stack_name = S.name
+		use_power(min(active_power_usage, (amount_inserted / 100)))
+	add_overlay("protolathe_[stack_name]")
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, cut_overlay), "protolathe_[stack_name]"), 10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

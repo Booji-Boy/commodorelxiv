@@ -43,7 +43,11 @@
 	if(!on)
 		return
 	. = ..()
+<<<<<<< HEAD
 	use_energy(active_power_usage) //use power for analyzing gases
+=======
+	use_power(active_power_usage) //use power for analyzing gases
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/air_sensor/process()
 	//update appearance according to power state
@@ -91,7 +95,11 @@
 	if(istype(multi_tool.buffer, /obj/machinery/atmospherics/components/unary/outlet_injector))
 		var/obj/machinery/atmospherics/components/unary/outlet_injector/input = multi_tool.buffer
 		inlet_id = input.id_tag
+<<<<<<< HEAD
 		multi_tool.set_buffer(src)
+=======
+		multi_tool.buffer = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "connected to input")
 
 	else if(istype(multi_tool.buffer, /obj/machinery/atmospherics/components/unary/vent_pump))
@@ -105,6 +113,7 @@
 		output.external_pressure_bound = 0
 		//finally assign it to this sensor
 		outlet_id = output.id_tag
+<<<<<<< HEAD
 		multi_tool.set_buffer(src)
 		balloon_alert(user, "connected to output")
 
@@ -113,6 +122,16 @@
 		balloon_alert(user, "sensor added to buffer")
 
 	return ITEM_INTERACT_SUCCESS
+=======
+		multi_tool.buffer = null
+		balloon_alert(user, "connected to output")
+
+	else
+		multi_tool.buffer = src
+		balloon_alert(user, "added to multitool buffer")
+
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * A portable version of the /obj/machinery/air_sensor
@@ -123,9 +142,16 @@
 /obj/item/air_sensor
 	name = "Air Sensor"
 	desc = "A device designed to detect gases and their concentration in an area."
+<<<<<<< HEAD
 	icon = 'icons/obj/wallmounts.dmi'
 	icon_state = "gsensor0"
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT)
+=======
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "gsensor0"
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT) // MONKESTATION EDIT CHANGE OLD // REQUIRES PR #75052
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// The injector linked with this sensor
 	var/input_id
 	/// The vent pump linked with this sensor
@@ -207,6 +233,7 @@
 
 /obj/item/air_sensor/wrench_act(mob/living/user, obj/item/tool)
 	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/air_sensor/welder_act(mob/living/user, obj/item/tool)
@@ -224,3 +251,25 @@
 /obj/item/air_sensor/atom_deconstruct(disassembled)
 	new /obj/item/analyzer(loc)
 	new /obj/item/stack/sheet/iron(loc, 1)
+=======
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	return
+
+/obj/item/air_sensor/welder_act(mob/living/user, obj/item/tool)
+	if(!tool.tool_start_check(user, amount = 1))
+		return
+
+	loc.balloon_alert(user, "dismantling sensor")
+	if(!tool.use_tool(src, user, 2 SECONDS, volume = 30, amount = 1))
+		return
+	loc.balloon_alert(user, "sensor dismanteled")
+
+	deconstruct(TRUE)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/item/air_sensor/deconstruct(disassembled)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		new /obj/item/analyzer(loc)
+		new /obj/item/stack/sheet/iron(loc, 1)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

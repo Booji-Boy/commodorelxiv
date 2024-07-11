@@ -1,3 +1,5 @@
+// MONKESTATION FILE REMOVAL
+/*
 /obj/item/organ/internal/heart/gland/spiderman
 	abductor_hint = "araneae cloister accelerator. The abductee occasionally exhales spider pheromones and will spawn spiderlings."
 	cooldown_low = 450
@@ -11,4 +13,10 @@
 	to_chat(owner, span_warning("You feel something crawling in your skin."))
 	owner.faction |= FACTION_SPIDER
 	var/mob/living/basic/spider/growing/spiderling/spider = new(owner.drop_location())
+<<<<<<< HEAD
 	spider.directive = "Protect your nest inside [owner.real_name]."
+=======
+	s
+pider.directive = "Protect your nest inside [owner.real_name]."
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

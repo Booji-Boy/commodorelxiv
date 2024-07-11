@@ -18,6 +18,7 @@
 	return ..()
 
 /datum/ai_behavior/run_away_from_target/perform(seconds_per_tick, datum/ai_controller/controller, target_key, hiding_location_key)
+<<<<<<< HEAD
 	if (controller.blackboard[BB_BASIC_MOB_STOP_FLEEING])
 		return AI_BEHAVIOR_DELAY
 	var/atom/target = controller.blackboard[hiding_location_key] || controller.blackboard[target_key]
@@ -28,6 +29,21 @@
 	if (plot_path_away_from(controller, target))
 		return AI_BEHAVIOR_DELAY
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	. = ..()
+	if (controller.blackboard[BB_BASIC_MOB_STOP_FLEEING])
+		finish_action(controller, succeeded = FALSE, target_key = target_key, hiding_location_key = hiding_location_key)
+		return
+	var/atom/target = controller.blackboard[hiding_location_key] || controller.blackboard[target_key]
+	if (QDELETED(target) || !can_see(controller.pawn, target, run_distance))
+		finish_action(controller, succeeded = TRUE, target_key = target_key, hiding_location_key = hiding_location_key)
+		return
+	if (get_dist(controller.pawn, controller.current_movement_target) > required_distance)
+		return // Still heading over
+	if (plot_path_away_from(controller, target))
+		return
+	finish_action(controller, succeeded = FALSE, target_key = target_key, hiding_location_key = hiding_location_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/run_away_from_target/proc/plot_path_away_from(datum/ai_controller/controller, atom/target)
 	var/turf/target_destination = get_turf(controller.pawn)
@@ -60,6 +76,7 @@
 
 /datum/ai_behavior/run_away_from_target/finish_action(datum/ai_controller/controller, succeeded, target_key, hiding_location_key)
 	. = ..()
+<<<<<<< HEAD
 	if (clear_failed_targets)
 		controller.clear_blackboard_key(target_key)
 
@@ -74,3 +91,6 @@
 	living_pawn.RangedAttack(target)
 	return ..()
 
+=======
+	controller.clear_blackboard_key(target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

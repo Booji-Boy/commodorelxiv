@@ -127,13 +127,13 @@
 
 	//Fancy hitscan lighting effects!
 	var/hitscan_light_intensity = 1.5
-	var/hitscan_light_range = 0.75
+	var/hitscan_light_outer_range = 0.75
 	var/hitscan_light_color_override
 	var/muzzle_flash_intensity = 3
 	var/muzzle_flash_range = 1.5
 	var/muzzle_flash_color_override
 	var/impact_light_intensity = 3
-	var/impact_light_range = 2
+	var/impact_light_outer_range = 2
 	var/impact_light_color_override
 
 	//Homing
@@ -214,6 +214,11 @@
 	var/can_hit_turfs = FALSE
 	/// If this projectile has been parried before
 	var/parried = FALSE
+<<<<<<< HEAD
+=======
+	///how long we paralyze for as this is a disorient
+	var/paralyze_timer = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/projectile/Initialize(mapload)
 	. = ..()
@@ -221,6 +226,7 @@
 	if(embedding)
 		updateEmbedding()
 	AddElement(/datum/element/connect_loc, projectile_connections)
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(on_enter))
 
 /obj/projectile/proc/Range()
 	range--
@@ -299,9 +305,15 @@
 		hity = target.pixel_y + rand(-8, 8)
 
 	if(damage > 0 && (damage_type == BRUTE || damage_type == BURN) && iswallturf(target_turf) && prob(75))
+<<<<<<< HEAD
 		var/turf/closed/wall/target_wall = target_turf
 		if(impact_effect_type && !hitscan)
 			new impact_effect_type(target_wall, hitx, hity)
+=======
+		var/turf/closed/wall/W = target_turf
+		if(impact_effect_type && !hitscan)
+			new impact_effect_type(target_turf, hitx, hity)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		target_wall.add_dent(WALL_DENT_SHOT, hitx, hity)
 
@@ -320,6 +332,7 @@
 	var/mob/living/living_target = target
 
 	if(blocked != 100) // not completely blocked
+<<<<<<< HEAD
 		var/obj/item/bodypart/hit_bodypart = living_target.get_bodypart(hit_limb_zone)
 		if (damage && damage_type == BRUTE)
 			if (living_target.blood_volume && (isnull(hit_bodypart) || hit_bodypart.can_bleed()))
@@ -340,6 +353,19 @@
 				if (spark_amount > 0)
 					do_sparks(spark_amount, FALSE, living_target)
 
+=======
+		if(damage && L.blood_volume && damage_type == BRUTE)
+			var/splatter_dir = dir
+			if(starting)
+				splatter_dir = get_dir(starting, target_turf)
+			if(isalien(L))
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(target_turf, splatter_dir, COLOR_DARK_PURPLE)
+			else
+				var/angle = !isnull(Angle) ? Angle : round(get_angle(starting, src), 1)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(loc, angle, COLOR_DARK_RED)
+			if(prob(33))
+				L.add_splatter_floor(target_turf)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else if(impact_effect_type && !hitscan)
 			new impact_effect_type(target_turf, hitx, hity)
 
@@ -357,8 +383,11 @@
 				playsound(src, hitsound, volume, TRUE, -1)
 			living_target.visible_message(span_danger("[living_target] is hit by \a [src][organ_hit_text]!"), \
 					span_userdanger("You're hit by \a [src][organ_hit_text]!"), null, COMBAT_MESSAGE_RANGE)
+<<<<<<< HEAD
 			if(living_target.is_blind())
 				to_chat(living_target, span_userdanger("You feel something hit you[organ_hit_text]!"))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/reagent_note
 	if(reagents?.reagent_list)
@@ -418,6 +447,18 @@
 		return
 	Impact(A)
 
+<<<<<<< HEAD
+=======
+/// Signal proc for when a projectile enters a turf.
+/obj/projectile/proc/on_enter(datum/source, atom/old_loc, dir, forced, list/old_locs)
+	SIGNAL_HANDLER
+
+	UnregisterSignal(old_loc, COMSIG_ATOM_ATTACK_HAND)
+
+	if(isturf(loc))
+		RegisterSignal(loc, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attempt_parry))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Signal proc for when a mob attempts to attack this projectile or the turf it's on with an empty hand.
 /obj/projectile/proc/attempt_parry(datum/source, mob/user, list/modifiers)
 	SIGNAL_HANDLER
@@ -1101,7 +1142,7 @@
 	if(tracer_type)
 		var/tempref = REF(src)
 		for(var/datum/point/p in beam_segments)
-			generate_tracer_between_points(p, beam_segments[p], tracer_type, color, duration, hitscan_light_range, hitscan_light_color_override, hitscan_light_intensity, tempref)
+			generate_tracer_between_points(p, beam_segments[p], tracer_type, color, duration, hitscan_light_outer_range, hitscan_light_color_override, hitscan_light_intensity, tempref)
 	if(muzzle_type && duration > 0)
 		var/datum/point/p = beam_segments[1]
 		var/atom/movable/thing = new muzzle_type
@@ -1110,7 +1151,7 @@
 		matrix.Turn(original_angle)
 		thing.transform = matrix
 		thing.color = color
-		thing.set_light(muzzle_flash_range, muzzle_flash_intensity, muzzle_flash_color_override? muzzle_flash_color_override : color)
+		thing.set_light(l_outer_range = muzzle_flash_range, l_power = muzzle_flash_intensity, l_color = muzzle_flash_color_override? muzzle_flash_color_override : color)
 		QDEL_IN(thing, duration)
 	if(impacting && impact_type && duration > 0)
 		var/datum/point/p = beam_segments[beam_segments[beam_segments.len]]
@@ -1120,7 +1161,7 @@
 		matrix.Turn(Angle)
 		thing.transform = matrix
 		thing.color = color
-		thing.set_light(impact_light_range, impact_light_intensity, impact_light_color_override? impact_light_color_override : color)
+		thing.set_light(l_outer_range = impact_light_outer_range, l_power = impact_light_intensity, l_color = impact_light_color_override? impact_light_color_override : color)
 		QDEL_IN(thing, duration)
 	if(cleanup)
 		cleanup_beam_segments()
@@ -1190,18 +1231,27 @@
 
 #undef MOVES_HITSCAN
 #undef MUZZLE_EFFECT_PIXEL_INCREMENT
+<<<<<<< HEAD
 #undef MAX_RANGE_HIT_PRONE_TARGETS
 
 /// Fire a projectile from this atom at another atom
 /atom/proc/fire_projectile(projectile_type, atom/target, sound, firer, list/ignore_targets = list())
+=======
+
+/// Fire a projectile from this atom at another atom
+/atom/proc/fire_projectile(projectile_type, atom/target, sound, firer)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (!isnull(sound))
 		playsound(src, sound, vol = 100, vary = TRUE)
 
 	var/turf/startloc = get_turf(src)
 	var/obj/projectile/bullet = new projectile_type(startloc)
 	bullet.starting = startloc
+<<<<<<< HEAD
 	for (var/atom/thing as anything in ignore_targets)
 		bullet.impacted[WEAKREF(thing)] = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bullet.firer = firer || src
 	bullet.fired_from = src
 	bullet.yo = target.y - startloc.y
@@ -1209,4 +1259,7 @@
 	bullet.original = target
 	bullet.preparePixelProjectile(target, src)
 	bullet.fire()
+<<<<<<< HEAD
 	return bullet
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

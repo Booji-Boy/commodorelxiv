@@ -48,7 +48,11 @@ const MATERIAL_ICONS: Record<string, [number, string][]> = {
     [17, 'sheet-titanium_2'],
     [34, 'sheet-titanium_3'],
   ],
+<<<<<<< HEAD
   'bluespace crystal': [[0, 'bluespace_crystal']],
+=======
+  'bluespace crystal': [[0, 'polycrystal']],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   plastic: [
     [0, 'sheet-plastic'],
     [17, 'sheet-plastic_2'],

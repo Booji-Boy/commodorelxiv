@@ -1,5 +1,6 @@
 import { useBackend, useSharedState } from '../backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   Icon,
@@ -7,11 +8,24 @@ import {
   Modal,
   Section,
   Stack,
+=======
+  Button,
+  Icon,
+  Modal,
+  Section,
+  Stack,
+  LabeledList,
+  Box,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 import { GasmixParser } from './common/GasmixParser';
 
 export const AnomalyRefinery = (props) => {
+<<<<<<< HEAD
+=======
+  const { act, data } = useBackend();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window title="Anomaly Refinery" width={550} height={350}>
       <Window.Content>

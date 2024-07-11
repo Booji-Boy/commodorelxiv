@@ -26,6 +26,7 @@ SUBSYSTEM_DEF(statpanels)
 		global_data = list(
 			"Map: [SSmapping.config?.map_name || "Loading..."]",
 			cached ? "Next Map: [cached.map_name]" : null,
+			"Storyteller: [!SSgamemode.secret_storyteller && SSgamemode.storyteller ? SSgamemode.storyteller.name : "Secret"]", //monkestation addition
 			"Round ID: [GLOB.round_id ? GLOB.round_id : "NULL"]",
 			"Server Time: [time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")]",
 			"Round Time: [ROUND_TIME()]",
@@ -160,6 +161,79 @@ SUBSYSTEM_DEF(statpanels)
 
 	target.stat_panel.send_message("update_spells", list(spell_tabs = target.spell_tabs, actions = actions))
 
+<<<<<<< HEAD
+=======
+/datum/controller/subsystem/statpanels/proc/set_turf_examine_tab(client/target, mob/target_mob)
+	var/list/overrides = list()
+	for(var/image/target_image as anything in target.images)
+		if(!target_image.loc || target_image.loc.loc != target_mob.listed_turf || !target_image.override)
+			continue
+		overrides += target_image.loc
+
+	var/list/atoms_to_display = list(target_mob.listed_turf)
+	for(var/atom/movable/turf_content as anything in target_mob.listed_turf)
+		if(turf_content.mouse_opacity == MOUSE_OPACITY_TRANSPARENT)
+			continue
+		if(turf_content.invisibility > target_mob.see_invisible)
+			continue
+		if(turf_content in overrides)
+			continue
+		if(turf_content.IsObscured())
+			continue
+		atoms_to_display += turf_content
+
+	/// Set the atoms we're meant to display
+	var/datum/object_window_info/obj_window = target.obj_window
+	if(!obj_window)
+		refresh_client_obj_view(target)
+		return
+	obj_window.atoms_to_show = atoms_to_display
+	START_PROCESSING(SSobj_tab_items, obj_window)
+	refresh_client_obj_view(target)
+
+/datum/controller/subsystem/statpanels/proc/refresh_client_obj_view(client/refresh)
+	var/list/turf_items = return_object_images(refresh)
+	if(!length(turf_items) || !refresh.mob?.listed_turf)
+		return
+	refresh.stat_panel.send_message("update_listedturf", turf_items)
+
+#define OBJ_IMAGE_LOADING "statpanels obj loading temporary"
+/// Returns all our ready object tab images
+/// Returns a list in the form list(list(object_name, object_ref, loaded_image), ...)
+/datum/controller/subsystem/statpanels/proc/return_object_images(client/load_from)
+	// You might be inclined to think that this is a waste of cpu time, since we
+	// A: Double iterate over atoms in the build case, or
+	// B: Generate these lists over and over in the refresh case
+	// It's really not very hot. The hot portion of this code is genuinely mostly in the image generation
+	// So it's ok to pay a performance cost for cleanliness here
+
+	// No turf? go away
+	if(!load_from.mob?.listed_turf)
+		return list()
+	var/datum/object_window_info/obj_window = load_from.obj_window
+	if(!obj_window)
+		return list()
+	var/list/already_seen = obj_window.atoms_to_images
+	var/list/to_make = obj_window.atoms_to_imagify
+	var/list/turf_items = list()
+	for(var/atom/turf_item as anything in obj_window.atoms_to_show)
+		// First, we fill up the list of refs to display
+		// If we already have one, just use that
+		var/existing_image = already_seen[turf_item]
+		if(existing_image == OBJ_IMAGE_LOADING)
+			continue
+		// We already have it. Success!
+		if(existing_image)
+			turf_items[++turf_items.len] = list("[turf_item.name]", REF(turf_item), existing_image)
+			continue
+		// Now, we're gonna queue image generation out of those refs
+		to_make += turf_item
+		already_seen[turf_item] = OBJ_IMAGE_LOADING
+		obj_window.RegisterSignal(turf_item, COMSIG_QDELETING, TYPE_PROC_REF(/datum/object_window_info,viewing_atom_deleted)) // we reset cache if anything in it gets deleted
+	return turf_items
+
+#undef OBJ_IMAGE_LOADING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/controller/subsystem/statpanels/proc/generate_mc_data()
 	mc_data = list(

@@ -1,16 +1,22 @@
 /datum/hud/larva
+	has_interaction_ui = TRUE
 	ui_style = 'icons/hud/screen_alien.dmi'
 
 /datum/hud/larva/New(mob/owner)
 	..()
 	var/atom/movable/screen/using
 
+<<<<<<< HEAD
 	action_intent = new /atom/movable/screen/combattoggle/flashy(null, src)
 	action_intent.icon = ui_style
 	action_intent.screen_loc = ui_combat_toggle
 	static_inventory += action_intent
 
 	healths = new /atom/movable/screen/healths/alien(null, src)
+=======
+	healths = new /atom/movable/screen/healths/alien()
+	healths.hud = src
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	infodisplay += healths
 
 	alien_queen_finder = new /atom/movable/screen/alien/alien_queen_finder(null, src)

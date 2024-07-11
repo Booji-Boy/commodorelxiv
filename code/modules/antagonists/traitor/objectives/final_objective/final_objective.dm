@@ -2,11 +2,19 @@
 	name = "Final Objective"
 	objectives = list(
 		/datum/traitor_objective/ultimate/battlecruiser = 1,
+<<<<<<< HEAD
 		/datum/traitor_objective/ultimate/battle_royale = 1,
 		/datum/traitor_objective/ultimate/dark_matteor = 1,
 		/datum/traitor_objective/ultimate/infect_ai = 1,
 		/datum/traitor_objective/ultimate/romerol = 1,
 		/datum/traitor_objective/ultimate/supermatter_cascade = 1,
+=======
+//		/datum/traitor_objective/ultimate/space_dragon = 1, //monkestation removal
+		/datum/traitor_objective/ultimate/supermatter_cascade = 1,
+		/datum/traitor_objective/ultimate/infect_ai = 1,
+		/datum/traitor_objective/ultimate/dark_matteor = 1,
+//		/datum/traitor_objective/ultimate/wizard = 1, //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	weight = 100
 

@@ -65,7 +65,7 @@
 	if(grill)
 		if(istype(used_item, /obj/item/melee/roastingstick))
 			return FALSE
-		if(!user.combat_mode && !(used_item.item_flags & ABSTRACT))
+		if(!(user.istate & ISTATE_HARM) && !(used_item.item_flags & ABSTRACT))
 			if(user.temporarilyRemoveItemFromInventory(used_item))
 				used_item.forceMove(get_turf(src))
 				var/list/modifiers = params2list(params)
@@ -160,6 +160,9 @@
 	if(!check_oxygen())
 		extinguish()
 		return
+	var/turf/open/my_turf = get_turf(src)
+	if(istype(my_turf) && !my_turf.planetary_atmos) //Pollute, but only when we're not on planetary atmos
+		my_turf.pollute_turf_list(list(/datum/pollutant/smoke = 15, /datum/pollutant/carbon_air_pollution = 5), POLLUTION_PASSIVE_EMITTER_CAP)
 	bonfire_burn(seconds_per_tick)
 
 /obj/structure/bonfire/extinguish()

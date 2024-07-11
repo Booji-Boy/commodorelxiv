@@ -131,6 +131,14 @@
 	bitfield |= CARDINAL_TO_SHORTPIPES(initialize_directions & ~connections)
 	icon_state = "[bitfield]_[piping_layer]"
 
+<<<<<<< HEAD
+=======
+/obj/machinery/atmospherics/pipe/update_icon()
+	update_pipe_icon()
+	update_layer()
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/atmospherics/proc/update_node_icon()
 	for(var/i in 1 to device_type)
 		if(!nodes[i])

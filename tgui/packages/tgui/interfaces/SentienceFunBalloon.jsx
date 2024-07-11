@@ -1,17 +1,29 @@
 import { useBackend } from '../backend';
 import {
   Button,
+<<<<<<< HEAD
   Input,
   LabeledList,
   NumberInput,
   Section,
   Stack,
+=======
+  NumberInput,
+  Section,
+  Stack,
+  Input,
+  LabeledList,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
 export const SentienceFunBalloon = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const { group_name, range, antag } = data;
+=======
+  const { group_name, range } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window title={'Sentience Fun Balloon'} width={400} height={200}>
       <Window.Content>

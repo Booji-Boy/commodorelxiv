@@ -90,7 +90,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 	if(machine_stat & (NOPOWER|BROKEN))
 		set_light(0)
 		return
-	set_light(1.5, 0.7, "#34D352") // green light
+	set_light(l_outer_range = 1.4, l_power = 0.7,l_color ="#34D352")//green light
 
 /obj/machinery/newscaster/update_overlays()
 	. = ..()
@@ -490,7 +490,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 	return (machine_stat & BROKEN)
 
 /obj/machinery/newscaster/welder_act(mob/living/user, obj/item/tool)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	. = ITEM_INTERACT_SUCCESS
 	if(!(machine_stat & BROKEN))
@@ -546,7 +546,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 
 
 /obj/machinery/newscaster/attack_paw(mob/living/user, list/modifiers)
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		to_chat(user, span_warning("The newscaster controls are far too complicated for your tiny brain!"))
 	else
 		take_damage(5, BRUTE, MELEE)
@@ -804,7 +804,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/newscaster, 30)
 /obj/item/wallframe/newscaster
 	name = "newscaster frame"
 	desc = "Used to build newscasters, just secure to the wall."
+<<<<<<< HEAD
 	icon_state = "newscaster_assembly"
+=======
+	icon_state = "newscaster"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron= SHEET_MATERIAL_AMOUNT * 7, /datum/material/glass= SHEET_MATERIAL_AMOUNT * 4)
 	result_path = /obj/machinery/newscaster
 	pixel_shift = 30

@@ -49,6 +49,15 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 	var/emergency
 	/// If ore redemption machines will send an update when it receives new ores.
 	var/receive_ore_updates = FALSE
+<<<<<<< HEAD
+=======
+	/// Can others request assistance from this terminal?
+	var/assistance_requestable = FALSE
+	/// Can others request supplies from this terminal?
+	var/supplies_requestable = FALSE
+	/// Can you relay information to this console?
+	var/anon_tips_receiver = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Did we error in the last mail?
 	var/has_mail_send_error = FALSE
 	/// Cooldown to prevent announcement spam
@@ -67,7 +76,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 	if(machine_stat & NOPOWER)
 		set_light(0)
 		return
-	set_light(1.5, 0.7, "#34D352")//green light
+	set_light(l_outer_range = 1.4, l_power = 0.7, l_color ="#34D352")//green light
 
 /obj/machinery/requests_console/examine(mob/user)
 	. = ..()
@@ -122,12 +131,27 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 			name = "\improper [department] requests console" // and if we have a 'department', our name should reflect that.
 
 	GLOB.req_console_all += src
+<<<<<<< HEAD
+=======
+
+	if((assistance_requestable)) // adding to assistance list if not already present
+		GLOB.req_console_assistance |= department
+
+	if((supplies_requestable)) // supplier list
+		GLOB.req_console_supplies |= department
+
+	if((anon_tips_receiver)) // tips lists
+		GLOB.req_console_information |= department
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	GLOB.req_console_ckey_departments[ckey(department)] = department // and then we set ourselves a listed name
 
 	radio = new /obj/item/radio(src)
 	radio.set_listening(FALSE)
+<<<<<<< HEAD
 	find_and_hang_on_wall()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/requests_console/Destroy()
 	QDEL_NULL(radio)
@@ -144,7 +168,11 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
+<<<<<<< HEAD
 /obj/machinery/requests_console/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+=======
+/obj/machinery/requests_console/ui_act(action, params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(.)
 		return
@@ -198,7 +226,12 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 				return
 			if(isliving(usr))
 				var/mob/living/L = usr
+<<<<<<< HEAD
 				message = L.treat_message(message)["message"]
+=======
+//				message = L.treat_message(message)["message"] MONKESTATION EDIT CHANGE OLD -- we dont have TTS
+				message = L.treat_message(message) // MONKESTATION EDIT CHANGE NEW
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			minor_announce(message, "[department] Announcement:", html_encode = FALSE, sound_override = 'sound/misc/announce_dig.ogg')
 			GLOB.news_network.submit_article(message, department, "Station Announcements", null)
@@ -213,6 +246,7 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 			var/recipient = params["reply_recipient"]
 
 			var/reply_message = reject_bad_text(tgui_input_text(usr, "Write a quick reply to [recipient]", "Awaiting Input"), ascii_only = FALSE)
+<<<<<<< HEAD
 			if(QDELETED(ui) || ui.status != UI_INTERACTIVE)
 				return
 			if(!reply_message)
@@ -257,6 +291,51 @@ GLOBAL_LIST_EMPTY(req_console_ckey_departments)
 		if("cargobay", "mining")
 			radio_freq = FREQ_SUPPLY
 
+=======
+
+			if(!reply_message)
+				has_mail_send_error = TRUE
+				playsound(src, 'sound/machines/buzz-two.ogg', 50, TRUE)
+				return TRUE
+
+			send_message(recipient, reply_message, REQ_NORMAL_MESSAGE_PRIORITY, REPLY_REQUEST)
+			return TRUE
+		if("send_message")
+			var/recipient = params["recipient"]
+			if(!recipient)
+				return
+			var/priority = params["priority"]
+			if(!priority)
+				return
+			var/message = reject_bad_text(trim(html_encode(params["message"]), MAX_MESSAGE_LEN), ascii_only = FALSE)
+			if(!message)
+				to_chat(usr, span_alert("Invalid message."))
+				has_mail_send_error = TRUE
+				return TRUE
+			var/request_type = params["request_type"]
+			if(!request_type)
+				return
+			send_message(recipient, message, priority, request_type)
+			return TRUE
+
+///Sends the message from the request console
+/obj/machinery/requests_console/proc/send_message(recipient, message, priority, request_type)
+	var/radio_freq
+	switch(ckey(recipient))
+		if("bridge")
+			radio_freq = FREQ_COMMAND
+		if("medbay")
+			radio_freq = FREQ_MEDICAL
+		if("science")
+			radio_freq = FREQ_SCIENCE
+		if("engineering")
+			radio_freq = FREQ_ENGINEERING
+		if("security")
+			radio_freq = FREQ_SECURITY
+		if("cargobay", "mining")
+			radio_freq = FREQ_SUPPLY
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/signal/subspace/messaging/rc/signal = new(src, list(
 		"sender_department" = department,
 		"recipient_department" = recipient,

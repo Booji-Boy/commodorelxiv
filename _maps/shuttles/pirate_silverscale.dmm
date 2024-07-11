@@ -23,6 +23,29 @@
 	dir = 8
 	},
 /area/shuttle/pirate)
+<<<<<<< HEAD
+=======
+"bH" = (
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/turf/open/floor/pod/dark,
+/area/shuttle/pirate)
+"ci" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 4
+	},
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/turf/open/floor/pod/dark,
+/area/shuttle/pirate)
+"cE" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 1
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/dark,
+/area/shuttle/pirate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cH" = (
 /obj/machinery/door/airlock/silver,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
@@ -40,6 +63,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/light,
 /area/shuttle/pirate)
 "dI" = (
@@ -123,6 +147,17 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/pirate)
+<<<<<<< HEAD
+=======
+"gg" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/turf/open/floor/carpet/royalblack,
+/area/shuttle/pirate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ht" = (
 /obj/machinery/door/airlock/silver,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
@@ -196,6 +231,17 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/pirate)
+<<<<<<< HEAD
+=======
+"lu" = (
+/obj/item/storage/secure/safe/directional/north,
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/obj/structure/bed/pod,
+/obj/item/bedsheet/black,
+/turf/open/floor/carpet/royalblack,
+/area/shuttle/pirate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "lL" = (
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 10
@@ -412,6 +458,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/structure/fans/tiny,
 /turf/open/floor/pod/light,
 /area/shuttle/pirate)
 "Ae" = (
@@ -490,6 +537,14 @@
 	},
 /turf/open/floor/iron/dark/textured,
 /area/shuttle/pirate)
+<<<<<<< HEAD
+=======
+"DP" = (
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/turf/open/floor/carpet/royalblack,
+/area/shuttle/pirate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "DX" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
@@ -821,6 +876,19 @@
 	},
 /turf/open/floor/pod/dark,
 /area/shuttle/pirate)
+<<<<<<< HEAD
+=======
+"Su" = (
+/obj/machinery/power/port_gen/pacman{
+	anchored = 1
+	},
+/obj/structure/cable,
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/all_access,
+/obj/effect/turf_decal/bot,
+/turf/open/floor/pod/dark,
+/area/shuttle/pirate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Sv" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4

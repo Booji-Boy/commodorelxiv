@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* MONKESTATION REMOVAL: MERGED WITH PRISONERS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/job/bitrunner
 	title = JOB_BITRUNNER
 	description = "Surf the virtual domain for gear and loot. Decrypt your rewards on station."
@@ -29,7 +33,11 @@
 		/obj/item/food/cornchips/blue = 1,
 	)
 	rpg_title = "Recluse"
+<<<<<<< HEAD
 	job_flags = STATION_JOB_FLAGS
+=======
+	job_flags = JOB_ANNOUNCE_ARRIVAL | JOB_CREW_MANIFEST | JOB_EQUIP_RANK | JOB_CREW_MEMBER | JOB_NEW_PLAYER_JOINABLE | JOB_REOPEN_ON_ROUNDSTART_LOSS | JOB_ASSIGN_QUIRKS | JOB_CAN_BE_INTERN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/outfit/job/bitrunner
 	name = "Bitrunner"
@@ -39,3 +47,7 @@
 	uniform = /obj/item/clothing/under/rank/cargo/bitrunner
 	belt = /obj/item/modular_computer/pda/bitrunner
 	ears = /obj/item/radio/headset/headset_cargo
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

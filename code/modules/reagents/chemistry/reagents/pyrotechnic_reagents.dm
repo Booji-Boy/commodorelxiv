@@ -6,6 +6,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	color = "#550000"
 	taste_description = "sweet tasting metal"
+	turf_exposure = TRUE
 
 /datum/reagent/thermite/expose_turf(turf/exposed_turf, reac_volume)
 	. = ..()
@@ -32,10 +33,13 @@
 	taste_description = "metal"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 //It has stable IN THE NAME. IT WAS MADE FOR THIS MOMENT.
 /datum/reagent/stabilizing_agent/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.myseed?.adjust_instability(-round(volume))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/clf3
 	name = "Chlorine Trifluoride"
 	description = "Makes a temporary 3x3 fireball when it comes into existence, so be careful when mixing. ClF3 applied to a surface burns things that wouldn't otherwise burn, sometimes through the very floors of the station and exposing it to the vacuum of space."
@@ -45,6 +49,8 @@
 	taste_description = "burning"
 	penetrates_skin = NONE
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	evaporation_rate = 100
+	turf_exposure = TRUE
 
 /datum/reagent/clf3/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -191,7 +197,9 @@
 	self_consuming = TRUE
 	penetrates_skin = NONE
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	liquid_fire_power = 1
 
+<<<<<<< HEAD
 // why, just why
 /datum/reagent/napalm/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	if(!(mytray.myseed?.resistance_flags & FIRE_PROOF))
@@ -199,6 +207,8 @@
 		mytray.adjust_toxic(round(volume * 7))
 
 	mytray.adjust_weedlevel(-rand(5,9)) //At least give them a small reward if they bother.
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/napalm/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -225,6 +235,7 @@
 	inverse_chem = /datum/reagent/inverse/cryostylane
 	burning_volume = 0.05
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED | REAGENT_DEAD_PROCESS
+	turf_exposure = TRUE
 
 /datum/reagent/cryostylane/burn(datum/reagents/holder)
 	if(holder.has_reagent(/datum/reagent/oxygen))
@@ -333,6 +344,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
 /datum/reagent/teslium/energized_jelly/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	if(!isjellyperson(affected_mob)) //everyone but jellypeople get shocked as normal.
 		return ..()
 	affected_mob.AdjustAllImmobility(-40  *REM * seconds_per_tick)
@@ -342,6 +354,17 @@
 		var/mob/living/carbon/human/affected_human = affected_mob
 		var/datum/species/jelly/luminescent/slime_species = affected_human.dna.species
 		slime_species.extract_cooldown = max(slime_species.extract_cooldown - (2 SECONDS * REM * seconds_per_tick), 0)
+=======
+	if(isjellyperson(affected_mob))
+		shock_timer = 0 //immune to shocks
+		affected_mob.AdjustAllImmobility(-40  *REM * seconds_per_tick)
+		affected_mob.stamina.adjust(2 * REM * seconds_per_tick, 0)
+		if(is_species(affected_mob, /datum/species/jelly/luminescent))
+			var/mob/living/carbon/human/affected_human = affected_mob
+			var/datum/species/jelly/luminescent/slime_species = affected_human.dna.species
+			slime_species.extract_cooldown = max(slime_species.extract_cooldown - (2 SECONDS * REM * seconds_per_tick), 0)
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/firefighting_foam
 	name = "Firefighting Foam"
@@ -350,6 +373,7 @@
 	color = "#A6FAFF55"
 	taste_description = "the inside of a fire extinguisher"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	turf_exposure = TRUE
 
 /datum/reagent/firefighting_foam/expose_turf(turf/open/exposed_turf, reac_volume)
 	. = ..()

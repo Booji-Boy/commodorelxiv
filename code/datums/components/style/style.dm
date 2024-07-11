@@ -96,14 +96,25 @@
 	if(multitooled)
 		src.multitooled = multitooled
 
+<<<<<<< HEAD
 /datum/component/style/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_USER_ITEM_INTERACTION, PROC_REF(hotswap))
+=======
+	RegisterSignal(src, COMSIG_ATOM_TOOL_ACT(TOOL_MULTITOOL), PROC_REF(on_parent_multitool))
+
+/datum/component/style/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_MOB_ITEM_AFTERATTACK, PROC_REF(hotswap))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_MOB_MINED, PROC_REF(on_mine))
 	RegisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_take_damage))
 	RegisterSignal(parent, COMSIG_MOB_EMOTED("flip"), PROC_REF(on_flip))
 	RegisterSignal(parent, COMSIG_MOB_EMOTED("spin"), PROC_REF(on_spin))
 	RegisterSignal(parent, COMSIG_MOB_ITEM_ATTACK, PROC_REF(on_attack))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_punch))
+=======
+	RegisterSignal(parent, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, PROC_REF(on_punch))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(SSdcs, COMSIG_GLOB_MOB_DEATH, PROC_REF(on_death))
 	RegisterSignal(parent, COMSIG_LIVING_RESONATOR_BURST, PROC_REF(on_resonator_burst))
 	RegisterSignal(parent, COMSIG_LIVING_PROJECTILE_PARRIED, PROC_REF(on_projectile_parry))
@@ -119,18 +130,29 @@
 			/obj/projectile/kinetic,\
 			/obj/projectile/bileworm_acid,\
 			/obj/projectile/herald,\
+<<<<<<< HEAD
 			/obj/projectile/kiss,\
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			)\
 		)
 	)
 
 
 /datum/component/style/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, COMSIG_USER_ITEM_INTERACTION)
 	UnregisterSignal(parent, COMSIG_MOB_MINED)
 	UnregisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE)
 	UnregisterSignal(parent, list(COMSIG_MOB_EMOTED("flip"), COMSIG_MOB_EMOTED("spin")))
 	UnregisterSignal(parent, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_UNARMED_ATTACK))
+=======
+	UnregisterSignal(parent, COMSIG_MOB_ITEM_AFTERATTACK)
+	UnregisterSignal(parent, COMSIG_MOB_MINED)
+	UnregisterSignal(parent, COMSIG_MOB_APPLY_DAMAGE)
+	UnregisterSignal(parent, list(COMSIG_MOB_EMOTED("flip"), COMSIG_MOB_EMOTED("spin")))
+	UnregisterSignal(parent, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	UnregisterSignal(SSdcs, COMSIG_GLOB_MOB_DEATH)
 	UnregisterSignal(parent, COMSIG_LIVING_RESONATOR_BURST)
 	UnregisterSignal(parent, COMSIG_LIVING_PROJECTILE_PARRIED)
@@ -142,7 +164,11 @@
 		qdel(projectile_parry.resolve())
 
 
+<<<<<<< HEAD
 /datum/component/style/Destroy(force)
+=======
+/datum/component/style/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	STOP_PROCESSING(SSdcs, src)
 	var/mob/mob_parent = parent
 	if(mob_parent.hud_used)
@@ -319,33 +345,62 @@
 			return "#364866"
 
 /// A proc that lets a user, when their rank >= `hotswap_rank`, swap items in storage with what's in their hands, simply by clicking on the stored item with a held item
+<<<<<<< HEAD
 /datum/component/style/proc/hotswap(mob/living/source, atom/target, obj/item/weapon, click_parameters)
 	SIGNAL_HANDLER
 
 	if((rank < hotswap_rank) || !isitem(target) || !(target in source.get_all_contents()))
 		return NONE
+=======
+/datum/component/style/proc/hotswap(mob/living/source, atom/target, obj/item/weapon, proximity_flag, click_parameters)
+	SIGNAL_HANDLER
+
+	if((rank < hotswap_rank) || !isitem(target) || !(target in source.get_all_contents()))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/obj/item/item_target = target
 
 	if(!(item_target.item_flags & IN_STORAGE))
+<<<<<<< HEAD
 		return NONE
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/datum/storage/atom_storage = item_target.loc.atom_storage
 
 	if(!atom_storage.can_insert(weapon, source, messages = FALSE))
 		source.balloon_alert(source, "unable to hotswap!")
+<<<<<<< HEAD
 		return NONE
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	atom_storage.attempt_insert(weapon, source, override = TRUE)
 	INVOKE_ASYNC(source, TYPE_PROC_REF(/mob/living, put_in_hands), target)
 	source.visible_message(span_notice("[source] quickly swaps [weapon] out with [target]!"), span_notice("You quickly swap [weapon] with [target]."))
+<<<<<<< HEAD
 	return ITEM_INTERACT_BLOCKING
+=======
+
+
+/datum/component/style/proc/on_parent_multitool(datum/source, mob/living/user, obj/item/tool, list/recipes)
+	multitooled = !multitooled
+	user.balloon_alert(user, "meter [multitooled ? "" : "un"]hacked")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Point givers
 /datum/component/style/proc/on_punch(mob/living/carbon/human/punching_person, atom/attacked_atom, proximity)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(!proximity || !punching_person.combat_mode || !isliving(attacked_atom))
+=======
+	if(!proximity || !(punching_person.istate & ISTATE_HARM) || !isliving(attacked_atom))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/mob/living/disrespected = attacked_atom

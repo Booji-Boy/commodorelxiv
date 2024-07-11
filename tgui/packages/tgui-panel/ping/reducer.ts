@@ -5,6 +5,15 @@
  */
 
 import { clamp01, scale } from 'common/math';
+<<<<<<< HEAD:tgui/packages/tgui-panel/ping/reducer.ts
+=======
+import { pingFail, pingSuccess } from './actions';
+import {
+  PING_MAX_FAILS,
+  PING_ROUNDTRIP_BEST,
+  PING_ROUNDTRIP_WORST,
+} from './constants';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:tgui/packages/tgui-panel/ping/reducer.js
 
 import { pingFail, pingSuccess } from './actions';
 import {

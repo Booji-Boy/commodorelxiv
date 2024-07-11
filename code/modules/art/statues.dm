@@ -45,6 +45,7 @@
 	return ..()
 
 
+<<<<<<< HEAD
 /obj/structure/statue/atom_deconstruct(disassembled = TRUE)
 	var/amount_mod = disassembled ? 0 : -2
 	for(var/mat in custom_materials)
@@ -52,16 +53,31 @@
 		var/amount = max(0,round(custom_materials[mat]/SHEET_MATERIAL_AMOUNT) + amount_mod)
 		if(amount > 0)
 			new custom_material.sheet_type(drop_location(), amount)
+=======
+/obj/structure/statue/deconstruct(disassembled = TRUE)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		var/amount_mod = disassembled ? 0 : -2
+		for(var/mat in custom_materials)
+			var/datum/material/custom_material = GET_MATERIAL_REF(mat)
+			var/amount = max(0,round(custom_materials[mat]/SHEET_MATERIAL_AMOUNT) + amount_mod)
+			if(amount > 0)
+				new custom_material.sheet_type(drop_location(), amount)
+	qdel(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //////////////////////////////////////STATUES/////////////////////////////////////////////////////////////
 ////////////////////////uranium///////////////////////////////////
 
 /obj/structure/statue/uranium
 	max_integrity = 300
+<<<<<<< HEAD
 	// largish, dim green glow
 	light_range = 3
 	light_power = 0.7
 	light_color = LIGHT_COLOR_NUCLEAR
+=======
+	light_outer_range = 2 //monkestation edit: replaced light_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/uranium=SHEET_MATERIAL_AMOUNT*5)
 	impressiveness = 25 // radiation makes an impression
 	abstract_type = /obj/structure/statue/uranium

@@ -45,6 +45,7 @@
 	icon_state = "40mmHE"
 	projectile_type = /obj/projectile/bullet/a40mm
 
+<<<<<<< HEAD
 /obj/item/ammo_casing/a40mm/rubber
 	name = "40mm rubber shell"
 	desc = "A cased rubber slug. The big brother of the beanbag slug, this thing will knock someone out in one. Doesn't do so great against anyone in armor."
@@ -114,3 +115,19 @@
 	. = ..()
 	icon_state = "[base_icon_state]"
 
+=======
+
+/obj/item/ammo_casing/a223
+	name = ".223 bullet casing"
+	desc = "A .223 bullet casing."
+	caliber = CALIBER_A223
+	projectile_type = /obj/projectile/bullet/a223
+
+/obj/item/ammo_casing/a223/phasic
+	name = ".223 phasic bullet casing"
+	desc = "A .223 phasic bullet casing."
+	projectile_type = /obj/projectile/bullet/a223/phasic
+
+/obj/item/ammo_casing/a223/weak
+	projectile_type = /obj/projectile/bullet/a223/weak
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

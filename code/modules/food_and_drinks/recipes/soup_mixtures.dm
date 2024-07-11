@@ -36,6 +36,7 @@
 	required_container = /obj/item/reagent_containers/cup/soup_pot
 	mix_message = "You smell something good coming from the steaming pot of soup."
 	reaction_tags = REACTION_TAG_FOOD | REACTION_TAG_EASY
+	reaction_flags = REACTION_NON_INSTANT
 
 	// General soup guideline:
 	// - Soups should produce 60-90 units (3-4 servings)
@@ -106,6 +107,7 @@
 	if(!length(required_ingredients))
 		return
 
+<<<<<<< HEAD
 	// If a food item is supposed to be made, remove relevant ingredients from the pot, then make the item
 	if(!isnull(resulting_food_path))
 		var/list/tracked_ingredients
@@ -134,6 +136,8 @@
 				holder.add_reagent(reagent_path,(required_reagents[reagent_path])*(created_volume-ingredient_max_multiplier))
 
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// This only happens if we're being instant reacted so let's just skip to what we really want
 	if(isnull(reaction))
 		testing("Soup reaction of type [type] instant reacted, cleaning up.")
@@ -222,6 +226,7 @@
 
 	testing("Soup reaction finished with a total react volume of [react_vol] and [length(pot.added_ingredients)] ingredients. Cleaning up.")
 	clean_up(holder, reaction, react_vol)
+<<<<<<< HEAD
 
 /**
  * Cleans up the ingredients and adds whatever leftover reagents to the mixture
@@ -249,19 +254,59 @@
 				continue
 
 			// Things that had reagents or ingredients in the soup will get deleted
+=======
+
+/**
+ * Cleans up the ingredients and adds whatever leftover reagents to the mixture
+ *
+ * * holder: The sou ppot
+ * * reaction: The reaction being cleaned up, note this CAN be null if being instant reacted
+ * * react_vol: How much soup was produced
+ */
+/datum/chemical_reaction/food/soup/proc/clean_up(datum/reagents/holder, datum/equilibrium/reaction, react_vol)
+	var/obj/item/reagent_containers/cup/soup_pot/pot = holder.my_atom
+
+	reaction?.data["ingredients"] = null
+
+	for(var/obj/item/ingredient as anything in pot.added_ingredients)
+		// Let's not mess with  indestructible items.
+		// Chef doesn't need more ways to delete things with cooking.
+		if(ingredient.resistance_flags & INDESTRUCTIBLE)
+			continue
+
+		// Things that had reagents or ingredients in the soup will get deleted
+		else if(!isnull(ingredient.reagents) || is_type_in_list(ingredient, required_ingredients))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			LAZYREMOVE(pot.added_ingredients, ingredient)
 			// Send everything left behind
 			transfer_ingredient_reagents(ingredient, holder)
 			// Delete, it's done
 			qdel(ingredient)
 
+<<<<<<< HEAD
+=======
+		// Everything else will just get fried
+		ingredient.AddElement(/datum/element/fried_item, 30)
+
+	// Spawning physical food results
+	if(resulting_food_path)
+		var/obj/item/created = new resulting_food_path(get_turf(pot))
+		created.pixel_y += 8
+		BLACKBOX_LOG_FOOD_MADE(created)
+	else
+		var/results_length = length(results)
+		var/datum/reagent/reagent = results[results_length]
+		if(reagent)
+			BLACKBOX_LOG_FOOD_MADE(initial(reagent.name))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Anything left in the ingredient list will get dumped out
 	pot.dump_ingredients(get_turf(pot), y_offset = 8)
 	// Blackbox log the chemical reaction used, to account for soup reaction that don't produce typical results
-	BLACKBOX_LOG_FOOD_MADE(type)
 
 /**
  * Transfers reagents from the passed reagent to the soup pot, as a "result"
+<<<<<<< HEAD
  * Also handles deleting a portion of nutriment reagents present, pseudo-converting
  * it into soup reagent. Returns TRUE if any reagents were transfered FALSE if there is
  * nothing to transfer
@@ -274,6 +319,18 @@
 /datum/chemical_reaction/food/soup/proc/transfer_ingredient_reagents(obj/item/ingredient, datum/reagents/holder, amount)
 	if(ingredient_reagent_multiplier <= 0)
 		return FALSE
+=======
+ *
+ * Also handles deleting a portion of nutriment reagents present, pseudo-converting it into soup reagent
+ *
+ * * ingredient: The ingredient to transfer reagents from
+ * * holder: The reagent holder of the soup pot the reaction is taking place in
+ * * amount: The amount of reagents to transfer, if null will transfer all reagents
+ */
+/datum/chemical_reaction/food/soup/proc/transfer_ingredient_reagents(obj/item/ingredient, datum/reagents/holder, amount)
+	if(ingredient_reagent_multiplier <= 0)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/reagents/ingredient_pool = ingredient.reagents
 	// Some ingredients are purely flavor (no pun intended) and will have reagents
 	if(isnull(ingredient_pool) || ingredient_pool.total_volume <= 0)
@@ -291,6 +348,7 @@
 	ingredient_pool.trans_to(holder, amount, ingredient_reagent_multiplier, no_react = TRUE)
 	return TRUE
 
+<<<<<<< HEAD
 /// Adds text to the requirements list of the recipe
 /// Return a list of strings, each string will be a new line in the requirements list
 /datum/chemical_reaction/food/soup/proc/describe_recipe_details()
@@ -300,6 +358,22 @@
 /// Return a list of strings, each string will be a new line in the results list
 /datum/chemical_reaction/food/soup/proc/describe_result()
 	return
+=======
+/// Called whenever the soup pot overfills with reagent.
+/datum/chemical_reaction/food/soup/proc/boil_over(datum/reagents/holder)
+	var/obj/item/reagent_containers/cup/soup_pot/pot = holder.my_atom
+	var/turf/below_pot = get_turf(pot)
+	below_pot.visible_message(span_warning("[pot] starts to boil over!"))
+	// Create a spread of dirty foam
+	var/datum/effect_system/fluid_spread/foam/dirty/soup_mess = new()
+	soup_mess.reagent_scale = 0.1 // (Just a little)
+	soup_mess.set_up(range = 1, holder = pot, location = below_pot, carry = holder, stop_reactions = TRUE)
+	soup_mess.start()
+	// Loses a bit from the foam
+	for(var/datum/reagent/reagent as anything in holder.reagent_list)
+		reagent.volume = round(reagent.volume * 0.9, 0.05)
+	holder.update_total()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #ifdef TESTING
 
@@ -1148,7 +1222,7 @@
 		/datum/reagent/consumable/nutriment/soup/electrons = 30,
 		// Jupiter cups obviously contain a fair amount of LE naturally,
 		// but to make it "worthwhile" for Ethereals to eat we add a bit extra
-		/datum/reagent/consumable/liquidelectricity/enriched = 10,
+		/datum/reagent/consumable/liquidelectricity = 10,
 	)
 	percentage_of_nutriment_converted = 0.10
 
@@ -1993,7 +2067,11 @@
 	name = "\improper New Osaka Sunrise soup"
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "new_osaka_sunrise"
+<<<<<<< HEAD
 	drink_type = VEGETABLES | BREAKFAST
+=======
+	drink_type = MEAT | GRAIN | DAIRY | VEGETABLES
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/chemical_reaction/food/soup/new_osaka_sunrise
 	required_reagents = list(
@@ -2122,7 +2200,11 @@
 	name = "\improper Hong Kong macaroni soup"
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "hong_kong_macaroni"
+<<<<<<< HEAD
 	drink_type = MEAT | VEGETABLES | GRAIN
+=======
+	drink_type = MEAT | VEGETABLES
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/chemical_reaction/food/soup/hong_kong_macaroni
 	required_reagents = list(
@@ -2180,7 +2262,11 @@
 	name = "secret noodle soup"
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "secret_noodle_soup"
+<<<<<<< HEAD
 	drink_type = MEAT | VEGETABLES | GRAIN
+=======
+	drink_type = MEAT | VEGETABLES
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/chemical_reaction/food/soup/secret_noodle_soup
 	required_reagents = list(

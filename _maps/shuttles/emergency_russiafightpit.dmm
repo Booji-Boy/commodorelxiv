@@ -195,7 +195,13 @@
 /area/shuttle/escape)
 "aN" = (
 /obj/effect/decal/cleanable/blood/old,
+<<<<<<< HEAD
 /mob/living/basic/bear/fightpit,
+=======
+/obj/effect/decal/cleanable/blood/old,
+/mob/living/basic/bear/fightpit,
+/obj/machinery/light/small/red/dim/directional/east,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "aO" = (
@@ -442,6 +448,7 @@
 /obj/item/clothing/gloves/fingerless,
 /turf/open/floor/iron,
 /area/shuttle/escape)
+<<<<<<< HEAD
 "jL" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/structure/chair/comfy/shuttle{
@@ -492,6 +499,11 @@
 /obj/effect/decal/cleanable/blood/old,
 /mob/living/basic/bear/fightpit,
 /obj/machinery/light/small/red/dim/directional/east,
+=======
+"lA" = (
+/obj/effect/decal/cleanable/blood/old,
+/mob/living/basic/bear/fightpit,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/engine,
 /area/shuttle/escape)
 "wq" = (
@@ -883,8 +895,13 @@ aa
 aa
 ab
 aE
+<<<<<<< HEAD
 aN
 wo
+=======
+lA
+aN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 aV
 aD
 bi

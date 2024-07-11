@@ -20,7 +20,10 @@ type ExosuitFabricatorData = FabricatorData & {
 
 export const ExosuitFabricator = (props) => {
   const { act, data } = useBackend<ExosuitFabricatorData>();
+<<<<<<< HEAD
   const { materials, SHEET_MATERIAL_AMOUNT } = data;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const availableMaterials: MaterialMap = {};
 
@@ -84,6 +87,7 @@ export const ExosuitFabricator = (props) => {
   );
 };
 
+<<<<<<< HEAD
 type RecipeProps = {
   design: Design;
   available: MaterialMap;
@@ -93,6 +97,11 @@ type RecipeProps = {
 const Recipe = (props: RecipeProps) => {
   const { act } = useBackend<ExosuitFabricatorData>();
   const { design, available, SHEET_MATERIAL_AMOUNT } = props;
+=======
+const Recipe = (props: { design: Design; available: MaterialMap }) => {
+  const { act, data } = useBackend<ExosuitFabricatorData>();
+  const { design, available } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const canPrint = !Object.entries(design.cost).some(
     ([material, amount]) =>
@@ -128,9 +137,13 @@ const Recipe = (props: RecipeProps) => {
             'FabricatorRecipe__Title',
             !canPrint && 'FabricatorRecipe__Title--disabled',
           ])}
+<<<<<<< HEAD
           onClick={() =>
             canPrint && act('build', { designs: [design.id], now: true })
           }
+=======
+          onClick={() => act('build', { designs: [design.id], now: true })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <div className="FabricatorRecipe__Icon">
             <Box
@@ -174,6 +187,7 @@ const Recipe = (props: RecipeProps) => {
   );
 };
 
+<<<<<<< HEAD
 type QueueProps = {
   availableMaterials: MaterialMap;
   SHEET_MATERIAL_AMOUNT: number;
@@ -182,6 +196,11 @@ type QueueProps = {
 const Queue = (props: QueueProps) => {
   const { act, data } = useBackend<ExosuitFabricatorData>();
   const { availableMaterials, SHEET_MATERIAL_AMOUNT } = props;
+=======
+const Queue = (props: { availableMaterials: MaterialMap }) => {
+  const { act, data } = useBackend<ExosuitFabricatorData>();
+  const { availableMaterials } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { designs, processing } = data;
 
   const queue = data.queue || [];
@@ -244,10 +263,14 @@ const Queue = (props: QueueProps) => {
         </Stack.Item>
         <Stack.Item grow>
           <Section fill style={{ overflow: 'auto' }}>
+<<<<<<< HEAD
             <QueueList
               availableMaterials={availableMaterials}
               SHEET_MATERIAL_AMOUNT={SHEET_MATERIAL_AMOUNT}
             />
+=======
+            <QueueList availableMaterials={availableMaterials} />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           </Section>
         </Stack.Item>
       </Stack>
@@ -255,6 +278,7 @@ const Queue = (props: QueueProps) => {
   );
 };
 
+<<<<<<< HEAD
 type QueueListProps = {
   availableMaterials: MaterialMap;
   SHEET_MATERIAL_AMOUNT: number;
@@ -263,6 +287,11 @@ type QueueListProps = {
 const QueueList = (props: QueueListProps) => {
   const { act, data } = useBackend<ExosuitFabricatorData>();
   const { availableMaterials, SHEET_MATERIAL_AMOUNT } = props;
+=======
+const QueueList = (props: { availableMaterials: MaterialMap }) => {
+  const { act, data } = useBackend<ExosuitFabricatorData>();
+  const { availableMaterials } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const queue = data.queue || [];
   const designs = data.designs;

@@ -29,6 +29,12 @@
 	playsound(src, SFX_SPARKS, 100, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	balloon_alert(user, "access controller shorted")
 	return TRUE
+<<<<<<< HEAD
+=======
+
+/obj/machinery/door_buttons/proc/removeMe()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/door_buttons/access_button
 	icon = 'icons/obj/machines/wallmounts.dmi'

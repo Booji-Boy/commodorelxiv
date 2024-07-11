@@ -34,12 +34,15 @@
 	stage_change() // If no argument is set, it will change the stage to the current stage, useful for stock grenades that start READY.
 	set_wires(new /datum/wires/explosive/chem_grenade(src))
 
+<<<<<<< HEAD
 /obj/item/grenade/chem_grenade/Destroy(force)
 	QDEL_NULL(wires)
 	QDEL_NULL(landminemode)
 	QDEL_LIST(beakers)
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/grenade/chem_grenade/apply_grenade_fantasy_bonuses(quality)
 	threatscale = modify_fantasy_variable("threatscale", threatscale, quality/10)
 

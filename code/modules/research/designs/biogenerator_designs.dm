@@ -70,7 +70,7 @@
 	name = "Monkey Cube"
 	id = "mcube"
 	build_type = BIOGENERATOR
-	materials = list(/datum/material/biomass = 50)
+	materials = list(/datum/material/biomass =SMALL_MATERIAL_AMOUNT*0.5)
 	build_path = /obj/item/food/monkeycube
 	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_FOOD)
 
@@ -186,6 +186,7 @@
 	build_path = /obj/item/rollingpaper
 	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_MATERIALS)
 
+<<<<<<< HEAD
 /datum/design/candle
 	name = "Candle"
 	id = "candle"
@@ -193,3 +194,37 @@
 	materials = list(/datum/material/biomass = 3)
 	build_path = /obj/item/flashlight/flare/candle
 	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_MATERIALS)
+=======
+/datum/design/strange_seeds
+	name = "Strange Seeds"
+	id = "strange_seeds"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass = 2000)
+	build_path = /obj/item/seeds/random
+	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_MATERIALS)
+
+
+/datum/design/saltpetre
+	name = "Saltpetre"
+	id = "saltpetre"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass = 0.3)
+	make_reagent = /datum/reagent/saltpetre
+	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_CHEMICALS)
+
+/datum/design/ammonia
+	name = "Ammonia"
+	id = "ammonia"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass = 0.2)
+	make_reagent = /datum/reagent/ammonia
+	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_CHEMICALS)
+
+/datum/design/diethylamine
+	name = "Diethylamine"
+	id = "diethylamine"
+	build_type = BIOGENERATOR
+	materials = list(/datum/material/biomass = 0.4)
+	make_reagent = /datum/reagent/diethylamine
+	category = list(RND_CATEGORY_INITIAL, RND_CATEGORY_BIO_CHEMICALS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

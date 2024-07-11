@@ -117,6 +117,7 @@ GLOBAL_LIST_INIT(mook_commands, list(
 /datum/ai_behavior/find_village
 
 /datum/ai_behavior/find_village/perform(seconds_per_tick, datum/ai_controller/controller, village_key)
+<<<<<<< HEAD
 
 	var/obj/effect/landmark/home_marker = locate(/obj/effect/landmark/mook_village) in GLOB.landmarks_list
 	if(isnull(home_marker))
@@ -124,6 +125,17 @@ GLOBAL_LIST_INIT(mook_commands, list(
 
 	controller.set_blackboard_key(village_key, home_marker)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+
+	var/obj/effect/landmark/home_marker = locate(/obj/effect/landmark/mook_village) in GLOB.landmarks_list
+	if(isnull(home_marker))
+		finish_action(controller, FALSE)
+		return
+
+	controller.set_blackboard_key(village_key, home_marker)
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///explore the lands away from the village to look for ore
 /datum/ai_planning_subtree/wander_away_from_village
@@ -188,7 +200,12 @@ GLOBAL_LIST_INIT(mook_commands, list(
 	return return_turf
 
 /datum/ai_behavior/wander/perform(seconds_per_tick, datum/ai_controller/controller, target_key, hiding_location_key)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_planning_subtree/mine_walls/mook
 	find_wall_behavior = /datum/ai_behavior/find_mineral_wall/mook
@@ -364,20 +381,38 @@ GLOBAL_LIST_INIT(mook_commands, list(
 	action_cooldown = 5 SECONDS
 
 /datum/ai_behavior/issue_commands/perform(seconds_per_tick, datum/ai_controller/controller, target_key, command_path)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/living_pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
 
 	if(isnull(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 	var/datum/pet_command/to_command = locate(command_path) in GLOB.mook_commands
 	if(isnull(to_command))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE)
+		return
+
+	var/datum/pet_command/to_command = locate(command_path) in GLOB.mook_commands
+	if(isnull(to_command))
+		finish_action(controller, FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/issue_command = pick(to_command.speech_commands)
 	living_pawn.say(issue_command, forced = "controller")
 	living_pawn._pointed(target)
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 ///find an ore, only pick it up when a mook brings it close to us

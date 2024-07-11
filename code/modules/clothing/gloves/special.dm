@@ -114,9 +114,11 @@
 	desc = "Pricy sterile gloves that are thicker than latex. Excellent grip ensures very fast carrying of patients along with the faster use time of various chemical related items."
 	icon_state = "nitrile"
 	inhand_icon_state = "greyscale_gloves"
+	armor_type = /datum/armor/nitrile
 	greyscale_colors = "#99eeff"
 	clothing_traits = list(TRAIT_QUICKER_CARRY, TRAIT_FASTMED)
 
+<<<<<<< HEAD
 /obj/item/clothing/gloves/latex/coroner
 	name = "coroner's gloves"
 	desc = "Black gloves made from latex with a superhydrophobic coating. Useful for picking bodies up instead of dragging blood behind."
@@ -127,6 +129,10 @@
 
 /obj/item/clothing/gloves/latex/coroner/add_blood_DNA(list/blood_DNA_to_add)
 	return FALSE
+=======
+/datum/armor/nitrile
+	bio = 100
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/gloves/tinkerer
 	name = "tinker's gloves"
@@ -153,5 +159,5 @@
 	max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
 	resistance_flags = FIRE_PROOF
 	siemens_coefficient = 0.3
-	clothing_traits = list(TRAIT_QUICKER_CARRY, TRAIT_CHUNKYFINGERS)
+	clothing_traits = list(TRAIT_QUICKER_CARRY)
 	clothing_flags = THICKMATERIAL

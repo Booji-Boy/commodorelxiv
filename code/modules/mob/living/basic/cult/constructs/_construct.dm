@@ -2,17 +2,29 @@
 	icon = 'icons/mob/nonhuman-player/cult.dmi'
 	gender = NEUTER
 	basic_mob_flags = DEL_ON_DEATH
+<<<<<<< HEAD
 	combat_mode = TRUE
 	mob_biotypes = MOB_MINERAL | MOB_SPECIAL
+=======
+	istate = ISTATE_HARM
+	mob_biotypes = MOB_MINERAL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	faction = list(FACTION_CULT)
 	unsuitable_atmos_damage = 0
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = INFINITY
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, STAMINA = 0, OXY = 0)
 	pressure_resistance = 100
 	speed = 0
 	unique_name = TRUE
 	can_buckle_to = FALSE
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
+	pressure_resistance = 100
+	speed = 0
+	unique_name = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	initial_language_holder = /datum/language_holder/construct
 	death_message = "collapses in a shattered heap."
 
@@ -81,7 +93,13 @@
 			structure_types_typecache = structure_types,\
 			)
 	add_traits(list(TRAIT_HEALS_FROM_CULT_PYLONS, TRAIT_SPACEWALK), INNATE_TRAIT)
+<<<<<<< HEAD
 	grant_actions_by_list(construct_spells)
+=======
+	for(var/spell in construct_spells)
+		var/datum/action/new_spell = new spell(src)
+		new_spell.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/spell_count = 1
 	for(var/datum/action/spell as anything in actions)

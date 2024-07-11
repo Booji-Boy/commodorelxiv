@@ -10,6 +10,11 @@
 	var/tox_mod = 1
 	/// Multiplier to oxygen damage received
 	var/oxy_mod = 1
+<<<<<<< HEAD
+=======
+	/// Multiplier to clone damage received
+	var/clone_mod = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Multiplier to stamina damage received
 	var/stamina_mod = 1
 	/// Multiplier to brain damage received

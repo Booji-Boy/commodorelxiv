@@ -49,7 +49,11 @@
 			opening = FALSE
 			return
 	update_appearance()
+<<<<<<< HEAD
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/falsewall, toggle_open)), 0.5 SECONDS)
+=======
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/obj/structure/falsewall, toggle_open)), 5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/falsewall/proc/toggle_open()
 	if(!QDELETED(src))
@@ -91,9 +95,15 @@
 		qdel(src)
 	return T
 
+<<<<<<< HEAD
 /obj/structure/falsewall/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!opening || !tool.tool_behaviour)
 		return NONE
+=======
+/obj/structure/falsewall/tool_act(mob/living/user, obj/item/tool, tool_type, is_right_clicking)
+	if(!opening)
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	to_chat(user, span_warning("You must wait until the door has stopped moving!"))
 	return ITEM_INTERACT_BLOCKING
 
@@ -385,12 +395,23 @@
 	canSmoothWith = SMOOTH_GROUP_MATERIAL_WALLS
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 
+<<<<<<< HEAD
 /obj/structure/falsewall/material/atom_deconstruct(disassembled = TRUE)
 	if(disassembled)
 		new girder_type(loc)
 	for(var/material in custom_materials)
 		var/datum/material/material_datum = material
 		new material_datum.sheet_type(loc, FLOOR(custom_materials[material_datum] / SHEET_MATERIAL_AMOUNT, 1))
+=======
+/obj/structure/falsewall/material/deconstruct(disassembled = TRUE)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		if(disassembled)
+			new girder_type(loc)
+		for(var/material in custom_materials)
+			var/datum/material/material_datum = material
+			new material_datum.sheet_type(loc, FLOOR(custom_materials[material_datum] / SHEET_MATERIAL_AMOUNT, 1))
+	qdel(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/falsewall/material/mat_update_desc(mat)
 	desc = "A huge chunk of [mat] used to separate rooms."

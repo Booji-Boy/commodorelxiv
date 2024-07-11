@@ -327,6 +327,11 @@
 
 	qdel(src)
 
+<<<<<<< HEAD
+=======
+/obj/structure/windoor_assembly/AltClick(mob/user)
+	return ..() // This hotkey is BLACKLISTED since it's used by /datum/component/simple_rotation
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Flips the windoor assembly, determines whather the door opens to the left or the right
 /obj/structure/windoor_assembly/verb/flip()

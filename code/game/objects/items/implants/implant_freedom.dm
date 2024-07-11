@@ -17,6 +17,7 @@
 /obj/item/implant/freedom/activate()
 	. = ..()
 	var/mob/living/carbon/carbon_imp_in = imp_in
+<<<<<<< HEAD
 	if(!can_trigger(carbon_imp_in))
 		balloon_alert(carbon_imp_in, "no restraints!")
 		return
@@ -52,6 +53,32 @@
 		<b>Function:</b> Transmits a specialized cluster of signals to override handcuff locking \
 		mechanisms. These signals will release any bindings on both the arms and legs.<BR> \
 		<b>Disclaimer:</b> Heavy-duty restraints such as straightjackets are deemed \"too complex\" to release from."
+=======
+	if(!carbon_imp_in.handcuffed && !carbon_imp_in.legcuffed)
+		balloon_alert(carbon_imp_in, "no restraints!")
+		return
+
+	uses--
+
+	carbon_imp_in.uncuff()
+	if(!uses)
+		addtimer(CALLBACK(carbon_imp_in, TYPE_PROC_REF(/atom, balloon_alert), carbon_imp_in, "implant degraded!"), 1 SECONDS)
+		qdel(src)
+
+/obj/item/implant/freedom/get_data()
+	var/dat = {"
+		<b>Implant Specifications:</b><BR>
+		<b>Name:</b> Freedom Beacon<BR>
+		<b>Life:</b> Optimum [initial(uses)] uses<BR>
+		<b>Important Notes:</b> <font color='red'>Illegal</font><BR>
+		<HR>
+		<b>Implant Details:</b> <BR>
+		<b>Function:</b> Transmits a specialized cluster of signals to override handcuff locking
+		mechanisms. These signals will release any bindings on both the arms and legs.<BR>
+		<b>Disclaimer:</b> Heavy-duty restraints such as straightjackets are deemed "too complex" to release from.
+	"}
+	return dat
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/implanter/freedom
 	name = "implanter (freedom)"

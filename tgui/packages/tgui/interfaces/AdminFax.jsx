@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -12,6 +13,20 @@ import {
   Section,
   TextArea,
   Tooltip,
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  Section,
+  Box,
+  Dropdown,
+  Button,
+  Input,
+  TextArea,
+  Divider,
+  NumberInput,
+  Tooltip,
+  Knob,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -28,6 +43,7 @@ export const AdminFax = (props) => {
 export const FaxMainPanel = (props) => {
   const { act, data } = useBackend();
 
+<<<<<<< HEAD
   const [fax, setFax] = useState('');
   const [saved, setSaved] = useState(false);
   const [paperName, setPaperName] = useState('');
@@ -37,6 +53,17 @@ export const FaxMainPanel = (props) => {
   const [stampCoordX, setStampCoordX] = useState(0);
   const [stampCoordY, setStampCoordY] = useState(0);
   const [stampAngle, setStampAngle] = useState(0);
+=======
+  const [fax, setFax] = useLocalState('fax', '');
+  const [saved, setSaved] = useLocalState('saved', false);
+  const [paperName, setPaperName] = useLocalState('paperName', '');
+  const [fromWho, setFromWho] = useLocalState('fromWho', '');
+  const [rawText, setRawText] = useLocalState('rawText', '');
+  const [stamp, setStamp] = useLocalState('stampType', '');
+  const [stampCoordX, setStampCoordX] = useLocalState('stampCoordX', 0);
+  const [stampCoordY, setStampCoordY] = useLocalState('stampCoordY', 0);
+  const [stampAngle, setStampAngle] = useLocalState('stampAngle', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   if (stamp && data.stamps[0] !== 'None') {
     data.stamps.unshift('None');
   }
@@ -99,7 +126,11 @@ export const FaxMainPanel = (props) => {
             icon="n"
             mr="7px"
             width="49%"
+<<<<<<< HEAD
             onClick={() => setPaperName('Nanotrasen Official Report')}
+=======
+            onClick={() => setPaperName('Nanotrasen Offical Report')}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             Nanotrasen
           </Button>

@@ -9,9 +9,14 @@
 	density = FALSE
 	circuit = /obj/item/circuitboard/machine/dish_drive
 	pass_flags = PASSTABLE
+<<<<<<< HEAD
 	interaction_flags_click = ALLOW_SILICON_REACH
 	/// List of dishes the drive can hold
 	var/static/list/collectable_items = list(
+=======
+	/// List of dishes the drive can hold
+	var/list/collectable_items = list(/obj/item/trash/waffles, // NOVA EDIT CHANGE - non-static list
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/trash/waffles,
 		/obj/item/broken_bottle,
 		/obj/item/kitchen/fork,
@@ -23,7 +28,11 @@
 		/obj/item/trash/tray,
 	)
 	/// List of items the drive detects as trash
+<<<<<<< HEAD
 	var/static/list/disposable_items = list(
+=======
+	var/static/list/disposable_items = list(/obj/item/trash/waffles,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/trash/waffles,
 		/obj/item/broken_bottle,
 		/obj/item/plate_shard,
@@ -38,6 +47,10 @@
 	var/list/dish_drive_contents
 	/// Distance this is capable of sucking dishes up over. (2 + servo tier)
 	var/suck_distance = 0
+<<<<<<< HEAD
+=======
+	var/binrange = 7
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	COOLDOWN_DECLARE(time_since_dishes)
 
@@ -83,10 +96,17 @@
 /obj/machinery/dish_drive/wrench_act(mob/living/user, obj/item/tool)
 	. = ..()
 	default_unfasten_wrench(user, tool)
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/dish_drive/attackby(obj/item/dish, mob/living/user, params)
 	if(is_type_in_list(dish, collectable_items) && !user.combat_mode)
+=======
+	return
+
+/obj/machinery/dish_drive/attackby(obj/item/dish, mob/living/user, params)
+	if(is_type_in_list(dish, collectable_items) && !(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!user.transferItemToLoc(dish, src))
 			return
 		LAZYADD(dish_drive_contents, dish)
@@ -103,7 +123,11 @@
 /obj/machinery/dish_drive/RefreshParts()
 	. = ..()
 	suck_distance = 0
+<<<<<<< HEAD
 	for(var/datum/stock_part/servo/servo in component_parts)
+=======
+	for(var/datum/stock_part/manipulator/servo in component_parts)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		suck_distance = servo.tier
 	// Lowers power use for total tier
 	var/total_rating = 0
@@ -125,6 +149,10 @@
 		do_the_dishes()
 	if(!suction_enabled)
 		return
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/obj/item/dish in view(2 + suck_distance, src))
 		if(is_type_in_list(dish, collectable_items) && dish.loc != src && (!dish.reagents || !dish.reagents.total_volume) && (dish.contents.len < 1))
 			if(dish.Adjacent(src))
@@ -142,16 +170,22 @@
 	balloon_alert(user, "disposal signal sent")
 	do_the_dishes(TRUE)
 
+<<<<<<< HEAD
 /obj/machinery/dish_drive/click_alt(mob/living/user)
 	do_the_dishes(TRUE)
 	return CLICK_ACTION_SUCCESS
+=======
+/obj/machinery/dish_drive/AltClick(mob/living/user)
+	do_the_dishes(TRUE)
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/dish_drive/proc/do_the_dishes(manual)
 	if(!LAZYLEN(dish_drive_contents))
 		if(manual)
 			visible_message(span_notice("[src] is empty!"))
 		return
-	var/obj/machinery/disposal/bin/bin = locate() in view(7, src)
+	var/obj/machinery/disposal/bin/bin = locate() in view(binrange, src) //NOVA EDIT CHANGE
 	if(!bin)
 		if(manual)
 			visible_message(span_warning("[src] buzzes. There are no disposal bins in range!"))
@@ -160,11 +194,17 @@
 	var/disposed = 0
 	for(var/obj/item/dish in dish_drive_contents)
 		if(is_type_in_list(dish, disposable_items))
+<<<<<<< HEAD
 			if(!use_energy(active_power_usage, force = FALSE))
 				say("Not enough energy to continue!")
 				break
 			LAZYREMOVE(dish_drive_contents, dish)
 			dish.forceMove(bin)
+=======
+			LAZYREMOVE(dish_drive_contents, dish)
+			dish.forceMove(bin)
+			use_power(active_power_usage)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			disposed++
 	if (disposed)
 		visible_message(span_notice("[src] [pick("whooshes", "bwooms", "fwooms", "pshooms")] and beams [disposed] stored item\s into the nearby [bin.name]."))

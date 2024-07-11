@@ -238,6 +238,16 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
 
+/datum/design/board/sleeper
+	name = "Sleeper Board"
+	desc = "The circuit board for a sleeper."
+	id = "sleeper"
+	build_path = /obj/item/circuitboard/machine/sleeper
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_MEDICAL
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_MEDICAL
+
 /datum/design/board/cryotube
 	name = "Cryotube Board"
 	desc = "The circuit board for a cryotube."
@@ -368,6 +378,7 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
+<<<<<<< HEAD
 /datum/design/board/experimentor
 	name = "E.X.P.E.R.I-MENTOR Board"
 	desc = "The circuit board for an E.X.P.E.R.I-MENTOR."
@@ -378,6 +389,8 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/design/board/protolathe
 	name = "Protolathe Board"
 	desc = "The circuit board for a protolathe."
@@ -580,17 +593,7 @@
 	category = list(
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_KITCHEN
 	)
-	departmental_flags = DEPARTMENT_BITFLAG_SERVICE
-
-/datum/design/board/monkey_recycler
-	name = "Monkey Recycler Board"
-	desc = "The circuit board for a monkey recycler."
-	id = "monkey_recycler"
-	build_path = /obj/item/circuitboard/machine/monkey_recycler
-	category = list(
-		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH
-	)
-	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+	departmental_flags = DEPARTMENT_BITFLAG_SERVICE | DEPARTMENT_BITFLAG_MEDICAL | DEPARTMENT_BITFLAG_SCIENCE
 
 /datum/design/board/seed_extractor
 	name = "Seed Extractor Board"
@@ -691,7 +694,7 @@
 	category = list(
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_SERVICE
 	)
-	departmental_flags = DEPARTMENT_BITFLAG_SERVICE
+	departmental_flags = DEPARTMENT_BITFLAG_SERVICE | DEPARTMENT_BITFLAG_CARGO
 
 /datum/design/board/ore_redemption
 	name = "Ore Redemption Machine Board"
@@ -742,6 +745,24 @@
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_ENGINEERING
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
+
+/datum/design/board/rad_collector
+	name = "Machine Design (Radiation Collector Board)"
+	desc = "The circuit board for a radiation collector array."
+	id = "rad_collector"
+	build_path = /obj/item/circuitboard/machine/rad_collector
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_ENGINEERING
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
+
+/datum/design/board/plantgenes
+	name = "Machine Design (Plant DNA Manipulator Board)"
+	desc = "The circuit board for a plant DNA manipulator."
+	id = "plantgenes"
+	build_path = /obj/item/circuitboard/machine/plantgenes
+	category = list (RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_BOTANY)
+	departmental_flags = DEPARTMENT_BITFLAG_SERVICE
 
 /datum/design/board/ntnet_relay
 	name = "NTNet Relay Board"
@@ -911,7 +932,7 @@
 	category = list(
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_SERVICE
 	)
-	departmental_flags = DEPARTMENT_BITFLAG_SERVICE
+	departmental_flags = DEPARTMENT_BITFLAG_SERVICE | DEPARTMENT_BITFLAG_MEDICAL
 
 /datum/design/board/stasis
 	name = "Lifeform Stasis Unit Board"
@@ -1145,6 +1166,30 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING
 
+<<<<<<< HEAD
+=======
+
+/datum/design/board/artifact_xray
+	name = "Artifact XRay Board"
+	desc = "The circuit board for a xray machine for artifacts"
+	id = "artifact_xray"
+	build_path = /obj/item/circuitboard/machine/artifactxray
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+
+/datum/design/board/artifact_heater
+	name = "Artifact Heating Pad Board"
+	desc = "The circuit board for a heating pad for artifact"
+	id = "artifact_heater"
+	build_path = /obj/item/circuitboard/machine/artifactheater
+	category = list(
+		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_RESEARCH
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/design/board/fishing_portal_generator
 	name = "Fishing Portal Generator Board"
 	desc = "The circuit board for the fishing portal generator"
@@ -1154,6 +1199,7 @@
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_SERVICE
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SERVICE | DEPARTMENT_BITFLAG_CARGO | DEPARTMENT_BITFLAG_SCIENCE
+<<<<<<< HEAD
 
 /datum/design/board/brm
 	name = "Boulder Retrieval Matrix"
@@ -1177,3 +1223,5 @@
 		RND_CATEGORY_MACHINE + RND_SUBCATEGORY_MACHINE_ENGINEERING
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SCIENCE | DEPARTMENT_BITFLAG_ENGINEERING
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

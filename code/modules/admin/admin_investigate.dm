@@ -19,7 +19,7 @@ ADMIN_VERB(investigate_show, R_NONE, "Investigate", "Browse various detailed log
 		INVESTIGATE_CRAFTING,
 		INVESTIGATE_DEATHS,
 		INVESTIGATE_ENGINE,
-		INVESTIGATE_EXPERIMENTOR,
+		INVESTIGATE_ARTIFACT,
 		INVESTIGATE_GRAVITY,
 		INVESTIGATE_HALLUCINATIONS,
 		INVESTIGATE_HYPERTORUS,
@@ -29,6 +29,7 @@ ADMIN_VERB(investigate_show, R_NONE, "Investigate", "Browse various detailed log
 		INVESTIGATE_RECORDS,
 		INVESTIGATE_RESEARCH,
 		INVESTIGATE_WIRES,
+		INVESTIGATE_NANITES,
 	)
 
 	var/list/logs_present = list("notes, memos, watchlist")

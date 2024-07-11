@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 ADMIN_VERB(painting_manager, R_ADMIN, "Paintings Manager", "View and redact paintings.", ADMIN_CATEGORY_MAIN)
 	var/static/datum/paintings_manager/ui = new
 	ui.ui_interact(user.mob)
+=======
+/datum/admins/proc/paintings_manager()
+	set name = "Paintings Manager"
+	set category = "Admin.Logging"
+
+	if(!check_rights(R_ADMIN))
+		return
+	var/datum/paintings_manager/ui = new(usr)
+	ui.ui_interact(usr)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Painting Admin Management Panel
 /datum/paintings_manager

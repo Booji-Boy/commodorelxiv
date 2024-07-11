@@ -15,6 +15,13 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/acid_volume
 	/// The maximum volume of acid on the parent [/atom].
 	var/max_volume = INFINITY
+<<<<<<< HEAD
+=======
+	/// Acid overlay appearance we apply
+	var/acid_overlay
+	/// The ambiant sound of acid eating away at the parent [/atom].
+	var/datum/looping_sound/acid/sizzle
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Used exclusively for melting turfs. TODO: Move integrity to the atom level so that this can be dealt with there.
 	var/parent_integrity = 30
 	/// How far the acid melting of turfs has progressed
@@ -30,6 +37,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// The proc used to handle the parent [/atom] when processing. TODO: Unify damage and resistance flags so that this doesn't need to exist!
 	var/datum/callback/process_effect
 
+<<<<<<< HEAD
 /datum/component/acid/Initialize(acid_power = ACID_POWER_MELT_TURF, acid_volume = 50, acid_overlay = GLOB.acid_overlay, acid_particles = /particles/acid, turf_acid_ignores_mobs = FALSE)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -62,26 +70,72 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		stack_trace("Tried to add /datum/component/acid to an atom ([atom_parent.type]) which does not use atom_integrity!")
 		return COMPONENT_INCOMPATIBLE
 
+=======
+/datum/component/acid/Initialize(acid_power = ACID_POWER_MELT_TURF, acid_volume = 50, acid_overlay = GLOB.acid_overlay)
+	if(!isatom(parent))
+		return COMPONENT_INCOMPATIBLE
+	//not incompatible, but pointless
+	var/atom/atom_parent = parent
+	if((acid_power) <= 0 || (acid_volume <= 0))
+		stack_trace("Acid component added to an atom ([atom_parent.type]) with insufficient acid power ([acid_power]) or acid volume ([acid_volume]).")
+		qdel(src)
+		return
+
+
+	if(isliving(parent))
+		max_volume = MOB_ACID_VOLUME_MAX
+		process_effect = CALLBACK(src, PROC_REF(process_mob), parent)
+	else if(isturf(parent))
+		max_volume = TURF_ACID_VOLUME_MAX
+		process_effect = CALLBACK(src, PROC_REF(process_turf), parent)
+	//if we failed all other checks, we must be an /atom/movable that uses integrity
+	else if(atom_parent.uses_integrity)
+		// The parent object cannot have acid. Not incompatible, but should not really happen.
+		if(atom_parent.resistance_flags & UNACIDABLE)
+			qdel(src)
+			return
+
+		max_volume = MOVABLE_ACID_VOLUME_MAX
+		process_effect = CALLBACK(src, PROC_REF(process_movable), parent)
+	//or not...
+	else
+		stack_trace("Tried to add /datum/component/acid to an atom ([atom_parent.type]) which does not use atom_integrity!")
+		return COMPONENT_INCOMPATIBLE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	src.acid_power = acid_power
 	set_volume(acid_volume)
 	src.acid_overlay = acid_overlay
 
+<<<<<<< HEAD
 	sizzle = new(atom_parent, TRUE)
 	if(acid_particles)
 		// acid particles look pretty bad when they stack on mobs, so that behavior is not wanted for items
 		particle_effect = new(atom_parent, acid_particles, isitem(atom_parent) ? NONE : PARTICLE_ATTACH_MOB)
+=======
+	sizzle = new(parent, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	START_PROCESSING(SSacid, src)
 
 /datum/component/acid/Destroy(force)
 	STOP_PROCESSING(SSacid, src)
 	if(sizzle)
 		QDEL_NULL(sizzle)
+<<<<<<< HEAD
 	if(particle_effect)
 		QDEL_NULL(particle_effect)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	process_effect = null
 	return ..()
 
 /datum/component/acid/RegisterWithParent()
+<<<<<<< HEAD
+=======
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_update_overlays))
+	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(on_clean))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_attack_hand))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_EXPOSE_REAGENT, PROC_REF(on_expose_reagent))
@@ -94,12 +148,20 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /datum/component/acid/UnregisterFromParent()
 	UnregisterSignal(parent, list(
+<<<<<<< HEAD
 		COMSIG_ATOM_ATTACK_HAND,
 		COMSIG_ATOM_EXAMINE,
 		COMSIG_ATOM_EXPOSE_REAGENT,
 		COMSIG_ATOM_UPDATE_OVERLAYS,
 		COMSIG_COMPONENT_CLEAN_ACT,
 	))
+=======
+		COMSIG_ATOM_EXAMINE,
+		COMSIG_ATOM_UPDATE_OVERLAYS,
+		COMSIG_COMPONENT_CLEAN_ACT,
+		COMSIG_ATOM_ATTACK_HAND,
+		COMSIG_ATOM_EXPOSE_REAGENT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isturf(parent))
 		UnregisterSignal(parent, COMSIG_ATOM_ENTERED)
 	var/atom/atom_parent = parent
@@ -108,8 +170,11 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /// Averages corrosive power and sums volume.
 /datum/component/acid/InheritComponent(datum/component/new_comp, i_am_original, acid_power, acid_volume)
+<<<<<<< HEAD
 	if(!i_am_original)
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	acid_power = ((src.acid_power * src.acid_volume) + (acid_power * acid_volume)) / (src.acid_volume + acid_volume)
 	set_volume(src.acid_volume + acid_volume)
 
@@ -148,6 +213,7 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/acid_used = min(acid_volume * 0.05, 20) * seconds_per_tick
 	var/applied_targets = 0
 	for(var/atom/movable/target_movable as anything in target_turf)
+<<<<<<< HEAD
 		// Dont apply acid to things under the turf
 		if(target_turf.underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(target_movable, TRAIT_T_RAY_VISIBLE))
 			continue
@@ -155,6 +221,8 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 		if(turf_acid_ignores_mobs && ismob(target_movable))
 			continue
 		// Apply the acid
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(target_movable.acid_act(acid_power, acid_used))
 			applied_targets++
 
@@ -204,7 +272,11 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 /datum/component/acid/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	examine_list += span_danger("[source.p_Theyre()] covered in a corrosive liquid!")
+=======
+	examine_list += span_danger("[source.p_theyre(TRUE)] covered in a corrosive liquid!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Makes it possible to clean acid off of objects.
 /datum/component/acid/proc/on_clean(atom/source, clean_types)
@@ -226,8 +298,13 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	set_volume(acid_volume + reac_volume)
 	return NONE
 
+<<<<<<< HEAD
 /// Handles searing the hand of anyone who tries to touch parent without protection.
 /datum/component/acid/proc/on_attack_hand(atom/source, mob/living/carbon/user)
+=======
+/// Handles searing the hand of anyone who tries to touch this without protection.
+/datum/component/acid/proc/on_attack_hand(atom/parent_atom, mob/living/carbon/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SIGNAL_HANDLER
 
 	if(!iscarbon(user) || user.can_touch_acid(source, acid_power, acid_volume))

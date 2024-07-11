@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { createSearch } from '../../common/string';
 import { useBackend } from '../backend';
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   Divider,
@@ -11,7 +14,14 @@ import {
   Stack,
   Tabs,
 } from '../components';
+<<<<<<< HEAD
 import { Window } from '../layouts';
+=======
+import { useBackend, useLocalState } from '../backend';
+
+import { Window } from '../layouts';
+import { createSearch } from '../../common/string';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Data = {
   netsuit: string;
@@ -33,8 +43,16 @@ type Outfit = {
 export const NetpodOutfits = (props) => {
   const { act, data } = useBackend<Data>();
   const { netsuit, collections = [] } = data;
+<<<<<<< HEAD
   const [selectedType, setSelectedType] = useState(collections[0]);
   const [search, setSearch] = useState('');
+=======
+  const [selectedType, setSelectedType] = useLocalState<Collection>(
+    'selectedType',
+    collections[0],
+  );
+  const [search, setSearch] = useLocalState<string>('outfitSearch', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const searchFn = createSearch(search, (outfit: Outfit) => outfit.name);
 
@@ -57,7 +75,11 @@ export const NetpodOutfits = (props) => {
               buttons={
                 <Input
                   autoFocus
+<<<<<<< HEAD
                   onChange={(event, value) => setSearch(value)}
+=======
+                  onInput={(event, value) => setSearch(value)}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   placeholder="Search"
                   value={search}
                 />

@@ -9,10 +9,15 @@
 	lefthand_file = 'icons/mob/inhands/clothing/hats_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/clothing/hats_righthand.dmi'
 	armor_type = /datum/armor/none
+<<<<<<< HEAD
 	light_system = OVERLAY_LIGHT
 	light_range = 2 //luminosity when on
 	light_power = 1.3
 	light_color = "#FF964E"
+=======
+	light_outer_range = 2 //luminosity when on
+	light_system = OVERLAY_LIGHT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	flags_cover = HEADCOVERSEYES
 	heat = 999
 	wound_bonus = 10
@@ -65,7 +70,7 @@
 	hitsound_off = 'sound/weapons/tap.ogg'
 	damtype_on = BRUTE
 	force_on = 18 //same as epen (but much more obvious)
-	light_range = 3 //ditto
+	light_outer_range = 3 //ditto
 	heat = 0
 
 /obj/item/clothing/head/utility/hardhat/cakehat/energycake/turn_on(mob/living/user)

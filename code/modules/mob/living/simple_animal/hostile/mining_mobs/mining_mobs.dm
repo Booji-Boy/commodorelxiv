@@ -12,7 +12,7 @@
 	response_harm_continuous = "strikes"
 	response_harm_simple = "strike"
 	status_flags = 0
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	var/throw_message = "bounces off of"
 	/// Is this mob subtype from a spawner (e.g. necropolis tendril, demonic portal)? Can be used to affect what it drops (e.g. legions force-dropping ashen skeletons).
 	var/from_spawner = FALSE
@@ -33,14 +33,21 @@
 	if(crusher_loot)
 		AddElement(/datum/element/crusher_loot, crusher_loot, crusher_drop_mod, del_on_death)
 	AddElement(/datum/element/mob_killed_tally, "mobs_killed_mining")
+<<<<<<< HEAD
 	var/static/list/vulnerable_projectiles
 	if(!vulnerable_projectiles)
 		vulnerable_projectiles = string_list(MINING_MOB_PROJECTILE_VULNERABILITY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(\
 		/datum/element/ranged_armour,\
 		minimum_projectile_force = 30,\
 		below_projectile_multiplier = 0.3,\
+<<<<<<< HEAD
 		vulnerable_projectile_types = vulnerable_projectiles,\
+=======
+		vulnerable_projectile_types = MINING_MOB_PROJECTILE_VULNERABILITY,\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		minimum_thrown_force = 20,\
 		throw_blocked_message = throw_message,\
 	)

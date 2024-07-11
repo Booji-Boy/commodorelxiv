@@ -33,6 +33,8 @@
 	var/list/banned_atom_types = list()
 	/// Cost of knowledge in knowledge points
 	var/cost = 0
+	/// If true, adds side path points according to value. Only main branch powers that split into sidepaths should have this.
+	var/adds_sidepath_points = 0
 	/// The priority of the knowledge. Higher priority knowledge appear higher in the ritual list.
 	/// Number itself is completely arbitrary. Does not need to be set for non-ritual knowledge.
 	var/priority = 0
@@ -61,6 +63,8 @@
 
 	if(gain_text)
 		to_chat(user, span_warning("[gain_text]"))
+	// Usually zero
+	our_heretic.side_path_points += adds_sidepath_points
 	on_gain(user, our_heretic)
 
 /**
@@ -126,6 +130,10 @@
 	if(ispath(item_path, /mob/living))
 		return "carcass[number_of_things > 1 ? "es" : ""] of any kind"
 	return "[initial(item_path.name)]\s"
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Called whenever the knowledge's associated ritual is completed successfully.
  *
@@ -284,7 +292,7 @@
 /datum/heretic_knowledge/mark
 	abstract_parent_type = /datum/heretic_knowledge/mark
 	mutually_exclusive = TRUE
-	cost = 2
+	cost = 1
 	/// The status effect typepath we apply on people on mansus grasp.
 	var/datum/status_effect/eldritch/mark_type
 
@@ -537,8 +545,20 @@
 	animate(summoned, 10 SECONDS, alpha = 155)
 
 	message_admins("A [summoned.name] is being summoned by [ADMIN_LOOKUPFLW(user)] in [ADMIN_COORDJMP(summoned)].")
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_HERETIC, poll_time = 10 SECONDS, checked_target = summoned, ignore_category = poll_ignore_define, alert_pic = summoned, role_name_text = summoned.name)
 	if(isnull(chosen_one))
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(
+		"Do you want to play as a [summoned.name]?",
+		check_jobban = ROLE_HERETIC,
+		poll_time = 10 SECONDS,
+		target_mob = summoned,
+		ignore_category = POLL_IGNORE_HERETIC_MONSTER,
+		role_name_text = summoned.name
+	)
+	if(!LAZYLEN(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		loc.balloon_alert(user, "ritual failed, no ghosts!")
 		animate(summoned, 0.5 SECONDS, alpha = 0)
 		QDEL_IN(summoned, 0.6 SECONDS)

@@ -29,9 +29,15 @@ type PaintingData = {
 
 export const PaintingAdminPanel = (props) => {
   const { act, data } = useBackend<PaintingAdminPanelData>();
+<<<<<<< HEAD
   const [chosenPaintingRef, setChosenPaintingRef] = useState<
     string | undefined
   >();
+=======
+  const [chosenPaintingRef, setChosenPaintingRef] = useLocalState<
+    string | null
+  >('chosenPainting', null);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { paintings } = data;
   const chosenPainting = paintings.find((p) => p.ref === chosenPaintingRef);
 
@@ -42,18 +48,25 @@ export const PaintingAdminPanel = (props) => {
           <Section
             title="Painting Information"
             buttons={
+<<<<<<< HEAD
               <Button onClick={() => setChosenPaintingRef(undefined)}>
                 Close
               </Button>
+=======
+              <Button onClick={() => setChosenPaintingRef(null)}>Close</Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }
           >
             <img
               src={resolveAsset(`paintings_${chosenPainting.md5}`)}
               height="96px"
               width="96px"
+<<<<<<< HEAD
               style={{
                 verticalAlign: 'middle',
               }}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             />
             <LabeledList>
               <LabeledList.Item label="md5" content={chosenPainting.md5} />
@@ -134,8 +147,14 @@ export const PaintingAdminPanel = (props) => {
                   setChosenPaintingRef(undefined);
                   act('delete', { ref: chosenPainting.ref });
                 }}
+<<<<<<< HEAD
                 content="Delete"
               />
+=======
+              >
+                Delete
+              </Button.Confirm>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Button
                 onClick={() => act('dumpit', { ref: chosenPainting.ref })}
               >
@@ -163,9 +182,12 @@ export const PaintingAdminPanel = (props) => {
                     src={resolveAsset(`paintings_${painting.md5}`)}
                     height="36px"
                     width="36px"
+<<<<<<< HEAD
                     style={{
                       verticalAlign: 'middle',
                     }}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   />
                 </Table.Cell>
                 <Table.Cell>

@@ -1,8 +1,15 @@
 /datum/export/material
+<<<<<<< HEAD
 	cost = 5 // Cost per SHEET_MATERIAL_AMOUNT, which is 100cm3 as of May 2023.
 	message = "cm3 of developer's tears. Please, report this on github"
 	amount_report_multiplier = SHEET_MATERIAL_AMOUNT
 	var/datum/material/material_id = null
+=======
+	cost = 5 // Cost per SHEET_MATERIAL_AMOUNT, which is 2000cm3 as of April 2016.
+	message = "cm3 of developer's tears. Please, report this on github"
+	amount_report_multiplier = SHEET_MATERIAL_AMOUNT
+	var/material_id = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	export_types = list(
 		/obj/item/stack/sheet/mineral,
 		/obj/item/stack/tile/mineral,

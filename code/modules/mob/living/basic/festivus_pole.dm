@@ -46,7 +46,13 @@
 	var/static/list/death_loot = list(/obj/item/stack/rods)
 	AddElement(/datum/element/death_drops, death_loot)
 	AddComponent(/datum/component/aggro_emote, emote_list = string_list(list("growls")), emote_chance = 20)
+<<<<<<< HEAD
 	grant_actions_by_list(list(/datum/action/cooldown/mob_cooldown/charge_apc = BB_FESTIVE_APC))
+=======
+	var/datum/action/cooldown/mob_cooldown/charge_apc/charge_ability = new(src)
+	charge_ability.Grant(src)
+	ai_controller.set_blackboard_key(BB_FESTIVE_APC, charge_ability)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_controller/basic_controller/festivus_pole
 	blackboard = list(
@@ -64,7 +70,7 @@
 
 /mob/living/basic/festivus/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
-	if(user.combat_mode)
+	if(user.istate & ISTATE_HARM)
 		return
 	visible_message(span_warning("[src] crackles with static electricity!"))
 	for(var/atom/affected in range(2, get_turf(src)))

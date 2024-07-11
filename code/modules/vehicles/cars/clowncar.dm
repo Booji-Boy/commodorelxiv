@@ -10,7 +10,11 @@
 	car_traits = CAN_KIDNAP
 	key_type = /obj/item/bikehorn
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_range = 6
+=======
+	light_outer_range = 8
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 2
 	light_on = FALSE
 	access_provider_flags = VEHICLE_CONTROL_DRIVE|VEHICLE_CONTROL_KIDNAPPED
@@ -141,7 +145,7 @@
 		if(iscarbon(hittarget_living))
 			var/mob/living/carbon/carb = hittarget_living
 			carb.Paralyze(4 SECONDS) //I play to make sprites go horizontal
-		hittarget_living.visible_message(span_warning("[src] rams into [hittarget_living] and sucks [hittarget_living.p_them()] up!")) //fuck off shezza this isn't ERP.
+		hittarget_living.visible_message(span_warning("[src] rams into [hittarget_living] and sucks [hittarget_living.p_them()] up!"))
 		mob_forced_enter(hittarget_living)
 		playsound(src, pick('sound/vehicles/clowncar_ram1.ogg', 'sound/vehicles/clowncar_ram2.ogg', 'sound/vehicles/clowncar_ram3.ogg'), 75)
 		log_combat(src, hittarget_living, "sucked up")
@@ -179,7 +183,11 @@
 	to_chat(user, span_danger("You scramble [src]'s child safety lock, and a panel with six colorful buttons appears!"))
 	initialize_controller_action_type(/datum/action/vehicle/sealed/roll_the_dice, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/cannon, VEHICLE_CONTROL_DRIVE)
+<<<<<<< HEAD
 	AddElementTrait(TRAIT_WADDLING, INNATE_TRAIT, /datum/element/waddling)
+=======
+	AddElement(/datum/element/waddling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /obj/vehicle/sealed/car/clowncar/atom_destruction(damage_flag)

@@ -5,16 +5,30 @@
 	desc = "A little cleaning robot, he looks so excited!"
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "cleanbot0"
+<<<<<<< HEAD
 	health = 25
 	maxHealth = 25
 	light_color = "#99ccff"
 
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_JANITOR)
+=======
+	pass_flags = PASSMOB | PASSFLAPS
+	density = FALSE
+	anchored = FALSE
+	health = 25
+	maxHealth = 25
+
+	maints_access_required = list(ACCESS_ROBOTICS, ACCESS_JANITOR)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	radio_key = /obj/item/encryptionkey/headset_service
 	radio_channel = RADIO_CHANNEL_SERVICE
 	bot_type = CLEAN_BOT
 	hackables = "cleaning software"
 	additional_access = /datum/id_trim/job/janitor
+<<<<<<< HEAD
+=======
+	greyscale_config = /datum/greyscale_config/buckets_cleanbot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possessed_message = "You are a cleanbot! Clean the station to the best of your ability!"
 	ai_controller = /datum/ai_controller/basic_controller/bot/cleanbot
 	path_image_color = "#993299"
@@ -23,6 +37,11 @@
 	///Flags indicating what kind of cleanables we should scan for to set as our target to clean.
 	///Options: CLEANBOT_CLEAN_BLOOD | CLEANBOT_CLEAN_TRASH | CLEANBOT_CLEAN_PESTS | CLEANBOT_CLEAN_DRAWINGS
 	var/janitor_mode_flags = CLEANBOT_CLEAN_BLOOD
+<<<<<<< HEAD
+=======
+	///should other bots salute us?
+	var/comissioned = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///the base icon state, used in updating icons.
 	var/base_icon = "cleanbot"
 	/// if we have all the top titles, grant achievements to living mobs that gaze upon our cleanbot god
@@ -136,7 +155,11 @@
 	generate_ai_keys()
 	AddComponent(/datum/component/obeys_commands, pet_commands)
 	AddComponent(/datum/component/cleaner, \
+<<<<<<< HEAD
 		base_cleaning_duration = 2 SECONDS, \
+=======
+		base_cleaning_duration = 1 SECONDS, \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		pre_clean_callback = CALLBACK(src, PROC_REF(update_bot_mode), BOT_CLEANING), \
 		on_cleaned_callback = CALLBACK(src, PROC_REF(update_bot_mode), BOT_IDLE), \
 	)
@@ -154,7 +177,11 @@
 	)
 
 	grant_actions_by_list(innate_actions)
+<<<<<<< HEAD
 	RegisterSignal(src, COMSIG_LIVING_EARLY_UNARMED_ATTACK, PROC_REF(pre_attack))
+=======
+	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attack_by))
 	update_appearance(UPDATE_ICON)
 
@@ -162,6 +189,10 @@
 	. = ..()
 	if(istype(arrived, /obj/item/reagent_containers/cup/bucket) && isnull(build_bucket))
 		build_bucket = arrived
+<<<<<<< HEAD
+=======
+		set_greyscale(build_bucket.greyscale_colors)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(istype(arrived, /obj/item/mop) && isnull(our_mop))
@@ -228,7 +259,11 @@
 // Variables sent to TGUI
 /mob/living/basic/bot/cleanbot/ui_data(mob/user)
 	var/list/data = ..()
+<<<<<<< HEAD
 	if((bot_access_flags & BOT_COVER_LOCKED) && !HAS_SILICON_ACCESS(user))
+=======
+	if(!(bot_access_flags & BOT_CONTROL_PANEL_OPEN) && !issilicon(user) && !isAdminGhostAI(user))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return data
 	data["custom_controls"]["clean_blood"] = janitor_mode_flags & CLEANBOT_CLEAN_BLOOD
 	data["custom_controls"]["clean_trash"] = janitor_mode_flags & CLEANBOT_CLEAN_TRASH
@@ -239,7 +274,11 @@
 // Actions received from TGUI
 /mob/living/basic/bot/cleanbot/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+<<<<<<< HEAD
 	if(. || (bot_access_flags & BOT_COVER_LOCKED) && !HAS_SILICON_ACCESS(ui.user))
+=======
+	if(. || !(bot_access_flags & BOT_CONTROL_PANEL_OPEN) && !ui.user.has_unlimited_silicon_privilege)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	switch(action)
@@ -265,7 +304,11 @@
 
 /mob/living/basic/bot/cleanbot/proc/on_attack_by(datum/source, obj/item/used_item, mob/living/user)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(!istype(used_item, /obj/item/knife) || user.combat_mode)
+=======
+	if(!istype(used_item, /obj/item/knife) || (user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	INVOKE_ASYNC(src, PROC_REF(attach_knife), user, used_item)
 	return COMPONENT_NO_AFTERATTACK
@@ -294,8 +337,13 @@
 		return
 
 	stolen_valor += new_job_title
+<<<<<<< HEAD
 	if(!HAS_TRAIT(src, TRAIT_COMMISSIONED) && (new_job_title in officers_titles))
 		ADD_TRAIT(src, TRAIT_COMMISSIONED, INNATE_TRAIT)
+=======
+	if(!comissioned && (new_job_title in officers_titles))
+		comissioned = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/name_to_add = job_titles[new_job_title]
 	name = (new_job_title in suffix_job_titles) ? "[name] " + name_to_add : name_to_add + " [name]"
@@ -317,18 +365,29 @@
 	INVOKE_ASYNC(weapon, TYPE_PROC_REF(/obj/item, attack), stabbed_carbon, src)
 	stabbed_carbon.Knockdown(2 SECONDS)
 
+<<<<<<< HEAD
 /mob/living/basic/bot/cleanbot/proc/pre_attack(mob/living/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
 	if(!proximity || !can_unarmed_attack())
 		return NONE
 
+=======
+/mob/living/basic/bot/cleanbot/proc/pre_attack(mob/living/source, atom/target)
+	SIGNAL_HANDLER
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(is_type_in_typecache(target, huntable_pests) && !isnull(our_mop))
 		INVOKE_ASYNC(our_mop, TYPE_PROC_REF(/obj/item, melee_attack_chain), src, target)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
+<<<<<<< HEAD
 	if(!(iscarbon(target) && (bot_access_flags & BOT_COVER_EMAGGED)) && !is_type_in_typecache(target, huntable_trash))
 		return NONE
+=======
+	if(!iscarbon(target) && !is_type_in_typecache(target, huntable_trash))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	visible_message(span_danger("[src] sprays hydrofluoric acid at [target]!"))
 	playsound(src, 'sound/effects/spray2.ogg', 50, TRUE, -6)
@@ -344,9 +403,17 @@
 	ai_controller.set_blackboard_key(BB_CLEANBOT_EMAGGED_PHRASES, emagged_phrases)
 
 /mob/living/basic/bot/cleanbot/autopatrol
+<<<<<<< HEAD
 	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
 
 /mob/living/basic/bot/cleanbot/medbay
 	name = "Scrubs, MD"
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_JANITOR, ACCESS_MEDICAL)
+=======
+	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_GHOST_CONTROLLABLE | BOT_MODE_ROUNDSTART_POSSESSION
+
+/mob/living/basic/bot/cleanbot/medbay
+	name = "Scrubs, MD"
+	maints_access_required = list(ACCESS_ROBOTICS, ACCESS_JANITOR, ACCESS_MEDICAL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bot_mode_flags = ~(BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED)

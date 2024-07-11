@@ -9,7 +9,46 @@
 	fire_sound_volume = 90
 	rack_sound = 'sound/weapons/gun/smg/smgrack.ogg'
 	suppressed_sound = 'sound/weapons/gun/smg/shot_suppressed.ogg'
+<<<<<<< HEAD
 	burst_fire_selection = TRUE
+=======
+	var/select = 1 ///fire selector position. 1 = semi, 2 = burst. anything past that can vary between guns.
+	var/selector_switch_icon = FALSE ///if it has an icon for a selector switch indicating current firemode.
+	gun_flags = GUN_SMOKE_PARTICLES
+
+/obj/item/gun/ballistic/automatic/update_overlays()
+	. = ..()
+	if(!selector_switch_icon)
+		return
+
+	switch(select)
+		if(0)
+			. += "[initial(icon_state)]_semi"
+		if(1)
+			. += "[initial(icon_state)]_burst"
+
+/obj/item/gun/ballistic/automatic/ui_action_click(mob/user, actiontype)
+	if(istype(actiontype, /datum/action/item_action/toggle_firemode))
+		burst_select()
+	else
+		..()
+
+/obj/item/gun/ballistic/automatic/proc/burst_select()
+	var/mob/living/carbon/human/user = usr
+	select = !select
+	if(!select)
+		burst_size = 1
+		fire_delay = 0
+		balloon_alert(user, "switched to semi-automatic")
+	else
+		burst_size = initial(burst_size)
+		fire_delay = initial(fire_delay)
+		balloon_alert(user, "switched to [burst_size]-round burst")
+
+	playsound(user, 'sound/weapons/empty.ogg', 100, TRUE)
+	update_appearance()
+	update_item_action_buttons()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/automatic/proto
 	name = "\improper Nanotrasen Saber SMG"
@@ -131,7 +170,11 @@
 	w_class = WEIGHT_CLASS_BULKY
 	inhand_icon_state = "m90"
 	selector_switch_icon = TRUE
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m223
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/m556
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	can_suppress = FALSE
 	var/obj/item/gun/ballistic/revolver/grenadelauncher/underbarrel
 	burst_size = 3
@@ -214,7 +257,11 @@
 	icon_state = "arg"
 	inhand_icon_state = "arg"
 	slot_flags = 0
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m223
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/m556
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	can_suppress = FALSE
 	burst_size = 3
 	fire_delay = 1
@@ -229,7 +276,11 @@
 	base_icon_state = "l6"
 	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = 0
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m7mm
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/mm712x82
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	weapon_weight = WEAPON_HEAVY
 	burst_size = 1
 	actions_types = list()

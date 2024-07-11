@@ -5,9 +5,12 @@
 /// Admins can still manually request a re-render
 #define LOG_UPDATE_TIMEOUT 5 SECONDS
 
+<<<<<<< HEAD
 // The maximum number of entries allowed in the signaler investigate log, keep this relatively small to prevent performance issues when an admin tries to query it
 #define INVESTIGATE_SIGNALER_LOG_MAX_LENGTH 500
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Investigate logging defines
 #define INVESTIGATE_ACCESSCHANGES "id_card_changes"
 #define INVESTIGATE_ATMOS "atmos"
@@ -16,7 +19,6 @@
 #define INVESTIGATE_CRAFTING "crafting"
 #define INVESTIGATE_DEATHS "deaths"
 #define INVESTIGATE_ENGINE "engine"
-#define INVESTIGATE_EXPERIMENTOR "experimentor"
 #define INVESTIGATE_GRAVITY "gravity"
 #define INVESTIGATE_HALLUCINATIONS "hallucinations"
 #define INVESTIGATE_HYPERTORUS "hypertorus"
@@ -26,6 +28,8 @@
 #define INVESTIGATE_RECORDS "records"
 #define INVESTIGATE_RESEARCH "research"
 #define INVESTIGATE_WIRES "wires"
+#define INVESTIGATE_NANITES "nanites"
+#define INVESTIGATE_ARTIFACT "artifact"
 
 // Logging types for log_message()
 #define LOG_ATTACK (1 << 0)
@@ -50,7 +54,13 @@
 #define LOG_VICTIM (1 << 19)
 #define LOG_RADIO_EMOTE (1 << 20)
 #define LOG_SPEECH_INDICATORS (1 << 21)
+<<<<<<< HEAD
 #define LOG_TRANSPORT (1 << 22)
+=======
+#define LOG_CLONING (1 << 22)
+#define LOG_MECHCOMP (1 << 23)
+#define LOG_BLACKMARKET (1 << 24)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Individual logging panel pages
 #define INDIVIDUAL_GAME_LOG (LOG_GAME)
@@ -59,7 +69,12 @@
 #define INDIVIDUAL_EMOTE_LOG (LOG_EMOTE | LOG_RADIO_EMOTE)
 #define INDIVIDUAL_COMMS_LOG (LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS)
 #define INDIVIDUAL_OOC_LOG (LOG_OOC | LOG_ADMIN)
+<<<<<<< HEAD
 #define INDIVIDUAL_SHOW_ALL_LOG (LOG_ATTACK | LOG_SAY | LOG_WHISPER | LOG_EMOTE | LOG_RADIO_EMOTE | LOG_DSAY | LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS | LOG_OOC | LOG_ADMIN | LOG_OWNERSHIP | LOG_GAME | LOG_ADMIN_PRIVATE | LOG_ASAY | LOG_MECHA | LOG_VIRUS | LOG_SHUTTLE | LOG_ECON | LOG_VICTIM | LOG_SPEECH_INDICATORS)
+=======
+#define INDIVIDUAL_OWNERSHIP_LOG (LOG_OWNERSHIP)
+#define INDIVIDUAL_SHOW_ALL_LOG (LOG_ATTACK | LOG_SAY | LOG_WHISPER | LOG_EMOTE | LOG_RADIO_EMOTE | LOG_DSAY | LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS | LOG_OOC | LOG_ADMIN | LOG_OWNERSHIP | LOG_GAME | LOG_ADMIN_PRIVATE | LOG_ASAY | LOG_MECHA | LOG_VIRUS | LOG_SHUTTLE | LOG_ECON | LOG_VICTIM | LOG_SPEECH_INDICATORS | LOG_CLONING)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define LOGSRC_CKEY "Ckey"
 #define LOGSRC_MOB "Mob"
@@ -78,6 +93,10 @@
 
 // Log entry keys
 #define LOG_ENTRY_KEY_TIMESTAMP "ts"
+<<<<<<< HEAD
+=======
+#define LOG_ENTRY_KEY_ROUNDID "round_id"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define LOG_ENTRY_KEY_CATEGORY "cat"
 #define LOG_ENTRY_KEY_MESSAGE "msg"
 #define LOG_ENTRY_KEY_DATA "data"
@@ -99,13 +118,17 @@
 #define LOG_CATEGORY_MANIFEST "manifest"
 #define LOG_CATEGORY_MECHA "mecha"
 #define LOG_CATEGORY_PAPER "paper"
+<<<<<<< HEAD
 #define LOG_CATEGORY_QDEL "qdel"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define LOG_CATEGORY_RUNTIME "runtime"
 #define LOG_CATEGORY_SHUTTLE "shuttle"
 #define LOG_CATEGORY_SILICON "silicon"
 #define LOG_CATEGORY_SILO "silo"
 #define LOG_CATEGORY_SIGNAL "signal"
 #define LOG_CATEGORY_SPEECH_INDICATOR "speech-indiciator"
+<<<<<<< HEAD
 // Leave the underscore, it's there for backwards compatibility reasons
 #define LOG_CATEGORY_SUSPICIOUS_LOGIN "suspicious_logins"
 #define LOG_CATEGORY_TARGET_ZONE_SWITCH "target-zone-switch"
@@ -114,6 +137,20 @@
 #define LOG_CATEGORY_TRANSPORT "transport"
 #define LOG_CATEGORY_VIRUS "virus"
 #define LOG_CATEGORY_CAVE_GENERATION "cave-generation"
+=======
+#define LOG_CATEGORY_SUSPICIOUS_LOGIN "supicious-login"
+#define LOG_CATEGORY_TARGET_ZONE_SWITCH "target-zone-switch"
+#define LOG_CATEGORY_TELECOMMS "telecomms"
+#define LOG_CATEGORY_TOOL "tool"
+#define LOG_CATEGORY_VIRUS "virus"
+#define LOG_CATEGORY_MECHCOMP "mechcomp"
+#define LOG_CATEGORY_CLONING "cloning"
+#define LOG_CATEGORY_MUSIC "music"
+#define LOG_CATEGORY_META "currency"
+#define LOG_CATEGORY_ARTIFACT "artifact"
+#define LOG_CATEGORY_BLACKMARKET "blackmarket"
+#define LOG_CATEGORY_ANTAG_REP "antag-rep"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Admin categories
 #define LOG_CATEGORY_ADMIN "admin"
@@ -127,11 +164,21 @@
 // Debug categories
 #define LOG_CATEGORY_DEBUG "debug"
 #define LOG_CATEGORY_DEBUG_ASSET "debug-asset"
+<<<<<<< HEAD
+=======
+#define LOG_CATEGORY_DEBUG_HREF "debug-href"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define LOG_CATEGORY_DEBUG_JOB "debug-job"
 #define LOG_CATEGORY_DEBUG_LUA "debug-lua"
 #define LOG_CATEGORY_DEBUG_MAPPING "debug-mapping"
 #define LOG_CATEGORY_DEBUG_MOBTAG "debug-mobtag"
+<<<<<<< HEAD
 #define LOG_CATEGORY_DEBUG_SQL "debug-sql"
+=======
+#define LOG_CATEGORY_DEBUG_QDEL "debug-qdel"
+#define LOG_CATEGORY_DEBUG_SQL "debug-sql"
+#define LOG_CATEGORY_DEBUG_TGUI "debug-tgui"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Compatibility categories, for when stuff is changed and you need existing functionality to work
 #define LOG_CATEGORY_COMPAT_GAME "game-compat"
@@ -150,29 +197,38 @@
 #define LOG_CATEGORY_GAME_VOTE "game-vote"
 #define LOG_CATEGORY_GAME_WHISPER "game-whisper"
 
+<<<<<<< HEAD
 // HREF categories
 #define LOG_CATEGORY_HREF "href"
 #define LOG_CATEGORY_HREF_TGUI "href-tgui"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Uplink categories
 #define LOG_CATEGORY_UPLINK "uplink"
 #define LOG_CATEGORY_UPLINK_CHANGELING "uplink-changeling"
 #define LOG_CATEGORY_UPLINK_HERETIC "uplink-heretic"
 #define LOG_CATEGORY_UPLINK_MALF "uplink-malf"
 #define LOG_CATEGORY_UPLINK_SPELL "uplink-spell"
+<<<<<<< HEAD
 #define LOG_CATEGORY_UPLINK_SPY "uplink-spy"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // PDA categories
 #define LOG_CATEGORY_PDA "pda"
 #define LOG_CATEGORY_PDA_CHAT "pda-chat"
 #define LOG_CATEGORY_PDA_COMMENT "pda-comment"
 
+<<<<<<< HEAD
 // Flags that apply to the entry_flags var on logging categories
 // These effect how entry datums process the inputs passed into them
 /// Enables data list usage for readable log entries
 /// You'll likely want to disable internal formatting to make this work properly
 #define ENTRY_USE_DATA_W_READABLE (1<<0)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define SCHEMA_VERSION "schema-version"
 
 // Default log schema version

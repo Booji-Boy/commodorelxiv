@@ -30,7 +30,11 @@
 	faction = list(FACTION_SPOOKY)
 	speak_emote = list("telepathically cries")
 
+<<<<<<< HEAD
 	habitable_atmos = null
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = T0C
 	maximum_survivable_temperature = T0C + 1500
 	sight = SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS
@@ -52,6 +56,7 @@
 
 /mob/living/basic/eyeball/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/static/list/innate_actions = list(
 		/datum/action/cooldown/spell/pointed/death_glare = BB_GLARE_ABILITY
 	)
@@ -59,6 +64,13 @@
 
 	AddElement(/datum/element/simple_flying)
 	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/grown/carrot), tame_chance = 100)
+=======
+	var/datum/action/cooldown/spell/pointed/death_glare/glare = new(src)
+	glare.Grant(src)
+	ai_controller.set_blackboard_key(BB_GLARE_ABILITY, glare)
+	AddElement(/datum/element/simple_flying)
+	AddComponent(/datum/component/tameable, food_types = list(/obj/item/food/grown/carrot), tame_chance = 100, after_tame = CALLBACK(src, PROC_REF(on_tame)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ADD_TRAIT(src, TRAIT_SPACEWALK, INNATE_TRAIT)
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
 	on_hit_overlay = mutable_appearance(icon, "[icon_state]_crying")
@@ -79,7 +91,11 @@
 
 /mob/living/basic/eyeball/attackby(obj/item/weapon, mob/living/carbon/human/user, list/modifiers)
 	. = ..()
+<<<<<<< HEAD
 	if(!weapon.force && !user.combat_mode)
+=======
+	if(!weapon.force && !(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(crying)
 		return
@@ -119,7 +135,11 @@
 	befriend(target)
 	COOLDOWN_START(src, eye_healing, 15 SECONDS)
 
+<<<<<<< HEAD
 /mob/living/basic/eyeball/tamed(mob/living/tamer, atom/food)
+=======
+/mob/living/basic/eyeball/proc/on_tame(mob/tamer)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	spin(spintime = 2 SECONDS, speed = 1)
 	//become passive to the humens
 	faction |= tamer.faction

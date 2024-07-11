@@ -6,24 +6,35 @@
 	argument_hash_start_idx = 2
 	///offsets of hats we will wear
 	var/list/offsets
+<<<<<<< HEAD
 	///signals to remove the hat on
 	var/list/remove_hat_signals
 	///traits we check before adding the hat
 	var/traits_prevent_checks
 
 /datum/element/hat_wearer/Attach(datum/target, offsets = list(), remove_hat_signals = list(), traits_prevent_checks = list())
+=======
+
+/datum/element/hat_wearer/Attach(datum/target, offsets = list())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if (!isliving(target))
 		return ELEMENT_INCOMPATIBLE
 	src.offsets = offsets
+<<<<<<< HEAD
 	src.traits_prevent_checks = traits_prevent_checks
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(target, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_overlays_updated))
 	RegisterSignal(target, COMSIG_ATOM_EXITED, PROC_REF(exited))
 	RegisterSignal(target, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
 	RegisterSignal(target, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attack_by))
+<<<<<<< HEAD
 	if(!length(remove_hat_signals))
 		return
 	RegisterSignals(target, remove_hat_signals, PROC_REF(remove_hat))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/element/hat_wearer/Detach(datum/target)
 	var/obj/item/hat = (locate(/obj/item/clothing/head) in target)
@@ -35,8 +46,11 @@
 		COMSIG_ATOM_ENTERED,
 		COMSIG_ATOM_ATTACKBY,
 	))
+<<<<<<< HEAD
 	if(length(remove_hat_signals))
 		UnregisterSignal(target, remove_hat_signals)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/element/hat_wearer/proc/on_overlays_updated(atom/source, list/overlays)
@@ -70,6 +84,7 @@
 
 /datum/element/hat_wearer/proc/on_attack_by(atom/movable/source, obj/item/item, mob/living/attacker)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 
 	if(!istype(item, /obj/item/clothing/head))
 		return
@@ -79,6 +94,10 @@
 			source.balloon_alert(attacker, "not possible right now!")
 			return COMPONENT_NO_AFTERATTACK
 
+=======
+	if(!istype(item, /obj/item/clothing/head))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	INVOKE_ASYNC(src, PROC_REF(place_hat), source, item, attacker)
 	return COMPONENT_NO_AFTERATTACK
 
@@ -87,6 +106,7 @@
 		source.balloon_alert(attacker, "must stay still!")
 		return
 	item.forceMove(source)
+<<<<<<< HEAD
 
 /datum/element/hat_wearer/proc/remove_hat(atom/movable/source)
 	SIGNAL_HANDLER
@@ -95,3 +115,5 @@
 	if(isnull(our_hat))
 		return
 	our_hat.forceMove(source.drop_location())
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

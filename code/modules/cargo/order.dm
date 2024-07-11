@@ -56,6 +56,8 @@
 	var/manifest_can_fail = TRUE
 	///Boolean on whether the manifest can be cancelled through cargo consoles.
 	var/can_be_cancelled = TRUE
+	///the account we charge for this purchase
+	var/account_to_charge = ACCOUNT_CAR
 
 /datum/supply_order/New(
 	datum/supply_pack/pack,
@@ -70,6 +72,7 @@
 	manifest_can_fail = TRUE,
 	cost_type = "cr",
 	can_be_cancelled = TRUE,
+	account_to_charge = ACCOUNT_CAR,
 )
 	id = SSshuttle.order_number++
 	src.cost_type = cost_type
@@ -84,6 +87,7 @@
 	src.charge_on_purchase = charge_on_purchase
 	src.manifest_can_fail = manifest_can_fail
 	src.can_be_cancelled = can_be_cancelled
+	src.account_to_charge = account_to_charge
 
 /datum/supply_order/Destroy(force)
 	QDEL_NULL(applied_coupon)
@@ -132,6 +136,7 @@
 		manifest_paper.name += " - Purchased by [owner]"
 	manifest_text += "Order[packname?"":"s"]: [id]<br/>"
 	manifest_text += "Destination: [station_name]<br/>"
+	manifest_text += "Paid For By: [account_to_charge]<br/>"
 	if(packname)
 		manifest_text += "Item: [packname]<br/>"
 	manifest_text += "Contents: <br/>"
@@ -192,7 +197,14 @@
 
 /datum/supply_order/proc/generateCombo(miscbox, misc_own, misc_contents, misc_cost)
 	for (var/I in misc_contents)
-		new I(miscbox)
+		var/obj/item = new I(miscbox)
+
+		if(istype(item, /obj/item/gun))
+			var/obj/item/gun/gun_actually = item
+			QDEL_NULL(gun_actually.pin)
+			var/obj/item/firing_pin/permit_pin/new_pin = new(gun_actually)
+			gun_actually.pin = new_pin
+
 	generateManifest(miscbox, misc_own, "", misc_cost)
 	return
 

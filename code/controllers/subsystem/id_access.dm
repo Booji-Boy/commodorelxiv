@@ -188,12 +188,6 @@ SUBSYSTEM_DEF(id_access)
 			"templates" = list(),
 			"pdas" = list(),
 		),
-		"[ACCESS_QM]" = list(
-			"regions" = list(REGION_SUPPLY),
-			"head" = JOB_QUARTERMASTER,
-			"templates" = list(),
-			"pdas" = list(),
-		),
 	)
 
 	var/list/station_job_trims = subtypesof(/datum/id_trim/job)
@@ -288,7 +282,7 @@ SUBSYSTEM_DEF(id_access)
 	desc_by_access["[ACCESS_LIBRARY]"] = "Library"
 	desc_by_access["[ACCESS_LAWYER]"] = "Law Office"
 	desc_by_access["[ACCESS_ROBOTICS]"] = "Robotics"
-	desc_by_access["[ACCESS_VIROLOGY]"] = "Virology"
+	desc_by_access["[ACCESS_VIROLOGY]"] = "Pathology"
 	desc_by_access["[ACCESS_PSYCHOLOGY]"] = "Psychology"
 	desc_by_access["[ACCESS_CMO]"] = "CMO Office"
 	desc_by_access["[ACCESS_QM]"] = "Quartermaster"
@@ -330,6 +324,10 @@ SUBSYSTEM_DEF(id_access)
 	desc_by_access["[ACCESS_CENT_CAPTAIN]"] = "Code Gold"
 	desc_by_access["[ACCESS_CENT_BAR]"] = "Code Scotch"
 	desc_by_access["[ACCESS_BIT_DEN]"] = "Bitrunner Den"
+<<<<<<< HEAD
+=======
+	desc_by_access["[ACCESS_PERMABRIG]"] = "Permabrig" // monkestation edit: add permabrig-only access
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Returns the access bitflags associated with any given access level.

@@ -83,8 +83,13 @@
  * * target - The atom to attempt to scan
  */
 /datum/experiment/scanning/perform_experiment_actions(datum/component/experiment_handler/experiment_handler, atom/target)
+<<<<<<< HEAD
 	var/contributing_index_value = experiment_requirements(experiment_handler, target)
 	if (!isnull(contributing_index_value))
+=======
+	var/contributing_index_value = get_contributing_index(target)
+	if (contributing_index_value)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(traits & EXPERIMENT_TRAIT_TYPECACHE)
 			scanned[contributing_index_value][target.type] = TRUE
 		else

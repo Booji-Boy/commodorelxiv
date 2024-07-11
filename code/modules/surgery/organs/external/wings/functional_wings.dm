@@ -26,14 +26,21 @@
 	///Are our wings open or closed?
 	var/wings_open = FALSE
 
+<<<<<<< HEAD
 	// grind_results = list(/datum/reagent/flightpotion = 5)
 	food_reagents = list(/datum/reagent/flightpotion = 5)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/organ/external/wings/functional/Destroy()
 	QDEL_NULL(fly)
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/organ/external/wings/functional/Insert(mob/living/carbon/receiver, special, movement_flags)
+=======
+/obj/item/organ/external/wings/functional/Insert(mob/living/carbon/receiver, special, drop_if_replaced)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(!.)
 		return

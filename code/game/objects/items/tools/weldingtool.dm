@@ -18,8 +18,13 @@
 	drop_sound = 'sound/items/handling/weldingtool_drop.ogg'
 	pickup_sound = 'sound/items/handling/weldingtool_pickup.ogg'
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 2
 	light_power = 1.5
+=======
+	light_outer_range = 2
+	light_power = 0.75
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_FIRE
 	light_on = FALSE
 	throw_speed = 3
@@ -57,8 +62,13 @@
 
 /obj/item/weldingtool/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddElement(/datum/element/tool_flash, light_range)
+=======
+	AddElement(/datum/element/update_icon_updates_onmob, ITEM_SLOT_HANDS)
+	AddElement(/datum/element/tool_flash, light_outer_range)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/falling_hazard, damage = force, wound_bonus = wound_bonus, hardhat_safety = TRUE, crushes = FALSE, impact_sound = hitsound)
 
 	create_reagents(max_fuel)
@@ -134,10 +144,48 @@
 	LAZYREMOVE(update_overlays_on_z, sparks)
 	target.cut_overlay(sparks)
 
+<<<<<<< HEAD
 /obj/item/weldingtool/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!status && interacting_with.is_refillable())
 		reagents.trans_to(interacting_with, reagents.total_volume, transferred_by = user)
 		to_chat(user, span_notice("You empty [src]'s fuel tank into [interacting_with]."))
+=======
+/obj/item/weldingtool/attack(mob/living/carbon/human/attacked_humanoid, mob/living/user)
+	if(!istype(attacked_humanoid))
+		return ..()
+
+	var/obj/item/bodypart/affecting = attacked_humanoid.get_bodypart(check_zone(user.zone_selected))
+
+	if(affecting && !IS_ORGANIC_LIMB(affecting) && !(user.istate & ISTATE_HARM))
+		if(src.use_tool(attacked_humanoid, user, 0, volume=50, amount=1))
+			if(user == attacked_humanoid)
+				user.visible_message(span_notice("[user] starts to fix some of the dents on [attacked_humanoid]'s [affecting.name]."),
+					span_notice("You start fixing some of the dents on [attacked_humanoid == user ? "your" : "[attacked_humanoid]'s"] [affecting.name]."))
+				if(!do_after(user, 5 SECONDS, attacked_humanoid))
+					return
+			item_heal_robotic(attacked_humanoid, user, 15, 0)
+	else
+		return ..()
+
+/obj/item/weldingtool/afterattack(atom/attacked_atom, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+
+	if(isOn())
+		. |= AFTERATTACK_PROCESSED_ITEM
+		if (!QDELETED(attacked_atom) && isliving(attacked_atom)) // can't ignite something that doesn't exist
+			handle_fuel_and_temps(1, user)
+			var/mob/living/attacked_mob = attacked_atom
+			if(attacked_mob.ignite_mob())
+				message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(attacked_mob)] on fire with [src] at [AREACOORD(user)]")
+				user.log_message("set [key_name(attacked_mob)] on fire with [src].", LOG_ATTACK)
+
+	if(!status && attacked_atom.is_refillable())
+		. |= AFTERATTACK_PROCESSED_ITEM
+		reagents.trans_to(attacked_atom, reagents.total_volume, transfered_by = user)
+		to_chat(user, span_notice("You empty [src]'s fuel tank into [attacked_atom]."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		update_appearance()
 		return ITEM_INTERACT_SUCCESS
 	if(!ishuman(interacting_with))
@@ -365,7 +413,7 @@
 	toolspeed = 0.1
 	custom_materials = list(/datum/material/iron =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/silver = SHEET_MATERIAL_AMOUNT*1.25, /datum/material/plasma =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/titanium =SHEET_MATERIAL_AMOUNT, /datum/material/diamond =SHEET_MATERIAL_AMOUNT)
 	light_system = NO_LIGHT_SUPPORT
-	light_range = 0
+	light_outer_range = 0
 	change_icons = FALSE
 
 /obj/item/weldingtool/abductor/process()
@@ -390,7 +438,7 @@
 	custom_materials = list(/datum/material/iron =HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = SMALL_MATERIAL_AMOUNT*5, /datum/material/plasma =HALF_SHEET_MATERIAL_AMOUNT*1.5, /datum/material/uranium =SMALL_MATERIAL_AMOUNT * 2)
 	change_icons = FALSE
 	can_off_process = TRUE
-	light_range = 1
+	light_outer_range = 1
 	w_class = WEIGHT_CLASS_NORMAL
 	toolspeed = 0.5
 	var/last_gen = 0

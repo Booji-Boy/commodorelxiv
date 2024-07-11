@@ -10,7 +10,10 @@ type SpawnersMenuContext = {
 type spawner = {
   name: string;
   amount_left: number;
+<<<<<<< HEAD
   infinite: boolean;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   desc?: string;
   you_are_text?: string;
   flavor_text?: string;

@@ -37,9 +37,15 @@
 	trigger_species = GLOB.phobia_species[phobia_type]
 	..()
 
+<<<<<<< HEAD
 /datum/brain_trauma/mild/phobia/on_lose(silent)
 	owner.clear_mood_event("phobia_[phobia_type]")
 	return ..()
+=======
+/datum/brain_trauma/mild/phobia/on_clone()
+	if(clonable)
+		return new type(phobia_type)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/brain_trauma/mild/phobia/on_life(seconds_per_tick, times_fired)
 	..()
@@ -151,6 +157,29 @@
 	phobia_type = "aliens"
 	random_gain = FALSE
 
+<<<<<<< HEAD
+=======
+/datum/brain_trauma/mild/phobia/strangers
+	phobia_type = "strangers"
+	random_gain = FALSE
+
+/datum/brain_trauma/mild/phobia/heresy
+	phobia_type = "heresy"
+	random_gain = FALSE
+
+/datum/brain_trauma/mild/phobia/insects
+	phobia_type = "insects"
+	random_gain = FALSE
+
+/datum/brain_trauma/mild/phobia/birds
+	phobia_type = "birds"
+	random_gain = FALSE
+
+/datum/brain_trauma/mild/phobia/falling
+	phobia_type = "falling"
+	random_gain = FALSE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/brain_trauma/mild/phobia/anime
 	phobia_type = "anime"
 	random_gain = FALSE

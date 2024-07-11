@@ -14,6 +14,10 @@
 	wound_flags = (ACCEPTS_GAUZE | CAN_BE_GRASPED)
 
 	default_scar_file = FLESH_SCAR_FILE
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
@@ -33,7 +37,11 @@
 	return ..()
 
 /datum/wound/pierce/bleed/receive_damage(wounding_type, wounding_dmg, wound_bonus)
+<<<<<<< HEAD
 	if(victim.stat == DEAD || (wounding_dmg < 5) || !limb.can_bleed() || !victim.blood_volume || !prob(internal_bleeding_chance + wounding_dmg))
+=======
+	if(QDELETED(victim) || victim.stat == DEAD || (wounding_dmg < 5) || !limb.can_bleed() || !victim.blood_volume || !prob(internal_bleeding_chance + wounding_dmg))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(limb.current_gauze?.splint_factor)
 		wounding_dmg *= (1 - limb.current_gauze.splint_factor)
@@ -46,12 +54,12 @@
 			victim.bleed(blood_bled, TRUE)
 		if(14 to 19)
 			victim.visible_message("<span class='smalldanger'>A small stream of blood spurts from the hole in [victim]'s [limb.plaintext_zone]!</span>", span_danger("You spit out a string of blood from the blow to your [limb.plaintext_zone]!"), vision_distance=COMBAT_MESSAGE_RANGE)
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir, COLOR_DARK_RED)
 			victim.bleed(blood_bled)
 		if(20 to INFINITY)
 			victim.visible_message(span_danger("A spray of blood streams from the gash in [victim]'s [limb.plaintext_zone]!"), span_danger("<b>You choke up on a spray of blood from the blow to your [limb.plaintext_zone]!</b>"), vision_distance=COMBAT_MESSAGE_RANGE)
 			victim.bleed(blood_bled)
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir, COLOR_DARK_RED)
 			victim.add_splatter_floor(get_step(victim.loc, victim.dir))
 
 /datum/wound/pierce/bleed/get_bleed_rate_of_change()
@@ -65,7 +73,11 @@
 	return BLOOD_FLOW_STEADY
 
 /datum/wound/pierce/bleed/handle_process(seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	if (!victim || HAS_TRAIT(victim, TRAIT_STASIS))
+=======
+	if (QDELETED(victim) || HAS_TRAIT(victim, TRAIT_STASIS))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	set_blood_flow(min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW))
@@ -174,6 +186,17 @@
 
 	wound_series = WOUND_SERIES_FLESH_PUNCTURE_BLEED
 
+<<<<<<< HEAD
+=======
+/datum/wound_pregen_data/flesh_pierce
+	abstract = TRUE
+
+	required_limb_biostate = (BIO_FLESH)
+	required_wounding_types = list(WOUND_PIERCE)
+
+	wound_series = WOUND_SERIES_FLESH_PUNCTURE_BLEED
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/wound/pierce/get_limb_examine_description()
 	return span_warning("The flesh on this limb appears badly perforated.")
 

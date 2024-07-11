@@ -13,7 +13,7 @@
 	pixel_x = -32
 	pixel_y = -32
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	light_range = 8
+	light_outer_range = 8
 	light_color = LIGHT_COLOR_LAVA
 	var/open = FALSE
 	var/changing_openness = FALSE
@@ -189,12 +189,16 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 				M.playsound_local(T, null, 100, FALSE, 0, FALSE, pressure_affected = FALSE, sound_to_use = legion_sound)
 				flash_color(M, flash_color = "#FF0000", flash_time = 50)
 		var/mutable_appearance/release_overlay = mutable_appearance('icons/effects/effects.dmi', "legiondoor")
+<<<<<<< HEAD
 		notify_ghosts(
 			"Legion has been released in the [get_area(src)]!",
 			source = src,
 			alert_overlay = release_overlay,
 			notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		)
+=======
+		notify_ghosts("Legion has been released in the [get_area(src)]!", source = src, alert_overlay = release_overlay, action = NOTIFY_JUMP, flashwindow = FALSE, header="Something Interesting!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/decal/necropolis_gate_decal
 	icon = 'icons/effects/96x96.dmi'
@@ -262,7 +266,11 @@ GLOBAL_DATUM(necropolis_gate, /obj/structure/necropolis_gate/legion_gate)
 
 	var/static/list/give_turf_traits
 	if(!give_turf_traits)
+<<<<<<< HEAD
 		give_turf_traits = string_list(list(TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED, TRAIT_IMMERSE_STOPPED))
+=======
+		give_turf_traits = string_list(list(TRAIT_LAVA_STOPPED, TRAIT_CHASM_STOPPED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/give_turf_traits, give_turf_traits)
 
 /obj/structure/stone_tile/singularity_pull()

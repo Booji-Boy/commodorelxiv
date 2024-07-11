@@ -12,6 +12,7 @@
 	var/deconversion_source
 
 /datum/antagonist/rev/can_be_owned(datum/mind/new_owner)
+<<<<<<< HEAD
 	if(new_owner.assigned_role.job_flags & JOB_HEAD_OF_STAFF)
 		return FALSE
 	if(new_owner.unconvertable)
@@ -19,6 +20,16 @@
 	if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
 		return FALSE
 	return ..()
+=======
+	. = ..()
+	if(.)
+		if(new_owner.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND)
+			return FALSE
+		if(HAS_TRAIT(new_owner, TRAIT_UNCONVERTABLE)) // monkestation edit: mind.unconvertable -> TRAIT_UNCONVERTABLE
+			return FALSE
+		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
+			return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/rev/admin_add(datum/mind/new_owner, mob/admin)
 	// No revolution exists which means admin adding this will create a new revolution team
@@ -332,15 +343,26 @@
 		owner.current.visible_message(span_deconversion_message("The frame beeps contentedly, suppressing the disloyal personality traits from the MMI before initalizing it."), null, null, null, owner.current)
 		to_chat(owner, span_userdanger("The frame's firmware detects and suppresses your unwanted personality traits! You feel more content with the leadership around these parts."))
 
+<<<<<<< HEAD
 /// Handles rev removal via IC methods such as borging, mindshielding, blunt force trauma to the head or revs losing.
 /datum/antagonist/rev/proc/remove_revolutionary(deconverter)
 	owner.current.log_message("has been deconverted from the revolution by [ismob(deconverter) ? key_name(deconverter) : deconverter]!", LOG_ATTACK, color=COLOR_CULT_RED)
 	if(deconverter == DECONVERTER_BORGED)
+=======
+//blunt trauma deconversions call this through species.dm spec_attacked_by()
+/datum/antagonist/rev/proc/remove_revolutionary(borged, deconverter)
+	if(!owner)
+		return
+	if(owner.current)
+		owner.current.log_message("has been deconverted from the revolution by [ismob(deconverter) ? key_name(deconverter) : deconverter]!", LOG_ATTACK, color="#960000")
+	if(borged)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		message_admins("[ADMIN_LOOKUPFLW(owner.current)] has been borged while being a [name]")
 	owner.special_role = null
 	deconversion_source = deconverter
 	owner.remove_antag_datum(type)
 
+<<<<<<< HEAD
 /// This is for revheads, for which they ordinarily shouldn't be deconverted outside of revs losing. As an exception, forceborging can de-headrev them.
 /datum/antagonist/rev/head/remove_revolutionary(deconverter)
 	// If they're living and the station won, turn them into an exiled headrev.
@@ -350,6 +372,17 @@
 	// Only actually remove headrev status on borging or when the station wins.
 	if(deconverter == DECONVERTER_BORGED || deconverter == DECONVERTER_STATION_WIN)
 		return ..()
+=======
+/datum/antagonist/rev/head/remove_revolutionary(borged, deconverter)
+	var/re_antag = FALSE
+	var/datum/mind/old_owner = owner //owner gets nulled when rev antag removed
+	if(borged || deconverter == DECONVERTER_STATION_WIN || deconverter == DECONVERTER_REVS_WIN)
+		if(owner.current?.stat != DEAD && deconverter == DECONVERTER_STATION_WIN)
+			re_antag = TRUE
+		. = ..()
+		if(re_antag)
+			old_owner.add_antag_datum(/datum/antagonist/enemy_of_the_state) //needs to be post ..() so old antag status is cleaned up
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/rev/head/equip_rev()
 	var/mob/living/carbon/carbon_owner = owner.current
@@ -527,6 +560,104 @@
 		if(isnull(real_headrev))
 			continue
 		add_memory_in_range(real_headrev, 5, /datum/memory/revolution_rev_victory, protagonist = real_headrev)
+<<<<<<< HEAD
+=======
+		if(charter_given || real_headrev.stat != CONSCIOUS)
+			continue
+		charter_given = TRUE
+		podspawn(list(
+			"target" = get_turf(real_headrev),
+			"style" = STYLE_SYNDICATE,
+			"spawn" = list(
+				/obj/item/bedsheet/rev,
+				/obj/item/megaphone,
+				/obj/item/station_charter/revolution,
+			)))
+		to_chat(real_headrev, span_hear("You hear something crackle in your ears for a moment before a voice speaks. \
+			\"Please stand by for a message from your benefactor. Message as follows, provocateur. \
+			<b>You have been chosen out of your fellow provocateurs to rename the station. Choose wisely.</b> Message ends.\""))
+
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_REVOLUTION_VICTORY)
+
+	for (var/mob/living/player as anything in GLOB.player_list)
+		var/datum/mind/player_mind = player.mind
+
+		if (isnull(player_mind))
+			continue
+
+		if (!(player_mind.assigned_role.departments_bitflags & (DEPARTMENT_BITFLAG_SECURITY|DEPARTMENT_BITFLAG_COMMAND)))
+			continue
+
+		if (player_mind in ex_revs + ex_headrevs)
+			continue
+
+		if (!istype(player))
+			continue
+
+		player_mind.add_antag_datum(/datum/antagonist/enemy_of_the_revolution)
+
+		if(player_mind.assigned_role.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND)
+			ADD_TRAIT(player, TRAIT_DEFIB_BLACKLISTED, REF(src))
+
+	for(var/datum/job/job as anything in SSjob.joinable_occupations)
+		if(!(job.departments_bitflags & DEPARTMENT_BITFLAG_SECURITY|DEPARTMENT_BITFLAG_COMMAND))
+			continue
+		job.allow_bureaucratic_error = FALSE
+		job.total_positions = 0
+
+	SSgamemode.point_gain_multipliers[EVENT_TRACK_ROLESET]++
+
+	var/message_header = "A recent assessment of your station has marked your station as a severe risk area for high ranking Nanotrasen officials."
+	var/extra_detail = try_auto_call_shuttle() \
+		? "For the safety of our staff, we are expediting an emergency shuttle for remaining members of security and command." \
+		: "For the safety of our staff, we have blacklisted your station for new employment of security and command."
+	var/propaganda = pick(world.file2list("strings/anti_union_propaganda.txt"))
+
+	priority_announce(
+		"[message_header]\n\n[extra_detail]\n\n[propaganda]",
+		sender_override = "Central Command Loyalty Monitoring Division"
+	)
+
+/// How much of the station, ignoring sec and command, should be revs before a shuttle will be automatically called?
+#define REV_AUTO_CALL_THRESHOLD 0.65
+
+/datum/team/revolution/proc/try_auto_call_shuttle()
+	var/total_revs = ex_revs.len + ex_headrevs.len
+	var/total_candidates = 0
+
+	for (var/datum/mind/crewmember as anything in get_crewmember_minds())
+		if (crewmember.has_antag_datum(/datum/antagonist/enemy_of_the_revolution))
+			continue
+		if(crewmember.current?.stat == DEAD) // if we have 60 dead nonrev crew, 2 alive crew, and 10 alive revs, it should qualify for the shuttle
+			continue
+
+		total_candidates += 1
+
+	var/display_percent = round(total_revs / total_candidates * 100)
+
+	if (total_revs / total_candidates < REV_AUTO_CALL_THRESHOLD)
+		log_game("REVOLUTION: Not calling the shuttle, [display_percent]% are revs")
+		return FALSE
+
+	// Do it later so everyone has time to see the messages
+	addtimer(CALLBACK(src, PROC_REF(perform_auto_shuttle_call)), 20 SECONDS)
+
+	var/log = "REVOLUTION: Auto-calling the shuttle, [display_percent]% are revs"
+	log_game(log)
+	message_admins(log)
+
+	return TRUE
+
+#undef REV_AUTO_CALL_THRESHOLD
+
+/datum/team/revolution/proc/perform_auto_shuttle_call()
+	var/can_evac_result = SSshuttle.canEvac()
+	if (can_evac_result != TRUE)
+		log_game("REVOLUTION: Not calling the shuttle, canEvac() returned [can_evac_result]")
+		return
+
+	SSshuttle.call_evac_shuttle("Sending emergency shuttle to rescue command and security staff.")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Handles effects of revs losing, such as making ex-headrevs unrevivable and setting up head of staff memories.
 /datum/team/revolution/proc/defeat_effects()

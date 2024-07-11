@@ -242,7 +242,11 @@ GLOBAL_LIST_INIT(animatable_blacklist, typecacheof(list(
 			projectiletype = initial(M.projectile_type)
 		if(istype(G, /obj/item/gun/ballistic))
 			Pewgun = G
+<<<<<<< HEAD
 			var/obj/item/ammo_box/magazine/M = Pewgun.spawn_magazine_type
+=======
+			var/obj/item/ammo_box/magazine/M = Pewgun.accepted_magazine_type
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			casingtype = initial(M.ammo_type)
 		if(istype(G, /obj/item/gun/energy))
 			Zapgun = G
@@ -319,7 +323,7 @@ GLOBAL_LIST_INIT(animatable_blacklist, typecacheof(list(
 
 /mob/living/simple_animal/hostile/mimic/xenobio/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	toggle_open()
 

@@ -35,6 +35,18 @@
 	message_mime = "acts out a burp."
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 
+
+/datum/emote/living/burp/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_FOOD_FIRE_BURPS))
+		if(ishuman(user))
+			var/mob/living/carbon/owner = user
+			var/datum/status_effect/food/fire_burps/Holder = owner.has_status_effect(STATUS_EFFECT_FOOD_FIREBURPS)
+			if(!Holder)
+				owner.has_status_effect(STATUS_EFFECT_FOOD_FIREBURPS)
+			if(Holder)
+				Holder.Burp()
+
 /datum/emote/living/choke
 	key = "choke"
 	key_third_person = "chokes"
@@ -133,7 +145,11 @@
 	if(. && ishuman(user))
 		var/mob/living/carbon/human/human_user = user
 		var/open = FALSE
+<<<<<<< HEAD
 		var/obj/item/organ/external/wings/functional/wings = human_user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
+=======
+		var/obj/item/organ/external/wings/functional/wings = H.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		// open/close functional wings
 		if(istype(wings))
@@ -144,8 +160,14 @@
 				wings.open_wings()
 			addtimer(CALLBACK(wings,  open ? TYPE_PROC_REF(/obj/item/organ/external/wings/functional, open_wings) : TYPE_PROC_REF(/obj/item/organ/external/wings/functional, close_wings)), wing_time)
 
+<<<<<<< HEAD
 		// play a flapping noise if the wing has this implemented
 		wings.make_flap_sound(human_user)
+=======
+		// play moth flutter noise if moth wing
+		if(istype(wings, /obj/item/organ/external/wings/moth))
+			playsound(H, 'sound/voice/moth/moth_flutter.ogg', 50, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/emote/living/flap/aflap
 	key = "aflap"
@@ -274,10 +296,24 @@
 /datum/emote/living/laugh/can_run_emote(mob/living/user, status_check = TRUE , intentional)
 	return ..() && user.can_speak(allow_mimes = TRUE)
 
+<<<<<<< HEAD
 /datum/emote/living/laugh/get_sound(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
 	return user.dna.species.get_laugh_sound(user)
+=======
+// MonkeStation Edit Start
+/datum/emote/living/laugh/get_sound(mob/living/carbon/human/user)
+	if(!istype(user))
+		return
+
+	// Alternative Laugh Hook
+	if(user.alternative_laughs.len)
+		return pick(user.alternative_laughs)
+
+	return user.dna.species.get_laugh_sound(user)
+// MonkeStation Edit End
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/emote/living/look
 	key = "look"
@@ -349,6 +385,7 @@
 	message = "pouts."
 	message_mime = "pouts silently."
 
+/* monkestation edit start - relocating this to our own code @ <monkestation/code/modules/mob/living/emote.dm>
 /datum/emote/living/scream
 	key = "scream"
 	key_third_person = "screams"
@@ -360,6 +397,17 @@
 	if(!intentional && HAS_TRAIT(user, TRAIT_ANALGESIA))
 		return
 	return ..()
+
+/datum/emote/living/scream/get_sound(mob/living/user)
+	if(!issilicon(user))
+		return
+	return pick(
+		'monkestation/sound/voice/screams/silicon/robotAUGH1.ogg',
+		'monkestation/sound/voice/screams/silicon/robotAUGH2.ogg',
+		'monkestation/sound/voice/screams/silicon/robotAUGH3.ogg',
+		'monkestation/sound/voice/screams/silicon/robotAUGH4.ogg',
+		'monkestation/sound/voice/screams/silicon/robotAUGH5.ogg')
+monkestation edit end */
 
 /datum/emote/living/scream/select_message_type(mob/user, message, intentional)
 	. = ..()
@@ -404,7 +452,11 @@
 	. = ..()
 	if(!ishuman(user))
 		return
+<<<<<<< HEAD
 	var/image/emote_animation = image('icons/mob/human/emote_visuals.dmi', user, "sigh")
+=======
+	var/image/emote_animation = image('icons/mob/species/human/emote_visuals.dmi', user, "sigh")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	flick_overlay_global(emote_animation, GLOB.clients, 2.0 SECONDS)
 
 /datum/emote/living/sit
@@ -428,6 +480,18 @@
 	message = "sniffs."
 	message_mime = "sniffs silently."
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+
+/datum/emote/living/sniff/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		var/turf/open/current_turf = get_turf(user)
+		if(istype(current_turf) && current_turf.pollution)
+			if(iscarbon(user))
+				var/mob/living/carbon/carbon_user = user
+				if(carbon_user.internal) //Breathing from internals means we cant smell
+					return
+				carbon_user.next_smell = world.time + SMELL_COOLDOWN
+			current_turf.pollution.smell_act(user)
 
 /datum/emote/living/snore
 	key = "snore"

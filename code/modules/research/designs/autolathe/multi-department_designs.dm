@@ -50,7 +50,11 @@
 	name = "Rapid Wiring Device"
 	id = "rwd"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5)
+=======
+	materials = list(/datum/material/iron = 10000, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/rwd/loaded
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -62,7 +66,11 @@
 	name = "Gas Analyzer"
 	id = "analyzer"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.3, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+=======
+	materials = list(/datum/material/iron = 30, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/analyzer
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -74,7 +82,11 @@
 	name = "Welding Tool"
 	id = "welding_tool"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*0.7, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+=======
+	materials = list(/datum/material/iron = 70, /datum/material/glass =SMALL_MATERIAL_AMOUNT*0.2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/weldingtool/empty
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -165,6 +177,19 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
 
+/datum/design/industrial_coil
+	name = "Industrial Cable Coil"
+	id = "industrial_coil"
+	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+	materials = list(/datum/material/iron = 30, /datum/material/glass = 5)
+	build_path = /obj/item/stack/cable_coil/industrial
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_TOOLS + RND_SUBCATEGORY_TOOLS_ENGINEERING,
+	)
+	maxstack = MAXCOIL
+	departmental_flags = DEPARTMENT_BITFLAG_ENGINEERING | DEPARTMENT_BITFLAG_SCIENCE
+
 /datum/design/toolbox
 	name = "Toolbox"
 	id = "tool_box"
@@ -226,7 +251,11 @@
 	name = "Boxcutter"
 	id = "boxcutter"
 	build_type = AUTOLATHE | PROTOLATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*2, /datum/material/plastic =SMALL_MATERIAL_AMOUNT*5)
+=======
+	materials = list(/datum/material/iron = 4000, /datum/material/plastic =SMALL_MATERIAL_AMOUNT*5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/boxcutter
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -285,7 +314,11 @@
 	name = "Condenser"
 	id = "condenser"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*2.5, /datum/material/glass=SMALL_MATERIAL_AMOUNT * 3)
+=======
+	materials = list(/datum/material/iron=250, /datum/material/glass=SMALL_MATERIAL_AMOUNT * 3)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/assembly/igniter/condenser
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -320,7 +353,11 @@
 	name = "Health Sensor"
 	id = "health_sensor"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*8, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2)
+=======
+	materials = list(/datum/material/iron = 800, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/assembly/health
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -380,7 +417,11 @@
 	name = "Proximity Sensor"
 	id = "prox_sensor"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*8, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2)
+=======
+	materials = list(/datum/material/iron = 800, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/assembly/prox_sensor
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -548,7 +589,11 @@
 	name = "Laptop Frame"
 	id = "laptop"
 	build_type = AUTOLATHE | PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 10000, /datum/material/glass =HALF_SHEET_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/modular_computer/laptop/buildable
 	category = list(
 		RND_CATEGORY_INITIAL,

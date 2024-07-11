@@ -144,6 +144,7 @@
 						user.Beam(src, icon_state = "rped_upgrade", time = 0.5 SECONDS)
 				return TRUE
 
+<<<<<<< HEAD
 			return FALSE
 
 /obj/structure/frame/computer/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
@@ -205,6 +206,12 @@
 /obj/structure/frame/computer/crowbar_act(mob/living/user, obj/item/tool)
 	if(user.combat_mode)
 		return NONE
+=======
+				qdel(src)
+				return
+	if((user.istate & ISTATE_HARM))
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	switch(state)
 		if(FRAME_COMPUTER_STATE_BOARD_INSTALLED)

@@ -33,7 +33,11 @@
 
 	faction = list(FACTION_RUSSIAN)
 
+<<<<<<< HEAD
 	habitable_atmos = null
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = TCMB
 	maximum_survivable_temperature = T0C + 1500
 	ai_controller = /datum/ai_controller/basic_controller/bear
@@ -62,12 +66,16 @@
 		add_overlay("armor_bear")
 
 /mob/living/basic/bear/proc/extract_combs(obj/structure/beebox/hive)
+<<<<<<< HEAD
 	if(!length(hive.honeycombs))
 		return
 	var/obj/item/food/honeycomb/honey_food = pick_n_take(hive.honeycombs)
 	if(isnull(honey_food))
 		return
 	honey_food.forceMove(get_turf(src))
+=======
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //SPACE BEARS! SQUEEEEEEEE~     OW! FUCK! IT BIT MY HAND OFF!!
 /mob/living/basic/bear/hudson
@@ -82,6 +90,7 @@
 	icon_dead = "snowbear_dead"
 	desc = "It's a polar bear, in space, but not actually in space."
 
+<<<<<<< HEAD
 /mob/living/basic/bear/snow/misha
 	name = "Misha"
 	real_name = "Misha"
@@ -97,6 +106,8 @@
 	status_flags = CANPUSH | GODMODE
 	gold_core_spawnable = NO_SPAWN
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/bear/snow/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_SNOWSTORM_IMMUNE, INNATE_TRAIT)
@@ -145,6 +156,7 @@
 
 	AddComponent(/datum/component/regenerator,\
 		regeneration_delay = 1 SECONDS,\
+<<<<<<< HEAD
 		brute_per_second = 5,\
 		outline_colour = COLOR_YELLOW,\
 	)
@@ -157,6 +169,15 @@
 /mob/living/basic/bear/butter/attack_hand(mob/living/user, list/modifiers) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
 	. = ..()
 	if(user.combat_mode && user.reagents && !stat)
+=======
+		health_per_second = 5,\
+		outline_colour = COLOR_YELLOW,\
+	)
+
+/mob/living/basic/bear/butter/attack_hand(mob/living/user, list/modifiers) //Borrowed code from Cak, feeds people if they hit you. More nutriment but less vitamin to represent BUTTER.
+	. = ..()
+	if((user.istate & ISTATE_HARM) && user.reagents && !stat)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.reagents.add_reagent(/datum/reagent/consumable/nutriment, 1)
 		user.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.1)
 
@@ -187,3 +208,7 @@
 	victim.Knockdown(20)
 	playsound(loc, 'sound/misc/slip.ogg', 15)
 	victim.visible_message(span_danger("[victim] slips on [src]'s butter!"))
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

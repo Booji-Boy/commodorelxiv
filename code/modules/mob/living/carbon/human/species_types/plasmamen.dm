@@ -13,7 +13,12 @@
 		TRAIT_NO_PLASMA_TRANSFORM,
 		TRAIT_RADIMMUNE,
 		TRAIT_RESISTCOLD,
+<<<<<<< HEAD
 		TRAIT_UNHUSKABLE,
+=======
+		TRAIT_NOBLOOD,
+		TRAIT_NO_DNA_COPY,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 	inherent_biotypes = MOB_HUMANOID|MOB_MINERAL
@@ -62,6 +67,13 @@
 		/datum/outfit/syndicate/reinforcement/mi13 = /datum/outfit/syndicate/reinforcement/plasmaman,
 		/datum/outfit/syndicate/reinforcement/waffle = /datum/outfit/syndicate/reinforcement/plasmaman,
 		/datum/outfit/syndicate/support = /datum/outfit/syndicate/support/plasmaman,
+	)
+
+	outfit_override_registry = list(
+		/datum/outfit/syndicate = /datum/outfit/syndicate/plasmaman,
+		/datum/outfit/syndicate/full = /datum/outfit/syndicate/full/plasmaman,
+		/datum/outfit/syndicate/leader = /datum/outfit/syndicate/leader/plasmaman,
+		/datum/outfit/syndicate/reinforcement = /datum/outfit/syndicate/reinforcement/plasmaman,
 	)
 
 	/// If the bones themselves are burning clothes won't help you much
@@ -129,6 +141,61 @@
 	else
 		give_important_for_life(equipping)
 
+<<<<<<< HEAD
+=======
+/datum/species/plasmaman/random_name(gender,unique,lastname)
+	if(unique)
+		return random_unique_plasmaman_name()
+
+	var/randname = plasmaman_name()
+
+	if(lastname)
+		randname += " [lastname]"
+
+	return randname
+
+/datum/species/plasmaman/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H, seconds_per_tick, times_fired)
+	. = ..()
+	if(istype(chem, /datum/reagent/toxin/plasma) || istype(chem, /datum/reagent/toxin/hot_ice))
+		for(var/i in H.all_wounds)
+			var/datum/wound/iter_wound = i
+			iter_wound.on_xadone(4 * REM * seconds_per_tick) // plasmamen use plasma to reform their bones or whatever
+		return FALSE // do normal metabolism
+
+	if(istype(chem, /datum/reagent/toxin/bonehurtingjuice))
+		H.stamina.adjust(-7.5 * REM * seconds_per_tick, 0)
+		H.adjustBruteLoss(0.5 * REM * seconds_per_tick, 0)
+		if(SPT_PROB(10, seconds_per_tick))
+			switch(rand(1, 3))
+				if(1)
+					H.say(pick("oof.", "ouch.", "my bones.", "oof ouch.", "oof ouch my bones."), forced = /datum/reagent/toxin/bonehurtingjuice)
+				if(2)
+					H.manual_emote(pick("oofs silently.", "looks like [H.p_their()] bones hurt.", "grimaces, as though [H.p_their()] bones hurt."))
+				if(3)
+					to_chat(H, span_warning("Your bones hurt!"))
+		if(chem.overdosed)
+			if(SPT_PROB(2, seconds_per_tick) && iscarbon(H)) //big oof
+				var/selected_part = pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG) //God help you if the same limb gets picked twice quickly.
+				var/obj/item/bodypart/bp = H.get_bodypart(selected_part) //We're so sorry skeletons, you're so misunderstood
+				if(bp)
+					playsound(H, get_sfx(SFX_DESECRATION), 50, TRUE, -1) //You just want to socialize
+					H.visible_message(span_warning("[H] rattles loudly and flails around!!"), span_danger("Your bones hurt so much that your missing muscles spasm!!"))
+					H.say("OOF!!", forced=/datum/reagent/toxin/bonehurtingjuice)
+					bp.receive_damage(200, 0, 0) //But I don't think we should
+				else
+					to_chat(H, span_warning("Your missing arm aches from wherever you left it."))
+					H.emote("sigh")
+		H.reagents.remove_reagent(chem.type, chem.metabolization_rate * seconds_per_tick)
+		return TRUE
+
+	if(istype(chem, /datum/reagent/gunpowder))
+		H.set_timed_status_effect(15 SECONDS * seconds_per_tick, /datum/status_effect/drugginess)
+		if(H.get_timed_status_effect_duration(/datum/status_effect/hallucination) / 10 < chem.volume)
+			H.adjust_hallucinations(2.5 SECONDS * seconds_per_tick)
+		// Do normal metabolism
+		return FALSE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/species/plasmaman/get_scream_sound(mob/living/carbon/human)
 	return pick(
 		'sound/voice/plasmaman/plasmeme_scream_1.ogg',
@@ -145,24 +212,6 @@
 		fungal organisms which together form a sentient being. In human space, \
 		they're usually attached to skeletons to afford a human touch."
 
-/datum/species/plasmaman/get_species_lore()
-	return list(
-		"A confusing species, plasmamen are truly \"a fungus among us\". \
-		What appears to be a singular being is actually a colony of millions of organisms \
-		surrounding a found (or provided) skeletal structure.",
-
-		"Originally discovered by NT when a researcher \
-		fell into an open tank of liquid plasma, the previously unnoticed fungal colony overtook the body creating \
-		the first \"true\" plasmaman. The process has since been streamlined via generous donations of convict corpses and plasmamen \
-		have been deployed en masse throughout NT to bolster the workforce.",
-
-		"New to the galactic stage, plasmamen are a blank slate. \
-		Their appearance, generally regarded as \"ghoulish\", inspires a lot of apprehension in their crewmates. \
-		It might be the whole \"flammable purple skeleton\" thing.",
-
-		"The colonids that make up plasmamen require the plasma-rich atmosphere they evolved in. \
-		Their psuedo-nervous system runs with externalized electrical impulses that immediately ignite their plasma-based bodies when oxygen is present.",
-	)
 
 /datum/species/plasmaman/create_pref_unique_perks()
 	var/list/to_add = list()

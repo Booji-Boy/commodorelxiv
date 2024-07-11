@@ -49,13 +49,17 @@
 
 /// Trim for Bounty Hunters NOT hired by centcom. (?)
 /datum/id_trim/bounty_hunter
+	access = list(ACCESS_BOUNTY_HUNTER)
 	assignment = "Bounty Hunter"
 	trim_state = "trim_deathcommando"
 	department_color = COLOR_PRISONER_ORANGE
 	subdepartment_color = COLOR_PRISONER_BLACK
 
+<<<<<<< HEAD
 	access = list(ACCESS_HUNTER)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Trim for player controlled avatars in the Virtual Domain.
 /datum/id_trim/bit_avatar
 	assignment = "Bit Avatar"
@@ -65,11 +69,18 @@
 
 /// Trim for cyber police in the Virtual Domain.
 /datum/id_trim/cyber_police
+<<<<<<< HEAD
 	assignment = ROLE_CYBER_POLICE
 	trim_state = "trim_deathcommando"
 	department_color = COLOR_BLACK
 	subdepartment_color = COLOR_GREEN
 	threat_modifier = -1 // Cops recognise cops
+=======
+	assignment = "Cyber Police"
+	trim_state = "trim_deathcommando"
+	department_color = COLOR_BLACK
+	subdepartment_color = COLOR_GREEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/id_trim/cyber_police/New()
 	. = ..()

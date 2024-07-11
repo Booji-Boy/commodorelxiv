@@ -215,8 +215,11 @@
  * * affected_turf - Turf to transform.
  */
 /datum/dimension_theme/proc/apply_materials(turf/affected_turf)
+<<<<<<< HEAD
 	PROTECTED_PROC(TRUE)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/custom_materials = list(GET_MATERIAL_REF(material) = SHEET_MATERIAL_AMOUNT)
 
 	if (istype(affected_turf, /turf/open/floor/material) || istype(affected_turf, /turf/closed/wall/material))

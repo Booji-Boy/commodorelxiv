@@ -136,6 +136,10 @@
 /obj/effect/dummy/chameleon/attack_animal(mob/user, list/modifiers)
 	master.disrupt()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/dummy/chameleon/attack_alien(mob/user, list/modifiers)
 	master.disrupt()
 

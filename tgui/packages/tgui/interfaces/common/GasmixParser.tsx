@@ -117,16 +117,26 @@ export const GasmixParser = (props: GasmixParserProps) => {
       ) : (
         <LabeledList.Item label="Gas Reactions">
           {reactions.length
+<<<<<<< HEAD
             ? reactions.map((reaction, index) =>
                 reactionOnClick ? (
                   <Box key={reaction[1]} mb="0.5em">
+=======
+            ? reactions.map((reaction) =>
+                reactionOnClick ? (
+                  <Box mb="0.5em">
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     <Button
                       content={reaction[1]}
                       onClick={() => reactionOnClick(reaction[0])}
                     />
                   </Box>
                 ) : (
+<<<<<<< HEAD
                   <div key={reaction[1]}>{reaction[1]}</div>
+=======
+                  <div>{reaction[1]}</div>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 ),
               )
             : 'No reactions detected'}

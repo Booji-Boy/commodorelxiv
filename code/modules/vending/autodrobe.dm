@@ -14,6 +14,8 @@
 			"products" = list(
 				/obj/item/clothing/under/costume/gladiator = 1,
 				/obj/item/clothing/head/helmet/gladiator = 1,
+				/obj/item/clothing/head/viking/fake_helmet = 1, //monkestation edit
+				/obj/item/clothing/under/viking/fake_tunic = 1, //monkestation edit
 				/obj/item/clothing/suit/toggle/labcoat/mad = 1,
 				/obj/item/clothing/suit/bio_suit/plaguedoctorsuit = 1,
 				/obj/item/clothing/head/bio_hood/plague = 1,
@@ -57,9 +59,21 @@
 				/obj/item/clothing/suit/costume/gothcoat = 1,
 				/obj/item/clothing/glasses/eyepatch = 1,
 				/obj/item/clothing/glasses/eyepatch/medical = 1,
+<<<<<<< HEAD
 				/obj/item/clothing/under/costume/gi = 4,
 				/obj/item/clothing/head/soft/propeller_hat = 1,
 				/obj/item/clothing/neck/bowtie/rainbow = 1,
+=======
+				/obj/item/clothing/under/costume/gi = 1,
+				/obj/item/clothing/head/soft/propeller_hat = 1,
+				/obj/item/clothing/neck/bowtie/rainbow = 1,
+				//Monkestation Addition start
+				/obj/item/clothing/neck/worldchampioncape = 1,
+				/obj/item/clothing/under/costume/worldchampiongi = 1,
+				/obj/item/clothing/head/milkmanhat = 2,
+				/obj/item/clothing/under/costume/milkman = 2,
+				//Monkestation Addition end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			),
 		),
 		list(
@@ -81,6 +95,7 @@
 				/obj/item/clothing/head/costume/shrine_wig = 1,
 				/obj/item/clothing/suit/costume/shrine_maiden = 1,
 				/obj/item/gohei = 1,
+				/obj/item/clothing/under/costume/skeleton = 1,
 			),
 		),
 		list(
@@ -98,9 +113,15 @@
 				/obj/item/clothing/mask/gas/sexymime = 1,
 				/obj/item/clothing/under/rank/civilian/mime/sexy = 1,
 				/obj/item/clothing/under/rank/civilian/mime/skirt = 1,
-				/obj/item/clothing/under/rank/civilian/clown/jester = 1,
 				/obj/item/clothing/head/costume/jester = 1,
+<<<<<<< HEAD
 				/obj/item/clothing/shoes/jester_shoes = 1,
+=======
+				/obj/item/clothing/under/rank/civilian/clown/jester = 1, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/shoes/clown_shoes/green_jester_shoes =1, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/head/costume/jester/alt =1, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/under/rank/civilian/clown/jester/alt =1, // MONKESTATION EDIT ADDITION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				/obj/item/clothing/under/costume/villain = 1,
 				/obj/item/clothing/suit/costume/joker = 1,
 				/obj/item/clothing/under/costume/joker = 1,
@@ -109,6 +130,20 @@
 				/obj/item/clothing/shoes/singerb = 1,
 				/obj/item/clothing/under/costume/singer/blue = 1,
 				/obj/item/clothing/head/costume/cueball = 1,
+<<<<<<< HEAD
+=======
+				/obj/item/clothing/under/suit/white_on_white = 1,
+				/obj/item/clothing/head/tragic = 2,
+				/obj/item/clothing/head/harlequinhat =2,//MONKESTATION EDIT ADDITION
+				/obj/item/clothing/under/costume/harlequin =2,//MONKESTATION EDIT ADDITION
+				/obj/item/clothing/shoes/clown_shoes/harlequin_boots =2,//MONKESTATION EDIT ADDITION
+				/obj/item/clothing/under/costume/tragic = 2,
+				/obj/item/clothing/under/costume/streetmime = 1,
+				/obj/item/clothing/mask/gas/clown_hat/yellow = 1,
+				/obj/item/clothing/shoes/clown_shoes/yellow = 1,
+				/obj/item/clothing/head/knowingclown = 2,
+				/obj/item/clothing/under/knowingclown = 2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			),
 		),
 		list(
@@ -124,6 +159,7 @@
 				/obj/item/clothing/under/dress/skirt = 1,
 				/obj/item/clothing/neck/tie = 3,
 				/obj/item/clothing/head/hats/tophat = 1,
+				/obj/item/clothing/head/wonka = 1,
 				/obj/item/clothing/under/costume/kilt = 1,
 				/obj/item/clothing/glasses/monocle =1,
 				/obj/item/clothing/head/hats/bowler = 1,
@@ -134,6 +170,8 @@
 				/obj/item/clothing/suit/costume/changshan_blue = 1,
 				/obj/item/clothing/suit/costume/cheongsam_red = 1,
 				/obj/item/clothing/suit/costume/cheongsam_blue = 1,
+				/obj/item/clothing/under/wonka = 1,
+				/obj/item/clothing/shoes/heels = 4, // MONKESTATION EDIT ADDITION
 			),
 		),
 		list(
@@ -147,6 +185,7 @@
 				/obj/item/clothing/suit/hooded/carp_costume = 1,
 				/obj/item/clothing/suit/hooded/ian_costume = 1,
 				/obj/item/clothing/suit/hooded/bee_costume = 1,
+				/obj/item/clothing/suit/hooded/dinojammies = 1,
 				/obj/item/clothing/mask/animal/small/bat = 1,
 				/obj/item/clothing/mask/animal/small/bee = 1,
 				/obj/item/clothing/mask/animal/small/bear = 1,
@@ -158,6 +197,7 @@
 				/obj/item/clothing/mask/animal/pig = 1,
 				/obj/item/clothing/mask/animal/cowmask = 1,
 				/obj/item/clothing/mask/animal/horsehead = 1,
+				/obj/item/clothing/head/lizard = 1,
 			),
 		),
 		list(
@@ -177,6 +217,10 @@
 				/obj/item/clothing/neck/maid = 1,
 				/obj/item/clothing/under/rank/civilian/janitor/maid = 1,
 				/obj/item/clothing/accessory/maidapron = 1,
+				/obj/item/clothing/under/costume/playbunny = 2, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/neck/tie/bunnytie = 2, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/head/playbunnyears = 2, // MONKESTATION EDIT ADDITION
+				/obj/item/clothing/suit/jacket/tailcoat = 2, // MONKESTATION EDIT ADDITION
 			),
 		),
 		list(
@@ -195,6 +239,10 @@
 				/obj/item/clothing/mask/gas/prop = 4,
 				/obj/item/clothing/mask/gas/atmosprop = 3,
 				/obj/item/clothing/mask/animal/small/tribal = 1,
+				/obj/item/clothing/head/shipwreckedhelmet = 2,
+				/obj/item/clothing/suit/shipwreckedsuit = 2,
+				/obj/item/clothing/head/kingofbugshelmet = 2,
+				/obj/item/clothing/suit/kingofbugssuit = 2,
 			),
 		),
 	)

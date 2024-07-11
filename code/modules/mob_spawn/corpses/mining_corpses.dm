@@ -27,7 +27,11 @@
 /obj/effect/mob_spawn/corpse/human/legioninfested/special(mob/living/carbon/human/spawned_human)
 	. = ..()
 	var/obj/item/organ/internal/legion_tumour/cancer = new()
+<<<<<<< HEAD
 	cancer.Insert(spawned_human, special = TRUE, movement_flags = DELETE_IF_REPLACED)
+=======
+	cancer.Insert(spawned_human, special = TRUE, drop_if_replaced = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns the outfit worn by our corpse
 /obj/effect/mob_spawn/corpse/human/legioninfested/proc/select_outfit()
@@ -377,7 +381,10 @@
 
 /datum/outfit/consumed_heremoth
 	name = "Legion-Consumed Tribal Mothman"
+<<<<<<< HEAD
 	uniform = /obj/item/clothing/under/costume/loincloth
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	suit = /obj/item/clothing/suit/hooded/cultrobes/eldritch
 	head = /obj/item/clothing/head/hooded/cult_hoodie/eldritch
 
@@ -397,3 +404,34 @@
 		))
 		backpack_contents += backpack_loot
 
+<<<<<<< HEAD
+=======
+/datum/outfit/consumed_ice_settler
+	name = "Legion-Consumed Settler"
+	suit = /obj/item/clothing/suit/hooded/wintercoat
+	shoes = /obj/item/clothing/shoes/winterboots
+	mask = /obj/item/clothing/mask/breath
+
+/datum/outfit/consumed_ice_settler/pre_equip(mob/living/carbon/human/ice_settler, visualsOnly = FALSE)
+	if(prob(40))
+		r_pocket = pick_weight(list(
+			/obj/item/coin/silver = 5,
+			/obj/item/fishing_hook = 2,
+			/obj/item/coin/gold = 2,
+			/obj/item/fishing_hook/shiny = 1,
+		))
+	if(prob(30))
+		back = pick_weight(list(
+			/obj/item/pickaxe = 4,
+			/obj/item/tank/internals/oxygen = 6,
+		))
+	else
+		back = /obj/item/storage/backpack/satchel/explorer
+		backpack_contents = list()
+		var/backpack_loot = pick(list(
+			/obj/item/food/fishmeat = 89,
+			/obj/item/food/fishmeat/carp = 10,
+			/obj/item/skeleton_key = 1,
+		))
+		backpack_contents += backpack_loot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -17,6 +17,10 @@
 		var/delay = rand(20 SECONDS, 1 MINUTES)
 
 		log_dynamic_and_announce("An unfavorable situation was requested, but no heavy rulesets could be drafted. Spawning [initial(round_event_control_type.name)] in [DisplayTimeText(delay)] instead.")
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic_unfavorable_situation.dm
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic_unfavorable_situation.dm
 		force_event_after(round_event_control_type, "an unfavorable situation", delay)
 	else
 		var/datum/dynamic_ruleset/midround/heavy_ruleset = pick_weight(possible_heavies)

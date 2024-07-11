@@ -157,7 +157,7 @@
 	if(target == user)
 		to_chat(user, span_notice("Target another toy mech if you want to start a battle with yourself."))
 		return
-	else if(!user.combat_mode)
+	else if(!(user.istate & ISTATE_HARM))
 		if(wants_to_battle) //prevent spamming someone with offers
 			to_chat(user, span_notice("You already are offering battle to someone!"))
 			return
@@ -226,14 +226,14 @@
 				SpinAnimation(5, 0)
 				playsound(src, 'sound/mecha/mechstep.ogg', 30, TRUE)
 				user.adjustBruteLoss(25)
-				user.adjustStaminaLoss(50)
+				user.stamina.adjust(-50)
 			if(2)
 				user.SpinAnimation(5, 0)
 				playsound(user, 'sound/weapons/smash.ogg', 20, TRUE)
 				combat_health-- //we scratched it!
 			if(4)
 				say(special_attack_cry + "!!")
-				user.adjustStaminaLoss(25)
+				user.stamina.adjust(-25)
 
 		if(!combat_sleep(1 SECONDS, null, user))
 			say("PATHETIC.")

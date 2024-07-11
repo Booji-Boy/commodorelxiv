@@ -14,8 +14,12 @@
 /// Replaces a single limb and deletes the old one if there was one
 /mob/living/carbon/proc/del_and_replace_bodypart(obj/item/bodypart/new_limb, special)
 	var/obj/item/bodypart/old_limb = get_bodypart(new_limb.body_zone)
+<<<<<<< HEAD
 	if(old_limb)
 		old_limb.drop_limb(special = TRUE)
+=======
+	if(!QDELETED(old_limb))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		qdel(old_limb)
 	new_limb.try_attach_limb(src, special = special)
 
@@ -30,7 +34,7 @@
 	return old_limb // can be null
 
 /mob/living/carbon/has_hand_for_held_index(i)
-	if(!i)
+	if(!i || length(hand_bodyparts) < i)
 		return FALSE
 	var/obj/item/bodypart/hand_instance = hand_bodyparts[i]
 	if(hand_instance && !hand_instance.bodypart_disabled)
@@ -226,5 +230,24 @@
 			. = "#fff4e6"
 		if("orange")
 			. = "#ffc905"
+<<<<<<< HEAD
 		if("green")
 			. = "#a8e61d"
+=======
+
+		///simian tones
+		if("ffffff")
+			. = "#ffffff"
+		if("ffb089")
+			. = "#ffb089"
+		if("aeafb3")
+			. = "#aeafb3"
+		if("bfd0ca")
+			. = "#bfd0ca"
+		if("ce7d54")
+			. = "#ce7d54"
+		if("c47373")
+			. = "#c47373"
+		if("f4e2d5")
+			. = "#f4e2d5"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -66,6 +66,16 @@
 			GLOB.news_network.submit_article(text, "Captain's Announcement", "Station Announcements", null)
 		if(ANNOUNCEMENT_TYPE_SYNDICATE)
 			header = MAJOR_ANNOUNCEMENT_TITLE("Syndicate Captain's Announcement")
+<<<<<<< HEAD
+=======
+		// MONKESTATION ADDITION START
+		if(ANNOUNCEMENT_TYPE_AI)
+			var/mob/living/silicon/ai/sender = usr
+			if(!istype(sender))
+				CRASH("Non-AI tried to send an AI station announcement")
+			header = MAJOR_ANNOUNCEMENT_TITLE("Station Announcement by [sender.name] (AI)")
+		// MONKESTATION ADDITION END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			header += generate_unique_announcement_header(title, sender_override)
 
@@ -107,7 +117,11 @@
 	message.title = title
 	message.content = text
 
+<<<<<<< HEAD
 	GLOB.communications_controller.send_message(message)
+=======
+	SScommunications.send_message(message)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Sends a minor annoucement to players.
@@ -197,7 +211,12 @@
 			continue
 
 		if(target.client?.prefs.read_preference(/datum/preference/toggle/sound_announcements))
+<<<<<<< HEAD
 			SEND_SOUND(target, sound(sound_to_play))
+=======
+//			SEND_SOUND(target, sound(sound_to_play)) MONKESTATION EDIT CHANGE OLD -- Volume mixer PR#7
+			SEND_SOUND(target, sound(sound_to_play, volume = target.client.prefs.channel_volume["[CHANNEL_VOX]"])) // MONKESTATION EDIT CHANGE NEW
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #undef MAJOR_ANNOUNCEMENT_TITLE
 #undef MAJOR_ANNOUNCEMENT_TEXT

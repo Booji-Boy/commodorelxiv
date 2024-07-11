@@ -2,15 +2,24 @@
  * Surgery Trays
  * A storage object that displays tools in its contents based on tier, better tools are more visible.
  * Can be folded up and carried. Click it to draw a random tool.
+<<<<<<< HEAD
+=======
+ *
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
  */
 /obj/item/surgery_tray
 	name = "surgery tray"
 	desc = "A Deforest brand medical cart. It is a folding model, meaning the wheels on the bottom can be retracted and the body used as a tray."
+<<<<<<< HEAD
 	icon = 'icons/obj/medical/medicart.dmi'
+=======
+	icon = 'icons/obj/medicart.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "tray"
 	w_class = WEIGHT_CLASS_BULKY
 	slowdown = 1
 	item_flags = SLOWS_WHILE_IN_HAND
+<<<<<<< HEAD
 	pass_flags = NONE
 
 	/// If true we're currently portable
@@ -19,6 +28,30 @@
 /// Fills the tray with items it should contain on creation
 /obj/item/surgery_tray/proc/populate_contents()
 	return
+=======
+
+	/// If true we're currently portable
+	var/is_portable = TRUE
+	/// List of things that we spawn containing
+	var/list/initial_contents = list(
+		/obj/item/blood_filter,
+		/obj/item/bonesetter,
+		/obj/item/cautery,
+		/obj/item/circular_saw,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/hemostat,
+		/obj/item/razor,
+		/obj/item/retractor,
+		/obj/item/scalpel,
+		/obj/item/stack/medical/bone_gel,
+		/obj/item/stack/sticky_tape/surgical,
+		/obj/item/surgical_drapes,
+		/obj/item/surgicaldrill,
+	)
+
+/obj/item/surgery_tray/deployed
+	is_portable = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/surgery_tray/Initialize(mapload)
 	. = ..()
@@ -51,7 +84,10 @@
 	. += is_portable \
 		? span_notice("You can click and drag it to yourself to pick it up, then use it in your hand to make it a cart!") \
 		: span_notice("You can click and drag it to yourself to turn it into a tray!")
+<<<<<<< HEAD
 	. += span_notice("The top is <b>screwed</b> on.")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/surgery_tray/update_overlays()
 	. = ..()
@@ -88,6 +124,15 @@
 	for(var/surgery_tool in surgery_overlays)
 		. |= surgery_overlays[surgery_tool]
 
+<<<<<<< HEAD
+=======
+///Spawn the things we contain on initialisation
+/obj/item/surgery_tray/proc/populate_contents()
+	for (var/thing_path in initial_contents)
+		new thing_path(src)
+	update_appearance(UPDATE_OVERLAYS)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Sets the surgery tray's deployment state. Silent if user is null.
 /obj/item/surgery_tray/proc/set_tray_mode(new_mode, mob/user)
 	is_portable = new_mode
@@ -97,11 +142,19 @@
 
 	if(is_portable)
 		interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
+<<<<<<< HEAD
 		passtable_on(src, type)
 		RemoveElement(/datum/element/noisy_movement)
 	else
 		interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
 		passtable_off(src, type)
+=======
+		pass_flags |= PASSTABLE
+		RemoveElement(/datum/element/noisy_movement)
+	else
+		interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
+		pass_flags &= ~PASSTABLE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		AddElement(/datum/element/noisy_movement)
 
 	update_appearance()
@@ -128,14 +181,20 @@
 /obj/item/surgery_tray/attack_hand(mob/living/user)
 	if(!user.can_perform_action(src, NEED_HANDS))
 		return ..()
+<<<<<<< HEAD
 	if(!length(contents))
 		balloon_alert(user, "empty!")
 	else
 		var/obj/item/grabbies = pick(contents)
+=======
+	var/obj/item/grabbies = pick(contents)
+	if(grabbies)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		atom_storage.remove_single(user, grabbies, drop_location())
 		user.put_in_hands(grabbies)
 	return TRUE
 
+<<<<<<< HEAD
 /obj/item/surgery_tray/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	. = ..()
 	tool.play_tool_sound(src)
@@ -145,11 +204,14 @@
 	deconstruct(TRUE)
 	to_chat(user, span_notice("[src] has been taken apart."))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/surgery_tray/dump_contents()
 	var/atom/drop_point = drop_location()
 	for(var/atom/movable/tool as anything in contents)
 		tool.forceMove(drop_point)
 
+<<<<<<< HEAD
 /obj/item/surgery_tray/atom_deconstruct(disassembled = TRUE)
 	dump_contents()
 	new /obj/item/stack/rods(drop_location(), 2)
@@ -213,3 +275,51 @@
 	new /obj/item/stack/medical/bone_gel(src)
 	new /obj/item/stack/sticky_tape/surgical(src)
 	new /obj/item/clothing/mask/surgical(src)
+=======
+/obj/item/surgery_tray/deconstruct(disassembled = TRUE)
+	dump_contents()
+	return ..()
+
+/obj/item/surgery_tray/morgue
+	name = "autopsy tray"
+	desc = "A Deforest brand surgery tray, made for use in morgues. It is a folding model, \
+		meaning the wheels on the bottom can be extended outwards, making it a cart."
+	initial_contents = list(
+		/obj/item/blood_filter,
+		/obj/item/bonesetter,
+		/obj/item/cautery,
+		/obj/item/circular_saw,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/hemostat,
+		/obj/item/razor,
+		/obj/item/retractor,
+		/obj/item/scalpel,
+		/obj/item/stack/medical/bone_gel,
+		/obj/item/stack/sticky_tape/surgical,
+		/obj/item/surgical_drapes,
+		/obj/item/surgicaldrill,
+	)
+
+/datum/storage/surgery_tray
+	max_total_storage = 30
+	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_slots = 14
+
+/datum/storage/surgery_tray/New()
+	. = ..()
+	set_holdable(list(
+		/obj/item/blood_filter,
+		/obj/item/bonesetter,
+		/obj/item/cautery,
+		/obj/item/circular_saw,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/hemostat,
+		/obj/item/razor,
+		/obj/item/retractor,
+		/obj/item/scalpel,
+		/obj/item/stack/medical/bone_gel,
+		/obj/item/stack/sticky_tape/surgical,
+		/obj/item/surgical_drapes,
+		/obj/item/surgicaldrill,
+	))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

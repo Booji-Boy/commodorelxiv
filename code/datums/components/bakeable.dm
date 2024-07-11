@@ -47,7 +47,10 @@
 
 /datum/component/bakeable/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_ITEM_OVEN_PLACED_IN, COMSIG_ITEM_OVEN_PROCESS, COMSIG_ATOM_EXAMINE))
+<<<<<<< HEAD
 	REMOVE_TRAIT(parent, TRAIT_BAKEABLE, REF(src))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Signal proc for [COMSIG_ITEM_OVEN_PLACED_IN] when baking starts (parent enters an oven)
 /datum/component/bakeable/proc/on_baking_start(datum/source, atom/used_oven, mob/baker)
@@ -96,12 +99,17 @@
 			asomnia_hadders += smeller 
 
 	if(positive_result)
+<<<<<<< HEAD
 		used_oven.visible_message(
 			span_notice("You smell something great coming from [used_oven]."), 
 			blind_message = span_notice("You smell something great..."),
 			ignored_mobs = asomnia_hadders,
 		)
 		BLACKBOX_LOG_FOOD_MADE(baked_result.type)
+=======
+		used_oven.visible_message(span_notice("You smell something great coming from [used_oven]."), blind_message = span_notice("You smell something great..."))
+		BLACKBOX_LOG_FOOD_MADE(baked_result)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		used_oven.visible_message(
 			span_warning("You smell a burnt smell coming from [used_oven]."),

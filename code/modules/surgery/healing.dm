@@ -2,7 +2,11 @@
 	target_mobtypes = list(/mob/living)
 	requires_bodypart_type = NONE
 	replaced_by = /datum/surgery
+<<<<<<< HEAD
 	surgery_flags = SURGERY_IGNORE_CLOTHES | SURGERY_REQUIRE_RESTING
+=======
+	surgery_flags = SURGERY_SELF_OPERABLE | SURGERY_IGNORE_CLOTHES | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possible_locs = list(BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,

@@ -97,10 +97,13 @@
 #define VV_HK_AUTO_RENAME "auto_rename"
 #define VV_HK_EDIT_FILTERS "edit_filters"
 #define VV_HK_EDIT_PARTICLES "edit_particles"
+#define VV_HK_EDIT_MOVABLE_PHYSICS "edit_movable_physics" //Monkestation EDIT PHYSICS
+#define VV_HK_EDIT_DISPLACEMENT_LARGE "edit_large_displacement"
 #define VV_HK_EDIT_COLOR_MATRIX "edit_color_matrix"
 #define VV_HK_TEST_MATRIXES "test_matrixes"
 #define VV_HK_ADD_AI "add_ai"
 #define VV_HK_ARMOR_MOD "mod_obj_armor"
+#define VV_HK_ADJUST_ANIMATIONS "adjust_animations" //Monkestation EDIT CYBERNETIC
 
 // /atom/movable
 #define VV_HK_OBSERVE_FOLLOW "observe_follow"
@@ -155,9 +158,12 @@
 #define VV_HK_MOD_MUTATIONS "quirkmut"
 #define VV_HK_MOD_QUIRKS "quirkmod"
 #define VV_HK_SET_SPECIES "setspecies"
+<<<<<<< HEAD
 #define VV_HK_PURRBATION "purrbation"
 #define VV_HK_APPLY_DNA_INFUSION "apply_dna_infusion"
 #define VV_HK_TURN_INTO_MMI "turn_into_mmi"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // misc
 #define VV_HK_SPACEVINE_PURGE "spacevine_purge"
@@ -170,7 +176,12 @@
 
 #define VV_HK_WEAKREF_RESOLVE "weakref_resolve"
 
+<<<<<<< HEAD
 // Flags for debug_variable() that do little things to what we end up rendering
 
 /// ALWAYS render a reduced list, useful for fuckoff big datums that need to be condensed for the sake of client load
 #define VV_ALWAYS_CONTRACT_LIST (1<<0)
+=======
+#define VV_HK_POSSESS_ITEM "possess_item"
+#define VV_HK_VIEW_DISEASE_DATA "disease_data"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

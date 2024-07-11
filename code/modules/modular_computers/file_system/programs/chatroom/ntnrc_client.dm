@@ -49,7 +49,10 @@
 	return new_converstaion
 
 /datum/computer_file/program/chatclient/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD:code/modules/modular_computers/file_system/programs/chatroom/ntnrc_client.dm
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/modular_computers/file_system/programs/ntnrc_client.dm
 	var/datum/ntnet_conversation/channel = SSmodular_computers.get_chat_channel_by_id(active_channel)
 	var/authed = FALSE
 	if(channel && ((channel.channel_operator == src) || netadmin_mode))

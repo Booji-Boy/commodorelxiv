@@ -80,6 +80,12 @@
 				affected_mob.revive(HEAL_ALL)
 				holder.del_reagent(type)
 				return
+<<<<<<< HEAD
+=======
+
+	..()
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/medicine/c2/helbital/overdose_process(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -133,13 +139,14 @@
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustBruteLoss(-3 * REM * normalise_creation_purity() * seconds_per_tick, updating_health = FALSE, required_bodytype = affected_bodytype)
 	var/ooo_youaregettingsleepy = 3.5
-	switch(round(affected_mob.getStaminaLoss()))
+	switch(round(affected_mob.stamina.loss))
 		if(10 to 40)
 			ooo_youaregettingsleepy = 3
 		if(41 to 60)
 			ooo_youaregettingsleepy = 2.5
 		if(61 to 200) //you really can only go to 120
 			ooo_youaregettingsleepy = 2
+<<<<<<< HEAD
 	need_mob_update += affected_mob.adjustStaminaLoss(ooo_youaregettingsleepy * REM * seconds_per_tick, updating_stamina = FALSE)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
@@ -149,10 +156,25 @@
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustStaminaLoss(3 * REM * seconds_per_tick, updating_stamina = FALSE)
 	if(affected_mob.getStaminaLoss() >= 80)
+=======
+	affected_mob.stamina.adjust(-ooo_youaregettingsleepy * REM * seconds_per_tick, FALSE)
+	..()
+	. = TRUE
+
+/datum/reagent/medicine/c2/probital/overdose_process(mob/living/affected_mob, seconds_per_tick, times_fired)
+	affected_mob.stamina.adjust(-3 * REM * seconds_per_tick, TRUE)
+	if(affected_mob.stamina.loss >= 80)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		affected_mob.adjust_drowsiness(2 SECONDS * REM * seconds_per_tick)
-	if(affected_mob.getStaminaLoss() >= 100)
+	if(affected_mob.stamina.loss >= 100)
 		to_chat(affected_mob,span_warning("You feel more tired than you usually do, perhaps if you rest your eyes for a bit..."))
+<<<<<<< HEAD
 		need_mob_update += affected_mob.adjustStaminaLoss(-100, updating_stamina = FALSE) // Don't add the biotype parameter here as it results in infinite sleep and chat spam.
+=======
+		affected_mob.stamina.adjust(100, TRUE)
+		if(HAS_TRAIT(affected_mob, TRAIT_INCAPACITATED))
+			affected_mob.exit_stamina_stun()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		affected_mob.Sleeping(10 SECONDS)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
@@ -303,10 +325,15 @@
 	COOLDOWN_DECLARE(drowsycd)
 
 /datum/reagent/medicine/c2/tirimol/on_mob_life(mob/living/carbon/human/affected_mob, seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	. = ..()
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustOxyLoss(-4.5 * REM * seconds_per_tick * normalise_creation_purity(), updating_health = FALSE, required_biotype = affected_biotype, required_respiration_type = affected_respiration_type)
 	need_mob_update += affected_mob.adjustStaminaLoss(2 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
+=======
+	affected_mob.adjustOxyLoss(-3 * REM * seconds_per_tick * normalise_creation_purity(), required_biotype = affected_biotype, required_respiration_type = affected_respiration_type)
+	affected_mob.stamina.adjust(-2 * REM * seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(drowsycd && COOLDOWN_FINISHED(src, drowsycd))
 		affected_mob.adjust_drowsiness(20 SECONDS)
 		COOLDOWN_START(src, drowsycd, 45 SECONDS)
@@ -385,9 +412,13 @@
 			medibonus += 1
 	if(creation_purity >= 1) //Perfectly pure multivers gives a bonus of 2!
 		medibonus += 1
+<<<<<<< HEAD
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustToxLoss(-0.5 * min(medibonus, 3 * normalise_creation_purity()) * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype) //not great at healing but if you have nothing else it will work
 	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_LUNGS, 0.5 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags) //kills at 40u
+=======
+	affected_mob.adjustToxLoss(-0.5 * min(medibonus, 3 * normalise_creation_purity()) * REM * seconds_per_tick, required_biotype = affected_biotype) //not great at healing but if you have nothing else it will work
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/r2 in affected_mob.reagents.reagent_list)
 		var/datum/reagent/the_reagent2 = r2
 		if(the_reagent2 == src)
@@ -401,10 +432,13 @@
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
 
+<<<<<<< HEAD
 // Antitoxin binds plants pretty well. So the tox goes significantly down
 /datum/reagent/medicine/c2/multiver/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_toxic(-(round(volume * 2)*normalise_creation_purity())) //0-2.66, 2 by default (0.75 purity).
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define issyrinormusc(A) (istype(A,/datum/reagent/medicine/c2/syriniver) || istype(A,/datum/reagent/medicine/c2/musiver)) //musc is metab of syrin so let's make sure we're not purging either
 
 /datum/reagent/medicine/c2/syriniver //Inject >> SYRINge
@@ -507,6 +541,10 @@
 	if(!iscarbon(exposed_mob))
 		return
 	var/mob/living/carbon/carbies = exposed_mob
+	if(ishuman(carbies))
+		var/mob/living/carbon/human/humans = carbies
+		if(istype(humans.dna.species, /datum/species/ipc))
+			return
 	if(carbies.stat == DEAD)
 		show_message = 0
 	if(!(methods & (PATCH|TOUCH|VAPOR)))
@@ -607,6 +645,7 @@
 	affected_mob.clear_alert("penthrite")
 	affected_mob.remove_traits(subject_traits, type)
 
+<<<<<<< HEAD
 /datum/reagent/medicine/c2/penthrite/overdose_process(mob/living/carbon/human/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	REMOVE_TRAIT(affected_mob, TRAIT_STABLEHEART, type)
@@ -616,6 +655,13 @@
 	need_mob_update += affected_mob.set_heartattack(TRUE)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+/datum/reagent/medicine/c2/penthrite/overdose_process(mob/living/carbon/human/H, seconds_per_tick, times_fired)
+	REMOVE_TRAIT(H, TRAIT_STABLEHEART, type)
+	H.stamina.adjust(-10 * REM * seconds_per_tick)
+	H.adjustOrganLoss(ORGAN_SLOT_HEART, 10 * REM * seconds_per_tick, required_organtype = affected_organtype)
+	H.set_heartattack(TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /******NICHE******/

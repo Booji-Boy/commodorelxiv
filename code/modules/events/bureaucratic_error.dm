@@ -20,8 +20,21 @@
 		overflow.total_positions = -1 // Ensures infinite slots as this role. Assistant will still be open for those that cant play it.
 		for(var/job in jobs)
 			var/datum/job/current = job
+<<<<<<< HEAD
 			current.total_positions = 0
 		return
 	// Adds/removes a random amount of job slots from all jobs.
 	for(var/datum/job/current as anything in jobs)
 		current.total_positions = max(current.total_positions + rand(-2,4), 0)
+=======
+			if(!current.allow_bureaucratic_error)
+				continue
+			var/ran = rand(-2,4) //MONKESTATION CHANGE: REMOVE(current.total_positions = 0) ADD: var/ran = rand(-2,4)
+			current.total_positions = max(current.total_positions + ran, 1) //MONKESTATION ADDITION
+	else // Adds/removes a random amount of job slots from all jobs.
+		for(var/datum/job/current as anything in jobs)
+			if(!current.allow_bureaucratic_error)
+				continue
+			var/ran = rand(-2,4)
+			current.total_positions = max(current.total_positions + ran, 1) //MONKESTATION CHANGE: ran, 0) ==> ran, 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

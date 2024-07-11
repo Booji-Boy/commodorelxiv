@@ -24,7 +24,11 @@ type Data = {
   message: string;
 };
 
+<<<<<<< HEAD
 export function CargoExpress(props) {
+=======
+export const CargoExpress = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { data } = useBackend<Data>();
   const { locked } = data;
 
@@ -38,7 +42,11 @@ export function CargoExpress(props) {
   );
 }
 
+<<<<<<< HEAD
 function CargoExpressContent(props) {
+=======
+const CargoExpressContent = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { act, data } = useBackend<Data>();
   const {
     hasBeacon,

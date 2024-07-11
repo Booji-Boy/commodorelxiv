@@ -18,9 +18,14 @@
 /datum/atom_hud/data
 
 /datum/atom_hud/data/human/medical
-	hud_icons = list(STATUS_HUD, HEALTH_HUD)
+	hud_icons = list(STATUS_HUD, HEALTH_HUD, NANITE_HUD)
 
-/datum/atom_hud/data/human/medical/basic
+/datum/atom_hud/data/human/medical/basic/add_atom_to_single_mob_hud(mob/M, mob/living/carbon/H)
+	if(check_sensors(H))
+		..()
+
+/datum/atom_hud/data/human/medical/basic/proc/update_suit_sensors(mob/living/carbon/H)
+	check_sensors(H) ? add_atom_to_hud(H) : remove_atom_from_hud(H)
 
 /datum/atom_hud/data/human/medical/basic/proc/check_sensors(mob/living/carbon/human/H)
 	if(!istype(H))
@@ -32,11 +37,12 @@
 		return FALSE
 	return TRUE
 
-/datum/atom_hud/data/human/medical/basic/add_atom_to_single_mob_hud(mob/M, mob/living/carbon/H)
-	if(check_sensors(H))
-		..()
+/datum/atom_hud/data/human/medical/advanced
 
-/datum/atom_hud/data/human/medical/basic/proc/update_suit_sensors(mob/living/carbon/H)
+/datum/atom_hud/data/human/medical/basic/sensors
+	hud_icons = list(SENSOR_HUD)
+
+/datum/atom_hud/data/human/medical/basic/sensors/update_suit_sensors(mob/living/carbon/H)
 	check_sensors(H) ? add_atom_to_hud(H) : remove_atom_from_hud(H)
 
 /datum/atom_hud/data/human/medical/advanced
@@ -47,7 +53,11 @@
 	hud_icons = list(ID_HUD)
 
 /datum/atom_hud/data/human/security/advanced
+<<<<<<< HEAD
 	hud_icons = list(ID_HUD, IMPSEC_FIRST_HUD, IMPLOYAL_HUD, IMPSEC_SECOND_HUD, WANTED_HUD)
+=======
+	hud_icons = list(ID_HUD, IMPTRACK_HUD, IMPLOYAL_HUD, IMPCHEM_HUD, WANTED_HUD, NANITE_HUD, PERMIT_HUD) //monkestation edit: adds NANITE_HUD and PERMIT_HUD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/atom_hud/data/human/fan_hud
 	hud_icons = list(FAN_HUD)
@@ -55,10 +65,10 @@
 /datum/atom_hud/data/diagnostic
 
 /datum/atom_hud/data/diagnostic/basic
-	hud_icons = list(DIAG_HUD, DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_BOT_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD, DIAG_AIRLOCK_HUD, DIAG_LAUNCHPAD_HUD)
+	hud_icons = list(DIAG_HUD, DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_BOT_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD, DIAG_AIRLOCK_HUD, DIAG_LAUNCHPAD_HUD, NANITE_HUD, DIAG_NANITE_FULL_HUD)
 
 /datum/atom_hud/data/diagnostic/advanced
-	hud_icons = list(DIAG_HUD, DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_BOT_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD, DIAG_AIRLOCK_HUD, DIAG_LAUNCHPAD_HUD, DIAG_PATH_HUD)
+	hud_icons = list(DIAG_HUD, DIAG_STAT_HUD, DIAG_BATT_HUD, DIAG_MECH_HUD, DIAG_BOT_HUD, DIAG_TRACK_HUD, DIAG_CAMERA_HUD, DIAG_AIRLOCK_HUD, DIAG_LAUNCHPAD_HUD, DIAG_PATH_HUD, NANITE_HUD, DIAG_NANITE_FULL_HUD)
 
 /datum/atom_hud/data/bot_path
 	// This hud exists so the bot can see itself, that's all
@@ -73,6 +83,9 @@
 
 /datum/atom_hud/ai_detector
 	hud_icons = list(AI_DETECT_HUD)
+
+/datum/atom_hud/data/human/permit
+	hud_icons = list(PERMIT_HUD)
 
 /datum/atom_hud/ai_detector/show_to(mob/new_viewer)
 	..()
@@ -167,7 +180,9 @@ Medical HUD! Basic mode needs suit sensors on.
 //called when a human changes suit sensors
 /mob/living/carbon/proc/update_suit_sensors()
 	var/datum/atom_hud/data/human/medical/basic/B = GLOB.huds[DATA_HUD_MEDICAL_BASIC]
+	var/datum/atom_hud/data/human/medical/basic/sensors/S = GLOB.huds[DATA_HUD_SENSORS]
 	B.update_suit_sensors(src)
+	S.update_suit_sensors(src)
 
 //called when a living mob changes health
 /mob/living/proc/med_hud_set_health()
@@ -186,14 +201,20 @@ Medical HUD! Basic mode needs suit sensors on.
 //called when a carbon changes stat, virus or XENO_HOST
 /mob/living/proc/med_hud_set_status()
 	var/image/holder = hud_list?[STATUS_HUD]
+	var/image/sensors = hud_list?[SENSOR_HUD]
 	if (isnull(holder))
 		return
 
 	var/icon/I = icon(icon, icon_state, dir)
 	holder.pixel_y = I.Height() - world.icon_size
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
+		if(sensors)
+			SET_PLANE_EXPLICIT(sensors, ABOVE_LIGHTING_PLANE, src)
+			sensors.icon_state = "sensors"
+
 		holder.icon_state = "huddead"
 	else
+		sensors?.icon_state = null
 		holder.icon_state = "hudhealthy"
 
 /mob/living/carbon/med_hud_set_status()
@@ -279,6 +300,14 @@ Security HUDs! Basic mode shows only the job.
 		sechud_icon_state = "hudno_id"
 	holder.icon_state = sechud_icon_state
 	sec_hud_set_security_status()
+//monkestation edit start
+	var/image/permit_holder = hud_list[PERMIT_HUD]
+	permit_holder.pixel_y = I.Height() - world.icon_size
+	var/permit_icon_state = wear_id?.get_gun_permit_iconstate()
+	if(!permit_icon_state)
+		permit_icon_state = "hudfan_no"
+	permit_holder.icon_state = permit_icon_state
+//monkestation edit end
 
 /mob/living/proc/sec_hud_set_implants()
 	var/image/holder
@@ -371,6 +400,14 @@ Security HUDs! Basic mode shows only the job.
 /***********************************************
 Diagnostic HUDs!
 ************************************************/
+
+/mob/living/proc/hud_set_nanite_indicator()
+	var/image/holder = hud_list[NANITE_HUD]
+	var/icon/I = icon(icon, icon_state, dir)
+	holder.pixel_y = I.Height() - world.icon_size
+	holder.icon_state = null
+	if(HAS_TRAIT(src, TRAIT_NANITE_MONITORING))
+		holder.icon_state = "nanite_ping"
 
 //For Diag health and cell bars!
 /proc/RoundDiagBar(value)

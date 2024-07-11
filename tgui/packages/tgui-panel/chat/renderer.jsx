@@ -9,7 +9,10 @@ import { classes } from 'common/react';
 import { createRoot } from 'react-dom/client';
 import { Tooltip } from 'tgui/components';
 import { createLogger } from 'tgui/logging';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   COMBINE_MAX_MESSAGES,
   COMBINE_MAX_TIME_WINDOW,
@@ -19,10 +22,18 @@ import {
   MAX_PERSISTED_MESSAGES,
   MAX_VISIBLE_MESSAGES,
   MESSAGE_PRUNE_INTERVAL,
+<<<<<<< HEAD
   MESSAGE_TYPE_INTERNAL,
   MESSAGE_TYPE_UNKNOWN,
   MESSAGE_TYPES,
 } from './constants';
+=======
+  MESSAGE_TYPES,
+  MESSAGE_TYPE_INTERNAL,
+  MESSAGE_TYPE_UNKNOWN,
+} from './constants';
+import { render } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { canPageAcceptType, createMessage, isSameMessage } from './model';
 import { highlightNode, linkifyNode } from './replaceInTextNode';
 
@@ -205,8 +216,13 @@ class ChatRenderer {
       const highlightWholeMessage = setting.highlightWholeMessage;
       const matchWord = setting.matchWord;
       const matchCase = setting.matchCase;
+<<<<<<< HEAD
       const allowedRegex = /^[a-zа-яё0-9_\-$/^[\s\]\\]+$/gi;
       const regexEscapeCharacters = /[!#$%^&*)(+=.<>{}[\]:;'"|~`_\-\\/]/g;
+=======
+      const enabled = setting.enabled;
+      const allowedRegex = /^[a-zа-яё0-9_\-$/^[\s\]\\]+$/gi;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       const lines = String(text)
         .split(',')
         .map((str) => str.trim())
@@ -271,6 +287,7 @@ class ChatRenderer {
         this.highlightParsers = [];
       }
       this.highlightParsers.push({
+        enabled,
         highlightWords,
         highlightRegex,
         highlightColor,
@@ -427,6 +444,7 @@ class ChatRenderer {
 
         // Highlight text
         if (!message.avoidHighlighting && this.highlightParsers) {
+<<<<<<< HEAD
           this.highlightParsers.map((parser) => {
             const highlighted = highlightNode(
               node,
@@ -438,6 +456,21 @@ class ChatRenderer {
               node.className += ' ChatMessage--highlighted';
             }
           });
+=======
+          this.highlightParsers
+            .filter((parser) => parser.enabled)
+            .map((parser) => {
+              const highlighted = highlightNode(
+                node,
+                parser.highlightRegex,
+                parser.highlightWords,
+                (text) => createHighlightNode(text, parser.highlightColor),
+              );
+              if (highlighted && parser.highlightWholeMessage) {
+                node.className += ' ChatMessage--highlighted';
+              }
+            });
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }
         // Linkify text
         const linkifyNodes = node.querySelectorAll('.linkify');
@@ -573,6 +606,21 @@ class ChatRenderer {
       this.rootNode.removeChild(message.node);
       // Mark this message as pruned
       message.node = 'pruned';
+<<<<<<< HEAD
+=======
+    }
+    // Remove pruned messages from the message array
+    this.messages = this.messages.filter(
+      (message) => message.node !== 'pruned',
+    );
+    logger.log(`Cleared chat`);
+  }
+
+  saveToDisk() {
+    // Allow only on IE11
+    if (Byond.IS_LTE_IE10) {
+      return;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     }
     // Remove pruned messages from the message array
     this.messages = this.messages.filter(

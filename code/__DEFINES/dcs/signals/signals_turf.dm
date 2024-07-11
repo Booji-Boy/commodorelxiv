@@ -26,6 +26,7 @@
 ///from /datum/element/decal/Detach(): (description, cleanable, directional, mutable_appearance/pic)
 #define COMSIG_TURF_DECAL_DETACHED "turf_decal_detached"
 
+<<<<<<< HEAD
 ///from /obj/item/pushbroom/sweep(): (broom, user, items_to_sweep)
 #define COMSIG_TURF_RECEIVE_SWEEPED_ITEMS "turf_receive_sweeped_items"
 
@@ -35,6 +36,25 @@
 	#define FOOTSTEP_OVERRIDEN (1<<0)
 ///from base of datum/thrownthing/finalize(): (turf/turf, atom/movable/thrownthing) when something is thrown and lands on us
 #define COMSIG_TURF_MOVABLE_THROW_LANDED "turf_movable_throw_landed"
+=======
+///called on liquid creation
+#define COMSIG_TURF_LIQUIDS_CREATION "turf_liquids_creation"
+	/// Blocks the liquid from being created.
+	#define BLOCK_LIQUID_CREATION (1 << 0)
+
+#define COMSIG_TURF_MOB_FALL "turf_mob_fall"
+
+///this is called whenever a turf is destroyed
+#define COMSIG_TURF_DESTROY "turf_destroy"
+///this is called whenever a turfs air is updated
+#define COMSIG_TURF_UPDATE_AIR "turf_air_change"
+///from /datum/element/footstep/prepare_step(): (list/steps)
+#define COMSIG_TURF_PREPARE_STEP_SOUND "turf_prepare_step_sound"
+///from base of datum/thrownthing/finalize(): (turf/turf, atom/movable/thrownthing) when something is thrown and lands on us
+#define COMSIG_TURF_MOVABLE_THROW_LANDED "turf_movable_throw_landed"
+///from /obj/item/pushbroom/sweep(): (broom, user, items_to_sweep)
+#define COMSIG_TURF_RECEIVE_SWEEPED_ITEMS "turf_receive_sweeped_items"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///From element/elevation/reset_elevation(): (list/values)
 #define COMSIG_TURF_RESET_ELEVATION "turf_reset_elevation"

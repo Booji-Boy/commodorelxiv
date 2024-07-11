@@ -41,8 +41,12 @@
 	radial_icon = 'icons/testing/turf_analysis.dmi'
 	radial_icon_state = "red_arrow"
 	speech_commands = list("heel", "follow")
+<<<<<<< HEAD
 	///the behavior we use to follow
 	var/follow_behavior = /datum/ai_behavior/pet_follow_friend
+=======
+	command_feedback = "follows"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/pet_command/follow/set_command_active(mob/living/parent, mob/living/commander)
 	. = ..()
@@ -247,8 +251,11 @@
 	set_command_target(parent, victim)
 
 /datum/pet_command/protect_owner/proc/set_attacking_target(atom/source, mob/living/attacker)
+<<<<<<< HEAD
 	SIGNAL_HANDLER
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/owner = weak_parent.resolve()
 	if(isnull(owner))
 		return

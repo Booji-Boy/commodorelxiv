@@ -37,13 +37,21 @@
 	if(active)
 		active = FALSE
 		REMOVE_TRAIT(user, TRAIT_XRAY_VISION, REF(src))
+<<<<<<< HEAD
 		ling_eyes.flash_protect = max(ling_eyes.flash_protect += 3, FLASH_PROTECTION_WELDER)
+=======
+		ling_eyes.flash_protect = FLASH_PROTECTION_WELDER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_changeling("We adjust our eyes to protect them from bright lights."))
 
 	else
 		active = TRUE
 		ADD_TRAIT(user, TRAIT_XRAY_VISION, REF(src))
+<<<<<<< HEAD
 		ling_eyes.flash_protect = max(ling_eyes.flash_protect += -3, FLASH_PROTECTION_HYPER_SENSITIVE)
+=======
+		ling_eyes.flash_protect = FLASH_PROTECTION_SENSITIVE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_changeling("We adjust our eyes to sense prey through walls."))
 
 	user.update_sight()
@@ -68,9 +76,15 @@
 	if(!istype(ling_eyes))
 		return
 	if(active)
+<<<<<<< HEAD
 		ling_eyes.flash_protect = max(ling_eyes.flash_protect += -3, FLASH_PROTECTION_HYPER_SENSITIVE)
 	else
 		ling_eyes.flash_protect = max(ling_eyes.flash_protect += 3, FLASH_PROTECTION_WELDER)
+=======
+		ling_eyes.flash_protect = FLASH_PROTECTION_SENSITIVE
+	else
+		ling_eyes.flash_protect = FLASH_PROTECTION_WELDER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Signal proc to remove flash sensitivity when the eyes are removed
 /datum/action/changeling/augmented_eyesight/proc/eye_removed(mob/living/source, obj/item/organ/removed, special)

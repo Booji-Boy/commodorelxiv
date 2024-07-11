@@ -22,7 +22,9 @@
 	if(!iscarbon(target))
 		return FALSE
 	var/mob/living/carbon/carbon_target = target
-	if(!carbon_target.get_bodypart(user.zone_selected)) //can only start if limb is missing
+	// you can only start the surgery if the limb is missing.
+	// for oozelings, this surgery is only available on the head.
+	if((!isoozeling(target) || user.zone_selected == BODY_ZONE_HEAD) && !carbon_target.get_bodypart(user.zone_selected))
 		return TRUE
 	return FALSE
 
@@ -126,6 +128,8 @@
 		display_pain(target, "You feel a strange sensation from your new [target.parse_zone_with_bodypart(target_zone)].", TRUE)
 		if(istype(tool, /obj/item/chainsaw))
 			qdel(tool)
+			bodypart_to_attach.bodytype |= BODYTYPE_ROBOTIC
+			bodypart_to_attach.bodytype &= ~BODYTYPE_ORGANIC
 			var/obj/item/chainsaw/mounted_chainsaw/new_arm = new(target)
 			target_zone == BODY_ZONE_R_ARM ? target.put_in_r_hand(new_arm) : target.put_in_l_hand(new_arm)
 			return

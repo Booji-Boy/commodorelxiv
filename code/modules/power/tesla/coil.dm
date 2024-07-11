@@ -33,6 +33,7 @@
 /obj/machinery/power/energy_accumulator/tesla_coil/Initialize(mapload)
 	. = ..()
 	set_wires(new /datum/wires/tesla_coil(src))
+<<<<<<< HEAD
 
 /obj/machinery/power/energy_accumulator/tesla_coil/cable_layer_act(mob/living/user, obj/item/tool)
 	if(panel_open)
@@ -41,6 +42,8 @@
 		balloon_alert(user, "unanchor first!")
 		return ITEM_INTERACT_BLOCKING
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/power/energy_accumulator/tesla_coil/RefreshParts()
 	. = ..()

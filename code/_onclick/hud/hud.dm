@@ -15,6 +15,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	"Glass" = 'icons/hud/screen_glass.dmi',
 	"Trasen-Knox" = 'icons/hud/screen_trasenknox.dmi',
 	"Detective" = 'icons/hud/screen_detective.dmi',
+	"GrimyPoop" = 'monkestation/icons/hud/screen_grimypoop.dmi'
 ))
 
 /proc/ui_style2icon(ui_style)
@@ -27,6 +28,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/hud_version = HUD_STYLE_STANDARD //Current displayed version of the HUD
 	var/inventory_shown = FALSE //Equipped item inventory
 	var/hotkey_ui_hidden = FALSE //This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
+	var/has_interaction_ui = FALSE
 
 	var/atom/movable/screen/blobpwrdisplay
 
@@ -95,6 +97,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/atom/movable/screen/stamina
 	var/atom/movable/screen/healthdoll
 	var/atom/movable/screen/spacesuit
+<<<<<<< HEAD
 	var/atom/movable/screen/hunger
 	// subtypes can override this to force a specific UI style
 	var/ui_style
@@ -103,6 +106,15 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	// They typically use * in their render target. They exist solely so we can reuse them,
 	// and avoid needing to make changes to all idk 300 consumers if we want to change the appearance
 	var/list/asset_refs_for_reuse = list()
+=======
+
+	var/list/atom/movable/screen/cybernetics/ammo_counter/cybernetics_ammo = list() //monkestation edit - CYBERNETICS
+
+	// subtypes can override this to force a specific UI style
+	var/ui_style
+
+	var/list/team_finder_arrows = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/hud/New(mob/owner)
 	mymob = owner
@@ -222,6 +234,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	QDEL_NULL(module_store_icon)
 	QDEL_LIST(static_inventory)
+	QDEL_LIST(team_finder_arrows)
 
 	// all already deleted by static inventory clear
 	inv_slots.Cut()
@@ -240,7 +253,11 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	stamina = null
 	healthdoll = null
 	spacesuit = null
+<<<<<<< HEAD
 	hunger = null
+=======
+	cybernetics_ammo = null //monkestation edit - CYBERNETICS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	blobpwrdisplay = null
 	alien_plasma_display = null
 	alien_queen_finder = null
@@ -250,6 +267,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	QDEL_LIST_ASSOC_VAL(plane_master_controllers)
 	QDEL_LIST(always_visible_inventory)
 	mymob = null
+	hand_slots = null //Monkestation edit: Fixes a harddel
 
 	QDEL_NULL(screentip_text)
 
@@ -336,6 +354,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += hotkeybuttons
 			if(infodisplay.len)
 				screenmob.client.screen += infodisplay
+			if(team_finder_arrows.len)
+				screenmob.client.screen += team_finder_arrows
 			if(always_visible_inventory.len)
 				screenmob.client.screen += always_visible_inventory
 
@@ -348,12 +368,16 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			hud_shown = FALSE //Governs behavior of other procs
 			if(static_inventory.len)
 				screenmob.client.screen -= static_inventory
+			if(team_finder_arrows.len)
+				screenmob.client.screen += team_finder_arrows
 			if(toggleable_inventory.len)
 				screenmob.client.screen -= toggleable_inventory
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
 			if(infodisplay.len)
 				screenmob.client.screen += infodisplay
+			if(team_finder_arrows.len)
+				screenmob.client.screen -= team_finder_arrows
 			if(always_visible_inventory.len)
 				screenmob.client.screen += always_visible_inventory
 
@@ -659,6 +683,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	var/button_number = 0
 	for(var/atom/movable/screen/button as anything in actions)
+		if(!button)
+			continue
 		var/postion = ButtonNumberToScreenCoords(button_number )
 		button.screen_loc = postion
 		button_number++

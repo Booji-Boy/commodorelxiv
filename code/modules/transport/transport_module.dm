@@ -1,3 +1,4 @@
+<<<<<<< HEAD:code/modules/transport/transport_module.dm
 /**
  * Base transport structure. A single tile that can form a modular set with neighbouring tiles
  * This type holds elevators and trams
@@ -5,6 +6,23 @@
 /obj/structure/transport/linear
 	name = "linear transport module"
 	desc = "A lightweight lift platform. It moves."
+=======
+GLOBAL_LIST_EMPTY(lifts)
+GLOBAL_LIST_INIT(all_radial_directions, list(
+	"NORTH" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTH),
+	"NORTHEAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTHEAST),
+	"EAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = EAST),
+	"SOUTHEAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = SOUTHEAST),
+	"SOUTH" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = SOUTH),
+	"SOUTHWEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = SOUTHWEST),
+	"WEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = WEST),
+	"NORTHWEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTHWEST)
+))
+
+/obj/structure/industrial_lift
+	name = "lift platform"
+	desc = "A lightweight lift platform. It moves up and down."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/industrial_lift/industrial_lift.dm
 	icon = 'icons/obj/smooth_structures/catwalk.dmi'
 	icon_state = "catwalk-0"
 	base_icon_state = "catwalk"
@@ -107,11 +125,19 @@
 ///set the movement registrations to our current turf(s) so contents moving out of our tile(s) are removed from our movement lists
 /obj/structure/transport/linear/proc/set_movement_registrations(list/turfs_to_set)
 	for(var/turf/turf_loc as anything in turfs_to_set || locs)
+<<<<<<< HEAD:code/modules/transport/transport_module.dm
 		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(uncrossed_remove_item_from_transport))
 		RegisterSignals(turf_loc, list(COMSIG_ATOM_ENTERED,COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(add_item_on_transport))
 
 ///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
 /obj/structure/transport/linear/proc/unset_movement_registrations(list/turfs_to_unset)
+=======
+		RegisterSignal(turf_loc, COMSIG_ATOM_EXITED, PROC_REF(UncrossedRemoveItemFromLift))
+		RegisterSignals(turf_loc, list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON), PROC_REF(AddItemOnLift))
+
+///unset our movement registrations from turfs that no longer contain us (or every loc if turfs_to_unset is unspecified)
+/obj/structure/industrial_lift/proc/unset_movement_registrations(list/turfs_to_unset)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/industrial_lift/industrial_lift.dm
 	var/static/list/registrations = list(COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXITED, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON)
 	for(var/turf/turf_loc as anything in turfs_to_unset || locs)
 		UnregisterSignal(turf_loc, registrations)
@@ -145,8 +171,13 @@
 	if(isliving(new_transport_contents) && !HAS_TRAIT(new_transport_contents, TRAIT_CANNOT_BE_UNBUCKLED))
 		ADD_TRAIT(new_transport_contents, TRAIT_CANNOT_BE_UNBUCKLED, BUCKLED_TRAIT)
 
+<<<<<<< HEAD:code/modules/transport/transport_module.dm
 	transport_contents += new_transport_contents
 	RegisterSignal(new_transport_contents, COMSIG_QDELETING, PROC_REF(remove_item_from_transport))
+=======
+	lift_load += new_lift_contents
+	RegisterSignal(new_lift_contents, COMSIG_QDELETING, PROC_REF(RemoveItemFromLift))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/industrial_lift/industrial_lift.dm
 
 	return TRUE
 
@@ -463,9 +494,16 @@
 				var/datum/callback/land_slam = new(victim_living, TYPE_PROC_REF(/mob/living/, tram_slam_land))
 				victim_living.throw_at(throw_target, 200 * collision_lethality, 4 * collision_lethality, callback = land_slam)
 
+<<<<<<< HEAD:code/modules/transport/transport_module.dm
 				//increment the hit counters
 				if(ismob(victim_living) && victim_living.client && istype(transport_controller_datum, /datum/transport_controller/linear/tram))
 					register_collision(points = 1)
+=======
+				//increment the hit counter signs
+				if(ismob(collided) && collided.client)
+					SSpersistence.tram_hits_this_round++
+					SEND_SIGNAL(src, COMSIG_TRAM_COLLISION, SSpersistence.tram_hits_this_round)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/industrial_lift/industrial_lift.dm
 
 	unset_movement_registrations(exited_locs)
 	group_move(things_to_move, travel_direction)
@@ -620,7 +658,7 @@
 	if(user.incapacitated())
 		return FALSE
 	// Maintain the god given right to fight an elevator
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return FALSE
 	// Gotta be by the lift
 	if(!user.Adjacent(src))
@@ -806,19 +844,8 @@
 	var/starting_position = loc
 	if (!can_open_lift_radial(user,starting_position))
 		return
-//NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST
-	var/static/list/tool_list = list(
-		"NORTH" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTH),
-		"NORTHEAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTH),
-		"EAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = EAST),
-		"SOUTHEAST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = EAST),
-		"SOUTH" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = SOUTH),
-		"SOUTHWEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = SOUTH),
-		"WEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = WEST),
-		"NORTHWEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = WEST)
-		)
 
-	var/result = show_radial_menu(user, src, tool_list, custom_check = CALLBACK(src, PROC_REF(can_open_lift_radial), user, starting_position), require_near = TRUE, tooltips = FALSE)
+	var/result = show_radial_menu(user, src, GLOB.all_radial_directions, custom_check = CALLBACK(src, PROC_REF(can_open_lift_radial), user, starting_position), require_near = TRUE, tooltips = FALSE)
 	if (!can_open_lift_radial(user,starting_position))
 		return	// nice try
 	if(!isnull(result) && result != "Cancel" && transport_controller_datum.controller_status & CONTROLS_LOCKED)

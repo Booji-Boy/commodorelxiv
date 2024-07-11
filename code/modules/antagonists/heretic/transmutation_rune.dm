@@ -105,6 +105,8 @@
 
 	// Now go through all our nearby atoms and see which are good for our ritual.
 	for(var/atom/nearby_atom as anything in atoms_in_range)
+		if(istype(nearby_atom, /obj/item/organ/internal/brain/slime))
+			selected_atoms |= nearby_atom
 		// Go through all of our required atoms
 		for(var/req_type in requirements_list)
 			// We already have enough of this type, skip
@@ -120,6 +122,10 @@
 			if(length(banned_atom_types))
 				if(nearby_atom.type in banned_atom_types)
 					continue
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			// This item is a valid type. Add it to our selected atoms list.
 			selected_atoms |= nearby_atom
 			// If it's a stack, we gotta see if it has more than one inside,

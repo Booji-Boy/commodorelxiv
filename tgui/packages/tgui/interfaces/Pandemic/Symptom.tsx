@@ -6,7 +6,10 @@ import {
   Stack,
   Tooltip,
 } from 'tgui/components';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { getColor } from './helpers';
 import { Threshold } from './types';
 

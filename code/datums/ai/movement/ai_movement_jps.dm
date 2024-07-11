@@ -12,7 +12,11 @@
 	var/atom/movable/moving = controller.pawn
 	var/delay = controller.movement_delay
 
+<<<<<<< HEAD
 	var/datum/move_loop/has_target/jps/loop = GLOB.move_manager.jps_move(moving,
+=======
+	var/datum/move_loop/has_target/jps/loop = SSmove_manager.jps_move(moving,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		current_movement_target,
 		delay,
 		repath_delay = 0.5 SECONDS,
@@ -38,8 +42,13 @@
 	source.minimum_distance = controller.get_minimum_distance()
 
 /datum/ai_movement/jps/bot
+<<<<<<< HEAD
 	max_pathing_attempts = 8
 	maximum_length = 25
+=======
+	max_pathing_attempts = 25
+	maximum_length = AI_BOT_PATH_LENGTH
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	diagonal_flags = DIAGONAL_REMOVE_ALL
 
 /datum/ai_movement/jps/bot/start_moving_towards(datum/ai_controller/controller, atom/current_movement_target, min_distance)
@@ -48,6 +57,7 @@
 	if(isnull(our_pawn))
 		return
 	our_pawn.RegisterSignal(loop, COMSIG_MOVELOOP_JPS_FINISHED_PATHING, TYPE_PROC_REF(/mob/living/basic/bot, generate_bot_path))
+<<<<<<< HEAD
 
 /datum/ai_movement/jps/bot/travel_to_beacon
 	maximum_length = AI_BOT_PATH_LENGTH
@@ -55,3 +65,5 @@
 
 /datum/ai_movement/jps/modsuit
 	maximum_length = MOD_AI_RANGE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

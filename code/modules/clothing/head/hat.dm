@@ -118,7 +118,11 @@
 	victim.visible_message(span_warning("\The [bullet] sends [victim]'s hat flying!"))
 	victim.dropItemToGround(src, force = TRUE, silent = TRUE)
 	throw_at(get_edge_target_turf(loc, pick(GLOB.alldirs)), range = 3, speed = 3)
+<<<<<<< HEAD
 	playsound(victim, SFX_RICOCHET, 100, TRUE)
+=======
+	playsound(victim, get_sfx(SFX_RICOCHET), 100, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/head_cowboy
 	melee = 5
@@ -128,10 +132,13 @@
 
 /// Bounty hunter's hat, very likely to intercept bullets
 /obj/item/clothing/head/cowboy/bounty
+<<<<<<< HEAD
 	name = "bounty hunting hat"
 	desc = "Reach for the skies, pardner."
 	icon_state = "bounty_hunter"
 	worn_icon_state = "hunter"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	deflect_chance = 50
 
 /obj/item/clothing/head/cowboy/black
@@ -200,11 +207,14 @@
 	greyscale_config_worn = /datum/greyscale_config/jester_hat/worn
 	flags_1 = IS_PLAYER_COLORABLE_1
 
+<<<<<<< HEAD
 /obj/item/clothing/head/costume/jesteralt
 	name = "jester hat"
 	desc = "A hat with bells, to add some merriness to the suit."
 	icon_state = "jester2"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/head/costume/rice_hat
 	name = "rice hat"
 	desc = "Welcome to the rice fields, motherfucker."

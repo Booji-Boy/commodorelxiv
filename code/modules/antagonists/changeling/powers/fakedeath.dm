@@ -20,6 +20,7 @@
 	..()
 	if(revive_ready)
 		INVOKE_ASYNC(src, PROC_REF(revive), user)
+<<<<<<< HEAD
 		return TRUE
 
 	var/death_duration_mod = 1
@@ -36,12 +37,30 @@
 
 /// Used to enable fakedeath and register relevant signals / start timers
 /datum/action/changeling/fakedeath/proc/enable_fakedeath(mob/living/changeling, duration_modifier = 1)
+=======
+
+
+	else if(enable_fakedeath(user))
+		to_chat(user, span_changeling("We begin our stasis, preparing energy to arise once more."))
+
+	else
+		stack_trace("Changeling revive failed to enter fakedeath when it should have been in a valid state to.")
+
+	return TRUE
+
+/// Used to enable fakedeath and register relevant signals / start timers
+/datum/action/changeling/fakedeath/proc/enable_fakedeath(mob/living/changeling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(revive_ready || HAS_TRAIT_FROM(changeling, TRAIT_DEATHCOMA, CHANGELING_TRAIT))
 		return
 
 	changeling.fakedeath(CHANGELING_TRAIT)
+<<<<<<< HEAD
 	ADD_TRAIT(changeling, TRAIT_STASIS, CHANGELING_TRAIT)
 	addtimer(CALLBACK(src, PROC_REF(ready_to_regenerate), changeling), fakedeath_duration * duration_modifier, TIMER_UNIQUE)
+=======
+	addtimer(CALLBACK(src, PROC_REF(ready_to_regenerate), changeling), fakedeath_duration, TIMER_UNIQUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Basically, these let the ling exit stasis without giving away their ling-y-ness if revived through other means
 	RegisterSignal(changeling, SIGNAL_REMOVETRAIT(TRAIT_DEATHCOMA), PROC_REF(fakedeath_reset))
 	RegisterSignal(changeling, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
@@ -51,10 +70,20 @@
 /// healing a changeling who went into stasis after actually dying, and
 /// also removes changeling stasis
 /datum/action/changeling/fakedeath/proc/disable_stasis_and_fakedeath(mob/living/changeling)
+<<<<<<< HEAD
 	REMOVE_TRAIT(changeling, TRAIT_STASIS, CHANGELING_TRAIT)
 	UnregisterSignal(changeling, SIGNAL_REMOVETRAIT(TRAIT_DEATHCOMA))
 	UnregisterSignal(changeling, COMSIG_MOB_STATCHANGE)
 
+=======
+	REMOVE_TRAIT(changeling, TRAIT_DEATHCOMA, CHANGELING_TRAIT)
+	UnregisterSignal(changeling, SIGNAL_REMOVETRAIT(TRAIT_DEATHCOMA))
+	UnregisterSignal(changeling, COMSIG_MOB_STATCHANGE)
+
+
+
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// This proc is called to reset the chemical cost of the revival
 /// as well as the revive ready flag and button states.
 /datum/action/changeling/fakedeath/proc/reset_chemical_cost()
@@ -122,7 +151,11 @@
 	if(QDELETED(src) || QDELETED(user))
 		return
 
+<<<<<<< HEAD
 	var/datum/antagonist/changeling/ling = IS_CHANGELING(user)
+=======
+	var/datum/antagonist/changeling/ling = user.mind?.has_antag_datum(/datum/antagonist/changeling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(QDELETED(ling) || !(src in ling.innate_powers + ling.purchased_powers)) // checking both innate and purchased for full coverage
 		return
 	if(!HAS_TRAIT_FROM(user, TRAIT_DEATHCOMA, CHANGELING_TRAIT))

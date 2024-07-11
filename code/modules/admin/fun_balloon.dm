@@ -95,6 +95,7 @@
 		if (!possessable.ckey && possessable.stat == CONSCIOUS) // Only assign ghosts to living, non-occupied mobs!
 			bodies += possessable
 
+<<<<<<< HEAD
 	var/list/candidates = SSpolling.poll_ghosts_for_targets(
 		question = "Would you like to be [span_notice(group_name)]?",
 		role = ROLE_SENTIENCE,
@@ -106,6 +107,18 @@
 		role_name_text = "sentience fun balloon",
 	)
 
+=======
+	var/question = "Would you like to be [group_name]?"
+	var/list/candidates = SSpolling.poll_ghost_candidates_for_mobs(
+		question,
+		role = ROLE_SENTIENCE,
+		poll_time = 10 SECONDS,
+		mobs = bodies,
+		ignore_category = POLL_IGNORE_SHUTTLE_DENIZENS,
+		pic_source = src,
+		role_name_text = group_name || "sentience fun balloon"
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	while(LAZYLEN(candidates) && LAZYLEN(bodies))
 		var/mob/dead/observer/C = pick_n_take(candidates)
 		var/mob/living/body = pick_n_take(bodies)

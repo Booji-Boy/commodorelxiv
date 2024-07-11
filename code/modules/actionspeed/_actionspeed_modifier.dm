@@ -40,8 +40,12 @@ can next move
 /datum/actionspeed_modifier/New(init_id)
 	. = ..()
 
+<<<<<<< HEAD
 	if(init_id)
 		id = init_id
+=======
+	id = init_id
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!id)
 		id = "[type]" //We turn the path into a string.

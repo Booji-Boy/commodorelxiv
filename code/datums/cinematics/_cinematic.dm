@@ -147,6 +147,10 @@
 
 	qdel(src)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Locks a mob, preventing them from moving, being hurt, or acting
 /datum/cinematic/proc/lock_mob(mob/to_lock)
 	locked += WEAKREF(to_lock)

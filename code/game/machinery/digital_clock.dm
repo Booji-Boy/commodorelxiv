@@ -30,7 +30,11 @@
 		return TRUE
 
 /obj/machinery/digital_clock/welder_act(mob/living/user, obj/item/tool)
+<<<<<<< HEAD
 	if(user.combat_mode)
+=======
+	if(user.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(atom_integrity >= max_integrity)
 		balloon_alert(user, "it doesn't need repairs!")
@@ -45,7 +49,11 @@
 	return TRUE
 
 /obj/machinery/digital_clock/multitool_act(mob/living/user, obj/item/tool)
+<<<<<<< HEAD
 	if(user.combat_mode)
+=======
+	if(user.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(!(obj_flags & EMAGGED))
 		return
@@ -57,6 +65,7 @@
 		obj_flags &= ~EMAGGED
 		return TRUE
 
+<<<<<<< HEAD
 /obj/machinery/digital_clock/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		return FALSE
@@ -64,23 +73,44 @@
 	do_sparks(3, cardinal_only = FALSE, source = src)
 	obj_flags |= EMAGGED
 	return TRUE
+=======
+/obj/machinery/digital_clock/emag_act(mob/user)
+	if(obj_flags & EMAGGED)
+		return
+	playsound(src, SFX_SPARKS, 100, vary = TRUE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
+	do_sparks(3, cardinal_only = FALSE, source = src)
+	obj_flags |= EMAGGED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/digital_clock/emp_act(severity)
 	. = ..()
 	emag_act()
 
+<<<<<<< HEAD
 /obj/machinery/digital_clock/on_deconstruction(disassembled)
+=======
+/obj/machinery/digital_clock/deconstruct(disassembled = TRUE)
+	if(flags_1 & NODECONSTRUCT_1)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(disassembled)
 		new /obj/item/wallframe/digital_clock(drop_location())
 	else
 		new /obj/item/stack/sheet/iron(drop_location(), 2)
 		new /obj/item/shard(drop_location())
 		new /obj/item/shard(drop_location())
+<<<<<<< HEAD
+=======
+	qdel(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/digital_clock/Initialize(mapload)
 	. = ..()
 	START_PROCESSING(SSdigital_clock, src)
+<<<<<<< HEAD
 	find_and_hang_on_wall()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/digital_clock/Destroy()
 	STOP_PROCESSING(SSdigital_clock, src)
@@ -97,7 +127,11 @@
 	if(machine_stat & (NOPOWER|BROKEN))
 		set_light(0)
 		return
+<<<<<<< HEAD
 	set_light(l_range = 1.5, l_power = 0.7, l_color = LIGHT_COLOR_BLUE) // blue light
+=======
+	set_light(l_outer_range = 1.5, l_power = 0.7, l_color = LIGHT_COLOR_BLUE) // blue light
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/digital_clock/update_overlays()
 	. = ..()

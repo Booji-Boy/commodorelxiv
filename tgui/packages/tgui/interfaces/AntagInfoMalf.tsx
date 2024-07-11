@@ -5,11 +5,18 @@ import { useBackend } from '../backend';
 import { BlockQuote, Button, Section, Stack, Tabs } from '../components';
 import { Window } from '../layouts';
 import {
+<<<<<<< HEAD
   Objective,
   ObjectivePrintout,
   ReplaceObjectivesButton,
 } from './common/Objectives';
 import { GenericUplink, Item } from './Uplink/GenericUplink';
+=======
+  ObjectivePrintout,
+  Objective,
+  ReplaceObjectivesButton,
+} from './common/Objectives';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const allystyle = {
   fontWeight: 'bold',
@@ -172,7 +179,11 @@ const CodewordsSection = (props) => {
 export const AntagInfoMalf = (props) => {
   const { act, data } = useBackend<Info>();
   const { processingTime, categories } = data;
+<<<<<<< HEAD
   const [antagInfoTab, setAntagInfoTab] = useState(0);
+=======
+  const [antagInfoTab, setAntagInfoTab] = useLocalState('antagInfoTab', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const categoriesList: string[] = [];
   const items: Item[] = [];
   for (let i = 0; i < categories.length; i++) {
@@ -187,6 +198,7 @@ export const AntagInfoMalf = (props) => {
         cost: `${item.cost} PT`,
         desc: item.desc,
         disabled: processingTime < item.cost,
+        is_locked: null,
       });
     }
   }
@@ -196,7 +208,11 @@ export const AntagInfoMalf = (props) => {
       height={530}
       theme={(antagInfoTab === 0 && 'hackerman') || 'malfunction'}
     >
+<<<<<<< HEAD
       <Window.Content style={{ fontFamily: 'Consolas, monospace' }}>
+=======
+      <Window.Content style={{ 'font-family': 'Consolas, monospace' }}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         <Stack vertical fill>
           <Stack.Item>
             <Tabs fluid>

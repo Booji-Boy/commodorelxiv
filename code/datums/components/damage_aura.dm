@@ -4,7 +4,11 @@
 /// Will deal more damage the more people are present.
 /datum/component/damage_aura
 	/// The range of which to damage
+<<<<<<< HEAD
 	var/range = 5
+=======
+	var/range
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Whether or not you must be a visible object of the parent
 	var/requires_visibility = TRUE
@@ -24,6 +28,12 @@
 	/// Stamina damage to damage over a second
 	var/stamina_damage = 0
 
+<<<<<<< HEAD
+=======
+	/// Amount of cloning damage to damage over a second
+	var/clone_damage = 0
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Amount of blood to damage over a second
 	var/blood_damage = 0
 
@@ -43,13 +53,21 @@
 	COOLDOWN_DECLARE(last_damage_effect_time)
 
 /datum/component/damage_aura/Initialize(
+<<<<<<< HEAD
 	range = 5,
+=======
+	range,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	requires_visibility = TRUE,
 	brute_damage = 0,
 	burn_damage = 0,
 	toxin_damage = 0,
 	suffocation_damage = 0,
 	stamina_damage = 0,
+<<<<<<< HEAD
+=======
+	clone_damage = 0,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	blood_damage = 0,
 	organ_damage = null,
 	simple_damage = 0,
@@ -59,7 +77,11 @@
 	if (!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 
+<<<<<<< HEAD
 	START_PROCESSING(SSaura, src)
+=======
+	START_PROCESSING(SSobj, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	src.range = range
 	src.requires_visibility = requires_visibility
@@ -68,14 +90,23 @@
 	src.toxin_damage = toxin_damage
 	src.suffocation_damage = suffocation_damage
 	src.stamina_damage = stamina_damage
+<<<<<<< HEAD
+=======
+	src.clone_damage = clone_damage
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	src.blood_damage = blood_damage
 	src.organ_damage = organ_damage
 	src.simple_damage = simple_damage
 	src.immune_factions = immune_factions
 	src.current_owner = WEAKREF(current_owner)
 
+<<<<<<< HEAD
 /datum/component/damage_aura/Destroy(force)
 	STOP_PROCESSING(SSaura, src)
+=======
+/datum/component/damage_aura/Destroy(force, silent)
+	STOP_PROCESSING(SSobj, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /// The requirements for the mob to be effected by the damage aura.
@@ -86,6 +117,7 @@
 
 /// What effect the damage aura has if it has an owner.
 /datum/component/damage_aura/proc/owner_effect(mob/living/owner_mob, seconds_per_tick)
+<<<<<<< HEAD
 	var/need_mob_update = FALSE
 	need_mob_update += owner_mob.adjustStaminaLoss(-20 * seconds_per_tick, updating_stamina = FALSE)
 	need_mob_update += owner_mob.adjustBruteLoss(-1 * seconds_per_tick, updating_health = FALSE)
@@ -96,12 +128,23 @@
 		owner_mob.blood_volume += 2 * seconds_per_tick
 	if(need_mob_update)
 		owner_mob.updatehealth()
+=======
+	owner_mob.stamina.adjust(20 * seconds_per_tick)
+	owner_mob.adjustBruteLoss(-1 * seconds_per_tick, updating_health = FALSE)
+	owner_mob.adjustFireLoss(-1 * seconds_per_tick, updating_health = FALSE)
+	owner_mob.adjustToxLoss(-1 * seconds_per_tick, updating_health = FALSE, forced = TRUE)
+	owner_mob.adjustOxyLoss(-1 * seconds_per_tick, updating_health = FALSE)
+	if (owner_mob.blood_volume < BLOOD_VOLUME_NORMAL)
+		owner_mob.blood_volume += 2 * seconds_per_tick
+	owner_mob.updatehealth()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/damage_aura/process(seconds_per_tick)
 	var/should_show_effect = COOLDOWN_FINISHED(src, last_damage_effect_time)
 	if (should_show_effect)
 		COOLDOWN_START(src, last_damage_effect_time, DAMAGE_EFFECT_COOLDOWN)
 
+<<<<<<< HEAD
 	var/list/to_damage = list()
 	if(requires_visibility)
 		for(var/mob/living/candidate in view(range, parent))
@@ -111,6 +154,9 @@
 			to_damage += candidate
 
 	for (var/mob/living/candidate as anything in to_damage)
+=======
+	for (var/mob/living/candidate in (requires_visibility ? view(range, parent) : range(range, parent)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/mob/living/owner = current_owner?.resolve()
 		if (owner && owner == candidate)
 			owner_effect(owner, seconds_per_tick)
@@ -127,7 +173,12 @@
 		if (iscarbon(candidate))
 			candidate.adjustToxLoss(toxin_damage * seconds_per_tick, updating_health = FALSE)
 			candidate.adjustOxyLoss(suffocation_damage * seconds_per_tick, updating_health = FALSE)
+<<<<<<< HEAD
 			candidate.adjustStaminaLoss(stamina_damage * seconds_per_tick, updating_stamina = FALSE)
+=======
+			candidate.stamina.adjust(-stamina_damage * seconds_per_tick)
+			candidate.adjustCloneLoss(clone_damage * seconds_per_tick, updating_health = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			for (var/organ in organ_damage)
 				candidate.adjustOrganLoss(organ, organ_damage[organ] * seconds_per_tick)

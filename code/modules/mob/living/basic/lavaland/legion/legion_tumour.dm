@@ -7,7 +7,10 @@
 	icon_state = "legion_remains"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_PARASITE_EGG
+<<<<<<< HEAD
 	organ_flags = ORGAN_ORGANIC | ORGAN_EDIBLE | ORGAN_VIRGIN | ORGAN_PROMINENT
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	decay_factor = STANDARD_ORGAN_DECAY * 3 // About 5 minutes outside of a host
 	/// What stage of growth the corruption has reached.
 	var/stage = 0
@@ -31,7 +34,11 @@
 	. = ..()
 	animate_pulse()
 
+<<<<<<< HEAD
 /obj/item/organ/internal/legion_tumour/apply_organ_damage(damage_amount, maximum, required_organ_flag)
+=======
+/obj/item/organ/internal/legion_tumour/apply_organ_damage(damage_amount, maximum, required_organtype)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/was_failing = organ_flags & ORGAN_FAILING
 	. = ..()
 	if (was_failing != (organ_flags & ORGAN_FAILING))
@@ -51,15 +58,22 @@
 	animate(transform = matrix(), time = 0.5 SECONDS / speed_divider, easing = SINE_EASING | EASE_IN)
 	animate(transform = matrix(), time = 2 SECONDS / speed_divider)
 
+<<<<<<< HEAD
 /obj/item/organ/internal/legion_tumour/Remove(mob/living/carbon/egg_owner, special, movement_flags)
+=======
+/obj/item/organ/internal/legion_tumour/Remove(mob/living/carbon/egg_owner, special)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	stage = 0
 	elapsed_time = 0
 
+<<<<<<< HEAD
 /obj/item/organ/internal/legion_tumour/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
 	owner.log_message("has received [src] which will eventually turn them into a Legion.", LOG_VICTIM)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/organ/internal/legion_tumour/attack(mob/living/target, mob/living/user, params)
 	if (try_apply(target, user))
 		qdel(src)
@@ -84,7 +98,10 @@
 	if (!ishuman(target))
 		return FALSE
 
+<<<<<<< HEAD
 	log_combat(user, target, "used a Legion Tumour on", src, "as they are in crit, this will turn them into a Legion.")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	target.visible_message(span_boldwarning("[user] splatters [target] with [src]... and it springs into horrible life!"))
 	var/mob/living/basic/legion_brood/skull = new(target.loc)
 	skull.melee_attack(target)
@@ -149,7 +166,10 @@
 /obj/item/organ/internal/legion_tumour/proc/infest()
 	if (QDELETED(src) || QDELETED(owner))
 		return
+<<<<<<< HEAD
 	owner.log_message("has been turned into a Legion by their tumour.", LOG_VICTIM)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	owner.visible_message(span_boldwarning("Black tendrils burst from [owner]'s flesh, covering them in amorphous flesh!"))
 	var/mob/living/basic/mining/legion/new_legion = new spawn_type(owner.loc)
 	new_legion.consume(owner)

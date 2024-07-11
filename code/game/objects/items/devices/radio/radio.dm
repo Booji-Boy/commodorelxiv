@@ -91,6 +91,11 @@
 	/// If TRUE, will set the icon in initializations.
 	VAR_PRIVATE/should_update_icon = FALSE
 
+	///Range that they can listen from different than canhear_range
+	var/listening_range
+	///can we radio host
+	var/radio_host = FALSE
+
 /obj/item/radio/Initialize(mapload)
 	set_wires(new /datum/wires/radio(src))
 	secure_radio_connections = list()
@@ -175,7 +180,12 @@
 	for(var/channel_name in channels)
 		add_radio(src, GLOB.radiochannels[channel_name])
 
+<<<<<<< HEAD
 	add_radio(src, frequency)
+=======
+	add_radio(src, FREQ_COMMON)
+	add_radio(src, FREQ_RADIO) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/radio/proc/make_syndie() // Turns normal radios into Syndicate radios!
 	qdel(keyslot)
@@ -303,6 +313,9 @@
 	if(!talking_movable.try_speak(message))
 		return
 
+	if(channel == FREQ_RADIO && !radio_host)
+		return
+
 	if(use_command)
 		spans |= SPAN_COMMAND
 
@@ -378,7 +391,17 @@
 
 /obj/item/radio/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), message_range)
 	. = ..()
+<<<<<<< HEAD
 	if(radio_freq || !broadcasting || get_dist(src, speaker) > canhear_range || message_mods[MODE_RELAY])
+=======
+	if(radio_freq || !broadcasting)
+		return
+
+	if(!listening_range &&  get_dist(src, speaker) > canhear_range)
+		return
+
+	if(listening_range && get_dist(src, speaker) > listening_range)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	var/list/filtered_mods = list()
 
@@ -416,6 +439,9 @@
 	// allow checks: are we listening on that frequency?
 	if (input_frequency == frequency)
 		return TRUE
+	if (input_frequency == FREQ_RADIO)
+		return TRUE
+
 	for(var/ch_name in channels)
 		if(channels[ch_name] & FREQ_LISTENING)
 			if(GLOB.radiochannels[ch_name] == text2num(input_frequency) || syndie)

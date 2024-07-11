@@ -20,16 +20,32 @@ export const Adminhelp = (props) => {
     bannedFromUrgentAhelp,
     urgentAhelpPromptMessage,
   } = data;
+<<<<<<< HEAD
   const [requestForAdmin, setRequestForAdmin] = useState(false);
   const [currentlyInputting, setCurrentlyInputting] = useState(false);
   const [ahelpMessage, setAhelpMessage] = useState('');
+=======
+  const [requestForAdmin, setRequestForAdmin] = useLocalState(
+    'request_for_admin',
+    false,
+  );
+  const [currentlyInputting, setCurrentlyInputting] = useLocalState(
+    'confirm_request',
+    false,
+  );
+  const [ahelpMessage, setAhelpMessage] = useLocalState('ahelp_message', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const confirmationText = 'alert admins';
   return (
     <Window title="Create Adminhelp" theme="admin" height={300} width={500}>
       <Window.Content
         style={{
+<<<<<<< HEAD
           backgroundImage: 'none',
+=======
+          'background-image': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         <Stack vertical fill>
@@ -53,7 +69,11 @@ export const Adminhelp = (props) => {
                     fontFamily="arial"
                     backgroundColor="grey"
                     style={{
+<<<<<<< HEAD
                       fontStyle: 'normal',
+=======
+                      'font-style': 'normal',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                   >
                     Input &apos;{confirmationText}&apos; to proceed.

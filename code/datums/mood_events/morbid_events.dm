@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Morbid Mood Events -
 Any mood events related to TRAIT_MORBID.
 Ususally this is an inverse of a typically good, alturistic action (such as saving someones life), punishing it with a negative mood event,
@@ -32,10 +33,13 @@ Intended to push a creepy, mad scientist/doctor vibe, or someone who is downrigh
 	mood_change = 2
 	timeout = 2 MINUTES
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/mood_event/morbid_hauntium
 	description = "I feel a better connection with the spirits, I love this!"
 	mood_change = 3
 	timeout = 6 MINUTES
+<<<<<<< HEAD
 
 // Negative Events - We helped someone stay alive.
 
@@ -49,3 +53,5 @@ Intended to push a creepy, mad scientist/doctor vibe, or someone who is downrigh
 	mood_change = -6
 	timeout = 2 MINUTES
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

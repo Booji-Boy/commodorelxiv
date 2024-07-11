@@ -13,12 +13,15 @@
 	favorite_bait = list(/obj/item/food/bait/worm)
 	required_temperature_min = MIN_AQUARIUM_TEMP+18
 	required_temperature_max = MIN_AQUARIUM_TEMP+26
+<<<<<<< HEAD
 
 /obj/item/fish/goldfish/gill
 	name = "McGill"
 	desc = "A great rubber duck tool for Lawyers who can't get a grasp over their case."
 	stable_population = 1
 	random_case_rarity = FISH_RARITY_NOPE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/fish/angelfish
 	name = "angelfish"
@@ -248,7 +251,11 @@
 	random_case_rarity = FISH_RARITY_RARE
 	fillet_type = /obj/item/food/meat/slab/rawcrab
 	required_temperature_min = MIN_AQUARIUM_TEMP+9
+<<<<<<< HEAD
 	required_temperature_max = LAVALAND_MAX_TEMPERATURE+50
+=======
+	required_temperature_max = 400
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	min_pressure = HAZARD_LOW_PRESSURE
 	safe_air_limits = list(
 		/datum/gas/oxygen = list(2, 100),
@@ -267,7 +274,11 @@
 	desc = "A subspecies of chasm chrabs that has adapted to the cold climate and lack of abysmal holes of the icemoon."
 	icon_state = "arctic_chrab"
 	dedicated_in_aquarium_icon_state = "ice_chrab_small"
+<<<<<<< HEAD
 	required_temperature_min = ICEBOX_MIN_TEMPERATURE-20
+=======
+	required_temperature_min = 160
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	required_temperature_max = MIN_AQUARIUM_TEMP+15
 	evolution_types = list(/datum/fish_evolution/chasm_chrab)
 	compatible_types = list(/obj/item/fish/chasm_crab)
@@ -301,6 +312,7 @@
 	fish_traits = list(/datum/fish_trait/emulsijack)
 	required_temperature_min = MIN_AQUARIUM_TEMP+5
 	required_temperature_max = MIN_AQUARIUM_TEMP+40
+<<<<<<< HEAD
 
 /obj/item/fish/jumpercable
 	name = "monocloning jumpercable"
@@ -321,6 +333,8 @@
 		/datum/fish_trait/mixotroph,
 		/datum/fish_trait/electrogenesis,
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/fish/ratfish
 	name = "ratfish"
@@ -427,9 +441,15 @@
 /obj/item/fish/mastodon
 	name = "unmarine mastodon"
 	desc = "A monster of exposed muscles and innards, wrapped in a fish-like skeleton. You don't remember ever seeing it on the catalog."
+<<<<<<< HEAD
 	icon = 'icons/obj/aquarium/wide.dmi'
 	icon_state = "mastodon"
 	dedicated_in_aquarium_icon = 'icons/obj/aquarium/fish.dmi'
+=======
+	icon = 'icons/obj/aquarium_wide.dmi'
+	icon_state = "mastodon"
+	dedicated_in_aquarium_icon = 'icons/obj/aquarium.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dedicated_in_aquarium_icon_state = "mastodon_small"
 	base_pixel_x = -16
 	pixel_x = -16
@@ -496,7 +516,10 @@
 /obj/item/fish/holo/puffer
 	name = "holographic pufferfish"
 	desc ="A holographic representation of 100% safe-to-eat pufferfish... that is, if holographic fishes were even edible."
+<<<<<<< HEAD
 	icon_state = "pufferfish"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sprite_width = 8
 	sprite_height = 8
 	average_size = 60
@@ -567,6 +590,7 @@
 ///It spins, and dimly glows in the dark.
 /obj/item/fish/starfish/flop_animation()
 	DO_FLOATING_ANIM(src)
+<<<<<<< HEAD
 
 /obj/item/fish/lavaloop
 	name = "lavaloop fish"
@@ -662,3 +686,5 @@
 	)
 	//anxiety naturally limits the amount of zipzaps per tank, so they are stronger alone
 	electrogenesis_power = 20 MEGA JOULES
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

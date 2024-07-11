@@ -9,7 +9,10 @@ import {
   Dimmer,
   Divider,
   Icon,
+<<<<<<< HEAD
   Image,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Input,
   NumberInput,
   Section,
@@ -67,9 +70,18 @@ const findAmount = (item_amts, name) => {
 const ShoppingTab = (props) => {
   const { data, act } = useBackend<Data>();
   const { credit_type, order_categories, order_datums, item_amts } = data;
+<<<<<<< HEAD
   const [shopCategory, setShopCategory] = useState(order_categories[0]);
   const [condensed] = useLocalState('condensed', false);
   const [searchItem, setSearchItem] = useState('');
+=======
+  const [shopCategory, setShopCategory] = useLocalState(
+    'shopCategory',
+    order_categories[0],
+  );
+  const [condensed] = useLocalState('condensed', false);
+  const [searchItem, setSearchItem] = useLocalState('searchItem', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const search = createSearch<OrderDatum>(
     searchItem,
     (order_datums) => order_datums.name,
@@ -331,8 +343,13 @@ const OrderSent = (props) => {
 
 export const ProduceConsole = (props) => {
   const { data } = useBackend<Data>();
+<<<<<<< HEAD
   const { credit_type, points, off_cooldown, order_categories } = data;
   const [tabIndex, setTabIndex] = useState(1);
+=======
+  const { points, off_cooldown, order_categories } = data;
+  const [tabIndex, setTabIndex] = useLocalState('tab-index', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [condensed, setCondensed] = useLocalState('condensed', false);
   const TabComponent = TAB2NAME[tabIndex - 1].component();
 

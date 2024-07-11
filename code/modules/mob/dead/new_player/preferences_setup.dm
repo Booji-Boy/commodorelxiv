@@ -107,6 +107,7 @@
 	// Set up the dummy for its photoshoot
 	apply_prefs_to(mannequin, TRUE)
 
+<<<<<<< HEAD
 	mannequin.job = preview_job.title
 	mannequin.dress_up_as_job(
 		equipping = show_job_clothes ? preview_job : no_job,
@@ -114,6 +115,11 @@
 		player_client = parent,
 		consistent = TRUE,
 	)
+=======
+	if(preview_job)
+		mannequin.job = preview_job.title
+		mannequin.dress_up_as_job(preview_job, TRUE, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Apply visual quirks
 	// Yes we do it every time because it needs to be done after job gear

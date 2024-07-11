@@ -427,6 +427,7 @@
 		held_sausage = null
 		update_appearance()
 
+<<<<<<< HEAD
 /obj/item/melee/roastingstick/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if (!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		return NONE
@@ -434,6 +435,16 @@
 		return NONE
 	if (istype(interacting_with, /obj/singularity) && get_dist(user, interacting_with) < 10)
 		to_chat(user, span_notice("You send [held_sausage] towards [interacting_with]."))
+=======
+/obj/item/melee/roastingstick/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if (!HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
+		return
+	if (!is_type_in_typecache(target, ovens))
+		return
+	if (istype(target, /obj/singularity) && get_dist(user, target) < 10)
+		to_chat(user, span_notice("You send [held_sausage] towards [target]."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		playsound(src, 'sound/items/rped.ogg', 50, TRUE)
 		beam = user.Beam(interacting_with, icon_state = "rped_upgrade", time = 10 SECONDS)
 		return ITEM_INTERACT_SUCCESS

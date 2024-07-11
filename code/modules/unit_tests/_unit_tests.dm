@@ -81,6 +81,10 @@
 #else
 #define TEST_OUTPUT_YELLOW(text) (text)
 #endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// A trait source when adding traits through unit tests
 #define TRAIT_SOURCE_UNIT_TESTS "unit_tests"
 
@@ -90,18 +94,19 @@
 #include "achievements.dm"
 #include "anchored_mobs.dm"
 #include "anonymous_themes.dm"
-#include "antag_conversion.dm"
 #include "antag_moodlets.dm"
 #include "area_contents.dm"
 #include "armor_verification.dm"
-#include "atmospherics_sanity.dm"
 #include "autowiki.dm"
 #include "barsigns.dm"
 #include "baseturfs.dm"
 #include "bespoke_id.dm"
 #include "binary_insert.dm"
 #include "bitrunning.dm"
+<<<<<<< HEAD
 #include "blackmarket.dm"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #include "blindness.dm"
 #include "bloody_footprints.dm"
 #include "breath.dm"
@@ -122,7 +127,6 @@
 #include "combat_stamina.dm"
 #include "combat_welder.dm"
 #include "component_tests.dm"
-#include "confusion.dm"
 #include "connect_loc.dm"
 #include "container_sanity.dm"
 #include "crayons.dm"
@@ -138,11 +142,13 @@
 #include "dynamic_ruleset_sanity.dm"
 #include "egg_glands.dm"
 #include "emoting.dm"
+<<<<<<< HEAD
 #include "ensure_subtree_operational_datum.dm"
 #include "explosion_action.dm"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #include "fish_unit_tests.dm"
 #include "focus_only_tests.dm"
-#include "font_awesome_icons.dm"
 #include "food_edibility_check.dm"
 #include "full_heal.dm"
 #include "gas_transfer.dm"
@@ -158,13 +164,12 @@
 #include "human_through_recycler.dm"
 #include "hunger_curse.dm"
 #include "hydroponics_extractor_storage.dm"
-#include "hydroponics_harvest.dm"
-#include "hydroponics_self_mutations.dm"
 #include "hydroponics_validate_genes.dm"
 #include "inhands.dm"
 #include "json_savefile_importing.dm"
 #include "keybinding_init.dm"
 #include "knockoff_component.dm"
+<<<<<<< HEAD
 #include "language_transfer.dm"
 #include "leash.dm"
 #include "lesserform.dm"
@@ -173,6 +178,13 @@
 #include "liver.dm"
 #include "load_map_security.dm"
 #include "lootpanel.dm"
+=======
+#include "leash.dm"
+#include "lesserform.dm"
+#include "limbsanity.dm"
+#include "linked_xenobio_pens.dm"
+#include "load_map_security.dm"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #include "lungs.dm"
 #include "machine_disassembly.dm"
 #include "mafia.dm"
@@ -182,17 +194,18 @@
 #include "mecha_damage.dm"
 #include "medical_wounds.dm"
 #include "merge_type.dm"
-#include "metabolizing.dm"
 #include "mindbound_actions.dm"
 #include "missing_icons.dm"
 #include "mob_chains.dm"
+<<<<<<< HEAD
 #include "mob_damage.dm"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #include "mob_faction.dm"
 #include "mob_spawn.dm"
 #include "modify_fantasy_variable.dm"
 #include "modsuit.dm"
 #include "modular_map_loader.dm"
-#include "monkey_business.dm"
 #include "mouse_bite_cable.dm"
 #include "movement_order_sanity.dm"
 #include "mutant_hands_consistency.dm"
@@ -202,12 +215,16 @@
 #include "objectives.dm"
 #include "operating_table.dm"
 #include "orderable_items.dm"
+<<<<<<< HEAD
 #include "organ_bodypart_shuffle.dm"
 #include "organ_set_bonus.dm"
 #include "organs.dm"
 #include "orphaned_genturf.dm"
 #include "outfit_sanity.dm"
 #include "oxyloss_suffocation.dm"
+=======
+#include "organ_set_bonus.dm"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #include "paintings.dm"
 #include "pills.dm"
 #include "plane_double_transform.dm"
@@ -239,9 +256,7 @@
 #include "security_levels.dm"
 #include "security_officer_distribution.dm"
 #include "serving_tray.dm"
-#include "simple_animal_freeze.dm"
 #include "siunit.dm"
-#include "slime_mood.dm"
 #include "slips.dm"
 #include "spawn_humans.dm"
 #include "spawn_mobs.dm"

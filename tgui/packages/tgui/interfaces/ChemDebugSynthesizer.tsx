@@ -1,5 +1,16 @@
 import { useBackend } from '../backend';
+<<<<<<< HEAD
 import { Button, NumberInput, Section } from '../components';
+=======
+import {
+  AnimatedNumber,
+  Box,
+  Button,
+  LabeledList,
+  NumberInput,
+  Section,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 import { Beaker, BeakerDisplay } from './common/BeakerDisplay';
 
@@ -11,7 +22,18 @@ type Data = {
 
 export const ChemDebugSynthesizer = (props) => {
   const { act, data } = useBackend<Data>();
+<<<<<<< HEAD
   const { amount, purity, beaker } = data;
+=======
+  const {
+    amount,
+    purity,
+    beakerCurrentVolume,
+    beakerMaxVolume,
+    isBeakerLoaded,
+    beakerContents = [],
+  } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window width={390} height={330}>
@@ -62,7 +84,31 @@ export const ChemDebugSynthesizer = (props) => {
             )
           }
         >
+<<<<<<< HEAD
           <BeakerDisplay beaker={beaker} showpH />
+=======
+          {isBeakerLoaded ? (
+            <>
+              <Box>
+                <AnimatedNumber value={beakerCurrentVolume} />
+                {' / ' + beakerMaxVolume + ' u'}
+              </Box>
+              {beakerContents.length > 0 ? (
+                <LabeledList>
+                  {beakerContents.map((chem) => (
+                    <LabeledList.Item key={chem.name} label={chem.name}>
+                      {chem.volume} u
+                    </LabeledList.Item>
+                  ))}
+                </LabeledList>
+              ) : (
+                <Box color="bad">Recipient Empty</Box>
+              )}
+            </>
+          ) : (
+            <Box color="average">No Recipient</Box>
+          )}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Section>
       </Window.Content>
     </Window>

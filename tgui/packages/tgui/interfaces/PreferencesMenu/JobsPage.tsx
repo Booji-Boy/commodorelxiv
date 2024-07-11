@@ -1,7 +1,11 @@
 import { sortBy } from 'common/collections';
 import { classes } from 'common/react';
+<<<<<<< HEAD
 import { PropsWithChildren, ReactNode } from 'react';
 
+=======
+import { InfernoNode, Inferno } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../../backend';
 import { Box, Button, Dropdown, Stack, Tooltip } from '../../components';
 import {
@@ -18,7 +22,11 @@ const sortJobs = (entries: [string, Job][], head?: string) =>
     entries,
     ([key, _]) => (key === head ? -1 : 1),
     ([key, _]) => key,
+<<<<<<< HEAD
   );
+=======
+  )(entries);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const PRIORITY_BUTTON_SIZE = '18px';
 
@@ -115,10 +123,17 @@ const PriorityButtons = (props: {
   return (
     <Stack
       style={{
+<<<<<<< HEAD
         alignItems: 'center',
         height: '100%',
         justifyContent: 'flex-end',
         paddingLeft: '0.3em',
+=======
+        'align-items': 'center',
+        height: '100%',
+        'justify-content': 'flex-end',
+        'padding-left': '0.3em',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }}
     >
       {isOverflow ? (
@@ -182,12 +197,25 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
   const priority = data.job_preferences[name];
 
   const createSetPriority = createCreateSetPriorityFromName(name);
+<<<<<<< HEAD
+=======
+
+  const { act } = useBackend<PreferencesMenuData>();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const experienceNeeded =
     data.job_required_experience && data.job_required_experience[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
 
+<<<<<<< HEAD
   let rightSide: ReactNode;
+=======
+  const alt_title_selected = data.job_alt_titles[name]
+    ? data.job_alt_titles[name]
+    : name;
+
+  let rightSide: InfernoNode;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   if (experienceNeeded) {
     const { experience_type, required_playtime } = experienceNeeded;
@@ -227,29 +255,64 @@ const JobRow = (props: { className?: string; job: Job; name: string }) => {
   }
 
   return (
+<<<<<<< HEAD
     <Stack.Item className={className} height="100%" mt={0}>
       <Stack fill align="center">
         <Tooltip content={job.description} position="bottom-start">
+=======
+    <Box
+      className={className}
+      style={{
+        'margin-top': 0,
+      }}
+    >
+      <Stack>
+        <Tooltip content={job.description} position="right">
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           <Stack.Item
+            align="center"
             className="job-name"
             width="50%"
             style={{
+<<<<<<< HEAD
               paddingLeft: '0.3em',
             }}
           >
             {name}
+=======
+              'padding-left': '0.3em',
+            }}
+          >
+            {' '}
+            {!job.alt_titles ? (
+              name
+            ) : (
+              <Dropdown
+                width="100%"
+                options={job.alt_titles}
+                displayText={alt_title_selected}
+                onSelected={(value) =>
+                  act('set_job_title', { job: name, new_title: value })
+                }
+              />
+            )}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           </Stack.Item>
         </Tooltip>
 
-        <Stack.Item grow className="options">
+        <Stack.Item width="50%" className="options" /* SKYRAT EDIT */>
           {rightSide}
         </Stack.Item>
       </Stack>
-    </Stack.Item>
+    </Box>
   );
 };
 
+<<<<<<< HEAD
 const Department = (props: { department: string } & PropsWithChildren) => {
+=======
+const Department: Inferno.SFC<{ department: string }> = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { children, department: name } = props;
   const className = `PreferencesMenu__Jobs__departments--${name}`;
 

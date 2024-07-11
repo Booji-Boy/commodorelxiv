@@ -1,11 +1,20 @@
 import { useBackend } from '../backend';
 import {
+<<<<<<< HEAD
   AnimatedNumber,
   BlockQuote,
   Button,
   ProgressBar,
   Section,
   Table,
+=======
+  Button,
+  Section,
+  Table,
+  BlockQuote,
+  ProgressBar,
+  AnimatedNumber,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { NtosWindow } from '../layouts';
 

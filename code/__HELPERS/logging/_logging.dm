@@ -141,7 +141,15 @@ GLOBAL_LIST_INIT(testing_global_profiler, list("_PROFILE_NAME" = "Global"))
 		if(LOG_MECHA)
 			log_mecha(log_text, data)
 		if(LOG_SHUTTLE)
+<<<<<<< HEAD
 			log_shuttle(log_text, data)
+=======
+			log_shuttle(log_text)
+		if(LOG_MECHCOMP)
+			log_mechcomp(log_text)
+		if(LOG_BLACKMARKET)
+			log_blackmarket(log_text)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(LOG_SPEECH_INDICATORS)
 			log_speech_indicators(log_text, data)
 		else
@@ -262,3 +270,17 @@ GLOBAL_LIST_INIT(testing_global_profiler, list("_PROFILE_NAME" = "Global"))
 		return "([AREACOORD(T)])"
 	else if(A.loc)
 		return "(UNKNOWN (?, ?, ?))"
+
+
+
+/proc/log_cloning(text, mob/initiator)
+	logger.Log(LOG_CATEGORY_CLONING, text, list(initiator))
+
+/proc/log_mechcomp(text, list/data)
+	logger.Log(LOG_CATEGORY_MECHCOMP, text, data)
+
+/proc/log_blackmarket(text, list/data)
+	logger.Log(LOG_CATEGORY_BLACKMARKET, text, data)
+
+/proc/log_antag_rep(text, list/data)
+	logger.Log(LOG_CATEGORY_ANTAG_REP, text, data)

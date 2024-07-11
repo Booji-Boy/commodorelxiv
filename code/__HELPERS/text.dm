@@ -356,6 +356,10 @@
 		. = t[1]
 		return uppertext(.) + copytext(t, 1 + length(.))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Returns a string with the first letter of each word capitialized
 /proc/full_capitalize(input)
 	var/regex/first_letter = new(@"[^A-z]*?([A-z]*)", "g")
@@ -1191,6 +1195,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 		text2num(semver_regex.group[2]),
 		text2num(semver_regex.group[3]),
 	)
+<<<<<<< HEAD
 
 /// Returns TRUE if the input_text ends with the ending
 /proc/endswith(input_text, ending)
@@ -1203,3 +1208,5 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	for(var/iteration in 1 to length_char(text))
 		grawlix += pick("@", "$", "?", "!", "#", "§", "*", "£", "%", "☠", "★", "☆", "¿", "⚡")
 	return grawlix
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

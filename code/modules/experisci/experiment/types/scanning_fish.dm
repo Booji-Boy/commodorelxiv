@@ -10,7 +10,11 @@ GLOBAL_LIST_EMPTY(scanned_fish_by_techweb)
 	name = "Fish Scanning Experiment 1"
 	description = "An experiment requiring different fish species to be scanned to unlock the 'Beach' setting for the fishing portal generator."
 	performance_hint = "Scan fish. Examine scanner to review progress. Unlock new fishing portals."
+<<<<<<< HEAD
 	allowed_experimentors = list(/obj/item/experi_scanner, /obj/machinery/destructive_scanner, /obj/item/fishing_rod/tech, /obj/item/fish_analyzer)
+=======
+	allowed_experimentors = list(/obj/item/experi_scanner, /obj/machinery/destructive_scanner, /obj/item/fishing_rod/tech)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	traits = EXPERIMENT_TRAIT_TYPECACHE
 	points_reward = list(TECHWEB_POINT_TYPE_GENERIC = 750)
 	required_atoms = list(/obj/item/fish = 4)
@@ -63,7 +67,11 @@ GLOBAL_LIST_EMPTY(scanned_fish_by_techweb)
 	examine_list += message
 
 ///Only scannable fish will contribute towards the experiment.
+<<<<<<< HEAD
 /datum/experiment/scanning/fish/final_contributing_index_checks(datum/component/experiment_handler/experiment_handler, obj/item/fish/target, typepath)
+=======
+/datum/experiment/scanning/fish/final_contributing_index_checks(obj/item/fish/target, typepath)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return target.experisci_scannable
 
 /**
@@ -104,7 +112,11 @@ GLOBAL_LIST_EMPTY(scanned_fish_by_techweb)
 	fish_source_reward = /datum/fish_source/portal/random
 
 ///holo fishes are normally unscannable, but this is an experiment for them, so we don't care for the experisci_scannable variable.
+<<<<<<< HEAD
 /datum/experiment/scanning/fish/holographic/final_contributing_index_checks(datum/component/experiment_handler/experiment_handler, obj/item/fish/target, typepath)
+=======
+/datum/experiment/scanning/fish/holographic/final_contributing_index_checks(obj/item/fish/target, typepath)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /datum/experiment/scanning/fish/fourth

@@ -27,7 +27,7 @@
 		"Security" = /obj/machinery/door/airlock/security,
 		"Command" = /obj/machinery/door/airlock/command,
 		"Medical" = /obj/machinery/door/airlock/medical,
-		"Virology" = /obj/machinery/door/airlock/virology,
+		"Pathology" = /obj/machinery/door/airlock/virology,
 		"Research" = /obj/machinery/door/airlock/research,
 		"Hydroponics" = /obj/machinery/door/airlock/hydroponics,
 		"Freezer" = /obj/machinery/door/airlock/freezer,
@@ -219,11 +219,30 @@
 	. = ..()
 	stored_custom_color = stored_color
 
+<<<<<<< HEAD
 /obj/item/airlock_painter/decal/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(isfloorturf(interacting_with) && use_paint(user))
 		paint_floor(interacting_with)
 		return ITEM_INTERACT_SUCCESS
 	return NONE
+=======
+/obj/item/airlock_painter/decal/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		balloon_alert(user, "get closer!")
+		return
+
+	if(isfloorturf(target) && use_paint(user))
+		paint_floor(target)
+	//monkestation edit start
+	if(iswallturf(target) && use_paint(user) && stored_custom_color)
+		var/turf/closed/wall/temp = target
+		if(user.istate & ISTATE_SECONDARY)
+			temp.change_trim_color(stored_custom_color)
+		else
+			temp.change_paint_color(stored_custom_color)
+	//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Actually add current decal to the floor.

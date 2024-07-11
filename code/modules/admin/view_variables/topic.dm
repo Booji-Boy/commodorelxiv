@@ -100,8 +100,8 @@
 					L.adjustOrganLoss(ORGAN_SLOT_BRAIN, amount)
 					newamt = L.get_organ_loss(ORGAN_SLOT_BRAIN)
 				if("stamina")
-					L.adjustStaminaLoss(amount, forced = TRUE)
-					newamt = L.getStaminaLoss()
+					L.stamina.adjust(-amount, forced = TRUE)
+					newamt = L.stamina.loss
 				else
 					to_chat(usr, "You caused an error. DEBUG: Text:[Text] Mob:[L]", confidential = TRUE)
 					return

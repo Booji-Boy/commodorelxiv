@@ -84,7 +84,11 @@
 		var/min_wound = leg.get_wound_threshold_of_wound_type(WOUND_BLUNT, WOUND_SEVERITY_SEVERE, return_value_if_no_wound = 30, wound_source = weapon)
 		var/max_wound = leg.get_wound_threshold_of_wound_type(WOUND_BLUNT, WOUND_SEVERITY_CRITICAL, return_value_if_no_wound = 50, wound_source = weapon)
 
+<<<<<<< HEAD
 		leg.receive_damage(brute = weapon.force, wound_bonus = rand(min_wound, max_wound + 10), damage_source = "kneecapping")
+=======
+		leg.receive_damage(brute = weapon.force, wound_bonus = rand(min_wound, max_wound + 10))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		target.emote("scream")
 		log_combat(attacker, target, "broke the kneecaps of", weapon)
 		target.update_damage_overlays()

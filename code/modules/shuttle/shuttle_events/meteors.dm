@@ -2,8 +2,13 @@
 	spawning_list = list(/obj/effect/meteor)
 
 /datum/shuttle_event/simple_spawner/meteor/post_spawn(atom/movable/spawnee)
+<<<<<<< HEAD
 	. = ..()
 	ADD_TRAIT(spawnee, TRAIT_FREE_HYPERSPACE_MOVEMENT, INNATE_TRAIT)
+=======
+	ADD_TRAIT(spawnee, TRAIT_FREE_HYPERSPACE_MOVEMENT, src)
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/shuttle_event/simple_spawner/meteor/spawn_movable(spawn_type)
 	var/turf/spawn_turf = get_spawn_turf()

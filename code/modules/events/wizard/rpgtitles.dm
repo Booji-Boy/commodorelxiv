@@ -43,7 +43,11 @@ GLOBAL_DATUM(rpgtitle_controller, /datum/rpgtitle_controller)
 	//we must prepare for the mother of all strings
 	new_crewmember.maptext_height = max(new_crewmember.maptext_height, 32)
 	new_crewmember.maptext_width = max(new_crewmember.maptext_width, 112)
+<<<<<<< HEAD
 	new_crewmember.maptext_x = -38 - new_crewmember.base_pixel_x
+=======
+	new_crewmember.maptext_x = -24 - new_crewmember.base_pixel_x
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new_crewmember.maptext_y = -32
 
 	//list of lists involving strings related to a biotype flag, their position in the list equal to the position they were defined as bitflags.

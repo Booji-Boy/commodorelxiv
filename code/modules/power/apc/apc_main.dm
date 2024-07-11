@@ -24,7 +24,8 @@
 	processing_flags = START_PROCESSING_MANUALLY
 
 	///Range of the light emitted when on
-	var/light_on_range = 1.5
+	var/light_on_inner_range = 0.5
+	var/light_on_outer_range = 2.5
 	///Reference to our area
 	var/area/area
 	///Mapper helper to tie an apc to another area
@@ -618,6 +619,32 @@
 			cell.charge = cell.maxcharge
 			charging = APC_FULLY_CHARGED
 
+<<<<<<< HEAD
+=======
+		if(chargemode)
+			if(!charging)
+				if(excess > cell.maxcharge*GLOB.CHARGELEVEL)
+					chargecount++
+				else
+					chargecount = 0
+
+				if(chargecount == 10)
+
+					chargecount = 0
+					charging = APC_CHARGING
+
+		else // chargemode off
+			charging = APC_NOT_CHARGING
+			chargecount = 0
+
+		// MONKESTATION ADDITION START - CLOCK CULT
+		if(integration_cog && GLOB.clock_power < GLOB.max_clock_power)
+			var/power_delta = clamp(cell.charge - 10, 0, 10)
+			GLOB.clock_power = min(round(GLOB.clock_power + (power_delta)), GLOB.max_clock_power)
+			cell.charge -= power_delta
+		// MONKESTATION ADDITION END
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else // no cell, switch everything off
 		charging = APC_NOT_CHARGING
 		equipment = autoset(equipment, AUTOSET_FORCE_OFF)
@@ -716,6 +743,7 @@
 /// Used for full_charge apc helper, which sets apc charge to 100%.
 /obj/machinery/power/apc/proc/set_full_charge()
 	cell.charge = cell.maxcharge
+<<<<<<< HEAD
 
 /// Returns the cell's current charge.
 /obj/machinery/power/apc/proc/charge()
@@ -735,6 +763,8 @@
 /// Draws power from the connected grid. When there isn't enough surplus energy from the grid, draws the rest of the demand from its cell. Returns the energy used.
 /obj/machinery/power/apc/proc/draw_power(amount)
 	return draw_energy(power_to_energy(amount))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*Power module, used for APC construction*/
 /obj/item/electronics/apc

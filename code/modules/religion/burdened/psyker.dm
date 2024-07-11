@@ -129,7 +129,11 @@
 	icon_state = "lucky"
 	force = 10
 	fire_sound = 'sound/weapons/gun/revolver/shot.ogg'
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/revchap
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev77
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	obj_flags = UNIQUE_RENAME
 	custom_materials = null
 	actions_types = list(/datum/action/item_action/pray_refill)
@@ -176,6 +180,7 @@
 /obj/item/gun/ballistic/revolver/chaplain/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY)
+<<<<<<< HEAD
 	AddComponent(/datum/component/effect_remover, \
 		success_feedback = "You disrupt the magic of %THEEFFECT with %THEWEAPON.", \
 		success_forcesay = "BEGONE FOUL MAGIKS!!", \
@@ -183,6 +188,8 @@
 		on_clear_callback = CALLBACK(src, PROC_REF(on_cult_rune_removed)), \
 		effects_we_clear = list(/obj/effect/rune, /obj/effect/heretic_rune, /obj/effect/cosmic_rune), \
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/bane, target_type = /mob/living/basic/revenant, damage_multiplier = 0, added_damage = 25)
 	name = pick(possible_names)
 	desc = possible_names[name]

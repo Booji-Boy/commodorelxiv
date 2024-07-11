@@ -42,5 +42,8 @@
 		ANNOUNCER_SHUTTLEDOCK = 'sound/ai/intern/shuttledock.ogg',
 		ANNOUNCER_SHUTTLERECALLED = 'sound/ai/intern/shuttlerecalled.ogg',
 		ANNOUNCER_SPANOMALIES = 'sound/ai/intern/spanomalies.ogg')
+<<<<<<< HEAD
 
 	custom_alert_message = "<span class='alert'>Please stand by for an important message from our new intern.</span><br>"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -8,6 +8,7 @@
 
 	body_parts_covered = FEET
 	slot_flags = ITEM_SLOT_FEET
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION
 
 	armor_type = /datum/armor/clothing_shoes
 	slowdown = SHOES_SLOWDOWN
@@ -199,12 +200,21 @@
 			user.visible_message(span_danger("[our_guy] stamps on [user]'s hand, mid-shoelace [tied ? "knotting" : "untying"]!"), span_userdanger("Ow! [our_guy] stamps on your hand!"), list(our_guy))
 			to_chat(our_guy, span_userdanger("You stamp on [user]'s hand! What the- [user.p_they()] [user.p_were()] [tied ? "knotting" : "untying"] your shoelaces!"))
 			user.emote("scream")
+<<<<<<< HEAD
 			if(istype(living_user))
 				var/obj/item/bodypart/ouchie = living_user.get_bodypart(pick(GLOB.arm_zones))
 				if(ouchie)
 					ouchie.receive_damage(brute = 10)
 				living_user.adjustStaminaLoss(40)
 				living_user.Paralyze(10)
+=======
+			if(istype(L))
+				var/obj/item/bodypart/ouchie = L.get_bodypart(pick(GLOB.arm_zones))
+				if(ouchie)
+					ouchie.receive_damage(brute = 10)
+				L.stamina.adjust(-40)
+				L.Paralyze(10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///checking to make sure we're still on the person we're supposed to be, for lacing do_after's
 /obj/item/clothing/shoes/proc/still_shoed(mob/living/carbon/our_guy)

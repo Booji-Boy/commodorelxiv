@@ -39,7 +39,11 @@
 	  */
 	var/list/_listen_lookup
 	/// Lazy associated list in the structure of `target -> list(signal -> proctype)` that are run when the datum receives that signal
+<<<<<<< HEAD
 	var/list/list/_signal_procs
+=======
+	var/list/list/datum/callback/_signal_procs
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// Datum level flags
 	var/datum_flags = NONE

@@ -2,6 +2,7 @@ import { BooleanLike } from 'common/react';
 
 import { useBackend } from '../backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   LabeledList,
@@ -10,6 +11,16 @@ import {
   Section,
   Slider,
   Tooltip,
+=======
+  Tooltip,
+  Box,
+  Slider,
+  ProgressBar,
+  NoticeBox,
+  Button,
+  LabeledList,
+  Section,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -60,6 +71,7 @@ export const IVDrip = (props) => {
       <Window.Content>
         <Section fill>
           <LabeledList>
+<<<<<<< HEAD
             <LabeledList.Item
               label="Flow Rate"
               buttons={
@@ -70,6 +82,51 @@ export const IVDrip = (props) => {
                     align="center"
                     icon="angles-left"
                     onClick={() =>
+=======
+            {mode === MODE.injecting && injectFromPlumbing ? ( // Plumbing drip injects with the rate from network
+              <LabeledList.Item label="Flow Rate">
+                Controlled by the plumbing network
+              </LabeledList.Item>
+            ) : (
+              !!canAdjustTransfer && (
+                <LabeledList.Item
+                  label="Flow Rate"
+                  buttons={
+                    <Box>
+                      <Button
+                        width={4}
+                        lineHeight={2}
+                        align="center"
+                        icon="angles-left"
+                        onClick={() =>
+                          act('changeRate', {
+                            rate: minTransferRate,
+                          })
+                        }
+                      />
+                      <Button
+                        width={4}
+                        lineHeight={2}
+                        align="center"
+                        icon="angles-right"
+                        onClick={() =>
+                          act('changeRate', {
+                            rate: maxTransferRate,
+                          })
+                        }
+                      />
+                    </Box>
+                  }
+                >
+                  <Slider
+                    step={transferStep}
+                    my={1}
+                    value={transferRate}
+                    minValue={minTransferRate}
+                    maxValue={maxTransferRate}
+                    unit="units/sec."
+                    onDrag={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       act('changeRate', {
                         rate: minTransferRate,
                       })
@@ -152,7 +209,11 @@ export const IVDrip = (props) => {
                 >
                   <span
                     style={{
+<<<<<<< HEAD
                       textShadow: '1px 1px 0 black',
+=======
+                      'text-shadow': '1px 1px 0 black',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     }}
                   >
                     {`${containerCurrentVolume} of ${containerMaxVolume} units`}

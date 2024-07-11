@@ -5,10 +5,13 @@
 	},
 /turf/open/cliff/snowrock/virtual_domain,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "bU" = (
 /mob/living/basic/bear/snow/ancient,
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cu" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
@@ -23,10 +26,13 @@
 /obj/structure/chair/sofa/bench,
 /turf/open/floor/plating/snowed/smoothed,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "cS" = (
 /obj/structure/barricade/wooden/snowed,
 /turf/open/floor/iron/stairs,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dR" = (
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
@@ -42,6 +48,7 @@
 /obj/structure/railing/corner,
 /turf/open/cliff/snowrock/virtual_domain,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "gF" = (
 /obj/effect/landmark/bitrunning/curiosity_spawn,
 /turf/open/misc/asteroid/snow,
@@ -59,6 +66,8 @@
 	},
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "hE" = (
 /turf/open/floor/wood,
 /area/icemoon/underground/explored/virtual_domain)
@@ -81,10 +90,13 @@
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "mr" = (
 /obj/structure/fluff/fokoff_sign,
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "mx" = (
 /obj/structure/railing,
 /obj/structure/railing{
@@ -106,6 +118,7 @@
 	},
 /turf/open/floor/wood,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "nY" = (
 /obj/structure/railing{
 	dir = 1
@@ -113,6 +126,8 @@
 /obj/structure/railing,
 /turf/open/floor/wood,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "pl" = (
 /obj/structure/bonfire/prelit,
 /turf/open/misc/asteroid/snow,
@@ -139,9 +154,13 @@
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "vz" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "ice"
 	},
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "xB" = (
@@ -184,6 +203,7 @@
 /obj/effect/decal/remains/plasma,
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "Dz" = (
 /obj/structure/railing/corner/end{
 	dir = 4
@@ -193,6 +213,8 @@
 	},
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "DB" = (
 /obj/structure/flora/rock/icy/style_random,
 /obj/structure/flora/rock/pile/icy/style_random,
@@ -242,6 +264,7 @@
 /obj/structure/flora/grass/green/style_random,
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "MP" = (
 /obj/structure/railing/corner/end/flip{
 	dir = 4
@@ -251,6 +274,8 @@
 	},
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "MT" = (
 /obj/structure/railing/corner{
 	dir = 8
@@ -260,6 +285,7 @@
 "Nv" = (
 /turf/open/floor/iron/stairs,
 /area/icemoon/underground/explored/virtual_domain)
+<<<<<<< HEAD
 "NM" = (
 /obj/structure/railing/corner/end/flip{
 	dir = 8
@@ -269,6 +295,8 @@
 	},
 /turf/open/misc/asteroid/snow,
 /area/icemoon/underground/explored/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Pl" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
@@ -624,10 +652,17 @@ dR
 dR
 dR
 dR
+<<<<<<< HEAD
 Nv
 Nv
 Nv
 dR
+=======
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -699,6 +734,7 @@ Qv
 Qv
 kK
 sw
+<<<<<<< HEAD
 gY
 dR
 sM
@@ -716,6 +752,25 @@ sM
 sM
 qc
 gF
+=======
+dR
+dR
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -781,6 +836,7 @@ dR
 sM
 sM
 sM
+<<<<<<< HEAD
 sa
 sM
 sM
@@ -793,6 +849,20 @@ sM
 sM
 Dz
 dR
+=======
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -854,6 +924,7 @@ Qv
 eB
 sw
 dR
+<<<<<<< HEAD
 mr
 sM
 sM
@@ -869,6 +940,23 @@ gY
 sM
 sM
 nY
+=======
+dR
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -928,16 +1016,24 @@ Am
 Am
 Qv
 Qv
+<<<<<<< HEAD
 mr
 eB
 dR
 dR
+=======
+dR
+eB
+dR
+sw
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 dR
 sM
 sM
 sM
 sM
 sM
+<<<<<<< HEAD
 kK
 dR
 bU
@@ -946,6 +1042,16 @@ dR
 cS
 Nv
 hc
+=======
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1016,10 +1122,17 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 dR
 sa
 gY
 dR
+=======
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1090,6 +1203,7 @@ dR
 sM
 sM
 sM
+<<<<<<< HEAD
 pL
 sM
 sM
@@ -1097,6 +1211,15 @@ sw
 dR
 dR
 sa
+=======
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1167,6 +1290,7 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 pL
 pL
 sM
@@ -1174,6 +1298,15 @@ sM
 dR
 dR
 sw
+=======
+sM
+sM
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1244,8 +1377,13 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 pL
 pL
+=======
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1322,11 +1460,19 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 pL
 pL
 pL
 pL
 pL
+=======
+sM
+sM
+sM
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -1400,8 +1546,13 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 pL
 pL
+=======
+sM
+sM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -2494,7 +2645,11 @@ sM
 sM
 sM
 sM
+<<<<<<< HEAD
 MP
+=======
+dR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -2802,7 +2957,11 @@ dR
 sM
 sM
 sM
+<<<<<<< HEAD
 NM
+=======
+dR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -4332,7 +4491,11 @@ sM
 sM
 sM
 sw
+<<<<<<< HEAD
 Dz
+=======
+dR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -4717,7 +4880,11 @@ sM
 sM
 sM
 dR
+<<<<<<< HEAD
 hc
+=======
+dR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM

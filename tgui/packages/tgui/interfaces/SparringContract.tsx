@@ -53,10 +53,16 @@ export const SparringContract = (props) => {
     no_chaplains,
     stakes_holy_match,
   } = data;
+<<<<<<< HEAD
   const [weapon, setWeapon] = useState(set_weapon);
   const [area, setArea] = useState(set_area);
   const [stakes, setStakes] = useState(set_stakes);
 
+=======
+  const [weapon, setWeapon] = useLocalState('weapon', set_weapon);
+  const [area, setArea] = useLocalState('area', set_area);
+  const [stakes, setStakes] = useLocalState('stakes', set_stakes);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window width={420} height={380}>
       <Window.Content>

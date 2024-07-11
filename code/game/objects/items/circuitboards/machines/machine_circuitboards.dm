@@ -178,20 +178,32 @@
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/modular_shield_generator
 	req_components = list(
+<<<<<<< HEAD
 		/datum/stock_part/servo = 1,
 		/datum/stock_part/micro_laser = 1,
 		/datum/stock_part/capacitor = 1,
 		/obj/item/stack/sheet/plasteel = 3,
 	)
+=======
+		/datum/stock_part/manipulator = 1,
+		/datum/stock_part/micro_laser = 1,
+		/datum/stock_part/capacitor = 1,
+		/obj/item/stack/sheet/plasteel = 3,)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/modular_shield_node
 	name = "Modular Shield Node"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/modular_shield/module/node
 	req_components = list(
+<<<<<<< HEAD
 		/obj/item/stack/cable_coil = 15,
 		/obj/item/stack/sheet/plasteel = 2,
 	)
+=======
+		/obj/item/stack/cable_coil = 3, //monke edit 15 to 3
+		/obj/item/stack/sheet/plasteel = 2,)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/modular_shield_well
 	name = "Modular Shield Well"
@@ -199,8 +211,12 @@
 	build_path = /obj/machinery/modular_shield/module/well
 	req_components = list(
 		/datum/stock_part/capacitor = 3,
+<<<<<<< HEAD
 		/obj/item/stack/sheet/plasteel = 2,
 	)
+=======
+		/obj/item/stack/sheet/plasteel = 2,)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/modular_shield_relay
 	name = "Modular Shield Relay"
@@ -208,17 +224,26 @@
 	build_path = /obj/machinery/modular_shield/module/relay
 	req_components = list(
 		/datum/stock_part/micro_laser = 3,
+<<<<<<< HEAD
 		/obj/item/stack/sheet/plasteel = 2,
 	)
+=======
+		/obj/item/stack/sheet/plasteel = 2,)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/modular_shield_charger
 	name = "Modular Shield Charger"
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/modular_shield/module/charger
 	req_components = list(
+<<<<<<< HEAD
 		/datum/stock_part/servo = 3,
 		/obj/item/stack/sheet/plasteel = 2,
 	)
+=======
+		/datum/stock_part/manipulator = 3,
+		/obj/item/stack/sheet/plasteel = 2,)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/cell_charger
 	name = "Cell Charger"
@@ -641,6 +666,7 @@
 		/obj/machinery/vending/sovietsoda = "BODA",
 		/obj/machinery/vending/sustenance = "Sustenance Vendor",
 		/obj/machinery/vending/tool = "YouTool",
+<<<<<<< HEAD
 		/obj/machinery/vending/wallmed = "NanoMed",
 		/obj/machinery/vending/wardrobe/atmos_wardrobe = "AtmosDrobe",
 		/obj/machinery/vending/wardrobe/bar_wardrobe = "BarDrobe",
@@ -662,6 +688,13 @@
 		/obj/machinery/vending/wardrobe/sec_wardrobe = "SecDrobe",
 		/obj/machinery/vending/wardrobe/viro_wardrobe = "ViroDrobe",
 	)
+=======
+		/obj/machinery/vending/custom = "Custom Vendor",
+		/obj/machinery/vending/imported = "NT Sustenance Supplier",
+		/obj/machinery/vending/imported/yangyu = "Fudobenda",
+		/obj/machinery/vending/imported/mothic = "Nomad Fleet Ration Chit Exchange",
+		/obj/machinery/vending/imported/tizirian = "Tizirian Imported Delicacies",)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/circuitboard/machine/vendor/screwdriver_act(mob/living/user, obj/item/tool)
 	var/static/list/display_vending_names_paths
@@ -965,6 +998,7 @@
 		/datum/stock_part/micro_laser = 1,
 	)
 
+<<<<<<< HEAD
 /obj/item/circuitboard/machine/experimentor
 	name = "E.X.P.E.R.I-MENTOR"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
@@ -974,6 +1008,8 @@
 		/datum/stock_part/servo = 2,
 		/datum/stock_part/micro_laser = 2)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/circuitboard/machine/mech_recharger
 	name = "Mechbay Recharger"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
@@ -992,6 +1028,7 @@
 		/datum/stock_part/micro_laser = 1,
 		/obj/item/stack/sheet/glass = 1)
 
+<<<<<<< HEAD
 /obj/item/circuitboard/machine/monkey_recycler
 	name = "Monkey Recycler"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
@@ -1006,6 +1043,8 @@
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
 	build_path = /obj/machinery/processor/slime
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/circuitboard/machine/protolathe/department/science
 	name = "Departmental Protolathe - Science"
 	greyscale_colors = CIRCUIT_COLOR_SCIENCE
@@ -1120,7 +1159,11 @@
 	build_path = /obj/machinery/photobooth
 	req_components = list(
 		/datum/stock_part/matter_bin = 1,
+<<<<<<< HEAD
 		/datum/stock_part/servo = 1,
+=======
+		/datum/stock_part/manipulator = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /obj/item/circuitboard/machine/photobooth/security
@@ -1246,7 +1289,7 @@
 /obj/item/circuitboard/machine/hydroponics
 	name = "Hydroponics Tray"
 	greyscale_colors = CIRCUIT_COLOR_SERVICE
-	build_path = /obj/machinery/hydroponics/constructable
+	build_path = /obj/machinery/growing/tray
 	req_components = list(
 		/datum/stock_part/matter_bin = 2,
 		/datum/stock_part/servo = 1,
@@ -1286,14 +1329,9 @@
 	needs_anchored = FALSE
 
 /obj/item/circuitboard/machine/processor/screwdriver_act(mob/living/user, obj/item/tool)
-	if(build_path == /obj/machinery/processor)
-		name = "Slime Processor"
-		build_path = /obj/machinery/processor/slime
-		to_chat(user, span_notice("Name protocols successfully updated."))
-	else
-		name = "Food Processor"
-		build_path = /obj/machinery/processor
-		to_chat(user, span_notice("Defaulting name protocols."))
+	name = "Food Processor"
+	build_path = /obj/machinery/processor
+	to_chat(user, span_notice("Defaulting name protocols."))
 	return TRUE
 
 /obj/item/circuitboard/machine/protolathe/department/service
@@ -1386,6 +1424,7 @@
 	name = "\improper Departmental Techfab - Cargo"
 	greyscale_colors = CIRCUIT_COLOR_SUPPLY
 	build_path = /obj/machinery/rnd/production/techfab/department/cargo
+<<<<<<< HEAD
 
 /obj/item/circuitboard/machine/materials_market
 	name = "Galactic Materials Market"
@@ -1411,6 +1450,8 @@
 		/obj/item/assembly/prox_sensor = 1,
 	)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Misc
 /obj/item/circuitboard/machine/sheetifier
 	name = "Sheet-meister 2000"
@@ -1554,6 +1595,44 @@
 		/datum/stock_part/capacitor/tier2 = 1,
 		/datum/stock_part/micro_laser/tier2 = 2,
 	)
+
+/obj/item/circuitboard/machine/plantgenes
+	name = "Gene Modder"
+	greyscale_colors = CIRCUIT_COLOR_SERVICE
+	build_path = /obj/machinery/plantgenes
+	req_components = list(
+		/obj/item/stock_parts/manipulator = 1,
+		/obj/item/stock_parts/micro_laser = 1,
+		/obj/item/stack/sheet/glass = 1,
+		/obj/item/stock_parts/scanning_module = 1)
+
+/obj/item/circuitboard/machine/artifactxray
+	name = "Artifact X-Ray Machine"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/artifact_xray
+	req_components = list(
+		/obj/item/stock_parts/capacitor = 1,
+		/datum/stock_part/scanning_module = 1,
+		/obj/item/stock_parts/micro_laser = 1)
+
+/obj/item/circuitboard/machine/artifactheater
+	name = "Artifact Heating Pad"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/atmospherics/components/unary/artifact_heatingpad
+	req_components = list(
+		/datum/stock_part/matter_bin = 2,
+		/obj/item/stack/cable_coil = 1,
+		/obj/item/stack/sheet/glass = 1)
+
+/obj/item/circuitboard/machine/artifactzapper
+	name = "Artifact Zapper"
+	greyscale_colors = CIRCUIT_COLOR_SCIENCE
+	build_path = /obj/machinery/artifact_zapper
+	req_components = list(
+		/datum/stock_part/capacitor = 2,
+		/datum/stock_part/scanning_module = 1,
+		/obj/item/stack/cable_coil = 1,
+		/obj/item/stack/sheet/glass = 3)
 
 /obj/item/circuitboard/machine/navbeacon
 	name = "Bot Navigational Beacon"

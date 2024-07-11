@@ -8,7 +8,7 @@
 	speak_emote = list("wails", "weeps")
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	basic_mob_flags = DEL_ON_DEATH
 	maxHealth = 40
 	health = 40
@@ -23,8 +23,13 @@
 	death_message = "wails, disintegrating into a pile of ectoplasm!"
 	gold_core_spawnable = NO_SPAWN //too spooky for science
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 2.5 // same glowing as visible player ghosts
 	light_power = 0.6
+=======
+	light_outer_range = 1 // same glowing as visible player ghosts
+	light_power = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller = /datum/ai_controller/basic_controller/ghost
 
 	///What hairstyle will this ghost have

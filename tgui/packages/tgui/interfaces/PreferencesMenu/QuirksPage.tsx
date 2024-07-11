@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 import { filter } from 'common/collections';
 import { useState } from 'react';
+=======
+import type { Inferno } from 'inferno';
+import { Box, Icon, Stack, Tooltip } from '../../components';
+import { PreferencesMenuData, Quirk } from './data';
+import { useBackend, useLocalState } from '../../backend';
+import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { useBackend } from '../../backend';
 import { Box, Button, Icon, Popper, Stack, Tooltip } from '../../components';
@@ -35,8 +43,18 @@ type QuirkListProps = {
   quirks: QuirkEntry[];
 };
 
+<<<<<<< HEAD
 type QuirkProps = {
   // eslint-disable-next-line react/no-unused-prop-types
+=======
+const QuirkList = (props: {
+  quirks: [
+    string,
+    Quirk & {
+      failTooltip?: string;
+    },
+  ][];
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   onClick: (quirkName: string, quirk: Quirk) => void;
   randomBodyEnabled: boolean;
   selected: boolean;
@@ -55,6 +73,7 @@ function QuirkList(props: QuirkProps & QuirkListProps) {
   return (
     // Stack is not used here for a variety of IE flex bugs
     <Box className="PreferencesMenu__Quirks__QuirkList">
+<<<<<<< HEAD
       {quirks.map(([quirkKey, quirk]) => (
         <QuirkDisplay
           key={quirkKey}
@@ -66,6 +85,96 @@ function QuirkList(props: QuirkProps & QuirkListProps) {
           serverData={serverData}
         />
       ))}
+=======
+      {props.quirks.map(([quirkKey, quirk]) => {
+        const className = 'PreferencesMenu__Quirks__QuirkList__quirk';
+
+        const child = (
+          <Box
+            className={className}
+            key={quirkKey}
+            role="button"
+            tabIndex="1"
+            onClick={() => {
+              props.onClick(quirkKey, quirk);
+            }}
+          >
+            <Stack fill>
+              <Stack.Item
+                align="center"
+                style={{
+                  'min-width': '15%',
+                  'max-width': '15%',
+                  'text-align': 'center',
+                }}
+              >
+                <Icon color="#333" fontSize={3} name={quirk.icon} />
+              </Stack.Item>
+
+              <Stack.Item
+                align="stretch"
+                style={{
+                  'border-right': '1px solid black',
+                  'margin-left': 0,
+                }}
+              />
+
+              <Stack.Item
+                grow
+                style={{
+                  'margin-left': 0,
+
+                  // Fixes an IE bug for text overflowing in Flex boxes
+                  'min-width': '0%',
+                }}
+              >
+                <Stack vertical fill>
+                  <Stack.Item
+                    className={`${className}--${getValueClass(quirk.value)}`}
+                    style={{
+                      'border-bottom': '1px solid black',
+                      padding: '2px',
+                    }}
+                  >
+                    <Stack
+                      fill
+                      style={{
+                        'font-size': '1.2em',
+                      }}
+                    >
+                      <Stack.Item grow basis="content">
+                        <b>{quirk.name}</b>
+                      </Stack.Item>
+
+                      <Stack.Item>
+                        <b>{quirk.value}</b>
+                      </Stack.Item>
+                    </Stack>
+                  </Stack.Item>
+
+                  <Stack.Item
+                    grow
+                    basis="content"
+                    style={{
+                      'margin-top': 0,
+                      padding: '3px',
+                    }}
+                  >
+                    {quirk.description}
+                  </Stack.Item>
+                </Stack>
+              </Stack.Item>
+            </Stack>
+          </Box>
+        );
+
+        if (quirk.failTooltip) {
+          return <Tooltip content={quirk.failTooltip}>{child}</Tooltip>;
+        } else {
+          return child;
+        }
+      })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     </Box>
   );
 }
@@ -276,6 +385,10 @@ function QuirkPopper(props: QuirkPopperProps) {
 function StatDisplay(props) {
   const { children } = props;
 
+<<<<<<< HEAD
+=======
+const StatDisplay: Inferno.StatelessComponent<{}> = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Box
       backgroundColor="#eee"
@@ -285,11 +398,16 @@ function StatDisplay(props) {
       px={3}
       py={0.5}
     >
+<<<<<<< HEAD
       {children}
+=======
+      {props.children}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     </Box>
   );
 }
 
+<<<<<<< HEAD
 export function QuirksPage(props) {
   const { act, data } = useBackend<PreferencesMenuData>();
 
@@ -300,6 +418,15 @@ export function QuirksPage(props) {
       RandomSetting.Disabled || randomToggleEnabled;
 
   const [selectedQuirks, setSelectedQuirks] = useState(data.selected_quirks);
+=======
+export const QuirksPage = (props) => {
+  const { act, data } = useBackend<PreferencesMenuData>();
+
+  const [selectedQuirks, setSelectedQuirks] = useLocalState(
+    `selectedQuirks_${data.active_slot}`,
+    data.selected_quirks,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <ServerPreferencesFetcher

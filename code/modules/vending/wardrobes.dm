@@ -50,6 +50,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/rank/security/officer/grey = 3,
 		/obj/item/clothing/under/pants/slacks = 3,
 		/obj/item/clothing/under/rank/security/officer/blueshirt = 3,
+<<<<<<< HEAD
 		/obj/item/clothing/suit/armor/vest/secjacket = 3,
 		/obj/item/clothing/suit/hooded/wintercoat/security = 3,
 		/obj/item/clothing/suit/armor/vest = 3,
@@ -59,11 +60,29 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/storage/backpack/satchel/sec = 3,
 		/obj/item/storage/backpack/duffelbag/sec = 3,
 		/obj/item/storage/backpack/messenger/sec = 3,
+=======
+		/obj/item/clothing/suit/armor/secduster = 3,
+		/obj/item/clothing/head/helmet/hat/cowboy = 3,
+		/obj/item/clothing/head/costume/constable = 3, //monkestation edit
+		/obj/item/clothing/under/rank/security/constable = 3, //Monkestation edit
+		/obj/item/clothing/under/rank/security/brig_physician = 3, //Monkestation edit
+		/obj/item/clothing/under/rank/security/brig_physician/skirt = 3, //Monkestation edit
+		/obj/item/clothing/suit/toggle/labcoat/brig_physician = 3, //Monkestation edit
+		/obj/item/clothing/shoes/sneakers/secred = 3, //Monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	premium = list(
 		/obj/item/clothing/under/rank/security/officer/formal = 3,
 		/obj/item/clothing/suit/jacket/officer/blue = 3,
 		/obj/item/clothing/head/beret/sec/navyofficer = 3,
+		/obj/item/clothing/suit/armor/secduster/engineering = 2,
+		/obj/item/clothing/head/helmet/hat/cowboy/engineering = 2,
+		/obj/item/clothing/suit/armor/secduster/medical = 2,
+		/obj/item/clothing/head/helmet/hat/cowboy/medical = 2,
+		/obj/item/clothing/suit/armor/secduster/cargo = 2,
+		/obj/item/clothing/head/helmet/hat/cowboy/cargo = 2,
+		/obj/item/clothing/suit/armor/secduster/science = 2,
+		/obj/item/clothing/head/helmet/hat/cowboy/science = 2
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
@@ -206,6 +225,11 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/head/costume/mailman = 1,
 		/obj/item/clothing/under/misc/mailman = 1,
 		/obj/item/clothing/under/rank/cargo/miner = 3,
+	)
+	contraband = list(
+		/obj/item/clothing/under/wonka = 1,
+		/obj/item/clothing/head/wonka = 1,
+		/obj/item/cane = 1
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/cargo_wardrobe
 	payment_department = ACCOUNT_CAR
@@ -388,6 +412,27 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	product_ads = "Guaranteed to prevent stains from spilled drinks!"
 	vend_reply = "Thank you for using the BarDrobe!"
 	products = list(
+<<<<<<< HEAD
+=======
+		/obj/item/clothing/head/hats/tophat = 2,
+		/obj/item/radio/headset/headset_srv = 2,
+		/obj/item/clothing/under/suit/sl = 2,
+		/obj/item/clothing/under/rank/civilian/bartender = 2,
+		/obj/item/clothing/under/rank/civilian/bartender/purple = 2,
+		/obj/item/clothing/under/rank/civilian/bartender/skirt = 2,
+		/obj/item/clothing/under/costume/playbunny = 2, // MONKESTATION EDIT ADDITION
+		/obj/item/clothing/neck/tie/bunnytie = 2, // MONKESTATION EDIT ADDITION
+		/obj/item/clothing/accessory/waistcoat = 2,
+		/obj/item/clothing/suit/apron/purple_bartender = 2,
+		/obj/item/clothing/head/soft/black = 2,
+		/obj/item/clothing/head/playbunnyears = 2, // MONKESTATION EDIT ADDITION
+		/obj/item/clothing/shoes/sneakers/black = 2,
+		/obj/item/clothing/shoes/heels = 2, // MONKESTATION EDIT ADDITION
+		/obj/item/reagent_containers/cup/rag = 2,
+		/obj/item/storage/box/beanbag = 1,
+		/obj/item/clothing/suit/armor/vest/alt = 1,
+		/obj/item/circuitboard/machine/dish_drive = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/clothing/glasses/sunglasses/reagent = 1,
 		/obj/item/clothing/accessory/waistcoat = 2,
 		/obj/item/clothing/head/hats/tophat = 2,
@@ -410,6 +455,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 	)
 	premium = list(
 		/obj/item/storage/box/dishdrive = 1,
+		/obj/item/clothing/suit/jacket/tailcoat/bartender = 2, // MONKESTATION EDIT ADDITION
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/bar_wardrobe
 	payment_department = ACCOUNT_MED
@@ -438,8 +484,20 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/shoes/sneakers/black = 2,
 		/obj/item/storage/box/mousetraps = 2,
 		/obj/item/circuitboard/machine/dish_drive = 1,
+<<<<<<< HEAD
 		/obj/item/reagent_containers/cup/rag = 2,
 		/obj/item/radio/headset/headset_srv = 2,
+=======
+		/obj/item/clothing/suit/toggle/chef = 1,
+		/obj/item/clothing/under/rank/civilian/chef = 1,
+		/obj/item/clothing/under/rank/civilian/chef/skirt = 2,
+		/obj/item/clothing/head/utility/chefhat = 1,
+		/obj/item/clothing/under/rank/civilian/cookjorts = 2,
+		/obj/item/clothing/shoes/cookflops = 2,
+		/obj/item/reagent_containers/cup/rag = 1,
+		/obj/item/clothing/suit/hooded/wintercoat = 2,
+		/obj/item/clothing/under/artisan = 2, //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	refill_canister = /obj/item/vending_refill/wardrobe/chef_wardrobe
 	payment_department = ACCOUNT_SRV
@@ -518,6 +576,11 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/clothing/under/rank/civilian/lawyer/black = 1,
 		/obj/item/clothing/under/rank/civilian/lawyer/black/skirt = 1,
 		/obj/item/clothing/shoes/laceup = 2,
+<<<<<<< HEAD
+=======
+		/obj/item/clothing/shoes/heels = 2, //MONKESTATION ADDITION
+		/obj/item/clothing/accessory/lawyers_badge = 2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/radio/headset/headset_srv = 2,
 		/obj/item/storage/box/evidence = 2,
 		/obj/item/fish_feed = 1,

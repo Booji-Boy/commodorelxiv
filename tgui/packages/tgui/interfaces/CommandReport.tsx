@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -117,7 +121,11 @@ const AnnouncementColor = (props) => {
     <Section title="Set announcement color" textAlign="center">
       <Dropdown
         width="100%"
+<<<<<<< HEAD
         selected={announcement_color}
+=======
+        displayText={announcement_color}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         options={announcement_colors}
         onSelected={(value) =>
           act('update_announcement_color', {
@@ -154,7 +162,14 @@ const AnnouncementSound = (props) => {
 const ReportText = (props) => {
   const { act, data } = useBackend<Data>();
   const { announce_contents, print_report, command_report_content } = data;
+<<<<<<< HEAD
   const [commandReport, setCommandReport] = useState(command_report_content);
+=======
+  const [commandReport, setCommandReport] = useLocalState<string>(
+    'textArea',
+    command_report_content,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Section title="Set report text" textAlign="center">
@@ -168,14 +183,22 @@ const ReportText = (props) => {
         <Stack.Item>
           <Button.Checkbox
             fluid
+<<<<<<< HEAD
             checked={!!announce_contents}
+=======
+            checked={announce_contents}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             onClick={() => act('toggle_announce')}
           >
             Announce Contents
           </Button.Checkbox>
           <Button.Checkbox
             fluid
+<<<<<<< HEAD
             checked={!!print_report || !announce_contents}
+=======
+            checked={print_report || !announce_contents}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             disabled={!announce_contents}
             onClick={() => act('toggle_printing')}
             tooltip={

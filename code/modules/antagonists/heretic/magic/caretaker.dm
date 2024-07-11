@@ -6,8 +6,13 @@
 		and you can be removed from it upon contact with antimagical artifacts."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
+<<<<<<< HEAD
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "caretaker"
+=======
+	button_icon = 'icons/mob/actions/actions_minor_antag.dmi'
+	button_icon_state = "ninja_cloak"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sound = 'sound/effects/curse2.ogg'
 
 	school = SCHOOL_FORBIDDEN

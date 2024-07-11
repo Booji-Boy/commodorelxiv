@@ -14,8 +14,15 @@
 	possible_shapes = list(
 		/mob/living/basic/carp,
 		/mob/living/basic/mouse,
+<<<<<<< HEAD
 		/mob/living/basic/pet/cat,
 		/mob/living/basic/pet/dog/corgi,
 		/mob/living/basic/pet/fox,
 		/mob/living/simple_animal/bot/secbot,
+=======
+		/mob/living/basic/pet/dog/corgi,
+		/mob/living/basic/pet/fox,
+		/mob/living/simple_animal/bot/secbot,
+		/mob/living/simple_animal/pet/cat,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)

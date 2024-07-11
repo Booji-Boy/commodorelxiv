@@ -5,6 +5,10 @@
 	icon_state = "fire_shark"
 	icon_living = "fire_shark"
 	pass_flags = PASSTABLE | PASSMOB
+<<<<<<< HEAD
+=======
+	istate = ISTATE_HARM | ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mob_biotypes = MOB_ORGANIC | MOB_BEAST
 	speed = -0.5
 	health = 16
@@ -16,7 +20,11 @@
 	obj_damage = 0
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 0.25, TOX = 0, STAMINA = 0, OXY = 0)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 0.25, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	faction = list(FACTION_HERETIC)
 	mob_size = MOB_SIZE_TINY
 	speak_emote = list("screams")
@@ -26,7 +34,11 @@
 	. = ..()
 	AddElement(/datum/element/death_gases, /datum/gas/plasma, 40)
 	AddElement(/datum/element/simple_flying)
+<<<<<<< HEAD
 	AddElement(/datum/element/venomous, /datum/reagent/phlogiston, 2, injection_flags = INJECT_CHECK_PENETRATE_THICK)
+=======
+	AddElement(/datum/element/venomous, /datum/reagent/phlogiston, 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(/datum/component/swarming)
 	AddComponent(/datum/component/regenerator, outline_colour = COLOR_DARK_RED)
 	ADD_TRAIT(src, TRAIT_SPACEWALK, INNATE_TRAIT)

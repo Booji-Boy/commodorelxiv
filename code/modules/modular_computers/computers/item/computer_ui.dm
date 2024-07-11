@@ -8,6 +8,7 @@
  * This is best called when you're actually changing the app, as we don't check
  * if we're swapping to the current UI repeatedly.
  * Args:
+<<<<<<< HEAD
  * user - The person whose UI we're updating. Only necessary if we're opening the UI for the first time.
  */
 /obj/item/modular_computer/proc/update_tablet_open_uis(mob/user)
@@ -37,6 +38,30 @@
 		return GLOB.contained_state
 	return ..()
 
+=======
+ * user - The person whose UI we're updating.
+ */
+/obj/item/modular_computer/proc/update_tablet_open_uis(mob/user)
+	var/datum/tgui/active_ui = SStgui.get_open_ui(user, src)
+	if(!active_ui)
+		if(active_program)
+			active_ui = new(user, src, active_program.tgui_id, active_program.filedesc)
+			active_program.ui_interact(user, active_ui)
+		else
+			active_ui = new(user, src, "NtosMain")
+		return active_ui.open()
+
+	if(active_program)
+		active_ui.interface = active_program.tgui_id
+		active_ui.title = active_program.filedesc
+		active_program.ui_interact(user, active_ui)
+	else
+		active_ui.interface = "NtosMain"
+
+	active_ui.send_assets()
+	update_static_data_for_all_viewers()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/modular_computer/interact(mob/user)
 	if(enabled)
 		ui_interact(user)
@@ -136,9 +161,13 @@
 
 	switch(action)
 		if("PC_exit")
+<<<<<<< HEAD
 			//you can't close apps in emergency mode.
 			if(isnull(internal_cell) || internal_cell.charge)
 				active_program.kill_program(usr)
+=======
+			active_program.kill_program(usr)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 		if("PC_shutdown")
 			shutdown_computer()
@@ -146,7 +175,11 @@
 		if("PC_minimize")
 			if(!active_program || (!isnull(internal_cell) && !internal_cell.charge))
 				return
+<<<<<<< HEAD
 			active_program.background_program(usr)
+=======
+			active_program.background_program()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 
 		if("PC_killprogram")
@@ -172,7 +205,7 @@
 			var/mob/user = usr
 			var/new_color
 			while(!new_color)
-				new_color = input(user, "Choose a new color for [src]'s flashlight.", "Light Color",light_color) as color|null
+				new_color = tgui_color_picker(user, "Choose a new color for [src]'s flashlight.", "Light Color", light_color)
 				if(!new_color)
 					return
 				if(is_color_dark(new_color, 50) ) //Colors too dark are rejected

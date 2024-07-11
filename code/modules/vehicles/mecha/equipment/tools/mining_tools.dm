@@ -17,6 +17,7 @@
 	tool_behaviour = TOOL_DRILL
 	toolspeed = 0.9
 	mech_flags = EXOSUIT_MODULE_WORKING | EXOSUIT_MODULE_COMBAT
+	movedelay = 0.2
 	var/drill_delay = 7
 	var/drill_level = DRILL_BASIC
 
@@ -171,7 +172,7 @@
 /obj/item/mecha_parts/mecha_equipment/drill/proc/drill_mob(mob/living/target, mob/living/user)
 	target.visible_message(span_danger("[chassis] is drilling [target] with [src]!"), \
 						span_userdanger("[chassis] is drilling you with [src]!"))
-	log_combat(user, target, "drilled", "[name]", "Combat mode: [user.combat_mode ? "On" : "Off"])(DAMTYPE: [uppertext(damtype)])")
+	log_combat(user, target, "drilled", "[name]", "Combat mode: [(user.istate & ISTATE_HARM) ? "On" : "Off"])(DAMTYPE: [uppertext(damtype)])")
 	if(target.stat == DEAD && target.getBruteLoss() >= (target.maxHealth * 2))
 		log_combat(user, target, "gibbed", name)
 		if(LAZYLEN(target.butcher_results) || LAZYLEN(target.guaranteed_butcher_results))
@@ -187,9 +188,9 @@
 		//blood splatters
 		var/splatter_dir = get_dir(chassis, target)
 		if(isalien(target))
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(target.drop_location(), splatter_dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter/xenosplatter(target.drop_location(), splatter_dir, COLOR_DARK_PURPLE)
 		else
-			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target.drop_location(), splatter_dir)
+			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target.drop_location(), splatter_dir, COLOR_DARK_RED)
 
 		//organs go everywhere
 		if(target_part && prob(10 * drill_level))
@@ -213,6 +214,7 @@
 	equip_cooldown = 1.5 SECONDS
 	equipment_slot = MECHA_UTILITY
 	mech_flags = EXOSUIT_MODULE_WORKING
+	movedelay = 0.2
 	var/scanning_time = 0
 	COOLDOWN_DECLARE(area_scan_cooldown)
 

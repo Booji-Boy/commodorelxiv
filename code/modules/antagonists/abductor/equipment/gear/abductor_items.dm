@@ -48,7 +48,11 @@
 		icon_state = "gizmo_scan"
 	to_chat(user, span_notice("You switch the device to [mode == GIZMO_SCAN? "SCAN": "MARK"] MODE"))
 
+<<<<<<< HEAD
 /obj/item/abductor/gizmo/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+=======
+/obj/item/abductor/gizmo/attack(mob/living/target, mob/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!ScientistCheck(user))
 		return ITEM_INTERACT_SKIP_TO_ATTACK // So you slap them with it
 	if(!console)
@@ -57,9 +61,15 @@
 
 	switch(mode)
 		if(GIZMO_SCAN)
+<<<<<<< HEAD
 			scan(interacting_with, user)
 		if(GIZMO_MARK)
 			mark(interacting_with, user)
+=======
+			scan(target, user)
+		if(GIZMO_MARK)
+			mark(target, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return ITEM_INTERACT_SUCCESS
 
@@ -104,9 +114,16 @@
 	icon_state = "silencer"
 	inhand_icon_state = "gizmo"
 
+<<<<<<< HEAD
 /obj/item/abductor/silencer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!AbductorCheck(user))
 		return ITEM_INTERACT_SKIP_TO_ATTACK // So you slap them with it
+=======
+/obj/item/abductor/silencer/attack(mob/living/target, mob/user)
+	if(!AbductorCheck(user))
+		return
+	radio_off(target, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	radio_off(interacting_with, user)
 	return ITEM_INTERACT_SUCCESS
@@ -275,8 +292,13 @@
 <br>
 Congratulations! You are now trained for invasive xenobiology research!"}
 
+<<<<<<< HEAD
 /obj/item/paper/guides/antag/abductor/click_alt()
 	return CLICK_ACTION_BLOCKING //otherwise it would fold into a paperplane.
+=======
+/obj/item/paper/guides/antag/abductor/AltClick()
+	return //otherwise it would fold into a paperplane.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/melee/baton/abductor
 	name = "advanced baton"
@@ -436,7 +458,11 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	if(ishuman(victim))
 		var/mob/living/carbon/human/human_victim = victim
 		species = span_notice("[human_victim.dna.species.name]")
+<<<<<<< HEAD
 		if(IS_CHANGELING(human_victim))
+=======
+		if(human_victim.mind && human_victim.mind.has_antag_datum(/datum/antagonist/changeling))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			species = span_warning("Changeling lifeform")
 		var/obj/item/organ/internal/heart/gland/temp = locate() in human_victim.organs
 		if(temp)
@@ -538,35 +564,55 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 /obj/item/scalpel/alien
 	name = "alien scalpel"
 	desc = "It's a gleaming sharp knife made out of silvery-green metal."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "scalpel_alien"
 	toolspeed = 0.25
 
 /obj/item/hemostat/alien
 	name = "alien hemostat"
 	desc = "You've never seen this before."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "hemostat_alien"
 	toolspeed = 0.25
 
 /obj/item/retractor/alien
 	name = "alien retractor"
 	desc = "You're not sure if you want the veil pulled back."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "retractor_alien"
 	toolspeed = 0.25
 
 /obj/item/circular_saw/alien
 	name = "alien saw"
 	desc = "Do the aliens also lose this, and need to find an alien hatchet?"
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "saw_alien"
 	toolspeed = 0.25
 
 /obj/item/surgicaldrill/alien
 	name = "alien drill"
 	desc = "Maybe alien surgeons have finally found a use for the drill."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "drill_alien"
 	toolspeed = 0.25
 
@@ -574,7 +620,11 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 	name = "alien cautery"
 	desc = "Why would bloodless aliens have a tool to stop bleeding? \
 		Unless..."
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	surgical_tray_overlay = "cautery_alien"
 	toolspeed = 0.25
 
@@ -696,24 +746,42 @@ Congratulations! You are now trained for invasive xenobiology research!"}
 /obj/item/abductor/alien_omnitool/proc/set_toolset(mob/user)
 	if(active_toolset == TOOLSET_MEDICAL)
 		tool_list = list(
+<<<<<<< HEAD
 			"Crowbar" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "crowbar"),
 			"Multitool" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "multitool"),
 			"Screwdriver" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "screwdriver_a"),
 			"Wirecutters" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "cutters"),
 			"Wrench" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "wrench"),
 			"Welding Tool" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "welder"),
+=======
+			"Crowbar" = image(icon = 'icons/obj/abductor.dmi', icon_state = "crowbar"),
+			"Multitool" = image(icon = 'icons/obj/abductor.dmi', icon_state = "multitool"),
+			"Screwdriver" = image(icon = 'icons/obj/abductor.dmi', icon_state = "screwdriver_a"),
+			"Wirecutters" = image(icon = 'icons/obj/abductor.dmi', icon_state = "cutters"),
+			"Wrench" = image(icon = 'icons/obj/abductor.dmi', icon_state = "wrench"),
+			"Welding Tool" = image(icon = 'icons/obj/abductor.dmi', icon_state = "welder"),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 		active_toolset = TOOLSET_HACKING
 		if(user)
 			balloon_alert(user, "hacking toolset selected")
 	else
 		tool_list = list(
+<<<<<<< HEAD
 			"Retractor" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "retractor"),
 			"Hemostat" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "hemostat"),
 			"Cautery" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "cautery"),
 			"Drill" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "drill"),
 			"Scalpel" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "scalpel"),
 			"Saw" = image(icon = 'icons/obj/antags/abductor.dmi', icon_state = "saw"),
+=======
+			"Retractor" = image(icon = 'icons/obj/abductor.dmi', icon_state = "retractor"),
+			"Hemostat" = image(icon = 'icons/obj/abductor.dmi', icon_state = "hemostat"),
+			"Cautery" = image(icon = 'icons/obj/abductor.dmi', icon_state = "cautery"),
+			"Drill" = image(icon = 'icons/obj/abductor.dmi', icon_state = "drill"),
+			"Scalpel" = image(icon = 'icons/obj/abductor.dmi', icon_state = "scalpel"),
+			"Saw" = image(icon = 'icons/obj/abductor.dmi', icon_state = "saw"),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			"Bonesetter" = image(icon = 'icons/obj/medical/surgery_tools.dmi', icon_state = "bonesetter"),
 			"Blood Filter" = image(icon = 'icons/obj/medical/surgery_tools.dmi', icon_state = "bloodfilter"),
 		)

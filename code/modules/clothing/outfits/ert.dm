@@ -545,11 +545,18 @@
 	shoes = /obj/item/clothing/shoes/cowboy
 	gloves = /obj/item/clothing/gloves/combat
 	back = /obj/item/storage/backpack/satchel/leather
+<<<<<<< HEAD
 	box = /obj/item/storage/box/survival
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	l_pocket = /obj/item/switchblade
 	r_pocket = /obj/item/reagent_containers/hypospray/medipen/salacid
 	ears = /obj/item/radio/headset
 	backpack_contents = list(
+<<<<<<< HEAD
+=======
+			/obj/item/storage/box/survival = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			/obj/item/storage/medkit/emergency = 1,
 			/obj/item/crowbar = 1,
 			/obj/item/restraints/handcuffs = 1,

@@ -2,6 +2,14 @@
 	name = "\improper Mothman"
 	plural_form = "Mothmen"
 	id = SPECIES_MOTH
+<<<<<<< HEAD
+=======
+	species_traits = list(
+		LIPS,
+		HAS_MARKINGS,
+		HAIR // monke edit: moths can have hair (it's the future, why not)
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	inherent_traits = list(
 		TRAIT_TACKLING_WINGED_ATTACKER,
 		TRAIT_ANTENNAE,
@@ -15,7 +23,11 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	species_language_holder = /datum/language_holder/moth
 	death_sound = 'sound/voice/moth/moth_death.ogg'
+<<<<<<< HEAD
 	payday_modifier = 1.0
+=======
+	wing_types = list(/obj/item/organ/external/wings/functional/moth/megamoth, /obj/item/organ/external/wings/functional/moth/mothra)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	family_heirlooms = list(/obj/item/flashlight/lantern/heirloom_moth)
 
 	bodypart_overrides = list(
@@ -33,6 +45,20 @@
 		var/mob/living/carbon/human/H = C
 		handle_mutant_bodyparts(H)
 
+<<<<<<< HEAD
+=======
+/datum/species/moth/random_name(gender,unique,lastname)
+	if(unique)
+		return random_unique_moth_name()
+
+	var/randname = moth_name()
+
+	if(lastname)
+		randname += " [lastname]"
+
+	return randname
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/species/moth/on_species_gain(mob/living/carbon/human/human_who_gained_species, datum/species/old_species, pref_load)
 	. = ..()
 	RegisterSignal(human_who_gained_species, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_weakness))
@@ -40,6 +66,15 @@
 /datum/species/moth/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS)
+<<<<<<< HEAD
+=======
+
+/datum/species/moth/proc/damage_weakness(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
+	SIGNAL_HANDLER
+
+	if(istype(attacking_item, /obj/item/melee/flyswatter))
+		damage_mods += 10 // Yes, a 10x damage modifier
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/species/moth/proc/damage_weakness(datum/source, list/damage_mods, damage_amount, damagetype, def_zone, sharpness, attack_direction, obj/item/attacking_item)
 	SIGNAL_HANDLER
@@ -105,22 +140,6 @@
 	return "Hailing from a planet that was lost long ago, the moths travel \
 		the galaxy as a nomadic people aboard a colossal fleet of ships, seeking a new homeland."
 
-/datum/species/moth/get_species_lore()
-	return list(
-		"Their homeworld lost to the ages, the moths live aboard the Grand Nomad Fleet. \
-		Made up of what could be found, bartered, repaired, or stolen the armada is a colossal patchwork \
-		built on a history of politely flagging travelers down and taking their things. Occasionally a moth \
-		will decide to leave the fleet, usually to strike out for fortunes to send back home.",
-
-		"Nomadic life produces a tight-knit culture, with moths valuing their friends, family, and vessels highly. \
-		Moths are gregarious by nature and do best in communal spaces. This has served them well on the galactic stage, \
-		maintaining a friendly and personable reputation even in the face of hostile encounters. \
-		It seems that the galaxy has come to accept these former pirates.",
-
-		"Surprisingly, living together in a giant fleet hasn't flattened variance in dialect and culture. \
-		These differences are welcomed and encouraged within the fleet for the variety that they bring.",
-	)
-
 /datum/species/moth/create_pref_unique_perks()
 	var/list/to_add = list()
 
@@ -150,6 +169,12 @@
 			SPECIES_PERK_DESC = "Moths need an extra layer of flash protection to protect \
 				themselves, such as against security officers or when welding. Welding \
 				masks will work.",
+		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "fist-raised",
+			SPECIES_PERK_NAME = "Insectoid Biology",
+			SPECIES_PERK_DESC = "Fly swatters will deal higher amounts of damage to a Moth.",
 		),
 	)
 

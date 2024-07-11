@@ -120,7 +120,7 @@
 		user.transferItemToLoc(attacking_item, src, TRUE)
 		LAZYADD(processor_contents, attacking_item)
 		return TRUE
-	else if(!user.combat_mode)
+	else if(!(user.istate & ISTATE_HARM))
 		to_chat(user, span_warning("That probably won't blend!"))
 		return TRUE
 	else
@@ -188,6 +188,7 @@
 	user.forceMove(drop_location())
 	user.visible_message(span_notice("[user] crawls free of the processor!"))
 
+<<<<<<< HEAD
 /obj/machinery/processor/slime
 	name = "slime processor"
 	base_icon_state = "processor_slime"
@@ -245,4 +246,6 @@
 		SSblackbox.record_feedback("tally", "slime_core_harvested", 1, processed_slime.slime_type.colour)
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef PROCESSOR_SELECT_RECIPE

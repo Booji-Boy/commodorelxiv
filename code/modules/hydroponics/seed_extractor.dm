@@ -94,7 +94,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/seed_extractor/attackby(obj/item/attacking_item, mob/living/user, params)
-	if(!isliving(user) || user.combat_mode)
+	if(!isliving(user) || (user.istate & ISTATE_HARM))
 		return ..()
 
 	if(default_deconstruction_screwdriver(user, "sextractor_open", "sextractor", attacking_item))
@@ -125,7 +125,7 @@
 
 	var/list/generated_seeds = seedify(attacking_item, -1, src, user)
 	if(!isnull(generated_seeds))
-		if(LAZYACCESS(params2list(params), RIGHT_CLICK))
+		if((user.istate & ISTATE_SECONDARY))
 			//find all seeds lying on the turf and add them to the machine
 			for(var/obj/item/seeds/seed as anything in generated_seeds)
 				//machine is full
@@ -134,7 +134,7 @@
 					break
 				//add seed to machine. second argument is null which means just force move into the machine
 				add_seed(seed)
-		to_chat(user, span_notice("You extract some seeds."))
+				to_chat(user, span_notice("You extract some seeds."))
 		return TRUE
 
 	else if(istype(attacking_item, /obj/item/seeds))
@@ -165,8 +165,8 @@
  * * O - seed to generate the string from
  */
 /obj/machinery/seed_extractor/proc/generate_seed_hash(obj/item/seeds/O)
-	var/genes = list2params(O.genes)
-	return md5("[O.name][O.lifespan][O.endurance][O.maturation][O.production][O.yield][O.potency][O.instability][genes]");
+	return "name=[O.name];lifespan=[O.lifespan];endurance=[O.endurance];maturation=[O.maturation];production=[O.production];yield=[O.yield];potency=[O.potency]"
+
 
 /** Add Seeds Proc.
  *
@@ -192,7 +192,6 @@
 		seed_data["production"] = to_add.production
 		seed_data["yield"] = to_add.yield
 		seed_data["potency"] = to_add.potency
-		seed_data["instability"] = to_add.instability
 		seed_data["refs"] = list(WEAKREF(to_add))
 		seed_data["traits"] = list()
 		for(var/datum/plant_gene/trait/trait in to_add.genes)

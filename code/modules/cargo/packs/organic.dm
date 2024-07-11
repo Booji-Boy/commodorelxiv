@@ -61,6 +61,7 @@
 	desc = "Any entrepreneuring botanist's dream. Contains twelve different seeds, \
 		including one replica-pod seed and two mystery seeds!"
 	cost = CARGO_CRATE_VALUE * 3
+<<<<<<< HEAD
 	access_view = ACCESS_HYDROPONICS
 	contains = list(
 		/obj/item/seeds/amanita,
@@ -76,6 +77,21 @@
 		/obj/item/seeds/shrub,
 		/obj/item/seeds/random = 2,
 	)
+=======
+	contains = list(/obj/item/seeds/nettle,
+					/obj/item/seeds/replicapod,
+					/obj/item/seeds/plump,
+					/obj/item/seeds/liberty,
+					/obj/item/seeds/amanita,
+					/obj/item/seeds/reishi,
+					/obj/item/seeds/bamboo,
+					/obj/item/seeds/eggplant/eggy,
+					/obj/item/seeds/rainbow_bunch,
+					/obj/item/seeds/seedling,
+					/obj/item/seeds/shrub,
+					/obj/item/seeds/random = 2,
+				)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	crate_name = "exotic seeds crate"
 	crate_type = /obj/structure/closet/crate/hydroponics
 
@@ -149,7 +165,6 @@
 	desc = "Bring on the flood with this high-capacity backpack crate. \
 		Contains 500 units of life-giving H2O."
 	cost = CARGO_CRATE_VALUE * 2
-	access = ACCESS_HYDROPONICS
 	contains = list(/obj/item/watertank)
 	crate_name = "hydroponics backpack crate"
 	crate_type = /obj/structure/closet/crate/secure/hydroponics
@@ -184,7 +199,10 @@
 		/obj/item/food/pizza/sassysage = 10,
 		/obj/item/food/pizza/pineapple = 10,
 		/obj/item/food/pizza/arnold = 3,
-		/obj/item/food/pizza/energy = 5
+		/obj/item/food/pizza/energy = 5,
+		/obj/item/food/pizza/mothic_margherita = 10,
+		/obj/item/food/pizza/mothic_firecracker = 5,
+		/obj/item/food/pizza/mothic_five_cheese = 5
 	)
 
 /datum/supply_pack/organic/pizza/fill(obj/structure/closet/crate/new_crate)

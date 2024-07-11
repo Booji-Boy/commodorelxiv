@@ -28,7 +28,7 @@
 	typepath = /datum/round_event/disease_outbreak
 	max_occurrences = 1
 	min_players = 10
-	weight = 5
+	weight = 4
 	category = EVENT_CATEGORY_HEALTH
 	description = "A 'classic' virus will infect some members of the crew."
 	min_wizard_trigger_potency = 2
@@ -37,7 +37,7 @@
 	///Disease recipient candidates
 	var/list/disease_candidates = list()
 
-/datum/round_event_control/disease_outbreak/can_spawn_event(players_amt, allow_magic = FALSE)
+/datum/round_event_control/disease_outbreak/can_spawn_event(players_amt, allow_magic = FALSE, fake_check = FALSE) //MONKESTATION ADDITION: fake_check = FALSE
 	. = ..()
 	if(!.)
 		return .
@@ -123,35 +123,37 @@
 
 /datum/round_event/disease_outbreak/setup()
 	announce_when = ADV_ANNOUNCE_DELAY
+	setup = TRUE //MONKESTATION ADDITION
 
 /datum/round_event/disease_outbreak/start()
 	var/datum/round_event_control/disease_outbreak/disease_event = control
 	afflicted += disease_event.disease_candidates
 	disease_event.disease_candidates.Cut() //Clean the list after use
-	if(!virus_type)
-		var/list/virus_candidates = list()
 
-		//Practically harmless diseases. Mostly just gives medical something to do.
-		virus_candidates += list(/datum/disease/flu, /datum/disease/cold9)
-
-		//The more dangerous ones
-		virus_candidates += list(/datum/disease/beesease, /datum/disease/brainrot, /datum/disease/fluspanish)
-
-		//The wacky ones
-		virus_candidates += list(/datum/disease/magnitis, /datum/disease/anxiety)
-
-		//The rest of the diseases either aren't conventional "diseases" or are too unique/extreme to be considered for a normal event
-		virus_type = pick(virus_candidates)
-
-	var/datum/disease/new_disease
-	new_disease = new virus_type()
+	var/virus_choice = pick(subtypesof(/datum/disease/advanced)- typesof(/datum/disease/advanced/premade))
+	var/list/anti = list(
+		ANTIGEN_BLOOD	= 1,
+		ANTIGEN_COMMON	= 1,
+		ANTIGEN_RARE	= 2,
+		ANTIGEN_ALIEN	= 0,
+		)
+	var/list/bad = list(
+		EFFECT_DANGER_HELPFUL	= 0,
+		EFFECT_DANGER_FLAVOR	= 1,
+		EFFECT_DANGER_ANNOYING	= 2,
+		EFFECT_DANGER_HINDRANCE	= 3,
+		EFFECT_DANGER_HARMFUL	= 0,
+		EFFECT_DANGER_DEADLY	= 0,
+		)
+	var/datum/disease/advanced/new_disease = new virus_choice
+	new_disease.makerandom(list(30,60),list(50,100),anti,bad,src)
 	new_disease.carrier = TRUE
 	illness_type = new_disease.name
 
 	var/mob/living/carbon/human/victim
 	while(length(afflicted))
 		victim = pick_n_take(afflicted)
-		if(victim.ForceContractDisease(new_disease, FALSE))
+		if(victim.infect_disease(new_disease, TRUE, notes = "Infected via Outbreak [key_name(victim)]"))
 			message_admins("Event triggered: Disease Outbreak - [new_disease.name] starting with patient zero [ADMIN_LOOKUPFLW(victim)]!")
 			log_game("Event triggered: Disease Outbreak - [new_disease.name] starting with patient zero [key_name(victim)].")
 			announce_to_ghosts(victim)
@@ -165,7 +167,7 @@
 	name = "Disease Outbreak: Advanced"
 	typepath = /datum/round_event/disease_outbreak/advanced
 	category = EVENT_CATEGORY_HEALTH
-	weight = 15
+	weight = 5 //monkestation change 15 ==> 5
 	min_players = 35 // To avoid shafting lowpop
 	earliest_start = 15 MINUTES // give the chemist a chance
 	description = "An 'advanced' disease will infect some members of the crew."
@@ -262,6 +264,7 @@
 	afflicted += disease_event.disease_candidates
 	disease_event.disease_candidates.Cut()
 
+<<<<<<< HEAD
 	if(isnull(max_symptoms))
 		max_symptoms = rand(ADV_MIN_SYMPTOMS, ADV_MAX_SYMPTOMS)
 
@@ -283,14 +286,34 @@
 		name_symptoms += new_symptom.name
 
 	illness_type = advanced_disease.name
+=======
+	var/virus_choice = pick(subtypesof(/datum/disease/advanced)- typesof(/datum/disease/advanced/premade))
+	var/list/anti = list(
+		ANTIGEN_BLOOD	= 1,
+		ANTIGEN_COMMON	= 1,
+		ANTIGEN_RARE	= 2,
+		ANTIGEN_ALIEN	= 0,
+		)
+	var/list/bad = list(
+		EFFECT_DANGER_HELPFUL	= 0,
+		EFFECT_DANGER_FLAVOR	= 0,
+		EFFECT_DANGER_ANNOYING	= 2,
+		EFFECT_DANGER_HINDRANCE	= 3,
+		EFFECT_DANGER_HARMFUL	= 3,
+		EFFECT_DANGER_DEADLY	= 1,
+		)
+	var/datum/disease/advanced/new_disease = new virus_choice
+	new_disease.makerandom(list(50,90),list(50,100),anti,bad,src)
+	new_disease.carrier = TRUE
+	illness_type = new_disease.name
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mob/living/carbon/human/victim
 	while(length(afflicted))
 		victim = pick_n_take(afflicted)
-		if(victim.ForceContractDisease(advanced_disease, FALSE))
-			message_admins("Event triggered: Disease Outbreak: Advanced - starting with patient zero [ADMIN_LOOKUPFLW(victim)]! Details: [advanced_disease.admin_details()] sp:[advanced_disease.spread_flags] ([advanced_disease.spread_text])")
-			log_game("Event triggered: Disease Outbreak: Advanced - starting with patient zero [key_name(victim)]. Details: [advanced_disease.admin_details()] sp:[advanced_disease.spread_flags] ([advanced_disease.spread_text])")
-			log_virus("Disease Outbreak: Advanced has triggered a custom virus outbreak of [advanced_disease.admin_details()] in [victim]!")
+		if(victim.infect_disease(new_disease, TRUE, notes = "Infected via Outbreak [key_name(victim)]"))
+			message_admins("Event triggered: Disease Outbreak - [new_disease.name] starting with patient zero [ADMIN_LOOKUPFLW(victim)]!")
+			log_game("Event triggered: Disease Outbreak - [new_disease.name] starting with patient zero [key_name(victim)].")
 			announce_to_ghosts(victim)
 			return
 		CHECK_TICK //don't lag the server to death
@@ -298,6 +321,7 @@
 		message_admins("Event Disease Outbreak: Advanced attempted to start, but failed to find a candidate target.")
 		log_game("Event Disease Outbreak: Advanced attempted to start, but failed to find a candidate target.")
 
+<<<<<<< HEAD
 /datum/disease/advance/random/event
 	name = "Event Disease"
 	copy_type = /datum/disease/advance
@@ -476,6 +500,8 @@
 	var/datum/reagent/cure = GLOB.chemical_reagents_list[cures[1]]
 	cure_text = cure.name
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef ADV_MIN_SYMPTOMS
 #undef ADV_MAX_SYMPTOMS
 #undef ADV_ANNOUNCE_DELAY

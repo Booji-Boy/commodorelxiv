@@ -243,6 +243,7 @@
 	icon_state = "detective"
 	inhand_icon_state = "det_hat"
 	dog_fashion = /datum/dog_fashion/head/detective
+<<<<<<< HEAD
 	interaction_flags_click = FORBID_TELEKINESIS_REACH|ALLOW_RESTING
 	///prefix our phrases must begin with
 	var/prefix = "go go gadget"
@@ -250,6 +251,12 @@
 	var/list/items_by_regex = list()
 	///A an assoc list of regex = phrase (like regex datum = gun text)
 	var/list/phrases_by_regex = list()
+=======
+	///prefix our phrases must begin with
+	var/prefix = "go go gadget"
+	///an assoc list of phrase = item (like gun = revolver)
+	var/list/items_by_phrase = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///how many gadgets can we hold
 	var/max_items = 4
 	///items above this weight cannot be put in the hat
@@ -260,6 +267,7 @@
 	become_hearing_sensitive(ROUNDSTART_TRAIT)
 	QDEL_NULL(atom_storage)
 
+<<<<<<< HEAD
 /obj/item/clothing/head/fedora/inspector_hat/proc/set_prefix(desired_prefix)
 
 	prefix = desired_prefix
@@ -283,19 +291,28 @@
 
 	return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/head/fedora/inspector_hat/examine(mob/user)
 	. = ..()
 	. += span_notice("You can put items inside, and get them out by saying a phrase, or using it in-hand!")
 	. += span_notice("The prefix is <b>[prefix]</b>, and you can change it with alt-click!\n")
+<<<<<<< HEAD
 	for(var/found_regex in phrases_by_regex)
 		var/found_phrase = phrases_by_regex[found_regex]
 		var/obj/item/found_item = items_by_regex[found_regex]
 		. += span_notice("[icon2html(found_item, user)] You can remove [found_item] by saying <b>\"[prefix] [found_phrase]\"</b>!")
+=======
+	for(var/phrase in items_by_phrase)
+		var/obj/item/item = items_by_phrase[phrase]
+		. += span_notice("[icon2html(item, user)] You can remove [item] by saying <b>\"[prefix] [phrase]\"</b>!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/head/fedora/inspector_hat/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), message_range)
 	. = ..()
 	var/mob/living/carbon/wearer = loc
 	if(!istype(wearer) || speaker != wearer) //if we are worn
+<<<<<<< HEAD
 		return
 
 	raw_message = htmlrendertext(raw_message)
@@ -312,6 +329,26 @@
 			break
 
 	return .
+=======
+		return FALSE
+
+	raw_message = htmlrendertext(raw_message)
+	var/prefix_index = findtext(raw_message, prefix)
+	if(prefix_index != 1)
+		return FALSE
+	
+	var/the_phrase = trim_left(replacetext(raw_message, prefix, ""))
+	var/obj/item/result = items_by_phrase[the_phrase]
+	if(!result)
+		return FALSE
+
+	if(wearer.put_in_active_hand(result))
+		wearer.visible_message(span_warning("[src] drops [result] into the hands of [wearer]!"))
+	else
+		balloon_alert(wearer, "cant put in hands!")
+
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/head/fedora/inspector_hat/attackby(obj/item/item, mob/user, params)
 	. = ..()
@@ -323,13 +360,22 @@
 		balloon_alert(user, "too big!")
 		return
 
+<<<<<<< HEAD
 	var/desired_phrase = tgui_input_text(user, "What is the activation phrase?", "Activation phrase", "gadget", max_length = 26)
 	if(!desired_phrase || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+=======
+	var/input = tgui_input_text(user, "What is the activation phrase?", "Activation phrase", "gadget", max_length = 26)
+	if(!input)
+		return
+	if(input in items_by_phrase)
+		balloon_alert(user, "already used!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(item.loc != user || !user.transferItemToLoc(item, src))
 		return
 
+<<<<<<< HEAD
 	to_chat(user, span_notice("You install [item] into the [thtotext(contents.len)] slot of [src]."))
 	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
 	set_phrase(desired_phrase,item)
@@ -378,6 +424,43 @@
 
 /obj/item/clothing/head/fedora/inspector_hat/Destroy()
 	QDEL_LIST_ASSOC(items_by_regex) //Anything that failed to drop gets deleted.
+=======
+	to_chat(user, span_notice("You install [item] into the [thtotext(contents.len)] slot in [src]."))
+	playsound(src, 'sound/machines/click.ogg', 30, TRUE)
+	items_by_phrase[input] = item
+
+/obj/item/clothing/head/fedora/inspector_hat/attack_self(mob/user)
+	. = ..()
+	var/phrase = tgui_input_list(user, "What item do you want to remove by phrase?", "Item Removal", items_by_phrase)
+	if(!phrase)
+		return
+	user.put_in_inactive_hand(items_by_phrase[phrase])
+
+/obj/item/clothing/head/fedora/inspector_hat/AltClick(mob/user)
+	. = ..()
+	var/new_prefix = tgui_input_text(user, "What should be the new prefix?", "Activation prefix", prefix, max_length = 24)
+	if(!new_prefix)
+		return
+	prefix = new_prefix
+
+/obj/item/clothing/head/fedora/inspector_hat/Exited(atom/movable/gone, direction)
+	. = ..()
+	for(var/phrase in items_by_phrase)
+		var/obj/item/result = items_by_phrase[phrase]
+		if(gone == result)
+			items_by_phrase -= phrase
+			return
+
+/obj/item/clothing/head/fedora/inspector_hat/atom_destruction(damage_flag)
+	for(var/phrase in items_by_phrase)
+		var/obj/item/result = items_by_phrase[phrase]
+		result.forceMove(drop_location())
+	items_by_phrase = null
+	return ..()
+
+/obj/item/clothing/head/fedora/inspector_hat/Destroy()
+	QDEL_LIST_ASSOC(items_by_phrase)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 //Mime
@@ -821,4 +904,8 @@
 	greyscale_config = /datum/greyscale_config/beret_badge
 	greyscale_config_worn = /datum/greyscale_config/beret_badge/worn
 	greyscale_colors = "#43523d#a2abb0"
+<<<<<<< HEAD
 	armor_type = /datum/armor/cosmetic_sec
+=======
+	armor_type = /datum/armor/beret_sec
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -26,7 +26,11 @@
 	gun_flags = TOY_FIREARM_OVERLAY | NOT_A_REAL_GUN
 
 /obj/item/gun/ballistic/automatic/pistol/toy/riot
+<<<<<<< HEAD
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/pistol/riot
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/pistol/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/automatic/pistol/riot/Initialize(mapload)
 	magazine = new /obj/item/ammo_box/magazine/toy/pistol/riot(src)
@@ -47,7 +51,7 @@
 	pb_knockback = 0
 	gun_flags = TOY_FIREARM_OVERLAY | NOT_A_REAL_GUN
 
-/obj/item/gun/ballistic/shotgun/toy/handle_chamber()
+/obj/item/gun/ballistic/shotgun/toy/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	. = ..()
 	if(chambered && !chambered.loaded_projectile)
 		qdel(chambered)
@@ -78,18 +82,29 @@
 	desc = "A bullpup three-round burst toy SMG, designated 'C-20r'. Ages 8 and up."
 	can_suppress = TRUE
 	item_flags = NONE
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	casing_ejector = FALSE
 	clumsy_check = FALSE
 	gun_flags = TOY_FIREARM_OVERLAY | NOT_A_REAL_GUN
 
 /obj/item/gun/ballistic/automatic/c20r/toy/unrestricted //Use this for actual toys
 	pin = /obj/item/firing_pin
+<<<<<<< HEAD
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45
 
 /obj/item/gun/ballistic/automatic/c20r/toy/unrestricted/riot
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45
+
+/obj/item/gun/ballistic/automatic/c20r/toy/unrestricted/riot
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/smgm45/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy //This is the syndicate variant with syndicate firing pin and riot darts.
 	name = "donksoft LMG"
@@ -97,15 +112,26 @@
 	fire_sound = 'sound/items/syringeproj.ogg'
 	can_suppress = FALSE
 	item_flags = NONE
+<<<<<<< HEAD
 	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/m762
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/m762/riot
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/m762/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	casing_ejector = FALSE
 	clumsy_check = FALSE
 	gun_flags = TOY_FIREARM_OVERLAY | NOT_A_REAL_GUN
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted //Use this for actual toys
 	pin = /obj/item/firing_pin
+<<<<<<< HEAD
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/m762
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted/riot
 	spawn_magazine_type = /obj/item/ammo_box/magazine/toy/m762/riot
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/m762
+
+/obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted/riot
+	accepted_magazine_type = /obj/item/ammo_box/magazine/toy/m762/riot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

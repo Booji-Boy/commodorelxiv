@@ -1,6 +1,23 @@
 import { BooleanLike } from 'common/react';
 import { classes } from 'common/react';
+<<<<<<< HEAD
 import { useState } from 'react';
+=======
+import { useBackend, useLocalState } from '../backend';
+import { Window } from '../layouts';
+import {
+  Box,
+  Section,
+  NumberInput,
+  Table,
+  Tabs,
+  LabeledList,
+  NoticeBox,
+  Button,
+  ProgressBar,
+  Stack,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { useBackend } from '../backend';
 import {
@@ -46,11 +63,31 @@ type Design = {
   name: string;
 };
 
+<<<<<<< HEAD
 export function Biogenerator(props) {
   const { data } = useBackend<Data>();
   const { beaker, beakerCurrentVolume, beakerMaxVolume, categories } = data;
 
   const [selectedCategory, setSelectedCategory] = useState(
+=======
+export const Biogenerator = (props) => {
+  const { act, data } = useBackend<BiogeneratorData>();
+  const {
+    processing,
+    beaker,
+    reagent_color,
+    biomass,
+    max_visual_biomass,
+    can_process,
+    beakerCurrentVolume,
+    beakerMaxVolume,
+    max_output,
+    efficiency,
+    categories,
+  } = data;
+  const [selectedCategory, setSelectedCategory] = useLocalState<string>(
+    'category',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     data.categories[0]?.name,
   );
 
@@ -61,22 +98,107 @@ export function Biogenerator(props) {
   const space = beaker ? beakerMaxVolume - beakerCurrentVolume : 1;
 
   return (
-    <Window width={400} height={500}>
+    <Window width={400} height={525}>
       <Window.Content>
         <Stack vertical fill>
           <Stack.Item>
+<<<<<<< HEAD
             <Controls />
+=======
+            <Section fill minHeight="80px">
+              <LabeledList>
+                <LabeledList.Item
+                  label="Biomass"
+                  buttons={
+                    <Button
+                      width={7}
+                      lineHeight={2}
+                      align="center"
+                      icon="cog"
+                      iconSpin={processing ? 1 : 0}
+                      content="Generate"
+                      disabled={!can_process || processing}
+                      onClick={() => act('activate')}
+                    />
+                  }
+                >
+                  <ProgressBar
+                    value={biomass}
+                    minValue={0}
+                    maxValue={max_visual_biomass}
+                    color="good"
+                  >
+                    <Box
+                      lineHeight={1.9}
+                      style={{
+                        'text-shadow': '1px 1px 0 black',
+                      }}
+                    >
+                      {`${parseFloat(biomass.toFixed(2))} units`}
+                    </Box>
+                  </ProgressBar>
+                </LabeledList.Item>
+                {!!beaker && (
+                  <LabeledList.Item
+                    label="Container"
+                    buttons={
+                      <Button
+                        width={7}
+                        lineHeight={2}
+                        align="center"
+                        icon="eject"
+                        content="Eject"
+                        onClick={() => act('eject')}
+                      />
+                    }
+                  >
+                    <ProgressBar
+                      value={beakerCurrentVolume}
+                      minValue={0}
+                      height={2}
+                      maxValue={beakerMaxVolume}
+                      color={reagent_color}
+                    >
+                      <Box
+                        lineHeight={1.9}
+                        style={{
+                          'text-shadow': '1px 1px 0 black',
+                        }}
+                      >
+                        {`${beakerCurrentVolume} of ${beakerMaxVolume} units`}
+                      </Box>
+                    </ProgressBar>
+                  </LabeledList.Item>
+                )}
+                {!beaker && (
+                  <LabeledList.Item label="Container">
+                    <NoticeBox m={0} height={2}>
+                      No liquid container
+                    </NoticeBox>
+                  </LabeledList.Item>
+                )}
+              </LabeledList>
+            </Section>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           </Stack.Item>
           <Stack.Item>
             <Tabs fluid>
               {categories.map(({ name }) => (
                 <Tabs.Tab
                   align="center"
+<<<<<<< HEAD
                   key={name}
                   selected={name === selectedCategory}
                   onClick={() => setSelectedCategory(name)}
                 >
                   {name}
+=======
+                  key={category.name}
+                  selected={category.name === selectedCategory}
+                  onClick={() => setSelectedCategory(category.name)}
+                >
+                  {category.name}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </Tabs.Tab>
               ))}
             </Tabs>
@@ -194,6 +316,7 @@ type Props = {
   space: number;
 };
 
+<<<<<<< HEAD
 function Item(props: Props) {
   const { item, space } = props;
   const { cost, id, is_reagent, name } = item;
@@ -218,6 +341,35 @@ function Item(props: Props) {
 
   return (
     <Table.Row>
+=======
+const ItemList = (props) => {
+  const { act } = useBackend();
+  const items = props.items.map((item) => {
+    const [amount, setAmount] = useLocalState(
+      'amount' + item.name,
+      item.is_reagent ? Math.min(Math.max(props.space, 1), 10) : 1,
+    );
+    const disabled =
+      props.processing ||
+      (item.is_reagent && !props.beaker) ||
+      (item.is_reagent && props.space < amount) ||
+      props.biomass < Math.ceil((item.cost * amount) / props.efficiency);
+    const max_possible = Math.floor(
+      (props.efficiency * props.biomass) / item.cost,
+    );
+    const max_capacity = item.is_reagent ? props.space : props.max_output;
+    const max_amount = Math.max(1, Math.min(max_capacity, max_possible));
+    return {
+      ...item,
+      disabled,
+      max_amount,
+      amount,
+      setAmount,
+    };
+  });
+  return items.map((item) => (
+    <Table.Row key={item.id}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       <Table.Cell>
         <span
           className={classes(['design32x32', id])}
@@ -240,9 +392,18 @@ function Item(props: Props) {
       <Table.Cell collapsing>
         <Button
           align="right"
+<<<<<<< HEAD
           width={5}
           pr={0}
           disabled={disabled}
+=======
+          content={
+            parseFloat(
+              ((item.cost * item.amount) / props.efficiency).toFixed(2),
+            ) + ' BIO'
+          }
+          disabled={item.disabled}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           onClick={() =>
             act('create', {
               id,

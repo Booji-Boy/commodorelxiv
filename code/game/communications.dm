@@ -66,26 +66,27 @@
 GLOBAL_LIST_EMPTY(all_radios)
 
 /proc/add_radio(obj/item/radio, freq)
-	if(!freq || !radio)
+	if(!freq || QDELETED(radio))
 		return
 	if(!GLOB.all_radios["[freq]"])
 		GLOB.all_radios["[freq]"] = list(radio)
 		return freq
 
 	GLOB.all_radios["[freq]"] |= radio
+	list_clear_nulls(GLOB.all_radios["[freq]"]) // sanity check, because oh god how does this happen
 	return freq
 
 /proc/remove_radio(obj/item/radio, freq)
-	if(!freq || !radio)
+	if(!freq || QDELETED(radio))
 		return
 	if(!GLOB.all_radios["[freq]"])
 		return
-
 	GLOB.all_radios["[freq]"] -= radio
 
 /proc/remove_radio_all(obj/item/radio)
 	for(var/freq in GLOB.all_radios)
 		GLOB.all_radios["[freq]"] -= radio
+		list_clear_nulls(GLOB.all_radios["[freq]"])
 
 // For information on what objects or departments use what frequencies,
 // see __DEFINES/radio.dm. Mappers may also select additional frequencies for
@@ -107,7 +108,8 @@ GLOBAL_LIST_INIT(radiochannels, list(
 	RADIO_CHANNEL_CTF_RED = FREQ_CTF_RED,
 	RADIO_CHANNEL_CTF_BLUE = FREQ_CTF_BLUE,
 	RADIO_CHANNEL_CTF_GREEN = FREQ_CTF_GREEN,
-	RADIO_CHANNEL_CTF_YELLOW = FREQ_CTF_YELLOW
+	RADIO_CHANNEL_CTF_YELLOW = FREQ_CTF_YELLOW,
+	RADIO_CHANNEL_RADIO = RADIO_KEY_RADIO,
 ))
 
 GLOBAL_LIST_INIT(reverseradiochannels, list(
@@ -126,7 +128,8 @@ GLOBAL_LIST_INIT(reverseradiochannels, list(
 	"[FREQ_CTF_RED]" = RADIO_CHANNEL_CTF_RED,
 	"[FREQ_CTF_BLUE]" = RADIO_CHANNEL_CTF_BLUE,
 	"[FREQ_CTF_GREEN]" = RADIO_CHANNEL_CTF_GREEN,
-	"[FREQ_CTF_YELLOW]" = RADIO_CHANNEL_CTF_YELLOW
+	"[FREQ_CTF_YELLOW]" = RADIO_CHANNEL_CTF_YELLOW,
+	"[FREQ_RADIO]" = RADIO_CHANNEL_RADIO,
 ))
 
 GLOBAL_LIST_INIT(radiocolors, list(

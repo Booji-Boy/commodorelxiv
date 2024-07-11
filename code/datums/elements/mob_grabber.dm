@@ -13,6 +13,7 @@
 		return ELEMENT_INCOMPATIBLE
 	src.minimum_stat = minimum_stat
 	src.steal_from_others = steal_from_others
+<<<<<<< HEAD
 	RegisterSignals(target, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(grab_mob))
 
 /datum/element/mob_grabber/Detach(datum/source)
@@ -29,3 +30,20 @@
 		return NONE
 	INVOKE_ASYNC(target, TYPE_PROC_REF(/mob/living, grabbedby), source)
 	return COMPONENT_CANCEL_ATTACK_CHAIN
+=======
+	RegisterSignals(target, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET), PROC_REF(grab_mob))
+
+/datum/element/mob_grabber/Detach(datum/source)
+	UnregisterSignal(source, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET))
+	. = ..()
+
+/// Try and grab something we attacked
+/datum/element/mob_grabber/proc/grab_mob(mob/living/source, mob/living/target)
+	SIGNAL_HANDLER
+	if (!isliving(target) || !source.Adjacent(target) || target.stat < minimum_stat)
+		return
+	var/atom/currently_pulled = target.pulledby
+	if (!isnull(currently_pulled) && (!steal_from_others || currently_pulled == source))
+		return
+	INVOKE_ASYNC(target, TYPE_PROC_REF(/mob/living, grabbedby), source)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

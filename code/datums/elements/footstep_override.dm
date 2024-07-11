@@ -78,4 +78,7 @@
 	steps[FOOTSTEP_MOB_HEAVY] = heavyfootstep
 	steps[FOOTSTEP_MOB_CLAW] = clawfootstep
 	steps[STEP_SOUND_PRIORITY] = priority
+<<<<<<< HEAD
 	return FOOTSTEP_OVERRIDEN
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

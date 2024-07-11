@@ -25,8 +25,25 @@
 		context[SCREENTIP_CONTEXT_LMB] = "Insert Item"
 		screentip_set = TRUE
 
+<<<<<<< HEAD
 	if(screentip_set)
 		. = CONTEXTUAL_SCREENTIP_SET
+=======
+/obj/machinery/rnd/destructive_analyzer/Insert_Item(obj/item/O, mob/living/user)
+	if(!(user.istate & ISTATE_HARM))
+		. = 1
+		if(!is_insertion_ready(user))
+			return
+		if(!user.transferItemToLoc(O, src))
+			to_chat(user, span_warning("\The [O] is stuck to your hand, you cannot put it in the [src.name]!"))
+			return
+		busy = TRUE
+		loaded_item = O
+		to_chat(user, span_notice("You add the [O.name] to the [src.name]!"))
+		flick("d_analyzer_la", src)
+		addtimer(CALLBACK(src, PROC_REF(finish_loading)), 10)
+		updateUsrDialog()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/rnd/destructive_analyzer/examine(mob/user)
 	. = ..()
@@ -79,7 +96,78 @@
 		var/list/points = techweb_item_point_check(loaded_item)
 		data["recoverable_points"] = techweb_point_display_generic(points)
 
+<<<<<<< HEAD
 		var/list/boostable_nodes = techweb_item_unlock_check(loaded_item)
+=======
+/obj/machinery/rnd/destructive_analyzer/proc/user_try_decon_id(id, mob/user)
+	if(!istype(loaded_item))
+		return FALSE
+
+	if (id && id != RESEARCH_MATERIAL_DESTROY_ID)
+		var/datum/techweb_node/TN = SSresearch.techweb_node_by_id(id)
+		if(!istype(TN))
+			return FALSE
+		var/dpath = loaded_item.type
+		var/list/worths = TN.boost_item_paths[dpath]
+		var/list/differences = list()
+		var/list/already_boosted = stored_research.boosted_nodes[TN.id]
+		for(var/i in worths)
+			var/used = already_boosted? already_boosted[i] : 0
+			var/value = min(worths[i], TN.research_costs[i]) - used
+			if(value > 0)
+				differences[i] = value
+		if(length(worths) && !length(differences))
+			return FALSE
+		var/choice = tgui_alert(user, "Are you sure you want to destroy [loaded_item] to [!length(worths) ? "reveal [TN.display_name]" : "boost [TN.display_name] by [json_encode(differences)] point\s"]?", "Destructive Analyzer", list("Proceed", "Cancel"))
+		if(choice != "Proceed")
+			return FALSE
+		if(QDELETED(loaded_item) || QDELETED(src))
+			return FALSE
+		SSblackbox.record_feedback("nested tally", "item_deconstructed", 1, list("[TN.id]", "[initial(loaded_item.name)]"))
+		if(destroy_item(loaded_item))
+			stored_research.boost_with_item(SSresearch.techweb_node_by_id(TN.id), dpath)
+
+	else
+		var/list/point_value = techweb_item_point_check(loaded_item)
+		if(stored_research.deconstructed_items[loaded_item.type])
+			point_value = list()
+		var/user_mode_string = ""
+		if(length(point_value))
+			user_mode_string = " for [json_encode(point_value)] points"
+		var/choice = tgui_alert(usr, "Are you sure you want to destroy [loaded_item][user_mode_string]?",, list("Proceed", "Cancel"))
+		if(choice == "Cancel")
+			return FALSE
+		if(QDELETED(loaded_item) || QDELETED(src))
+			return FALSE
+		destroy_item(loaded_item)
+	return TRUE
+
+/obj/machinery/rnd/destructive_analyzer/proc/unload_item()
+	if(!loaded_item)
+		return FALSE
+	loaded_item.forceMove(get_turf(src))
+	loaded_item = null
+	update_appearance()
+	return TRUE
+
+/obj/machinery/rnd/destructive_analyzer/ui_interact(mob/user)
+	. = ..()
+	var/datum/browser/popup = new(user, "destructive_analyzer", name, 900, 600)
+	popup.set_content(ui_deconstruct())
+	popup.open()
+
+/obj/machinery/rnd/destructive_analyzer/proc/ui_deconstruct() //Legacy code
+	var/list/l = list()
+	if(!loaded_item)
+		l += "<div class='statusDisplay'>No item loaded. Standing-by...</div>"
+	else
+		l += "<div class='statusDisplay'>[RDSCREEN_NOBREAK]"
+		l += "<table><tr><td>[icon2html(loaded_item, usr)]</td><td><b>[loaded_item.name]</b> <A href='?src=[REF(src)];eject_item=1'>Eject</A></td></tr></table>[RDSCREEN_NOBREAK]"
+		l += "Select a node to boost by deconstructing this item. This item can boost:"
+
+		var/anything = FALSE
+		var/list/boostable_nodes = techweb_item_boost_check(loaded_item)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		for(var/id in boostable_nodes)
 			var/datum/techweb_node/unlockable_node = SSresearch.techweb_node_by_id(id)
 			var/list/node_data = list()

@@ -29,6 +29,11 @@
 	smoothing_flags = SMOOTH_BITMASK
 	smoothing_groups = SMOOTH_GROUP_TABLES
 	canSmoothWith = SMOOTH_GROUP_TABLES
+<<<<<<< HEAD
+=======
+	///TRUE if the table can be climbed on and have living mobs placed on it normally, FALSE otherwise
+	var/climbable = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/frame = /obj/structure/table_frame
 	var/framestack = /obj/item/stack/rods
 	var/glass_shard_type = /obj/item/shard
@@ -43,15 +48,25 @@
 	if(_buildstack)
 		buildstack = _buildstack
 	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_TABLE_PRIORITY)
+<<<<<<< HEAD
 
 	make_climbable()
+=======
+	AddElement(/datum/element/elevation, pixel_shift = 12)
+	if(climbable)
+		AddElement(/datum/element/climbable)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/static/list/loc_connections = list(
 		COMSIG_LIVING_DISARM_COLLIDE = PROC_REF(table_living),
 	)
 
 	AddElement(/datum/element/connect_loc, loc_connections)
+<<<<<<< HEAD
 	var/static/list/give_turf_traits = list(TRAIT_TURF_IGNORE_SLOWDOWN, TRAIT_TURF_IGNORE_SLIPPERY, TRAIT_IMMERSE_STOPPED)
+=======
+	var/static/list/give_turf_traits = list(TRAIT_TURF_IGNORE_SLOWDOWN, TRAIT_TURF_IGNORE_SLIPPERY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/give_turf_traits, give_turf_traits)
 	register_context()
 
@@ -114,7 +129,7 @@
 					return ..()
 				to_chat(user, span_warning("[pushed_mob] is buckled to [pushed_mob.buckled]!"))
 				return
-			if(user.combat_mode)
+			if((user.istate & ISTATE_HARM))
 				switch(user.grab_state)
 					if(GRAB_PASSIVE)
 						to_chat(user, span_warning("You need a better grip to do that!"))
@@ -267,8 +282,13 @@
 		var/obj/item/riding_offhand/riding_item = tool
 		var/mob/living/carried_mob = riding_item.rider
 		if(carried_mob == user) //Piggyback user.
+<<<<<<< HEAD
 			return NONE
 		if(user.combat_mode)
+=======
+			return
+		if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			user.unbuckle_mob(carried_mob)
 			tablelimbsmash(user, carried_mob)
 		else
@@ -287,6 +307,7 @@
 				tableplace(user, carried_mob)
 		return ITEM_INTERACT_SUCCESS
 
+<<<<<<< HEAD
 	// Where putting things on tables is handled.
 	if(!user.combat_mode && !(tool.item_flags & ABSTRACT) && user.transferItemToLoc(tool, drop_location(), silent = FALSE))
 		//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
@@ -294,12 +315,27 @@
 		tool.pixel_y = clamp(text2num(LAZYACCESS(modifiers, ICON_Y)) - 16, -(world.icon_size/2), world.icon_size/2)
 		AfterPutItemOnTable(tool, user)
 		return ITEM_INTERACT_SUCCESS
+=======
+	if(!(user.istate & ISTATE_HARM) && !(I.item_flags & ABSTRACT))
+		if(user.transferItemToLoc(I, drop_location(), silent = FALSE))
+			//Center the icon where the user clicked.
+			if(!LAZYACCESS(modifiers, ICON_X) || !LAZYACCESS(modifiers, ICON_Y))
+				return
+			//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
+			I.pixel_x = clamp(text2num(LAZYACCESS(modifiers, ICON_X)) - 16, -(world.icon_size/2), world.icon_size/2)
+			I.pixel_y = clamp(text2num(LAZYACCESS(modifiers, ICON_Y)) - 16, -(world.icon_size/2), world.icon_size/2)
+			AfterPutItemOnTable(I, user)
+			return TRUE
+	else
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return NONE
 
 /obj/structure/table/proc/AfterPutItemOnTable(obj/item/thing, mob/living/user)
 	return
 
+<<<<<<< HEAD
 /obj/structure/table/atom_deconstruct(disassembled = TRUE)
 	var/turf/target_turf = get_turf(src)
 	if(buildstack)
@@ -316,6 +352,27 @@
 /obj/structure/table/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	if(the_rcd.mode == RCD_DECONSTRUCT)
 		return list("delay" = 2.4 SECONDS, "cost" = 16)
+=======
+/obj/structure/table/deconstruct(disassembled = TRUE, wrench_disassembly = 0)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		var/turf/T = get_turf(src)
+		if(buildstack)
+			new buildstack(T, buildstackamount)
+		else
+			for(var/i in custom_materials)
+				var/datum/material/M = i
+				new M.sheet_type(T, FLOOR(custom_materials[M] / SHEET_MATERIAL_AMOUNT, 1))
+		if(!wrench_disassembly)
+			new frame(T)
+		else
+			new framestack(T, framestackamount)
+	qdel(src)
+
+/obj/structure/table/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+	switch(the_rcd.mode)
+		if(RCD_DECONSTRUCT)
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 2.4 SECONDS, "cost" = 16)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/table/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -400,6 +457,7 @@
 		living_mob.forceMove(loc)
 
 	for(var/atom/movable/attached_movable as anything in attached_items)
+<<<<<<< HEAD
 		if(!attached_movable.Move(loc)) // weird
 			clear_item_reference(attached_movable) // we check again in on_item_moved() just in case something's wacky tobaccy
 
@@ -408,6 +466,15 @@
 	UnregisterSignal(thing, COMSIG_MOVABLE_MOVED)
 	LAZYREMOVE(attached_items, thing)
 
+=======
+		if(!attached_movable.Move(loc))
+			RemoveItemFromTable(attached_movable, attached_movable.loc)
+
+/obj/structure/table/rolling/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /*
  * Glass tables
  */
@@ -452,7 +519,11 @@
 		check_break(M)
 
 /obj/structure/table/glass/proc/check_break(mob/living/M)
+<<<<<<< HEAD
 	if(M.has_gravity() && M.mob_size > MOB_SIZE_SMALL && !(M.movement_type & MOVETYPES_NOT_TOUCHING_GROUND))
+=======
+	if(M.has_gravity() && M.mob_size > MOB_SIZE_SMALL && !(M.movement_type & FLYING) && !HAS_TRAIT(M, TRAIT_LIGHTWEIGHT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		table_shatter(M)
 
 /obj/structure/table/glass/proc/table_shatter(mob/living/victim)
@@ -733,8 +804,14 @@
 	smoothing_flags = NONE
 	smoothing_groups = null
 	canSmoothWith = null
+<<<<<<< HEAD
 	can_buckle = TRUE
 	buckle_lying = 90
+=======
+	can_buckle = 1
+	buckle_lying = 90
+	climbable = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/silver =SHEET_MATERIAL_AMOUNT)
 	var/mob/living/carbon/patient = null
 	var/obj/machinery/computer/operating/computer = null
@@ -864,6 +941,7 @@
 	deconstruct(TRUE)
 	return ITEM_INTERACT_SUCCESS
 
+<<<<<<< HEAD
 /obj/structure/rack/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
 	if(tool.tool_behaviour == TOOL_WRENCH)
 		return NONE
@@ -876,6 +954,17 @@
 	if(user.transferItemToLoc(tool, drop_location(), silent = FALSE))
 		return ITEM_INTERACT_SUCCESS
 	return ITEM_INTERACT_BLOCKING
+=======
+/obj/structure/rack/attackby(obj/item/W, mob/living/user, params)
+	if (W.tool_behaviour == TOOL_WRENCH && !(flags_1&NODECONSTRUCT_1) && (user.istate & ISTATE_SECONDARY))
+		W.play_tool_sound(src)
+		deconstruct(TRUE)
+		return
+	if((user.istate & ISTATE_HARM))
+		return ..()
+	if(user.transferItemToLoc(W, drop_location()))
+		return 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/rack/attack_paw(mob/living/user, list/modifiers)
 	attack_hand(user, modifiers)
@@ -921,7 +1010,11 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "rack_parts"
 	inhand_icon_state = "rack_parts"
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT)
 	var/building = FALSE
 

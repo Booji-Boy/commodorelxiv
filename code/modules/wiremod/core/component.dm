@@ -183,10 +183,10 @@
  * * name - The name of the output port
  * * type - The datatype it handles.
  */
-/obj/item/circuit_component/proc/add_output_port(name, type, order = 1)
+/obj/item/circuit_component/proc/add_output_port(name, type, order = 1, port_type = /datum/port/output)
 	var/list/arguments = list(src)
 	arguments += args
-	var/datum/port/output/output_port = new(arglist(arguments))
+	var/datum/port/output/output_port = new port_type(arglist(arguments))
 	output_ports += output_port
 	sortTim(output_ports, GLOBAL_PROC_REF(cmp_port_order_asc))
 	if(parent)
@@ -206,6 +206,9 @@
 		SStgui.update_uis(parent)
 	return null //explicitly set the port to null if used like this: `port = remove_output_port(port)`
 
+
+/obj/item/circuit_component/proc/after_work_call()
+	return
 
 /**
  * Called whenever an input is received from one of the ports.
@@ -235,6 +238,7 @@
 
 	if(circuit_flags & CIRCUIT_FLAG_OUTPUT_SIGNAL)
 		trigger_output.set_output(COMPONENT_SIGNAL)
+	after_work_call()
 	return TRUE
 
 /obj/item/circuit_component/proc/set_circuit_size(new_size)
@@ -245,6 +249,9 @@
 
 	if(parent)
 		parent.current_size += circuit_size
+
+/obj/item/circuit_component/proc/check_power_modifictions()
+	return power_usage_per_input
 
 /**
  * Called whether this circuit component should receive an input.
@@ -266,10 +273,19 @@
 			message_admins("[display_name] tried to execute on [parent.get_creator_admin()] that has admin_only set to 0")
 			return FALSE
 
+<<<<<<< HEAD
 		var/flags = SEND_SIGNAL(parent, COMSIG_CIRCUIT_PRE_POWER_USAGE, energy_usage_per_input)
 		if(!(flags & COMPONENT_OVERRIDE_POWER_USAGE))
 			var/obj/item/stock_parts/cell/cell = parent.get_cell()
 			if(!cell?.use(energy_usage_per_input))
+=======
+		var/power_usage = check_power_modifictions()
+
+		var/flags = SEND_SIGNAL(parent, COMSIG_CIRCUIT_PRE_POWER_USAGE, power_usage)
+		if(!(flags & COMPONENT_OVERRIDE_POWER_USAGE))
+			var/obj/item/stock_parts/cell/cell = parent.get_cell()
+			if(!cell?.use(power_usage))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return FALSE
 
 	if((!port || port.trigger == PROC_REF(input_received)) && (circuit_flags & CIRCUIT_FLAG_INPUT_SIGNAL) && !COMPONENT_TRIGGERED_BY(trigger_input, port))

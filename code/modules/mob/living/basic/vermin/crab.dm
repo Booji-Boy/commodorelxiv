@@ -78,7 +78,11 @@
 /datum/ai_controller/basic_controller/crab
 	blackboard = list(
 		BB_ALWAYS_IGNORE_FACTION = TRUE,
+<<<<<<< HEAD
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/of_size/smaller,
+=======
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/of_size/ours_or_smaller,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		BB_FLEE_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 	)
 
@@ -92,5 +96,8 @@
 		/datum/ai_planning_subtree/simple_find_target,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree,
 		/datum/ai_planning_subtree/random_speech/crab,
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/go_for_swim,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)

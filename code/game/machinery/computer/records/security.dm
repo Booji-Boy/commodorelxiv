@@ -176,7 +176,11 @@
 			return TRUE
 
 		if("set_note")
+<<<<<<< HEAD
 			var/note = strip_html_full(params["note"], MAX_MESSAGE_LEN)
+=======
+			var/note = trim(params["note"], MAX_MESSAGE_LEN)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			investigate_log("[user] has changed the security note of record: \"[target]\" from \"[target.security_note]\" to \"[note]\".")
 			target.security_note = note
 			return TRUE

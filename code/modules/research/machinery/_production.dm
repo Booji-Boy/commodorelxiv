@@ -373,6 +373,7 @@
 /obj/machinery/rnd/production/proc/do_make_item(datum/design/design, items_remaining, build_time_per_item, material_cost_coefficient, charge_per_item, turf/target)
 	PROTECTED_PROC(TRUE)
 
+<<<<<<< HEAD
 	if(!items_remaining) // how
 		finalize_build()
 		return
@@ -381,6 +382,169 @@
 		say("Unable to continue production, power failure.")
 		finalize_build()
 		return
+=======
+	efficiency_coeff = max(total_rating, 0)
+
+/obj/machinery/rnd/production/on_deconstruction()
+	for(var/obj/item/reagent_containers/cup/G in component_parts)
+		reagents.trans_to(G, G.reagents.maximum_volume)
+
+	return ..()
+
+/obj/machinery/rnd/production/proc/do_print(atom/path, amount, list/matlist)
+	for(var/i in 1 to amount)
+		new path(get_turf(src))
+
+	SSblackbox.record_feedback("nested tally", "item_printed", amount, list("[initial(name)]", "[initial(path.name)]"))
+	finalize_build()
+
+/obj/machinery/rnd/production/proc/efficient_with(path)
+	return !ispath(path, /obj/item/stack/sheet) && !ispath(path, /obj/item/stack/ore/bluespace_crystal)
+
+/obj/machinery/rnd/production/proc/user_try_print_id(design_id, print_quantity)
+	if(!design_id)
+		return FALSE
+
+	if(istext(print_quantity))
+		print_quantity = text2num(print_quantity)
+
+	if(isnull(print_quantity))
+		print_quantity = 1
+
+	var/datum/design/design = stored_research.researched_designs[design_id] ? SSresearch.techweb_design_by_id(design_id) : null
+
+	if(!istype(design))
+		return FALSE
+
+	if(busy)
+		say("Warning: fabricator is busy!")
+		return FALSE
+
+	if(!(isnull(allowed_department_flags) || (design.departmental_flags & allowed_department_flags)))
+		say("This fabricator does not have the necessary keys to decrypt this design.")
+		return FALSE
+
+	if(design.build_type && !(design.build_type & allowed_buildtypes))
+		say("This fabricator does not have the necessary manipulation systems for this design.")
+		return FALSE
+
+	if(!materials.mat_container)
+		say("No connection to material storage, please contact the quartermaster.")
+		return FALSE
+
+	if(materials.on_hold())
+		say("Mineral access is on hold, please contact the quartermaster.")
+		return FALSE
+
+	var/power = active_power_usage
+
+	print_quantity = clamp(print_quantity, 1, 50)
+
+	for(var/material in design.materials)
+		power += round(design.materials[material] * print_quantity / 35)
+
+	power = min(active_power_usage, power)
+	use_power(power)
+
+	var/coefficient = efficient_with(design.build_path) ? efficiency_coeff : 1
+	var/list/efficient_mats = list()
+
+	for(var/material in design.materials)
+		efficient_mats[material] = design.materials[material] * coefficient
+
+	if(!materials.mat_container.has_materials(efficient_mats, print_quantity))
+		say("Not enough materials to complete prototype[print_quantity > 1? "s" : ""].")
+		return FALSE
+
+	for(var/reagent in design.reagents_list)
+		if(!reagents.has_reagent(reagent, design.reagents_list[reagent] * print_quantity * coefficient))
+			say("Not enough reagents to complete prototype[print_quantity > 1? "s" : ""].")
+			return FALSE
+
+	// Charge the lathe tax at least once per ten items.
+	var/total_cost = LATHE_TAX * max(round(print_quantity / 10), 1)
+
+	if(!charges_tax)
+		total_cost = 0
+
+	if(isliving(usr))
+		var/mob/living/user = usr
+		var/obj/item/card/id/card = user.get_idcard(TRUE)
+
+		if(!card && istype(user.pulling, /obj/item/card/id))
+			card = user.pulling
+
+		if(card && card.registered_account)
+			var/datum/bank_account/our_acc = card.registered_account
+			if(our_acc.account_job.departments_bitflags & allowed_department_flags)
+				total_cost = 0 // We are not charging crew for printing their own supplies and equipment.
+
+	if(attempt_charge(src, usr, total_cost) & COMPONENT_OBJ_CANCEL_CHARGE)
+		say("Insufficient funds to complete prototype. Please present a holochip or valid ID card.")
+		return FALSE
+
+	if(iscyborg(usr))
+		var/mob/living/silicon/robot/borg = usr
+
+		if(!borg.cell)
+			return FALSE
+
+		borg.cell.use(SILICON_LATHE_TAX)
+
+	materials.mat_container.use_materials(efficient_mats, print_quantity)
+	materials.silo_log(src, "built", -print_quantity, "[design.name]", efficient_mats)
+
+	for(var/reagent in design.reagents_list)
+		reagents.remove_reagent(reagent, design.reagents_list[reagent] * print_quantity * coefficient)
+
+	busy = TRUE
+
+	if(production_animation)
+		flick(production_animation, src)
+
+	var/time_coefficient = design.lathe_time_factor * efficiency_coeff
+
+	addtimer(CALLBACK(src, PROC_REF(reset_busy)), (30 * time_coefficient * print_quantity) ** 0.5)
+	addtimer(CALLBACK(src, PROC_REF(do_print), design.build_path, print_quantity, efficient_mats), (32 * time_coefficient * print_quantity) ** 0.8)
+
+	return TRUE
+
+/obj/machinery/rnd/production/proc/finalize_build()
+
+/obj/machinery/rnd/production/proc/eject_sheets(eject_sheet, eject_amt)
+	var/datum/component/material_container/mat_container = materials.mat_container
+
+	if(!mat_container)
+		say("No access to material storage, please contact the quartermaster.")
+		return 0
+
+	if(materials.on_hold())
+		say("Mineral access is on hold, please contact the quartermaster.")
+		return 0
+
+	var/count = mat_container.retrieve_sheets(text2num(eject_amt), eject_sheet, drop_location())
+
+	var/list/matlist = list()
+	matlist[eject_sheet] = SHEET_MATERIAL_AMOUNT * count
+
+	materials.silo_log(src, "ejected", -count, "sheets", matlist)
+
+	return count
+
+// Stuff for the stripe on the department machines
+/obj/machinery/rnd/production/default_deconstruction_screwdriver(mob/user, icon_state_open, icon_state_closed, obj/item/screwdriver)
+	. = ..()
+
+	update_icon(UPDATE_OVERLAYS)
+
+/obj/machinery/rnd/production/update_overlays()
+	. = ..()
+
+	if(!stripe_color)
+		return
+
+	var/mutable_appearance/stripe = mutable_appearance('monkestation/icons/obj/machines/research.dmi', "protolate_stripe") //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!directly_use_energy(charge_per_item)) // provide the wait time until lathe is ready
 		var/area/my_area = get_area(src)

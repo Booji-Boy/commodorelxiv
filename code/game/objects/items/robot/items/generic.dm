@@ -18,10 +18,16 @@
 /obj/item/borg/stun
 	name = "electrically-charged arm"
 	icon_state = "elecarm"
+<<<<<<< HEAD
 	var/stamina_damage = 60 //Same as normal batong
 	var/cooldown_check = 0
 	/// cooldown between attacks
 	var/cooldown = 4 SECONDS // same as baton
+=======
+	/// Cost to use the stun arm
+	var/charge_cost = 1000
+	COOLDOWN_DECLARE(non_charge_cooldown)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/borg/stun/attack(mob/living/attacked_mob, mob/living/user)
 	if(cooldown_check > world.time)
@@ -38,6 +44,7 @@
 			return
 
 	user.do_attack_animation(attacked_mob)
+<<<<<<< HEAD
 	attacked_mob.adjustStaminaLoss(stamina_damage)
 	attacked_mob.set_confusion_if_lower(5 SECONDS)
 	attacked_mob.adjust_stutter(20 SECONDS)
@@ -57,6 +64,25 @@
 	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
 	cooldown_check = world.time + cooldown
 	log_combat(user, attacked_mob, "stunned", src, "(Combat mode: [user.combat_mode ? "On" : "Off"])")
+=======
+	attacked_mob.adjust_stutter(10 SECONDS)
+	if(ishuman(user) && !COOLDOWN_FINISHED(src, non_charge_cooldown))
+		attacked_mob.stamina.adjust(-5)
+		attacked_mob.visible_message(span_danger("[user] weakly prods [attacked_mob] with [src]!"), \
+					span_userdanger("[user] weakly prods you with [src]!"))
+		COOLDOWN_START(src, non_charge_cooldown, 3 SECONDS)
+		return
+
+	attacked_mob.stamina.adjust(-100)
+	COOLDOWN_START(src, non_charge_cooldown, 5 SECONDS)
+
+	attacked_mob.visible_message(span_danger("[user] prods [attacked_mob] with [src]!"), \
+					span_userdanger("[user] prods you with [src]!"))
+
+	playsound(loc, 'sound/weapons/egloves.ogg', 50, TRUE, -1)
+
+	log_combat(user, attacked_mob, "stunned", src, "(Combat mode: [(user.istate & ISTATE_HARM) ? "On" : "Off"])")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #undef CYBORG_STUN_CHARGE_COST
 
@@ -105,7 +131,7 @@
 		if(HUG_MODE_NICE)
 			if(isanimal_or_basicmob(attacked_mob))
 				var/list/modifiers = params2list(params)
-				if (!user.combat_mode && !LAZYACCESS(modifiers, RIGHT_CLICK))
+				if (!(user.istate & ISTATE_HARM) && !(user.istate & ISTATE_SECONDARY))
 					attacked_mob.attack_hand(user, modifiers) //This enables borgs to get the floating heart icon and mob emote from simple_animal's that have petbonus == true.
 				return
 			if(user.zone_selected == BODY_ZONE_HEAD)

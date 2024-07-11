@@ -1,3 +1,22 @@
+<<<<<<< HEAD
+=======
+import { useBackend } from '../backend';
+import {
+  LabeledList,
+  Section,
+  ProgressBar,
+  Collapsible,
+  Stack,
+  Icon,
+  Box,
+  Tooltip,
+  Button,
+} from '../components';
+import { Window } from '../layouts';
+import { capitalize } from 'common/string';
+import { Design, MaterialMap } from './Fabrication/Types';
+import { DesignBrowser } from './Fabrication/DesignBrowser';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { BooleanLike, classes } from 'common/react';
 import { capitalize } from 'common/string';
 
@@ -33,6 +52,7 @@ type AutolatheData = {
 };
 
 export const Autolathe = (props) => {
+<<<<<<< HEAD
   const { data } = useBackend<AutolatheData>();
   const {
     materialtotal,
@@ -42,6 +62,10 @@ export const Autolathe = (props) => {
     active,
     SHEET_MATERIAL_AMOUNT,
   } = data;
+=======
+  const { act, data } = useBackend<AutolatheData>();
+  const { materialtotal, materialsmax, materials, designs, active } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const filteredMaterials = materials.filter((material) => material.amount > 0);
 
@@ -69,10 +93,14 @@ export const Autolathe = (props) => {
                       bad: [0, materialsmax * 0.25],
                     }}
                   >
+<<<<<<< HEAD
                     {materialtotal / SHEET_MATERIAL_AMOUNT +
                       '/' +
                       materialsmax / SHEET_MATERIAL_AMOUNT +
                       ' sheets'}
+=======
+                    {materialtotal + '/' + materialsmax + ' cm³'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </ProgressBar>
                 </LabeledList.Item>
                 <LabeledList.Item>
@@ -140,6 +168,7 @@ type PrintButtonProps = {
 };
 
 const PrintButton = (props: PrintButtonProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<AutolatheData>();
   const {
     design,
@@ -148,6 +177,16 @@ const PrintButton = (props: PrintButtonProps) => {
     SHEET_MATERIAL_AMOUNT,
     maxmult,
   } = props;
+=======
+  const { act, data } = useBackend<AutolatheData>();
+  const { design, quantity, availableMaterials } = props;
+
+  const canPrint = !Object.entries(design.cost).some(
+    ([material, amount]) =>
+      !availableMaterials[material] ||
+      amount * quantity > (availableMaterials[material] ?? 0),
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const canPrint = maxmult >= quantity;
   return (
@@ -167,9 +206,13 @@ const PrintButton = (props: PrintButtonProps) => {
           !canPrint && 'FabricatorRecipe__Button--disabled',
         ])}
         color={'transparent'}
+<<<<<<< HEAD
         onClick={() =>
           canPrint && act('make', { id: design.id, multiplier: quantity })
         }
+=======
+        onClick={() => act('make', { id: design.id, multiplier: quantity })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       >
         &times;{quantity}
       </div>
@@ -184,6 +227,7 @@ type AutolatheRecipeProps = {
 };
 
 const AutolatheRecipe = (props: AutolatheRecipeProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<AutolatheData>();
   const { design, availableMaterials, SHEET_MATERIAL_AMOUNT } = props;
 
@@ -220,6 +264,16 @@ const AutolatheRecipe = (props: AutolatheRecipeProps) => {
   }
   maxmult = Math.min(Math.floor(maxmult), 50);
   const canPrint = maxmult > 0;
+=======
+  const { act, data } = useBackend<AutolatheData>();
+  const { design, availableMaterials } = props;
+
+  const canPrint = !Object.entries(design.cost).some(
+    ([material, amount]) =>
+      !availableMaterials[material] ||
+      amount > (availableMaterials[material] ?? 0),
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <div className="FabricatorRecipe">
@@ -249,9 +303,13 @@ const AutolatheRecipe = (props: AutolatheRecipeProps) => {
             'FabricatorRecipe__Title',
             !canPrint && 'FabricatorRecipe__Title--disabled',
           ])}
+<<<<<<< HEAD
           onClick={() =>
             canPrint && act('make', { id: design.id, multiplier: 1 })
           }
+=======
+          onClick={() => act('make', { id: design.id, multiplier: 1 })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <div className="FabricatorRecipe__Icon">
             <Box

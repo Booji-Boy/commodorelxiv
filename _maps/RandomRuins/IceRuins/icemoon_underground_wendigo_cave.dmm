@@ -79,6 +79,7 @@
 	},
 /area/icemoon/underground/explored)
 "q" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/indestructible/necropolis{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -260,6 +261,9 @@
 /area/icemoon/underground/unexplored)
 "W" = (
 /mob/living/simple_animal/hostile/megafauna/wendigo,
+=======
+/mob/living/simple_animal/hostile/megafauna/wendigo/monkestation_override,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/indestructible/necropolis{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},

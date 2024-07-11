@@ -5,6 +5,10 @@
 	tick_interval = -1
 	duration = 1 MINUTES // set in on creation, this just needs to be any value to process
 	alert_type = null
+<<<<<<< HEAD
+=======
+	remove_on_fullheal = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// A reference to a COPY of the DNA that the mob will be transformed into.
 	var/datum/dna/new_dna
 	/// A reference to a COPY of the DNA of the mob prior to transformation.
@@ -36,6 +40,10 @@
 	new_dna.transfer_identity(transforming)
 	transforming.real_name = new_dna.real_name
 	transforming.name = transforming.get_visible_name()
+<<<<<<< HEAD
+=======
+	transforming.update_name_tag() // monkestation edit: name tags
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	transforming.updateappearance(mutcolor_update = TRUE)
 	transforming.domutcheck()
 	return TRUE

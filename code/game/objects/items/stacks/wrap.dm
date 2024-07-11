@@ -36,12 +36,20 @@
 		//Set layers to these colors, base then ribbon
 		set_greyscale(colors = list(generated_base_color, generated_ribbon_color))
 
+<<<<<<< HEAD
 /obj/item/stack/wrapping_paper/click_alt(mob/user)
 	var/new_base = input(user, "", "Select a base color", color) as color
 	var/new_ribbon = input(user, "", "Select a ribbon color", color) as color
 	if(!new_base || !new_ribbon)
 		return CLICK_ACTION_BLOCKING
 
+=======
+/obj/item/stack/wrapping_paper/AltClick(mob/user, modifiers)
+	var/new_base = tgui_color_picker(user, "", "Select a base color", color)
+	var/new_ribbon = tgui_color_picker(user, "", "Select a ribbon color", color)
+	if(!user.can_perform_action(src))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_greyscale(colors = list(new_base, new_ribbon))
 	return CLICK_ACTION_SUCCESS
 
@@ -84,6 +92,7 @@
 		parcel.base_icon_state = "deliverypackage5"
 		parcel.update_icon()
 		user.forceMove(parcel)
+		parcel.contains_mobs = TRUE //monkestation edit
 		parcel.add_fingerprint(user)
 		return OXYLOSS
 	else
@@ -102,12 +111,27 @@
 /obj/item/delivery/can_be_package_wrapped()
 	return FALSE
 
+<<<<<<< HEAD
 /obj/item/stack/package_wrap/storage_insert_on_interaction(datum/storage, atom/storage_holder, mob/user)
 	if(isitem(storage_holder))
 		// Don't insert if the target can be wrapped
 		var/obj/item/item = storage_holder
 		return !item.can_be_package_wrapped()
 	return TRUE
+=======
+/obj/item/stack/package_wrap/afterattack(obj/target, mob/user, proximity)
+	. = ..()
+	if(!proximity)
+		return
+	if(!istype(target))
+		return
+	if(target.anchored)
+		return
+	//monkestation edit start
+	if(!amount)
+		return
+	//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/stack/package_wrap/interact_with_atom(obj/interacting_with, mob/living/user, list/modifiers)
 	if(!isobj(interacting_with))
@@ -157,6 +181,12 @@
 			closet.forceMove(parcel)
 			parcel.add_fingerprint(user)
 			closet.add_fingerprint(user)
+			//monkestation edit start
+			for(var/item in closet.get_all_contents())
+				if(istype(item, /mob))
+					parcel.contains_mobs = TRUE
+					break
+			//monkestation edit end
 		else
 			balloon_alert(user, "not enough paper!")
 			return ITEM_INTERACT_BLOCKING

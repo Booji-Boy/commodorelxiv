@@ -55,9 +55,17 @@ Slimecrossing Armor
 
 /obj/structure/light_prism/Initialize(mapload, newcolor)
 	. = ..()
+<<<<<<< HEAD
 	if(newcolor)
 		color = newcolor
 		set_light_color(newcolor)
+=======
+	#if DM_VERSION < 515
+	newcolor ||= COLOR_WHITE // If you're reading this and developing on 515 or later, you can remove this line
+	#endif
+	color = newcolor
+	set_light_color(newcolor)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_light(5)
 
 /obj/structure/light_prism/attack_hand(mob/user, list/modifiers)
@@ -73,7 +81,7 @@ Slimecrossing Armor
 	if(!IsAvailable(feedback = TRUE))
 		return
 	var/obj/item/clothing/glasses/prism_glasses/glasses = target
-	var/new_color = input(owner, "Choose the lens color:", "Color change",glasses.glasses_color) as color|null
+	var/new_color = tgui_color_picker(owner, "Choose the lens color:", "Color change", glasses.glasses_color)
 	if(!new_color)
 		return
 	glasses.glasses_color = new_color

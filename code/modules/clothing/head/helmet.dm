@@ -14,7 +14,14 @@
 	clothing_flags = SNUG_FIT | STACKABLE_HELMET_EXEMPT
 	flags_cover = HEADCOVERSEYES|EARS_COVERED
 	flags_inv = HIDEHAIR
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dog_fashion = /datum/dog_fashion/head/helmet
+
+	var/can_flashlight = FALSE //if a flashlight can be mounted. if it has a flashlight and this is false, it is permanently attached.
 
 /datum/armor/head_helmet
 	melee = 35
@@ -164,10 +171,14 @@
 	toggle_message = "You pull the visor down on"
 	alt_toggle_message = "You push the visor up on"
 	armor_type = /datum/armor/toggleable_riot
+<<<<<<< HEAD
 	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACE|HIDESNOUT
+=======
+	flags_inv = HIDEEARS|HIDEFACE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	strip_delay = 80
 	actions_types = list(/datum/action/item_action/toggle)
-	visor_flags_inv = HIDEFACE|HIDESNOUT
+	visor_flags_inv = HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	visor_flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
@@ -248,12 +259,13 @@
 	clothing_flags = STOPSPRESSUREDAMAGE | STACKABLE_HELMET_EXEMPT
 	strip_delay = 80
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+	flags_inv = HIDEHAIR //monkestation edit
 	dog_fashion = null
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
 
 /datum/armor/helmet_swat
 	melee = 40
-	bullet = 30
+	bullet = 40 //monkestation edit, 30 to 40
 	laser = 30
 	energy = 40
 	bomb = 50
@@ -267,13 +279,20 @@
 	desc = "An extremely robust helmet with the Nanotrasen logo emblazoned on the top."
 	icon_state = "swat"
 	inhand_icon_state = "swat_helmet"
+<<<<<<< HEAD
 	clothing_flags = STACKABLE_HELMET_EXEMPT
+=======
+	clothing_flags = PLASMAMAN_HELMET_EXEMPT | SNUG_FIT //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	cold_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELM_MIN_TEMP_PROTECT
 	heat_protection = HEAD
 	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
-	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH | PEPPERPROOF
+	flags_cover = HEADCOVERSEYES | PEPPERPROOF //monkestation edit
 
+/obj/item/clothing/head/helmet/swat/nanotrasen/Initialize(mapload) //monkestation edit
+	. = ..()
+	AddComponent(/datum/component/seclite_attachable, light_icon_state = "flight")
 
 /obj/item/clothing/head/helmet/thunderdome
 	name = "\improper Thunderdome helmet"

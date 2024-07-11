@@ -24,7 +24,11 @@
 	throw_speed = 3
 	throw_range = 7
 	custom_materials = list(/datum/material/iron= SMALL_MATERIAL_AMOUNT * 4)
+<<<<<<< HEAD
 	var/tracking_range = 35
+=======
+	var/tracking_range = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/locator/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -465,7 +469,11 @@
 		balloon_alert(user, "emergency teleport triggered!")
 		if (!HAS_TRAIT(user, TRAIT_NOBLOOD))
 			make_bloods(mobloc, emergency_destination, user)
+<<<<<<< HEAD
 		playsound(mobloc, SFX_PORTAL_ENTER, 50, 1, SHORT_RANGE_SOUND_EXTRARANGE)
+=======
+		playsound(mobloc, SFX_SPARKS, 50, 1, SHORT_RANGE_SOUND_EXTRARANGE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		playsound(emergency_destination, 'sound/effects/phasein.ogg', 25, 1, SHORT_RANGE_SOUND_EXTRARANGE)
 		playsound(emergency_destination, SFX_PORTAL_ENTER, 50, 1, SHORT_RANGE_SOUND_EXTRARANGE)
 	else //We tried to save. We failed. Death time.

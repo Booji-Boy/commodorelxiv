@@ -21,9 +21,20 @@ type NumberInputData = {
 export const NumberInputModal = (props) => {
   const { act, data } = useBackend<NumberInputData>();
   const { init_value, large_buttons, message = '', timeout, title } = data;
+<<<<<<< HEAD
   const [input, setInput] = useState(init_value);
 
   const setValue = (value: number) => {
+=======
+  const [input, setInput] = useLocalState('input', init_value);
+  const onChange = (value: number) => {
+    if (value === input) {
+      return;
+    }
+    setInput(value);
+  };
+  const onClick = (value: number) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     if (value === input) {
       return;
     }

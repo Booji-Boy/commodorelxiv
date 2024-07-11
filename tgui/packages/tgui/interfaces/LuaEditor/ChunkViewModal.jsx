@@ -1,9 +1,12 @@
 import hljs from 'highlight.js/lib/core';
 
+<<<<<<< HEAD
 import { useLocalState } from '../../backend';
 import { Box, Button, Modal, Section } from '../../components';
 import { sanitizeText } from '../../sanitize';
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 export const ChunkViewModal = (props) => {
   const [, setModal] = useLocalState('modal');
   const [viewedChunk, setViewedChunk] = useLocalState('viewedChunk');

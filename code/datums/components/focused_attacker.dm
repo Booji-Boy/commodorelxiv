@@ -17,19 +17,31 @@
 	src.maximum_gain = maximum_gain
 	src.gain_per_attack = gain_per_attack
 
+<<<<<<< HEAD
 /datum/component/focused_attacker/Destroy(force)
+=======
+/datum/component/focused_attacker/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (!isnull(last_target))
 		UnregisterSignal(last_target, COMSIG_QDELETING)
 	return ..()
 
 /datum/component/focused_attacker/RegisterWithParent()
 	if (isliving(parent))
+<<<<<<< HEAD
 		RegisterSignal(parent, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(pre_mob_attack))
+=======
+		RegisterSignals(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK), PROC_REF(pre_mob_attack))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		RegisterSignal(parent, COMSIG_ITEM_PRE_ATTACK, PROC_REF(pre_item_attack))
 
 /datum/component/focused_attacker/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_ITEM_PRE_ATTACK))
+=======
+	UnregisterSignal(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, COMSIG_ITEM_PRE_ATTACK))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Before a mob attacks, try increasing its attack power
 /datum/component/focused_attacker/proc/pre_mob_attack(mob/living/attacker, atom/target)

@@ -9,9 +9,9 @@
 	//shitty stats, because botany is easy
 	lifespan = 60
 	endurance = 10
-	maturation = 8
+	maturation = 12
 	production = 4
-	yield = 3
+	yield = 30
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing.dmi'
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05)

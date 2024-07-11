@@ -18,13 +18,33 @@
 	var/stasis_can_toggle = 0
 	var/mattress_state = "stasis_on"
 	var/obj/effect/overlay/vis/mattress_on
+	var/mob/living/carbon/patient = null
+	var/obj/machinery/computer/operating/op_computer
 
 /obj/machinery/stasis/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/elevation, pixel_shift = 6)
+	for(var/direction in GLOB.alldirs)
+		op_computer = locate(/obj/machinery/computer/operating) in get_step(src, direction)
+		if(op_computer)
+			op_computer.sbed = src
+			break
+
+/obj/machinery/stasis/Initialize(mapload)
+	. = ..()
+<<<<<<< HEAD
+	AddElement(/datum/element/elevation, pixel_shift = 6)
+=======
+	if(op_computer && op_computer.sbed == src)
+		op_computer.sbed = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/stasis/examine(mob/user)
 	. = ..()
+	. += span_notice("Alt-click to [stasis_enabled ? "turn off" : "turn on"] the machine.")
+	. += span_notice("The [src] is [op_computer ? "linked" : "<b>NOT</b> linked"] to a nearby operating computer.")
+	. += span_notice("patient = [patient]")
+	. += span_notice("op_computer = [op_computer]")
 	. += span_notice("Alt-click to [stasis_enabled ? "turn off" : "turn on"] the machine.")
 
 /obj/machinery/stasis/proc/play_power_sound()
@@ -113,26 +133,30 @@
 	ADD_TRAIT(target, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
 	target.extinguish_mob()
 	update_use_power(ACTIVE_POWER_USE)
+	patient = occupant
 
 /obj/machinery/stasis/proc/thaw_them(mob/living/target)
 	target.remove_status_effect(/datum/status_effect/grouped/stasis, STASIS_MACHINE_EFFECT)
 	REMOVE_TRAIT(target, TRAIT_TUMOR_SUPPRESSED, TRAIT_GENERIC)
+	patient = null
 	if(target == occupant)
 		update_use_power(IDLE_POWER_USE)
 
-/obj/machinery/stasis/post_buckle_mob(mob/living/L)
-	if(!can_be_occupant(L))
+/obj/machinery/stasis/post_buckle_mob(mob/living/buckled)
+	if(!can_be_occupant(buckled))
 		return
-	set_occupant(L)
+	set_occupant(buckled)
 	if(stasis_running() && check_nap_violations())
-		chill_out(L)
+		chill_out(buckled)
 	update_appearance()
+	buckled.pixel_y -= 2
 
-/obj/machinery/stasis/post_unbuckle_mob(mob/living/L)
-	thaw_them(L)
-	if(L == occupant)
+/obj/machinery/stasis/post_unbuckle_mob(mob/living/buckled)
+	thaw_them(buckled)
+	if(buckled == occupant)
 		set_occupant(null)
 	update_appearance()
+	buckled.pixel_y += 2
 
 /obj/machinery/stasis/process()
 	if(!(occupant && isliving(occupant) && check_nap_violations()))

@@ -65,7 +65,12 @@
 
 /datum/outfit/yourmother/post_equip(mob/living/carbon/human/user, visualsOnly = FALSE)
 	. = ..()
+<<<<<<< HEAD
 	user.set_hairstyle("Braided", update = TRUE) //get_dynamic_human_appearance uses bald dummies
+=======
+	user.hairstyle = "Braided" //get_dynamic_human_appearance uses bald dummies
+	user.update_body_parts()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/client_image_holder/hallucination/your_mother
 	gender = FEMALE

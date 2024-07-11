@@ -25,6 +25,10 @@
 
 /datum/status_effect/fire_handler/on_creation(mob/living/new_owner, new_stacks, forced = FALSE)
 	. = ..()
+	var/turf/source_turf = get_turf(owner)
+	if(istype(source_turf, /turf/open/floor/plating/ocean))
+		qdel(src)
+		return
 
 	if(isanimal(owner))
 		qdel(src)
@@ -136,7 +140,16 @@
 	/// Type of mob light emitter we use when on fire
 	var/moblight_type = /obj/effect/dummy/lighting_obj/moblight/fire
 
+<<<<<<< HEAD
 /datum/status_effect/fire_handler/fire_stacks/tick(seconds_between_ticks)
+=======
+/datum/status_effect/fire_handler/fire_stacks/tick(seconds_per_tick, times_fired)
+	var/turf/source_turf = get_turf(owner)
+	if(istype(source_turf, /turf/open/floor/plating/ocean))
+		qdel(src)
+		return TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(stacks <= 0)
 		qdel(src)
 		return TRUE
@@ -156,7 +169,11 @@
 		qdel(src)
 		return TRUE
 
+<<<<<<< HEAD
 	deal_damage(seconds_between_ticks)
+=======
+	deal_damage(seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/status_effect/fire_handler/fire_stacks/update_particles()
 	if(on_fire)
@@ -247,7 +264,12 @@
 	owner.clear_mood_event("on_fire")
 	SEND_SIGNAL(owner, COMSIG_LIVING_EXTINGUISHED, owner)
 	cache_stacks()
+<<<<<<< HEAD
 	for(var/obj/item/equipped in (owner.get_equipped_items(INCLUDE_HELD)))
+=======
+	for(var/obj/item/equipped in owner.get_equipped_items())
+		equipped.wash(CLEAN_TYPE_ACID)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		equipped.extinguish()
 
 /datum/status_effect/fire_handler/fire_stacks/on_remove()
@@ -261,7 +283,10 @@
 /datum/status_effect/fire_handler/fire_stacks/on_apply()
 	. = ..()
 	RegisterSignal(owner, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(add_fire_overlay))
+<<<<<<< HEAD
 	RegisterSignal(owner, COMSIG_ATOM_EXTINGUISH, PROC_REF(extinguish))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	owner.update_appearance(UPDATE_OVERLAYS)
 
 /datum/status_effect/fire_handler/fire_stacks/proc/add_fire_overlay(mob/living/source, list/overlays)
@@ -275,6 +300,14 @@
 		return
 
 	overlays |= created_overlay
+<<<<<<< HEAD
+=======
+
+/obj/effect/dummy/lighting_obj/moblight/fire
+	name = "fire"
+	light_color = LIGHT_COLOR_FIRE
+	light_outer_range = LIGHT_RANGE_FIRE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/status_effect/fire_handler/wet_stacks
 	id = "wet_stacks"

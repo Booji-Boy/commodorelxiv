@@ -234,6 +234,20 @@
 					var/obj/structure/tram/tram_wall
 					tram_wall = new tram_wall_type(loc)
 					sheets.use(amount)
+<<<<<<< HEAD
+=======
+					var/obj/structure/tramwall/tram_wall
+					var/tram_wall_type = text2path("/obj/structure/tramwall/[M]")
+					if(tram_wall_type)
+						tram_wall = new tram_wall_type(loc)
+					else
+						var/obj/structure/tramwall/material/mat_tram_wall = new(loc)
+						var/list/material_list = list()
+						material_list[GET_MATERIAL_REF(sheets.material_type)] = SHEET_MATERIAL_AMOUNT * 2
+						if(material_list)
+							mat_tram_wall.set_custom_materials(material_list)
+						tram_wall = mat_tram_wall
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 					transfer_fingerprints_to(tram_wall)
 					qdel(src)
 				return
@@ -473,7 +487,11 @@
 				get_turf(src), RCD_MEMORY_WALL,
 			)
 		if(RCD_DECONSTRUCT)
+<<<<<<< HEAD
 			return list("delay" = 2 SECONDS, "cost" = 13)
+=======
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 2 SECONDS, "cost" = 13)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/girder/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -520,7 +538,11 @@
 				return
 			B.use(amount)
 			var/turf/T = get_turf(src)
+<<<<<<< HEAD
 			T.place_on_top(/turf/closed/wall/mineral/bronze)
+=======
+			IS_CLOCK(user) ? T.PlaceOnTop(/turf/closed/wall/clockwork) : T.PlaceOnTop(/turf/closed/wall/mineral/bronze) //monkestation edit: clock cultists make clockwork walls
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			qdel(src)
 
 	else

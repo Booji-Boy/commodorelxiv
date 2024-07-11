@@ -41,7 +41,11 @@
 		)
 	if(hitting_projectile.suppressed != SUPPRESSED_VERY)
 		visible_message(
+<<<<<<< HEAD
 			span_danger("[src] is hit by \a [hitting_projectile][damage_sustained ? "" : ", [no_damage_feedback]"]!"),
+=======
+			span_danger("[src] is hit by \a [hitting_projectile][damage_sustained ? "" : ", without leaving a mark"]!"),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			vision_distance = COMBAT_MESSAGE_RANGE,
 		)
 

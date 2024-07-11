@@ -361,6 +361,7 @@ effective or pretty fucking useless.
 	new /obj/item/analyzer(src)
 	new /obj/item/wirecutters(src)
 
+<<<<<<< HEAD
 /obj/item/storage/toolbox/emergency/turret/storage_insert_on_interacted_with(datum/storage, obj/item/inserted, mob/living/user)
 	if(!istype(inserted, /obj/item/wrench/combat))
 		return TRUE
@@ -369,6 +370,17 @@ effective or pretty fucking useless.
 	if(!inserted.toolspeed)
 		return TRUE
 	return FALSE
+=======
+/obj/item/storage/toolbox/emergency/turret/attackby(obj/item/attacking_item, mob/living/user, params)
+	if(!istype(attacking_item, /obj/item/wrench/combat))
+		return ..()
+
+	if(!(user.istate & ISTATE_HARM))
+		return
+
+	if(!attacking_item.toolspeed)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/storage/toolbox/emergency/turret/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/wrench/combat))
@@ -444,7 +456,7 @@ effective or pretty fucking useless.
 	if(!attacking_item.toolspeed)
 		return
 
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		balloon_alert(user, "deconstructing...")
 		if(!attacking_item.use_tool(src, user, 5 SECONDS, volume = 20))
 			return

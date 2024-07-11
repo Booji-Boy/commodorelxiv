@@ -11,6 +11,11 @@
 #define CATEGORY_BEPIS "Bepis Tech"
 #define CATEGORY_BITRUNNING_FLAIR "Misc"
 #define CATEGORY_BITRUNNING_TECH "Tech"
+<<<<<<< HEAD
 
 ///Helper macro for record computers' preview views, used to ensure consistency in all use cases.
 #define USER_PREVIEW_ASSIGNED_VIEW(user_ckey) "preview_[user_ckey]_[REF(src)]_records"
+=======
+#define CATEGORY_BITRUNNING_COMBAT_GEAR "Combat gear" // monkeystation addition: bitrunning tech split up
+#define CATEGORY_BITRUNNING_ABILITIES "Abilities" // monkeystation addition: bitrunning tech split up
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

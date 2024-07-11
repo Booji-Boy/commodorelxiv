@@ -26,7 +26,7 @@
 	interaction_flags_mouse_drop = NEED_HANDS
 
 	///What are we sticking our needle in?
-	var/atom/attached
+	var/mob/attached
 	///Are we donating or injecting?
 	var/mode = IV_INJECTING
 	///The chemicals flow speed
@@ -277,7 +277,7 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 ///called when an IV is attached
-/obj/machinery/iv_drip/proc/attach_iv(atom/target, mob/user)
+/obj/machinery/iv_drip/proc/attach_iv(mob/target, mob/user)
 	if(isliving(target))
 		user.visible_message(span_warning("[usr] begins attaching [src] to [target]..."), span_warning("You begin attaching [src] to [target]."))
 		if(!do_after(usr, 1 SECONDS, target))
@@ -288,9 +288,13 @@
 	var/datum/reagents/container = get_reagents()
 	log_combat(usr, target, "attached", src, "containing: ([container.get_reagent_log_string()])")
 	add_fingerprint(usr)
+<<<<<<< HEAD
 	if(isliving(target))
 		var/mob/living/target_mob = target
 		target_mob.throw_alert(ALERT_IV_CONNECTED, /atom/movable/screen/alert/iv_connected)
+=======
+	target.throw_alert(ALERT_IV_CONNECTED, /atom/movable/screen/alert/iv_connected)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attached = target
 	START_PROCESSING(SSmachines, src)
 	update_appearance(UPDATE_ICON)
@@ -301,9 +305,13 @@
 /obj/machinery/iv_drip/proc/detach_iv()
 	if(attached)
 		visible_message(span_notice("[attached] is detached from [src]."))
+<<<<<<< HEAD
 		if(isliving(attached))
 			var/mob/living/attached_mob = attached
 			attached_mob.clear_alert(ALERT_IV_CONNECTED, /atom/movable/screen/alert/iv_connected)
+=======
+		attached.clear_alert(ALERT_IV_CONNECTED, /atom/movable/screen/alert/iv_connected)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(src, COMSIG_IV_DETACH, attached)
 	attached = null
 	update_appearance(UPDATE_ICON)
@@ -402,6 +410,11 @@
 	desc = "You have an IV connected to your arm. Remember to remove it or drag the IV stand with you before moving, or else it will rip out!"
 	icon_state = ALERT_IV_CONNECTED
 
+/atom/movable/screen/alert/iv_connected
+	name = "IV Connected"
+	desc = "You have an IV connected to your arm. Remember to remove it or drag the IV stand with you before moving, or else it will rip out!"
+	icon_state = ALERT_IV_CONNECTED
+
 #undef IV_TAKING
 #undef IV_INJECTING
 
@@ -411,5 +424,8 @@
 #undef IV_TRANSFER_RATE_STEP
 
 #undef ALERT_IV_CONNECTED
+<<<<<<< HEAD
 
 #undef DEFAULT_IV_TRANSFER_RATE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

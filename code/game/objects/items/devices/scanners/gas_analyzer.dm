@@ -26,7 +26,10 @@
 	var/barometer_accuracy
 	/// Cached gasmix data from ui_interact
 	var/list/last_gasmix_data
+<<<<<<< HEAD
 	/// Max scan distance
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/ranged_scan_distance = 1
 
 /obj/item/analyzer/Initialize(mapload)
@@ -145,6 +148,7 @@
 
 	ui_interact(user)
 
+<<<<<<< HEAD
 /obj/item/analyzer/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return interact_with_atom(interacting_with, user, modifiers)
 
@@ -152,6 +156,14 @@
 	if(can_see(user, interacting_with, ranged_scan_distance))
 		atmos_scan(user, (interacting_with.return_analyzable_air() ? interacting_with : get_turf(interacting_with)))
 	return NONE // Non-blocking
+=======
+/obj/item/analyzer/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!can_see(user, target, ranged_scan_distance))
+		return
+	. |= AFTERATTACK_PROCESSED_ITEM
+	atmos_scan(user, (target.return_analyzable_air() ? target : get_turf(target)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Called when our analyzer is used on something
 /obj/item/analyzer/proc/on_analyze(datum/source, atom/target)
@@ -199,6 +211,7 @@
 		var/temperature = air.return_temperature()
 		var/heat_capacity = air.heat_capacity()
 		var/thermal_energy = air.thermal_energy()
+		var/cached_scan_results = air.analyzer_results
 
 		if(total_moles > 0)
 			message += span_notice("Moles: [round(total_moles, 0.01)] mol")
@@ -216,9 +229,26 @@
 			message += airs.len > 1 ? span_notice("This node is empty!") : span_notice("[target] is empty!")
 			message += span_notice("Volume: [volume] L") // don't want to change the order volume appears in, suck it
 
+		if(cached_scan_results && cached_scan_results["fusion"]) //notify the user if a fusion reaction was detected
+			var/fusion_power = round(cached_scan_results["fusion"], 0.01)
+			var/tier = fusionpower2text(fusion_power)
+
+			message += span_bold("Large amounts of free neutrons detected in the air indicate that a fusion reaction took place.")
+			message += span_notice("Power of the last fusion reaction: [fusion_power]\n This power indicates it was a [tier]-tier fusion reaction.")
 	// we let the join apply newlines so we do need handholding
 	to_chat(user, examine_block(jointext(message, "\n")), type = MESSAGE_TYPE_INFO)
 	return TRUE
+
+/proc/fusionpower2text(power) //used when displaying fusion power on analyzers
+	switch(power)
+		if(0 to 5)
+			return "low"
+		if(5 to 20)
+			return "mid"
+		if(20 to 50)
+			return "high"
+		if(50 to INFINITY)
+			return "super"
 
 /obj/item/analyzer/ranged
 	desc = "A hand-held long-range environmental scanner which reports current gas levels."

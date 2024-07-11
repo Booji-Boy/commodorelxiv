@@ -207,8 +207,13 @@
 /obj/structure/table,
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
+<<<<<<< HEAD
 "nz" = (
 /obj/structure/ore_box,
+=======
+"k" = (
+/obj/machinery/computer/operating,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
 "nP" = (
@@ -385,6 +390,7 @@
 	},
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
+<<<<<<< HEAD
 "wT" = (
 /obj/structure/table/wood,
 /obj/item/resonator/upgraded{
@@ -421,6 +427,15 @@
 /obj/item/mining_scanner,
 /obj/item/mining_scanner,
 /obj/item/mining_scanner,
+=======
+"s" = (
+/obj/machinery/light/small/directional/north,
+/obj/structure/table/optable,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"t" = (
+/obj/structure/extinguisher_cabinet/directional/north,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
 "xv" = (
@@ -763,9 +778,148 @@
 /obj/machinery/autolathe,
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
+<<<<<<< HEAD
 "Xy" = (
 /obj/effect/turf_decal/tile/dark_red,
 /obj/effect/turf_decal/tile/dark_red{
+=======
+"x" = (
+/obj/structure/table/wood,
+/obj/machinery/reagentgrinder,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"y" = (
+/obj/machinery/computer/arcade/orion_trail{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"z" = (
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"A" = (
+/obj/structure/table/wood,
+/obj/item/surgical_drapes{
+	pixel_x = 15
+	},
+/obj/item/storage/medkit/fire,
+/obj/item/storage/medkit/fire,
+/obj/item/stock_parts/matter_bin,
+/obj/item/assembly/igniter,
+/obj/item/stock_parts/micro_laser,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stack/sheet/glass,
+/obj/item/stock_parts/manipulator,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"B" = (
+/obj/item/storage/medkit/fire,
+/obj/structure/table/wood,
+/obj/item/storage/medkit/fire,
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"C" = (
+/obj/item/storage/medkit/brute,
+/obj/structure/table/wood,
+/obj/item/storage/medkit/brute,
+/obj/item/areaeditor/blueprints{
+	desc = "Use to build new structures in the wastes.";
+	name = "land claim"
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"D" = (
+/obj/item/storage/medkit/brute,
+/obj/structure/table/wood,
+/obj/item/storage/medkit/brute,
+/obj/item/disk/design_disk/golem_shell,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"E" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/open/floor/plating,
+/area/ruin/powered/golem_ship)
+"F" = (
+/obj/structure/ore_box,
+/turf/open/floor/plating,
+/area/ruin/powered/golem_ship)
+"G" = (
+/turf/closed/wall/mineral/titanium,
+/area/ruin/powered/golem_ship)
+"H" = (
+/obj/machinery/door/airlock/titanium,
+/obj/structure/fans/tiny,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"I" = (
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/plating,
+/area/ruin/powered/golem_ship)
+"J" = (
+/obj/item/gun/energy/recharge/kinetic_accelerator,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"K" = (
+/obj/machinery/door/airlock/titanium,
+/obj/structure/fans/tiny,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"L" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"M" = (
+/obj/effect/mob_spawn/ghost_role/human/golem/adamantine,
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"N" = (
+/obj/machinery/light/directional/north,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"O" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"Q" = (
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"R" = (
+/obj/item/borg/upgrade/modkit/trigger_guard,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"S" = (
+/obj/structure/table/wood,
+/obj/item/storage/backpack/duffelbag/med/surgery,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"T" = (
+/obj/structure/fans/tiny,
+/obj/machinery/door/airlock/titanium,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"U" = (
+/obj/effect/mob_spawn/ghost_role/human/golem/adamantine,
+/obj/machinery/light/small/directional/south,
+/turf/open/floor/mineral/titanium/purple,
+/area/ruin/powered/golem_ship)
+"V" = (
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/plating,
+/area/ruin/powered/golem_ship)
+"Y" = (
+/obj/machinery/door/airlock/titanium,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/dark_red{
@@ -795,6 +949,7 @@
 /obj/structure/closet/crate/bin,
 /turf/open/floor/mineral/titanium/purple,
 /area/ruin/powered/golem_ship)
+<<<<<<< HEAD
 "XR" = (
 /obj/item/aquarium_kit{
 	pixel_y = 12;
@@ -814,6 +969,13 @@
 	dir = 1
 	},
 /turf/open/floor/mineral/titanium,
+=======
+"Z" = (
+/obj/machinery/computer/arcade/battle{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/powered/golem_ship)
 
 (1,1,1) = {"
@@ -889,6 +1051,7 @@ lF
 wN
 "}
 (5,1,1) = {"
+<<<<<<< HEAD
 lF
 Pe
 fk
@@ -923,6 +1086,42 @@ sS
 Ul
 lF
 wN
+=======
+a
+a
+a
+b
+s
+l
+j
+l
+l
+j
+l
+Z
+b
+a
+a
+a
+"}
+(6,1,1) = {"
+b
+b
+b
+b
+S
+l
+b
+l
+Q
+G
+l
+Q
+b
+b
+b
+b
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (7,1,1) = {"
 Df
@@ -1015,6 +1214,7 @@ Df
 Df
 "}
 (12,1,1) = {"
+<<<<<<< HEAD
 wN
 wN
 wN
@@ -1049,6 +1249,42 @@ pE
 MC
 MC
 Df
+=======
+b
+c
+I
+b
+J
+l
+O
+l
+l
+O
+l
+z
+b
+V
+F
+b
+"}
+(13,1,1) = {"
+b
+d
+f
+j
+R
+l
+l
+l
+l
+l
+l
+l
+j
+f
+F
+b
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (14,1,1) = {"
 wN

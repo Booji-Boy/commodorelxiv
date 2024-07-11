@@ -6,7 +6,11 @@
 /datum/grand_finale/cheese
 	// we don't set name, desc and others, thus we won't appear in the radial choice of a normal finale rune
 	dire_warning = TRUE
+<<<<<<< HEAD
 	minimum_time = 45 MINUTES //i'd imagine speedrunning this would be crummy, but the wizard's average lifespan is barely reaching this point
+=======
+//	minimum_time = 45 MINUTES //i'd imagine speedrunning this would be crummy, but the wizard's average lifespan is barely reaching this point
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/grand_finale/cheese/trigger(mob/living/invoker)
 	message_admins("[key_name(invoker)] has summoned forth The Wabbajack and cursed the crew with madness!")

@@ -128,7 +128,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		C.visible_message(span_danger("[C]'s eye protection blocks the sand!"), span_warning("Your eye protection blocks the sand!"))
 		return
 	C.adjust_eye_blur(12 SECONDS)
-	C.adjustStaminaLoss(15)//the pain from your eyes burning does stamina damage
+	C.stamina.adjust(-15)//the pain from your eyes burning does stamina damage
 	C.adjust_confusion(5 SECONDS)
 	to_chat(C, span_userdanger("\The [src] gets into your eyes! The pain, it burns!"))
 	qdel(src)
@@ -267,8 +267,13 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		. += span_notice("You could <b>rig</b> something to it.")
 
 /obj/item/gibtonite/Destroy()
+<<<<<<< HEAD
 	QDEL_NULL(rig)
 	rig_overlay = null
+=======
+	qdel(wires)
+	set_wires(null)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/item/gibtonite/Exited(atom/movable/gone, direction)
@@ -283,6 +288,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	return TRUE
 
 /obj/item/gibtonite/attackby(obj/item/I, mob/user, params)
+<<<<<<< HEAD
 	if(istype(I, /obj/item/assembly_holder) && !rig)
 		var/obj/item/assembly_holder/holder = I
 		if(!(locate(/obj/item/assembly/igniter) in holder.assemblies))
@@ -298,6 +304,11 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 		add_overlay(rig_overlay)
 		RegisterSignal(src, COMSIG_IGNITER_ACTIVATE, PROC_REF(igniter_prime))
 		log_bomber(user, "attached [holder] to ", src)
+=======
+	if(!wires && isigniter(I))
+		user.visible_message(span_notice("[user] attaches [I] to [src]."), span_notice("You attach [I] to [src]."))
+		set_wires(new /datum/wires/explosive/gibtonite(src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		attacher = key_name(user)
 		user.balloon_alert_to_viewers("attached rig")
 		return
@@ -417,7 +428,11 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	force = 1
 	throwforce = 2
 	w_class = WEIGHT_CLASS_TINY
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/iron = COIN_MATERIAL_AMOUNT)
+=======
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	var/string_attached
 	var/list/sideslist = list("heads","tails")
@@ -532,6 +547,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	return
 
 /obj/item/coin/gold
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/gold = COIN_MATERIAL_AMOUNT)
 
 /obj/item/coin/silver
@@ -563,6 +579,39 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 
 /obj/item/coin/runite
 	custom_materials = list(/datum/material/runite = COIN_MATERIAL_AMOUNT)
+=======
+	custom_materials = list(/datum/material/gold = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/silver
+	custom_materials = list(/datum/material/silver = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/diamond
+	custom_materials = list(/datum/material/diamond = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/plasma
+	custom_materials = list(/datum/material/plasma = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/uranium
+	custom_materials = list(/datum/material/uranium = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/titanium
+	custom_materials = list(/datum/material/titanium = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/bananium
+	custom_materials = list(/datum/material/bananium = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/adamantine
+	custom_materials = list(/datum/material/adamantine = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/mythril
+	custom_materials = list(/datum/material/mythril = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/plastic
+	custom_materials = list(/datum/material/plastic = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+
+/obj/item/coin/runite
+	custom_materials = list(/datum/material/runite = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/coin/twoheaded
 	desc = "Hey, this coin's the same on both sides!"
@@ -572,7 +621,11 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	name = "antag token"
 	desc = "A novelty coin that helps the heart know what hard evidence cannot prove."
 	icon_state = "coin_valid"
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/plastic = COIN_MATERIAL_AMOUNT)
+=======
+	custom_materials = list(/datum/material/plastic = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sideslist = list("valid", "salad")
 	heads_name = "valid"
 	material_flags = NONE
@@ -581,7 +634,11 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 /obj/item/coin/iron
 
 /obj/item/coin/gold/debug
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/gold = COIN_MATERIAL_AMOUNT)
+=======
+	custom_materials = list(/datum/material/gold = HALF_SHEET_MATERIAL_AMOUNT*0.4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	desc = "If you got this somehow, be aware that it will dust you. Almost certainly."
 
 /obj/item/coin/gold/debug/attack_self(mob/user)

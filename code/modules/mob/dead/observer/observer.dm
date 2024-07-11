@@ -11,16 +11,22 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	plane = GHOST_PLANE
 	stat = DEAD
 	density = FALSE
+	appearance_flags = KEEP_TOGETHER
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	lighting_cutoff = LIGHTING_CUTOFF_MEDIUM
 	invisibility = INVISIBILITY_OBSERVER
 	hud_type = /datum/hud/ghost
 	movement_type = GROUND | FLYING
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 2.5
 	light_power = 0.6
+=======
+	light_outer_range = 1
+	light_power = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_on = FALSE
-	shift_to_open_context_menu = FALSE
+	rclick_always_context_menu = TRUE
 	var/can_reenter_corpse
 	var/bootime = 0
 	var/started_as_observer //This variable is set to 1 when you enter the game as an observer.
@@ -227,7 +233,11 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				facial_hair_overlay.alpha = 200
 				add_overlay(facial_hair_overlay)
 		if(hairstyle)
+<<<<<<< HEAD
 			var/datum/sprite_accessory/hair/S = SSaccessories.hairstyles_list[hairstyle]
+=======
+			S = GLOB.roundstart_hairstyles_list[hairstyle]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(S)
 				hair_overlay = mutable_appearance(S.icon, "[S.icon_state]", -HAIR_LAYER)
 				if(hair_color)
@@ -314,7 +324,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		if(!HAS_TRAIT(src, TRAIT_CORPSELOCKED)) //corpse-locked have to confirm with the alert below
 			ghostize(TRUE)
 			return TRUE
-	var/response = tgui_alert(usr, "Are you sure you want to ghost? You won't be able to re-enter your body!", "Confirm Ghost Observe", list("Ghost", "Stay in Body"))
+	var/response = tgui_alert(usr, "Are you sure you want to ghost? You won't be able to re-enter your body! If you are leaving the round, use cryo instead.", "Confirm Ghost Observe", list("Ghost", "Stay in Body")) // MONKESTATION EDIT: issuing commands to use cryo instead of just ghosting in a locker.
 	if(response != "Ghost")
 		return FALSE//didn't want to ghost after-all
 	ghostize(FALSE) // FALSE parameter is so we can never re-enter our body. U ded.
@@ -325,7 +335,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Ghost"
 	set desc = "Relinquish your life and enter the land of the dead."
 
-	var/response = tgui_alert(usr, "Are you sure you want to ghost? If you ghost whilst still alive you cannot re-enter your body!", "Confirm Ghost Observe", list("Ghost", "Stay in Body"))
+	var/response = tgui_alert(usr, "Are you sure you want to ghost? If you ghost whilst still alive you cannot re-enter your body! If you are leaving the round, use cryo instead.", "Confirm Ghost Observe", list("Ghost", "Stay in Body")) // MONKESTATION EDIT: issuing commands to use cryo instead of just ghosting in a locker.
 	if(response != "Ghost")
 		return
 	ghostize(FALSE)
@@ -718,6 +728,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			reenter_corpse()
 			return
 
+<<<<<<< HEAD
 		if(href_list["view"])
 			var/atom/target = locate(href_list["view"])
 			observer_view(target)
@@ -745,6 +756,19 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 
 	ManualFollow(target)
+=======
+		if(href_list["jump"])
+			var/atom/movable/target = locate(href_list["jump"])
+			var/turf/target_turf = get_turf(target)
+			if(target_turf && isturf(target_turf))
+				abstract_move(target_turf)
+
+		if(href_list["play"])
+			var/atom/movable/target = locate(href_list["play"])
+			if(istype(target) && (target != src))
+				target.attack_ghost(usr)
+				return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //We don't want to update the current var
 //But we will still carry a mind.

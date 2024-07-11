@@ -96,6 +96,11 @@
 	icon_state = "eng"
 	icon_door = "eng_tool"
 
+/obj/structure/closet/toolcloset/populate_contents_immediate()
+	. = ..()
+	if(prob(5))
+		new /obj/item/clothing/gloves/color/yellow(src) //Monkestation edit: Moves this to immediate for unit tests.
+
 /obj/structure/closet/toolcloset/PopulateContents()
 	..()
 	if(prob(40))
@@ -124,7 +129,10 @@
 		new /obj/item/stack/cable_coil(src)
 	if(prob(20))
 		new /obj/item/multitool(src)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(prob(40))
 		new /obj/item/clothing/head/utility/hardhat(src)
 

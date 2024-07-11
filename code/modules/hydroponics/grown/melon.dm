@@ -8,11 +8,15 @@
 	product = /obj/item/food/grown/watermelon
 	lifespan = 50
 	endurance = 40
+<<<<<<< HEAD
 	instability = 20
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_dead = "watermelon-dead"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/watermelon/holy, /obj/item/seeds/watermelon/barrel)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/melon_barrel, /datum/hydroponics/plant_mutation/holy_melon, /datum/hydroponics/plant_mutation/honeydew)
 	reagents_add = list(/datum/reagent/water = 0.2, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.2)
 
 /obj/item/seeds/watermelon/suicide_act(mob/living/user)
@@ -48,7 +52,7 @@
 	plantname = "Holy Melon Vines"
 	product = /obj/item/food/grown/holymelon
 	genes = list(/datum/plant_gene/trait/glow/yellow, /datum/plant_gene/trait/anti_magic)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/water/holywater = 0.2, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1)
 	rarity = PLANT_MODERATELY_RARE
 	graft_gene = /datum/plant_gene/trait/glow/yellow
@@ -97,7 +101,7 @@
 	plantname = "Barrel Melon Vines"
 	product = /obj/item/food/grown/barrelmelon
 	genes = list(/datum/plant_gene/trait/brewing)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/ethanol/ale = 0.2, /datum/reagent/consumable/nutriment = 0.1)
 	rarity = 10
 	graft_gene = /datum/plant_gene/trait/brewing

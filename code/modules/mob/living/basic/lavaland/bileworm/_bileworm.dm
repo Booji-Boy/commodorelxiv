@@ -49,6 +49,7 @@
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/bileworm/spew_bile = new(src)
 	spew_bile.Grant(src)
 	spew_bile.StartCooldownSelf(INFINITY)
+<<<<<<< HEAD
 	ai_controller?.set_blackboard_key(BB_BILEWORM_SPEW_BILE, spew_bile)
 
 	var/static/list/other_innate_actions = list(
@@ -57,3 +58,14 @@
 		/datum/action/cooldown/mob_cooldown/resurface = BB_BILEWORM_RESURFACE,
 	)
 	grant_actions_by_list(other_innate_actions)
+=======
+	var/datum/action/cooldown/mob_cooldown/resurface/resurface = new(src)
+	resurface.Grant(src)
+	var/datum/action/cooldown/mob_cooldown/devour/devour = new(src)
+	devour.Grant(src)
+	var/datum/action/adjust_vision/bileworm/adjust_vision = new(src)
+	adjust_vision.Grant(src)
+	ai_controller.set_blackboard_key(BB_BILEWORM_SPEW_BILE, spew_bile)
+	ai_controller.set_blackboard_key(BB_BILEWORM_RESURFACE, resurface)
+	ai_controller.set_blackboard_key(BB_BILEWORM_DEVOUR, devour)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

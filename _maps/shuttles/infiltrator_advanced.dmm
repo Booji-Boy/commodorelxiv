@@ -878,6 +878,7 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/eva)
+<<<<<<< HEAD
 "cg" = (
 /obj/machinery/suit_storage_unit/syndicate,
 /obj/effect/turf_decal/box,
@@ -885,6 +886,8 @@
 /obj/effect/mapping_helpers/airalarm/syndicate_access,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/eva)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ci" = (
 /obj/structure/table/reinforced,
 /obj/machinery/status_display/evac{
@@ -997,6 +1000,7 @@
 	},
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/armory)
+<<<<<<< HEAD
 "cw" = (
 /obj/effect/turf_decal/bot,
 /obj/effect/turf_decal/stripes/line{
@@ -1020,6 +1024,8 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/medical)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cx" = (
 /obj/effect/spawner/structure/window/reinforced/plasma/plastitanium,
 /obj/machinery/power/shuttle_engine/heater,
@@ -1286,6 +1292,7 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/airlock)
+<<<<<<< HEAD
 "di" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 1
@@ -1298,6 +1305,8 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/airlock)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dj" = (
 /obj/item/grenade/syndieminibomb{
 	pixel_x = 6;
@@ -1315,6 +1324,7 @@
 /obj/item/grenade/c4,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/armory)
+<<<<<<< HEAD
 "dk" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 1
@@ -1336,6 +1346,8 @@
 /obj/effect/mapping_helpers/airalarm/syndicate_access,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/airlock)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dm" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1355,6 +1367,7 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/airlock)
+<<<<<<< HEAD
 "dp" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -1363,6 +1376,8 @@
 /obj/effect/mapping_helpers/airalarm/syndicate_access,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/airlock)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dq" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
@@ -1617,6 +1632,7 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/armory)
+<<<<<<< HEAD
 "dT" = (
 /obj/machinery/computer/operating{
 	dir = 1
@@ -1627,6 +1643,8 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/medical)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dU" = (
 /obj/structure/table/optable,
 /obj/effect/turf_decal/bot,
@@ -1809,6 +1827,7 @@
 	},
 /turf/closed/wall/r_wall/syndicate,
 /area/shuttle/syndicate/medical)
+<<<<<<< HEAD
 "eo" = (
 /obj/structure/table/reinforced,
 /obj/item/wrench,
@@ -1828,6 +1847,8 @@
 /obj/effect/mapping_helpers/airalarm/syndicate_access,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/armory)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ep" = (
 /obj/structure/mirror/directional/north,
 /obj/structure/sink/directional/south,
@@ -1881,6 +1902,7 @@
 "ev" = (
 /turf/closed/wall/mineral/plastitanium/nodiagonal,
 /area/shuttle/syndicate/hallway)
+<<<<<<< HEAD
 "eE" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -1915,6 +1937,14 @@
 /turf/open/floor/mineral/plastitanium,
 /area/shuttle/syndicate/bridge)
 "th" = (
+=======
+"ex" = (
+/obj/structure/table/reinforced,
+/obj/item/storage/backpack/duffelbag/syndie/surgery,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/medical)
+"eM" = (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/table/reinforced,
 /obj/item/bodypart/arm/left/robot{
 	pixel_x = -6
@@ -1925,6 +1955,7 @@
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/pod/dark,
 /area/shuttle/syndicate/medical)
+<<<<<<< HEAD
 "tB" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -1963,6 +1994,120 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/bridge)
 "xc" = (
+=======
+"fP" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/airalarm/directional/south,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/stripes/line{
+	dir = 10
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/syndicate/airlock)
+"iN" = (
+/obj/structure/table/reinforced,
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/machinery/light/directional/west,
+/obj/machinery/status_display/evac{
+	pixel_x = -32
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/healthanalyzer/advanced,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/medical)
+"ss" = (
+/obj/machinery/suit_storage_unit/syndicate,
+/obj/effect/turf_decal/box,
+/obj/machinery/airalarm/directional/south,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/eva)
+"xQ" = (
+/obj/machinery/computer/operating{
+	dir = 1
+	},
+/obj/effect/turf_decal/bot,
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/medical)
+"BD" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/airalarm/directional/east,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/syndicate/airlock)
+"DQ" = (
+/obj/structure/table/reinforced,
+/obj/item/wrench,
+/obj/item/weldingtool/largetank,
+/obj/item/assembly/signaler{
+	desc = "Used to remotely activate devices. Allows for syncing when using a secure signaler on another. Slightly scooted.";
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/item/assembly/signaler{
+	desc = "Used to remotely activate devices. Allows for syncing when using a secure signaler on another. Slightly scooted.";
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/structure/extinguisher_cabinet/directional/east,
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/armory)
+"HA" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/airalarm/directional/south,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/effect/turf_decal/stripes/line{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/syndicate/airlock)
+"LY" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/syndicate/airlock)
+"TC" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/structure/closet/crate/freezer{
+	name = "universal blood storage"
+	},
+/obj/machinery/iv_drip,
+/obj/item/reagent_containers/blood/universal{
+	pixel_x = 4;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/blood/universal,
+/obj/item/reagent_containers/blood/universal{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/pod/dark,
+/area/shuttle/syndicate/medical)
+"VF" = (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/chair/comfy/shuttle{
 	dir = 4;
 	name = "tactical chair"
@@ -1974,6 +2119,7 @@
 /obj/effect/mapping_helpers/airalarm/syndicate_access,
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
+<<<<<<< HEAD
 /obj/machinery/light/floor,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/bridge)
@@ -2089,6 +2235,14 @@
 "YW" = (
 /obj/effect/turf_decal/bot,
 /obj/structure/table/reinforced,
+=======
+/turf/open/floor/mineral/plastitanium/red,
+/area/shuttle/syndicate/bridge)
+"YB" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/table/reinforced,
+/obj/machinery/light/directional/east,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/storage/fancy/cigarettes/cigpack_syndicate{
 	pixel_x = 8
 	},
@@ -2171,7 +2325,7 @@ aO
 bd
 bo
 dH
-cw
+TC
 bf
 bD
 bD
@@ -2189,16 +2343,21 @@ ad
 aO
 aN
 bm
-di
+HA
 aO
 bl
 bA
 by
 bH
+<<<<<<< HEAD
 KJ
 Pv
+=======
+bL
+iN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 dD
-dT
+xQ
 bn
 cy
 ad
@@ -2243,8 +2402,13 @@ cc
 bJ
 bN
 bW
+<<<<<<< HEAD
 TT
 th
+=======
+ex
+eM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 cx
 cB
 cP
@@ -2258,7 +2422,7 @@ aO
 aE
 aU
 df
-dl
+BD
 dv
 bq
 bs
@@ -2370,7 +2534,11 @@ ak
 aq
 ax
 aF
+<<<<<<< HEAD
 YW
+=======
+YB
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 bc
 aQ
 aZ
@@ -2391,7 +2559,11 @@ ad
 ab
 qC
 ar
+<<<<<<< HEAD
 xc
+=======
+VF
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 aF
 aF
 be
@@ -2400,7 +2572,7 @@ dR
 bS
 eE
 de
-cg
+ss
 dR
 bQ
 ek
@@ -2442,7 +2614,7 @@ aO
 aE
 bv
 dh
-dp
+LY
 dv
 cv
 ds
@@ -2511,7 +2683,7 @@ ad
 aO
 aN
 cu
-dk
+fP
 aO
 ai
 bY
@@ -2536,7 +2708,7 @@ ca
 dx
 dq
 aO
-eo
+DQ
 ci
 dM
 db

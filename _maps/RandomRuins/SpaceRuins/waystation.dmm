@@ -7,6 +7,31 @@
 	},
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/waystation/dorms)
+<<<<<<< HEAD
+=======
+"au" = (
+/obj/structure/table/wood,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/item/clipboard{
+	pixel_x = -6;
+	pixel_y = 4
+	},
+/obj/item/stamp{
+	pixel_x = 7;
+	pixel_y = 9
+	},
+/obj/item/stamp/denied{
+	pixel_x = 7;
+	pixel_y = 4
+	},
+/obj/item/stamp/head/qm{
+	pixel_x = 7;
+	pixel_y = -2
+	},
+/obj/structure/cable,
+/turf/open/floor/iron/grimy,
+/area/ruin/space/has_grav/waystation/qm)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "aO" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/structure/cable,
@@ -2126,6 +2151,27 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/has_grav/waystation/kitchen)
+<<<<<<< HEAD
+=======
+"Mj" = (
+/obj/machinery/button/door/directional/east{
+	id = "Blastdoor_load";
+	layer = 4;
+	name = "Loading Doors";
+	pixel_y = -6
+	},
+/obj/machinery/button/door/directional/east{
+	id = "Blastdoor_unload";
+	layer = 4;
+	name = "Loading Doors";
+	pixel_y = 6
+	},
+/obj/machinery/modular_computer/preset{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/waystation/cargobay)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Mk" = (
 /obj/structure/table/wood,
 /obj/item/folder,
@@ -2513,6 +2559,13 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/waystation/cargobay)
+<<<<<<< HEAD
+=======
+"SJ" = (
+/mob/living/basic/trooper/syndicate/ranged/shotgun/space,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/waystation/dorms)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "SL" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/effect/mapping_helpers/damaged_window,

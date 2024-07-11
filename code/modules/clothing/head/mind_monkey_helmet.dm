@@ -47,11 +47,26 @@
 	playsound(src, 'sound/machines/ping.ogg', 30, TRUE)
 	RegisterSignal(magnification, COMSIG_SPECIES_LOSS, PROC_REF(make_fall_off))
 	polling = TRUE
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_MONKEY_HELMET, poll_time = 5 SECONDS, checked_target = magnification, ignore_category = POLL_IGNORE_MONKEY_HELMET, alert_pic = magnification, role_name_text = "mind-magnified monkey")
 	polling = FALSE
 	if(!magnification)
 		return
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates_for_mob(
+		"Do you want to play as a mind magnified monkey?",
+		check_jobban = ROLE_MONKEY_HELMET,
+		poll_time = 5 SECONDS,
+		target_mob = magnification,
+		ignore_category = POLL_IGNORE_MONKEY_HELMET,
+		role_name_text = "mind-magnified monkey"
+	)
+	polling = FALSE
+	if(!magnification)
+		return
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		UnregisterSignal(magnification, COMSIG_SPECIES_LOSS)
 		magnification = null
 		visible_message(span_notice("[src] falls silent and drops on the floor. Maybe you should try again later?"))
@@ -86,7 +101,7 @@
 				if(2) //brain death
 					magnification.apply_damage(500,BRAIN,BODY_ZONE_HEAD,FALSE,FALSE,FALSE)
 				if(3) //primal gene (gorilla)
-					magnification.gorillize()
+					magnification.gorillize(FALSE) // monkestation edit: don't keep monkey name for gorilla
 				if(4) //genetic mass susceptibility (gib)
 					magnification.gib(DROP_ALL_REMAINS)
 	//either used up correctly or taken off before polling finished (punish this by destroying the helmet)

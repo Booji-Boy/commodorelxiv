@@ -1,5 +1,6 @@
 import { useBackend } from '../backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   Divider,
@@ -12,6 +13,19 @@ import {
   Tooltip,
 } from '../components';
 import { NtosWindow } from '../layouts';
+=======
+  Stack,
+  Section,
+  Box,
+  Button,
+  Input,
+  Table,
+  Tooltip,
+  NoticeBox,
+  Divider,
+  RestrictedInput,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Data = {
   name: string;

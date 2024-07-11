@@ -74,7 +74,24 @@
 		if(!(basalt.loc in impacted_areas) || !(basalt.z in impacted_z_levels))
 			continue
 		basalt.refill_dug()
+<<<<<<< HEAD
 	return ..()
+=======
+
+///Refills the previously dug tile
+/turf/open/misc/asteroid/proc/refill_dug()
+	dug = FALSE
+	icon_state = base_icon_state
+	if(has_floor_variance && prob(floor_variance))
+		icon_state = "[base_icon_state][rand(0,12)]"
+	update_appearance()
+
+/turf/open/misc/asteroid/basalt/refill_dug()
+	. = ..()
+	GLOB.dug_up_basalt -= src
+	set_basalt_light(src)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Emberfalls are the result of an ash storm passing by close to the playable area of lavaland. They have a 10% chance to trigger in place of an ash storm.
 /datum/weather/ash_storm/emberfall

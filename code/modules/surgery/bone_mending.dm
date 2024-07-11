@@ -21,6 +21,7 @@
 	)
 
 ///// Repair Compound Fracture (Critical)
+///// Repair Compound Fracture (Critical)
 /datum/surgery/repair_bone_compound
 	name = "Repair Compound Fracture"
 	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
@@ -80,7 +81,7 @@
 			span_notice("[user] successfully repairs the fracture in [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully repairs the fracture in [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
-		log_combat(user, target, "repaired a hairline fracture in", addition="COMBAT_MODE: [uppertext(user.combat_mode)]")
+		log_combat(user, target, "repaired a hairline fracture in", addition="COMBAT_MODE: [uppertext((user.istate & ISTATE_HARM))]")
 		qdel(surgery.operated_wound)
 	else
 		to_chat(user, span_warning("[target] has no hairline fracture there!"))
@@ -129,7 +130,7 @@
 			span_notice("[user] successfully resets the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully resets the bone in [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
-		log_combat(user, target, "reset a compound fracture in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+		log_combat(user, target, "reset a compound fracture in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 	else
 		to_chat(user, span_warning("[target] has no compound fracture there!"))
 	return ..()
@@ -179,7 +180,7 @@
 			span_notice("[user] successfully repairs the fracture in [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully repairs the fracture in [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
-		log_combat(user, target, "repaired a compound fracture in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+		log_combat(user, target, "repaired a compound fracture in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 		qdel(surgery.operated_wound)
 	else
 		to_chat(user, span_warning("[target] has no compound fracture there!"))

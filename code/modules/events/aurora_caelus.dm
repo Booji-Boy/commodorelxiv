@@ -7,7 +7,7 @@
 	category = EVENT_CATEGORY_FRIENDLY
 	description = "A colourful display can be seen through select windows. And the kitchen."
 
-/datum/round_event_control/aurora_caelus/can_spawn_event(players, allow_magic = FALSE)
+/datum/round_event_control/aurora_caelus/can_spawn_event(players, allow_magic = FALSE, fake_check = FALSE) //MONKESTATION ADDITION: fake_check = FALSE
 	if(!SSmapping.empty_space)
 		return FALSE
 	return ..()
@@ -29,6 +29,7 @@
 	fade_kitchen(fade_in = TRUE)
 
 /datum/round_event/aurora_caelus/start()
+<<<<<<< HEAD
 	if(!prob(1) && !check_holidays(APRIL_FOOLS))
 		return
 	for(var/area/station/service/kitchen/affected_area in GLOB.areas)
@@ -44,6 +45,29 @@
 			if(seymour.mind && istype(seymour.mind.assigned_role, /datum/job/cook))
 				seymour.say("My roast is ruined!!!", forced = "ruined roast")
 				seymour.emote("scream")
+=======
+	for(var/area/affected_area as anything in GLOB.areas)
+		if(affected_area.area_flags & AREA_USES_STARLIGHT)
+			for(var/turf/open/space/spess in affected_area.get_contained_turfs())
+				spess.set_light(l_outer_range = spess.light_outer_range * 3, l_power = spess.light_power * 0.5)
+		if(istype(affected_area, /area/station/service/kitchen))
+			for(var/turf/open/kitchen in affected_area.get_contained_turfs())
+				kitchen.set_light(1, 0.75)
+			if(!prob(1) && !check_holidays(APRIL_FOOLS))
+				continue
+			var/obj/machinery/oven/roast_ruiner = locate() in affected_area
+			if(roast_ruiner)
+				roast_ruiner.balloon_alert_to_viewers("oh egads!")
+				var/turf/ruined_roast = get_turf(roast_ruiner)
+				ruined_roast.atmos_spawn_air("plasma=100;TEMP=1000")
+				message_admins("Aurora Caelus event caused an oven to ignite at [ADMIN_VERBOSEJMP(ruined_roast)].")
+				log_game("Aurora Caelus event caused an oven to ignite at [loc_name(ruined_roast)].")
+			for(var/mob/living/carbon/human/seymour as anything in GLOB.human_list)
+				if(seymour.mind && istype(seymour.mind.assigned_role, /datum/job/cook))
+					seymour.say("My roast is ruined!!!", forced = "ruined roast")
+					seymour.emote("scream")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/round_event/aurora_caelus/tick()
 	if(activeFor % 8 != 0)
@@ -64,6 +88,7 @@
 
 /datum/round_event/aurora_caelus/proc/fade_space(fade_in = FALSE)
 	set waitfor = FALSE
+<<<<<<< HEAD
 	// iterate all glass tiles
 	var/start_color = hsl_gradient(1, 0, "#A2FF80", 1, "#A2FFEE")
 	var/start_range = GLOB.starlight_range * 1.75
@@ -114,3 +139,10 @@
 	for(var/area/station/service/kitchen/affected_area in GLOB.areas)
 		for(var/turf/open/kitchen_floor in affected_area.get_turfs_from_all_zlevels())
 			kitchen_floor.set_light(end_range, end_power, end_color)
+=======
+	var/new_light = initial(spess.light_outer_range)
+	while(spess.light_outer_range > new_light)
+		spess.set_light(l_outer_range = spess.light_outer_range - 0.2)
+		sleep(30)
+	spess.set_light(l_outer_range = new_light, l_power = initial(spess.light_power), l_color = initial(spess.light_color))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

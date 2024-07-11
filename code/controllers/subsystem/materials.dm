@@ -21,16 +21,27 @@ SUBSYSTEM_DEF(materials)
 	var/list/list/material_combos
 	///List of stackcrafting recipes for materials using base recipes
 	var/list/base_stack_recipes = list(
+<<<<<<< HEAD
 		new /datum/stack_recipe("Chair", /obj/structure/chair/greyscale, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_FURNITURE),
 		new /datum/stack_recipe("Toilet", /obj/structure/toilet/greyscale, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_FURNITURE),
 		new /datum/stack_recipe("Sink Frame", /obj/structure/sinkframe, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_FURNITURE),
 		new /datum/stack_recipe("Material floor tile", /obj/item/stack/tile/material, 1, 4, 20, crafting_flags = CRAFT_APPLIES_MATS, category = CAT_TILES),
 		new /datum/stack_recipe("Material airlock assembly", /obj/structure/door_assembly/door_assembly_material, 4, time = 5 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_DOORS),
+=======
+		new /datum/stack_recipe("Chair", /obj/structure/chair/greyscale, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE),
+		new /datum/stack_recipe("Toilet", /obj/structure/toilet/greyscale, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE),
+		new /datum/stack_recipe("Sink Frame", /obj/structure/sinkframe, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE),
+		new /datum/stack_recipe("Material floor tile", /obj/item/stack/tile/material, 1, 4, 20, applies_mats = TRUE, check_density = FALSE, category = CAT_TILES),
+		new /datum/stack_recipe("Material airlock assembly", /obj/structure/door_assembly/door_assembly_material, 4, time = 5 SECONDS, one_per_turf = TRUE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_DOORS),
+		new /datum/stack_recipe("Railing", /obj/structure/railing, one_per_turf = FALSE, on_solid_ground = TRUE, applies_mats = TRUE, category = CAT_FURNITURE),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	///List of stackcrafting recipes for materials using rigid recipes
 	var/list/rigid_stack_recipes = list(
 		new /datum/stack_recipe("Carving block", /obj/structure/carving_block, 5, time = 3 SECONDS, crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_ONE_PER_TURF | CRAFT_ON_SOLID_GROUND | CRAFT_APPLIES_MATS, category = CAT_STRUCTURE),
 	)
+	///Blank versions of all of the mining templates, indexed by rarity.
+	var/list/template_paths_by_rarity = list()
 
 	///A list of dimensional themes used by the dimensional anomaly and other things, most of which require materials to function.
 	var/list/datum/dimension_theme/dimensional_themes
@@ -168,3 +179,7 @@ SUBSYSTEM_DEF(materials)
 			combo[GET_MATERIAL_REF(mat)] = OPTIMAL_COST(materials_declaration[mat] * multiplier)
 		material_combos[combo_index] = combo
 	return combo
+
+/datum/controller/subsystem/materials/proc/InitializeTemplates()
+	for(var/datum/mining_template/template as anything in typesof(/datum/mining_template))
+		LAZYADD(template_paths_by_rarity["[initial(template.rarity)]"], template)

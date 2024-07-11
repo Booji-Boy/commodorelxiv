@@ -52,7 +52,11 @@ export const CrewManifest = (props) => {
                     minWidth="40px"
                     width="40px"
                   >
+<<<<<<< HEAD
                     {positions[dept].exceptions.includes(crewMember.rank) && (
+=======
+                    {positions[dept].exceptions.includes(crewMember.trim) && (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       <Tooltip content="No position limit" position="bottom">
                         <Icon className="CrewManifest__Icon" name="infinity" />
                       </Tooltip>

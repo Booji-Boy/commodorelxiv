@@ -377,6 +377,10 @@
 	},
 /obj/item/lazarus_injector,
 /obj/effect/turf_decal/bot,
+<<<<<<< HEAD
+=======
+/obj/machinery/light/directional/south,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/bot/medbot{
 	name = "\improper emergency medibot";
 	pixel_x = -3;

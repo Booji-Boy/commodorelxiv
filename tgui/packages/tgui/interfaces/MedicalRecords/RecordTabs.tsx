@@ -2,6 +2,7 @@ import { filter, sortBy } from 'common/collections';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   Icon,
@@ -12,6 +13,17 @@ import {
   Tabs,
 } from 'tgui/components';
 
+=======
+  Stack,
+  Input,
+  Section,
+  Tabs,
+  NoticeBox,
+  Box,
+  Icon,
+  Button,
+} from 'tgui/components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
 import { MedicalRecord, MedicalRecordData } from './types';
@@ -25,7 +37,11 @@ export const MedicalRecordTabs = (props) => {
     ? 'No records found.'
     : 'No match. Refine your search.';
 
+<<<<<<< HEAD
   const [search, setSearch] = useState('');
+=======
+  const [search, setSearch] = useLocalState('search', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const sorted: MedicalRecord[] = sortBy(
     filter(records, (record) => isRecordMatch(record, search)),
@@ -65,15 +81,6 @@ export const MedicalRecordTabs = (props) => {
               Create
             </Button>
           </Stack.Item>
-          <Stack.Item>
-            <Button.Confirm
-              content="Purge"
-              icon="trash"
-              disabled={!station_z}
-              onClick={() => act('purge_records')}
-              tooltip="Wipe all record data."
-            />
-          </Stack.Item>
         </Stack>
       </Stack.Item>
     </Stack>
@@ -107,8 +114,13 @@ const CrewTab = (props: { record: MedicalRecord }) => {
       onClick={() => selectRecord(record)}
       selected={selectedRecord?.crew_ref === crew_ref}
     >
+<<<<<<< HEAD
       <Box>
         <Icon name={JOB2ICON[trim] || 'question'} /> {name}
+=======
+      <Box wrap>
+        <Icon name={JOB2ICON[rank] || 'question'} /> {name}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </Box>
     </Tabs.Tab>
   );

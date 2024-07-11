@@ -104,6 +104,7 @@
 		towards your attacker. This effect can only trigger once every 20 seconds."
 	gain_text = "The footsoldier was known to be a fearsome duelist. \
 		Their general quickly appointed them as their personal Champion."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/limited_amount/risen_corpse,
 		/datum/heretic_knowledge/mark/blade_mark,
@@ -227,7 +228,10 @@
 		During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack. \
 		This spell can be cast in rapid succession, but doing so will increase the cooldown."
 	gain_text = "In the flurry of death, he found peace within himself. Despite insurmountable odds, he forged on."
-	next_knowledge = list(/datum/heretic_knowledge/duel_stance)
+	next_knowledge = list(
+		/datum/heretic_knowledge/duel_stance,
+		/datum/heretic_knowledge/rifle,
+	)
 	spell_to_add = /datum/action/cooldown/spell/realignment
 	cost = 1
 	route = PATH_BLADE
@@ -242,6 +246,7 @@
 		you gain increased resistance to gaining wounds and resistance to batons."
 	gain_text = "In time, it was he who stood alone among the bodies of his former comrades, awash in blood, none of it his own. \
 		He was without rival, equal, or purpose."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/blade_upgrade/blade,
 		/datum/heretic_knowledge/reroll_targets,
@@ -372,6 +377,7 @@
 		at a target, dealing damage and causing bleeding."
 	gain_text = "Without thinking, I took the knife of a fallen soldier and threw with all my might. My aim was true! \
 		The Torn Champion smiled at their first taste of agony, and with a nod, their blades became my own."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/summon/maid_in_mirror,
 		/datum/heretic_knowledge/ultimate/blade_final,
@@ -406,7 +412,11 @@
 	priority_announce(
 		text = "[generate_heretic_text()] Master of blades, the Torn Champion's disciple, [user.real_name] has ascended! Their steel is that which will cut reality in a maelstom of silver! [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
+<<<<<<< HEAD
 		sound = 'sound/ambience/antag/heretic/ascend_blade.ogg',
+=======
+		sound = 'monkestation/sound/ambience/antag/heretic/ascend_blade.ogg',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		color_override = "pink",
 	)
 	user.client?.give_award(/datum/award/achievement/misc/blade_ascension, user)

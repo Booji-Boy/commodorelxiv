@@ -11,7 +11,10 @@
 	desc = "A fishing line. In spite of its simplicity, the added length will make fishing a speck easier."
 	icon = 'icons/obj/fishing.dmi'
 	icon_state = "reel_blue"
+<<<<<<< HEAD
 	w_class = WEIGHT_CLASS_SMALL
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///A list of traits that this fishing line has, checked by fish traits and the minigame.
 	var/list/fishing_line_traits
 	/// Color of the fishing line
@@ -248,6 +251,24 @@
 		var/mob/living/living_target = target
 		living_target.apply_status_effect(/datum/status_effect/grouped/hooked/jaws, rod.fishing_line)
 
+/obj/item/fishing_hook/stabilized
+	name = "gyro-stabilized hook"
+	desc = "A quirky hook that grants the user a better control of the tool, allowing them to move the bait both and up and down when reeling in, otherwise keeping it in place."
+	icon_state = "gyro"
+	fishing_hook_traits = FISHING_HOOK_BIDIRECTIONAL
+	rod_overlay_icon_state = "hook_gyro_overlay"
+
+/obj/item/fishing_hook/stabilized/examine(mob/user)
+	. = ..()
+	. += span_notice("While fishing, you can hold the <b>Right</b> Mouse Button to move the bait down, rather than up.")
+
+/obj/item/fishing_hook/jaws
+	name = "jawed hook"
+	desc = "Despite hints of rust, this gritty beartrap-like hook hybrid manages to look even more threating than the real thing. May neptune have mercy of whatever gets caught in its jaws."
+	icon_state = "jaws"
+	fishing_hook_traits = FISHING_HOOK_NO_ESCAPE|FISHING_HOOK_NO_ESCAPE|FISHING_HOOK_KILL
+	rod_overlay_icon_state = "hook_jaws_overlay"
+
 /obj/item/storage/toolbox/fishing
 	name = "fishing toolbox"
 	desc = "Contains everything you need for your fishing trip."
@@ -258,10 +279,17 @@
 /obj/item/storage/toolbox/fishing/Initialize(mapload)
 	. = ..()
 	// Can hold fishing rod despite the size
+<<<<<<< HEAD
 	var/static/list/exception_cache = typecacheof(list(
 		/obj/item/fishing_rod,
 		/obj/item/fishing_line,
 	))
+=======
+	var/static/list/exception_cache = typecacheof(
+		/obj/item/fishing_rod,
+		/obj/item/fishing_line,
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	atom_storage.exception_hold = exception_cache
 
 /obj/item/storage/toolbox/fishing/PopulateContents()
@@ -283,6 +311,22 @@
 
 /obj/item/storage/toolbox/fishing/small/PopulateContents()
 	new /obj/item/fishing_rod/unslotted(src)
+	new /obj/item/fishing_hook(src)
+	new /obj/item/fishing_line(src)
+
+/obj/item/storage/toolbox/fishing/small
+	name = "compact fishing toolbox"
+	desc = "Contains everything you need for your fishing trip. Except for the bait."
+	w_class = WEIGHT_CLASS_NORMAL
+	force = 5
+	throwforce = 5
+
+/obj/item/storage/toolbox/fishing/small/Initialize(mapload)
+	. = ..()
+	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL //It can still hold a fishing rod
+
+/obj/item/storage/toolbox/fishing/small/PopulateContents()
+	new /obj/item/fishing_rod(src)
 	new /obj/item/fishing_hook(src)
 	new /obj/item/fishing_line(src)
 

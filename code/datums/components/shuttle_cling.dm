@@ -51,7 +51,11 @@
 	update_state(parent) //otherwise we'll get moved 1 tile before we can correct ourselves, which isnt super bad but just looks jank
 
 /datum/component/shuttle_cling/proc/initialize_loop()
+<<<<<<< HEAD
 	hyperloop = GLOB.move_manager.move(moving = parent, direction = direction, delay = not_clinging_move_delay, subsystem = SShyperspace_drift, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_NO_DIR_UPDATE|MOVEMENT_LOOP_OUTSIDE_CONTROL)
+=======
+	hyperloop = SSmove_manager.move(moving = parent, direction = direction, delay = not_clinging_move_delay, subsystem = SShyperspace_drift, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_NO_DIR_UPDATE|MOVEMENT_LOOP_OUTSIDE_CONTROL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	update_state()
 
 /datum/component/shuttle_cling/proc/clear_loop()

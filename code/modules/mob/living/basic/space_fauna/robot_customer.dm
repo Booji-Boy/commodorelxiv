@@ -10,7 +10,10 @@
 	icon_state = "amerifat"
 	icon_living = "amerifat"
 
+<<<<<<< HEAD
 	max_grab = GRAB_AGGRESSIVE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	basic_mob_flags = DEL_ON_DEATH
 	mob_biotypes = MOB_ROBOTIC|MOB_HUMANOID
 	sentience_type = SENTIENCE_ARTIFICIAL
@@ -36,7 +39,11 @@
 
 	. = ..()
 
+<<<<<<< HEAD
 	add_traits(list(TRAIT_NOMOBSWAP, TRAIT_NO_TELEPORT, TRAIT_STRONG_GRABBER), INNATE_TRAIT) // never suffer a bitch to fuck with you
+=======
+	ADD_TRAIT(src, list(TRAIT_NOMOBSWAP, TRAIT_NO_TELEPORT, TRAIT_STRONG_GRABBER), INNATE_TRAIT) // never suffer a bitch to fuck with you
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/footstep, FOOTSTEP_OBJ_ROBOT, 1, -6, sound_vary = TRUE)
 
 	ai_controller.set_blackboard_key(BB_CUSTOMER_CUSTOMERINFO, customer_info)

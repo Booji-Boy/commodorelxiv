@@ -6,7 +6,10 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_TINY
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Weakref to the library computer we are connected to.
 	var/datum/weakref/computer_ref
 	///The current scanning mode (BARCODE_SCANNER_CHECKIN|BARCODE_SCANNER_INVENTORY)
@@ -26,4 +29,7 @@
 		if(BARCODE_SCANNER_INVENTORY)
 			scan_mode = BARCODE_SCANNER_CHECKIN
 			user.balloon_alert(user, "check-in mode")
+<<<<<<< HEAD
 	playsound(loc, 'sound/items/click.ogg', 20, TRUE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -3,6 +3,10 @@ import {
   Button,
   Dropdown,
   Flex,
+<<<<<<< HEAD
+=======
+  Input,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   LabeledList,
   ProgressBar,
   Section,
@@ -27,7 +31,10 @@ export const Mule = (props) => {
     id,
     allow_possession,
     possession_enabled,
+<<<<<<< HEAD
     pai_inserted,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     destinations = [],
   } = data;
   const locked = data.locked && !data.siliconUser;
@@ -84,6 +91,7 @@ export const Mule = (props) => {
           <Section
             title="Controls"
             buttons={
+<<<<<<< HEAD
               <>
                 {!!load && (
                   <Button
@@ -100,6 +108,15 @@ export const Mule = (props) => {
                   />
                 )}
               </>
+=======
+              !!load && (
+                <Button
+                  icon="eject"
+                  content="Unload"
+                  onClick={() => act('unload')}
+                />
+              )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }
           >
             <LabeledList>

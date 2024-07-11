@@ -4,8 +4,13 @@
 ///// Debride burnt flesh
 /datum/surgery/debride
 	name = "Debride burnt flesh"
+<<<<<<< HEAD
 	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
 	targetable_wound = /datum/wound/burn/flesh
+=======
+	surgery_flags = SURGERY_SELF_OPERABLE | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
+	targetable_wound = /datum/wound/burn
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possible_locs = list(
 		BODY_ZONE_R_ARM,
 		BODY_ZONE_L_ARM,
@@ -20,6 +25,7 @@
 	)
 
 /datum/surgery/debride/can_start(mob/living/user, mob/living/carbon/target)
+<<<<<<< HEAD
 	. = ..()
 	if(!.)
 		return .
@@ -28,6 +34,14 @@
 	// Should be guaranteed to have the wound by this point
 	ASSERT(burn_wound, "[type] on [target] has no burn wound when it should have been guaranteed to have one by can_start")
 	return burn_wound.infestation > 0
+=======
+	if(!istype(target))
+		return FALSE
+	if(..())
+		var/obj/item/bodypart/targeted_bodypart = target.get_bodypart(user.zone_selected)
+		var/datum/wound/burn/flesh/burn_wound = targeted_bodypart.get_wound_type(targetable_wound)
+		return(burn_wound && burn_wound.infestation > 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //SURGERY STEPS
 
@@ -99,7 +113,7 @@
 			span_notice("[user] successfully excises some of the infected flesh from [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully excises some of the infected flesh from  [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
-		log_combat(user, target, "excised infected flesh in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+		log_combat(user, target, "excised infected flesh in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 		surgery.operated_bodypart.receive_damage(brute=3, wound_bonus=CANT_WOUND)
 		burn_wound.infestation -= infestation_removed
 		burn_wound.sanitization += sanitization_added
@@ -165,7 +179,7 @@
 			span_notice("[user] successfully wraps [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 			span_notice("[user] successfully wraps [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 		)
-		log_combat(user, target, "dressed burns in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+		log_combat(user, target, "dressed burns in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 		burn_wound.sanitization += sanitization_added
 		burn_wound.flesh_healing += flesh_healing_added
 		var/obj/item/bodypart/the_part = target.get_bodypart(target_zone)

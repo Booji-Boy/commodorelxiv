@@ -66,7 +66,7 @@
 			perfectly aerodynamic (and potentially lethal) paper airplanes."
 	item = /obj/item/storage/box/syndie_kit/origami_bundle
 	cost = 4
-	surplus = 0
+	surplus = 50 //monkestation edit: from 0 to 50
 	purchasable_from = ~UPLINK_NUKE_OPS //clown ops intentionally left in, because that seems like some s-tier shenanigans.
 
 
@@ -77,7 +77,11 @@
 	item = /obj/item/book/granter/martial/carp
 	progression_minimum = 30 MINUTES
 	cost = 17
+<<<<<<< HEAD
 	surplus = 0
+=======
+	surplus = 30 //monkestation edit: from 0 to 30
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	purchasable_from = ~(UPLINK_NUKE_OPS | UPLINK_CLOWN_OPS)
 
 /datum/uplink_item/stealthy_weapons/crossbow
@@ -99,7 +103,13 @@
 	These shocks are capable of affecting the inner circuitry of most robots as well, applying a short stun. \
 	Has the added benefit of affecting the vocal cords of your victim, causing them to slur as if inebriated."
 	item = /obj/item/melee/baton/telescopic/contractor_baton
+<<<<<<< HEAD
 	cost = 7
 	surplus = 50
 	limited_stock = 1
 	purchasable_from = UPLINK_TRAITORS | UPLINK_SPY
+=======
+	cost = 12
+	surplus = 50
+	purchasable_from = ~(UPLINK_NUKE_OPS | UPLINK_CLOWN_OPS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

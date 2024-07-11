@@ -68,6 +68,7 @@
 		cavity_item.forceMove(drop_location())
 		cavity_item = null
 	return ..()
+<<<<<<< HEAD
 
 /// Sprite to show for photocopying mob butts
 /obj/item/bodypart/chest/proc/get_butt_sprite()
@@ -79,6 +80,8 @@
 		return tail.get_butt_sprite()
 
 	return icon('icons/mob/butts.dmi', human_owner.physique == FEMALE ? BUTT_SPRITE_HUMAN_FEMALE : BUTT_SPRITE_HUMAN_MALE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/chest/monkey
 	icon = 'icons/mob/human/species/monkey/bodyparts.dmi'
@@ -90,8 +93,13 @@
 	should_draw_greyscale = FALSE
 	is_dimorphic = FALSE
 	wound_resistance = -10
+<<<<<<< HEAD
 	bodyshape = BODYSHAPE_MONKEY
 	acceptable_bodyshape = BODYSHAPE_MONKEY
+=======
+	bodytype = BODYTYPE_MONKEY | BODYTYPE_ORGANIC
+	acceptable_bodytype = BODYTYPE_MONKEY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dmg_overlay_type = SPECIES_MONKEY
 
 /obj/item/bodypart/chest/alien
@@ -131,10 +139,17 @@
 	aux_layer = BODYPARTS_HIGH_LAYER
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_DEFAULT
 	can_be_disabled = TRUE
+<<<<<<< HEAD
 	unarmed_attack_verbs = list("punch") /// The classic punch, wonderfully classic and completely random
 	grappled_attack_verb = "pummel"
 	unarmed_damage_low = 5
 	unarmed_damage_high = 10
+=======
+	unarmed_attack_verb = "punch" /// The classic punch, wonderfully classic and completely random
+	unarmed_damage_low = 5
+	unarmed_damage_high = 5
+	unarmed_stun_threshold = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	body_zone = BODY_ZONE_L_ARM
 	/// Datum describing how to offset things worn on the hands of this arm, note that an x offset won't do anything here
 	var/datum/worn_feature_offset/worn_glove_offset
@@ -183,6 +198,11 @@
 
 	var/atom/movable/screen/inventory/hand/hand = new_owner.hud_used.hand_slots["[held_index]"]
 	hand.update_appearance()
+
+	biological_state = BIO_STANDARD_JOINTED
+
+/obj/item/bodypart/arm/Destroy()
+	return ..()
 
 /obj/item/bodypart/arm/left
 	name = "left arm"
@@ -263,10 +283,16 @@
 	px_x = -5
 	px_y = -3
 	dmg_overlay_type = SPECIES_MONKEY
+<<<<<<< HEAD
 	unarmed_damage_low = 3
 	unarmed_damage_high = 8
 	unarmed_effectiveness = 5
 	appendage_noun = "paw"
+=======
+	unarmed_damage_low = 2 /// monkey punches must be really weak, considering they bite people instead and their bites are weak as hell.
+	unarmed_damage_high = 2
+	unarmed_stun_threshold = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/arm/left/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -361,10 +387,16 @@
 	px_x = 5
 	px_y = -3
 	dmg_overlay_type = SPECIES_MONKEY
+<<<<<<< HEAD
 	unarmed_damage_low = 3
 	unarmed_damage_high = 8
 	unarmed_effectiveness = 0
 	appendage_noun = "paw"
+=======
+	unarmed_damage_low = 2
+	unarmed_damage_high = 2
+	unarmed_stun_threshold = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/arm/right/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -387,6 +419,7 @@
 	desc = "This item shouldn't exist. Talk about breaking a leg. Badum-Tss!"
 	attack_verb_continuous = list("kicks", "stomps")
 	attack_verb_simple = list("kick", "stomp")
+<<<<<<< HEAD
 	max_damage = LIMB_MAX_HP_DEFAULT
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_DEFAULT
 	can_be_disabled = TRUE
@@ -404,6 +437,31 @@
 
 /obj/item/bodypart/leg/Destroy()
 	QDEL_NULL(worn_foot_offset)
+	return ..()
+=======
+	bodytype = BODYTYPE_HUMANOID | BODYTYPE_ORGANIC
+	max_damage = 50
+	body_damage_coeff = 0.75
+	can_be_disabled = TRUE
+	unarmed_attack_effect = ATTACK_EFFECT_KICK
+	body_zone = BODY_ZONE_L_LEG
+	unarmed_attack_verb = "kick" // The lovely kick, typically only accessable by attacking a grouded foe. 1.5 times better than the punch.
+	unarmed_damage_low = 8
+	unarmed_damage_high = 8
+	unarmed_stun_threshold = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
+	/// Can these legs be digitigrade? See digitigrade.dm
+	var/can_be_digitigrade = FALSE
+	///Set limb_id to this when in "digi mode". MUST BE UNIQUE LIKE ALL LIMB IDS
+	var/digitigrade_id
+	/// Used solely by digitigrade limbs to remember what their old limb ID was.
+	var/old_limb_id
+	/// Used by the bloodysoles component to make footprints
+	var/footprint_sprite = FOOTPRINT_SPRITE_SHOES
+	biological_state = BIO_STANDARD_JOINTED
+
+/obj/item/bodypart/leg/Destroy()
 	return ..()
 
 /obj/item/bodypart/leg/left
@@ -475,10 +533,15 @@
 	wound_resistance = -10
 	px_y = 4
 	dmg_overlay_type = SPECIES_MONKEY
-	unarmed_damage_low = 2
+	unarmed_damage_low = 3
 	unarmed_damage_high = 3
+<<<<<<< HEAD
 	unarmed_effectiveness = 5
 	footprint_sprite = FOOTPRINT_SPRITE_PAWS
+=======
+	unarmed_stun_threshold = 4
+	footprint_sprite =  FOOTPRINT_SPRITE_PAWS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/leg/left/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -565,10 +628,15 @@
 	wound_resistance = -10
 	px_y = 4
 	dmg_overlay_type = SPECIES_MONKEY
-	unarmed_damage_low = 2
+	unarmed_damage_low = 3
 	unarmed_damage_high = 3
+<<<<<<< HEAD
 	unarmed_effectiveness = 5
 	footprint_sprite = FOOTPRINT_SPRITE_PAWS
+=======
+	unarmed_stun_threshold = 4
+	footprint_sprite =  FOOTPRINT_SPRITE_PAWS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/leg/right/alien
 	icon = 'icons/mob/human/species/alien/bodyparts.dmi'
@@ -583,3 +651,18 @@
 	can_be_disabled = FALSE
 	max_damage = LIMB_MAX_HP_ALIEN_LIMBS
 	should_draw_greyscale = FALSE
+<<<<<<< HEAD
+=======
+
+/obj/item/bodypart/leg/right/tallboy
+	limb_id = SPECIES_TALLBOY
+	top_offset = 23
+	unarmed_damage_low = 40
+	unarmed_damage_low = 40
+
+/obj/item/bodypart/leg/left/tallboy
+	limb_id = SPECIES_TALLBOY
+	top_offset = 23
+	unarmed_damage_low = 40
+	unarmed_damage_low = 40
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

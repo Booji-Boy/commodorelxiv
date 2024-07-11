@@ -11,3 +11,5 @@
 	new /obj/item/cultivator(src)
 	new /obj/item/hatchet(src)
 	new /obj/item/secateurs(src)
+	new /obj/item/storage/box/plant_gene(src)
+	new /obj/item/chicken_carrier(src)

@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 //world/proc/shelleo
 #define SHELLEO_ERRORLEVEL 1
 #define SHELLEO_STDOUT 2
 #define SHELLEO_STDERR 3
 
 ADMIN_VERB(play_sound, R_SOUND, "Play Global Sound", "Play a sound to all connected players.", ADMIN_CATEGORY_FUN, sound as sound)
+=======
+/client/proc/play_sound(S as sound)
+	set category = "Admin.Fun"
+	set name = "Play Global Sound"
+	if(!check_rights(R_SOUND))
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/freq = 1
 	var/vol = tgui_input_number(user, "What volume would you like the sound to play at?", max_value = 100)
 	if(!vol)
@@ -189,6 +198,7 @@ ADMIN_VERB(stop_sounds, R_NONE, "Stop All Playing Sounds", "Stops all playing so
 		var/client/player_client = player.client
 		player_client?.tgui_panel?.stop_music()
 
+<<<<<<< HEAD
 	S_TIMER_COOLDOWN_RESET(SStimer, COOLDOWN_INTERNET_SOUND)
 	BLACKBOX_LOG_ADMIN_VERB("Stop All Playing Sounds")
 
@@ -196,3 +206,18 @@ ADMIN_VERB(stop_sounds, R_NONE, "Stop All Playing Sounds", "Stops all playing so
 #undef SHELLEO_ERRORLEVEL
 #undef SHELLEO_STDOUT
 #undef SHELLEO_STDERR
+=======
+/client/proc/stop_sounds()
+	set category = "Debug"
+	set name = "Stop All Playing Sounds"
+	if(!src.holder)
+		return
+
+	log_admin("[key_name(src)] stopped all currently playing sounds.")
+	message_admins("[key_name_admin(src)] stopped all currently playing sounds.")
+	for(var/mob/M in GLOB.player_list)
+		SEND_SOUND(M, sound(null))
+		var/client/C = M.client
+		C?.tgui_panel?.stop_music()
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Stop All Playing Sounds") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

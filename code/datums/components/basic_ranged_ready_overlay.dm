@@ -29,7 +29,11 @@
 	UnregisterSignal(parent, list(COMSIG_BASICMOB_POST_ATTACK_RANGED, COMSIG_LIVING_REVIVE))
 	return ..()
 
+<<<<<<< HEAD
 /datum/component/basic_ranged_ready_overlay/Destroy(force)
+=======
+/datum/component/basic_ranged_ready_overlay/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	deltimer(waiting_timer)
 	return ..()
 

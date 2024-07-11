@@ -14,9 +14,9 @@
 	can_change_cable_layer = TRUE
 
 	/// The icon state used by the emitter when it's on.
-	var/icon_state_on = "emitter_+a"
+	var/icon_state_on = "emitter-active" //monkestation edit
 	/// The icon state used by the emitter when it's on and low on power.
-	var/icon_state_underpowered = "emitter_+u"
+	var/icon_state_underpowered = "emitter-under" //monkestation edit
 	///Is the machine active?
 	var/active = FALSE
 	///Does the machine have power?
@@ -316,7 +316,11 @@
 /obj/machinery/power/emitter/screwdriver_act(mob/living/user, obj/item/item)
 	if(..())
 		return TRUE
+<<<<<<< HEAD
 	default_deconstruction_screwdriver(user, "[base_icon_state]_open", base_icon_state, item)
+=======
+	default_deconstruction_screwdriver(user, "emitter-open", "emitter", item) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /// Attempt to toggle the controls lock of the emitter

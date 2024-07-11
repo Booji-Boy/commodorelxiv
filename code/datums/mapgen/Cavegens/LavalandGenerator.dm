@@ -10,7 +10,10 @@
 		/mob/living/basic/mining/bileworm = 20,
 		/mob/living/basic/mining/brimdemon = 20,
 		/mob/living/basic/mining/lobstrosity/lava = 20,
+<<<<<<< HEAD
 		/obj/effect/spawner/random/lavaland_mob/raptor = 15,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/mob/living/basic/mining/goldgrub = 10,
 		/obj/structure/spawner/lavaland = 2,
 		/obj/structure/spawner/lavaland/goliath = 3,
@@ -34,7 +37,10 @@
 		/obj/structure/geyser/protozine = 10,
 		/obj/structure/geyser/random = 2,
 		/obj/structure/geyser/wittel = 10,
+<<<<<<< HEAD
 		/obj/structure/ore_vent/boss = 1,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 	initial_closed_chance = 45

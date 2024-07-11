@@ -36,8 +36,12 @@ export const TextInputModal = (props) => {
     timeout,
     title,
   } = data;
+<<<<<<< HEAD
 
   const [input, setInput] = useState(placeholder || '');
+=======
+  const [input, setInput] = useLocalState<string>('input', placeholder || '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const onType = (value: string) => {
     if (value === input) {
       return;
@@ -94,10 +98,14 @@ export const TextInputModal = (props) => {
 };
 
 /** Gets the user input and invalidates if there's a constraint. */
+<<<<<<< HEAD
 const InputArea = (props: {
   input: string;
   onType: (value: string) => void;
 }) => {
+=======
+const InputArea = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { act, data } = useBackend<TextInputData>();
   const { max_length, multiline } = data;
   const { input, onType } = props;

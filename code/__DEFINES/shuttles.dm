@@ -106,10 +106,13 @@
 #define SHUTTLE_UNLOCK_MEDISIM "holodeck"
 // Needs a rune to be cleared by a null rod.
 #define SHUTTLE_UNLOCK_NARNAR "narnar"
+<<<<<<< HEAD
 // Needs someone to be polymorphed - Pride Mirror, Magic Mirror, Race Swap, Polymorph Staff/Wand. Badmin Mirror doesn't count, neither does xenobio.
 #define SHUTTLE_UNLOCK_WABBAJACK "wabbajack"
 // Needs cargo budget to be almost empty to be purchasable.
 #define SHUTTLE_UNLOCK_SCRAPHEAP "scrapheap"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Shuttle Events
 

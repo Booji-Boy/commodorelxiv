@@ -1,17 +1,31 @@
 import { useBackend } from '../backend';
 import {
   BlockQuote,
+<<<<<<< HEAD
   Box,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Button,
   Collapsible,
   Dropdown,
   Input,
   LabeledList,
+<<<<<<< HEAD
   NoticeBox,
   Section,
   Stack,
   Table,
   Tabs,
+=======
+  Section,
+  Stack,
+  Tabs,
+  Box,
+  Table,
+  NoticeBox,
+  Tooltip,
+  Icon,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { TableCell, TableRow } from '../components/Table';
 import { NtosWindow } from '../layouts';
@@ -186,23 +200,140 @@ const PaperPublishing = (props) => {
               }
             />
           </LabeledList.Item>
+<<<<<<< HEAD
+=======
+          <LabeledList.Item label="Selected File">
+            <Stack>
+              <Stack.Item>
+                <Dropdown
+                  width="35rem"
+                  options={Object.keys(fileList)}
+                  displayText={selectedFile ? selectedFile : '-'}
+                  onSelected={(ordfile_name) =>
+                    act('select_file', {
+                      selected_uid: fileList[ordfile_name],
+                    })
+                  }
+                />
+              </Stack.Item>
+              <Stack.Item align="center">
+                <Tooltip
+                  position="left"
+                  content="The selected file containing experimental data for our paper. Must be present in the HDD to be accesible. Transfer files with the File Manager program."
+                >
+                  <Icon size={1.15} name="info-circle" />
+                </Tooltip>
+              </Stack.Item>
+            </Stack>
+          </LabeledList.Item>
+          <LabeledList.Item label="Selected Experiment">
+            <Stack>
+              <Stack.Item>
+                <Dropdown
+                  width="35rem"
+                  options={Object.keys(expList)}
+                  displayText={selectedExperiment ? selectedExperiment : '-'}
+                  onSelected={(experiment_name) =>
+                    act('select_experiment', {
+                      selected_expath: expList[experiment_name],
+                    })
+                  }
+                />
+              </Stack.Item>
+              <Stack.Item align="center">
+                <Tooltip
+                  position="left"
+                  content="The topic we want to publish our paper on. Different topics unlock different technologies and possible partners."
+                >
+                  <Icon size={1.15} name="info-circle" />
+                </Tooltip>
+              </Stack.Item>
+            </Stack>
+          </LabeledList.Item>
+          <LabeledList.Item label="Selected Tier">
+            <Stack>
+              <Stack.Item>
+                <Dropdown
+                  width="35rem"
+                  options={allowedTiers.map((number) => String(number))}
+                  displayText={tier ? String(tier) : '-'}
+                  onSelected={(new_tier) =>
+                    act('select_tier', {
+                      selected_tier: Number(new_tier),
+                    })
+                  }
+                />
+              </Stack.Item>
+              <Stack.Item align="center">
+                <Tooltip
+                  position="left"
+                  content="The tier we want to publish on. Higher tiers can confer better rewards but means our data will be judged more harshly."
+                >
+                  <Icon size={1.15} name="info-circle" />
+                </Tooltip>
+              </Stack.Item>
+            </Stack>
+          </LabeledList.Item>
+          <LabeledList.Item label="Selected Partner">
+            <Stack>
+              <Stack.Item>
+                <Dropdown
+                  width="35rem"
+                  options={Object.keys(allowedPartners)}
+                  displayText={selectedPartner ? selectedPartner : '-'}
+                  onSelected={(new_partner) =>
+                    act('select_partner', {
+                      selected_partner: allowedPartners[new_partner],
+                    })
+                  }
+                />
+              </Stack.Item>
+              <Stack.Item align="center">
+                <Tooltip
+                  position="left"
+                  content="Which organization to partner with. We can obtain research boosts in techs related to the partner's interests."
+                >
+                  <Icon size={1.15} name="info-circle" />
+                </Tooltip>
+              </Stack.Item>
+            </Stack>
+          </LabeledList.Item>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </LabeledList>
       </Section>
       <Section title="Expected Results" key="rewards">
         <Stack fill>
           <Stack.Item grow>
+<<<<<<< HEAD
             <Button
               tooltip="How much will our relation improve with the particular partner. Cooperation will be used to unlock boosts."
               icon="info-circle"
             />
+=======
+            <Tooltip
+              position="top"
+              content="How much will our relation improve with the particular partner. Cooperation will be used to unlock boosts."
+            >
+              <Icon size={1.15} name="info-circle" />
+            </Tooltip>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             {' Cooperation: '}
             <BlockQuote>{gains[coopIndex - 1]}</BlockQuote>
           </Stack.Item>
           <Stack.Item grow>
+<<<<<<< HEAD
             <Button
               tooltip="How much grant will we be endowed with upon the publication of this paper."
               icon="info-circle"
             />
+=======
+            <Tooltip
+              position="top"
+              content="How much grant will we be endowed with upon the publication of this paper."
+            >
+              <Icon size={1.15} name="info-circle" />
+            </Tooltip>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             {' Funding: '}
             <BlockQuote>{gains[fundingIndex - 1]}</BlockQuote>
           </Stack.Item>
@@ -386,7 +517,11 @@ export const NtosScipaperContent = (props) => {
             })
           }
         >
+<<<<<<< HEAD
           {'Publications'}
+=======
+          {'View Previous Publications'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Tabs.Tab>
         <Tabs.Tab
           selected={currentTab === 3}
@@ -396,7 +531,11 @@ export const NtosScipaperContent = (props) => {
             })
           }
         >
+<<<<<<< HEAD
           {'Experiments'}
+=======
+          {'View Available Experiments'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Tabs.Tab>
         <Tabs.Tab
           selected={currentTab === 4}
@@ -406,7 +545,11 @@ export const NtosScipaperContent = (props) => {
             })
           }
         >
+<<<<<<< HEAD
           {'Scientific Partners'}
+=======
+          {'View Scientific Partners'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Tabs.Tab>
       </Tabs>
       {currentTab === 1 && <PaperPublishing />}

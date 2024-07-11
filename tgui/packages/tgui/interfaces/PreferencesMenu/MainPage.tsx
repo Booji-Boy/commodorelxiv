@@ -1,5 +1,6 @@
 import { filter, map, sortBy } from 'common/collections';
 import { classes } from 'common/react';
+<<<<<<< HEAD
 import { createSearch } from 'common/string';
 import { ReactNode, useState } from 'react';
 
@@ -14,6 +15,26 @@ import {
   Popper,
   Stack,
 } from '../../components';
+=======
+import { sendAct, useBackend, useLocalState } from '../../backend';
+import {
+  Box,
+  Button,
+  Flex,
+  LabeledList,
+  Popper,
+  Stack,
+  TrackOutsideClicks,
+  FitText,
+  Input,
+  Icon,
+} from '../../components';
+import {
+  createSetPreference,
+  PreferencesMenuData,
+  RandomSetting,
+} from './data';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { CharacterPreview } from '../common/CharacterPreview';
 import {
   createSetPreference,
@@ -31,13 +52,25 @@ import {
 import { Gender, GENDERS } from './preferences/gender';
 import { RandomizationButton } from './RandomizationButton';
 import { ServerPreferencesFetcher } from './ServerPreferencesFetcher';
+<<<<<<< HEAD
+=======
+import { MultiNameInput, NameInput } from './names';
+import { Gender, GENDERS } from './preferences/gender';
+import features from './preferences/features';
+import {
+  FeatureChoicedServerData,
+  FeatureValueInput,
+} from './preferences/features/base';
+import { filterMap, sortBy } from 'common/collections';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useRandomToggleState } from './useRandomToggleState';
+import { createSearch } from 'common/string';
 
-const CLOTHING_CELL_SIZE = 48;
-const CLOTHING_SIDEBAR_ROWS = 9;
+const CLOTHING_CELL_SIZE = 64;
+const CLOTHING_SIDEBAR_ROWS = 10;
 
-const CLOTHING_SELECTION_CELL_SIZE = 48;
-const CLOTHING_SELECTION_WIDTH = 5.4;
+const CLOTHING_SELECTION_CELL_SIZE = 64;
+const CLOTHING_SELECTION_WIDTH = 6.3;
 const CLOTHING_SELECTION_MULTIPLIER = 5.2;
 
 const CharacterControls = (props: {
@@ -89,33 +122,191 @@ const ChoicedSelection = (props: {
   supplementalValue?: unknown;
   onClose: () => void;
   onSelect: (value: string) => void;
+<<<<<<< HEAD
 }) => {
   const { act } = useBackend<PreferencesMenuData>();
 
   const { catalog, supplementalFeature, supplementalValue } = props;
   const [getSearchText, searchTextSet] = useState('');
+=======
+  searchText: string;
+  setSearchText: (value: string) => void;
+}) => {
+  const { act } = useBackend<PreferencesMenuData>();
+
+  const {
+    catalog,
+    supplementalFeature,
+    supplementalValue,
+    searchText,
+    setSearchText,
+  } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   if (!catalog.icons) {
     return <Box color="red">Provided catalog had no icons!</Box>;
   }
 
+  let search = createSearch(searchText, (name: string) => {
+    return name;
+  });
+
+  const use_small_supplemental =
+    supplementalFeature &&
+    (features[supplementalFeature].small_supplemental === true ||
+      features[supplementalFeature].small_supplemental === undefined);
   return (
     <Box
+<<<<<<< HEAD
       className="ChoicedSelection"
       style={{
         padding: '5px',
 
+=======
+      className="theme-generic"
+      style={{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         height: `${
           CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_MULTIPLIER
         }px`,
         width: `${CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH}px`,
       }}
     >
+<<<<<<< HEAD
       <Stack vertical fill>
         <Stack.Item>
           <Stack fill>
             {supplementalFeature && (
+=======
+      <Box
+        className="PopupWindow"
+        style={{ padding: '5px' }}
+        width="100%"
+        height="100%"
+      >
+        <Stack vertical fill>
+          <Stack.Item>
+            <Stack fill>
+              {supplementalFeature && use_small_supplemental && (
+                <Stack.Item>
+                  <FeatureValueInput
+                    act={act}
+                    feature={features[supplementalFeature]}
+                    featureId={supplementalFeature}
+                    shrink
+                    value={supplementalValue}
+                  />
+                </Stack.Item>
+              )}
+
+              <Stack.Item grow>
+                <Box
+                  style={{
+                    'border-bottom': '1px solid #888',
+                    'font-weight': 'bold',
+                    'font-size': '14px',
+                    'text-align': 'center',
+                  }}
+                >
+                  Select {props.name}
+                </Box>
+              </Stack.Item>
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Stack.Item>
+                <Button color="red" onClick={props.onClose}>
+                  X
+                </Button>
+              </Stack.Item>
+            </Stack>
+          </Stack.Item>
+
+          {Object.keys(catalog.icons).length > 5 && (
+            <Stack.Item>
+              <Box>
+                <Icon mr={1} name="search" />
+                <Input
+                  autoFocus
+                  width={`${
+                    CLOTHING_SELECTION_CELL_SIZE * CLOTHING_SELECTION_WIDTH - 55
+                  }px`}
+                  placeholder="Search options"
+                  value={searchText}
+                  onInput={(_, value) => setSearchText(value)}
+                />
+              </Box>
+            </Stack.Item>
+          )}
+
+          <Stack.Item
+            overflowX="hidden"
+            overflowY="auto"
+            grow
+            className="section-background"
+          >
+            <Flex wrap>
+              {Object.entries(catalog.icons)
+                .filter(([n, _]) => searchText?.length < 1 || search(n))
+                .map(([name, image], index) => {
+                  return (
+                    <Flex.Item
+                      key={index}
+                      basis={`${CLOTHING_SELECTION_CELL_SIZE}px`}
+                      style={{
+                        padding: '5px',
+                      }}
+                    >
+                      <Button
+                        onClick={() => {
+                          props.onSelect(name);
+                        }}
+                        selected={name === props.selected}
+                        style={{
+                          height: `${CLOTHING_SELECTION_CELL_SIZE}px`,
+                          width: `${CLOTHING_SELECTION_CELL_SIZE}px`,
+                        }}
+                      >
+                        <Box
+                          className={classes([
+                            'preferences32x32',
+                            image,
+                            'centered-image',
+                          ])}
+                          style={{
+                            transform:
+                              'translateX(-50%) translateY(-50%) scale(1.4)',
+                          }}
+                        />
+                      </Button>
+                      <Box textAlign="center">
+                        <FitText
+                          maxWidth={CLOTHING_SELECTION_CELL_SIZE}
+                          maxFontSize={12}
+                        >
+                          {name}
+                        </FitText>
+                      </Box>
+                    </Flex.Item>
+                  );
+                })}
+            </Flex>
+          </Stack.Item>
+          {supplementalFeature && !use_small_supplemental && (
+            <>
+              <Stack.Item mt={0.25}>
+                <Box
+                  pb={0.25}
+                  style={{
+                    'border-bottom': '1px solid rgba(255, 255, 255, 0.1)',
+                    'font-weight': 'bold',
+                    'font-size': '14px',
+                    'text-align': 'center',
+                  }}
+                >
+                  Select {features[supplementalFeature].name}
+                </Box>
+              </Stack.Item>
+              <Stack.Item shrink mt={0.5}>
                 <FeatureValueInput
                   act={act}
                   feature={features[supplementalFeature]}
@@ -124,6 +315,7 @@ const ChoicedSelection = (props: {
                   value={supplementalValue}
                 />
               </Stack.Item>
+<<<<<<< HEAD
             )}
 
             <Stack.Item grow>
@@ -196,10 +388,17 @@ const ChoicedSelection = (props: {
           </Autofocus>
         </Stack.Item>
       </Stack>
+=======
+            </>
+          )}
+        </Stack>
+      </Box>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     </Box>
   );
 };
 
+<<<<<<< HEAD
 const searchInCatalog = (searchText = '', catalog: Record<string, string>) => {
   let items = Object.entries(catalog);
   if (searchText) {
@@ -211,11 +410,20 @@ const searchInCatalog = (searchText = '', catalog: Record<string, string>) => {
   return items;
 };
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 const GenderButton = (props: {
   handleSetGender: (gender: Gender) => void;
   gender: Gender;
 }) => {
+<<<<<<< HEAD
   const [genderMenuOpen, setGenderMenuOpen] = useState(false);
+=======
+  const [genderMenuOpen, setGenderMenuOpen] = useLocalState(
+    'genderMenuOpen',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Popper
@@ -241,9 +449,15 @@ const GenderButton = (props: {
                   />
                 </Stack.Item>
               );
+<<<<<<< HEAD
             },
           )}
         </Stack>
+=======
+            })}
+          </Stack>
+        )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }
     >
       <Button
@@ -286,9 +500,18 @@ const MainFeature = (props: {
   } = props;
 
   const supplementalFeature = catalog.supplemental_feature;
+  let [searchText, setSearchText] = useLocalState(
+    catalog.name + '_choiced_search',
+    '',
+  );
+  const handleCloseInternal = () => {
+    handleClose();
+    setSearchText('');
+  };
 
   return (
     <Popper
+<<<<<<< HEAD
       placement="bottom-start"
       isOpen={isOpen}
       onClickOutside={handleClose}
@@ -308,13 +531,39 @@ const MainFeature = (props: {
           onClose={handleClose}
           onSelect={handleSelect}
         />
+=======
+      options={{
+        placement: 'bottom-start',
+      }}
+      popperContent={
+        isOpen && (
+          <TrackOutsideClicks onOutsideClick={handleCloseInternal}>
+            <ChoicedSelection
+              name={catalog.name}
+              catalog={catalog}
+              selected={currentValue}
+              supplementalFeature={supplementalFeature}
+              supplementalValue={
+                supplementalFeature &&
+                data.character_preferences.supplemental_features[
+                  supplementalFeature
+                ]
+              }
+              onClose={handleCloseInternal}
+              onSelect={handleSelect}
+              searchText={searchText}
+              setSearchText={setSearchText}
+            />
+          </TrackOutsideClicks>
+        )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       }
     >
       <Button
         onClick={(event) => {
           event.stopPropagation();
           if (isOpen) {
-            handleClose();
+            handleCloseInternal();
           } else {
             handleOpen();
           }
@@ -395,8 +644,12 @@ export const PreferenceList = (props: {
         padding: '4px',
       }}
       overflowX="hidden"
+<<<<<<< HEAD
       overflowY="auto"
       maxHeight={props.maxHeight}
+=======
+      overflowY="scroll"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     >
       <LabeledList>
         {sortPreferences(Object.entries(props.preferences)).map(
@@ -416,7 +669,10 @@ export const PreferenceList = (props: {
               <LabeledList.Item
                 key={featureId}
                 label={feature.name}
+<<<<<<< HEAD
                 tooltip={feature.description}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 verticalAlign="middle"
               >
                 <Stack fill>
@@ -449,6 +705,7 @@ export const PreferenceList = (props: {
   );
 };
 
+<<<<<<< HEAD
 export const getRandomization = (
   preferences: Record<string, unknown>,
   serverData: ServerData | undefined,
@@ -485,6 +742,17 @@ export const MainPage = (props: { openSpecies: () => void }) => {
   const [deleteCharacterPopupOpen, setDeleteCharacterPopupOpen] =
     useState(false);
   const [multiNameInputOpen, setMultiNameInputOpen] = useState(false);
+=======
+export const MainPage = (props: { openSpecies: () => void }) => {
+  const { act, data } = useBackend<PreferencesMenuData>();
+  const [currentClothingMenu, setCurrentClothingMenu] = useLocalState<
+    string | null
+  >('currentClothingMenu', null);
+  const [multiNameInputOpen, setMultiNameInputOpen] = useLocalState(
+    'multiNameInputOpen',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [randomToggleEnabled] = useRandomToggleState();
 
   return (
@@ -516,10 +784,43 @@ export const MainPage = (props: { openSpecies: () => void }) => {
           data.character_preferences.non_contextual.random_body !==
             RandomSetting.Disabled || randomToggleEnabled;
 
+<<<<<<< HEAD
         const randomizationOfMainFeatures = getRandomization(
           Object.fromEntries(mainFeatures),
           serverData,
           randomBodyEnabled,
+=======
+        const getRandomization = (
+          preferences: Record<string, unknown>,
+        ): Record<string, RandomSetting> => {
+          if (!serverData) {
+            return {};
+          }
+
+          return Object.fromEntries(
+            filterMap(Object.keys(preferences), (preferenceKey) => {
+              if (
+                serverData.random.randomizable.indexOf(preferenceKey) === -1
+              ) {
+                return undefined;
+              }
+
+              if (!randomBodyEnabled) {
+                return undefined;
+              }
+
+              return [
+                preferenceKey,
+                data.character_preferences.randomization[preferenceKey] ||
+                  RandomSetting.Disabled,
+              ];
+            }),
+          );
+        };
+
+        const randomizationOfMainFeatures = getRandomization(
+          Object.fromEntries(mainFeatures),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         );
 
         const nonContextualPreferences = {

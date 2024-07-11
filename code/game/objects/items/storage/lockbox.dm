@@ -51,8 +51,11 @@
 		balloon_alert(user, "locked!")
 		return FALSE
 
+<<<<<<< HEAD
 	return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/storage/lockbox/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(!broken)
 		broken = TRUE

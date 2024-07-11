@@ -131,7 +131,12 @@
 			candidate.adjustToxLoss(-toxin_heal * seconds_per_tick, updating_health = FALSE, forced = TRUE)
 
 			candidate.adjustOxyLoss(-suffocation_heal * seconds_per_tick, updating_health = FALSE)
+<<<<<<< HEAD
 			candidate.adjustStaminaLoss(-stamina_heal * seconds_per_tick, updating_stamina = FALSE)
+=======
+			candidate.stamina.adjust(stamina_heal * seconds_per_tick)
+			candidate.adjustCloneLoss(-clone_heal * seconds_per_tick, updating_health = FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			for (var/organ in organ_healing)
 				candidate.adjustOrganLoss(organ, -organ_healing[organ] * seconds_per_tick)

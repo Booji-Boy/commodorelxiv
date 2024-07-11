@@ -148,7 +148,11 @@
 	animate(src, alpha = 0, time = 2, easing = EASE_OUT) //fade out
 	visible_message(span_hierophant_warning("[src] fades out!"))
 	ADD_TRAIT(src, TRAIT_UNDENSE, VANISHING_TRAIT)
+<<<<<<< HEAD
 	addtimer(CALLBACK(src, PROC_REF(pandora_teleport_3), T), 0.2 SECONDS)
+=======
+	addtimer(CALLBACK(src, PROC_REF(pandora_teleport_3), T), 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/hostile/asteroid/elite/pandora/proc/pandora_teleport_3(turf/T)
 	forceMove(T)

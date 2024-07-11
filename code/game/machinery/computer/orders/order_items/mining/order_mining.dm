@@ -17,6 +17,10 @@
 	item_path = /obj/item/fulton_core
 	cost_per_order = 320
 
+/datum/orderable_item/mining/ashsuit //MONKE EDIT
+	item_path = /obj/item/clothing/suit/hooded/ashsuit
+	cost_per_order = 100
+
 /datum/orderable_item/mining/mining_modsuit
 	item_path = /obj/item/mod/control/pre_equipped/mining
 	desc = "A mining-themed MODsuit that works best when in a mining environment."
@@ -33,6 +37,22 @@
 /datum/orderable_item/mining/crusher
 	item_path = /obj/item/kinetic_crusher
 	cost_per_order = 650
+
+/datum/orderable_item/mining/crusher/spear //MONKE EDIT
+	item_path = /obj/item/kinetic_crusher/spear
+	cost_per_order = 1250
+
+/datum/orderable_item/mining/crusher/hammer //MONKE EDIT
+	item_path = /obj/item/kinetic_crusher/hammer
+	cost_per_order = 1250
+
+/datum/orderable_item/mining/crusher/machete //MONKE EDIT
+	item_path = /obj/item/kinetic_crusher/machete
+	cost_per_order = 1250
+
+/datum/orderable_item/mining/crusher/claw //MONKE EDIT
+	item_path = /obj/item/kinetic_crusher/claw
+	cost_per_order = 1250
 
 /datum/orderable_item/mining/resonator
 	item_path = /obj/item/resonator
@@ -97,6 +117,7 @@
 
 /datum/orderable_item/mining/hiking_boots
 	item_path = /obj/item/clothing/shoes/winterboots/ice_boots
+<<<<<<< HEAD
 	cost_per_order = 2000
 
 /datum/orderable_item/mining/style_meter
@@ -119,3 +140,10 @@
 /datum/orderable_item/mining/grapple_gun
 	item_path = /obj/item/grapple_gun
 	cost_per_order = 3000
+=======
+	cost_per_order = 2500
+
+/datum/orderable_item/mining/style_meter
+	item_path = /obj/item/style_meter
+	cost_per_order = 1500
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

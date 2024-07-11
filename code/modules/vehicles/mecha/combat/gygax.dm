@@ -5,12 +5,17 @@
 	base_icon_state = "gygax"
 	movedelay = 3
 	max_integrity = 250
+<<<<<<< HEAD
 	accesses = list(ACCESS_MECH_SCIENCE, ACCESS_MECH_SECURITY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	armor_type = /datum/armor/mecha_gygax
 	max_temperature = 25000
 	force = 25
 	destruction_sleep_duration = 40
 	exit_delay = 40
+	encumbrance_gap = 1.4
+	internal_damage_threshold = 18
 	wreckage = /obj/structure/mecha_wreckage/gygax
 	mech_type = EXOSUIT_MODULE_GYGAX
 	max_equip_by_category = list(
@@ -18,7 +23,7 @@
 		MECHA_R_ARM = 1,
 		MECHA_UTILITY = 3,
 		MECHA_POWER = 1,
-		MECHA_ARMOR = 2,
+		MECHA_ARMOR = 3,
 	)
 	step_energy_drain = 4
 	can_use_overclock = TRUE

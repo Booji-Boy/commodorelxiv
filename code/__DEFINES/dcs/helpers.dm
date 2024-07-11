@@ -2,7 +2,12 @@
 /// The datum hosting the signal is automaticaly added as the first argument
 /// Returns a bitfield gathered from all registered procs
 /// Arguments given here are packaged in a list and given to _SendSignal
+<<<<<<< HEAD
 #define SEND_SIGNAL(target, sigtype, arguments...) ( !target._listen_lookup?[sigtype] ? NONE : target._SendSignal(sigtype, list(target, ##arguments)) )
+=======
+
+#define SEND_SIGNAL(target, sigtype, arguments...) ( !target?._listen_lookup?[sigtype] ? NONE : target._SendSignal(sigtype, list(target, ##arguments)) )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define SEND_GLOBAL_SIGNAL(sigtype, arguments...) ( SEND_SIGNAL(SSdcs, sigtype, ##arguments) )
 

@@ -402,6 +402,11 @@ DEFINE_BITFIELD(turret_flags, list(
 		set_disabled(rand(6 SECONDS, 20 SECONDS))
 		remove_control()
 
+<<<<<<< HEAD
+=======
+		addtimer(CALLBACK(src, PROC_REF(toggle_on), TRUE), rand(60,600))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/porta_turret/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
 	. = ..()
 	if(. && atom_integrity > 0) //damage received
@@ -852,7 +857,7 @@ DEFINE_BITFIELD(turret_flags, list(
 	lethal_projectile = /obj/projectile/plasma/turret
 	lethal_projectile_sound = 'sound/weapons/plasma_cutter.ogg'
 	mode = TURRET_LETHAL //It would be useless in stun mode anyway
-	faction = list(FACTION_NEUTRAL,FACTION_SILICON,FACTION_TURRET) //Minebots, medibots, etc that should not be shot.
+	faction = list(FACTION_NEUTRAL,FACTION_SILICON,FACTION_TURRET,FACTION_TAMED,FACTION_BOSS) //Minebots, medibots, etc that should not be shot.
 
 /obj/machinery/porta_turret/aux_base/assess_perp(mob/living/carbon/human/perp)
 	return 0 //Never shoot humanoids. You are on your own if Ashwalkers or the like attack!
@@ -985,6 +990,7 @@ DEFINE_BITFIELD(turret_flags, list(
 
 	var/id = attacking_item.GetID()
 
+<<<<<<< HEAD
 	if(isnull(id))
 		return
 
@@ -997,6 +1003,12 @@ DEFINE_BITFIELD(turret_flags, list(
 		to_chat(user, span_notice("You [ locked ? "lock" : "unlock"] the panel."))
 	else
 		to_chat(user, span_alert("Access denied."))
+=======
+			locked = !locked
+			to_chat(user, span_notice("You [ locked ? "lock" : "unlock"] the panel."))
+		else
+			to_chat(user, span_alert("Access denied."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/turretid/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
@@ -1132,7 +1144,11 @@ DEFINE_BITFIELD(turret_flags, list(
 
 /obj/item/gun/ballistic/get_turret_properties()
 	. = ..()
+<<<<<<< HEAD
 	var/obj/item/ammo_box/mag = spawn_magazine_type
+=======
+	var/obj/item/ammo_box/mag = accepted_magazine_type
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/ammo_casing/primary_ammo = initial(mag.ammo_type)
 
 	.["base_icon_state"] = "syndie"

@@ -222,7 +222,11 @@
 			if(!user.transferItemToLoc(I, src))
 				return
 			set_wires(new /datum/wires/explosive/pizza(src))
+<<<<<<< HEAD
 			register_bomb(I)
+=======
+			bomb = I
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			balloon_alert(user, "bomb placed")
 			update_appearance()
 			return
@@ -308,8 +312,12 @@
 	if(!pizza)
 		var/randompizza = pick(subtypesof(/obj/item/food/pizza) - /obj/item/food/pizza/flatbread) //also disincludes another base type
 		pizza = new randompizza(src)
+<<<<<<< HEAD
 		update_appearance()
 	register_bomb(new /obj/item/bombcore/miniature/pizza(src))
+=======
+	bomb = new(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_wires(new /datum/wires/explosive/pizza(src))
 
 /obj/item/pizzabox/bomb/armed

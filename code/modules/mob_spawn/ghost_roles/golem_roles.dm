@@ -23,6 +23,7 @@
 	. = ..()
 	var/area/init_area = get_area(src)
 	if(!mapload && init_area)
+<<<<<<< HEAD
 		notify_ghosts(
 			"\A golem shell has been completed in \the [init_area.name].",
 			source = src,
@@ -31,6 +32,16 @@
 			ignore_key = POLL_IGNORE_GOLEM,
 			notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		)
+=======
+		notify_ghosts("\A golem shell has been completed in \the [init_area.name].", source = src, action = NOTIFY_PLAY, flashwindow = FALSE, ignore_key = POLL_IGNORE_GOLEM)
+	if(creator)
+		you_are_text = "You are a golem."
+		flavour_text = "You move slowly, but are highly resistant to heat and cold as well as blunt trauma. You are unable to wear clothes, but can still use most tools."
+		important_text = "Serve [creator], and assist [creator.p_them()] in completing [creator.p_their()] goals at any cost."
+		owner_ref = WEAKREF(creator)
+		spawner_job_path = /datum/job/servant_golem
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/mob_spawn/ghost_role/human/golem/name_mob(mob/living/spawned_mob, forced_name)
 	if(forced_name || !iscarbon(spawned_mob))
@@ -49,6 +60,7 @@
 		var/mob/living/carbon/human/human_spawn = new_spawn
 		human_spawn.set_cloned_appearance()
 
+<<<<<<< HEAD
 /// Gives lavaland golems some noble ideas, and enslaved ones a master
 /obj/effect/mob_spawn/ghost_role/human/golem/proc/give_directive(mob/living/new_spawn)
 	new_spawn.log_message("possessed a free golem shell.", LOG_GAME)
@@ -65,6 +77,13 @@
 	var/static/list/allowed_areas = typecacheof(list(/area/icemoon, /area/lavaland, /area/ruin, /area/misc/survivalpod, /area/golem))
 	ADD_TRAIT(new_spawn, TRAIT_FORBID_MINING_SHUTTLE_CONSOLE_OUTSIDE_STATION, INNATE_TRAIT)
 	new_spawn.AddComponent(/datum/component/hazard_area, area_whitelist = allowed_areas)
+=======
+/obj/effect/mob_spawn/ghost_role/human/golem/proc/try_keep_home(mob/new_spawn)
+//	var/static/list/allowed_areas = typecacheof(list(/area/icemoon, /area/lavaland, /area/ruin)) + typecacheof(/area/misc/survivalpod)
+// this is dumb, im removing it.
+//	ADD_TRAIT(new_spawn, TRAIT_FORBID_MINING_SHUTTLE_CONSOLE_OUTSIDE_STATION, INNATE_TRAIT)
+//	new_spawn.AddComponent(/datum/component/hazard_area, area_whitelist = allowed_areas)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 // Subtype which can yell at other golems

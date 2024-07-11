@@ -8,17 +8,22 @@
 	product = /obj/item/food/grown/cherries
 	lifespan = 35
 	endurance = 35
-	maturation = 5
+	maturation = 40
 	production = 5
 	growthstages = 5
+<<<<<<< HEAD
 	instability = 15
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
+=======
+	growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_grow = "cherry-grow"
 	icon_dead = "cherry-dead"
 	icon_harvest = "cherry-harvest"
 	genes = list(/datum/plant_gene/trait/repeated_harvest)
-	mutatelist = list(/obj/item/seeds/cherry/blue, /obj/item/seeds/cherry/bulb)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/blue_cherry, /datum/hydroponics/plant_mutation/cherry_bulb)
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.07, /datum/reagent/consumable/sugar = 0.07)
+	harvest_age = 100
 
 /obj/item/food/grown/cherries
 	seed = /obj/item/seeds/cherry
@@ -40,7 +45,7 @@
 	species = "bluecherry"
 	plantname = "Blue Cherry Tree"
 	product = /obj/item/food/grown/bluecherries
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.07, /datum/reagent/consumable/sugar = 0.07, /datum/reagent/oxygen = 0.07)
 	rarity = 10
 
@@ -59,12 +64,14 @@
 /obj/item/seeds/cherry/bulb
 	name = "pack of cherry bulb pits"
 	desc = "The glowy kind of cherries."
+	//growing_icon = 'icons/obj/hydroponics/growing_fruits.dmi'
+	//growthstages = 5
 	icon_state = "seed-cherrybulb"
 	species = "cherrybulb"
 	plantname = "Cherry Bulb Tree"
 	product = /obj/item/food/grown/cherrybulbs
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/glow/pink)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.07, /datum/reagent/consumable/sugar = 0.07)
 	rarity = 10
 	graft_gene = /datum/plant_gene/trait/glow/pink
@@ -88,7 +95,7 @@
 	species = "cherry_bomb"
 	plantname = "Cherry Bomb Tree"
 	product = /obj/item/food/grown/cherry_bomb
-	mutatelist = null
+	possible_mutations = list()
 	genes = list(/datum/plant_gene/trait/bomb_plant, /datum/plant_gene/trait/modified_volume/cherry_bomb)
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.1, /datum/reagent/consumable/sugar = 0.1, /datum/reagent/gunpowder = 0.7)
 	rarity = 60 //See above

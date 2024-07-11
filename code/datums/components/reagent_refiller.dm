@@ -28,7 +28,11 @@
 
 	return ..()
 
+<<<<<<< HEAD
 /datum/component/reagent_refiller/Destroy(force)
+=======
+/datum/component/reagent_refiller/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	power_draw_callback = null
 	return ..()
 

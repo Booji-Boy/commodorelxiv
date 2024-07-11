@@ -36,7 +36,11 @@
 	return TRUE
 
 /datum/action/cooldown/spell/pointed/swap/InterceptClickOn(mob/living/caller, params, atom/target)
+<<<<<<< HEAD
 	if(LAZYACCESS(params2list(params), RIGHT_CLICK))
+=======
+	if((caller.istate & ISTATE_SECONDARY))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!IsAvailable(feedback = TRUE))
 			return FALSE
 		if(!target)

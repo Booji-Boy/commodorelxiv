@@ -23,6 +23,17 @@
 	var/id = null
 	var/initialized_button = FALSE
 	var/silicon_access_disabled = FALSE
+<<<<<<< HEAD
+=======
+	///The light mask used in the icon file for emissive layer
+	var/light_mask = null
+	light_power = 0.5 // Minimums, we want the button to glow if it has a mask, not light an area
+	light_outer_range = 1.5
+	light_color = LIGHT_COLOR_DARK_BLUE
+	armor_type = /datum/armor/machinery_button
+	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.02
+	resistance_flags = LAVA_PROOF | FIRE_PROOF
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/button/indestructible
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -194,6 +205,7 @@
 
 	return ITEM_INTERACT_SUCCESS
 
+<<<<<<< HEAD
 /obj/machinery/button/base_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	. = ..()
 	if(.)
@@ -203,6 +215,13 @@
 		return attempt_press(user) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 
+=======
+	if(!(user.istate & ISTATE_HARM) && !(W.item_flags & NOBLUDGEON))
+		return attack_hand(user)
+	else
+		return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/button/emag_act(mob/user, obj/item/card/emag/emag_card)
 	. = ..()
 	if(obj_flags & EMAGGED)
@@ -217,7 +236,10 @@
 	if(!device?.emag_act(user, emag_card))
 		balloon_alert(user, "access overridden")
 	return TRUE
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/button/attack_ai(mob/user)
 	if(!silicon_access_disabled && !panel_open)

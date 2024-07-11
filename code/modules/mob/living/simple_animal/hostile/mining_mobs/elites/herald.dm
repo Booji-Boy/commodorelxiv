@@ -140,9 +140,7 @@
 	if(target)
 		H.original = target
 	H.fire(set_angle)
-	if(is_trishot)
-		shoot_projectile(marker, set_angle + 15, FALSE, FALSE)
-		shoot_projectile(marker, set_angle - 15, FALSE, FALSE)
+	//monke edit - removed heralds shotgun BS from his tri shot
 
 /mob/living/simple_animal/hostile/asteroid/elite/herald/proc/herald_trishot(target)
 	ranged_cooldown = world.time + 30
@@ -227,7 +225,7 @@
 	name ="death bolt"
 	icon_state= "chronobolt"
 	damage = 20
-	armour_penetration = 60
+	armour_penetration = 25 //was 50 changed because 50 was waay too much monkestation 20 edit
 	speed = 2
 	damage_type = BRUTE
 	pass_flags = PASSTABLE

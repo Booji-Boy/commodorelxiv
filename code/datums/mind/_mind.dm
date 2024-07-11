@@ -64,7 +64,12 @@
 	///If this mind's master is another mob (i.e. adamantine golems). Weakref of a /living.
 	var/datum/weakref/enslaved_to
 
+<<<<<<< HEAD
 	var/unconvertable = FALSE
+=======
+	var/datum/language_holder/language_holder
+	/* var/unconvertable = FALSE */ // monkestation edit: replace with mind trait
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/late_joiner = FALSE
 	/// has this mind ever been an AI
 	var/has_ever_been_ai = FALSE

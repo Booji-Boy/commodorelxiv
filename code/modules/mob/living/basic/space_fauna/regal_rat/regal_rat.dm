@@ -52,10 +52,16 @@
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
 	RegisterSignal(src, COMSIG_MOB_LOGIN, PROC_REF(on_login))
 
+<<<<<<< HEAD
 	AddElementTrait(TRAIT_WADDLING, INNATE_TRAIT, /datum/element/waddling)
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/door_pryer, pry_time = 5 SECONDS, interaction_key = REGALRAT_INTERACTION)
 	AddElement(/datum/element/poster_tearer, interaction_key = REGALRAT_INTERACTION)
+=======
+	AddElement(/datum/element/waddling)
+	AddElement(/datum/element/ai_retaliate)
+	AddElement(/datum/element/door_pryer, pry_time = 5 SECONDS, interaction_key = REGALRAT_INTERACTION)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(\
 		/datum/component/ghost_direct_control,\
 		poll_candidates = poll_ghosts,\
@@ -63,6 +69,7 @@
 		poll_ignore_key = POLL_IGNORE_REGAL_RAT,\
 		assumed_control_message = "You are an independent, invasive force on the station! Hoard coins, trash, cheese, and the like from the safety of darkness!",\
 		after_assumed_control = CALLBACK(src, PROC_REF(became_player_controlled)),\
+<<<<<<< HEAD
 		poll_chat_border_icon = /obj/item/food/cheese/wedge,\
 	)
 
@@ -78,6 +85,17 @@
 	if(!QDELETED(potential_component))
 		qdel(potential_component)
 	return ..()
+=======
+	)
+
+	var/datum/action/cooldown/mob_cooldown/domain/domain = new(src)
+	domain.Grant(src)
+	ai_controller.set_blackboard_key(BB_DOMAIN_ABILITY, domain)
+
+	var/datum/action/cooldown/mob_cooldown/riot/riot = new(src)
+	riot.Grant(src)
+	ai_controller.set_blackboard_key(BB_RAISE_HORDE_ABILITY, riot)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/regal_rat/examine(mob/user)
 	. = ..()
@@ -110,8 +128,14 @@
 	notify_ghosts(
 		"All rise for [name], ascendant to the throne in \the [get_area(src)].",
 		source = src,
+<<<<<<< HEAD
 		header = "Sentient Rat Created",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
+=======
+		action = NOTIFY_ORBIT,
+		flashwindow = FALSE,
+		header = "Sentient Rat Created",
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /// Supplementary work we do when we login. Done this way so we synchronize with the ai controller shutting off and all that jazz as well as allowing more shit to be passed in if need be in future.
@@ -181,7 +205,11 @@
 	if(isnull(mind))
 		return
 
+<<<<<<< HEAD
 	if(!combat_mode)
+=======
+	if(!(istate &ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		INVOKE_ASYNC(src, PROC_REF(poison_target), target)
 		return COMPONENT_HOSTILE_NO_ATTACK
 

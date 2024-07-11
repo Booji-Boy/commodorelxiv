@@ -32,8 +32,15 @@ GLOBAL_REAL(logger, /datum/log_holder)
 
 GENERAL_PROTECT_DATUM(/datum/log_holder)
 
+<<<<<<< HEAD
 ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds logs.", ADMIN_CATEGORY_MAIN)
 	logger.ui_interact(user.mob)
+=======
+/client/proc/log_viewer_new()
+	set name = "View Round Logs"
+	set category = "Admin.Logging"
+	logger.ui_interact(mob)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/log_holder/ui_interact(mob/user, datum/tgui/ui)
 	if(!check_rights_for(user.client, R_ADMIN))
@@ -109,6 +116,10 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 			cache_ui_data()
 			SStgui.update_uis(src)
 			return TRUE
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			stack_trace("unknown ui_act action [action] for [type]")
 
@@ -118,7 +129,7 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 		CRASH("Attempted to call init_logging twice!")
 
 	round_id = GLOB.round_id
-	logging_start_timestamp = rustg_unix_timestamp()
+	logging_start_timestamp = unix_timestamp_string()
 	log_categories = list()
 	disabled_categories = list()
 
@@ -275,10 +286,20 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	category_instance.category_header = category_header
 	init_category_file(category_instance, category_header)
 
+<<<<<<< HEAD
 /datum/log_holder/proc/human_readable_timestamp(precision = 3)
 	var/start = time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")
 	// now we grab the millis from the rustg timestamp
 	var/rustg_stamp = rustg_unix_timestamp()
+=======
+/datum/log_holder/proc/unix_timestamp_string() // pending change to rust-g
+	return RUSTG_CALL(RUST_G, "unix_timestamp")()
+
+/datum/log_holder/proc/human_readable_timestamp(precision = 3)
+	var/start = time2text(world.timeofday, "YYYY-MM-DD hh:mm:ss")
+	// now we grab the millis from the rustg timestamp
+	var/rustg_stamp = unix_timestamp_string()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/timestamp = splittext(rustg_stamp, ".")
 #ifdef UNIT_TESTS
 	if(length(timestamp) != 2)
@@ -293,8 +314,15 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 /// Adds an entry to the given category, if the category is disabled it will not be logged.
 /// If the category does not exist, we will CRASH and log to the error category.
 /// the data list is optional and will be recursively json serialized.
+<<<<<<< HEAD
 /datum/log_holder/proc/Log(category, message, list/data)
 	// This is Log because log is a byond internal proc
+=======
+/datum/log_holder/proc/Log(category, message, list/data, severity = "info")
+	// This is Log because log is a byond internal proc
+	if(shutdown)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// do not include the message because these go into the runtime log and we might be secret!
 	if(!istext(message))
@@ -325,7 +353,11 @@ ADMIN_VERB(log_viewer_new, R_ADMIN|R_DEBUG, "View Round Logs", "View the rounds 
 	if(length(data))
 		semver_store = list()
 		data = recursive_jsonify(data, semver_store)
+<<<<<<< HEAD
 	log_category.create_entry(message, data, semver_store)
+=======
+	log_category.create_entry(message, data, semver_store, severity)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Recursively converts an associative list of datums into their jsonified(list) form
 /datum/log_holder/proc/recursive_jsonify(list/data_list, list/semvers)

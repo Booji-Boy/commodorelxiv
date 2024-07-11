@@ -19,8 +19,13 @@
 
 	// Lighting system to better communicate the directions.
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_range = 4
 	light_power = 1.5
+=======
+	light_outer_range = 4
+	light_power = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_RED
 
 /obj/machinery/doppler_array/Initialize(mapload)

@@ -489,7 +489,11 @@
 	id = "controller_shell"
 	build_path = /obj/item/controller
 	build_type = COMPONENT_PRINTER
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*3.5)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 7000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
 	)
@@ -500,7 +504,11 @@
 	id = "scanner_shell"
 	build_path = /obj/item/wiremod_scanner
 	build_type = COMPONENT_PRINTER
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*3.5)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 7000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
 	)
@@ -510,7 +518,11 @@
 	desc = "A handheld shell that allows the user to input a string"
 	id = "keyboard_shell"
 	build_path = /obj/item/keyboard_shell
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*5)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 10000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_type = COMPONENT_PRINTER
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
@@ -522,7 +534,11 @@
 	id = "gun_shell"
 	build_path = /obj/item/gun/energy/wiremod_gun
 	build_type = COMPONENT_PRINTER
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/plasma =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 10000, /datum/material/plasma =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
 	)
@@ -533,7 +549,11 @@
 	id = "bot_shell"
 	build_path = /obj/item/shell/bot
 	build_type = COMPONENT_PRINTER
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*5)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 10000)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
 	)
@@ -544,7 +564,11 @@
 	id = "money_bot_shell"
 	build_path = /obj/item/shell/money_bot
 	build_type = COMPONENT_PRINTER
+<<<<<<< HEAD
 	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/gold =SMALL_MATERIAL_AMOUNT*0.5)
+=======
+	materials = list(/datum/material/glass =SHEET_MATERIAL_AMOUNT, /datum/material/iron = 10000, /datum/material/gold =SMALL_MATERIAL_AMOUNT*0.5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_CIRCUITRY + RND_SUBCATEGORY_CIRCUITRY_SHELLS
 	)
@@ -557,7 +581,11 @@
 	build_type = COMPONENT_PRINTER
 	materials = list(
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT,
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*5.5,
+=======
+		/datum/material/iron = 11000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/gold =SMALL_MATERIAL_AMOUNT*5,
 	)
 	category = list(
@@ -570,7 +598,11 @@
 	id = "server_shell"
 	materials = list(
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*7.5,
+=======
+		/datum/material/iron = 15000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/material/gold =HALF_SHEET_MATERIAL_AMOUNT * 1.5,
 	)
 	build_path = /obj/item/shell/server
@@ -585,7 +617,11 @@
 	id = "door_shell"
 	materials = list(
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*7.5,
+=======
+		/datum/material/iron = 15000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	build_path = /obj/item/shell/airlock
 	build_type = COMPONENT_PRINTER
@@ -599,7 +635,11 @@
 	id = "dispenser_shell"
 	materials = list(
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5,
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*7.5,
+=======
+		/datum/material/iron = 15000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	build_path = /obj/item/shell/dispenser
 	build_type = COMPONENT_PRINTER
@@ -613,7 +653,11 @@
 	id = "bci_shell"
 	materials = list(
 		/datum/material/glass =SHEET_MATERIAL_AMOUNT,
+<<<<<<< HEAD
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT*4,
+=======
+		/datum/material/iron = 8000,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	build_path = /obj/item/shell/bci
 	build_type = COMPONENT_PRINTER

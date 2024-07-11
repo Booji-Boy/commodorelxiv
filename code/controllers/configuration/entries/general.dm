@@ -100,6 +100,8 @@
 /// log virology data
 /datum/config_entry/flag/log_virus
 
+/datum/config_entry/flag/log_cloning
+
 /// log assets
 /datum/config_entry/flag/log_asset
 
@@ -731,6 +733,7 @@
 /datum/config_entry/flag/config_errors_runtime
 	default = FALSE
 
+<<<<<<< HEAD
 /datum/config_entry/number/upload_limit
 	default = 524288
 	min_val = 0
@@ -738,3 +741,13 @@
 /datum/config_entry/number/upload_limit_admin
 	default = 5242880
 	min_val = 0
+=======
+/datum/config_entry/flag/minimum_account_age
+	default = FALSE
+
+/datum/config_entry/number/minimum_age
+	default = 7
+
+/datum/config_entry/flag/vpn_kick
+	default = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

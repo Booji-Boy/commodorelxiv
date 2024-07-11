@@ -14,6 +14,22 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 	program_icon = "address-book"
 
 	var/change_position_cooldown = 30
+<<<<<<< HEAD
+=======
+	///Jobs blacklisted from having their slots edited.
+	var/static/list/blacklisted = list(
+		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_HEAD_OF_SECURITY,
+		JOB_RESEARCH_DIRECTOR,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_QUARTERMASTER,
+		JOB_AI,
+		JOB_CYBORG,
+		JOB_ASSISTANT,
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//The scaling factor of max total positions in relation to the total amount of people on board the station in %
 	var/max_relative_positions = 30 //30%: Seems reasonable, limit of 6 @ 20 players
@@ -53,8 +69,12 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 	return FALSE
 
 
+<<<<<<< HEAD
 /datum/computer_file/program/job_management/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/job_management/ui_act(action, params, datum/tgui/ui)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/card/id/user_id = computer.computer_id_slot
 	if(!user_id || !(ACCESS_CHANGE_IDS in user_id.access))
 		return TRUE

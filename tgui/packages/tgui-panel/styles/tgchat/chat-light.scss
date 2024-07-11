@@ -312,6 +312,11 @@ em {
   font-weight: bold;
 }
 
+.modchat {
+  color: #e236d8;
+  font-weight: bold;
+}
+
 .name {
   font-weight: bold;
 }
@@ -404,6 +409,10 @@ em {
 
 .yellowteamradio {
   color: #d1ba22 !important;
+}
+
+.radioradio {
+  color: #ffc0cb !important;
 }
 
 .yell {
@@ -736,6 +745,7 @@ h2.alert {
   font-size: 185%;
 }
 
+<<<<<<< HEAD
 .spiderbreacher {
   color: #804b02;
   font-weight: bold;
@@ -744,6 +754,10 @@ h2.alert {
 
 .spiderscout {
   color: #0c0674;
+=======
+.spiderscout {
+  color: #1b10cd;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   font-weight: bold;
   font-size: 120%;
 }
@@ -1091,6 +1105,7 @@ $border-width-px: $border-width * 1px;
   flex-direction: column;
 }
 
+<<<<<<< HEAD
 .ooc_alert {
   background: #bdc8ff;
   border: 1px solid #002eb8;
@@ -1109,6 +1124,8 @@ $border-width-px: $border-width * 1px;
   flex-direction: column;
 }
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 @each $color-name, $color-value in $alert-stripe-colors {
   .chat_alert_#{$color-name} {
     color: #ffffff;
@@ -1160,3 +1177,107 @@ $border-width-px: $border-width * 1px;
     );
   }
 }
+<<<<<<< HEAD
+=======
+
+// MONKESTATION ADDITION START PR#45 - Clock cult
+.brass {
+  color: #be8700;
+}
+
+.big_brass {
+  color: #be8700;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.clockyellow {
+  color: #daaa18;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.clockgray {
+  color: #42474d;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.clockred {
+  color: #6e001a;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.ratvar {
+  color: #be8700;
+  font-size: 48px;
+  font-weight: bold;
+  font-style: italic;
+  animation: ratvarcolor 5000ms infinite;
+}
+
+@keyframes ratvarcolor {
+  0% {
+    color: #0d0d0d;
+  }
+  9% {
+    color: #be8700;
+  }
+  18% {
+    color: #0d0d0d;
+  }
+  27% {
+    color: #42474d;
+  }
+  36% {
+    color: #0d0d0d;
+  }
+  45% {
+    color: #af0aaf;
+  }
+  54% {
+    color: #0d0d0d;
+  }
+  63% {
+    color: #1e8ce1;
+  }
+  72% {
+    color: #0d0d0d;
+  }
+  81% {
+    color: #daaa18;
+  }
+  90% {
+    color: #0d0d0d;
+  }
+  100% {
+    color: #6e001a;
+  }
+}
+// MONKESTATION ADDITION END PR#45 - Clock cult
+
+// MONKESTATION
+
+.honk {
+  color: #ff69bf;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.looc {
+  color: #2e57d1;
+  font-weight: bold;
+}
+
+.death_message {
+  display: block;
+  color: white;
+  text-align: center;
+  background-color: black;
+  border: 2px solid rgb(240, 62, 225);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px 20px;
+}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -95,7 +95,12 @@ const Contents = (properties) => {
               })
             }
           >
+<<<<<<< HEAD
             <Image
+=======
+            <Box
+              as="img"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               src={item.sprite + '.png'}
               verticalAlign="middle"
               ml="-6px"

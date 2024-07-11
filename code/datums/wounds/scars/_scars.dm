@@ -30,7 +30,11 @@
 	/// If false, we will only check to see if a limb has ALL our biostates, instead of just any.
 	var/check_any_biostates
 
+<<<<<<< HEAD
 /datum/scar/Destroy(force)
+=======
+/datum/scar/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(limb)
 		LAZYREMOVE(limb.scars, src)
 	if(victim)
@@ -81,10 +85,14 @@
 		qdel(src)
 		return
 
+<<<<<<< HEAD
 	description = pick_list(scar_file, scar_keyword)
 	if (!description)
 		stack_trace("no valid description found for scar! file: [scar_file] keyword: [scar_keyword] wound: [W.type]")
 		description = "general disfigurement"
+=======
+	description = pick_list(W.get_scar_file(BP, add_to_scars), W.get_scar_keyword(BP, add_to_scars)) || "general disfigurement"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	precise_location = pick_list_replacements(SCAR_LOC_FILE, limb.body_zone)
 	switch(W.severity)

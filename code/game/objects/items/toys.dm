@@ -454,14 +454,19 @@
 		return
 	var/obj/item/bodypart/chest/CH = user.get_bodypart(BODY_ZONE_CHEST)
 	if(CH.cavity_item) // if he's (un)bright enough to have a round and full belly...
+<<<<<<< HEAD
 		user.visible_message(span_danger("[user] regurgitates [src]!")) // I swear i dont have a fetish
 		user.vomit(VOMIT_CATEGORY_BLOOD, lost_nutrition = 100, distance = 0)
+=======
+		user.visible_message(span_danger("[user] regurgitates [src]!"))
+		user.vomit(100, TRUE, distance = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.adjustOxyLoss(120)
 		user.dropItemToGround(src) // incase the crit state doesn't drop the singulo to the floor
 		user.set_suicide(FALSE)
 		return
 	user.transferItemToLoc(src, user, TRUE)
-	CH.cavity_item = src // The mother came inside and found Andy, dead with a HUGE belly full of toys
+	CH.cavity_item = src
 	user.adjustOxyLoss(200) // You know how most small toys in the EU have that 3+ onion head icon and a warning that says "Unsuitable for children under 3 years of age due to small parts - choking hazard"? This is why.
 	user.death(FALSE)
 	user.ghostize(FALSE)
@@ -772,7 +777,7 @@
 
 /obj/item/dualsaber/toy/impale(mob/living/user)//Stops Toy Dualsabers from injuring clowns
 	to_chat(user, span_warning("You twirl around a bit before losing your balance and impaling yourself on [src]."))
-	user.adjustStaminaLoss(25)
+	user.stamina.adjust(-25)
 
 /obj/item/toy/katana
 	name = "replica katana"

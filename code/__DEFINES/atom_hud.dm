@@ -48,6 +48,15 @@
 /// Steady Hacked APC effect, visible only to Malf AIs
 #define MALF_APC_HUD "23"
 
+//monkestation edit start
+#define NANITE_HUD "23"
+#define DIAG_NANITE_FULL_HUD "24"
+// for gun permit
+#define PERMIT_HUD "25"
+// for implants to let you see sensor field
+#define SENSOR_HUD	"26"
+//monkestation edit end
+
 //by default everything in the hud_list of an atom is an image
 //a value in hud_list with one of these will change that behavior
 #define HUD_LIST_LIST 1
@@ -64,7 +73,17 @@
 #define DATA_HUD_SENTIENT_DISEASE 8
 #define DATA_HUD_AI_DETECT 9
 #define DATA_HUD_FAN 10
+<<<<<<< HEAD
 #define DATA_HUD_MALF_APC 11
+=======
+#define DATA_HUD_PERMIT 11 //monkestation edit
+#define DATA_HUD_SENSORS 12 //monkestation edit
+
+// Notification action types
+#define NOTIFY_JUMP "jump"
+#define NOTIFY_PLAY "play"
+#define NOTIFY_ORBIT "orbit"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// cooldown for being shown the images for any particular data hud
 #define ADD_HUD_TO_COOLDOWN 20
@@ -83,7 +102,11 @@
 #define SECHUD_BARTENDER "hudbartender"
 #define SECHUD_BITRUNNER "hudbitrunner"
 #define SECHUD_BOTANIST "hudbotanist"
+<<<<<<< HEAD
 #define SECHUD_BRIDGE_ASSISTANT "hudbridgeassistant"
+=======
+#define SECHUD_BRIG_PHYSICIAN "hudbrigphysician"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define SECHUD_CAPTAIN "hudcaptain"
 #define SECHUD_CARGO_TECHNICIAN "hudcargotechnician"
 #define SECHUD_CHAPLAIN "hudchaplain"

@@ -256,7 +256,11 @@ const PaiOptions = (props) => {
           mt={1}
           onClick={() => act('reset_software')}
         >
+<<<<<<< HEAD
           Reset Software
+=======
+          Malicious Software Detected
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Button>
       )}
     </Section>

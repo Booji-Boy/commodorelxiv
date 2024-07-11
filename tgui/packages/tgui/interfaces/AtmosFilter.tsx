@@ -1,9 +1,15 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 
 import { useBackend } from '../backend';
 import { Button, LabeledList, NumberInput, Section } from '../components';
 import { getGasLabel } from '../constants';
 import { Window } from '../layouts';
+=======
+import { Window } from '../layouts';
+import { useBackend } from '../backend';
+import { getGasLabel } from '../constants';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Data = {
   filter_types: Filter[];

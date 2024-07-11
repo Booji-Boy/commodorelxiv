@@ -39,11 +39,14 @@
 	/// Should we stop the current living movement attempt
 	#define COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
 
+<<<<<<< HEAD
 /// From base of /client/Move(), invoked when a non-living mob is attempting to move: (list/move_args)
 #define COMSIG_MOB_CLIENT_PRE_NON_LIVING_MOVE "mob_client_move_possessed_object"
 	/// Cancels the move attempt
 	#define COMSIG_MOB_CLIENT_BLOCK_PRE_NON_LIVING_MOVE COMPONENT_MOVABLE_BLOCK_PRE_MOVE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// From base of /client/Move(): (new_loc, direction)
 #define COMSIG_MOB_CLIENT_PRE_MOVE "mob_client_pre_move"
 	/// Should always match COMPONENT_MOVABLE_BLOCK_PRE_MOVE as these are interchangeable and used to block movement.
@@ -54,6 +57,8 @@
 	#define MOVE_ARG_DIRECTION 2
 /// From base of /client/Move(): (direction, old_dir)
 #define COMSIG_MOB_CLIENT_MOVED "mob_client_moved"
+/// From base of /client/Move(): but sent to the client over mob
+#define COMSIG_MOB_CLIENT_MOVED_CLIENT_SEND "client_moved"
 /// From base of /client/proc/change_view() (mob/source, new_size)
 #define COMSIG_MOB_CLIENT_CHANGE_VIEW "mob_client_change_view"
 /// From base of /mob/proc/reset_perspective() : ()
@@ -104,7 +109,11 @@
 /// allows you to add multiplicative damage modifiers to the damage mods argument to adjust incoming damage
 /// not sent if the apply damage call was forced
 #define COMSIG_MOB_APPLY_DAMAGE_MODIFIERS "mob_apply_damage_modifiers"
+<<<<<<< HEAD
 /// from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus, sharpness, attack_direction, attacking_item)
+=======
+///from base of /mob/living/proc/apply_damage(): (damage, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus, sharpness, attack_direction)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define COMSIG_MOB_APPLY_DAMAGE "mob_apply_damage"
 /// from /mob/living/proc/apply_damage(): (damage, damagetype, def_zone, blocked, wound_bonus, bare_wound_bonus, sharpness, attack_direction, attacking_item)
 /// works like above but after the damage is actually inflicted
@@ -219,7 +228,10 @@
 	#define DEVIATION_OVERRIDE_NONE (1<<2)
 	/// Return to stop the flash entirely
 	#define STOP_FLASH (1<<3)
+<<<<<<< HEAD
 /// from /obj/item/assembly/flash/flash_carbon, to the mob flashing another carbon
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// (mob/living/carbon/flashed, obj/item/assembly/flash/flash, deviation (from code/__DEFINES/mobs.dm))
 #define COMSIG_MOB_SUCCESSFUL_FLASHED_CARBON "mob_success_flashed_carbon"
 
@@ -234,6 +246,7 @@
 /// from mob/proc/dropItemToGround()
 #define COMSIG_MOB_DROPPING_ITEM "mob_dropping_item"
 
+<<<<<<< HEAD
 /// from /mob/proc/change_mob_type() : ()
 #define COMSIG_PRE_MOB_CHANGED_TYPE "mob_changed_type"
 	#define COMPONENT_BLOCK_MOB_CHANGE (1<<0)
@@ -243,5 +256,10 @@
 /// from /mob/proc/slip(): (knockdown_amonut, obj/slipped_on, lube_flags [mobs.dm], paralyze, force_drop)
 #define COMSIG_MOB_SLIPPED "mob_slipped"
 
+=======
+/// from /mob/proc/change_mob_type_unchecked() : ()
+#define COMSIG_MOB_CHANGED_TYPE "mob_changed_type"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// from /mob/proc/key_down(): (key, client/client, full_key)
 #define COMSIG_MOB_KEYDOWN "mob_key_down"

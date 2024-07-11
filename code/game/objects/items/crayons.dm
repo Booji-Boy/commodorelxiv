@@ -95,7 +95,6 @@
 	*/
 	var/static/list/graffiti = list(
 		"amyjon",
-		"antilizard",
 		"body",
 		"cyka",
 		"dwarf",
@@ -189,10 +188,15 @@
 	)
 	/// List of selectable large options
 	var/static/list/graffiti_large_h = list(
+<<<<<<< HEAD
 		"furrypride" = CRAYON_COST_LARGE,
 		"paint" = CRAYON_COST_LARGE,
 		"secborg" = CRAYON_COST_LARGE,
 		"yiffhell" = CRAYON_COST_LARGE,
+=======
+		"paint",
+		"secborg"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	/// Combined lists
 	var/static/list/all_drawables = graffiti + symbols + drawings + oriented + runes + graffiti_large_h
@@ -818,11 +822,20 @@
 
 /obj/item/toy/crayon/spraycan/examine(mob/user)
 	. = ..()
+<<<<<<< HEAD
 	if(charges != INFINITE_CHARGES)
 		if(charges_left)
 			. += "It's roughly [PERCENT(charges_left/charges)]% full."
 		else
 			. += "It is empty."
+=======
+	if(charges_left)
+		. += "It has [charges_left] use\s left."
+	else
+		. += "It is empty."
+	if(!has_cap) // MONKESTATION ADDITION: SPRAYCAN GUN (monkestation/code/game/objects/items/spraycan_gun.dm)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. += span_notice("Alt-click [src] to [ is_capped ? "take the cap off" : "put the cap on"]. Right-click a colored object to match its existing color.")
 
 /obj/item/toy/crayon/spraycan/use_on(atom/target, mob/user, list/modifiers)

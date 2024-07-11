@@ -81,7 +81,7 @@ Charged extracts:
 	effect_desc = "Creates a hypercharged slime cell battery, which has high capacity but takes longer to recharge."
 
 /obj/item/slimecross/charged/yellow/do_effect(mob/user)
-	new /obj/item/stock_parts/cell/high/slime_hypercharged(get_turf(user))
+	new /obj/item/stock_parts/cell/emproof/slime/hypercharged(user.drop_location()) // monke edit: make hypercharged slime cells EMP-proof, by changing their parent from cell/high to cell/emproof
 	user.visible_message(span_notice("[src] sparks violently, and swells with electric power!"))
 	..()
 
@@ -183,8 +183,13 @@ Charged extracts:
 	..()
 
 /obj/item/slimecross/charged/pink
+<<<<<<< HEAD
 	colour = SLIME_TYPE_PINK
 	effect_desc = "Produces a... lovepotion... no ERP."
+=======
+	colour = "pink"
+	effect_desc = "Produces a... lovepotion..."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/slimecross/charged/pink/do_effect(mob/user)
 	new /obj/item/slimepotion/lovepotion(get_turf(user))
@@ -278,6 +283,11 @@ Charged extracts:
 /obj/item/slimecross/charged/rainbow/do_effect(mob/user)
 	user.visible_message(span_warning("[src] swells and splits into three new slimes!"))
 	for(var/i in 1 to 3)
+<<<<<<< HEAD
 		var/mob/living/basic/slime/new_slime = new (get_turf(user))
 		new_slime.random_colour()
+=======
+		var/mob/living/basic/slime/S = new(get_turf(user))
+		S.start_mutating(TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()

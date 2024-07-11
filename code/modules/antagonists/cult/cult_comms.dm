@@ -107,6 +107,7 @@
 /datum/action/innate/cult/mastervote/Activate()
 	var/choice = tgui_alert(owner, "The mantle of leadership is heavy. Success in this role requires an expert level of communication and experience. Are you sure?",, list("Yes", "No"))
 	if(choice == "Yes" && IsAvailable())
+<<<<<<< HEAD
 		var/datum/antagonist/cult/mind_cult_datum = owner.mind.has_antag_datum(/datum/antagonist/cult)
 		start_poll_cultists_for_leader(owner, mind_cult_datum.cult_team)
 
@@ -127,6 +128,11 @@
 
 	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(poll_cultists_for_leader), nominee, team), 10 SECONDS)
 
+=======
+		var/datum/antagonist/cult/cult_antag = owner.mind.has_antag_datum(/datum/antagonist/cult, TRUE)
+		poll_cultists_for_leader(owner, cult_antag.cult_team)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Polls all Cultists on whether the person putting themselves forward should be made the Cult Leader, if they can actually be such.
 /proc/poll_cultists_for_leader(mob/living/nominee, datum/team/cult/team)
 	if(QDELETED(nominee) || nominee.incapacitated())
@@ -137,7 +143,11 @@
 			team_member.current.update_mob_action_buttons()
 			if(team_member.current.incapacitated())
 				continue
+<<<<<<< HEAD
 			to_chat(team_member.current,span_cult_large("[nominee] has died in the process of attempting to start a vote!"))
+=======
+			to_chat(team_member.current,span_cultlarge("[nominee] has died in the process of attempting to start a vote!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	var/list/mob/living/asked_cultists = list()
 	for(var/datum/mind/team_member as anything in team.members)
@@ -150,7 +160,11 @@
 		question = "[span_notice(nominee.name)] seeks to lead your cult, do you support [nominee.p_them()]?",
 		poll_time = 30 SECONDS,
 		group = asked_cultists,
+<<<<<<< HEAD
 		alert_pic = nominee,
+=======
+		pic_source = nominee,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		role_name_text = "cult master nomination",
 		custom_response_messages = list(
 			POLL_RESPONSE_SIGNUP = "You have pledged your allegience to [nominee].",
@@ -158,7 +172,10 @@
 			POLL_RESPONSE_NOT_SIGNED = "You aren't nominated for this.",
 			POLL_RESPONSE_TOO_LATE_TO_UNREGISTER = "It's too late to unregister yourself, voting has already begun!",
 			POLL_RESPONSE_UNREGISTERED = "You have been removed your pledge to [nominee].",
+<<<<<<< HEAD
 		chat_text_border_icon = mutable_appearance('icons/effects/effects.dmi', "cult_master_logo")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 	)
 	if(QDELETED(nominee) || nominee.incapacitated())
@@ -169,7 +186,11 @@
 			team_member.current.update_mob_action_buttons()
 			if(team_member.current.incapacitated())
 				continue
+<<<<<<< HEAD
 			to_chat(team_member.current,span_cult_large("[nominee] has died in the process of attempting to win the cult's support!"))
+=======
+			to_chat(team_member.current,span_cultlarge("[nominee] has died in the process of attempting to win the cult's support!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(!nominee.mind)
 		team.cult_vote_called = FALSE
@@ -179,7 +200,11 @@
 			team_member.current.update_mob_action_buttons()
 			if(team_member.current.incapacitated())
 				continue
+<<<<<<< HEAD
 			to_chat(team_member.current,span_cult_large("[nominee] has gone catatonic in the process of attempting to win the cult's support!"))
+=======
+			to_chat(team_member.current,span_cultlarge("[nominee] has gone catatonic in the process of attempting to win the cult's support!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(LAZYLEN(yes_voters) <= LAZYLEN(asked_cultists) * 0.5)
 		team.cult_vote_called = FALSE
@@ -189,6 +214,7 @@
 			team_member.current.update_mob_action_buttons()
 			if(team_member.current.incapacitated())
 				continue
+<<<<<<< HEAD
 			to_chat(team_member.current, span_cult_large("[nominee] could not win the cult's support and shall continue to serve as an acolyte."))
 		return FALSE
 
@@ -196,6 +222,17 @@
 	var/datum/antagonist/cult/cult_datum = nominee.mind.has_antag_datum(/datum/antagonist/cult)
 	if(!cult_datum.make_cult_leader())
 		CRASH("[cult_datum.owner.current] was supposed to turn into the leader, but they didn't for some reason. This isn't supposed to happen unless an Admin messed with it.")
+=======
+			to_chat(team_member.current, span_cultlarge("[nominee] could not win the cult's support and shall continue to serve as an acolyte."))
+		return FALSE
+
+	team.cult_vote_called = FALSE
+	team.cult_master = nominee
+	var/datum/antagonist/cult/cultist = nominee.mind.has_antag_datum(/datum/antagonist/cult)
+	cultist?.silent = TRUE
+	cultist?.on_removal()
+	nominee.mind.add_antag_datum(/datum/antagonist/cult/master)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /datum/action/innate/cult/master/IsAvailable(feedback = FALSE)

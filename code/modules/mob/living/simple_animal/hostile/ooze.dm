@@ -22,7 +22,7 @@
 	attack_verb_continuous = "slimes"
 	attack_verb_simple = "slime"
 	attack_sound = 'sound/effects/blobattack.ogg'
-	combat_mode = TRUE
+	istate = ISTATE_HARM|ISTATE_BLOCKING
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	mob_size = MOB_SIZE_LARGE
 	initial_language_holder = /datum/language_holder/slime
@@ -208,7 +208,16 @@
 ///Register for owner death
 /datum/action/consume/New(Target)
 	. = ..()
+<<<<<<< HEAD
 	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(stop_consuming))
+=======
+	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_owner_death))
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(handle_mob_deletion))
+
+/datum/action/consume/proc/handle_mob_deletion()
+	SIGNAL_HANDLER
+	stop_consuming() //Shit out the vored mob before u go go
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Try to consume the pulled mob
 /datum/action/consume/Trigger(trigger_flags)
@@ -236,7 +245,11 @@
 /datum/action/consume/proc/start_consuming(mob/living/target)
 	vored_mob = target
 	vored_mob.forceMove(owner) ///AAAAAAAAAAAAAAAAAAAAAAHHH!!!
+<<<<<<< HEAD
 	RegisterSignal(vored_mob, COMSIG_QDELETING, PROC_REF(stop_consuming))
+=======
+	RegisterSignal(vored_mob, COMSIG_QDELETING, PROC_REF(handle_mob_deletion))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	playsound(owner,'sound/items/eatfood.ogg', rand(30,50), TRUE)
 	owner.visible_message(span_warning("[src] devours [target]!"), span_notice("You devour [target]."))
 	START_PROCESSING(SSprocessing, src)

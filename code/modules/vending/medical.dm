@@ -17,7 +17,10 @@
 		/obj/item/stack/medical/ointment = 2,
 		/obj/item/stack/medical/suture = 2,
 		/obj/item/stack/medical/bone_gel = 4,
+<<<<<<< HEAD
 		/obj/item/cane/crutch = 2,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/cane/white = 2,
 		/obj/item/clothing/glasses/eyepatch/medical = 2,
 		/obj/item/storage/box/bandages = 2,
@@ -63,10 +66,17 @@
 		/obj/item/stack/medical/ointment = 0,
 		/obj/item/stack/medical/suture = 1,
 		/obj/item/stack/medical/bone_gel = 1,
+<<<<<<< HEAD
 		/obj/item/cane/crutch = 2,
 		/obj/item/cane/white = 2,
 		/obj/item/clothing/glasses/eyepatch/medical = 2,
 	)
+=======
+		/obj/item/cane/white = 2,
+		/obj/item/clothing/glasses/eyepatch/medical = 2,
+	)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Created out of a necessity to get these dumb chems out of the medical tools vendor.
 /obj/machinery/vending/drugs
 	name = "\improper NanoDrug Plus"

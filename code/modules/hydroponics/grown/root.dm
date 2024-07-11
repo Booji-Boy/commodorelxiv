@@ -8,12 +8,17 @@
 	product = /obj/item/food/grown/carrot
 	maturation = 10
 	production = 1
-	yield = 5
-	instability = 15
+	yield = 50
 	growthstages = 3
+<<<<<<< HEAD
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
 	mutatelist = list(/obj/item/seeds/carrot/parsnip)
 	reagents_add = list(/datum/reagent/medicine/oculine = 0.1, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05)
+=======
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+	possible_mutations = list(/datum/hydroponics/plant_mutation/parsnip)
+	reagents_add = list(/datum/reagent/medicine/oculine = 0.25, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.05)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/grown/carrot
 	seed = /obj/item/seeds/carrot
@@ -50,7 +55,7 @@
 	plantname = "Parsnip"
 	product = /obj/item/food/grown/parsnip
 	icon_dead = "carrot-dead"
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.05, /datum/reagent/consumable/nutriment = 0.05, /datum/reagent/aluminium = 0.05)
 
 /obj/item/food/grown/parsnip
@@ -73,11 +78,16 @@
 	product = /obj/item/food/grown/whitebeet
 	lifespan = 60
 	endurance = 50
+<<<<<<< HEAD
 	yield = 6
 	instability = 10
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
+=======
+	yield = 60
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_dead = "whitebeet-dead"
-	mutatelist = list(/obj/item/seeds/redbeet)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/redbeet)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/sugar = 0.2, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/food/grown/whitebeet
@@ -99,9 +109,14 @@
 	product = /obj/item/food/grown/redbeet
 	lifespan = 60
 	endurance = 50
+<<<<<<< HEAD
 	yield = 5
 	instability = 15
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
+=======
+	yield = 50
+	growing_icon = 'icons/obj/hydroponics/growing_vegetables.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_dead = "whitebeet-dead"
 	genes = list(/datum/plant_gene/trait/maxchem)
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.05, /datum/reagent/consumable/nutriment = 0.05)

@@ -8,6 +8,10 @@
 	var/max_children = 3
 
 /datum/ai_behavior/find_partner/perform(seconds_per_tick, datum/ai_controller/controller, target_key, partner_types_key, child_types_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	max_children = controller.blackboard[BB_MAX_CHILDREN] || max_children
 	var/mob/pawn_mob = controller.pawn
 	var/list/partner_types = controller.blackboard[partner_types_key]
@@ -17,6 +21,7 @@
 	var/children = 0
 	for(var/mob/living/other in oview(range, pawn_mob))
 		if(!pawn_mob.faction_check_atom(other))
+<<<<<<< HEAD
 			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 		if(children >= max_children)
@@ -40,6 +45,34 @@
 			return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+			finish_action(controller, FALSE)
+			return
+
+		if(children >= max_children)
+			finish_action(controller, FALSE)
+			return
+
+		if(other.stat != CONSCIOUS) //Check if it's conscious FIRST.
+			continue
+
+		if(is_type_in_list(other, child_types)) //Check for children SECOND.
+			children++
+			continue
+
+		if(!is_type_in_list(other, partner_types) || !HAS_TRAIT(other, TRAIT_MOB_BREEDER))
+			continue
+
+		if(other.ckey)
+			continue
+
+		if(other.gender != living_pawn.gender && !(other.flags_1 & HOLOGRAM_1)) //Better safe than sorry ;_;
+			controller.set_blackboard_key(target_key, other)
+			finish_action(controller, TRUE)
+
+	finish_action(controller, FALSE)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Reproduce.
@@ -55,6 +88,7 @@
 	set_movement_target(controller, target)
 
 /datum/ai_behavior/make_babies/perform(seconds_per_tick, datum/ai_controller/controller, target_key, child_types_key)
+<<<<<<< HEAD
 	var/mob/target = controller.blackboard[target_key]
 	if(QDELETED(target) || target.stat != CONSCIOUS)
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
@@ -62,6 +96,18 @@
 	living_pawn.set_combat_mode(FALSE)
 	living_pawn.melee_attack(target)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+	var/mob/target = controller.blackboard[target_key]
+	if(QDELETED(target) || target.stat != CONSCIOUS)
+		finish_action(controller, FALSE, target_key)
+		return
+	var/mob/living/basic/living_pawn = controller.pawn
+	//living_pawn.set_combat_mode(FALSE)
+	living_pawn.istate &= ~ISTATE_HARM
+	living_pawn.melee_attack(target)
+	finish_action(controller, TRUE, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/make_babies/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()
@@ -71,4 +117,8 @@
 	var/mob/living/living_pawn = controller.pawn
 	if(QDELETED(living_pawn)) // pawn can be null at this point
 		return
+<<<<<<< HEAD
 	living_pawn.set_combat_mode(initial(living_pawn.combat_mode))
+=======
+	living_pawn.istate = initial(living_pawn.istate)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

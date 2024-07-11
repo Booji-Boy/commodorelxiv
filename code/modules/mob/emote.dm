@@ -81,6 +81,15 @@
 	if(.)
 		user.SpinAnimation(FLIP_EMOTE_DURATION,1)
 
+	if(isliving(user) && intentional)
+		var/mob/living/L = user
+		if(iscarbon(L))
+			var/mob/living/carbon/hat_loser = user
+			if(hat_loser.head)
+				var/obj/item/clothing/head/worn_headwear = hat_loser.head
+				if(worn_headwear.contents.len)
+					worn_headwear.throw_hats(rand(2,3), get_turf(hat_loser), hat_loser)
+
 /datum/emote/flip/check_cooldown(mob/user, intentional)
 	. = ..()
 	if(.)
@@ -306,6 +315,14 @@
 	. = ..()
 	if(.)
 		user.spin(20, 1)
+		if(isliving(user) && intentional)
+			var/mob/living/L = user
+			if(iscarbon(L))
+				var/mob/living/carbon/hat_loser = user
+				if(hat_loser.head)
+					var/obj/item/clothing/head/worn_headwear = hat_loser.head
+					if(worn_headwear.contents.len)
+						worn_headwear.throw_hats(rand(1,2), get_turf(hat_loser), hat_loser)
 
 /datum/emote/spin/check_cooldown(mob/living/carbon/user, intentional)
 	. = ..()

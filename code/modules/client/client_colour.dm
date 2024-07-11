@@ -238,10 +238,13 @@
 	override = TRUE
 	colour = list(0.8,0,0,0, 0,0,0,0, 0,0,1,0, 0,0,0,1, 0,0,0,0)
 
+<<<<<<< HEAD
 /datum/client_colour/manual_heart_blood
 	priority = PRIORITY_ABSOLUTE
 	colour = COLOR_RED
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/client_colour/temp
 	priority = PRIORITY_HIGH
 

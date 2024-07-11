@@ -148,8 +148,13 @@ SUBSYSTEM_DEF(dynamic)
 	/// What is the higher bound of when the roundstart annoucement is sent out?
 	var/waittime_h = 1800
 
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic.dm
 	/// A number between 0 and 100. The maximum amount of threat allowed to generate.
 	var/max_threat_level = 100
+=======
+	/// Maximum amount of threat allowed to generate.
+	var/max_threat_level = 0 //disables dynamic threat PLEASE DONT LET ME MERGE THIS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic.dm
 
 	/// The extra chance multiplier that a heavy impact midround ruleset will run next time.
 	/// For example, if this is set to 50, then the next heavy roll will be about 50% more likely to happen.
@@ -164,7 +169,7 @@ SUBSYSTEM_DEF(dynamic)
 	/// If there are less than this many players readied, threat level will be lowered.
 	/// This number should be kept fairly low, as there are other measures that population
 	/// impacts Dynamic, such as the requirements variable on rulesets.
-	var/low_pop_player_threshold = 20
+	var/low_pop_player_threshold = 25
 
 	/// The maximum threat that can roll with *zero* players.
 	/// As the number of players approaches `low_pop_player_threshold`, the maximum
@@ -426,7 +431,25 @@ SUBSYSTEM_DEF(dynamic)
 
 	return advisory_string
 
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic.dm
 /datum/controller/subsystem/dynamic/proc/show_threatlog(mob/admin)
+=======
+	generate_station_goals(greenshift)
+	. += generate_station_goal_report()
+	. += generate_station_trait_report()
+	if(length(SScommunications.command_report_footnotes))
+		. += generate_report_footnote()
+
+	print_command_report(., "[command_name()] Status Summary", announce=FALSE)
+	if(greenshift)
+		priority_announce("Thanks to the tireless efforts of our security and intelligence divisions, there are currently no credible threats to [station_name()]. All station construction projects have been authorized. Have a secure shift!", "Security Report", SSstation.announcer.get_rand_report_sound(), color_override = "green")
+	else
+		if(SSsecurity_level.get_current_level_as_number() < SEC_LEVEL_BLUE)
+			SSsecurity_level.set_level(SEC_LEVEL_BLUE, announce = FALSE)
+		priority_announce("[SSsecurity_level.current_security_level.elevating_to_announcement]\n\nA summary has been copied and printed to all communications consoles.", "Security level elevated.", ANNOUNCER_INTERCEPT, color_override = SSsecurity_level.current_security_level.announcement_color)
+
+/datum/game_mode/dynamic/proc/show_threatlog(mob/admin)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic.dm
 	if(!SSticker.HasRoundStarted())
 		tgui_alert(usr, "The round hasn't started yet!")
 		return

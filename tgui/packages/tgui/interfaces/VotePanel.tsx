@@ -1,5 +1,19 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 
+=======
+import {
+  Box,
+  Icon,
+  Stack,
+  Button,
+  Section,
+  NoticeBox,
+  LabeledList,
+  Collapsible,
+} from '../components';
+import { Window } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../backend';
 import {
   Box,
@@ -30,6 +44,7 @@ type Vote = {
 type Option = {
   name: string;
   votes: number;
+  desc: string;
 };
 
 type ActiveVote = {
@@ -65,8 +80,13 @@ type Data = {
 };
 
 export const VotePanel = (props) => {
+<<<<<<< HEAD
   const { act, data } = useBackend<Data>();
   const { currentVote, user, LastVoteTime, VoteCD } = data;
+=======
+  const { data } = useBackend<Data>();
+  const { currentVote, user } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   /**
    * Adds the voting type to title if there is an ongoing vote.
@@ -130,7 +150,11 @@ const VoteOptionDimmer = (props) => {
  */
 const VoteOptions = (props) => {
   const { act, data } = useBackend<Data>();
+<<<<<<< HEAD
   const { possibleVotes, user, LastVoteTime, VoteCD } = data;
+=======
+  const { possibleVotes, user } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Stack.Item>
@@ -203,11 +227,19 @@ const VotersList = (props) => {
   return (
     <Stack.Item>
       <Collapsible
+<<<<<<< HEAD
         title={`View Active Voters${
           data.voting.length ? ` (${data.voting.length})` : ''
         }`}
       >
         <Section height={4} fill scrollable>
+=======
+        title={`View Voters${
+          data.voting.length ? `: ${data.voting.length}` : ''
+        }`}
+      >
+        <Section height={8} fill scrollable>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           {data.voting.map((voter) => {
             return <Box key={voter}>{voter}</Box>;
           })}
@@ -242,6 +274,7 @@ const ChoicesPanel = (props) => {
                   textAlign="right"
                   buttons={
                     <Button
+                      tooltip={choice.desc}
                       disabled={user.singleSelection === choice.name}
                       onClick={() => {
                         act('voteSingle', { voteOption: choice.name });
@@ -283,6 +316,7 @@ const ChoicesPanel = (props) => {
                   textAlign="right"
                   buttons={
                     <Button
+                      tooltip={choice.desc}
                       onClick={() => {
                         act('voteMulti', { voteOption: choice.name });
                       }}
@@ -325,6 +359,7 @@ const TimePanel = (props) => {
             {currentVote?.timeRemaining || 0}s
           </Box>
           {!!user.isLowerAdmin && (
+<<<<<<< HEAD
             <Stack>
               <Stack.Item>
                 <Button
@@ -345,6 +380,15 @@ const TimePanel = (props) => {
                 </Button>
               </Stack.Item>
             </Stack>
+=======
+            <Button
+              color="red"
+              disabled={!user.isLowerAdmin || !currentVote}
+              onClick={() => act('cancel')}
+            >
+              Cancel Vote
+            </Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           )}
         </Stack>
       </Section>

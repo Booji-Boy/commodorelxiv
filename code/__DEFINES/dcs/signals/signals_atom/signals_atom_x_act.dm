@@ -45,6 +45,7 @@
 ///from obj/machinery/bsa/full/proc/fire(): ()
 #define COMSIG_ATOM_BSA_BEAM "atom_bsa_beam_pass"
 	#define COMSIG_ATOM_BLOCKS_BSA_BEAM (1<<0)
+<<<<<<< HEAD
 
 /// Sent from [atom/proc/item_interaction], when this atom is left-clicked on by a mob with an item
 /// Sent from the very beginning of the click chain, intended for generic atom-item interactions
@@ -71,11 +72,17 @@
 /// Sent from [atom/proc/item_interaction], when this atom is left-clicked on by a mob with a tool of a specific tool type
 /// Args: (mob/living/user, obj/item/tool, list/recipes)
 /// Return any ITEM_INTERACT_ flags as relevant (see tools.dm)
+=======
+/// from base of atom/Exited(): (mob/user, obj/item/extrapolator/E, scan = TRUE)
+#define COMSIG_ATOM_EXTRAPOLATOR_ACT "atom_extrapolator_act"
+///for any tool behaviors: (mob/living/user, obj/item/I, list/recipes)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define COMSIG_ATOM_TOOL_ACT(tooltype) "tool_act_[tooltype]"
 /// Sent from [atom/proc/item_interaction], when this atom is right-clicked on by a mob with a tool of a specific tool type
 /// Args: (mob/living/user, obj/item/tool)
 /// Return any ITEM_INTERACT_ flags as relevant (see tools.dm)
 #define COMSIG_ATOM_SECONDARY_TOOL_ACT(tooltype) "tool_secondary_act_[tooltype]"
+<<<<<<< HEAD
 
 /// Sent from [atom/proc/ranged_item_interaction], when this atom is left-clicked on by a mob with an item while not adjacent
 #define COMSIG_ATOM_RANGED_ITEM_INTERACTION "atom_ranged_item_interaction"
@@ -93,3 +100,8 @@
 /// Args: (obj/item/inserting, mob/living/user)
 #define COMSIG_ATOM_STORAGE_ITEM_INTERACT_INSERT "atom_storage_item_interact_insert"
 	#define BLOCK_STORAGE_INSERT (1<<0)
+=======
+	// We have the same returns here as COMSIG_ATOM_TOOL_ACT
+	// #define COMPONENT_BLOCK_TOOL_ATTACK (1<<0)
+#define COMSIG_ATOM_DOOR_OPEN "atom_door_open"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -2,6 +2,7 @@ import { filter, sortBy } from 'common/collections';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   Icon,
@@ -12,6 +13,17 @@ import {
   Tabs,
 } from 'tgui/components';
 
+=======
+  Stack,
+  Input,
+  Section,
+  Tabs,
+  NoticeBox,
+  Box,
+  Icon,
+  Button,
+} from 'tgui/components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { JOB2ICON } from '../common/JobToIcon';
 import { CRIMESTATUS2COLOR } from './constants';
 import { isRecordMatch } from './helpers';
@@ -26,7 +38,11 @@ export const SecurityRecordTabs = (props) => {
     ? 'No records found.'
     : 'No match. Refine your search.';
 
+<<<<<<< HEAD
   const [search, setSearch] = useState('');
+=======
+  const [search, setSearch] = useLocalState('search', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const sorted = sortBy(
     filter(records, (record) => isRecordMatch(record, search)),
@@ -66,15 +82,6 @@ export const SecurityRecordTabs = (props) => {
               Create
             </Button>
           </Stack.Item>
-          <Stack.Item>
-            <Button.Confirm
-              content="Purge"
-              disabled={!higher_access || !station_z}
-              icon="trash"
-              onClick={() => act('purge_records')}
-              tooltip="Wipe criminal record data."
-            />
-          </Stack.Item>
         </Stack>
       </Stack.Item>
     </Stack>
@@ -110,8 +117,13 @@ const CrewTab = (props: { record: SecurityRecord }) => {
       onClick={() => selectRecord(record)}
       selected={isSelected}
     >
+<<<<<<< HEAD
       <Box bold={isSelected} color={CRIMESTATUS2COLOR[wanted_status]}>
         <Icon name={JOB2ICON[trim] || 'question'} /> {name}
+=======
+      <Box bold={isSelected} color={CRIMESTATUS2COLOR[wanted_status]} wrap>
+        <Icon name={JOB2ICON[rank] || 'question'} /> {name}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </Box>
     </Tabs.Tab>
   );

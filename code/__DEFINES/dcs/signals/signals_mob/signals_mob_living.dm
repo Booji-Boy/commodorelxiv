@@ -78,6 +78,11 @@
 #define COMSIG_LIVING_ADJUST_OXY_DAMAGE "living_adjust_oxy_damage"
 /// Send when toxloss is modified (type, amount, forced)
 #define COMSIG_LIVING_ADJUST_TOX_DAMAGE "living_adjust_tox_damage"
+<<<<<<< HEAD
+=======
+/// Send when cloneloss is modified (type, amount, forced)
+#define COMSIG_LIVING_ADJUST_CLONE_DAMAGE "living_adjust_clone_damage"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Send when staminaloss is modified (type, amount, forced)
 #define COMSIG_LIVING_ADJUST_STAMINA_DAMAGE "living_adjust_stamina_damage"
 
@@ -85,6 +90,10 @@
 #define COMSIG_LIVING_ADJUST_STANDARD_DAMAGE_TYPES list(\
 	COMSIG_LIVING_ADJUST_BRUTE_DAMAGE,\
 	COMSIG_LIVING_ADJUST_BURN_DAMAGE,\
+<<<<<<< HEAD
+=======
+	COMSIG_LIVING_ADJUST_CLONE_DAMAGE,\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	COMSIG_LIVING_ADJUST_OXY_DAMAGE,\
 	COMSIG_LIVING_ADJUST_TOX_DAMAGE,\
 )
@@ -113,6 +122,8 @@
 
 ///from base of mob/living/Stun() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_STUN "living_stun"
+///from mob/living/carbon/enter_stamina_stun()
+#define COMSIG_LIVING_STAMINA_STUN "carbon_stamina_stun"
 ///from base of mob/living/Knockdown() (amount, ignore_canstun)
 #define COMSIG_LIVING_STATUS_KNOCKDOWN "living_knockdown"
 ///from base of mob/living/Paralyze() (amount, ignore_canstun)
@@ -139,19 +150,26 @@
 #define COMSIG_LIVING_SLAM_TABLE "living_slam_table"
 ///from /obj/item/hand_item/slapper/attack(): (source=mob/living/slapper, mob/living/slapped)
 #define COMSIG_LIVING_SLAP_MOB "living_slap_mob"
+<<<<<<< HEAD
 /// from /mob/living/*/UnarmedAttack(), before sending [COMSIG_LIVING_UNARMED_ATTACK]: (mob/living/source, atom/target, proximity, modifiers)
 /// The only reason this exists is so hulk can fire before Fists of the North Star.
 /// Note that this is called before [/mob/living/proc/can_unarmed_attack] is called, so be wary of that.
 #define COMSIG_LIVING_EARLY_UNARMED_ATTACK "human_pre_attack_hand"
 /// from mob/living/*/UnarmedAttack(): (mob/living/source, atom/target, proximity, modifiers)
+=======
+///(NOT on humans) from mob/living/*/UnarmedAttack(): (mob/living/source, atom/target, proximity, modifiers)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define COMSIG_LIVING_UNARMED_ATTACK "living_unarmed_attack"
 ///From base of mob/living/MobBump(): (mob/bumped, mob/living/bumper)
 #define COMSIG_LIVING_PRE_MOB_BUMP "movable_pre_bump"
 	#define COMPONENT_LIVING_BLOCK_PRE_MOB_BUMP (1<<0)
 ///From base of mob/living/MobBump() (mob/living)
 #define COMSIG_LIVING_MOB_BUMP "living_mob_bump"
+<<<<<<< HEAD
 ///From base of mob/living/MobBump() (mob/living)
 #define COMSIG_LIVING_MOB_BUMPED "living_mob_bumped"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///From base of mob/living/Bump() (turf/closed)
 #define COMSIG_LIVING_WALL_BUMP "living_wall_bump"
 ///From base of turf/closed/Exited() (turf/closed)
@@ -238,6 +256,7 @@
 /// From /datum/ai/behavior/climb_tree/perform() : (mob/living/basic/living_pawn)
 #define COMSIG_LIVING_CLIMB_TREE "living_climb_tree"
 
+<<<<<<< HEAD
 ///from /mob/living/proc/check_block(): (atom/hit_by, damage, attack_text, attack_type, armour_penetration, damage_type)
 #define COMSIG_LIVING_CHECK_BLOCK "living_check_block"
 	#define SUCCESSFUL_BLOCK (1<<0)
@@ -251,12 +270,15 @@
 #define COMSIG_LIVING_DISARM_COLLIDE "living_disarm_collision"
 	#define COMSIG_LIVING_SHOVE_HANDLED (1<<0)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Sent on a mob from /datum/component/mob_chain when component is attached with it as the "front" : (mob/living/basic/tail)
 #define COMSIG_MOB_GAINED_CHAIN_TAIL "living_gained_chain_tail"
 /// Sent on a mob from /datum/component/mob_chain when component is detached from it as the "front" : (mob/living/basic/tail)
 #define COMSIG_MOB_LOST_CHAIN_TAIL "living_detached_chain_tail"
 /// Sent from a 'contract chain' button on a mob chain
 #define COMSIG_MOB_CHAIN_CONTRACT "living_chain_contracted"
+<<<<<<< HEAD
 
 /// Sent from `obj/item/reagent_containers/pill/on_consumption`: (obj/item/reagent_containers/pill/pill, mob/feeder)
 #define COMSIG_LIVING_PILL_CONSUMED "living_pill_consumed"
@@ -284,3 +306,5 @@
 #define COMSIG_MOB_HAPPINESS_CHANGE "happiness_change"
 /// From /obj/item/melee/baton/baton_effect(): (datum/source, mob/living/user, /obj/item/melee/baton)
 #define COMSIG_MOB_BATONED "mob_batoned"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -15,7 +15,11 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = WEIGHT_CLASS_NORMAL
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 50)
+=======
+	custom_materials = list(/datum/material/iron=SHEET_MATERIAL_AMOUNT*50)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	req_access = list(ACCESS_ENGINE_EQUIP)
 	armor_type = /datum/armor/item_construction
 	resistance_flags = FIRE_PROOF
@@ -318,6 +322,7 @@
 	upgrade = RCD_UPGRADE_SIMPLE_CIRCUITS
 
 /obj/item/rcd_upgrade/anti_interrupt
+<<<<<<< HEAD
 	name = "RCD advanced upgrade: anti disruption"
 	desc = "It contains the upgrades necessary to prevent interruption of RCD construction and deconstruction."
 	icon_state = "datadisk2"
@@ -327,6 +332,13 @@
 	name = "RCD advanced upgrade: enhanced cooling"
 	desc = "It contains the upgrades necessary to allow more frequent use of the RCD."
 	icon_state = "datadisk7"
+=======
+	desc = "It contains the upgrades necessary to prevent interruption of RCD construction and deconstruction."
+	upgrade = RCD_UPGRADE_ANTI_INTERRUPT
+
+/obj/item/rcd_upgrade/cooling
+	desc = "It contains the upgrades necessary to allow more frequent use of the RCD."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	upgrade = RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN
 
 /obj/item/rcd_upgrade/silo_link

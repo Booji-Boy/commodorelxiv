@@ -17,7 +17,11 @@ endmap
 
 map birdshot
 	#default
+<<<<<<< HEAD
 	maxplayers 66
+=======
+	minplayers 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	votable
 endmap
 
@@ -26,6 +30,14 @@ map deltastation
 	votable
 endmap
 
+<<<<<<< HEAD
+=======
+map kilostation
+	maxplayers 40
+	votable
+endmap
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 map icebox
 	minplayers 25
 	votable
@@ -42,6 +54,7 @@ map northstar
 	votable
 endmap
 
+<<<<<<< HEAD
 map tramstation
 	minplayers 35
 	votable
@@ -55,10 +68,24 @@ endmap
 # Debug-only maps.
 
 map gateway_test
+=======
+map runtimestation
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 endmap
 
 map multiz_debug
 endmap
 
+<<<<<<< HEAD
 map runtimestation
+=======
+map boxstation
+	minplayers 25
+	votable
+endmap
+
+map blueshift
+	minplayers 75
+	votable
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 endmap

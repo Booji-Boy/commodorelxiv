@@ -10,7 +10,11 @@
 		var/obj/item/bodypart/affecting = get_bodypart(check_zone(def_zone))
 		if(affecting)
 			return check_armor(affecting, type)
+<<<<<<< HEAD
 		//If a specific bodypart is targeted, check how that bodypart is protected and return the value.
+=======
+		//If a specific bodypart is targetted, check how that bodypart is protected and return the value.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//If you don't specify a bodypart, it checks ALL your bodyparts for protection, and averages out the values
 	for(var/X in bodyparts)
@@ -32,18 +36,22 @@
 	return 100 - protection
 
 ///Get all the clothing on a specific body part
+<<<<<<< HEAD
 /mob/living/carbon/human/proc/get_clothing_on_part(obj/item/bodypart/def_zone)
+=======
+/mob/living/carbon/human/proc/get_clothing_on_part(def_zone)
+	if(istype(def_zone, /obj/item/bodypart))
+		var/obj/item/bodypart/def_bodypart = def_zone
+		def_zone = def_bodypart.body_part
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/covering_part = list()
 	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, back, gloves, shoes, belt, s_store, glasses, ears, wear_id, wear_neck) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor)
-	for(var/bp in body_parts)
-		if(!bp)
-			continue
-		if(bp && istype(bp , /obj/item/clothing))
-			var/obj/item/clothing/C = bp
-			if(C.body_parts_covered & def_zone.body_part)
-				covering_part += C
+	for(var/obj/item/clothing/worn in body_parts)
+		if(worn.body_parts_covered & def_zone)
+			covering_part += worn
 	return covering_part
 
+<<<<<<< HEAD
 /mob/living/carbon/human/bullet_act(obj/projectile/bullet, def_zone, piercing_hit = FALSE)
 
 	if(bullet.firer == src && bullet.original == src) //can't block or reflect when shooting yourself
@@ -70,6 +78,44 @@
 
 	if(check_block(bullet, bullet.damage, "the [bullet.name]", PROJECTILE_ATTACK, bullet.armour_penetration, bullet.damage_type))
 		bullet.on_hit(src, 100, def_zone, piercing_hit)
+=======
+/mob/living/carbon/human/bullet_act(obj/projectile/P, def_zone, piercing_hit = FALSE)
+
+	if(P.firer == src && P.original == src) //can't block or reflect when shooting yourself
+		return ..()
+
+	if(P.reflectable & REFLECT_NORMAL)
+		if(check_reflect(def_zone)) // Checks if you've passed a reflection% check
+			visible_message(
+				span_danger("The [P.name] gets reflected by [src]!"),
+				span_userdanger("The [P.name] gets reflected by [src]!"),
+			)
+			// Find a turf near or on the original location to bounce to
+			if(!isturf(loc)) //Open canopy mech (ripley) check. if we're inside something and still got hit
+				P.force_hit = TRUE //The thing we're in passed the bullet to us. Pass it back, and tell it to take the damage.
+				loc.bullet_act(P, def_zone, piercing_hit)
+				return BULLET_ACT_HIT
+			if(P.starting)
+				var/new_x = P.starting.x + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+				var/new_y = P.starting.y + pick(0, 0, 0, 0, 0, -1, 1, -2, 2)
+				var/turf/curloc = get_turf(src)
+
+				// redirect the projectile
+				P.original = locate(new_x, new_y, P.z)
+				P.starting = curloc
+				P.firer = src
+				P.yo = new_y - curloc.y
+				P.xo = new_x - curloc.x
+				var/new_angle_s = P.Angle + rand(120,240)
+				while(new_angle_s > 180) // Translate to regular projectile degrees
+					new_angle_s -= 360
+				P.set_angle(new_angle_s)
+
+			return BULLET_ACT_FORCE_PIERCE // complete projectile permutation
+
+	if(check_shields(P, P.damage, "the [P.name]", PROJECTILE_ATTACK, P.armour_penetration, P.damage_type))
+		P.on_hit(src, 100, def_zone, piercing_hit)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return BULLET_ACT_HIT
 
 	return ..()
@@ -114,6 +160,33 @@
 		w_uniform.add_fingerprint(user)
 	..()
 
+<<<<<<< HEAD
+=======
+
+/mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user)
+	if(!I || !user)
+		return FALSE
+
+	var/obj/item/bodypart/affecting
+	if(user == src)
+		affecting = get_bodypart(check_zone(user.zone_selected)) //stabbing yourself always hits the right target
+	else
+		var/zone_hit_chance = 80
+		if(body_position == LYING_DOWN) // half as likely to hit a different zone if they're on the ground
+			zone_hit_chance += 10
+		affecting = get_bodypart(get_random_valid_zone(user.zone_selected, zone_hit_chance))
+	var/target_area = parse_zone(check_zone(user.zone_selected)) //our intended target
+
+	SEND_SIGNAL(I, COMSIG_ITEM_ATTACK_ZONE, src, user, affecting)
+	I.disease_contact(src, check_zone(user.zone_selected))
+	SSblackbox.record_feedback("nested tally", "item_used_for_combat", 1, list("[I.force]", "[initial(I.name)]"))
+	SSblackbox.record_feedback("tally", "zone_targeted", 1, target_area)
+
+	// the attacked_by code varies among species
+	return dna.species.spec_attacked_by(I, user, affecting, src)
+
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/attack_hulk(mob/living/carbon/human/user)
 	. = ..()
 	if(!.)
@@ -158,7 +231,15 @@
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
 
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK)) //Always drop item in hand, if no item, get stunned instead.
+=======
+	var/martial_result = user.apply_martial_art(src, modifiers)
+	if (martial_result != MARTIAL_ATTACK_INVALID)
+		return martial_result
+
+	if((user.istate & ISTATE_SECONDARY)) //Always drop item in hand, if no item, get stunned instead.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/obj/item/I = get_active_held_item()
 		if(I && !(I.item_flags & ABSTRACT) && dropItemToGround(I))
 			playsound(loc, 'sound/weapons/slash.ogg', 25, TRUE, -1)
@@ -181,7 +262,7 @@
 				to_chat(user, span_danger("You tackle [src] down!"))
 		return TRUE
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		..() //shaking
 		return FALSE
 
@@ -199,13 +280,19 @@
 			apply_damage(damage, BRUTE, affecting, run_armor_check(affecting, MELEE))
 		return TRUE
 
+/*
 /mob/living/carbon/human/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	. = ..()
 	if(!.)
 		return
 
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK)) //Always drop item in hand if there is one. If there's no item, shove the target. If the target is incapacitated, slam them into the ground to stun them.
 		var/obj/item/I = get_active_held_item()
+=======
+	if((user.istate & ISTATE_SECONDARY)) //Always drop item in hand, if no item, get stun instead. //monkestation edit: now deal stam damage and knockdown instead
+/*		var/obj/item/I = get_active_held_item()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(I && dropItemToGround(I))
 			playsound(loc, 'sound/weapons/slash.ogg', 25, TRUE, -1)
 			visible_message(span_danger("[user] disarms [src]!"), \
@@ -213,6 +300,7 @@
 			to_chat(user, span_danger("You disarm [src]!"))
 		else if(!HAS_TRAIT(src, TRAIT_INCAPACITATED))
 			playsound(loc, 'sound/weapons/pierce.ogg', 25, TRUE, -1)
+<<<<<<< HEAD
 			var/shovetarget = get_edge_target_turf(user, get_dir(user, get_step_away(src, user)))
 			adjustStaminaLoss(35)
 			throw_at(shovetarget, 4, 2, user, force = MOVE_FORCE_OVERPOWERING)
@@ -227,9 +315,23 @@
 							"<span class='userdanger'>[user] slams you into the ground!</span>", "<span class='hear'>You hear something slam loudly onto the floor!</span>", null, user)
 			to_chat(user, "<span class='danger'>You slam [src] into the floor beneath you!</span>")
 			log_combat(user, src, "slammed into the ground")
+=======
+			Paralyze(100)
+			log_combat(user, src, "tackled")
+			visible_message(span_danger("[user] tackles [src] down!"), \
+							span_userdanger("[user] tackles you down!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
+			to_chat(user, span_danger("You tackle [src] down!"))*/
+		playsound(loc, 'sound/weapons/pierce.ogg', 25, TRUE, -1) //monkestation edit start
+		Knockdown(2 SECONDS)
+		log_combat(user, src, "tackled")
+		visible_message(span_danger("[user] tackles [src] down!"), \
+						span_userdanger("[user] tackles you down!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), null, user)
+		to_chat(user, span_danger("You tackle [src] down!"))
+		stamina.adjust(-30) //monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		if (w_uniform)
 			w_uniform.add_fingerprint(user)
 		var/damage = prob(90) ? rand(user.melee_damage_lower, user.melee_damage_upper) : 0
@@ -250,7 +352,7 @@
 		if(!dismembering_strike(user, user.zone_selected)) //Dismemberment successful
 			return TRUE
 		apply_damage(damage, BRUTE, affecting, armor_block)
-
+*/
 
 
 
@@ -269,6 +371,24 @@
 		var/armor_block = run_armor_check(affecting, MELEE)
 		apply_damage(damage, BRUTE, affecting, armor_block)
 
+<<<<<<< HEAD
+=======
+/mob/living/carbon/human/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	. = ..()
+	if(!.)
+		return
+	var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
+	if(check_shields(user, damage, "the [user.name]", MELEE_ATTACK, user.armour_penetration))
+		return FALSE
+	var/dam_zone = dismembering_strike(user, pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+	if(!dam_zone) //Dismemberment successful
+		return TRUE
+	var/obj/item/bodypart/affecting = get_bodypart(get_random_valid_zone(dam_zone))
+	var/armor = run_armor_check(affecting, MELEE, armour_penetration = user.armour_penetration)
+	var/attack_direction = get_dir(user, src)
+	apply_damage(damage, user.melee_damage_type, affecting, armor, wound_bonus = user.wound_bonus, bare_wound_bonus = user.bare_wound_bonus, sharpness = user.sharpness, attack_direction = attack_direction)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/ex_act(severity, target, origin)
 	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
 		return FALSE
@@ -600,8 +720,8 @@
 		bleed_text += "!</span>"
 		combined_msg += bleed_text
 
-	if(getStaminaLoss())
-		if(getStaminaLoss() > 30)
+	if(stamina.loss)
+		if(stamina.loss > 30)
 			combined_msg += span_info("You're completely exhausted.")
 		else
 			combined_msg += span_info("You feel fatigued.")

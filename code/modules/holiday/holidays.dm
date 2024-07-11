@@ -380,6 +380,7 @@
 	name = "Summer Solstice"
 	begin_day = 21
 	begin_month = JUNE
+<<<<<<< HEAD
 	holiday_hat = /obj/item/clothing/head/costume/garland
 
 /datum/holiday/pride_week
@@ -400,6 +401,8 @@
 
 /datum/holiday/pride_week/getStationPrefix()
 	return pick("Pride","LGBTQIAPP++","Alphabet","Fudge Packer","Gaylord", "Faggot", "Rainbow", "Dyke", "Homo")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // JULY
 
@@ -500,6 +503,7 @@
 
 // AUGUST
 
+<<<<<<< HEAD
 /datum/holiday/ukraine
 	name = "Independence Day of Ukraine"
 	begin_month = AUGUST
@@ -509,6 +513,8 @@
 /datum/holiday/ukraine/getStationPrefix()
 	return pick("Kyiv", "Ukraine")
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // SEPTEMBER
 
 //Tiziran Unification Day is celebrated on Sept 1st, the day on which lizards were made a roundstart race
@@ -613,6 +619,7 @@
 /datum/holiday/vegan/getStationPrefix()
 	return pick("Tofu", "Tempeh", "Seitan", "Tofurkey")
 
+<<<<<<< HEAD
 /datum/holiday/october_revolution
 	name = "October Revolution"
 	begin_day = 6
@@ -626,6 +633,8 @@
 
 /datum/holiday/october_revolution/getStationPrefix()
 	return pick("Communist", "Soviet", "Bolshevik", "Socialist", "Red", "Workers'")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/holiday/remembrance_day
 	name = "Remembrance Day"
@@ -664,7 +673,7 @@
 	begin_month = NOVEMBER
 
 /datum/holiday/hello/greet()
-	return "[pick(list("Aloha", "Bonjour", "Hello", "Hi", "Greetings", "Salutations", "Bienvenidos", "Hola", "Howdy", "Ni hao", "Guten Tag", "Konnichiwa", "G'day cunt"))]! " + ..()
+	return "[pick(list("Aloha", "Bonjour", "Hello", "Hi", "Greetings", "Salutations", "Bienvenidos", "Hola", "Howdy", "Ni hao", "Guten Tag", "Konnichiwa", "G'day mate"))]! " + ..()
 
 //The Festival of Holy Lights is celebrated on Nov 28th, the date on which ethereals were merged (#40995)
 /datum/holiday/holy_lights
@@ -802,7 +811,7 @@
 	end_day = 3
 
 /datum/holiday/islamic/ramadan/getStationPrefix()
-	return pick("Haram","Halaal","Jihad","Muslim", "Al", "Mohammad", "Rashidun", "Umayyad", "Abbasid", "Abdul", "Fatimid", "Ayyubid", "Almohad", "Abu")
+	return pick("Haram","Halaal","Muslim", "Al", "Rashidun", "Umayyad", "Abbasid", "Abdul", "Fatimid", "Ayyubid", "Almohad", "Abu")
 
 /datum/holiday/islamic/ramadan/end
 	name = "End of Ramadan"

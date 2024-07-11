@@ -6,7 +6,10 @@
 	name = "Rat King's Domain"
 	desc = "Corrupts this area to be more suitable for your rat army."
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
+<<<<<<< HEAD
 	click_to_activate = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	cooldown_time = 6 SECONDS
 	melee_cooldown_time = 0 SECONDS
 	button_icon = 'icons/mob/actions/actions_animal.dmi'
@@ -15,6 +18,7 @@
 	button_icon_state = "coffer"
 	shared_cooldown = NONE
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/domain/IsAvailable(feedback = FALSE)
 	. = ..()
 	if (!.)
@@ -27,6 +31,10 @@
 /datum/action/cooldown/mob_cooldown/domain/proc/domain()
 	var/turf/location = get_turf(owner)
 	location.atmos_spawn_air("[GAS_MIASMA]=4;[TURF_TEMPERATURE(T20C)]")
+=======
+/datum/action/cooldown/mob_cooldown/domain/proc/domain()
+	var/turf/location = get_turf(owner)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch (rand(1,10))
 		if (8)
 			new /obj/effect/decal/cleanable/vomit(location)
@@ -51,7 +59,10 @@
 	name = "Raise Army"
 	desc = "Raise an army out of the hordes of mice and pests crawling around the maintenance shafts."
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_INCAPACITATED
+<<<<<<< HEAD
 	click_to_activate = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	button_icon = 'icons/mob/actions/actions_animal.dmi'
 	button_icon_state = "riot"
 	background_icon_state = "bg_clock"
@@ -78,6 +89,7 @@
 		/datum/pet_command/point_targeting/attack/glockroach
 	)
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/riot/IsAvailable(feedback = FALSE)
 	. = ..()
 	if (!.)
@@ -87,6 +99,8 @@
 			owner.balloon_alert(owner, "can't use while ventcrawling!")
 		return FALSE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/mob_cooldown/riot/Activate(atom/target)
 	StartCooldown(10 SECONDS)
 	riot()
@@ -127,7 +141,11 @@
 		to_chat(owner,span_warning("There's too many mice on this station to beckon a new one! Find them first!"))
 		return
 	new /mob/living/basic/mouse(owner.loc)
+<<<<<<< HEAD
 	owner.visible_message(span_warning("[owner] commands a mouse to their side!"))
+=======
+	owner.visible_message(span_warning("[owner] commands a rat to their side!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Makes a passed mob into our minion
 /datum/action/cooldown/mob_cooldown/riot/proc/make_minion(mob/living/new_minion, minion_desc, list/command_list = mouse_commands)
@@ -241,6 +259,7 @@
 	taste_description = "something funny"
 	overdose_threshold = 20
 
+<<<<<<< HEAD
 /datum/reagent/rat_spit/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 	if(HAS_TRAIT(affected_mob, TRAIT_AGEUSIA))
@@ -266,6 +285,33 @@
 		affected_mob.adjust_disgust(5)
 	else if(prob(5))
 		affected_mob.vomit(VOMIT_CATEGORY_DEFAULT)
+=======
+/datum/reagent/rat_spit/on_mob_metabolize(mob/living/L)
+	..()
+	if(HAS_TRAIT(L, TRAIT_AGEUSIA))
+		return
+	to_chat(L, span_notice("This food has a funny taste!"))
+
+/datum/reagent/rat_spit/overdose_start(mob/living/M)
+	..()
+	var/mob/living/carbon/victim = M
+	if (istype(victim) && !(FACTION_RAT in victim.faction))
+		to_chat(victim, span_userdanger("With this last sip, you feel your body convulsing horribly from the contents you've ingested. As you contemplate your actions, you sense an awakened kinship with rat-kind and their newly risen leader!"))
+		victim.faction |= FACTION_RAT
+		victim.vomit()
+	metabolization_rate = 10 * REAGENTS_METABOLISM
+
+/datum/reagent/rat_spit/on_mob_life(mob/living/carbon/C)
+	if(prob(15))
+		to_chat(C, span_notice("You feel queasy!"))
+		C.adjust_disgust(3)
+	else if(prob(10))
+		to_chat(C, span_warning("That food does not sit up well!"))
+		C.adjust_disgust(5)
+	else if(prob(5))
+		C.vomit()
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/pet_command/protect_owner/glockroach
 	protect_behavior = /datum/ai_behavior/basic_ranged_attack/glockroach

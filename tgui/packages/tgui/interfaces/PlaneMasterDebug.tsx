@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  InfinitePlane,
+  Stack,
+  Box,
+  Button,
+  Modal,
+  Dropdown,
+  Section,
+  LabeledList,
+  Tooltip,
+  Slider,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { sortBy } from 'common/collections';
 import { flow } from 'common/fp';
 import { classes, shallowDiffers } from 'common/react';
@@ -194,7 +210,11 @@ const addConnectionRefs = function (
 };
 
 // Takes a list of planes, uses the depth stack to position them
+<<<<<<< HEAD
 const positionPlanes = (connectSources: AssocConnected) => {
+=======
+const positionPlanes = function (connectSources: AssocConnected) {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { data } = useBackend<PlaneDebugData>();
   const { plane_info, relay_info, filter_connect, depth_stack } = data;
 
@@ -264,6 +284,7 @@ const positionPlanes = (connectSources: AssocConnected) => {
   // and get rid of the now unneeded parent refs
   const stack = depth_stack.map((layer) =>
     flow([
+<<<<<<< HEAD
       (planes) => sortBy(planes, (plane: string) => plane_info[plane].plane),
       (planes) =>
         sortBy(planes, (plane: string) => {
@@ -273,6 +294,16 @@ const positionPlanes = (connectSources: AssocConnected) => {
           }
           return read_from.plane;
         }),
+=======
+      sortBy((plane: string) => plane_info[plane].plane),
+      sortBy((plane: string) => {
+        const read_from = plane_info[layer[plane]];
+        if (!read_from) {
+          return 0;
+        }
+        return read_from.plane;
+      }),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     ])(Object.keys(layer)),
   );
 
@@ -407,7 +438,11 @@ export class PlaneMasterDebug extends Component {
       <Window width={1200} height={800} title={'Plane Debugging: ' + mob_name}>
         <Window.Content
           style={{
+<<<<<<< HEAD
             backgroundImage: 'none',
+=======
+            'background-image': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           <InfinitePlane
@@ -782,8 +817,23 @@ const PlaneWindow = (props) => {
           maxValue={255}
           step={1}
           stepPixelSize={1.9}
+<<<<<<< HEAD
           onDrag={setAlpha}
           onChange={setAlpha}
+=======
+          onDrag={(e, value) =>
+            act('set_alpha', {
+              edit: workingPlane.our_ref,
+              alpha: value,
+            })
+          }
+          onChange={(e, value) =>
+            act('set_alpha', {
+              edit: workingPlane.our_ref,
+              alpha: value,
+            })
+          }
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           Alpha ({workingPlane.alpha})
         </Slider>
@@ -850,7 +900,11 @@ const ToggleMirror = (props) => {
   );
 };
 
+<<<<<<< HEAD
 const has_foreign_mob = () => {
+=======
+const has_foreign_mob = function () {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { data } = useBackend<PlaneDebugData>();
   const { mob_ref, our_ref } = data;
   return mob_ref !== our_ref;

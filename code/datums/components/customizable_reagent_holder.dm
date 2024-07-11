@@ -24,6 +24,9 @@
 	var/ingredient_type
 	/// Adds screentips for all items that call on this proc, defaults to "Add"
 	var/screentip_verb
+	//monkestation edit
+	var/job_xp = 0
+	var/job
 
 /datum/component/customizable_reagent_holder/Initialize(
 		atom/replacement,
@@ -32,6 +35,8 @@
 		max_ingredients = MAX_ATOM_OVERLAYS - 3, // The cap is >= MAX_ATOM_OVERLAYS so we reserve 2 for top /bottom of item + 1 to stay under cap
 		list/obj/item/initial_ingredients = null,
 		screentip_verb = "Add",
+		job_xp = 0,
+		job
 )
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -47,6 +52,8 @@
 	src.max_ingredients = max_ingredients
 	src.ingredient_type = ingredient_type
 	src.screentip_verb = screentip_verb
+	src.job_xp = job_xp
+	src.job = job
 
 	if (initial_ingredients)
 		for (var/_ingredient in initial_ingredients)
@@ -65,7 +72,10 @@
 	. = ..()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(customizable_attack))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_ATOM_EXITED, PROC_REF(food_exited))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_ATOM_PROCESSED, PROC_REF(on_processed))
 	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
 	ADD_TRAIT(parent, TRAIT_CUSTOMIZABLE_REAGENT_HOLDER, REF(src))
@@ -76,7 +86,10 @@
 	UnregisterSignal(parent, list(
 		COMSIG_ATOM_ATTACKBY,
 		COMSIG_ATOM_EXAMINE,
+<<<<<<< HEAD
 		COMSIG_ATOM_EXITED,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		COMSIG_ATOM_PROCESSED,
 		COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM,
 	))
@@ -140,6 +153,11 @@
 		replacement_parent.TakeComponent(src)
 		handle_reagents(atom_parent)
 		qdel(atom_parent)
+
+	if(job && job_xp)
+		if(attacker.client?.prefs)
+			add_jobxp_chance_delayed_check(attacker.client, job_xp, job, 40, FALSE)
+
 	handle_reagents(ingredient)
 	add_ingredient(ingredient)
 	handle_fill(ingredient)

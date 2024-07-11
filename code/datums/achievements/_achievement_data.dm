@@ -113,7 +113,11 @@
 			"name" = award.name,
 			"desc" = award.desc,
 			"category" = award.category,
+<<<<<<< HEAD
 			"icon_class" = assets.icon_class_name("achievement-[award.icon_state]"),
+=======
+			"icon_class" = assets.icon_class_name(award.icon),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			"value" = data[achievement_type],
 			)
 		award_data += award.get_ui_data(user.ckey)

@@ -14,7 +14,12 @@ export const GamePreferenceWindow = (props: {
 }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
+<<<<<<< HEAD
   const [currentPage, setCurrentPage] = useState(
+=======
+  const [currentPage, setCurrentPage] = useLocalState(
+    'currentPage',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     props.startingPage ?? GamePreferencesSelectedPage.Settings,
   );
 

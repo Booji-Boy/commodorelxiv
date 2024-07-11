@@ -32,7 +32,10 @@
 	src.spawn_distance_exclude = spawn_distance_exclude
 
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(stop_spawning))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_VENT_WAVE_CONCLUDED, PROC_REF(stop_spawning))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	START_PROCESSING((spawn_time < 2 SECONDS ? SSfastprocess : SSprocessing), src)
 
 /datum/component/spawner/process()
@@ -95,6 +98,10 @@
 		spawner.visible_message(span_danger("A creature [spawn_text] [spawner]."))
 
 
+<<<<<<< HEAD
+=======
+	RegisterSignal(created, COMSIG_QDELETING, PROC_REF(on_deleted))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Remove weakrefs to atoms which have been killed or deleted without us picking it up somehow
 /datum/component/spawner/proc/validate_references()

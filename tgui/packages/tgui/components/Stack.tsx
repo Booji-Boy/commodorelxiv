@@ -5,7 +5,19 @@
  */
 
 import { classes } from 'common/react';
+<<<<<<< HEAD
 import { RefObject } from 'react';
+=======
+import { RefObject } from 'inferno';
+import {
+  computeFlexClassName,
+  computeFlexItemClassName,
+  computeFlexItemProps,
+  computeFlexProps,
+  FlexItemProps,
+  FlexProps,
+} from './Flex';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import {
   computeFlexClassName,

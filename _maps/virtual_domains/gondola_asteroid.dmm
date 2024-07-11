@@ -11,7 +11,11 @@
 "g" = (
 /obj/structure/marker_beacon{
 	light_color = "#FFE8AA";
+<<<<<<< HEAD
 	light_range = 20
+=======
+	light_outer_range = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	},
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
@@ -53,7 +57,11 @@
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "z" = (
+<<<<<<< HEAD
 /mob/living/basic/pet/gondola/virtual_domain,
+=======
+/mob/living/simple_animal/pet/gondola/virtual_domain,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "A" = (
@@ -97,9 +105,13 @@
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "O" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "shuttle_space"
 	},
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "Q" = (
@@ -110,10 +122,13 @@
 /obj/structure/flora/bush/sunny/style_random,
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "V" = (
 /obj/structure/flora/coconuts,
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/powered/virtual_domain)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "W" = (
 /obj/structure/flora/bush/ferny/style_random,
 /turf/open/floor/grass,
@@ -506,7 +521,11 @@ C
 C
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 C
 C
@@ -545,7 +564,11 @@ C
 W
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 C
 q
@@ -638,7 +661,11 @@ C
 g
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 z
 C
@@ -996,7 +1023,11 @@ h
 C
 C
 q
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 C
 C
@@ -1166,7 +1197,11 @@ h
 h
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 C
 C
@@ -1319,7 +1354,11 @@ C
 q
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 h
 h
@@ -1490,7 +1529,11 @@ C
 C
 C
 C
+<<<<<<< HEAD
 V
+=======
+C
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 C
 C
 C

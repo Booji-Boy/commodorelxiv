@@ -1,6 +1,9 @@
 /**
  * Automatically shoot at a target if they do anything while this is active on them.
+<<<<<<< HEAD
  * Currently not given to any mob, but retained so admins can use it.
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
  */
 /datum/action/cooldown/mob_cooldown/watcher_overwatch
 	name = "Overwatch"
@@ -45,7 +48,10 @@
 	living_owner.face_atom(target)
 	living_owner.Stun(overwatch_duration, ignore_canstun = TRUE)
 	target.apply_status_effect(/datum/status_effect/overwatch, overwatch_duration, owner, projectile_type, projectile_sound)
+<<<<<<< HEAD
 	owner.visible_message(span_warning("[owner]'s eye locks on to [target]!"))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	StartCooldown()
 	return TRUE
 

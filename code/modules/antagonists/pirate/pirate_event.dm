@@ -8,20 +8,30 @@
 	weight = 10
 	max_occurrences = 1
 	min_players = 20
-	dynamic_should_hijack = TRUE
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_INVASION
 	description = "The crew will either pay up, or face a pirate assault."
 	admin_setup = list(/datum/event_admin_setup/listed_options/pirates)
 	map_flags = EVENT_SPACE_ONLY
+<<<<<<< HEAD
 
 /datum/round_event_control/pirates/preRunEvent()
 	if (SSmapping.is_planetary())
 		return EVENT_CANT_RUN
 	return ..()
+=======
+	track = EVENT_TRACK_ROLESET
+	tags = list(TAG_COMBAT, TAG_COMMUNAL)
+	checks_antag_cap = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/round_event/pirates
 	///admin chosen pirate team
-	var/list/datum/pirate_gang/gang_list
+	var/list/datum/pirate_gang/gang_list = list(
+		/datum/pirate_gang/psykers,
+		/datum/pirate_gang/skeletons,
+		/datum/pirate_gang/rogues
+	)
 
 /datum/round_event/pirates/start()
 	send_pirate_threat(gang_list)
@@ -66,7 +76,11 @@
 	if(chosen_gang.paid_off)
 		return
 
+<<<<<<< HEAD
 	var/list/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a [span_notice("pirate crew of [chosen_gang.name]?")]", check_jobban = ROLE_TRAITOR, alert_pic = /obj/item/claymore/cutlass, role_name_text = "pirate crew")
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates("Do you wish to be considered for a pirate crew of [chosen_gang.name]?", check_jobban = ROLE_SPACE_PIRATE, pic_source = /obj/item/claymore/cutlass, role_name_text = "pirate crew")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	shuffle_inplace(candidates)
 
 	var/template_key = "pirate_[chosen_gang.ship_template_id]"
@@ -81,9 +95,15 @@
 	if(!ship.load(T))
 		CRASH("Loading pirate ship failed!")
 
+<<<<<<< HEAD
 	for(var/turf/area_turf as anything in ship.get_affected_turfs(T))
 		for(var/obj/effect/mob_spawn/ghost_role/human/pirate/spawner in area_turf)
 			if(candidates.len > 0)
+=======
+	for(var/turf/A in ship.get_affected_turfs(T))
+		for(var/obj/effect/mob_spawn/ghost_role/human/pirate/spawner in A)
+			if(length(candidates) > 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				var/mob/our_candidate = candidates[1]
 				var/mob/spawned_mob = spawner.create_from_ghost(our_candidate)
 				candidates -= our_candidate

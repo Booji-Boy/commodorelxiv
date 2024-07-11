@@ -15,7 +15,11 @@
 	light_color = COLOR_PAI_GREEN
 	light_flags = LIGHT_ATTACHED
 	light_on = FALSE
+<<<<<<< HEAD
 	light_range = 3
+=======
+	light_outer_range = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_system = OVERLAY_LIGHT
 	maxHealth = 500
 	mob_size = MOB_SIZE_TINY
@@ -119,9 +123,15 @@
 		"mouse" = TRUE,
 		"rabbit" = TRUE,
 		"repairbot" = TRUE,
+<<<<<<< HEAD
 		"kitten" = TRUE,
 		"puppy" = TRUE,
 		"spider" = TRUE,
+=======
+		"kitten" = FALSE,
+		"puppy" = FALSE,
+		"spider" = FALSE,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	/// List of all available card overlays.
 	var/static/list/possible_overlays = list(
@@ -195,9 +205,15 @@
 /mob/living/silicon/pai/Exited(atom/movable/gone, direction)
 	if(gone == atmos_analyzer)
 		atmos_analyzer = null
+<<<<<<< HEAD
 	else if(gone == aicamera)
 		aicamera = null
 	else if(gone == internal_gps)
+=======
+	if(deleting_atom == camera)
+		camera = null
+	if(deleting_atom == internal_gps)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		internal_gps = null
 	else if(gone == instrument)
 		instrument = null
@@ -241,7 +257,10 @@
 	RegisterSignal(src, COMSIG_LIVING_CULT_SACRIFICED, PROC_REF(on_cult_sacrificed))
 	RegisterSignals(src, list(COMSIG_LIVING_ADJUST_BRUTE_DAMAGE, COMSIG_LIVING_ADJUST_BURN_DAMAGE), PROC_REF(on_shell_damaged))
 	RegisterSignal(src, COMSIG_LIVING_ADJUST_STAMINA_DAMAGE, PROC_REF(on_shell_weakened))
+<<<<<<< HEAD
 	RegisterSignal(src, COMSIG_HIT_BY_SABOTEUR, PROC_REF(on_saboteur))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/silicon/pai/make_laws()
 	laws = new /datum/ai_laws/pai()
@@ -268,6 +287,7 @@
 	update_stat()
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
 
+<<<<<<< HEAD
 /mob/living/silicon/pai/update_desc(updates)
 	desc = "A hard-light holographic avatar representing a pAI. This one appears in the form of a [chassis]."
 	return ..()
@@ -277,6 +297,8 @@
 	held_state = "[chassis]"
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/silicon/pai/set_stat(new_stat)
 	. = ..()
 	update_stat()
@@ -474,13 +496,17 @@
 
 /// Updates the distance we can be from our pai card
 /mob/living/silicon/pai/proc/increment_range(increment_amount)
+<<<<<<< HEAD
 	if(emagged)
 		return
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/new_distance = leash.distance + increment_amount
 	if (new_distance < HOLOFORM_MIN_RANGE || new_distance > HOLOFORM_MAX_RANGE)
 		return
 	leash.set_distance(new_distance)
+<<<<<<< HEAD
 
 ///Gives the messenger ability to the pAI, creating a new one if it doesn't have one already.
 /mob/living/silicon/pai/proc/give_messenger_ability()
@@ -492,3 +518,5 @@
 /mob/living/silicon/pai/proc/remove_messenger_ability()
 	if(messenger_ability)
 		messenger_ability.Remove(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

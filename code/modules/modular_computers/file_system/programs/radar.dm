@@ -68,7 +68,10 @@
 	return data
 
 /datum/computer_file/program/radar/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("selecttarget")
 			var/selected_new_ref = params["ref"]
@@ -114,7 +117,7 @@
 	var/locx = (target_turf.x - here_turf.x) + 24
 	var/locy = (here_turf.y - target_turf.y) + 24
 
-	if(get_dist_euclidian(here_turf, target_turf) > 24)
+	if(get_dist_euclidean(here_turf, target_turf) > 24)
 		userot = TRUE
 		rot = round(get_angle(here_turf, target_turf))
 	else
@@ -208,7 +211,7 @@
 
 	var/here_turf = get_turf(computer)
 	var/target_turf = get_turf(signal)
-	var/trackdistance = get_dist_euclidian(here_turf, target_turf)
+	var/trackdistance = get_dist_euclidean(here_turf, target_turf)
 	switch(trackdistance)
 		if(0)
 			program_open_overlay = "[initial(program_open_overlay)]direct"
@@ -264,6 +267,7 @@
 		objects += list(crewinfo)
 
 /datum/computer_file/program/radar/lifeline/trackable(mob/living/carbon/human/humanoid)
+<<<<<<< HEAD
 	. = ..()
 	if(. != RADAR_TRACKABLE)
 		return .
@@ -275,6 +279,18 @@
 	if(!uniform.has_sensor || uniform.sensor_mode < SENSOR_COORDS) // Suit sensors must be on maximum
 		return RADAR_NOT_TRACKABLE
 	return .
+=======
+	if(!humanoid || !istype(humanoid))
+		return FALSE
+	if(..())
+		if (humanoid in GLOB.nanite_sensors_list)
+			return TRUE
+		if (istype(humanoid.w_uniform, /obj/item/clothing/under))
+			var/obj/item/clothing/under/uniform = humanoid.w_uniform
+			if(uniform.has_sensor && uniform.sensor_mode >= SENSOR_COORDS) // Suit sensors must be on maximum
+				return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Tracks all janitor equipment
 /datum/computer_file/program/radar/custodial_locator

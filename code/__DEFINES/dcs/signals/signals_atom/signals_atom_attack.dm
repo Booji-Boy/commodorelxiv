@@ -6,7 +6,11 @@
 #define COMSIG_ATOM_ATTACKBY "atom_attackby"
 /// From base of [atom/proc/attacby_secondary()]: (/obj/item/weapon, /mob/user, params)
 #define COMSIG_ATOM_ATTACKBY_SECONDARY "atom_attackby_secondary"
+<<<<<<< HEAD
 /// From [/item/attack()], sent by an atom which was just attacked by an item: (/obj/item/weapon, /mob/user, proximity_flag, click_parameters)
+=======
+///from [/item/afterattack()], sent by an atom which was just attacked by an item: (/obj/item/weapon, /mob/user, proximity_flag, click_parameters)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define COMSIG_ATOM_AFTER_ATTACKEDBY "atom_after_attackby"
 /// From base of [/atom/proc/attack_hand_secondary]: (mob/user, list/modifiers) - Called when the atom receives a secondary unarmed attack.
 #define COMSIG_ATOM_ATTACK_HAND_SECONDARY "atom_attack_hand_secondary"
@@ -53,6 +57,7 @@
 #define COMSIG_ATOM_ATTACK_ROBOT_SECONDARY "atom_attack_robot_secondary"
 ///from relay_attackers element: (atom/attacker, attack_flags)
 #define COMSIG_ATOM_WAS_ATTACKED "atom_was_attacked"
+<<<<<<< HEAD
 ///Called before a atom gets something tilted on them. If [COMPONENT_IMMUNE_TO_TILT_AND_CRUSH] is returned in a signal, the atom will be unaffected: (atom/target, atom/source)
 #define COMSIG_PRE_TILT_AND_CRUSH "atom_pre_tilt_and_crush"
 	#define COMPONENT_IMMUNE_TO_TILT_AND_CRUSH (1<<0)
@@ -60,6 +65,13 @@
 #define COMSIG_POST_TILT_AND_CRUSH "atom_post_tilt_and_crush"
 /// Called when an atom is splashed with something: (atom/source)
 #define COMSIG_ATOM_SPLASHED "atom_splashed"
+=======
+///Called before a atom gets something tilted on them. If [COMPONENT_IMMUNE_TO_TILT_AND_CRUSH] is returned in a signal, the atom will be unaffected.
+#define COMSIG_PRE_TILT_AND_CRUSH "atom_pre_tilt_and_crush"
+	#define COMPONENT_IMMUNE_TO_TILT_AND_CRUSH (1<<0)
+///Called when a atom gets something tilted on them
+#define COMSIG_POST_TILT_AND_CRUSH "atom_post_tilt_and_crush"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	///The damage type of the weapon projectile is non-lethal stamina
 	#define ATTACKER_STAMINA_ATTACK (1<<0)

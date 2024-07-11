@@ -249,6 +249,7 @@
 	cost = PAYCHECK_CREW
 	contains = list(/obj/item/bait_can/worm/premium)
 
+<<<<<<< HEAD
 /datum/supply_pack/goody/fish_feed
 	name = "Can of Fish Food Single-Pack"
 	desc = "For keeping your little friends fed and alive."
@@ -263,10 +264,15 @@
 
 /datum/supply_pack/goody/telescopic_fishing_rod
 	name = "Telescopic Fishing Rod Single-Pack"
+=======
+/datum/supply_pack/goody/telescopic_fishing_rod
+	name = "Telescopic Fishing Rod"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	desc = "A collapsible fishing rod that can fit within a backpack."
 	cost = PAYCHECK_CREW * 8
 	contains = list(/obj/item/fishing_rod/telescopic)
 
+<<<<<<< HEAD
 /datum/supply_pack/goody/fish_analyzer
 	name = "Fish Analyzer Single-Pack"
 	desc = "A single analyzer to monitor fish's status and traits with, in case you don't have the technology to print one."
@@ -279,6 +285,8 @@
 	cost = PAYCHECK_LOWER
 	contains = list(/obj/item/book/manual/fish_catalog)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/supply_pack/goody/coffee_mug
 	name = "Coffee Mug Single-Pack"
 	desc = "A bog standard coffee mug, for drinking coffee."

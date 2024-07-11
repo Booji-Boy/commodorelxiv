@@ -165,6 +165,26 @@
 	check_atmos_process(src, air, air.temperature)
 
 /**
+ * Run when you update the conditions in which an /atom might want to start reacting to its turf's air
+ */
+/atom/proc/atmos_conditions_changed()
+	return
+
+/atom/movable/atmos_conditions_changed()
+	var/turf/open/open_loc = loc
+	if(!isopenturf(open_loc))
+		return
+	var/datum/gas_mixture/turf_gas = open_loc.air
+	if(isnull(turf_gas))
+		return
+	check_atmos_process(open_loc, turf_gas, turf_gas.temperature)
+
+/turf/open/atmos_conditions_changed()
+	if(isnull(air))
+		return
+	check_atmos_process(src, air, air.temperature)
+
+/**
  * Called by the machinery disconnect(), custom for each type
  */
 /obj/machinery/atmospherics/proc/destroy_network()
@@ -434,7 +454,12 @@
 		to_chat(user, span_warning("As you begin unwrenching \the [src] a gush of air blows in your face... maybe you should reconsider?"))
 		unsafe_wrenching = TRUE //Oh dear oh dear
 
+<<<<<<< HEAD
 	if(I.use_tool(src, user, empty_pipe ? 0 : 2 SECONDS, volume = 50))
+=======
+	var/time_taken = empty_pipe ? 0 : 20
+	if(I.use_tool(src, user, time_taken, volume = 50))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.visible_message( \
 			"[user] unfastens \the [src].", \
 			span_notice("You unfasten \the [src]."), \
@@ -444,10 +469,16 @@
 		//You unwrenched a pipe full of pressure? Let's splat you into the wall, silly.
 		if(unsafe_wrenching)
 			unsafe_pressure_release(user, internal_pressure)
+<<<<<<< HEAD
 		deconstruct(TRUE)
 		return ITEM_INTERACT_SUCCESS
 
 	return ITEM_INTERACT_BLOCKING
+=======
+		return deconstruct(TRUE)
+
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Getter for can_unwrench

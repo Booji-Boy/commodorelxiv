@@ -5,6 +5,7 @@
 	button_icon_state = "adrenaline"
 	chemical_cost = 25 // similar cost to biodegrade, as they serve similar purposes
 	dna_cost = 2
+<<<<<<< HEAD
 	req_human = FALSE
 	req_stat = CONSCIOUS
 	disabled_by_fire = FALSE
@@ -19,6 +20,11 @@
 		return FALSE
 
 	return .
+=======
+	req_human = TRUE
+	req_stat = UNCONSCIOUS
+	disabled_by_fire = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Recover from stuns.
 /datum/action/changeling/adrenaline/sting_action(mob/living/carbon/user)

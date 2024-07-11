@@ -1,4 +1,5 @@
 import { filter, sortBy } from 'common/collections';
+<<<<<<< HEAD
 import { toFixed } from 'common/math';
 import { BooleanLike } from 'common/react';
 
@@ -11,6 +12,21 @@ import {
   NumberInput,
   ProgressBar,
   Section,
+=======
+import { flow } from 'common/fp';
+import { toFixed } from 'common/math';
+import { BooleanLike } from 'common/react';
+import { multiline } from 'common/string';
+import { useBackend } from '../backend';
+import {
+  Button,
+  Divider,
+  NumberInput,
+  ProgressBar,
+  Section,
+  Box,
+  LabeledList,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Stack,
 } from '../components';
 import { getGasColor } from '../constants';
@@ -41,10 +57,17 @@ export const BluespaceSender = (props) => {
   const { act, data } = useBackend<Data>();
   const { gas_transfer_rate, credits, bluespace_network_gases = [], on } = data;
 
+<<<<<<< HEAD
   const gases: Gas[] = sortBy(
     filter(bluespace_network_gases, (gas) => gas.amount >= 0.01),
     (gas) => -gas.amount,
   );
+=======
+  const gases: Gas[] = flow([
+    filter<Gas>((gas) => gas.amount >= 0.01),
+    sortBy<Gas>((gas) => -gas.amount),
+  ])(bluespace_network_gases);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const gasMax = Math.max(1, ...gases.map((gas) => gas.amount));
 
@@ -62,7 +85,11 @@ export const BluespaceSender = (props) => {
                 color="transparent"
                 icon="info"
                 tooltipPosition="bottom-start"
+<<<<<<< HEAD
                 tooltip={`
+=======
+                tooltip={multiline`
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 Any gas you pipe into here will be added to the Bluespace
                 Network! That means any connected Bluespace Vendor (multitool)
                 will hook up to all the gas stored in this, and charge
@@ -77,7 +104,11 @@ export const BluespaceSender = (props) => {
                 unit="moles/S"
                 minValue={0}
                 maxValue={1}
+<<<<<<< HEAD
                 onDrag={(value) =>
+=======
+                onDrag={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   act('rate', {
                     rate: value,
                   })
@@ -130,11 +161,18 @@ const GasDisplay = (props: GasDisplayProps) => {
             animated
             fluid
             value={price}
+<<<<<<< HEAD
             step={1}
             unit="per mole"
             minValue={0}
             maxValue={100}
             onDrag={(value) =>
+=======
+            unit="per mole"
+            minValue={0}
+            maxValue={100}
+            onDrag={(event, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               act('price', {
                 gas_price: value,
                 gas_type: id,

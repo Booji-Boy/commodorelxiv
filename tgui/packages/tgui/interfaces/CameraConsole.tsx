@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 import { filter, sort } from 'common/collections';
 import { BooleanLike, classes } from 'common/react';
 import { createSearch } from 'common/string';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { filter, sortBy } from 'common/collections';
+import { flow } from 'common/fp';
+import { BooleanLike, classes } from 'common/react';
+import { createSearch } from 'common/string';
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   ByondUi,
@@ -67,6 +75,7 @@ const prevNextCamera = (
  * Filters cameras, applies search terms and sorts the alphabetically.
  */
 const selectCameras = (cameras: Camera[], searchText = ''): Camera[] => {
+<<<<<<< HEAD
   let queriedCameras = filter(cameras, (camera: Camera) => !!camera.name);
   if (searchText) {
     const testSearch = createSearch(
@@ -78,6 +87,17 @@ const selectCameras = (cameras: Camera[], searchText = ''): Camera[] => {
   queriedCameras = sort(queriedCameras);
 
   return queriedCameras;
+=======
+  const testSearch = createSearch(searchText, (camera: Camera) => camera.name);
+
+  return flow([
+    filter((camera: Camera) => !!camera.name),
+    // Optional search term
+    searchText && filter(testSearch),
+    // Slightly expensive, but way better than sorting in BYOND
+    sortBy((camera: Camera) => camera),
+  ])(cameras);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 };
 
 export const CameraConsole = (props) => {
@@ -91,6 +111,7 @@ export const CameraConsole = (props) => {
 };
 
 export const CameraContent = (props) => {
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
 
   return (
@@ -100,6 +121,15 @@ export const CameraContent = (props) => {
       </Stack.Item>
       <Stack.Item grow={3}>
         <CameraControls searchText={searchText} />
+=======
+  return (
+    <Stack fill>
+      <Stack.Item grow>
+        <CameraSelector />
+      </Stack.Item>
+      <Stack.Item grow={3}>
+        <CameraControls />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </Stack.Item>
     </Stack>
   );
@@ -107,7 +137,11 @@ export const CameraContent = (props) => {
 
 const CameraSelector = (props) => {
   const { act, data } = useBackend<Data>();
+<<<<<<< HEAD
   const { searchText, setSearchText } = props;
+=======
+  const [searchText, setSearchText] = useLocalState('searchText', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { activeCamera } = data;
   const cameras = selectCameras(data.cameras, searchText);
 
@@ -116,12 +150,18 @@ const CameraSelector = (props) => {
       <Stack.Item>
         <Input
           autoFocus
+<<<<<<< HEAD
           expensive
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           fluid
           mt={1}
           placeholder="Search for a camera"
           onInput={(e, value) => setSearchText(value)}
+<<<<<<< HEAD
           value={searchText}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         />
       </Stack.Item>
       <Stack.Item grow>
@@ -156,10 +196,17 @@ const CameraSelector = (props) => {
   );
 };
 
+<<<<<<< HEAD
 const CameraControls = (props: { searchText: string }) => {
   const { act, data } = useBackend<Data>();
   const { activeCamera, can_spy, mapRef } = data;
   const { searchText } = props;
+=======
+const CameraControls = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { activeCamera, can_spy, mapRef } = data;
+  const [searchText] = useLocalState('searchText', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const cameras = selectCameras(data.cameras, searchText);
 

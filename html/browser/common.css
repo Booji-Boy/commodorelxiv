@@ -31,6 +31,10 @@ a:hover
 	background: #ffffff;
 }
 
+a.inlineblock {
+	display: inline-block;
+}
+
 a.white, a.white:link, a.white:visited, a.white:active
 {
 	color: #40628a;
@@ -410,6 +414,7 @@ ul.sparse {
     vertical-align: middle;
 }
 
+<<<<<<< HEAD
 .code {
 	padding: 6px 8px;
 	border: 1px solid #161616;
@@ -425,3 +430,8 @@ ul.sparse {
 	user-select: all;
 }
 
+=======
+.highlighter:hover {
+	background-color: #f0c400 !important;
+}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

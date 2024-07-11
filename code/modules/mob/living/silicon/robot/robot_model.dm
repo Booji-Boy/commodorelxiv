@@ -64,6 +64,12 @@
 		var/obj/item/new_module = new path(src)
 		emag_modules += new_module
 		emag_modules -= path
+//monkestation edit start
+	for(var/path in clock_modules)
+		var/obj/item/new_module = new path(src)
+		clock_modules += new_module
+		clock_modules -= path
+//monkestation edit end
 
 /obj/item/robot_model/Destroy()
 	basic_modules.Cut()
@@ -71,6 +77,7 @@
 	modules.Cut()
 	added_modules.Cut()
 	storages.Cut()
+	clock_modules.Cut() //MonkeStation Edit: Clears clock modules
 	return ..()
 
 /obj/item/robot_model/proc/get_usable_modules()
@@ -128,7 +135,18 @@
 	if(cyborg.emagged)
 		for(var/obj/item/module as anything in emag_modules)
 			add_module(module, FALSE, FALSE)
+<<<<<<< HEAD
 	for(var/obj/item/module as anything in added_modules)
+=======
+	//monkestation edit start
+	if(IS_CLOCK(cyborg) && !cyborg.clockwork) //this should never happen
+		cyborg.set_clockwork(TRUE, FALSE)
+	if(cyborg.clockwork)
+		for(var/obj/item/module in clock_modules)
+			add_module(module, FALSE, FALSE)
+	//monkestation edit end
+	for(var/obj/item/module in added_modules)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		add_module(module, FALSE, FALSE)
 	for(var/obj/item/module as anything in held_modules & modules)
 		cyborg.equip_module_to_slot(module, held_modules.Find(module))
@@ -170,10 +188,19 @@
 			if(!gun.chambered)
 				. = TRUE
 				gun.recharge_newshot() //try to reload a new shot.
+<<<<<<< HEAD
 
 	if(cyborg.toner < cyborg.tonermax)
 		. = TRUE
 		cyborg.toner = cyborg.tonermax
+=======
+		//monkestation ed start
+		else if(istype(module, /obj/item/hand_labeler/cyborg))
+			var/obj/item/hand_labeler/cyborg/labeler = module
+			labeler.labels_left = 30
+		//monkestation edit end
+	cyborg.toner = cyborg.tonermax
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Refills consumables that require materials, rather than being given for free.
@@ -227,6 +254,7 @@
 	var/mob/living/silicon/robot/cyborg = loc
 	var/obj/item/robot_model/new_model = new new_config_type(cyborg)
 	new_model.robot = cyborg
+	cyborg.icon = 'icons/mob/silicon/robots.dmi' //reset our icon to default, but before a new custom icon may be applied by be_transformed_to
 	if(!new_model.be_transformed_to(src, forced))
 		qdel(new_model)
 		return
@@ -239,6 +267,7 @@
 	cyborg.diag_hud_set_status()
 	cyborg.diag_hud_set_borgcell()
 	cyborg.diag_hud_set_aishell()
+	cyborg.update_icons()
 	log_silicon("CYBORG: [key_name(cyborg)] has transformed into the [new_model] model.")
 
 	INVOKE_ASYNC(new_model, PROC_REF(do_transform_animation))
@@ -263,7 +292,6 @@
 			cyborg_base_icon = details[SKIN_ICON_STATE]
 		if(!isnull(details[SKIN_ICON]))
 			cyborg.icon = details[SKIN_ICON]
-		if(!isnull(details[SKIN_PIXEL_X]))
 			cyborg.base_pixel_x = details[SKIN_PIXEL_X]
 		if(!isnull(details[SKIN_PIXEL_Y]))
 			cyborg.base_pixel_y = details[SKIN_PIXEL_Y]
@@ -808,7 +836,12 @@
 		/obj/item/hand_labeler/borg,
 		/obj/item/razor,
 		/obj/item/instrument/guitar,
+<<<<<<< HEAD
 		/obj/item/instrument/piano_synth,
+=======
+		/obj/item/instrument/piano_synth/robot,
+		/obj/item/reagent_containers/dropper,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/lighter,
 		/obj/item/borg/lollipop,
 		/obj/item/stack/pipe_cleaner_coil/cyborg,
@@ -830,6 +863,7 @@
 		"Kent" = list(SKIN_ICON_STATE = "kent", SKIN_LIGHT_KEY = "medical", SKIN_HAT_OFFSET = 3),
 		"Tophat" = list(SKIN_ICON_STATE = "tophat", SKIN_LIGHT_KEY = NONE, SKIN_HAT_OFFSET = INFINITY),
 		"Waitress" = list(SKIN_ICON_STATE = "service_f"),
+		"Kerfus" = list(SKIN_ICON_STATE = "kerfus_service", SKIN_LIGHT_KEY = NONE, SKIN_ICON = CYBORG_ICON_CARGO),
 	)
 
 /obj/item/robot_model/service/respawn_consumable(mob/living/silicon/robot/cyborg, coeff = 1)

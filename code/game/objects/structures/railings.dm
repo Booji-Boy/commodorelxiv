@@ -8,13 +8,21 @@
 	density = TRUE
 	anchored = TRUE
 	pass_flags_self = LETPASSTHROW|PASSSTRUCTURE
+<<<<<<< HEAD
 	layer = ABOVE_TREE_LAYER
 	plane = ABOVE_GAME_PLANE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// armor is a little bit less than a grille. max_integrity about half that of a grille.
 	armor_type = /datum/armor/structure_railing
 	max_integrity = 25
 
 	var/climbable = TRUE
+<<<<<<< HEAD
+=======
+	///Initial direction of the railing.
+	var/ini_dir
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///item released when deconstructed
 	var/item_deconstruct = /obj/item/stack/rods
 
@@ -26,7 +34,6 @@
 	bomb = 10
 
 /obj/structure/railing/corner //aesthetic corner sharp edges hurt oof ouch
-	icon_state = "railing_corner"
 	density = FALSE
 	climbable = FALSE
 
@@ -73,7 +80,7 @@
 	..()
 	add_fingerprint(user)
 
-	if(I.tool_behaviour == TOOL_WELDER && !user.combat_mode)
+	if(I.tool_behaviour == TOOL_WELDER && !(user.istate & ISTATE_HARM))
 		if(atom_integrity < max_integrity)
 			if(!I.tool_start_check(user, amount=1))
 				return
@@ -94,10 +101,20 @@
 	deconstruct()
 	return TRUE
 
+<<<<<<< HEAD
 /obj/structure/railing/atom_deconstruct(disassembled)
 	var/rods_to_make = istype(src,/obj/structure/railing/corner) ? 1 : 2
 	var/obj/rod = new item_deconstruct(drop_location(), rods_to_make)
 	transfer_fingerprints_to(rod)
+=======
+/obj/structure/railing/deconstruct(disassembled)
+	if((flags_1 & NODECONSTRUCT_1))
+		return ..()
+	var/rods_to_make = istype(src,/obj/structure/railing/corner) ? 1 : 2
+	var/obj/rod = new item_deconstruct(drop_location(), rods_to_make)
+	transfer_fingerprints_to(rod)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Implements behaviour that makes it possible to unanchor the railing.
 /obj/structure/railing/wrench_act(mob/living/user, obj/item/I)
@@ -154,6 +171,10 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "wooden_railing"
 	item_deconstruct = /obj/item/stack/sheet/mineral/wood
+<<<<<<< HEAD
+=======
+	plane = GAME_PLANE_FOV_HIDDEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	layer = ABOVE_MOB_LAYER
 
 /obj/structure/railing/wooden_fence/Initialize(mapload)
@@ -166,8 +187,13 @@
 	adjust_dir_layer(new_dir)
 
 /obj/structure/railing/wooden_fence/proc/adjust_dir_layer(direction)
+<<<<<<< HEAD
 	layer = (direction & NORTH) ? MOB_LAYER : initial(layer)
 	plane = (direction & NORTH) ? GAME_PLANE : initial(plane)
+=======
+	var/new_layer = (direction & NORTH) ? MOB_LAYER : ABOVE_MOB_LAYER
+	layer = new_layer
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /obj/structure/railing/corner/end/wooden_fence

@@ -20,6 +20,7 @@
 
 /datum/heretic_knowledge/entropy_pulse
 	name = "Pulse of Entropy"
+<<<<<<< HEAD
 	desc = "Allows you to transmute 10 iron sheets and a garbage item to fill the surrounding vicinity of the rune with rust."
 	gain_text = "Reality begins to whisper to me. To give it its entropic end."
 	required_atoms = list(
@@ -29,13 +30,28 @@
 	cost = 0
 	route = PATH_SIDE
 	var/rusting_range = 8
+=======
+	desc = "Allows you to transmute 20 irons and 2 garbage items to fill the surrounding vicinity of the rune with rust."
+	gain_text = "Reality begins to whisper to me. To give it its entropic end."
+	required_atoms = list(
+		/obj/item/stack/sheet/iron = 20,
+		/obj/item/trash = 2
+	)
+	cost = 0
+	route = PATH_SIDE
+	var/rusting_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/heretic_knowledge/entropy_pulse/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
 	for(var/turf/nearby_turf in view(rusting_range, loc))
 		if(get_dist(nearby_turf, loc) <= 1) //tiles on rune should always be rusted
 			nearby_turf.rust_heretic_act()
 		//we exclude closed turf to avoid exposing cultist bases
+<<<<<<< HEAD
 		if(prob(10) || isclosedturf(nearby_turf))
+=======
+		if(prob(20) || isclosedturf(nearby_turf))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			continue
 		nearby_turf.rust_heretic_act()
 	return TRUE

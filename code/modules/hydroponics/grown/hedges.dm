@@ -7,12 +7,12 @@
 	product = /obj/item/grown/shrub
 	lifespan = 40
 	endurance = 30
-	maturation = 4
+	maturation = 12
 	production = 6
-	yield = 2
-	instability = 10
+	yield = 20
 	growthstages = 3
 	reagents_add = list()
+	possible_mutations = list(/datum/hydroponics/plant_mutation/kudzu_vines)
 
 /obj/item/grown/shrub
 	seed = /obj/item/seeds/shrub

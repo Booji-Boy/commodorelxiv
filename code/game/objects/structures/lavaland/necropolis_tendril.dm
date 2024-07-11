@@ -18,6 +18,10 @@
 	scanner_taggable = TRUE
 	mob_gps_id = "WT"
 	spawner_gps_id = "Necropolis Tendril"
+<<<<<<< HEAD
+=======
+	var/deconstruct_override = FALSE // Monkestation addition: override for ocean tendrils
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/spawner/lavaland/goliath
 	mob_types = list(/mob/living/basic/mining/goliath)
@@ -42,7 +46,15 @@ GLOBAL_LIST_INIT(tendrils, list())
 	AddComponent(/datum/component/gps, "Eerie Signal")
 	GLOB.tendrils += src
 
+<<<<<<< HEAD
 /obj/structure/spawner/lavaland/atom_deconstruct(disassembled)
+=======
+/obj/structure/spawner/lavaland/deconstruct(disassembled)
+	// Monkestation addition start: override for ocean tendrils
+	if(deconstruct_override)
+		return ..()
+	// Monkestation addition end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/effect/collapse(loc)
 
 /obj/structure/spawner/lavaland/examine(mob/user)
@@ -90,8 +102,14 @@ GLOBAL_LIST_INIT(tendrils, list())
 	emitted_light = new(loc)
 	visible_message(span_boldannounce("The tendril writhes in fury as the earth around it begins to crack and break apart! Get back!"))
 	balloon_alert_to_viewers("interact to grab loot before collapse!", vision_distance = 7)
+<<<<<<< HEAD
 	playsound(loc,'sound/effects/tendril_destroyed.ogg', 200, FALSE, 50, TRUE, TRUE)
 	addtimer(CALLBACK(src, PROC_REF(collapse)), 5 SECONDS)
+=======
+	balloon_alert_to_viewers("note that you can get multiple chests if multiple people grab!", vision_distance = 7)
+	playsound(loc,'sound/effects/tendril_destroyed.ogg', 200, FALSE, 75, TRUE, TRUE)
+	addtimer(CALLBACK(src, PROC_REF(collapse)), 75)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/collapse/examine(mob/user)
 	var/list/examine_messages = ..()

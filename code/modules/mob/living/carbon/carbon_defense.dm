@@ -84,7 +84,47 @@
 		return TRUE
 	return ..()
 
+<<<<<<< HEAD
 /mob/living/carbon/send_item_attack_message(obj/item/I, mob/living/user, hit_area, def_zone)
+=======
+/mob/living/carbon/attacked_by(obj/item/I, mob/living/user)
+	var/obj/item/bodypart/affecting
+	if(user == src)
+		affecting = get_bodypart(check_zone(user.zone_selected)) //we're self-mutilating! yay!
+	else
+		var/zone_hit_chance = 80
+		if(body_position == LYING_DOWN) // half as likely to hit a different zone if they're on the ground
+			zone_hit_chance += 10
+		affecting = get_bodypart(get_random_valid_zone(user.zone_selected, zone_hit_chance))
+	if(!affecting) //missing limb? we select the first bodypart (you can never have zero, because of chest)
+		affecting = bodyparts[1]
+	SEND_SIGNAL(I, COMSIG_ITEM_ATTACK_ZONE, src, user, affecting)
+	send_item_attack_message(I, user, affecting.plaintext_zone, affecting)
+	if(I.force)
+		var/attack_direction = get_dir(user, src)
+		apply_damage(I.force, I.damtype, affecting, wound_bonus = I.wound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness(), attack_direction = attack_direction, attacking_item = I)
+		if(I.damtype == BRUTE && affecting.can_bleed())
+			if(prob(33))
+				I.add_mob_blood(src)
+				var/turf/location = get_turf(src)
+				add_splatter_floor(location)
+				if(get_dist(user, src) <= 1) //people with TK won't get smeared with blood
+					user.add_mob_blood(src)
+				if(affecting.body_zone == BODY_ZONE_HEAD)
+					if(wear_mask)
+						wear_mask.add_mob_blood(src)
+						update_worn_mask()
+					if(wear_neck)
+						wear_neck.add_mob_blood(src)
+						update_worn_neck()
+					if(head)
+						head.add_mob_blood(src)
+						update_worn_head()
+
+		return TRUE //successful attack
+
+/mob/living/carbon/send_item_attack_message(obj/item/I, mob/living/user, hit_area, obj/item/bodypart/hit_bodypart)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!I.force && !length(I.attack_verb_simple) && !length(I.attack_verb_continuous))
 		return
 	var/obj/item/bodypart/hit_bodypart = get_bodypart(def_zone)
@@ -143,20 +183,49 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /mob/living/carbon/attack_hand(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	. = ..()
 
 	for(var/thing in diseases)
 		var/datum/disease/D = thing
 		if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
 			user.ContactContractDisease(D)
+=======
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		. = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
-	for(var/thing in user.diseases)
-		var/datum/disease/D = thing
-		if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
-			ContactContractDisease(D)
 
+	if(length(diseases) && isliving(user))
+		var/mob/living/living = user
+		var/block = living.check_contact_sterility(BODY_ZONE_EVERYTHING)
+		var/list/contact = filter_disease_by_spread(diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+		if(length(contact) && !block)
+			for(var/datum/disease/advanced/V as anything in contact)
+				living.infect_disease(V, notes="(Skin Contact - (Bump), coming from [src])")
+
+	if(isliving(user))
+		var/mob/living/living = user
+		var/block = check_contact_sterility(BODY_ZONE_EVERYTHING)
+		if(length(living.diseases))
+			var/list/contact = filter_disease_by_spread(living.diseases, required = DISEASE_SPREAD_CONTACT_SKIN)
+			if(length(contact) && !block)
+				for(var/datum/disease/advanced/V as anything in contact)
+					infect_disease(V, notes="(Skin Contact - (Bump), coming from [living])")
+
+
+<<<<<<< HEAD
 	if(.)
 		return TRUE
+=======
+	for(var/datum/surgery/operations as anything in surgeries)
+		if((user.istate & ISTATE_HARM))
+			break
+		if(body_position != LYING_DOWN && (operations.surgery_flags & SURGERY_REQUIRE_RESTING))
+			continue
+		if(operations.next_step(user, modifiers))
+			return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for(var/datum/wound/wounds as anything in all_wounds)
 		if(wounds.try_handling(user))
@@ -174,6 +243,7 @@
 
 /mob/living/carbon/attack_paw(mob/living/carbon/human/user, list/modifiers)
 
+	/*
 	if(try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE))
 		for(var/thing in diseases)
 			var/datum/disease/D = thing
@@ -184,8 +254,8 @@
 		var/datum/disease/D = thing
 		if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)
 			ContactContractDisease(D)
-
-	if(!user.combat_mode)
+	*/
+	if(!(user.istate & ISTATE_HARM))
 		help_shake_act(user)
 		return FALSE
 
@@ -194,9 +264,10 @@
 			var/datum/disease/D = thing
 			if(D.spread_flags & (DISEASE_SPREAD_SPECIAL | DISEASE_SPREAD_NON_CONTAGIOUS))
 				continue
-			ForceContractDisease(D)
+			try_contact_infect(D, note="Monkey Bite Infected")
 		return TRUE
 
+<<<<<<< HEAD
 /**
  * Really weird proc that attempts to dismebmer the passed zone if it is at max damage
  * Unless the attacker is an NPC, in which case it disregards the zone and picks a random one
@@ -209,6 +280,9 @@
 	return dam_zone
 
 /mob/living/carbon/dismembering_strike(mob/living/attacker, dam_zone)
+=======
+/mob/living/carbon/proc/dismembering_strike(mob/living/attacker, dam_zone)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!attacker.limb_destroyer)
 		return dam_zone
 	var/obj/item/bodypart/affecting
@@ -229,6 +303,110 @@
 
 	return dam_zone
 
+<<<<<<< HEAD
+=======
+/**
+ * Attempt to disarm the target mob.
+ * Will shove the target mob back, and drop them if they're in front of something dense
+ * or another carbon.
+*/
+/mob/living/carbon/disarm(mob/living/carbon/target)
+	do_attack_animation(target, ATTACK_EFFECT_DISARM)
+	playsound(target, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+	if (ishuman(target))
+		var/mob/living/carbon/human/human_target = target
+		human_target.w_uniform?.add_fingerprint(src)
+
+	SEND_SIGNAL(target, COMSIG_HUMAN_DISARM_HIT, src, zone_selected)
+	var/shove_dir = get_dir(loc, target.loc)
+	var/turf/target_shove_turf = get_step(target.loc, shove_dir)
+	var/shove_blocked = FALSE //Used to check if a shove is blocked so that if it is knockdown logic can be applied
+
+	var/turf/target_old_turf = target.loc
+	if(HAS_TRAIT(target,TRAIT_SHOVE_RESIST))
+		log_combat(src, target, "shoved")
+		target.stamina.adjust(-7)
+		target.visible_message("<span class='danger'>[name] tries to shove [target.name]</span>",
+							"<span class='userdanger'>You're nearly knocked down by [name]!</span>", "<span class='hear'>You hear aggressive shuffling!</span>", COMBAT_MESSAGE_RANGE, src)
+		return
+
+
+	//Are we hitting anything? or
+	if(SEND_SIGNAL(target_shove_turf, COMSIG_CARBON_DISARM_PRESHOVE) & COMSIG_CARBON_ACT_SOLID)
+		shove_blocked = TRUE
+	else
+		target.Move(target_shove_turf, shove_dir)
+		if(get_turf(target) == target_old_turf)
+			shove_blocked = TRUE
+
+	if(!shove_blocked)
+		target.setGrabState(GRAB_PASSIVE)
+
+	if(target.IsKnockdown() && !target.IsParalyzed()) //KICK HIM IN THE NUTS
+		target.Paralyze(SHOVE_CHAIN_PARALYZE)
+		target.visible_message(span_danger("[name] kicks [target.name] onto [target.p_their()] side!"),
+						span_userdanger("You're kicked onto your side by [name]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
+		to_chat(src, span_danger("You kick [target.name] onto [target.p_their()] side!"))
+		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, SetKnockdown), 0), SHOVE_CHAIN_PARALYZE)
+		log_combat(src, target, "kicks", "onto their side (paralyzing)")
+
+	var/directional_blocked = FALSE
+	var/can_hit_something = (!target.is_shove_knockdown_blocked() && !target.buckled)
+
+	//Directional checks to make sure that we're not shoving through a windoor or something like that
+	if(shove_blocked && can_hit_something && (shove_dir in GLOB.cardinals))
+		var/target_turf = get_turf(target)
+		for(var/obj/obj_content in target_turf)
+			if(obj_content.flags_1 & ON_BORDER_1 && obj_content.dir == shove_dir && obj_content.density)
+				directional_blocked = TRUE
+				break
+		if(target_turf != target_shove_turf && !directional_blocked) //Make sure that we don't run the exact same check twice on the same tile
+			for(var/obj/obj_content in target_shove_turf)
+				if(obj_content.flags_1 & ON_BORDER_1 && obj_content.dir == turn(shove_dir, 180) && obj_content.density)
+					directional_blocked = TRUE
+					break
+
+	if(can_hit_something)
+		//Don't hit people through windows, ok?
+		if(!directional_blocked && SEND_SIGNAL(target_shove_turf, COMSIG_CARBON_DISARM_COLLIDE, src, target, shove_blocked) & COMSIG_CARBON_SHOVE_HANDLED)
+			return
+		if(directional_blocked || shove_blocked)
+			target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
+			target.visible_message(span_danger("[name] shoves [target.name], knocking [target.p_them()] down!"),
+				span_userdanger("You're knocked down from a shove by [name]!"), span_hear("You hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, src)
+			to_chat(src, span_danger("You shove [target.name], knocking [target.p_them()] down!"))
+			log_combat(src, target, "shoved", "knocking them down")
+			return
+
+	target.visible_message(span_danger("[name] shoves [target.name]!"),
+		span_userdanger("You're shoved by [name]!"), span_hear("You hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, src)
+	to_chat(src, span_danger("You shove [target.name]!"))
+
+	//Take their lunch money
+	var/target_held_item = target.get_active_held_item()
+	var/append_message = ""
+	if(!is_type_in_typecache(target_held_item, GLOB.shove_disarming_types)) //It's too expensive we'll get caught
+		target_held_item = null
+
+	if(!target.has_movespeed_modifier(/datum/movespeed_modifier/shove))
+		target.add_movespeed_modifier(/datum/movespeed_modifier/shove)
+		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living/carbon, clear_shove_slowdown)), SHOVE_SLOWDOWN_LENGTH)
+
+	log_combat(src, target, "shoved", append_message)
+
+/mob/living/carbon/proc/is_shove_knockdown_blocked() //If you want to add more things that block shove knockdown, extend this
+	for (var/obj/item/clothing/clothing in get_equipped_items())
+		if(clothing.clothing_flags & BLOCKS_SHOVE_KNOCKDOWN)
+			return TRUE
+	return FALSE
+
+/mob/living/carbon/proc/clear_shove_slowdown()
+	remove_movespeed_modifier(/datum/movespeed_modifier/shove)
+	var/active_item = get_active_held_item()
+	if(is_type_in_typecache(active_item, GLOB.shove_disarming_types))
+		visible_message(span_warning("[name] regains their grip on \the [active_item]!"), span_warning("You regain your grip on \the [active_item]"), null, COMBAT_MESSAGE_RANGE)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/blob_act(obj/structure/blob/B)
 	if (stat == DEAD)
 		return
@@ -303,6 +481,30 @@
 						null, span_hear("You hear the rustling of clothes."), DEFAULT_MESSAGE_RANGE, list(helper, src))
 		to_chat(helper, span_notice("You shake [src] trying to pick [p_them()] up!"))
 		to_chat(src, span_notice("[helper] shakes you to get you up!"))
+		//Monkestation addition start: this is a port of #77651 which was closed, so I'm putting this as an addition
+	else if(helper.zone_selected == BODY_ZONE_PRECISE_MOUTH) //Boops
+		if(HAS_TRAIT(src, TRAIT_BADTOUCH) && prob(75))
+			helper.visible_message(span_notice("[src] matrix dodges [helper]'s boop, holy shit!"), \
+						null, span_hear("You hear a strange noise, like someone fighting for their life!"), DEFAULT_MESSAGE_RANGE, list(helper, src))
+			to_chat(helper, span_notice("[src] matrix dodges your boop, holy shit!"))
+			to_chat(src, span_notice("[helper] tried to boop you but you avoid it with a matrix dodge, holy shit!"))
+		else if(istype(get_item_by_slot(ITEM_SLOT_MASK), /obj/item/clothing/mask/gas/clown_hat))
+			playsound(src, 'sound/items/bikehorn.ogg', 50, TRUE)
+			helper.visible_message(span_notice("[helper] honks [src]'s nose"), \
+						null, span_hear("You hear a honk!"), DEFAULT_MESSAGE_RANGE, list(helper, src))
+			to_chat(helper, span_notice("You honk [src]'s nose."))
+			to_chat(src, span_notice("[helper] honks your clown nose, honk! "))
+		else if(src.dna.species.bodytype & BODYTYPE_SNOUTED)
+			helper.visible_message(span_notice("[helper] boops [src]'s snout."), \
+						null, span_hear("You hear a soft patter."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+			to_chat(helper, span_notice("You boop [src] on the snout."))
+			to_chat(src, span_notice("[helper] boops you on the snout."))
+		else
+			helper.visible_message(span_notice("[helper] boops [src]'s nose."), \
+						null, span_hear("You hear a soft patter."), DEFAULT_MESSAGE_RANGE, list(helper, src))
+			to_chat(helper, span_notice("You boop [src] on the nose."))
+			to_chat(src, span_notice("[helper] boops you on the nose."))
+		//Monkestation addition end
 	else if(check_zone(helper.zone_selected) == BODY_ZONE_HEAD && get_bodypart(BODY_ZONE_HEAD)) //Headpats!
 		helper.visible_message(span_notice("[helper] gives [src] a pat on the head to make [p_them()] feel better!"), \
 					null, span_hear("You hear a soft patter."), DEFAULT_MESSAGE_RANGE, list(helper, src))
@@ -680,15 +882,25 @@
 /// Fill in the lists of things we can bioscramble into people
 /mob/living/carbon/proc/init_bioscrambler_lists()
 	var/list/body_parts = typesof(/obj/item/bodypart/chest) + typesof(/obj/item/bodypart/head) + subtypesof(/obj/item/bodypart/arm) + subtypesof(/obj/item/bodypart/leg)
+<<<<<<< HEAD
 	for(var/obj/item/bodypart/part as anything in body_parts)
 		if(!is_type_in_typecache(part, GLOB.bioscrambler_parts_blacklist) && BODYTYPE_CAN_BE_BIOSCRAMBLED(initial(part.bodytype)))
+=======
+	for (var/obj/item/bodypart/part as anything in body_parts)
+		if(!is_type_in_typecache(part, GLOB.bioscrambler_parts_blacklist) && !(part::bodytype & BODYTYPE_ROBOTIC) && !(part::limb_id in GLOB.bioscrambler_limb_id_blacklist))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			continue
 		body_parts -= part
 	GLOB.bioscrambler_valid_parts = body_parts
 
 	var/list/organs = subtypesof(/obj/item/organ/internal) + subtypesof(/obj/item/organ/external)
+<<<<<<< HEAD
 	for(var/obj/item/organ/organ_type as anything in organs)
 		if(!is_type_in_typecache(organ_type, GLOB.bioscrambler_organs_blacklist) && !(initial(organ_type.organ_flags) & ORGAN_ROBOTIC))
+=======
+	for (var/obj/item/organ/organ_type as anything in organs)
+		if(!is_type_in_typecache(organ_type, GLOB.bioscrambler_organs_blacklist) && !(organ_type::organ_flags & ORGAN_SYNTHETIC) && organ_type::zone != "abstract")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			continue
 		organs -= organ_type
 	GLOB.bioscrambler_valid_organs = organs

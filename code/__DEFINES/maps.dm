@@ -127,7 +127,7 @@ Always compile, always use that verb, and always make sure that it works for wha
 ///Z level traits for CentCom
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE, ZTRAIT_NOPHASE = TRUE)
 ///Z level traits for Space Station 13
-#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
+#define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE, ZTRAIT_STARLIGHT = TRUE)
 ///Z level traits for Deep Space
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
 ///Z level traits for Lavaland
@@ -220,5 +220,28 @@ Always compile, always use that verb, and always make sure that it works for wha
 //All
 #define CLUSTER_CHECK_ALL 30 //!Don't let anything cluster, like, at all
 
+<<<<<<< HEAD
 /// Checks the job changes in the map config for the passed change key.
 #define CHECK_MAP_JOB_CHANGE(job, change) SSmapping.config.job_changes?[job]?[change]
+=======
+//monkestation start
+#define ZTRAIT_OSHAN "OshanTrait"
+
+///Z level traits for Lavaland
+#define ZTRAITS_TRENCH list(\
+	ZTRAIT_GRAVITY = TRUE, \
+	ZTRAIT_MINING = TRUE, \
+	ZTRAIT_NOPARALLAX = TRUE, \
+	ZTRAIT_BOMBCAP_MULTIPLIER = 2, \
+	ZTRAIT_BASETURF = /turf/open/floor/plating/ocean/dark)
+
+// boolean - particle weather types that occur on the level
+#define WEATHER_MESSAGE_DELAY 30 SECONDS
+#define ZTRAIT_DAYCYCLE "Daycycle"
+#define ZTRAIT_STARLIGHT "Starlight"
+#define PARTICLEWEATHER_RAIN "weather_rain"
+#define PARTICLEWEATHER_SNOW "weather_snow"
+#define PARTICLEWEATHER_DUST "weather_dust"
+#define PARTICLEWEATHER_RADS "weather_rads"
+//monkestation end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

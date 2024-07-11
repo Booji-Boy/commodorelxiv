@@ -29,6 +29,7 @@
 	if(!special) // if some admin wants to give someone tail moodles for tail shenanigans, they can spawn it and do it by hand
 		original_owner ||= WEAKREF(receiver)
 
+<<<<<<< HEAD
 		// If it's your tail, an infinite debuff is replaced with a timed one
 		// If it's not your tail but of same species, I guess it works, but we are more sad
 		// If it's not your tail AND of different species, we are horrified
@@ -82,11 +83,42 @@
 		stop_wag(organ_owner)
 
 	organ_owner.clear_mood_event("tail_regained")
+=======
+/obj/item/organ/external/tail/Remove(mob/living/carbon/organ_owner, special, moving)
+	if(wag_flags & WAG_WAGGING)
+		wag(FALSE)
+
+	return ..()
+
+/obj/item/organ/external/tail/on_remove(mob/living/carbon/organ_owner, special)
+	. = ..()
+
+	UnregisterSignal(organ_owner, COMSIG_ORGAN_WAG_TAIL)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(type in organ_owner.dna.species.external_organs)
 		organ_owner.add_mood_event("tail_lost", /datum/mood_event/tail_lost)
 		organ_owner.add_mood_event("tail_balance_lost", /datum/mood_event/tail_balance_lost)
 
+<<<<<<< HEAD
+=======
+
+/obj/item/organ/external/tail/proc/wag(mob/user, start = TRUE, stop_after = 0)
+	if(!(wag_flags & WAG_ABLE))
+		return
+
+	if(start)
+		start_wag()
+		if(stop_after)
+			addtimer(CALLBACK(src, PROC_REF(wag), FALSE), stop_after, TIMER_STOPPABLE|TIMER_DELETE_ME)
+	else
+		stop_wag()
+	owner.update_body_parts()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human = owner
+		human.update_mutant_bodyparts()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///We need some special behaviour for accessories, wrapped here so we can easily add more interactions later
 ///Accepts an optional timeout after which we remove the tail wagging
 ///Returns false if the wag worked, true otherwise
@@ -194,6 +226,35 @@
 
 	wag_flags = WAG_ABLE
 	dna_block = DNA_LIZARD_TAIL_BLOCK
+<<<<<<< HEAD
+=======
+	///A reference to the paired_spines, since for some fucking reason tail spines are tied to the spines themselves.
+	var/obj/item/organ/external/spines/paired_spines
+
+/obj/item/organ/external/tail/lizard/Insert(mob/living/carbon/receiver, special, drop_if_replaced)
+	. = ..()
+	if(.)
+		paired_spines = ownerlimb.owner.get_organ_slot(ORGAN_SLOT_EXTERNAL_SPINES)
+		paired_spines?.paired_tail = src
+
+/obj/item/organ/external/tail/lizard/Remove(mob/living/carbon/organ_owner, special, moving)
+	. = ..()
+	if(paired_spines)
+		paired_spines.paired_tail = null
+		paired_spines = null
+
+/obj/item/organ/external/tail/lizard/start_wag()
+	if(paired_spines)
+		var/datum/bodypart_overlay/mutant/spines/accessory = paired_spines.bodypart_overlay
+		accessory.wagging = TRUE
+	return ..()
+
+/obj/item/organ/external/tail/lizard/stop_wag()
+	if(paired_spines)
+		var/datum/bodypart_overlay/mutant/spines/accessory = paired_spines.bodypart_overlay
+		accessory.wagging = FALSE
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Lizard tail bodypart overlay datum
 /datum/bodypart_overlay/mutant/tail/lizard

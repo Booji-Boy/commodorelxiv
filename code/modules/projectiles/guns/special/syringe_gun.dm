@@ -31,6 +31,17 @@
 	recharge_newshot()
 
 /obj/item/gun/syringe/apply_fantasy_bonuses(bonus)
+<<<<<<< HEAD
+=======
+	. = ..()
+	max_syringes = modify_fantasy_variable("max_syringes", max_syringes, bonus, minimum = 1)
+
+/obj/item/gun/syringe/remove_fantasy_bonuses(bonus)
+	max_syringes = reset_fantasy_variable("max_syringes", max_syringes)
+	return ..()
+
+/obj/item/gun/syringe/handle_atom_del(atom/A)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	max_syringes = modify_fantasy_variable("max_syringes", max_syringes, bonus, minimum = 1)
 
@@ -51,7 +62,7 @@
 /obj/item/gun/syringe/can_shoot()
 	return syringes.len
 
-/obj/item/gun/syringe/handle_chamber()
+/obj/item/gun/syringe/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	if(chambered && !chambered.loaded_projectile) //we just fired
 		recharge_newshot()
 	update_appearance()
@@ -77,11 +88,16 @@
 
 	return TRUE
 
+<<<<<<< HEAD
 /obj/item/gun/syringe/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(istype(tool, /obj/item/reagent_containers/syringe/bluespace))
 		balloon_alert(user, "[tool.name] is too big!")
 		return ITEM_INTERACT_BLOCKING
 	if(istype(tool, /obj/item/reagent_containers/syringe))
+=======
+/obj/item/gun/syringe/attackby(obj/item/A, mob/user, params, show_msg = TRUE)
+	if(istype(A, /obj/item/reagent_containers/syringe))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(syringes.len < max_syringes)
 			if(!user.transferItemToLoc(tool, src))
 				return ITEM_INTERACT_BLOCKING
@@ -200,6 +216,10 @@
 /obj/item/gun/syringe/blowgun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	visible_message(span_danger("[user] shoots the blowgun!"))
 
+<<<<<<< HEAD
 	user.adjustStaminaLoss(20, updating_stamina = FALSE)
+=======
+	user.stamina.adjust(-20)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	user.adjustOxyLoss(20)
 	return ..()

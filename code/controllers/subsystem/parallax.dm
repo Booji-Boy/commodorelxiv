@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(parallax)
 	var/list/currentrun
 	var/planet_x_offset = 128
 	var/planet_y_offset = 128
+<<<<<<< HEAD
 	/// A random parallax layer that we sent to every player
 	var/atom/movable/screen/parallax_layer/random/random_layer
 	/// Weighted list with the parallax layers we could spawn
@@ -18,13 +19,26 @@ SUBSYSTEM_DEF(parallax)
 		/atom/movable/screen/parallax_layer/random/asteroids = 35,
 		PARALLAX_NONE = 30,
 	)
+=======
+	//var/random_layer //monkestation removal
+	//var/random_parallax_color //monkestation removal
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //These are cached per client so needs to be done asap so people joining at roundstart do not miss these.
 /datum/controller/subsystem/parallax/PreInit()
 	. = ..()
+<<<<<<< HEAD
 
 	set_random_parallax_layer(pick_weight(random_parallax_weights))
 
+=======
+	/* monkestation removal
+	if(prob(70)) //70% chance to pick a special extra layer
+		random_layer = pick(/atom/movable/screen/parallax_layer/random/space_gas, /atom/movable/screen/parallax_layer/random/asteroids)
+		random_parallax_color = pick(COLOR_TEAL, COLOR_GREEN, COLOR_SILVER, COLOR_YELLOW, COLOR_CYAN, COLOR_ORANGE, COLOR_PURPLE)//Special color for random_layer1. Has to be done here so everyone sees the same color.
+	monkestation removal end */
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	planet_y_offset = rand(100, 160)
 	planet_x_offset = rand(100, 160)
 

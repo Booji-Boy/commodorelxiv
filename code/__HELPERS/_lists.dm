@@ -289,6 +289,23 @@
 			return !zebra || list_to_check[path]
 	return FALSE
 
+/**
+ * Checks for specific paths in a list, while returning the path found.
+ *
+ * Subpaths must come before parent paths if subtypes are to be considered.
+ *
+ * Arguments:
+ * - path_to_check: A typepath to check.
+ * - [list_to_check][/list]: A list of typepaths to check the path_to_check against.
+ */
+/proc/is_path_in_list_return_path(path_to_check, list/list_to_check)
+	if(!LAZYLEN(list_to_check) || !path_to_check)
+		return FALSE
+	for(var/path in list_to_check)
+		if(ispath(path_to_check, path))
+			return path
+	return FALSE
+
 ///Checks for specific types in specifically structured (Assoc "type" = TRUE|FALSE) lists ('typecaches')
 #define is_type_in_typecache(A, L) (A && length(L) && L[(ispath(A) ? A : A:type)])
 
@@ -345,6 +362,10 @@
 	if(only_root_path)
 		for(var/current_path in pathlist)
 			.[current_path] = TRUE
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(ignore_root_path)
 		for(var/current_path in pathlist)
 			for(var/subtype in subtypesof(current_path))
@@ -394,6 +415,10 @@
 	if(only_root_path)
 		for(var/current_path in pathlist)
 			.[current_path] = pathlist[current_path]
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(ignore_root_path)
 		for(var/current_path in pathlist)
 			for(var/subtype in subtypesof(current_path))
@@ -418,6 +443,7 @@
 /proc/list_clear_nulls(list/list_to_clear)
 	return (list_to_clear.RemoveAll(null) > 0)
 
+<<<<<<< HEAD
 
 /**
  * Removes any empty weakrefs from the list
@@ -429,6 +455,8 @@
 		if(!entry.resolve())
 			list_to_clear -= entry
 	return list_to_clear.len < start_len
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  * Returns list containing all the entries from first list that are not present in second.
@@ -470,8 +498,8 @@
  * B would have a 30% chance of being picked,
  * C would have a 10% chance of being picked,
  * and D would have a 0% chance of being picked.
- * You should only pass integers in.
  */
+<<<<<<< HEAD
 /proc/pick_weight(list/list_to_pick)
 	if(length(list_to_pick) == 0)
 		return null
@@ -489,9 +517,20 @@
 			continue
 
 		total -= item_weight
+=======
+/proc/pick_weight(list/list_to_pick) // monkestation edit: port superior pick_weight impl
+	var/total = 0
+	var/item
+	for(item in list_to_pick)
+		if(isnull(list_to_pick[item]))
+			stack_trace("weighted_pick given null weight: [json_encode(list_to_pick)]")
+		total += list_to_pick[item]
+	total = rand() * total
+	for(item in list_to_pick)
+		total -= list_to_pick[item]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(total <= 0)
 			return item
-
 	return null
 
 /**
@@ -573,6 +612,13 @@
 		var/picked = rand(1,list_to_pick.len)
 		. = list_to_pick[picked]
 		list_to_pick.Cut(picked,picked+1) //Cut is far more efficient that Remove()
+
+/// Pick a random element from the list and remove it from the list.
+/proc/pick_n_take_weighted(list/list_to_pick)
+	if(length(list_to_pick))
+		var/picked = pick_weight(list_to_pick)
+		list_to_pick -= picked
+		return picked
 
 ///Returns the top(last) element from the list and removes it from the list (typical stack function)
 /proc/pop(list/L)
@@ -720,6 +766,14 @@
 		return target
 	return null
 
+
+
+/// Returns datum/data/record
+/proc/find_record_old(field, value, list/L)
+	for(var/datum/data/record/R in L)
+		if(R.fields[field] == value)
+			return R
+	return null
 
 /**
  * Move a single element from position from_index within a list, to position to_index
@@ -1188,3 +1242,16 @@
 	if("x" in coords)
 		return locate(coords["x"], coords["y"], coords["z"])
 	return locate(coords[1], coords[2], coords[3])
+
+//monkestation edit start
+//Scales a range (i.e 1,100) and picks an item from the list based on your passed value
+//i.e in a list with length 4, a 25 in the 1-100 range will give you the 2nd item
+//This assumes your ranges start with 1, I am not good at math and can't do linear scaling
+/proc/scale_range_pick(min,max,value,list/L)
+	if(!length(L))
+		return null
+	var/index = 1 + (value * (length(L) - 1)) / (max - min)
+	if(length(L) < index)
+		index = length(L)
+	return L[index]
+//monkestation edit end

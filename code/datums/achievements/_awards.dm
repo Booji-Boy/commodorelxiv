@@ -82,7 +82,11 @@
 ///Achievements are one-off awards for usually doing cool things.
 /datum/award/achievement
 	desc = "Achievement for epic people"
+<<<<<<< HEAD
 	icon_state = "" // This should warn contributors that do not declare an icon when contributing new achievements.
+=======
+	icon = "" // This should warn contributors that do not declare an icon when contributing new achievements.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///How many players have earned this achievement
 	var/times_achieved = 0
 
@@ -173,7 +177,11 @@
 /datum/award/score/achievements_score
 	name = "Achievements Unlocked"
 	desc = "Don't worry, metagaming is all that matters."
+<<<<<<< HEAD
 	icon_state = "elephant" //Obey the reference
+=======
+	icon = "elephant" //Obey the reference
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	database_id = ACHIEVEMENTS_SCORE
 
 /datum/award/score/achievements_score/get_ui_data(key)

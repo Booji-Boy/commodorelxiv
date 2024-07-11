@@ -18,7 +18,11 @@
 	tastes = list("fish" = 4, "batter" = 1, "hot peppers" = 1)
 	foodtypes = SEAFOOD | FRIED
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SWEATY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/fishmeat
 	name = "fish fillet"
@@ -765,7 +769,11 @@
 	tastes = list("meat" = 5, "clowns" = 3, "sixteen teslas" = 1)
 	w_class = WEIGHT_CLASS_SMALL
 	foodtypes = MEAT | FRUIT
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SLIDE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/meatclown/Initialize(mapload)
 	. = ..()
@@ -872,7 +880,11 @@
 	)
 	tastes = list("tex-mex" = 3, "cumin" = 2)
 	foodtypes = MEAT | VEGETABLES
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SWEATY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/fried_chicken
 	name = "fried chicken"

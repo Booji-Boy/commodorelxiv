@@ -12,7 +12,10 @@
 	max_integrity = 100
 	armor_type = /datum/armor/item_modular_computer
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	interaction_flags_mouse_drop = NEED_HANDS | ALLOW_RESTING
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	///The ID currently stored in the computer.
 	var/obj/item/card/id/computer_id_slot
@@ -368,10 +371,16 @@
 		add_log("manual overriding of permissions and modification of device firmware detected. Reboot and reinstall required.")
 	obj_flags |= EMAGGED
 	device_theme = PDA_THEME_SYNDICATE
+<<<<<<< HEAD
 	if(user)
 		balloon_alert(user, "syndieOS loaded")
 		if (emag_card)
 			to_chat(user, span_notice("You swipe \the [src] with [emag_card]. A console window momentarily fills the screen, with white text rapidly scrolling past."))
+=======
+	balloon_alert(user, "syndieOS loaded")
+	if (emag_card)
+		to_chat(user, span_notice("You swipe \the [src] with [emag_card]. A console window momentarily fills the screen, with white text rapidly scrolling past."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /obj/item/modular_computer/examine(mob/user)
@@ -497,6 +506,7 @@
 			soundloop.start()
 		enabled = TRUE
 		update_appearance()
+<<<<<<< HEAD
 		if(user)
 			if(issynth)
 				to_chat(user, span_notice("You send an activation signal to \the [src], turning it on."))
@@ -505,6 +515,10 @@
 			if(open_ui)
 				update_tablet_open_uis(user)
 		SEND_SIGNAL(src, COMSIG_MODULAR_COMPUTER_TURNED_ON, user)
+=======
+		if(open_ui)
+			update_tablet_open_uis(user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	else // Unpowered
 		if(user)
@@ -633,12 +647,19 @@
 
 	// The program is already running. Resume it.
 	if(program in idle_threads)
+<<<<<<< HEAD
 		active_program?.background_program()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		active_program = program
 		program.alert_pending = FALSE
 		idle_threads.Remove(program)
 		if(open_ui)
+<<<<<<< HEAD
 			INVOKE_ASYNC(src, PROC_REF(update_tablet_open_uis), user)
+=======
+			update_tablet_open_uis(user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		update_appearance(UPDATE_ICON)
 		return TRUE
 
@@ -663,7 +684,11 @@
 	active_program = program
 	program.alert_pending = FALSE
 	if(open_ui)
+<<<<<<< HEAD
 		INVOKE_ASYNC(src, PROC_REF(update_tablet_open_uis), user)
+=======
+		update_tablet_open_uis(user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	update_appearance(UPDATE_ICON)
 	return TRUE
 
@@ -697,9 +722,15 @@
 	return SSmodular_computers.add_log("[src]: [text]")
 
 /obj/item/modular_computer/proc/close_all_programs()
+<<<<<<< HEAD
 	active_program?.kill_program()
 	for(var/datum/computer_file/program/idle as anything in idle_threads)
 		idle.kill_program()
+=======
+	active_program = null
+	for(var/datum/computer_file/program/idle as anything in idle_threads)
+		idle_threads.Remove(idle)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/modular_computer/proc/shutdown_computer(loud = TRUE)
 	close_all_programs()
@@ -829,6 +860,11 @@
 			return
 
 	if(istype(attacking_item, /obj/item/paper))
+		//MONKESTATION EDIT START
+		// Don't allow plastic cards (including the spare ID safe code biscuits!) to be inserted
+		if(istype(attacking_item, /obj/item/paper/paperslip/corporate))
+			return
+		//MONKESTATION EDIT END
 		if(stored_paper >= max_paper)
 			balloon_alert(user, "no more room!")
 			return

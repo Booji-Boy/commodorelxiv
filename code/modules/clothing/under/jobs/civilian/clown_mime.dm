@@ -36,6 +36,11 @@
 	. = ..()
 	AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg'=1), 50, falloff_exponent = 20) //die off quick please
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CLOWN, CELL_VIRUS_TABLE_GENERIC, rand(2,3), 0)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/clothing/under/rank/civilian/clown/LateInitialize()
+	. = ..()
+	AddComponent(/datum/component/hide_from_people/clown)
 
 /obj/item/clothing/under/rank/civilian/clown/blue
 	name = "blue clown suit"
@@ -82,11 +87,14 @@
 	greyscale_config_worn = /datum/greyscale_config/jester_suit/worn
 	flags_1 = IS_PLAYER_COLORABLE_1
 
+<<<<<<< HEAD
 /obj/item/clothing/under/rank/civilian/clown/jesteralt
 	name = "jester suit"
 	desc = "A jolly dress, well suited to entertain your master, nuncle."
 	icon_state = "jester2"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/clothing/under/rank/civilian/clown/sexy
 	name = "sexy-clown suit"
 	desc = "It makes you look HONKable!"

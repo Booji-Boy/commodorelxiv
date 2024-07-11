@@ -7,7 +7,11 @@ import { NtosWindow } from '../layouts';
 
 export const NtosRecords = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const [searchTerm, setSearchTerm] = useState('');
+=======
+  const [searchTerm, setSearchTerm] = useLocalState('search', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { mode, records } = data;
 
   const isMatchingSearchTerms = createSearch(searchTerm);

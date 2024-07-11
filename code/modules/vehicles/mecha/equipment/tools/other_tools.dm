@@ -11,6 +11,7 @@
 	equip_cooldown = 150
 	energy_drain = STANDARD_CELL_CHARGE
 	range = MECHA_RANGED
+	movedelay = 0.4
 	var/teleport_range = 7
 
 /obj/item/mecha_parts/mecha_equipment/teleporter/action(mob/source, atom/target, list/modifiers)
@@ -33,6 +34,7 @@
 	equip_cooldown = 50
 	energy_drain = 300
 	range = MECHA_RANGED
+	movedelay = 0.4
 
 
 /obj/item/mecha_parts/mecha_equipment/wormhole_generator/action(mob/source, atom/target, list/modifiers)
@@ -75,6 +77,7 @@
 	equip_cooldown = 10
 	energy_drain = 100
 	range = MECHA_MELEE|MECHA_RANGED
+	movedelay = 0.4
 	///Which atom we are movable_target onto for
 	var/atom/movable/movable_target
 	///Whether we will throw movable atomstothrow by locking onto them or just throw them back from where we click
@@ -151,6 +154,8 @@
 //////////////////////////// ARMOR BOOSTER MODULES //////////////////////////////////////////////////////////
 /obj/item/mecha_parts/mecha_equipment/armor
 	equipment_slot = MECHA_ARMOR
+	movedelay = 0.4
+
 	///short protection name to display in the UI
 	var/protect_name = "you're mome"
 	///icon in armor.dmi that shows in the UI
@@ -201,8 +206,9 @@
 	can_be_toggled = TRUE
 	active = FALSE
 	equipment_slot = MECHA_UTILITY
+	movedelay = 0.4
 	/// Repaired health per second
-	var/health_boost = 0.5
+	var/health_boost = 1
 	var/icon/droid_overlay
 	var/list/repairable_damage = list(MECHA_INT_TEMP_CONTROL,MECHA_CABIN_AIR_BREACH)
 
@@ -274,6 +280,7 @@
 	icon_state = "tesla"
 	range = MECHA_MELEE
 	equipment_slot = MECHA_POWER
+<<<<<<< HEAD
 	can_be_toggled = TRUE
 	active = FALSE
 	///Type of fuel the generator is using. Is set in generator_init() to add the starting amount of fuel
@@ -286,6 +293,19 @@
 	var/max_fuel = 75 * SHEET_MATERIAL_AMOUNT
 	///Energy recharged per second
 	var/rechargerate = 0.005 * STANDARD_CELL_RATE
+=======
+	movedelay = 0.4
+	activated = FALSE
+	var/coeff = 100
+	var/obj/item/stack/sheet/fuel
+	var/max_fuel = 50000
+	/// Fuel used per second while idle, not generating
+	var/fuelrate_idle = 12.5
+	/// Fuel used per second while actively generating
+	var/fuelrate_active = 100
+	/// Energy recharged per second
+	var/rechargerate = 100
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mecha_parts/mecha_equipment/generator/Initialize(mapload)
 	. = ..()
@@ -324,6 +344,28 @@
 		return FALSE
 	load_fuel(weapon, user)
 
+<<<<<<< HEAD
+=======
+/obj/item/mecha_parts/mecha_equipment/generator/proc/load_fuel(obj/item/stack/sheet/P, mob/user)
+	if(P.type == fuel.type && P.amount > 0)
+		var/to_load = max(max_fuel - fuel.amount*SHEET_MATERIAL_AMOUNT,0)
+		if(to_load)
+			var/units = min(max(round(to_load / SHEET_MATERIAL_AMOUNT),1),P.amount)
+			fuel.amount += units
+			P.use(units)
+			to_chat(user, "[icon2html(src, user)][span_notice("[units] unit\s of [fuel] successfully loaded.")]")
+			return units
+		else
+			to_chat(user, "[icon2html(src, user)][span_notice("Unit is full.")]")
+			return 0
+	else
+		to_chat(user, "[icon2html(src, user)][span_warning("[fuel] traces in target minimal! [P] cannot be used as fuel.")]")
+		return
+
+/obj/item/mecha_parts/mecha_equipment/generator/attackby(weapon,mob/user, params)
+	load_fuel(weapon)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/mecha_parts/mecha_equipment/generator/process(seconds_per_tick)
 	if(!chassis)
 		active = FALSE
@@ -344,6 +386,7 @@
 	if(current_charge < chassis.cell.maxcharge)
 		fuel_usage_rate = fuelrate_active
 		chassis.give_power(rechargerate * seconds_per_tick)
+<<<<<<< HEAD
 	fuel.amount -= min(seconds_per_tick * fuel_usage_rate / SHEET_MATERIAL_AMOUNT, fuel.amount)
 
 ///Try to insert more fuel into the generator
@@ -365,6 +408,9 @@
 ///Introduces the actual fuel type to be used, as well as the starting amount of said fuel
 /obj/item/mecha_parts/mecha_equipment/generator/proc/generator_init()
 	fuel = new /obj/item/stack/sheet/mineral/plasma(src, 0)
+=======
+	fuel.amount -= min(seconds_per_tick * use_fuel / SHEET_MATERIAL_AMOUNT, fuel.amount)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /////////////////////////////////////////// THRUSTERS /////////////////////////////////////////////
 
@@ -432,7 +478,18 @@
 	name = "RCS thruster package"
 	desc = "A set of thrusters that allow for exosuit movement in zero-gravity environments, by expelling gas from the internal life support tank."
 	effect_type = /obj/effect/particle_effect/fluid/smoke
+<<<<<<< HEAD
 	var/move_cost = 0.05 //moles per step (5 times more than human jetpacks)
+=======
+	movedelay = 0.2
+	var/move_cost = 20 //moles per step
+
+/obj/item/mecha_parts/mecha_equipment/thrusters/gas/try_attach_part(mob/user, obj/vehicle/sealed/mecha/M, attach_right = FALSE)
+	if(!M.internal_tank)
+		to_chat(user, span_warning("[M] does not have an internal tank and cannot support this upgrade!"))
+		return FALSE
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/gas/thrust(movement_dir)
 	if(!chassis)
@@ -454,6 +511,7 @@
 	desc = "A set of thrusters that allow for exosuit movement in zero-gravity environments."
 	detachable = FALSE
 	effect_type = /obj/effect/particle_effect/ion_trails
+	movedelay = 0
 
 /obj/item/mecha_parts/mecha_equipment/thrusters/ion/thrust(movement_dir)
 	if(!chassis)

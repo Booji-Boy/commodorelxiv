@@ -25,11 +25,19 @@
 	bubble_icon = "machine"
 
 	faction = list(FACTION_HIVEBOT)
+<<<<<<< HEAD
 	combat_mode = TRUE
 	speech_span = SPAN_ROBOT
 	death_message = "blows apart!"
 
 	habitable_atmos = null
+=======
+	istate = ISTATE_HARM | ISTATE_BLOCKING
+	speech_span = SPAN_ROBOT
+	death_message = "blows apart!"
+
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = TCMB
 	ai_controller = /datum/ai_controller/basic_controller/hivebot
 	///does this type do range attacks?
@@ -95,7 +103,12 @@
 
 /mob/living/basic/hivebot/mechanic/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	GRANT_ACTION(/datum/action/cooldown/spell/conjure/foam_wall)
+=======
+	var/datum/action/cooldown/spell/conjure/foam_wall/foam = new(src)
+	foam.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
 
 /mob/living/basic/hivebot/mechanic/proc/pre_attack(mob/living/fixer, atom/target)

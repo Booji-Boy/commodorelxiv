@@ -9,7 +9,11 @@
 	var/atom/movable/moving = controller.pawn
 	var/min_dist = controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE]
 	var/delay = controller.movement_delay
+<<<<<<< HEAD
 	var/datum/move_loop/loop = GLOB.move_manager.move_to(moving, current_movement_target, min_dist, delay, flags = move_flags, subsystem = SSai_movement, extra_info = controller)
+=======
+	var/datum/move_loop/loop = SSmove_manager.move_to(moving, current_movement_target, min_dist, delay, flags = move_flags, subsystem = SSai_movement, extra_info = controller)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
 	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
 
@@ -19,6 +23,13 @@
 	if(!target_turf?.can_cross_safely(source.moving))
 		return FALSE
 
+<<<<<<< HEAD
+=======
+	if(!target_turf?.can_cross_safely(source.moving))
+		. = MOVELOOP_SKIP_STEP
+	return .
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Move immediately and don't update our facing
 /datum/ai_movement/basic_avoidance/backstep
 	move_flags = MOVEMENT_LOOP_START_FAST | MOVEMENT_LOOP_NO_DIR_UPDATE

@@ -56,6 +56,8 @@ SUBSYSTEM_DEF(garbage)
 	#endif
 	#endif
 
+	/// Toggle for enabling/disabling hard deletes. Objects that don't explicitly request hard deletion with this disabled will leak.
+	var/enable_hard_deletes = FALSE
 
 /datum/controller/subsystem/garbage/PreInit()
 	InitQueues()
@@ -145,7 +147,10 @@ SUBSYSTEM_DEF(garbage)
 			pass_counts[i] = 0
 			fail_counts[i] = 0
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/controller/subsystem/garbage/proc/HandleQueue(level = GC_QUEUE_FILTER)
 	if (level == GC_QUEUE_FILTER)
 		delslasttick = 0
@@ -221,7 +226,13 @@ SUBSYSTEM_DEF(garbage)
 				var/datum/qdel_item/I = items[type]
 
 				var/message = "## TESTING: GC: -- [text_ref(D)] | [type] was unable to be GC'd --"
+<<<<<<< HEAD
 				message = "[message] (ref count of [refcount(D)])"
+=======
+
+				message = "[message] (ref count of [refcount(D)])"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				log_world(message)
 
 				var/detail = D.dump_harddel_info()
@@ -279,10 +290,29 @@ SUBSYSTEM_DEF(garbage)
 	queue[++queue.len] = list(queue_time, D, D.gc_destroyed) // not += for byond reasons
 
 //this is mainly to separate things profile wise.
-/datum/controller/subsystem/garbage/proc/HardDelete(datum/D)
+/datum/controller/subsystem/garbage/proc/HardDelete(datum/D, non_datum = FALSE, override = FALSE)
+	if(!D)
+		return
+
+	if (!override && !enable_hard_deletes)
+		return
+
 	++delslasttick
 	++totaldels
-	var/type = D.type
+	var/type
+	if (!non_datum)
+		type = D.type
+	else if (islist(D))
+		type = "/list"
+	else if (istext(D))
+		type = "string"
+	else if (isnum(D))
+		type = "number"
+	else if (isfile(D))
+		type = "file"
+	else
+		type = "unknown"
+
 	var/refID = text_ref(D)
 	var/datum/qdel_item/type_info = items[type]
 	var/detail = D.dump_harddel_info()
@@ -293,6 +323,7 @@ SUBSYSTEM_DEF(garbage)
 	del(D)
 	tick_usage = TICK_USAGE_TO_MS(tick_usage)
 
+<<<<<<< HEAD
 	type_info.hard_deletes++
 	type_info.hard_delete_time += tick_usage
 	if (tick_usage > type_info.hard_delete_max)
@@ -300,9 +331,21 @@ SUBSYSTEM_DEF(garbage)
 	if (tick_usage > highest_del_ms)
 		highest_del_ms = tick_usage
 		highest_del_type_string = "[type]"
+=======
+	var/datum/qdel_item/I = items[type]
+	if(I)
+		I.hard_deletes++
+		I.hard_delete_time += tick_usage
+		if (tick_usage > I.hard_delete_max)
+			I.hard_delete_max = tick_usage
+		if (tick_usage > highest_del_ms)
+			highest_del_ms = tick_usage
+			highest_del_type_string = "[type]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
-	var/time = MS2DS(tick_usage)
+		var/time = MS2DS(tick_usage)
 
+<<<<<<< HEAD
 	if (time > 0.1 SECONDS)
 		postpone(time)
 	var/threshold = CONFIG_GET(number/hard_deletes_overrun_threshold)
@@ -315,6 +358,20 @@ SUBSYSTEM_DEF(garbage)
 		var/overrun_limit = CONFIG_GET(number/hard_deletes_overrun_limit)
 		if (overrun_limit && type_info.hard_deletes_over_threshold >= overrun_limit)
 			type_info.qdel_flags |= QDEL_ITEM_SUSPENDED_FOR_LAG
+=======
+		if (time > 0.1 SECONDS)
+			postpone(time)
+		var/threshold = CONFIG_GET(number/hard_deletes_overrun_threshold)
+		if (threshold && (time > threshold SECONDS))
+			if (!(I.qdel_flags & QDEL_ITEM_ADMINS_WARNED))
+				log_game("Error: [type]([refID]) took longer than [threshold] seconds to delete (took [round(time/10, 0.1)] seconds to delete)")
+				message_admins("Error: [type]([refID]) took longer than [threshold] seconds to delete (took [round(time/10, 0.1)] seconds to delete).")
+				I.qdel_flags |= QDEL_ITEM_ADMINS_WARNED
+			I.hard_deletes_over_threshold++
+			var/overrun_limit = CONFIG_GET(number/hard_deletes_overrun_limit)
+			if (overrun_limit && I.hard_deletes_over_threshold >= overrun_limit)
+				I.qdel_flags |= QDEL_ITEM_SUSPENDED_FOR_LAG
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/controller/subsystem/garbage/Recover()
 	InitQueues() //We first need to create the queues before recovering data
@@ -344,9 +401,15 @@ SUBSYSTEM_DEF(garbage)
 /// Should be treated as a replacement for the 'del' keyword.
 ///
 /// Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
+<<<<<<< HEAD
 /proc/qdel(datum/to_delete, force = FALSE)
 	if(!istype(to_delete))
 		del(to_delete)
+=======
+/proc/qdel(datum/D, force=FALSE, ...)
+	if(!istype(D))
+		SSgarbage.HardDelete(D, TRUE, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/datum/qdel_item/trash = SSgarbage.items[to_delete.type]
@@ -354,6 +417,7 @@ SUBSYSTEM_DEF(garbage)
 		trash = SSgarbage.items[to_delete.type] = new /datum/qdel_item(to_delete.type)
 	trash.qdels++
 
+<<<<<<< HEAD
 	if(!isnull(to_delete.gc_destroyed))
 		if(to_delete.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
 			CRASH("[to_delete.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
@@ -418,3 +482,70 @@ SUBSYSTEM_DEF(garbage)
 			#endif
 			trash.no_hint++
 			SSgarbage.Queue(to_delete)
+=======
+	if(isnull(D.gc_destroyed))
+		if (SEND_SIGNAL(D, COMSIG_PREQDELETED, force)) // Give the components a chance to prevent their parent from being deleted
+			return
+		D.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
+		var/start_time = world.time
+		var/start_tick = world.tick_usage
+		SEND_SIGNAL(D, COMSIG_QDELETING, force) // Let the (remaining) components know about the result of Destroy
+		var/hint = D.Destroy(arglist(args.Copy(2))) // Let our friend know they're about to get fucked up.
+		if(world.time != start_time)
+			I.slept_destroy++
+		else
+			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
+		if(!D)
+			return
+		switch(hint)
+			if (QDEL_HINT_QUEUE) //qdel should queue the object for deletion.
+				SSgarbage.Queue(D)
+			if (QDEL_HINT_IWILLGC)
+				D.gc_destroyed = world.time
+				SSdemo.mark_destroyed(D) //Monkestation Edit: REPLAYS
+				return
+			if (QDEL_HINT_LETMELIVE) //qdel should let the object live after calling destory.
+				if(!force)
+					D.gc_destroyed = null //clear the gc variable (important!)
+					return
+				// Returning LETMELIVE after being told to force destroy
+				// indicates the objects Destroy() does not respect force
+				#ifdef TESTING
+				if(!I.no_respect_force)
+					testing("WARNING: [D.type] has been force deleted, but is \
+						returning an immortal QDEL_HINT, indicating it does \
+						not respect the force flag for qdel(). It has been \
+						placed in the queue, further instances of this type \
+						will also be queued.")
+				#endif
+				I.no_respect_force++
+
+				SSgarbage.Queue(D)
+			if (QDEL_HINT_HARDDEL) //qdel should assume this object won't gc, and queue a hard delete
+				SSdemo.mark_destroyed(D) //Monkestation Edit: REPLAYS
+				SSgarbage.Queue(D, GC_QUEUE_HARDDELETE)
+			if (QDEL_HINT_HARDDEL_NOW) //qdel should assume this object won't gc, and hard del it post haste.
+				SSdemo.mark_destroyed(D) //Monkestation Edit: REPLAYS
+				SSgarbage.HardDelete(D, override = TRUE)
+			#ifdef REFERENCE_TRACKING
+			if (QDEL_HINT_FINDREFERENCE) //qdel will, if REFERENCE_TRACKING is enabled, display all references to this object, then queue the object for deletion.
+				SSgarbage.HardDelete(D, override = TRUE) // Need to override enable_hard_deletes, stuff like /client uses this
+				D.find_references() //This breaks ci. Consider it insurance against somehow pring reftracking on accident
+			if (QDEL_HINT_IFFAIL_FINDREFERENCE) //qdel will, if REFERENCE_TRACKING is enabled and the object fails to collect, display all references to this object.
+				SSgarbage.Queue(D)
+				SSgarbage.reference_find_on_fail[text_ref(D)] = TRUE
+			#endif
+			else
+				#ifdef TESTING
+				if(!I.no_hint)
+					testing("WARNING: [D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
+				#endif
+				I.no_hint++
+				SSgarbage.Queue(D)
+		//Monkestation Edit: REPLAYS
+		if(D)
+			SSdemo?.mark_destroyed(D)
+		//Monkestation Edit: REPLAYS
+	else if(D.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
+		CRASH("[D.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

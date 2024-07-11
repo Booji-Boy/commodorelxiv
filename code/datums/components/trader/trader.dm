@@ -103,7 +103,11 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 ///If our trader is alive, and the customer left clicks them with an empty hand without combat mode
 /datum/component/trader/proc/on_attack_hand(atom/source, mob/living/carbon/customer)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(!can_trade(customer) || customer.combat_mode)
+=======
+	if(!can_trade(customer) || (customer.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	var/list/npc_options = list()
 	if(length(products))
@@ -426,7 +430,11 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 ///Returns if the trader is conscious and its combat mode is disabled.
 /datum/component/trader/proc/can_trade(mob/customer)
 	var/mob/living/trader = parent
+<<<<<<< HEAD
 	if(trader.combat_mode)
+=======
+	if(trader.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		trader.balloon_alert(customer, "in combat!")
 		return FALSE
 	if(IS_DEAD_OR_INCAP(trader))

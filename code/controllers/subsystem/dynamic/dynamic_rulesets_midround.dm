@@ -63,6 +63,7 @@
 		if (isnull(creature.client)) // Are they connected?
 			trimmed_list.Remove(creature)
 			continue
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic_rulesets_midround.dm
 		if(creature.client.get_remaining_days(minimum_required_age) > 0)
 			trimmed_list.Remove(creature)
 			continue
@@ -75,6 +76,21 @@
 		if (isnull(creature.mind))
 			continue
 		if (restrict_ghost_roles && !(creature.mind.assigned_role.job_flags & JOB_CREW_MEMBER)) // Are they not playing a station role?
+=======
+		if (isnull(creature.mind))
+			trimmed_list.Remove(creature)
+			continue
+		if(creature.client.get_remaining_days(minimum_required_age) > 0)
+			trimmed_list.Remove(creature)
+			continue
+		if (!((antag_preference || antag_flag) in creature.client.prefs.be_special))
+			trimmed_list.Remove(creature)
+			continue
+		if (is_banned_from(creature.ckey, list(antag_flag_override || antag_flag, ROLE_SYNDICATE)))
+			trimmed_list.Remove(creature)
+			continue
+		if (restrict_ghost_roles && (creature.mind.assigned_role.title in GLOB.exp_specialmap[EXP_TYPE_SPECIAL])) // Are they playing a ghost role?
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic_rulesets_midround.dm
 			trimmed_list.Remove(creature)
 			continue
 		if (creature.mind.assigned_role.title in restricted_roles) // Does their job allow it?
@@ -132,6 +148,7 @@
 		message_admins("Possible volunteers was 0. This shouldn't appear, because of ready(), unless you forced it!")
 		return
 
+<<<<<<< HEAD:code/controllers/subsystem/dynamic/dynamic_rulesets_midround.dm
 	SSdynamic.log_dynamic_and_announce("Polling [possible_volunteers.len] players to apply for the [name] ruleset.")
 	candidates = SSpolling.poll_ghost_candidates(
 		question = "Looking for volunteers to become [span_notice(antag_flag)] for [span_danger(name)]",
@@ -141,6 +158,10 @@
 		alert_pic = signup_item_path,
 		role_name_text = antag_flag,
 	)
+=======
+	mode.log_dynamic_and_announce("Polling [possible_volunteers.len] players to apply for the [name] ruleset.")
+	candidates = SSpolling.poll_ghost_candidates("Looking for volunteers to become [antag_flag] for [name]", check_jobban = antag_flag_override, role = antag_flag || antag_flag_override, poll_time = 30 SECONDS, pic_source = /obj/structure/sign/poster/contraband/syndicate_recruitment, role_name_text = antag_flag)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/game/gamemodes/dynamic/dynamic_rulesets_midround.dm
 
 	if(!candidates || candidates.len <= 0)
 		SSdynamic.log_dynamic_and_announce("The ruleset [name] received no applications.")
@@ -235,11 +256,16 @@
 	antag_flag_override = ROLE_TRAITOR
 	protected_roles = list(
 		JOB_CAPTAIN,
+		JOB_HEAD_OF_PERSONNEL,
+		JOB_CHIEF_ENGINEER,
+		JOB_CHIEF_MEDICAL_OFFICER,
+		JOB_RESEARCH_DIRECTOR,
 		JOB_DETECTIVE,
 		JOB_HEAD_OF_PERSONNEL,
 		JOB_HEAD_OF_SECURITY,
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
+		JOB_SECURITY_ASSISTANT,
 		JOB_WARDEN,
 	)
 	restricted_roles = list(
@@ -250,8 +276,12 @@
 	required_candidates = 1
 	weight = 35
 	cost = 3
-	requirements = list(3,3,3,3,3,3,3,3,3,3)
+	requirements = list(30,20,10,3,3,3,3,3,3,3)
+	required_enemies = list(2,2,1,0,0,0,0,0,0)
+	repeatable_weight_decrease = 5 //max 7 per round
 	repeatable = TRUE
+
+	minimum_players = 15
 
 /datum/dynamic_ruleset/midround/from_living/autotraitor/trim_candidates()
 	..()
@@ -350,6 +380,8 @@
 	flags = HIGH_IMPACT_RULESET
 	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_WIZARDDEN)
 
+	minimum_players = 30
+
 /datum/dynamic_ruleset/midround/from_ghosts/wizard/ready(forced = FALSE)
 	if(!check_candidates())
 		return FALSE
@@ -386,7 +418,6 @@
 	cost = 7
 	minimum_round_time = 70 MINUTES
 	requirements = REQUIREMENTS_VERY_HIGH_THREAT_NEEDED
-	ruleset_lazy_templates = list(LAZY_TEMPLATE_KEY_NUKIEBASE)
 	flags = HIGH_IMPACT_RULESET
 
 	var/list/operative_cap = list(2,2,3,3,4,5,5,5,5,5)
@@ -453,6 +484,7 @@
 		JOB_PRISONER,
 		JOB_SECURITY_OFFICER,
 		JOB_WARDEN,
+		JOB_SECURITY_ASSISTANT,
 	)
 	restricted_roles = list(
 		JOB_AI,
@@ -502,7 +534,7 @@
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
 	minimum_round_time = 40 MINUTES
-	weight = 5
+	weight = 4 //monkestation edit: from 5 to 4
 	cost = 10
 	minimum_players = 25
 	repeatable = TRUE

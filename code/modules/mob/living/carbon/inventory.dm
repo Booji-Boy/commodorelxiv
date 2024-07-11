@@ -137,6 +137,11 @@
 		if(ITEM_SLOT_HANDS)
 			put_in_hands(equipping)
 			update_held_items()
+		//monkestation edit start
+		if(ITEM_SLOT_EARS)
+			SEND_SIGNAL(src, COMSIG_CARBON_EQUIP_EARS, I)
+			not_handled = TRUE
+		//monkestation edit end
 		if(ITEM_SLOT_BACKPACK)
 			if(!back || !back.atom_storage?.attempt_insert(equipping, src, override = TRUE, force = indirect_action ? STORAGE_SOFT_LOCKED : STORAGE_NOT_LOCKED))
 				not_handled = TRUE
@@ -152,7 +157,11 @@
 	return not_handled
 
 /mob/living/carbon/get_equipped_speed_mod_items()
+<<<<<<< HEAD
 	return ..() + get_equipped_items()
+=======
+	return ..() + get_all_worn_items()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// This proc is called after an item has been successfully handled and equipped to a slot.
 /mob/living/carbon/proc/has_equipped(obj/item/item, slot, initial = FALSE)
@@ -193,6 +202,11 @@
 			update_worn_legcuffs()
 	else
 		not_handled = TRUE
+
+	//monkestation edit start
+	if(I == ears)
+		SEND_SIGNAL(src, COMSIG_CARBON_UNEQUIP_EARS, I, force, newloc, no_move, invdrop, silent)
+	//monkestation edit end
 
 	// Not an else-if because we're probably equipped in another slot
 	if(I == internal && (QDELETED(src) || QDELETED(I) || I.loc != src))
@@ -479,9 +493,13 @@
 		"right pocket" = ITEM_SLOT_RPOCKET
 	)
 
+<<<<<<< HEAD
 	var/placed_in = equip_in_one_of_slots(item, slots, indirect_action = TRUE)
 
 	if (isnull(placed_in) && delete_item_if_failed)
 		qdel(item)
 
 	return placed_in
+=======
+	return equip_in_one_of_slots(item, slots, qdel_on_fail = delete_item_if_failed)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

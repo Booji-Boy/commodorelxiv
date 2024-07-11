@@ -1,9 +1,15 @@
 import { useBackend } from '../../backend';
 import { Button, Stack } from '../../components';
 import { Window } from '../../layouts';
+<<<<<<< HEAD
 import { RequestsConsoleHeader } from './RequestsConsoleHeader';
 import { RequestMainScreen } from './RequestsConsoleMainScreen';
 import { RequestsData } from './types';
+=======
+import { RequestsData } from './types';
+import { RequestsConsoleHeader } from './RequestsConsoleHeader';
+import { RequestMainScreen } from './RequestsConsoleMainScreen';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 export const RequestsConsole = (props) => {
   const { act, data } = useBackend<RequestsData>();

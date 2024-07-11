@@ -14,10 +14,13 @@
 	},
 /turf/open/floor/iron,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "e" = (
 /obj/modular_map_connector,
 /turf/closed/wall/ice,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "f" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
@@ -102,9 +105,12 @@
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
+<<<<<<< HEAD
 /obj/structure/railing/corner/end{
 	dir = 4
 	},
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plating/snowed,
 /area/virtual_domain/safehouse)
@@ -206,7 +212,11 @@ i
 g
 a
 i
+<<<<<<< HEAD
 e
+=======
+i
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 i

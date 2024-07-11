@@ -70,10 +70,13 @@
 	icon_state = "clown_broken"
 	inhand_icon_state = null
 	spawner_type = /mob/living/basic/clown/mutant
+<<<<<<< HEAD
 	deliveryamt = 5
 
 /obj/item/grenade/spawnergrenade/cat
 	name = "Catnade"
 	desc = "You can hear faint meowing and the sounds of claws on metal coming from within."
 	spawner_type = /mob/living/basic/pet/cat/feral
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	deliveryamt = 5

@@ -452,6 +452,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 4
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/mob_spawn/corpse/human/assistant,
 /obj/effect/spawner/random/engineering/flashlight,
@@ -463,6 +464,11 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/all_access,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/titanium,
 /area/shuttle/abandoned/engine)
 "Nh" = (

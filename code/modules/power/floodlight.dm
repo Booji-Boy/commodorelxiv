@@ -229,7 +229,11 @@
 	active_power_usage = light_setting_list[setting] * light_power_coefficient
 	if(!avail(active_power_usage) && setting > FLOODLIGHT_OFF)
 		return change_setting(setting - 1)
+<<<<<<< HEAD
 	update_light_state()
+=======
+	set_light(l_outer_range = light_setting_list[setting], l_power = light_power)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/setting_text = ""
 	if(setting > FLOODLIGHT_OFF)
 		icon_state = "[initial(icon_state)]_on"

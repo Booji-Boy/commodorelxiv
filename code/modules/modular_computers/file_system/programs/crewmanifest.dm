@@ -16,8 +16,12 @@
 	data["manifest"] = GLOB.manifest.get_manifest()
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/crew_manifest/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/crew_manifest/ui_act(action, params, datum/tgui/ui)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("PRG_print")
 			if(computer) //This option should never be called if there is no printer

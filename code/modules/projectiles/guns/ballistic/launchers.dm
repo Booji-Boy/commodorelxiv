@@ -11,6 +11,7 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	pin = /obj/item/firing_pin/implant/pindicate
 	bolt_type = BOLT_TYPE_NO_BOLT
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted
 	pin = /obj/item/firing_pin
@@ -27,6 +28,7 @@
 	icon_state = "mecha_grenadelnchr"
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/grenademulti
 	pin = /obj/item/firing_pin
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/cyborg/attack_self()
 	return
@@ -41,6 +43,7 @@
 	fire_delay = 0
 	actions_types = list()
 	casing_ejector = FALSE
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/rocketlauncher
 	name = "\improper Dardo-RE Rocket Launcher"
@@ -51,8 +54,11 @@
 	icon = 'icons/obj/weapons/guns/wide_guns.dmi'
 	icon_state = "rocketlauncher"
 	inhand_icon_state = "rocketlauncher"
+<<<<<<< HEAD
 	worn_icon_state = "rocketlauncher"
 	SET_BASE_PIXEL(-8, 0)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/rocketlauncher
 	fire_sound = 'sound/weapons/gun/general/rocket_launch.ogg'
 	slot_flags = ITEM_SLOT_BACK
@@ -70,6 +76,7 @@
 	tac_reloads = FALSE
 	/// Do we shit flames behind us when we fire?
 	var/backblast = TRUE
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/rocketlauncher/Initialize(mapload)
 	. = ..()

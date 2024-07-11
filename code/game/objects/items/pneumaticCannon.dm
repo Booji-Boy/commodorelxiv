@@ -109,7 +109,7 @@
 	return TRUE
 
 /obj/item/pneumatic_cannon/attackby(obj/item/W, mob/living/user, params)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return ..()
 	if(istype(W, /obj/item/tank/internals))
 		if(needs_air == FALSE)
@@ -161,6 +161,7 @@
 		loadedWeightClass++
 	return TRUE
 
+<<<<<<< HEAD
 /obj/item/pneumatic_cannon/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.combat_mode)
 		return ITEM_INTERACT_SKIP_TO_ATTACK
@@ -170,6 +171,16 @@
 /obj/item/pneumatic_cannon/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	Fire(user, interacting_with)
 	return ITEM_INTERACT_SUCCESS
+=======
+/obj/item/pneumatic_cannon/afterattack(atom/target, mob/living/user, flag, params)
+	. = ..()
+	if(flag && (user.istate & ISTATE_HARM))//melee attack
+		return
+	if(!istype(user))
+		return
+	Fire(user, target)
+	return AFTERATTACK_PROCESSED_ITEM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/pneumatic_cannon/proc/Fire(mob/living/user, atom/target)
 	if(!istype(user) && !target)

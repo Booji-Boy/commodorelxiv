@@ -23,6 +23,7 @@
 	hackables = "fire safety protocols"
 	path_image_color = "#FFA500"
 	possessed_message = "You are a firebot! Protect the station from fires to the best of your ability!"
+<<<<<<< HEAD
 
 	automated_announcements = list(
 		FIREBOT_VOICED_FIRE_DETECTED = 'sound/voice/firebot/detected.ogg',
@@ -33,6 +34,8 @@
 		FIREBOT_VOICED_TEMPERATURE_NOMINAL = 'sound/voice/firebot/tempnominal.ogg',
 		FIREBOT_VOICED_KEEP_COOL = 'sound/voice/firebot/keepitcool.ogg',
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/atom/target_fire
 	var/atom/old_target_fire
@@ -76,7 +79,7 @@
 	internal_ext.max_water = INFINITY
 	internal_ext.refill()
 
-/mob/living/simple_animal/bot/firebot/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
+/mob/living/simple_animal/bot/firebot/UnarmedAttack(atom/A, proximity_flag)
 	if(!(bot_mode_flags & BOT_MODE_ON))
 		return
 	if(!can_unarmed_attack())
@@ -121,7 +124,11 @@
 	if(!(bot_cover_flags & BOT_COVER_EMAGGED))
 		return
 
+<<<<<<< HEAD
 	to_chat(user, span_warning("You enable the very ironically named \"fighting with fire\" mode, and disable the targeting safeties.")) // heheehe. funny
+=======
+	to_chat(user, span_warning("You enable the very ironically named \"fighting with fire\" mode, and disable the targetting safeties.")) // heheehe. funny
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	audible_message(span_danger("[src] buzzes oddly!"))
 	playsound(src, SFX_SPARKS, 75, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)

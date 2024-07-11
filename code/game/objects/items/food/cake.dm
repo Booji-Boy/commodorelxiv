@@ -8,7 +8,11 @@
 	)
 	tastes = list("cake" = 1)
 	foodtypes = GRAIN | DAIRY
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// type is spawned 5 at a time and replaces this cake when processed by cutting tool
 	var/obj/item/food/cakeslice/slice_type
 	/// changes yield of sliced cake, default for cake is 5
@@ -31,7 +35,11 @@
 	tastes = list("cake" = 1)
 	foodtypes = GRAIN | DAIRY
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_STAM_REGEN_SMALL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/plain
 	name = "plain cake"
@@ -83,7 +91,11 @@
 	tastes = list("cake" = 5, "sweetness" = 2, "brains" = 1)
 	foodtypes = GRAIN | DAIRY | MEAT | GORE | SUGAR
 	slice_type = /obj/item/food/cakeslice/brain
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_LARGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cakeslice/brain
 	name = "brain cake slice"
@@ -97,7 +109,11 @@
 	)
 	tastes = list("cake" = 5, "sweetness" = 2, "brains" = 1)
 	foodtypes = GRAIN | DAIRY | MEAT | GORE | SUGAR
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_STAM_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/cheese
 	name = "cheese cake"
@@ -223,7 +239,11 @@
 	tastes = list("cake" = 5, "sweetness" = 1)
 	foodtypes = GRAIN | DAIRY | JUNKFOOD | SUGAR
 	slice_type = /obj/item/food/cakeslice/birthday
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_LARGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/birthday/make_microwaveable() // super sekrit club
 	AddElement(/datum/element/microwavable, /obj/item/clothing/head/utility/hardhat/cakehat)
@@ -239,7 +259,11 @@
 	)
 	tastes = list("cake" = 5, "sweetness" = 1)
 	foodtypes = GRAIN | DAIRY | JUNKFOOD | SUGAR
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_HEALTH_MEDIUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/birthday/energy
 	name = "energy cake"
@@ -252,7 +276,7 @@
 		/datum/reagent/consumable/sprinkles = 10,
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 		/datum/reagent/consumable/pwr_game = 10,
-		/datum/reagent/consumable/liquidelectricity/enriched = 10,
+		/datum/reagent/consumable/liquidelectricity = 10,
 	)
 	tastes = list("cake" = 3, "a Vlad's Salad" = 1)
 	slice_type = /obj/item/food/cakeslice/birthday/energy
@@ -283,7 +307,7 @@
 		/datum/reagent/consumable/sprinkles = 2,
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 		/datum/reagent/consumable/pwr_game = 2,
-		/datum/reagent/consumable/liquidelectricity/enriched = 2,
+		/datum/reagent/consumable/liquidelectricity = 2,
 	)
 	tastes = list("cake" = 3, "a Vlad's Salad" = 1)
 	crafting_complexity = FOOD_COMPLEXITY_4
@@ -436,7 +460,11 @@
 	venue_value = FOOD_PRICE_CHEAP
 	slice_type = /obj/item/food/cakeslice/pound_cake_slice
 	yield = 7
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_JOB_MINER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cakeslice/pound_cake_slice
 	name = "pound cake slice"
@@ -448,7 +476,11 @@
 	)
 	tastes = list("cake" = 5, "sweetness" = 5, "batter" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR | JUNKFOOD
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_JOB_MINER
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/hardware_cake
 	name = "hardware cake"
@@ -520,7 +552,11 @@
 	tastes = list("cake" = 1, "sugar" = 1, "joy" = 10)
 	foodtypes = GRAIN | SUGAR | DAIRY
 	slice_type = /obj/item/food/cakeslice/clown_slice
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_5
+=======
+	food_buffs = STATUS_EFFECT_FOOD_WACKY
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cakeslice/clown_slice
 	name = "clown cake slice"
@@ -533,7 +569,11 @@
 	)
 	tastes = list("cake" = 1, "sugar" = 1, "joy" = 10)
 	foodtypes = GRAIN | SUGAR | DAIRY
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_5
+=======
+	food_buffs = STATUS_EFFECT_FOOD_SLIDE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/trumpet
 	name = "spaceman's cake"
@@ -662,7 +702,10 @@
 	icon_state = "plumcakeslice"
 	tastes = list("cake" = 5, "sweetness" = 1, "plum" = 2)
 	foodtypes = GRAIN | DAIRY | FRUIT | SUGAR
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cake/wedding
 	name = "wedding cake"
@@ -676,7 +719,11 @@
 	tastes = list("cake" = 3, "frosting" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
 	slice_type = /obj/item/food/cakeslice/wedding
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	yield = 20 //Monkestation Edit: it takes 4 plain cakes to make 4x the output should be fine
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/cakeslice/wedding
 	name = "wedding cake slice"
@@ -684,6 +731,7 @@
 	icon_state = "weddingcake_slice"
 	tastes = list("cake" = 3, "frosting" = 1)
 	foodtypes = GRAIN | DAIRY | SUGAR
+<<<<<<< HEAD
 
 /obj/item/food/cake/pineapple_cream_cake
 	name = "pineapple cream cake"
@@ -711,3 +759,5 @@
 	tastes = list("cake" = 2, "cream" = 3, "pineapple" = 4)
 	foodtypes = GRAIN | DAIRY | SUGAR | FRUIT | PINEAPPLE
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

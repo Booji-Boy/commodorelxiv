@@ -16,8 +16,12 @@
 
 	file_storing.computer = src
 	used_capacity += file_storing.size
+<<<<<<< HEAD
 	SEND_SIGNAL(file_storing, COMSIG_COMPUTER_FILE_STORE, src)
 	SEND_SIGNAL(src, COMSIG_MODULAR_COMPUTER_FILE_STORE, file_storing)
+=======
+	SEND_SIGNAL(file_storing, COMSIG_MODULAR_COMPUTER_FILE_STORE, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /**
@@ -38,8 +42,12 @@
 
 	stored_files.Remove(file_removing)
 	used_capacity -= file_removing.size
+<<<<<<< HEAD
 	SEND_SIGNAL(src, COMSIG_MODULAR_COMPUTER_FILE_DELETE, file_removing)
 	SEND_SIGNAL(file_removing, COMSIG_COMPUTER_FILE_DELETE)
+=======
+	SEND_SIGNAL(file_removing, COMSIG_MODULAR_COMPUTER_FILE_DELETED)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(file_removing)
 	return TRUE
 

@@ -59,10 +59,13 @@
 	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(track_if_fish))
 	AddElement(/datum/element/relay_attackers)
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
+<<<<<<< HEAD
 	create_reagents(6, SEALED_CONTAINER)
 	RegisterSignal(reagents, COMSIG_REAGENTS_NEW_REAGENT, PROC_REF(start_autofeed))
 	AddComponent(/datum/component/plumbing/aquarium)
 	ADD_KEEP_TOGETHER(src, INNATE_TRAIT)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/aquarium/proc/track_if_fish(atom/source, atom/initialized)
 	SIGNAL_HANDLER
@@ -78,6 +81,7 @@
 	. = ..()
 	LAZYREMOVEASSOC(tracked_fish_by_type, gone.type, gone)
 
+<<<<<<< HEAD
 /obj/structure/aquarium/proc/start_autofeed(datum/source, new_reagent, amount, reagtemp, data, no_react)
 	SIGNAL_HANDLER
 	START_PROCESSING(SSobj, src)
@@ -94,6 +98,8 @@
 	for(var/obj/item/fish/fish as anything in fishes)
 		fish.feed(reagents)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Returns tracked_fish_by_type but flattened and without the items in the blacklist, also shuffled if shuffle is TRUE.
 /obj/structure/aquarium/proc/get_fishes(shuffle = FALSE, blacklist)
 	. = list()
@@ -178,6 +184,7 @@
 	default_unfasten_wrench(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
+<<<<<<< HEAD
 /obj/structure/aquarium/plunger_act(obj/item/plunger/P, mob/living/user, reinforced)
 	if(!panel_open)
 		return
@@ -187,6 +194,8 @@
 		reagents.expose(get_turf(src), TOUCH) //splash on the floor
 		reagents.clear_reagents()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/aquarium/attackby(obj/item/item, mob/living/user, params)
 	if(broken)
 		var/obj/item/stack/sheet/glass/glass = item
@@ -207,7 +216,11 @@
 			update_appearance()
 			return TRUE
 
+<<<<<<< HEAD
 	if(istype(item, /obj/item/fish_feed) && !panel_open)
+=======
+	if(istype(item, /obj/item/fish_feed))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!item.reagents.total_volume)
 			balloon_alert(user, "[item] is empty!")
 			return TRUE
@@ -216,6 +229,7 @@
 			fish.feed(item.reagents)
 		balloon_alert(user, "fed the fish")
 		return TRUE
+<<<<<<< HEAD
 	if(istype(item, /obj/item/aquarium_upgrade))
 		var/obj/item/aquarium_upgrade/upgrade = item
 		if(upgrade.upgrade_from_type != type)
@@ -231,6 +245,8 @@
 		qdel(upgrade)
 		qdel(src)
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/structure/aquarium/proc/on_attacked(datum/source, mob/attacker, attack_flags)

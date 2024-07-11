@@ -136,6 +136,23 @@
 	COOLDOWN_START(src, vehicle_move_cooldown = modified_move_cooldown, (last_move_diagonal ? 2 : 1) * modified_move_delay)
 	return ..()
 
+/datum/component/riding/creature/keycheck(mob/user)
+	if(!keytype)
+		return TRUE
+
+	if(isvehicle(parent))
+		var/obj/vehicle/vehicle_parent = parent
+		return istype(vehicle_parent.inserted_key, keytype)
+
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_user = user
+		for(var/obj/item/listed_item as anything in carbon_user.get_equipped_items())
+			if(listed_item.type == keytype)
+				return TRUE
+		return FALSE
+	else
+		return user.is_holding_item_of_type(keytype)
+
 /// Yeets the rider off, used for animals and cyborgs, redefined for humans who shove their piggyback rider off
 /datum/component/riding/creature/proc/force_dismount(mob/living/rider, gentle = FALSE)
 	var/atom/movable/movable_parent = parent
@@ -164,7 +181,7 @@
 		return
 
 	for(var/mob/yeet_mob in user.buckled_mobs)
-		force_dismount(yeet_mob, (!user.combat_mode)) // gentle on help, byeeee if not
+		force_dismount(yeet_mob, (!(user.istate & ISTATE_HARM))) // gentle on help, byeeee if not
 
 
 /// If the ridden creature has abilities, and some var yet to be made is set to TRUE, the rider will be able to control those abilities
@@ -258,7 +275,11 @@
 /datum/component/riding/creature/human/proc/on_host_unarmed_melee(mob/living/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK) && (target in source.buckled_mobs))
+=======
+	if((human_parent.istate & ISTATE_SECONDARY) && (target in human_parent.buckled_mobs))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		force_dismount(target)
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	return NONE
@@ -444,19 +465,27 @@
 	set_vehicle_dir_layer(WEST, OBJ_LAYER)
 
 /datum/component/riding/creature/goliath
+<<<<<<< HEAD
 	keytype = /obj/item/key/lasso
 	vehicle_move_delay = 4
 	rider_traits = list(TRAIT_NO_FLOATING_ANIM, TRAIT_TENTACLE_IMMUNE)
 
 /datum/component/riding/creature/goliath/deathmatch
 	keytype = null
+=======
+	vehicle_move_delay = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/riding/creature/goliath/Initialize(mob/living/riding_mob, force, ride_check_flags, potion_boost)
 	. = ..()
 	var/mob/living/basic/mining/goliath/goliath = parent
 	goliath.add_movespeed_modifier(/datum/movespeed_modifier/goliath_mount)
 
+<<<<<<< HEAD
 /datum/component/riding/creature/goliath/Destroy(force)
+=======
+/datum/component/riding/creature/goliath/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/mining/goliath/goliath = parent
 	goliath.remove_movespeed_modifier(/datum/movespeed_modifier/goliath_mount)
 	return ..()
@@ -509,6 +538,7 @@
 	set_vehicle_dir_layer(NORTH, OBJ_LAYER)
 	set_vehicle_dir_layer(EAST, OBJ_LAYER)
 	set_vehicle_dir_layer(WEST, OBJ_LAYER)
+<<<<<<< HEAD
 
 /datum/component/riding/creature/leaper
 	can_force_unbuckle = FALSE
@@ -661,3 +691,5 @@
 	mounter = null
 	host = null
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

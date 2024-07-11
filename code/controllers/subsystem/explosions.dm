@@ -299,6 +299,11 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
  */
 /datum/controller/subsystem/explosions/proc/propagate_blastwave(atom/epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, flash_range, adminlog, ignorecap, silent, smoke, protect_epicenter, atom/explosion_cause, explosion_direction, explosion_arc)
 	epicenter = get_turf(epicenter)
+
+	var/area/checking = get_area(epicenter)
+	if(SEND_SIGNAL(checking, COMSIG_AREA_EXPLOSION_SHOCKWAVE) & COMSIG_CANCEL_EXPLOSION)
+		return
+
 	if(!epicenter)
 		return
 
@@ -363,6 +368,11 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		message_admins("Explosion with size (Devast: [devastation_range], Heavy: [heavy_impact_range], Light: [light_impact_range], Flame: [flame_range]) in [ADMIN_VERBOSEJMP(epicenter)]. Possible cause: [explosion_cause]. Last fingerprints: [who_did_it].")
 		log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range], [flame_range]) in [loc_name(epicenter)].  Possible cause: [explosion_cause]. Last fingerprints: [who_did_it_game_log].")
 
+	//monkestation edit start
+	deadchat_broadcast("Explosion with size: Devast: [devastation_range], Heavy: [heavy_impact_range], Light: [light_impact_range], Flame: [flame_range].", \
+						turf_target = epicenter, message_type = DEADCHAT_ANNOUNCEMENT)
+	//monkestation edit end
+
 	var/x0 = epicenter.x
 	var/y0 = epicenter.y
 	var/z0 = epicenter.z
@@ -382,14 +392,12 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 	if(!silent)
 		shake_the_room(epicenter, orig_max_distance, far_dist, devastation_range, heavy_impact_range)
 
-	if(heavy_impact_range > 1)
-		var/datum/effect_system/explosion/E
-		if(smoke)
-			E = new /datum/effect_system/explosion/smoke
-		else
-			E = new
-		E.set_up(epicenter)
-		E.start()
+	if(devastation_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, COLOR_WHITE, FALSE, TRUE)
+	else if(heavy_impact_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, COLOR_WHITE, FALSE, FALSE)
+	else if(light_impact_range > 0)
+		new /obj/effect/temp_visual/explosion(epicenter, max_range, COLOR_WHITE, TRUE, FALSE)
 
 	//flash mobs
 	if(flash_range)
@@ -521,7 +529,7 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
  * - [creaking_sound][/sound]: The sound that plays when the station creaks during the explosion.
  * - [hull_creaking_sound][/sound]: The sound that plays when the station creaks after the explosion.
  */
-/datum/controller/subsystem/explosions/proc/shake_the_room(turf/epicenter, near_distance, far_distance, quake_factor, echo_factor, creaking, sound/near_sound = sound(get_sfx(SFX_EXPLOSION)), sound/far_sound = sound('sound/effects/explosionfar.ogg'), sound/echo_sound = sound('sound/effects/explosion_distant.ogg'), sound/creaking_sound = sound(get_sfx(SFX_EXPLOSION_CREAKING)), hull_creaking_sound = sound(get_sfx(SFX_HULL_CREAKING)))
+/datum/controller/subsystem/explosions/proc/shake_the_room(turf/epicenter, near_distance, far_distance, quake_factor, echo_factor, creaking, sound/near_sound = sound(get_sfx(SFX_EXPLOSION)), sound/far_sound = sound('sound/effects/explosionfar.ogg'), sound/echo_sound = sound('sound/effects/explosion_distant.ogg'), sound/creaking_sound = sound(get_sfx(SFX_EXPLOSION_CREAKING)), hull_creaking_sound = sound(get_sfx(SFX_HULL_CREAKING)), pressure_affected = TRUE, disable_shaking = FALSE) // monkestation edit: add pressure_affected, disable_shaking
 	var/frequency = get_rand_frequency()
 	var/blast_z = epicenter.z
 	if(isnull(creaking)) // Autoset creaking.
@@ -542,20 +550,20 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 		var/base_shake_amount = sqrt(near_distance / (distance + 1))
 
 		if(distance <= round(near_distance + world.view - 2, 1)) // If you are close enough to see the effects of the explosion first-hand (ignoring walls)
-			listener.playsound_local(epicenter, null, 100, TRUE, frequency, sound_to_use = near_sound)
-			if(base_shake_amount > 0)
+			listener.playsound_local(epicenter, null, 100, TRUE, frequency, pressure_affected = pressure_affected, sound_to_use = near_sound) // monkestation edit: pressure_affected
+			if(base_shake_amount > 0 && !disable_shaking) // monkestation edit: disable_shaking
 				shake_camera(listener, NEAR_SHAKE_DURATION, clamp(base_shake_amount, 0, NEAR_SHAKE_CAP))
 
 		else if(distance < far_distance) // You can hear a far explosion if you are outside the blast radius. Small explosions shouldn't be heard throughout the station.
 			var/far_volume = clamp(far_distance / 2, FAR_LOWER, FAR_UPPER)
 			if(creaking)
-				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, sound_to_use = creaking_sound, distance_multiplier = 0)
+				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, pressure_affected = pressure_affected, sound_to_use = creaking_sound, distance_multiplier = 0) // monkestation edit: pressure_affected
 			else if(prob(FAR_SOUND_PROB)) // Sound variety during meteor storm/tesloose/other bad event
-				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, sound_to_use = far_sound, distance_multiplier = 0)
+				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, pressure_affected = pressure_affected, sound_to_use = far_sound, distance_multiplier = 0) // monkestation edit: pressure_affected
 			else
-				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, sound_to_use = echo_sound, distance_multiplier = 0)
+				listener.playsound_local(epicenter, null, far_volume, TRUE, frequency, pressure_affected = pressure_affected, sound_to_use = echo_sound, distance_multiplier = 0) // monkestation edit: pressure_affected
 
-			if(base_shake_amount || quake_factor)
+			if(!disable_shaking && (base_shake_amount || quake_factor)) // monkestation edit: disable_shaking
 				base_shake_amount = max(base_shake_amount, quake_factor * 3, 0) // Devastating explosions rock the station and ground
 				shake_camera(listener, FAR_SHAKE_DURATION, min(base_shake_amount, FAR_SHAKE_CAP))
 
@@ -563,10 +571,11 @@ ADMIN_VERB(check_bomb_impacts, R_DEBUG, "Check Bomb Impact", "See what the effec
 			var/echo_volume
 			if(quake_factor)
 				echo_volume = 60
-				shake_camera(listener, FAR_SHAKE_DURATION, clamp(quake_factor / 4, 0, FAR_SHAKE_CAP))
+				if(!disable_shaking) // monkestation edit: disable_shaking
+					shake_camera(listener, FAR_SHAKE_DURATION, clamp(quake_factor / 4, 0, FAR_SHAKE_CAP))
 			else
 				echo_volume = 40
-			listener.playsound_local(epicenter, null, echo_volume, TRUE, frequency, sound_to_use = echo_sound, distance_multiplier = 0)
+			listener.playsound_local(epicenter, null, echo_volume, TRUE, frequency, pressure_affected = pressure_affected, sound_to_use = echo_sound, distance_multiplier = 0) // monkestation edit: pressure_affected
 
 		if(creaking) // 5 seconds after the bang, the station begins to creak
 			addtimer(CALLBACK(listener, TYPE_PROC_REF(/mob, playsound_local), epicenter, null, rand(FREQ_LOWER, FREQ_UPPER), TRUE, frequency, null, null, FALSE, hull_creaking_sound, 0), CREAK_DELAY)

@@ -22,12 +22,21 @@
 /// Someone, for the love of god, profile this.  Is there a reason to cache mutable_appearance
 /// if so, why are we JUST doing the airlocks when we can put this in mutable_appearance.dm for
 /// everything
-/proc/get_airlock_overlay(icon_state, icon_file, atom/offset_spokesman, em_block)
+/proc/get_airlock_overlay(icon_state, icon_file, atom/offset_spokesman, em_block, state_color = null) // Monkestation Edit - Airlock accent greyscale color support - Added `state_color = null`
 	var/static/list/airlock_overlays = list()
 
-	var/base_icon_key = "[icon_state][REF(icon_file)]"
+	var/base_icon_key = "[icon_state][REF(icon_file)][state_color]" // Monkestation Edit- Airlock accent greyscale color support - ORIGINAL: var/base_icon_key = "[icon_state][REF(icon_file)]"
 	if(!(. = airlock_overlays[base_icon_key]))
+		/* Monkestation Edit - Airlock accent greyscale color support - ORIGINAL:
 		. = airlock_overlays[base_icon_key] = mutable_appearance(icon_file, icon_state)
+		*/ // Monkestation Edit START
+		var/mutable_appearance/airlock_overlay = mutable_appearance(icon_file, icon_state)
+		if(state_color)
+			airlock_overlay.color = state_color
+
+		. = airlock_overlays[base_icon_key] = airlock_overlay
+		// Monkestation Edit END
+
 	if(isnull(em_block))
 		return
 
@@ -157,7 +166,10 @@
 
 /obj/machinery/door/airlock/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_wires(get_wires())
 	if(glass)
 		airlock_material = "glass"
@@ -243,7 +255,7 @@
 	if(locked)
 		return
 	set_bolt(TRUE)
-	playsound(src,boltDown,30,FALSE,3)
+	playsound(src,boltDown,30,FALSE,3, mixer_channel = CHANNEL_MACHINERY)
 	audible_message(span_hear("You hear a click from the bottom of the door."), null,  1)
 	update_appearance()
 
@@ -261,7 +273,7 @@
 	if(!locked)
 		return
 	set_bolt(FALSE)
-	playsound(src,boltUp,30,FALSE,3)
+	playsound(src,boltUp,30,FALSE,3, mixer_channel = CHANNEL_MACHINERY)
 	audible_message(span_hear("You hear a click from the bottom of the door."), null,  1)
 	update_appearance()
 
@@ -511,7 +523,9 @@
 			icon_state = ""
 		if(AIRLOCK_DENY, AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG)
 			icon_state = "nonexistenticonstate" //MADNESS
+	SSdemo.mark_dirty(src) //Monkestation Edit: REPLAYS
 
+/* monkestation edit
 /obj/machinery/door/airlock/update_overlays()
 	. = ..()
 
@@ -590,6 +604,7 @@
 					floorlight.pixel_x = -32
 					floorlight.pixel_y = 0
 			. += floorlight
+*/ //monkestation end
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
@@ -600,12 +615,17 @@
 		if("deny")
 			if(!machine_stat)
 				update_icon(ALL, AIRLOCK_DENY)
+<<<<<<< HEAD
 				playsound(src,doorDeni,50,FALSE,3)
 				addtimer(CALLBACK(src, PROC_REF(handle_deny_end)), AIRLOCK_DENY_ANIMATION_TIME)
 
 /obj/machinery/door/airlock/proc/handle_deny_end()
 	if(airlock_state == AIRLOCK_DENY)
 		update_icon(ALL, AIRLOCK_CLOSED)
+=======
+				playsound(src,doorDeni,50,FALSE,3, mixer_channel = CHANNEL_MACHINERY)
+				addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), ALL, AIRLOCK_CLOSED), AIRLOCK_DENY_ANIMATION_TIME)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/door/airlock/examine(mob/user)
 	. = ..()
@@ -801,7 +821,7 @@
 	if(ishuman(user) && prob(40) && density)
 		var/mob/living/carbon/human/H = user
 		if((HAS_TRAIT(H, TRAIT_DUMB)) && Adjacent(user))
-			playsound(src, 'sound/effects/bang.ogg', 25, TRUE)
+			playsound(src, 'sound/effects/bang.ogg', 25, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 			if(!istype(H.head, /obj/item/clothing/head/helmet))
 				H.visible_message(span_danger("[user] headbutts the airlock."), \
 									span_userdanger("You headbutt the airlock!"))
@@ -996,9 +1016,14 @@
 			return
 	add_fingerprint(user)
 
-	if(is_wire_tool(C) && panel_open)
-		attempt_wire_interaction(user)
-		return
+	if(is_wire_tool(C))
+		if(panel_open)
+			attempt_wire_interaction(user)
+			return
+		else
+			attempt_hacking_interaction(user)
+			return
+
 	else if(panel_open && security_level == AIRLOCK_SECURITY_NONE && istype(C, /obj/item/stack/sheet))
 		if(istype(C, /obj/item/stack/sheet/iron))
 			return try_reinforce(user, C, 2, AIRLOCK_SECURITY_IRON)
@@ -1016,6 +1041,8 @@
 		cable.plugin(src, user)
 	else if(istype(C, /obj/item/airlock_painter))
 		change_paintjob(C, user)
+	else if(istype(C, /obj/item/card/id/fake_card))
+		open_with_fake_card(C, user)
 	else if(istype(C, /obj/item/door_seal)) //adding the seal
 		var/obj/item/door_seal/airlockseal = C
 		if(!density)
@@ -1025,7 +1052,7 @@
 			to_chat(user, span_warning("[src] has already been sealed!"))
 			return
 		user.visible_message(span_notice("[user] begins sealing [src]."), span_notice("You begin sealing [src]."))
-		playsound(src, 'sound/items/jaws_pry.ogg', 30, TRUE)
+		playsound(src, 'sound/items/jaws_pry.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 		if(!do_after(user, airlockseal.seal_time, target = src))
 			return
 		if(!density)
@@ -1037,7 +1064,7 @@
 		if(!user.transferItemToLoc(airlockseal, src))
 			to_chat(user, span_warning("For some reason, you can't attach [airlockseal]!"))
 			return
-		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+		playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 		user.visible_message(span_notice("[user] finishes sealing [src]."), span_notice("You finish sealing [src]."))
 		seal = airlockseal
 		modify_max_integrity(max_integrity * AIRLOCK_SEAL_MULTIPLIER)
@@ -1056,6 +1083,26 @@
 	else
 		return ..()
 
+
+/obj/machinery/door/airlock/proc/open_with_fake_card(obj/card, mob/user)
+	add_fingerprint(user)
+	if(operating || welded || locked)
+		return FALSE
+	var/obj/item/card/id/fake_card/fake = card
+	if(fake.uses)
+		if(check_access_list(fake.access))
+			user.visible_message("<span class='warning'>[user] starts fumbling at \the [src] with a piece of paper!</span>", "<span class='userwarning'>You start swiping \the [fake] in \the [src]!</span>")
+			playsound(src, 'sound/items/handling/paper_pickup.ogg', 100, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
+			if(do_after(user, 50, src))
+				if(open()) //only take a use away if the door actually opens
+					playsound(src, 'sound/items/poster_ripped.ogg', 100, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
+					fake.used()
+					if(fake.uses == 0)
+						to_chat(user, "<span class='warning'>It's no good, this ID is so torn up it won't fit in another door.</span>")
+		else
+			do_animate("deny")
+	else
+		to_chat(user, "<span class='warning'>It's no good, this ID is so torn up it won't fit in another door.</span>")
 
 /obj/machinery/door/airlock/try_to_weld(obj/item/weldingtool/W, mob/living/user)
 	if(!operating && density)
@@ -1111,12 +1158,12 @@
 		to_chat(user, span_warning("You don't have the dexterity to remove the seal!"))
 		return TRUE
 	user.visible_message(span_notice("[user] begins removing the seal from [src]."), span_notice("You begin removing [src]'s pneumatic seal."))
-	playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+	playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 	if(!do_after(user, airlockseal.unseal_time, target = src))
 		return TRUE
 	if(!seal)
 		return TRUE
-	playsound(src, 'sound/items/jaws_pry.ogg', 30, TRUE)
+	playsound(src, 'sound/items/jaws_pry.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 	airlockseal.forceMove(get_turf(user))
 	user.visible_message(span_notice("[user] finishes removing the seal from [src]."), span_notice("You finish removing [src]'s pneumatic seal."))
 	seal = null
@@ -1176,7 +1223,7 @@
 
 			if(!prying_so_hard)
 				var/time_to_open = 50
-				playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE) //is it aliens or just the CE being a dick?
+				playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS) //is it aliens or just the CE being a dick?
 				prying_so_hard = TRUE
 				if(do_after(user, time_to_open, src))
 					if(check_electrified && shock(user,100))
@@ -1250,6 +1297,7 @@
 	if(delayed_close_requested)
 		delayed_close_requested = FALSE
 		addtimer(CALLBACK(src, PROC_REF(close)), FORCING_DOOR_CHECKS)
+	SEND_SIGNAL(src, COMSIG_ATOM_DOOR_OPEN) /// this is different because we need one that covers all doors
 	return TRUE
 
 /// Additional checks depending on what we want to happen to door (should we try and open it normally, or do we want this open at all costs?)
@@ -1258,8 +1306,13 @@
 		if(DEFAULT_DOOR_CHECKS) // Regular behavior.
 			if(!hasPower() || wires.is_cut(WIRE_OPEN) || (obj_flags & EMAGGED))
 				return FALSE
+<<<<<<< HEAD
 			use_energy(50 JOULES)
 			playsound(src, doorOpen, 30, TRUE)
+=======
+			use_power(50)
+			playsound(src, doorOpen, 30, TRUE, mixer_channel = CHANNEL_MACHINERY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 
 		if(FORCING_DOOR_CHECKS) // Only one check.
@@ -1270,7 +1323,7 @@
 			return TRUE
 
 		if(BYPASS_DOOR_CHECKS) // No power usage, special sound, get it open.
-			playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+			playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 			return TRUE
 
 		else
@@ -1303,6 +1356,19 @@
 	if(killthis)
 		SSexplosions.med_mov_atom += killthis
 	SEND_SIGNAL(src, COMSIG_AIRLOCK_CLOSE, forced)
+
+	var/turf/open/open_turf = get_turf(src)
+	if(open_turf.liquids)
+		var/datum/liquid_group/turfs_group = open_turf.liquids.liquid_group
+		turfs_group.remove_from_group(open_turf)
+		qdel(open_turf.liquids)
+		turfs_group.try_split(open_turf)
+		for(var/dir in GLOB.cardinals)
+			var/turf/open/direction_turf = get_step(open_turf, dir)
+			if(!isopenturf(direction_turf) || !direction_turf.liquids)
+				continue
+			turfs_group.check_edges(direction_turf)
+
 	operating = TRUE
 	update_icon(ALL, AIRLOCK_CLOSING, 1)
 	layer = CLOSED_DOOR_LAYER
@@ -1340,12 +1406,17 @@
 		if(DEFAULT_DOOR_CHECKS to FORCING_DOOR_CHECKS)
 			if(obj_flags & EMAGGED)
 				return FALSE
+<<<<<<< HEAD
 			use_energy(50 JOULES)
 			playsound(src, doorClose, 30, TRUE)
+=======
+			use_power(50)
+			playsound(src, doorClose, 30, TRUE, mixer_channel = CHANNEL_MACHINERY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return TRUE
 
 		if(BYPASS_DOOR_CHECKS)
-			playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE)
+			playsound(src, 'sound/machines/airlockforced.ogg', 30, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 			return TRUE
 
 		else
@@ -1427,7 +1498,7 @@
 	if(!density) //Already open
 		return ..()
 	if(locked || welded || seal) //Extremely generic, as aliens only understand the basics of how airlocks work.
-		if(user.combat_mode)
+		if((user.istate & ISTATE_HARM))
 			return ..()
 		to_chat(user, span_warning("[src] refuses to budge!"))
 		return
@@ -1438,7 +1509,7 @@
 	var/time_to_open = 5 //half a second
 	if(hasPower())
 		time_to_open = 5 SECONDS //Powered airlocks take longer to open, and are loud.
-		playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE)
+		playsound(src, 'sound/machines/airlock_alien_prying.ogg', 100, TRUE, mixer_channel = CHANNEL_SOUND_EFFECTS)
 
 
 	if(do_after(user, time_to_open, src))
@@ -1553,7 +1624,11 @@
 			if(security_level != AIRLOCK_SECURITY_NONE)
 				to_chat(user, span_notice("[src]'s reinforcement needs to be removed first."))
 				return FALSE
+<<<<<<< HEAD
 			return list("delay" = 5 SECONDS, "cost" = 32)
+=======
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 5 SECONDS, "cost" = 32)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/machinery/door/airlock/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -1593,9 +1668,15 @@
 
 	var/list/power = list()
 	power["main"] = remaining_main_outage() ? 0 : 2 // boolean
+<<<<<<< HEAD
 	power["main_timeleft"] = round(remaining_main_outage() / 10)
 	power["backup"] = remaining_backup_outage() ? 0 : 2 // boolean
 	power["backup_timeleft"] = round(remaining_backup_outage() / 10)
+=======
+	power["main_timeleft"] = remaining_main_outage()
+	power["backup"] = remaining_backup_outage() ? 0 : 2 // boolean
+	power["backup_timeleft"] = remaining_backup_outage()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	data["power"] = power
 
 	data["shock"] = secondsElectrified == MACHINE_NOT_ELECTRIFIED ? 2 : 0
@@ -1633,14 +1714,22 @@
 		return
 	switch(action)
 		if("disrupt-main")
+<<<<<<< HEAD
 			if(!main_power_timer)
+=======
+			if(remaining_main_outage())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				loseMainPower()
 				update_appearance()
 			else
 				to_chat(usr, span_warning("Main power is already offline."))
 			. = TRUE
 		if("disrupt-backup")
+<<<<<<< HEAD
 			if(!backup_power_timer)
+=======
+			if(remaining_backup_outage())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				loseBackupPower()
 				update_appearance()
 			else

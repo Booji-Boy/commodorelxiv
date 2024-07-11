@@ -61,7 +61,7 @@
 		projectile_obj.preparePixelProjectile(target, source, modifiers, spread)
 		if(source.client && isliving(source)) //dont want it to happen from syndie mecha npc mobs, they do direct fire anyways
 			var/mob/living/shooter = source
-			projectile_obj.hit_prone_targets = shooter.combat_mode
+			projectile_obj.hit_prone_targets = (shooter.istate & ISTATE_HARM)
 		projectile_obj.fire()
 		if(!projectile_obj.suppressed && firing_effect_type)
 			new firing_effect_type(get_turf(src), chassis.dir)
@@ -78,7 +78,12 @@
 //Base energy weapon type
 /obj/item/mecha_parts/mecha_equipment/weapon/energy
 	name = "general energy weapon"
+<<<<<<< HEAD
 	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect/red
+=======
+	movedelay = 0.2
+	firing_effect_type = /obj/effect/temp_visual/dir_setting/firing_effect/energy
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
 	equip_cooldown = 8
@@ -96,6 +101,7 @@
 	desc = "A weapon for combat exosuits. Shoots a bunch of weak disabler beams."
 	icon_state = "mecha_disabler"
 	energy_drain = 100
+	movedelay = 0
 	projectile = /obj/projectile/beam/disabler/weak
 	variance = 25
 	projectiles_per_shot = 5
@@ -223,6 +229,7 @@
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic
 	name = "general ballistic weapon"
 	fire_sound = 'sound/weapons/gun/smg/shot.ogg'
+	movedelay = 0.4
 	var/projectiles
 	var/projectiles_cache //ammo to be loaded in, if possible.
 	var/projectiles_cache_max
@@ -432,7 +439,11 @@
 	projectiles_cache_max = 999
 	equip_cooldown = 20
 	mech_flags = EXOSUIT_MODULE_HONK
+<<<<<<< HEAD
 	ammo_type = MECHA_AMMO_BANANA_PEEL
+=======
+	movedelay = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/launcher/mousetrap_mortar
 	name = "mousetrap mortar"
@@ -446,7 +457,11 @@
 	projectiles_cache_max = 999
 	equip_cooldown = 10
 	mech_flags = EXOSUIT_MODULE_HONK
+<<<<<<< HEAD
 	ammo_type = MECHA_AMMO_MOUSETRAP
+=======
+	movedelay = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/launcher/mousetrap_mortar/proj_init(obj/item/assembly/mousetrap/armed/M)
 	M.secured = TRUE
@@ -459,6 +474,7 @@
 	energy_drain = 250
 	equip_cooldown = 20
 	range = MECHA_MELEE|MECHA_RANGED
+	movedelay = 0
 	missile_range = 5
 	projectile = /obj/item/punching_glove
 	fire_sound = 'sound/items/bikehorn.ogg'

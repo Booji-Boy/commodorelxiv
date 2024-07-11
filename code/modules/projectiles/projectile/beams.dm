@@ -10,8 +10,13 @@
 	eyeblur = 4 SECONDS
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/red_laser
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1
 	light_power = 1.4
+=======
+	light_outer_range = 1
+	light_power = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_SOFT_RED
 	ricochets_max = 50 //Honk!
 	ricochet_chance = 80
@@ -125,10 +130,15 @@
 /obj/projectile/beam/disabler
 	name = "disabler beam"
 	icon_state = "omnilaser"
-	damage = 30
+	damage = 0
 	damage_type = STAMINA
+	stamina = 45
+	paralyze_timer = 5 SECONDS
 	armor_flag = ENERGY
+<<<<<<< HEAD
 	hitsound = 'sound/weapons/sear_disabler.ogg'
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/blue_laser
 	light_color = LIGHT_COLOR_BLUE
 	tracer_type = /obj/effect/projectile/tracer/disabler
@@ -136,7 +146,16 @@
 	impact_type = /obj/effect/projectile/impact/disabler
 
 /obj/projectile/beam/disabler/weak
-	damage = 15
+	stamina = 15
+
+/obj/projectile/beam/disabler/smoothbore
+	name = "unfocused disabler beam"
+	weak_against_armour = TRUE
+
+/obj/projectile/beam/disabler/smoothbore/prime
+	name = "focused disabler beam"
+	weak_against_armour = FALSE
+	stamina = 35
 
 /obj/projectile/beam/disabler/smoothbore
 	name = "unfocused disabler beam"
@@ -200,13 +219,13 @@
 	impact_type = /obj/effect/projectile/impact/laser/emitter
 	impact_effect_type = null
 	hitscan_light_intensity = 3
-	hitscan_light_range = 0.75
+	hitscan_light_outer_range = 0.75
 	hitscan_light_color_override = COLOR_LIME
 	muzzle_flash_intensity = 6
 	muzzle_flash_range = 2
 	muzzle_flash_color_override = COLOR_LIME
 	impact_light_intensity = 7
-	impact_light_range = 2.5
+	impact_light_outer_range = 2.5
 	impact_light_color_override = COLOR_LIME
 
 /obj/projectile/beam/lasertag
@@ -225,7 +244,7 @@
 		var/mob/living/carbon/human/M = target
 		if(istype(M.wear_suit))
 			if(M.wear_suit.type in suit_types)
-				M.adjustStaminaLoss(34)
+				M.stamina.adjust(-34)
 
 /obj/projectile/beam/lasertag/redtag
 	icon_state = "laser"
@@ -249,6 +268,29 @@
 /obj/projectile/beam/lasertag/bluetag/hitscan
 	hitscan = TRUE
 
+<<<<<<< HEAD
 /obj/projectile/magic/shrink/alien
 	antimagic_flags = NONE
 	shrink_time = 9 SECONDS
+=======
+//a shrink ray that shrinks stuff, which grows back after a short while.
+/obj/projectile/beam/shrink
+	name = "shrink ray"
+	icon_state = "blue_laser"
+	hitsound = 'sound/weapons/shrink_hit.ogg'
+	damage = 0
+	damage_type = STAMINA
+	armor_flag = ENERGY
+	impact_effect_type = /obj/effect/temp_visual/impact_effect/shrink
+	light_color = LIGHT_COLOR_BLUE
+	var/shrink_time = 90
+
+/obj/projectile/beam/shrink/on_hit(atom/target, blocked = 0, pierce_hit)
+	. = ..()
+	if(isopenturf(target) || isindestructiblewall(target))//shrunk floors wouldnt do anything except look weird, i-walls shouldn't be bypassable
+		return
+	target.AddComponent(/datum/component/shrink, shrink_time)
+
+/obj/projectile/beam/shrink/is_hostile_projectile()
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

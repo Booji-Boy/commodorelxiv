@@ -14,13 +14,24 @@
 
 /datum/map_template/shuttle/emergency/New()
 	. = ..()
+<<<<<<< HEAD:code/datums/shuttles/emergency.dm
 	if(!occupancy_limit && who_can_purchase)
 		CRASH("The [name] needs an occupancy limit!")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/datums/shuttles.dm
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_SHUTTLE_SALE) && credit_cost > 0 && prob(15))
 		var/discount_amount = round(rand(25, 80), 5)
 		name += " ([discount_amount]% Discount!)"
 		var/discount_multiplier = 100 - discount_amount
 		credit_cost = ((credit_cost * discount_multiplier) / 100)
+<<<<<<< HEAD:code/datums/shuttles/emergency.dm
+=======
+
+/datum/map_template/shuttle/cargo
+	port_id = "cargo"
+	name = "Base Shuttle Template (Cargo)"
+	who_can_purchase = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/datums/shuttles.dm
 
 ///on post_load use our variables to change shuttle events
 /datum/map_template/shuttle/emergency/post_load(obj/docking_port/mobile/mobile)
@@ -385,10 +396,19 @@
 /datum/map_template/shuttle/emergency/cruise
 	suffix = "cruise"
 	name = "The NTSS Independence"
-	description = "Ordinarily reserved for special functions and events, the Cruise Shuttle Independence can bring a summery cheer to your next station evacuation for a 'modest' fee!"
+	description = "Unparalleled Resilience, Unmatched Patriotism. Prepare to embark on a mission of extraordinary proportions with the NTSS Independence Evacuation Space Shuttle. \
+	Designed to offer a groundbreaking combination of power, resilience, and a symbol of classical American patriotism, this shuttle is the pinnacle of cutting-edge technology and unwavering determination. \
+	Proudly standing as one of Nanotrasen's most coveted and exclusive shuttles available to space station captains, the NTSS Independence is a testament to excellence and is primed to be your ultimate ally in times of crisis. \
+	With the NTSS Independence at your side, you can face any crisis head-on, knowing that the lives of your crew and survivors are in the hands of a vessel built on the principles of strength, bravery, and American ideals. \
+	Please note, In the face of a catastrophic event, the NTSS Independence shines as a true hero. Engineered to withstand extreme conditions, this shuttle fearlessly crashes into the space station, carving out a beachhead to facilitate the rescue and evacuation of survivors."
 	admin_notes = "This motherfucker is BIG. You might need to force dock it."
+<<<<<<< HEAD:code/datums/shuttles/emergency.dm
 	credit_cost = CARGO_CRATE_VALUE * 100
 	occupancy_limit = "80"
+=======
+	credit_cost = EMAG_LOCKED_SHUTTLE_COST * 3.5
+	emag_only = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/datums/shuttles.dm
 
 /datum/map_template/shuttle/emergency/monkey
 	suffix = "nature"

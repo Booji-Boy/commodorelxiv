@@ -7,8 +7,28 @@
 import { canRender, classes } from 'common/react';
 import { forwardRef, ReactNode, RefObject, useEffect } from 'react';
 
+<<<<<<< HEAD
 import { addScrollableNode, removeScrollableNode } from '../events';
 import { BoxProps, computeBoxClassName, computeBoxProps } from './Box';
+=======
+export type SectionProps = BoxProps & {
+  className?: string;
+  title?: InfernoNode;
+  buttons?: InfernoNode;
+  fill?: boolean;
+  fitted?: boolean;
+  scrollable?: boolean;
+  scrollableHorizontal?: boolean;
+  /** @deprecated This property no longer works, please remove it. */
+  level?: never;
+  /** @deprecated Please use `scrollable` property */
+  overflowY?: never;
+  /** @member Allows external control of scrolling. */
+  scrollableRef?: RefObject<HTMLDivElement>;
+  /** @member Callback function for the `scroll` event */
+  onScroll?: (this: GlobalEventHandlers, ev: Event) => any;
+};
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Props = Partial<{
   /** Buttons to render aside the section title. */
@@ -112,9 +132,13 @@ export const Section = forwardRef(
           <div
             className="Section__content"
             onScroll={onScroll}
+<<<<<<< HEAD
             // For posterity: the forwarded ref needs to be here specifically
             // to actually let things interact with the scrolling.
             ref={forwardedRef}
+=======
+            className="Section__content"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             {children}
           </div>

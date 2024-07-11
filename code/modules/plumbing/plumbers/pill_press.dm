@@ -8,9 +8,14 @@
 ///We take a constant input of reagents, and produce a pill once a set volume is reached
 /obj/machinery/plumbing/pill_press
 	name = "chemical press"
-	desc = "A press that makes pills, patches and bottles."
+	desc = "A press that makes pills, patches and tubes."
 	icon_state = "pill_press"
+<<<<<<< HEAD
 
+=======
+	///category for plumbing RCD
+	category="Storage"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// current operating product (pills or patches)
 	var/product = "pill"
 	/// selected size of the product
@@ -33,9 +38,15 @@
 		var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/chemmaster)
 
 		var/list/types = list(
+<<<<<<< HEAD
 			CAT_PILLS = GLOB.reagent_containers[CAT_PILLS],
 			CAT_PATCHES = GLOB.reagent_containers[CAT_PATCHES],
 			"Bottles" = list(/obj/item/reagent_containers/cup/bottle),
+=======
+			CAT_PILLS = GLOB.chem_master_containers[CAT_PILLS],
+			CAT_PATCHES = GLOB.chem_master_containers[CAT_PATCHES],
+			CAT_TUBES = list(/obj/item/reagent_containers/cup/tube),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 
 		packaging_types = list()
@@ -52,7 +63,11 @@
 
 			packaging_types += list(category_item)
 
+<<<<<<< HEAD
 	packaging_type = REF(GLOB.reagent_containers[CAT_PILLS][1])
+=======
+	packaging_type = REF(GLOB.chem_master_containers[CAT_PILLS][1])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	decode_category()
 
 	AddComponent(/datum/component/plumbing/simple_demand, bolt, layer)
@@ -69,7 +84,11 @@
 	else if(ispath(container, /obj/item/reagent_containers/pill))
 		packaging_category = CAT_PILLS
 	else
+<<<<<<< HEAD
 		packaging_category = "Bottles"
+=======
+		packaging_category = CAT_TUBES
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return container
 
 /obj/machinery/plumbing/pill_press/process(seconds_per_tick)
@@ -87,7 +106,11 @@
 			if(CAT_PATCHES)
 				suffix = "Patch"
 			else
+<<<<<<< HEAD
 				suffix = "Bottle"
+=======
+				suffix = "Tube"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		container.name = "[product_name] [suffix]"
 		reagents.trans_to(container, current_volume)
 		stored_products += container
@@ -104,7 +127,11 @@
 			stored_products -= AM
 			AM.forceMove(drop_location())
 
+<<<<<<< HEAD
 	use_energy(active_power_usage * seconds_per_tick)
+=======
+	use_power(active_power_usage * seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/plumbing/pill_press/ui_assets(mob/user)
 	return list(

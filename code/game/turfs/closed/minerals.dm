@@ -211,13 +211,39 @@
 /turf/closed/mineral/proc/gets_drilled(mob/user, give_exp = FALSE)
 	if(istype(user))
 		SEND_SIGNAL(user, COMSIG_MOB_MINED, src, give_exp)
+<<<<<<< HEAD
 	if(mineralType && (mineralAmt > 0))
 		new mineralType(src, mineralAmt)
 		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, mineralType)
 	if(spawned_boulder)
 		new spawned_boulder(src)
+=======
+	if (mineralType && (mineralAmt > 0))
+		new mineralType(src, mineralAmt)
+		SSblackbox.record_feedback("tally", "ore_mined", mineralAmt, initial(mineralType.name))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
+		if(HAS_TRAIT(H, FOOD_JOB_MINER))
+			var/obj/item/stack/ore/picked_ore
+			if(prob(20))
+				switch(rand(122))
+					if(0 to 70)
+						picked_ore = /obj/item/stack/ore/iron
+					if(71 to 85)
+						picked_ore = /obj/item/stack/ore/plasma
+					if(86 to 105)
+						picked_ore = /obj/item/stack/ore/silver
+					if(106 to 120)
+						picked_ore = /obj/item/stack/ore/gold
+					if(121)
+						picked_ore = /obj/item/stack/ore/diamond
+					if(122)
+						picked_ore = /obj/item/stack/ore/bluespace_crystal
+			if(picked_ore)
+				new picked_ore(src, 1)
+				SSblackbox.record_feedback("tally", "ore_mined", 1, initial(picked_ore.name))
+
 		if(give_exp)
 			if (mineralType && (mineralAmt > 0))
 				H.mind.adjust_experience(/datum/skill/mining, initial(mineralType.mine_experience) * mineralAmt)
@@ -276,8 +302,12 @@
 /turf/closed/mineral/random
 	/// What are the base odds that this turf spawns a mineral in the wall on initialize?
 	var/mineralChance = 13
+<<<<<<< HEAD
 	/// Does this mineral determine it's random chance and mineral contents based on proximity to a vent? Overrides mineralChance and mineralAmt.
 	var/proximity_based = FALSE
+=======
+	var/turf_transforms = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Returns a list of the chances for minerals to spawn.
 /// Will only run once, and will then be cached.
@@ -293,6 +323,7 @@
 		/obj/item/stack/ore/titanium = 11,
 		/obj/item/stack/ore/uranium = 5,
 		/turf/closed/mineral/gibtonite = 4,
+		/turf/closed/mineral/artifact = 1,
 	)
 
 /turf/closed/mineral/random/Initialize(mapload)
@@ -309,12 +340,14 @@
 			spawn_chance_list = mineral_chances_by_type[type]
 		var/path = pick(spawn_chance_list)
 		if(ispath(path, /turf))
-			var/stored_flags = 0
-			if(turf_flags & NO_RUINS)
-				stored_flags |= NO_RUINS
-			var/turf/T = ChangeTurf(path,null,CHANGETURF_IGNORE_AIR)
-			T.flags_1 |= stored_flags
+			if(turf_transforms)
+				var/stored_flags = 0
+				if(turf_flags & NO_RUINS)
+					stored_flags |= NO_RUINS
+				var/turf/T = ChangeTurf(path,null,CHANGETURF_IGNORE_AIR)
+				T.flags_1 |= stored_flags
 
+<<<<<<< HEAD
 			if(ismineralturf(T))
 				var/turf/closed/mineral/M = T
 				M.turf_type = src.turf_type
@@ -322,9 +355,20 @@
 				GLOB.post_ore_random["[M.mineralAmt]"] += 1
 				src = M
 				M.levelupdate()
+=======
+				if(ismineralturf(T))
+					var/turf/closed/mineral/M = T
+					M.turf_type = src.turf_type
+					M.mineralAmt = rand(1, 5)
+					src = M
+					M.levelupdate()
+				else
+					src = T
+					T.levelupdate()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			else
-				src = T
-				T.levelupdate()
+				Change_Ore(/obj/item/stack/ore/iron, 1)
+				Spread_Vein(/obj/item/stack/ore/iron)
 
 		else
 			Change_Ore(path, FALSE)
@@ -381,6 +425,7 @@
 		/obj/item/stack/ore/titanium = 4,
 		/obj/item/stack/ore/uranium = 2,
 		/turf/closed/mineral/gibtonite = 2,
+		/turf/closed/mineral/artifact = 2,
 	)
 
 //extremely low chance of rare ores, meant mostly for populating stations with large amounts of asteroid
@@ -418,6 +463,7 @@
 		/obj/item/stack/ore/titanium = 11,
 		/obj/item/stack/ore/uranium = 5,
 		/turf/closed/mineral/gibtonite/volcanic = 4,
+		/turf/closed/mineral/artifact/volcanic = 1,
 	)
 
 /turf/closed/mineral/random/snow
@@ -935,5 +981,48 @@
 
 /turf/closed/mineral/strong/ex_act(severity, target)
 	return FALSE
+
+//Artifact spawning rock
+
+/turf/closed/mineral/artifact
+	mineralAmt = 1
+	//icon_state = "rock_Gibtonite_inactive"
+	scan_state = "rock_Artifact"
+
+/turf/closed/mineral/artifact/gets_drilled(mob/user, give_exp = FALSE, triggered_by_explosion = FALSE)
+	if(istype(user))
+		SEND_SIGNAL(user, COMSIG_MOB_MINED, src, give_exp)
+
+	if(!triggered_by_explosion) //if someone maxcaps lavaland and promptly unearths every single artifact thats gonna fuck up and activate some of them which is not good
+		new /obj/effect/artifact_spawner(src)
+
+	var/flags = NONE
+	if(defer_change)
+		flags = CHANGETURF_DEFER_CHANGE
+	var/turf/open/mined = ScrapeAway(null, flags)
+	mined.update_visuals()
+
+/turf/closed/mineral/artifact/volcanic
+	turf_type = /turf/open/misc/asteroid/basalt/lava_land_surface
+	baseturfs = /turf/open/misc/asteroid/basalt/lava_land_surface
+	initial_gas_mix = LAVALAND_DEFAULT_ATMOS
+	defer_change = TRUE
+
+/turf/closed/mineral/mineral_sample
+	mineralAmt = 1
+	//icon_state = "rock_Gibtonite_inactive"
+	scan_state = "rock_Artifact"
+
+/turf/closed/mineral/mineral_sample/gets_drilled(mob/user, give_exp = FALSE, triggered_by_explosion = FALSE)
+	if(istype(user))
+		SEND_SIGNAL(user, COMSIG_MOB_MINED, src, give_exp)
+
+	new /obj/item/merged_material/mineral_sample(src)
+
+	var/flags = NONE
+	if(defer_change)
+		flags = CHANGETURF_DEFER_CHANGE
+	var/turf/open/mined = ScrapeAway(null, flags)
+	mined.update_visuals()
 
 #undef MINING_MESSAGE_COOLDOWN

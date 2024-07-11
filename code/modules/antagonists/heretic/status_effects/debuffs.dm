@@ -48,8 +48,13 @@
 	to_chat(owner, span_boldwarning("You feel filled with a rage that is not your own!"))
 	return TRUE
 
+<<<<<<< HEAD
 /datum/status_effect/amok/tick(seconds_between_ticks)
 	var/prev_combat_mode = owner.combat_mode
+=======
+/datum/status_effect/amok/tick()
+	var/prev_combat_mode = (owner.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	owner.set_combat_mode(TRUE)
 
 	// If we're holding a gun, expand the range a bit.
@@ -215,8 +220,11 @@
 	REMOVE_TRAIT(owner, TRAIT_IGNORESLOWDOWN, TRAIT_STATUS_EFFECT(id))
 	owner.AdjustUnconscious(20 SECONDS, ignore_canstun = TRUE)
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Used by moon heretics to make people mad
 /datum/status_effect/moon_converted
 	id = "moon converted"
@@ -280,7 +288,11 @@
 
 /datum/status_effect/moon_converted/on_remove()
 	// Span warning and unconscious so they realize they aren't evil anymore
+<<<<<<< HEAD
 	to_chat(owner, span_warning("Your mind is cleared from the effect of the mansus, your alligiences are as they were before"))
+=======
+	to_chat(owner, span_warning("Your mind is cleared from the effect of the manus, your alligiences are as they were before"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	REMOVE_TRAIT(owner, TRAIT_MUTE, REF(src))
 	owner.AdjustUnconscious(5 SECONDS, ignore_canstun = FALSE)
 	owner.log_message("[owner] is no longer insane.", LOG_GAME)

@@ -120,7 +120,7 @@
 	if(!(gamer in gamers))
 		gamers[gamer] = 0
 
-	gamers[gamer]++ // How many times the player has 'prestiged' (massacred their crew)
+	gamers[gamer]++ // How many games the gamer has 'gamed' (massacred their crew)
 
 	if(gamers[gamer] > ORION_GAMER_REPORT_THRESHOLD && prob(20 * gamers[gamer]))
 
@@ -495,7 +495,16 @@
 	obj_flags |= EMAGGED
 	return TRUE
 
+<<<<<<< HEAD
 ///A minibomb achieved from winning at emagged Orion.
+=======
+/mob/living/basic/trooper/syndicate/ranged/smg/orion
+	name = "spaceport security"
+	desc = "Premier corporate security forces for all spaceports found along the Orion Trail."
+	faction = list(FACTION_ORION)
+	loot = list()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/orion_ship
 	name = "model settler ship"
 	desc = "A model spaceship, it looks like those used back in the day when travelling to Orion! It even has a miniature FX-293 reactor, which was renowned for its instability and tendency to explode..."

@@ -12,15 +12,26 @@
 	cargo_cost_multiplier = 0.65
 	express_cost_multiplier = 1
 	purchase_tooltip = @{"Your purchases will arrive at cargo,
+<<<<<<< HEAD
 	and hopefully get delivered by them.
+=======
+	and hopefully gets delivered to you by the security.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	35% cheaper than express delivery."}
 	express_tooltip = @{"Sends your purchases instantly."}
 	credit_type = CREDIT_TYPE_BITRUNNING
 
 	order_categories = list(
 		CATEGORY_BITRUNNING_FLAIR,
+<<<<<<< HEAD
 		CATEGORY_BITRUNNING_TECH,
 		CATEGORY_BEPIS,
+=======
+//		CATEGORY_BITRUNNING_TECH, Monkestation removal: split up into combat gear and abilities tabs
+		CATEGORY_BEPIS,
+		CATEGORY_BITRUNNING_COMBAT_GEAR,
+		CATEGORY_BITRUNNING_ABILITIES,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	blackbox_key = "bitrunning"
 
@@ -55,11 +66,19 @@
 		cost_type = credit_type,
 		can_be_cancelled = FALSE,
 	)
+<<<<<<< HEAD
 	say("Thank you for your purchase! It will arrive on the next cargo shuttle!")
 	radio.talk_into(src, "A bitrunner has ordered equipment which will arrive on the cargo shuttle! Please make sure it gets to them as soon as possible!", radio_channel)
 	SSshuttle.shopping_list += new_order
 
 /obj/machinery/computer/order_console/bitrunning/retrieve_points(obj/item/card/id/id_card)
+=======
+	say("Thank you for your purchase! It will arrive on the next cargo shuttle! ")
+	radio.talk_into(src, "A prisoner has ordered equipment which will arrive on the cargo shuttle! Please make sure it gets to them as soon as possible!", radio_channel) //MONKESTATION EDIT
+	SSshuttle.shopping_list += new_order
+
+/obj/machinery/computer/order_console/bitrunning/retrive_points(obj/item/card/id/id_card)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return round(id_card.registered_account.bitrunning_points)
 
 /obj/machinery/computer/order_console/bitrunning/ui_act(action, params)
@@ -71,16 +90,32 @@
 	icon_state = "[initial(icon_state)][powered() ? null : "_off"]"
 	return ..()
 
+<<<<<<< HEAD
 /datum/supply_pack/bitrunning
 	name = "bitrunning order"
 	hidden = TRUE
 	crate_name = "bitrunning delivery crate"
+=======
+//MONKESTATION EDIT START
+/datum/supply_pack/bitrunning
+	name = "prisoner bitrunning order"
+	hidden = TRUE
+	crate_name = "prisoner bitrunning delivery crate"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	access = list(ACCESS_BIT_DEN)
 
 /datum/supply_pack/bitrunning/New(purchaser, cost, list/contains)
 	. = ..()
+<<<<<<< HEAD
 	name = "[purchaser]'s Bitrunning Order"
 	src.cost = cost
 	src.contains = contains
 
+=======
+	name = "[purchaser]'s Prisoner Bitrunning Order"
+	src.cost = cost
+	src.contains = contains
+
+//MONKESTATION EDIT END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef CREDIT_TYPE_BITRUNNING

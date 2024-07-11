@@ -10,7 +10,27 @@
 	final_icon.Crop(10, 1, 22, 13)
 	final_icon.Scale(32, 32)
 
+<<<<<<< HEAD
 	return final_icon
+=======
+	for (var/accessory_name in accessory_list)
+		var/icon/icon_with_socks = new(lower_half)
+
+		if (accessory_name != "Nude")
+			var/datum/sprite_accessory/accessory = accessory_list[accessory_name]
+
+			var/icon/accessory_icon = icon(accessory.icon, accessory.icon_state) //MONKESTATION EDIT
+			if (color && !accessory.use_static)
+				accessory_icon.Blend(color, ICON_MULTIPLY)
+			icon_with_socks.Blend(accessory_icon, ICON_OVERLAY)
+
+		icon_with_socks.Crop(10, 1, 22, 13)
+		icon_with_socks.Scale(32, 32)
+
+		values[accessory_name] = icon_with_socks
+
+	return values
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Backpack preference
 /datum/preference/choiced/backpack
@@ -95,6 +115,7 @@
 	should_generate_icons = TRUE
 
 /datum/preference/choiced/socks/init_possible_values()
+<<<<<<< HEAD
 	return assoc_to_keys_features(SSaccessories.socks_list)
 
 /datum/preference/choiced/socks/icon_for(value)
@@ -106,9 +127,27 @@
 		lower_half.Blend(icon('icons/mob/human/bodyparts_greyscale.dmi', "human_l_leg"), ICON_OVERLAY)
 
 	return generate_underwear_icon(SSaccessories.socks_list[value], lower_half)
+=======
+	return generate_values_for_underwear(GLOB.socks_list, list("human_r_leg", "human_l_leg"), COLOR_WHITE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/preference/choiced/socks/apply_to_human(mob/living/carbon/human/target, value)
 	target.socks = value
+
+/datum/preference/choiced/socks/is_accessible(datum/preferences/preferences)
+	if (!..(preferences))
+		return FALSE
+
+	var/species_type = preferences.read_preference(/datum/preference/choiced/species)
+	var/datum/species/species = new species_type
+	return !(NO_UNDERWEAR in species.species_traits)
+
+/datum/preference/choiced/socks/compile_constant_data()
+	var/list/data = ..()
+
+	data[SUPPLEMENTAL_FEATURE_KEY] = "socks_color"
+
+	return data
 
 /// Undershirt preference
 /datum/preference/choiced/undershirt

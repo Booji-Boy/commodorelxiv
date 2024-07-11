@@ -46,8 +46,13 @@
 	gain_text = "I met an old man in an anique shop who wielded a very unusual weapon. \
 		I could not purchase it at the time, but they showed me how they made it ages ago."
 	next_knowledge = list(
+<<<<<<< HEAD
 		/datum/heretic_knowledge/duel_stance,
 		/datum/heretic_knowledge/spell/area_conversion,
+=======
+		/datum/heretic_knowledge/spell/realignment,
+		/datum/heretic_knowledge/spell/rust_construction,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/heretic_knowledge/rifle_ammo,
 	)
 	required_atoms = list(
@@ -71,7 +76,11 @@
 		/obj/item/stack/sheet/animalhide = 1,
 		/obj/item/ammo_casing = 3,
 	)
+<<<<<<< HEAD
 	result_atoms = list(/obj/item/ammo_box/strilka310/lionhunter)
+=======
+	result_atoms = list(/obj/item/ammo_box/a762/lionhunter)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	cost = 0
 	route = PATH_SIDE
 	/// A list of calibers that the ritual will deny. Only ballistic calibers are allowed.

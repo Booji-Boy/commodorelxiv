@@ -123,7 +123,11 @@
 	return ..()
 
 /datum/brain_trauma/mild/healthy/on_life(seconds_per_tick, times_fired)
+<<<<<<< HEAD
 	owner.adjustStaminaLoss(-6 * seconds_per_tick) //no pain, no fatigue
+=======
+	owner.stamina.adjust(2.5 * seconds_per_tick) //no pain, no fatigue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/brain_trauma/mild/healthy/on_lose()
 	owner.remove_status_effect(/datum/status_effect/grouped/screwy_hud/fake_healthy, type)
@@ -153,7 +157,7 @@
 
 	else if(SPT_PROB(1.5, seconds_per_tick))
 		to_chat(owner, span_warning("You feel a sudden weakness in your muscles!"))
-		owner.adjustStaminaLoss(50)
+		owner.stamina.adjust(-50)
 	..()
 
 /datum/brain_trauma/mild/muscle_spasms
@@ -286,6 +290,7 @@
 /datum/brain_trauma/mild/color_blindness/on_lose(silent)
 	owner.remove_client_colour(/datum/client_colour/monochrome/colorblind)
 	return ..()
+<<<<<<< HEAD
 
 /datum/brain_trauma/mild/possessive
 	name = "Possessive"
@@ -324,3 +329,5 @@
 
 	REMOVE_TRAIT(my_thing, TRAIT_NODROP, TRAUMA_TRAIT)
 	UnregisterSignal(my_thing, list(COMSIG_ITEM_DROPPED, COMSIG_MOVABLE_MOVED))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

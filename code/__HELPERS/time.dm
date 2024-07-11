@@ -1,6 +1,6 @@
 //Returns the world time in english
 /proc/worldtime2text()
-	return gameTimestamp("hh:mm:ss", world.time)
+	return gameTimestamp("hh:mm:ss", world.time - SSticker.round_start_time)
 
 /proc/time_stamp(format = "hh:mm:ss", show_ds)
 	var/time_string = time2text(world.timeofday, format)
@@ -8,14 +8,23 @@
 
 /proc/gameTimestamp(format = "hh:mm:ss", wtime=null)
 	if(!wtime)
-		wtime = world.time
-	return time2text(wtime - GLOB.timezoneOffset, format)
+		wtime = world.time - SSticker.round_start_time
+	var/hour = round(wtime / 36000)
+	var/minute = round(((wtime) - (hour * 36000)) / 600)
+	var/second = round(((wtime) - (hour * 36000) - (minute * 600)) / 10)
 
-/proc/station_time(display_only = FALSE, wtime=world.time)
-	return ((((wtime - SSticker.round_start_time) * SSticker.station_time_rate_multiplier) + SSticker.gametime_offset) % 864000) - (display_only? GLOB.timezoneOffset : 0)
+
+	if(hour < 10)
+		hour = "0[hour]"
+	if(minute < 10)
+		minute = "0[minute]"
+	if(second < 10)
+		second = "0[second]"
+
+	return "[hour]:[minute]:[second]"
 
 /proc/station_time_timestamp(format = "hh:mm:ss", wtime)
-	return time2text(station_time(TRUE, wtime), format)
+	return time2text(station_time(wtime), format)
 
 /proc/station_time_debug(force_set)
 	if(isnum(force_set))
@@ -140,3 +149,12 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	else if (time < 1 HOURS)
 		time += 12 HOURS // e.g. 12.23 AM
 	return "[time2text(time, format)] [am_pm]"
+
+//monkestation edit start
+//returns time diff of two times normalized to time_rate_multiplier
+/proc/daytimeDiff(timeA, timeB)
+
+	//if the time is less than station time, add 24 hours (MIDNIGHT_ROLLOVER)
+	var/time_diff = timeA > timeB ? (timeB + 24 HOURS) - timeA : timeB - timeA
+	return time_diff / SSticker.station_time_rate_multiplier // normalise with the time rate multiplier
+//monkestation edit end

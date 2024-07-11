@@ -49,7 +49,10 @@ GLOBAL_DATUM(cargo_sloth, /mob/living/basic/sloth)
 
 	// If someone adds non-cargo sloths to maps we'll have a problem but we're fine for now
 	GLOB.cargo_sloth = src
+<<<<<<< HEAD
 	GLOB.gorilla_start += get_turf(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/sloth/Destroy()
 	if(GLOB.cargo_sloth == src)

@@ -1,6 +1,10 @@
 GLOBAL_LIST_EMPTY(dead_players_during_shift)
 /mob/living/carbon/human/gib_animation()
-	new /obj/effect/temp_visual/gib_animation(loc, dna.species.gib_anim)
+	switch(dna.species.species_gibs)
+		if(GIB_TYPE_HUMAN)
+			new /obj/effect/temp_visual/gib_animation(loc, "gibbed-h")
+		if(GIB_TYPE_ROBOTIC)
+			new /obj/effect/temp_visual/gib_animation(loc, "gibbed-r")
 
 /mob/living/carbon/human/dust_animation()
 	new /obj/effect/temp_visual/dust_animation(loc, dna.species.dust_anim)
@@ -37,11 +41,16 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()]", LOG_ATTACK)
 		if(key) // Prevents log spamming of keyless mob deaths (like xenobio monkeys)
 			investigate_log("has died at [loc_name(src)].<br>\
+<<<<<<< HEAD
 				BRUTE: [src.getBruteLoss()] BURN: [src.getFireLoss()] TOX: [src.getToxLoss()] OXY: [src.getOxyLoss()] STAM: [src.getStaminaLoss()]<br>\
+=======
+				BRUTE: [src.getBruteLoss()] BURN: [src.getFireLoss()] TOX: [src.getToxLoss()] OXY: [src.getOxyLoss()] CLONE: [src.getCloneLoss()] STAM: [src.stamina.loss]<br>\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				<b>Brain damage</b>: [src.get_organ_loss(ORGAN_SLOT_BRAIN) || "0"]<br>\
 				<b>Blood volume</b>: [src.blood_volume]cl ([round((src.blood_volume / BLOOD_VOLUME_NORMAL) * 100, 0.1)]%)<br>\
 				<b>Reagents</b>:<br>[reagents_readout()]", INVESTIGATE_DEATHS)
 	to_chat(src, span_warning("You have died. Barring complete bodyloss, you can in most cases be revived by other players. If you do not wish to be brought back, use the \"Do Not Resuscitate\" verb in the ghost tab."))
+	to_chat(src, span_greentext("You can no longer recall who was responsible for your death.")) // MONKESTATION EDIT: making an explicit request that someone review DA RULEZ.
 
 /mob/living/carbon/human/proc/reagents_readout()
 	var/readout = "Blood:"
@@ -64,5 +73,10 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 /mob/living/carbon/proc/Drain()
 	become_husk(CHANGELING_DRAIN)
 	ADD_TRAIT(src, TRAIT_BADDNA, CHANGELING_DRAIN)
+	blood_volume = 0
+	return TRUE
+
+/mob/living/carbon/proc/makeUncloneable()
+	ADD_TRAIT(src, TRAIT_BADDNA, MADE_UNCLONEABLE)
 	blood_volume = 0
 	return TRUE

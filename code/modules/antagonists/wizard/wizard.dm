@@ -14,7 +14,10 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 	preview_outfit = /datum/outfit/wizard
 	can_assign_self_objectives = TRUE
 	default_custom_objective = "Demonstrate your incredible and destructive magical powers."
+<<<<<<< HEAD
 	hardcore_random_bonus = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/give_objectives = TRUE
 	var/strip = TRUE //strip before equipping
 	var/allow_rename = TRUE
@@ -25,6 +28,13 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 	show_to_ghosts = TRUE
 	/// This mob's Grand Ritual ability
 	var/datum/action/cooldown/grand_ritual/ritual
+
+/datum/antagonist/wizard/antag_token(datum/mind/hosts_mind, mob/spender)
+	if(isobserver(spender))
+		var/mob/living/carbon/human/new_mob = spender.change_mob_type(/mob/living/carbon/human , delete_old_mob = TRUE)
+		new_mob.mind.make_wizard()
+	else
+		hosts_mind.make_wizard()
 
 /datum/antagonist/wizard_minion
 	name = "Wizard Minion"
@@ -86,10 +96,13 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 	if(allow_rename)
 		rename_wizard()
 	ADD_TRAIT(owner, TRAIT_MAGICALLY_GIFTED, REF(src))
+<<<<<<< HEAD
 
 /datum/antagonist/wizard/Destroy()
 	QDEL_NULL(ritual)
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/wizard/create_team(datum/team/wizard/new_team)
 	if(!new_team)
@@ -116,9 +129,6 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 	RegisterSignal(ritual, COMSIG_GRAND_RITUAL_FINAL_COMPLETE, PROC_REF(on_ritual_complete))
 
 /datum/antagonist/wizard/proc/send_to_lair()
-	// And now we ensure that its loaded
-	SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_WIZARDDEN)
-
 	if(!owner.current)
 		return
 	if(!GLOB.wizardstart.len)
@@ -257,7 +267,10 @@ GLOBAL_LIST_EMPTY(wizard_spellbook_purchases_by_key)
 	name = "Wizard Apprentice"
 	antag_hud_name = "apprentice"
 	can_assign_self_objectives = FALSE
+<<<<<<< HEAD
 	move_to_lair = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/mind/master
 	var/school = APPRENTICE_DESTRUCTION
 	outfit_type = /datum/outfit/wizard/apprentice

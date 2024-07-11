@@ -125,7 +125,7 @@ at the cost of risking a vicious bite.**/
 	break_message = "<span class='warning'>The structure shatters, leaving only a demonic screech!</span>"
 	break_sound = 'sound/magic/demon_dies.ogg'
 	light_color = LIGHT_COLOR_BLOOD_MAGIC
-	light_range = 2
+	light_outer_range = 2
 	use_cooldown_duration = 1 MINUTES
 	/// Color of the pants that will come out
 	var/pants_color = COLOR_WHITE
@@ -149,7 +149,7 @@ at the cost of risking a vicious bite.**/
 	var/altar_result = show_radial_menu(user, src, altar_options, custom_check = CALLBACK(src, PROC_REF(check_menu), user), require_near = TRUE, tooltips = TRUE)
 	switch(altar_result)
 		if("Change Color")
-			var/chosen_color = input(user, "", "Choose Color", pants_color) as color|null
+			var/chosen_color = tgui_color_picker(user, "", "Choose Color", pants_color)
 			if(!isnull(chosen_color) && user.can_perform_action(src))
 				pants_color = chosen_color
 		if("Create Artefact")

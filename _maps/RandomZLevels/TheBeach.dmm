@@ -52,8 +52,13 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/awaymission/beach)
 "aB" = (
+<<<<<<< HEAD
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
+=======
+/mob/living/basic/crab/kreb,
+/turf/open/misc/beach/sand,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/awaymission/beach)
 "aC" = (
 /obj/structure/table/bronze,
@@ -180,7 +185,14 @@
 	pixel_y = 8;
 	pixel_x = 6
 	},
+<<<<<<< HEAD
 /obj/item/food/watermelonslice,
+=======
+/turf/open/water/beach/biodome,
+/area/awaymission/beach)
+"aK" = (
+/mob/living/basic/crab,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/beach/sand,
 /area/awaymission/beach)
 "cw" = (
@@ -3485,6 +3497,7 @@
 	},
 /turf/closed/wall/mineral/wood,
 /area/awaymission/beach)
+<<<<<<< HEAD
 "Rj" = (
 /turf/open/misc/beach/coast{
 	dir = 6
@@ -3492,6 +3505,10 @@
 /area/awaymission/beach)
 "Rn" = (
 /obj/effect/turf_decal/stripes/red/box,
+=======
+"da" = (
+/mob/living/basic/parrot,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/beach/sand,
 /area/awaymission/beach)
 "Rr" = (

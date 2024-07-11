@@ -7,6 +7,7 @@
 	key = "wendigo"
 	map_name = "wendigo"
 	reward_points = BITRUNNER_REWARD_HIGH
+<<<<<<< HEAD
 
 /obj/effect/mob_spawn/corpse/human/bitrunner/special(mob/living/spawned_mob)
 	. = ..()
@@ -15,3 +16,7 @@
 /obj/effect/mob_spawn/corpse/human/cyber_police/special(mob/living/spawned_mob)
 	. = ..()
 	spawned_mob.apply_status_effect(/datum/status_effect/gutted)
+=======
+	safehouse_path = /datum/map_template/safehouse/lavaland_boss
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

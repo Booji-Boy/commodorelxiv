@@ -54,6 +54,10 @@
 
 /datum/component/thermite/Destroy()
 	thermite_overlay = null
+<<<<<<< HEAD
+=======
+	burn_callback = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(burn_timer)
 		deltimer(burn_timer)
 		burn_timer = null
@@ -70,6 +74,11 @@
 	RegisterSignal(parent, COMSIG_ATOM_FIRE_ACT, PROC_REF(on_fire_act))
 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_update_overlays))
 	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(clean_react))
+<<<<<<< HEAD
+=======
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(attackby_react))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_qdeleting)) //probably necessary because turfs are wack
 	var/turf/turf_parent = parent
 	turf_parent.update_appearance()
@@ -82,6 +91,11 @@
 		COMSIG_ATOM_FIRE_ACT,
 		COMSIG_ATOM_UPDATE_OVERLAYS,
 		COMSIG_COMPONENT_CLEAN_ACT,
+<<<<<<< HEAD
+=======
+		COMSIG_ATOM_ATTACKBY,
+		COMSIG_ATOM_EXAMINE,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		COMSIG_QDELETING,
 	))
 	var/turf/turf_parent = parent
@@ -120,7 +134,11 @@
 	fakefire = new(parent_turf)
 	burn_callback = CALLBACK(src, PROC_REF(burn_parent), user)
 	burn_timer = addtimer(burn_callback, min(amount * 0.35 SECONDS, 20 SECONDS), TIMER_STOPPABLE)
+<<<<<<< HEAD
 	//unregister everything related to burning
+=======
+	//unregister everything mechanical, we are burning up
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	UnregisterSignal(parent, list(COMSIG_COMPONENT_CLEAN_ACT, COMSIG_ATOM_ATTACKBY, COMSIG_ATOM_FIRE_ACT))
 
 /**

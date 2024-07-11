@@ -75,6 +75,18 @@
 
 	if (flags_1 & ON_BORDER_1)
 		AddElement(/datum/element/connect_loc, loc_connections)
+	//monkestation edit start
+	if(uses_color)
+		var/new_color = SSstation_coloring.get_default_color()
+		if(glass_color_blend_to_color && glass_color_blend_to_ratio)
+			glass_color = BlendRGB(new_color, glass_color_blend_to_color, glass_color_blend_to_ratio)
+		else
+			glass_color = new_color
+		if(fulltile)
+			color = glass_color
+		if(mapload && fulltile)
+			new /obj/structure/window_sill(get_turf(src))
+	//monkestation edit end
 
 /obj/structure/window/examine(mob/user)
 	. = ..()
@@ -91,8 +103,14 @@
 				. += span_notice("The window is <i>unscrewed</i> from the floor, and could be deconstructed by <b>wrenching</b>.")
 
 /obj/structure/window/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+<<<<<<< HEAD
 	if(the_rcd.mode == RCD_DECONSTRUCT)
 		return list("delay" = 2 SECONDS, "cost" = 5)
+=======
+	switch(the_rcd.mode)
+		if(RCD_DECONSTRUCT)
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 2 SECONDS, "cost" = 5)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/window/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -171,7 +189,7 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		user.visible_message(span_notice("[user] knocks on [src]."), \
 			span_notice("You knock on [src]."))
 		playsound(src, knock_sound, 50, TRUE)
@@ -179,6 +197,7 @@
 		user.visible_message(span_warning("[user] bashes [src]!"), \
 			span_warning("You bash [src]!"))
 		playsound(src, bash_sound, 100, TRUE)
+	return TRUE //monkestation edit
 
 /obj/structure/window/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -405,6 +424,7 @@
 	if((updates & UPDATE_SMOOTHING) && (smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK)))
 		QUEUE_SMOOTH(src)
 
+
 	var/ratio = atom_integrity / max_integrity
 	ratio = CEILING(ratio*4, 1) * 25
 	if(ratio > 75)
@@ -464,8 +484,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/unanchored/spawner, 0)
 	acid = 100
 
 /obj/structure/window/reinforced/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+<<<<<<< HEAD
 	if(the_rcd.mode == RCD_DECONSTRUCT)
 		return list("delay" = 3 SECONDS, "cost" = 15)
+=======
+	switch(the_rcd.mode)
+		if(RCD_DECONSTRUCT)
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 3 SECONDS, "cost" = 15)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/window/reinforced/attackby_secondary(obj/item/tool, mob/user, params)
@@ -657,8 +683,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	glass_amount = 2
 
 /obj/structure/window/fulltile/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+<<<<<<< HEAD
 	if(the_rcd.mode == RCD_DECONSTRUCT)
 		return list("delay" = 2.5 SECONDS, "cost" = 10)
+=======
+	switch(the_rcd.mode)
+		if(RCD_DECONSTRUCT)
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 2.5 SECONDS, "cost" = 10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/window/fulltile/unanchored
@@ -715,8 +747,14 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	glass_amount = 2
 
 /obj/structure/window/reinforced/fulltile/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
+<<<<<<< HEAD
 	if(the_rcd.mode == RCD_DECONSTRUCT)
 		return list("mode" = RCD_DECONSTRUCT, "delay" = 4 SECONDS, "cost" = 20)
+=======
+	switch(the_rcd.mode)
+		if(RCD_DECONSTRUCT)
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 4 SECONDS, "cost" = 20)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/structure/window/reinforced/fulltile/unanchored
@@ -882,7 +920,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	. = ..()
 	if(.)
 		return
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		take_damage(4, BRUTE, MELEE, 0)
 		if(!QDELETED(src))
 			update_appearance()
@@ -904,7 +942,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	if(W.get_temperature())
 		fire_act(W.get_temperature())
 		return
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return ..()
 	if(istype(W, /obj/item/paper) && atom_integrity < max_integrity)
 		user.visible_message(span_notice("[user] starts to patch the holes in \the [src]."))
@@ -924,6 +962,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/reinforced/tinted/frosted/spaw
 	icon = 'icons/obj/smooth_structures/structure_variations.dmi'
 	icon_state = "clockwork_window-single"
 	glass_type = /obj/item/stack/sheet/bronze
+	uses_color // monkestation edit
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/window/bronze/spawner, 0)
 

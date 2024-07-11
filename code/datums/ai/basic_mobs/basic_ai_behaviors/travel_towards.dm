@@ -8,8 +8,11 @@
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	/// If true we will get rid of our target on completion
 	var/clear_target = FALSE
+<<<<<<< HEAD
 	///should we use a different movement type?
 	var/new_movement_type
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/travel_towards/setup(datum/ai_controller/controller, target_key)
 	. = ..()
@@ -23,10 +26,19 @@
 
 /datum/ai_behavior/travel_towards/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()
+<<<<<<< HEAD
 	if (clear_target)
 		controller.clear_blackboard_key(target_key)
 	if(new_movement_type)
 		controller.change_ai_movement_type(initial(controller.ai_movement))
+=======
+	finish_action(controller, TRUE, target_key)
+
+/datum/ai_behavior/travel_towards/finish_action(datum/ai_controller/controller, succeeded, target_key)
+	. = ..()
+	if (clear_target)
+		controller.clear_blackboard_key(target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/travel_towards/stop_on_arrival
 	clear_target = TRUE

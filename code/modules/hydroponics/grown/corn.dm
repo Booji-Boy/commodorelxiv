@@ -8,13 +8,17 @@
 	product = /obj/item/food/grown/corn
 	maturation = 8
 	potency = 20
-	instability = 50 //Corn used to be wheatgrass, before being cultivated for generations.
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
 	icon_grow = "corn-grow" // Uses one growth icons set for all the subtypes
 	icon_dead = "corn-dead" // Same for the dead icon
+<<<<<<< HEAD
 	mutatelist = list(/obj/item/seeds/corn/snapcorn, /obj/item/seeds/corn/pepper)
 	reagents_add = list(/datum/reagent/consumable/nutriment/fat/oil/corn = 0.2, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1)
+=======
+	possible_mutations = list(/datum/hydroponics/plant_mutation/snap_corn)
+	reagents_add = list(/datum/reagent/consumable/cornoil = 0.2, /datum/reagent/consumable/nutriment/vitamin = 0.04, /datum/reagent/consumable/nutriment = 0.1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/grown/corn
 	seed = /obj/item/seeds/corn
@@ -63,7 +67,7 @@
 	species = "snapcorn"
 	plantname = "Snapcorn Stalks"
 	product = /obj/item/grown/snapcorn
-	mutatelist = null
+	possible_mutations = list()
 	rarity = 10
 
 /obj/item/grown/snapcorn

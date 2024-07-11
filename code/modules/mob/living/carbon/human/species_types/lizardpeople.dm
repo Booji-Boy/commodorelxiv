@@ -3,6 +3,17 @@
 	name = "\improper Lizardperson"
 	plural_form = "Lizardfolk"
 	id = SPECIES_LIZARD
+<<<<<<< HEAD
+=======
+	visual_gender = FALSE
+	species_traits = list(
+		MUTCOLORS,
+		MUTCOLORS_SECONDARY,
+		EYECOLOR,
+		LIPS,
+		HAIR // monke edit: lizards can have hair (it's the future, why not)
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
 		TRAIT_TACKLING_TAILED_DEFENDER,
@@ -29,8 +40,9 @@
 	inert_mutation = /datum/mutation/human/firebreath
 	death_sound = 'sound/voice/lizard/deathsound.ogg'
 	species_language_holder = /datum/language_holder/lizard
-	digitigrade_customization = DIGITIGRADE_OPTIONAL
+	digitigrade_customization = DIGITIGRADE_FORCED //Monkestation Edit: OPTIONAL > FORCED
 
+	mutanteyes = /obj/item/organ/internal/eyes/lizard
 	// Lizards are coldblooded and can stand a greater temperature range than humans
 	bodytemp_heat_damage_limit = BODYTEMP_HEAT_LAVALAND_SAFE
 	bodytemp_cold_damage_limit = (BODYTEMP_COLD_DAMAGE_LIMIT - 10)
@@ -111,25 +123,6 @@
 		empire: though now they must contend with their younger, more \
 		technologically advanced Human neighbours."
 
-/datum/species/lizard/get_species_lore()
-	return list(
-		"The face of conspiracy theory was changed forever the day mankind met the lizards.",
-
-		"Hailing from the arid world of Tizira, lizards were travelling the stars back when mankind was first discovering how neat trains could be. \
-		However, much like the space-fable of the space-tortoise and space-hare, lizards have rejected their kin's motto of \"slow and steady\" \
-		in favor of resting on their laurels and getting completely surpassed by 'bald apes', due in no small part to their lack of access to plasma.",
-
-		"The history between lizards and humans has resulted in many conflicts that lizards ended on the losing side of, \
-		with the finale being an explosive remodeling of their moon. Today's lizard-human relations are seeing the continuance of a record period of peace.",
-
-		"Lizard culture is inherently militaristic, though the influence the military has on lizard culture \
-		begins to lessen the further colonies lie from their homeworld - \
-		with some distanced colonies finding themselves subsumed by the cultural practices of other species nearby.",
-
-		"On their homeworld, lizards celebrate their 16th birthday by enrolling in a mandatory 5 year military tour of duty. \
-		Roles range from combat to civil service and everything in between. As the old slogan goes: \"Your place will be found!\"",
-	)
-
 // Override for the default temperature perks, so we can give our specific "cold blooded" perk.
 /datum/species/lizard/create_pref_temperature_perks()
 	var/list/to_add = list()
@@ -154,12 +147,23 @@ Lizard subspecies: ASHWALKERS
 	examine_limb_id = SPECIES_LIZARD
 	mutantlungs = /obj/item/organ/internal/lungs/lavaland
 	mutantbrain = /obj/item/organ/internal/brain/primitive
+<<<<<<< HEAD
+=======
+	species_traits = list(
+		MUTCOLORS,
+		MUTCOLORS_SECONDARY,
+		EYECOLOR,
+		LIPS,
+		NO_UNDERWEAR, //MONKESTATION ADDITION: no more flesh clothes lol
+	)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
 		TRAIT_VIRUSIMMUNE,
+		TRAIT_HARD_SOLES //MONKESTATION ADDITION
 	)
 	species_language_holder = /datum/language_holder/lizard/ash
-	digitigrade_customization = DIGITIGRADE_FORCED
+	/*digitigrade_customization = DIGITIGRADE_FORCED*/ //MONKESTATION REMOVAL: not needed
 	examine_limb_id = SPECIES_LIZARD
 	bodypart_overrides = list(
 		BODY_ZONE_HEAD = /obj/item/bodypart/head/lizard,

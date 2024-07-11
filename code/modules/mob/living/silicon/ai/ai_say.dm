@@ -151,9 +151,19 @@
 		if(!only_listener)
 			// Play voice for all mobs in the z level
 			for(var/mob/player_mob as anything in GLOB.player_list)
+<<<<<<< HEAD
 				if(!player_mob.can_hear() || !(safe_read_pref(player_mob.client, /datum/preference/toggle/sound_announcements)))
 					continue
 
+=======
+				if(player_mob.client && !player_mob.client?.prefs)
+					stack_trace("[player_mob] ([player_mob.ckey]) has null prefs, which shouldn't be possible!")
+					continue
+
+				if(!player_mob.can_hear() || !(player_mob.client?.prefs.read_preference(/datum/preference/toggle/sound_vox)))
+					continue
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				var/turf/player_turf = get_turf(player_mob)
 				if(!is_valid_z_level(ai_turf, player_turf))
 					continue

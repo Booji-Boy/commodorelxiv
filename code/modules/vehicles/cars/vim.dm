@@ -14,8 +14,13 @@
 	movedelay = 0.6
 	engine_sound_length = 0.3 SECONDS
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_range = 4
 	light_power = 1.5
+=======
+	light_outer_range = 4
+	light_power = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_on = FALSE
 	engine_sound = 'sound/effects/servostep.ogg'
 	///Maximum size of a mob trying to enter the mech
@@ -58,7 +63,7 @@
 	return ..()
 
 /obj/vehicle/sealed/car/vim/welder_act(mob/living/user, obj/item/W)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	. = TRUE
 	if(DOING_INTERACTION(user, src))

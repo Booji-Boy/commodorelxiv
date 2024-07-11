@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+import { Component } from 'inferno';
+import {
+  Box,
+  Button,
+  KeyListener,
+  Stack,
+  Tooltip,
+  TrackOutsideClicks,
+} from '../../components';
+import { resolveAsset } from '../../assets';
+import { PreferencesMenuData } from './data';
+import { useBackend } from '../../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { range, sortBy } from 'common/collections';
 import { isEscape, KEY } from 'common/keys';
 import { Component } from 'react';
@@ -72,9 +87,17 @@ const sortKeybindings = (array: [string, Keybinding][]) =>
     return keybinding.name;
   });
 
+<<<<<<< HEAD
 const sortKeybindingsByCategory = (
   array: [string, Record<string, Keybinding>][],
 ) => sortBy(array, ([category, _]) => category);
+=======
+const sortKeybindingsByCategory = sortBy(
+  ([category, _]: [string, Record<string, Keybinding>]) => {
+    return category;
+  },
+);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const formatKeyboardEvent = (event: KeyboardEvent): string => {
   let text = '';
@@ -134,10 +157,14 @@ class KeybindingButton extends Component<{
         fluid
         textAlign="center"
         captureKeys={typingHotkey === undefined}
+<<<<<<< HEAD
         onClick={(event) => {
           event.stopPropagation();
           onClick?.();
         }}
+=======
+        onClick={onClick}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         selected={typingHotkey !== undefined}
       >
         {typingHotkey || currentHotkey || 'Unbound'}
@@ -165,7 +192,11 @@ const KeybindingName = (props: { keybinding: Keybinding }) => {
       <Box
         as="span"
         style={{
+<<<<<<< HEAD
           borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
+=======
+          'border-bottom': '2px dotted rgba(255, 255, 255, 0.8)',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         {keybinding.name}
@@ -176,6 +207,15 @@ const KeybindingName = (props: { keybinding: Keybinding }) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+KeybindingName.defaultHooks = {
+  onComponentShouldUpdate: (lastProps, nextProps) => {
+    return lastProps.keybinding !== nextProps.keybinding;
+  },
+};
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 const ResetToDefaultButton = (props: { keybindingId: string }) => {
   const { act } = useBackend<PreferencesMenuData>();
 

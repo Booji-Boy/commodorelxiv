@@ -10,12 +10,39 @@ import { PaiData } from './types';
  * another section that displays the selected installed
  * software info.
  */
+<<<<<<< HEAD
 export function InstalledDisplay(props) {
   const { data } = useBackend<PaiData>();
   const { installed = [] } = data;
+=======
+export const InstalledDisplay = (props) => {
+  return (
+    <Stack fill vertical>
+      <Stack.Item grow>
+        <InstalledSoftware />
+      </Stack.Item>
+      <Stack.Item grow={2}>
+        <InstalledInfo />
+      </Stack.Item>
+    </Stack>
+  );
+};
+
+/** Iterates over installed software to render buttons. */
+const InstalledSoftware = (props) => {
+  const { data } = useBackend<PaiData>();
+  const { installed = [] } = data;
+  const [currentSelection, setCurrentSelection] = useLocalState('software', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const [currentSelection, setCurrentSelection] = useState('');
 
+<<<<<<< HEAD
+=======
+/** Software info for buttons clicked. */
+const InstalledInfo = (props) => {
+  const [currentSelection] = useLocalState('software', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const title = !currentSelection ? 'Select a Program' : currentSelection;
 
   return (
@@ -62,11 +89,18 @@ type SoftwareButtonsProps = {
  * Once a software is selected, generates custom buttons or a default
  * power toggle.
  */
+<<<<<<< HEAD
 function SoftwareButtons(props: SoftwareButtonsProps) {
   const { currentSelection } = props;
 
   const { act, data } = useBackend<PaiData>();
   const { door_jack, languages, master_name } = data;
+=======
+const SoftwareButtons = (props) => {
+  const { act, data } = useBackend<PaiData>();
+  const { door_jack, languages, master_name } = data;
+  const [currentSelection] = useLocalState('software', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   switch (currentSelection) {
     case 'Door Jack':

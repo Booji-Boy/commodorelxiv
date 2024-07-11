@@ -260,8 +260,9 @@
 	pressure_limit = 1e14
 
 /obj/machinery/portable_atmospherics/canister/fusion_test/create_gas()
-	air_contents.add_gases(/datum/gas/hydrogen, /datum/gas/tritium)
-	air_contents.gases[/datum/gas/hydrogen][MOLES] = 300
+	air_contents.add_gases(/datum/gas/carbon_dioxide, /datum/gas/plasma, /datum/gas/tritium)
+	air_contents.gases[/datum/gas/plasma][MOLES] = 1000
+	air_contents.gases[/datum/gas/carbon_dioxide][MOLES] = 1000
 	air_contents.gases[/datum/gas/tritium][MOLES] = 300
 	air_contents.temperature = 10000
 	SSair.start_processing_machine(src)
@@ -410,7 +411,28 @@
 		to_chat(user, span_notice("You cut [src] apart."))
 		deconstruct(TRUE)
 
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
+=======
+/obj/machinery/portable_atmospherics/canister/welder_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if((user.istate & ISTATE_HARM))
+		return FALSE
+	if(atom_integrity >= max_integrity)
+		return TRUE
+	if(machine_stat & BROKEN)
+		return TRUE
+	if(!tool.tool_start_check(user, amount=0))
+		return TRUE
+	to_chat(user, span_notice("You begin repairing cracks in [src]..."))
+	while(tool.use_tool(src, user, 2.5 SECONDS, volume=40))
+		atom_integrity = min(atom_integrity + 25, max_integrity)
+		if(atom_integrity >= max_integrity)
+			to_chat(user, span_notice("You've finished repairing [src]."))
+			return TRUE
+		to_chat(user, span_notice("You repair some of the cracks in [src]..."))
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/portable_atmospherics/canister/Exited(atom/movable/gone, direction)
 	. = ..()

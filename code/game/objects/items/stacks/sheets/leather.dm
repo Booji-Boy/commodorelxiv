@@ -193,6 +193,7 @@ GLOBAL_LIST_INIT(carp_recipes, list ( \
 	merge_type = /obj/item/stack/sheet/leather
 
 GLOBAL_LIST_INIT(leather_recipes, list ( \
+<<<<<<< HEAD
 	new/datum/stack_recipe("wallet", /obj/item/storage/wallet, 1, crafting_flags = NONE, category = CAT_CONTAINERS), \
 	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle, 2, crafting_flags = NONE, category = CAT_ENTERTAINMENT), \
 	new/datum/stack_recipe("basketball", /obj/item/toy/basketball, 20, crafting_flags = NONE, category = CAT_ENTERTAINMENT), \
@@ -205,6 +206,20 @@ GLOBAL_LIST_INIT(leather_recipes, list ( \
 	new/datum/stack_recipe("sheriff vest", /obj/item/clothing/accessory/vest_sheriff, 4, crafting_flags = NONE, category = CAT_CLOTHING), \
 	new/datum/stack_recipe("leather jacket", /obj/item/clothing/suit/jacket/leather, 7, crafting_flags = NONE, category = CAT_CLOTHING), \
 	new/datum/stack_recipe("biker jacket", /obj/item/clothing/suit/jacket/leather/biker, 7, crafting_flags = NONE, category = CAT_CLOTHING), \
+=======
+	new/datum/stack_recipe("wallet", /obj/item/storage/wallet, 1, check_density = FALSE, category = CAT_CONTAINERS), \
+	new/datum/stack_recipe("muzzle", /obj/item/clothing/mask/muzzle, 2, check_density = FALSE, category = CAT_ENTERTAINMENT), \
+	new/datum/stack_recipe("basketball", /obj/item/toy/basketball, 20, check_density = FALSE, category = CAT_ENTERTAINMENT), \
+	new/datum/stack_recipe("baseball", /obj/item/toy/beach_ball/baseball, 3, check_density = FALSE, category = CAT_ENTERTAINMENT), \
+	new/datum/stack_recipe("saddle", /obj/item/goliath_saddle, 5, check_density = FALSE, category = CAT_EQUIPMENT), \
+	new/datum/stack_recipe("leather shoes", /obj/item/clothing/shoes/laceup, 2, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("cowboy boots", /obj/item/clothing/shoes/cowboy, 2, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("botany gloves", /obj/item/clothing/gloves/botanic_leather, 3, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("leather satchel", /obj/item/storage/backpack/satchel/leather, 5, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("sheriff vest", /obj/item/clothing/accessory/vest_sheriff, 4, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("leather jacket", /obj/item/clothing/suit/jacket/leather, 7, check_density = FALSE, category = CAT_CLOTHING), \
+	new/datum/stack_recipe("biker jacket", /obj/item/clothing/suit/jacket/leather/biker, 7, check_density = FALSE, category = CAT_CLOTHING), \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new/datum/stack_recipe_list("belts", list( \
 		new/datum/stack_recipe("tool belt", /obj/item/storage/belt/utility, 4, crafting_flags = NONE, category = CAT_CONTAINERS), \
 		new/datum/stack_recipe("botanical belt", /obj/item/storage/belt/plant, 2, crafting_flags = NONE, category = CAT_CONTAINERS), \

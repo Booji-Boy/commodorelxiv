@@ -42,6 +42,7 @@
 	var/use_reverb = TRUE
 	/// Are we ignoring walls? Defaults to TRUE.
 	var/ignore_walls = TRUE
+	var/channel //monkestation edit
 
 	// State stuff
 	/// The source of the sound, or the recipient of the sound.
@@ -64,7 +65,7 @@
 	/// Sound channel to play on, random if not provided
 	var/sound_channel
 
-/datum/looping_sound/New(_parent, start_immediately = FALSE, _direct = FALSE, _skip_starting_sounds = FALSE)
+/datum/looping_sound/New(_parent, start_immediately = FALSE, _direct = FALSE, _skip_starting_sounds = FALSE, _channel = 0) //monkestation edit
 	if(!mid_sounds)
 		WARNING("A looping sound datum was created without sounds to play.")
 		return
@@ -72,6 +73,7 @@
 	set_parent(_parent)
 	direct = _direct
 	skip_starting_sounds = _skip_starting_sounds
+	channel = _channel
 
 	if(start_immediately)
 		start()
@@ -151,7 +153,11 @@
 /datum/looping_sound/proc/play(soundfile, volume_override)
 	var/sound/sound_to_play = sound(soundfile)
 	if(direct)
+<<<<<<< HEAD
 		sound_to_play.channel = sound_channel || SSsounds.random_available_channel()
+=======
+		sound_to_play.channel = channel || SSsounds.random_available_channel() // monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		sound_to_play.volume = volume_override || volume //Use volume as fallback if theres no override
 		SEND_SOUND(parent, sound_to_play)
 	else
@@ -165,7 +171,9 @@
 			pressure_affected = pressure_affected,
 			ignore_walls = ignore_walls,
 			falloff_distance = falloff_distance,
-			use_reverb = use_reverb
+			use_reverb = use_reverb,
+			channel = channel, //monkestation edit
+			mixer_channel = channel
 		)
 
 /// Returns the sound we should now be playing.
@@ -174,7 +182,7 @@
 	if(!each_once)
 		. = play_from
 		while(!isfile(.) && !isnull(.))
-			. = pick_weight(.)
+			. = pick_weight(fill_with_ones(.))
 		return .
 
 	if(in_order)
@@ -192,7 +200,7 @@
 		// Tree is a list of lists containign files
 		// If an entry in the tree goes to 0 length, we cut it from the list
 		tree += list(.)
-		. = pick_weight(.)
+		. = pick_weight(fill_with_ones(.))
 
 	if(!isfile(.))
 		return
@@ -228,7 +236,7 @@
 
 /// Simple proc that's executed when the looping sound is stopped, so that the `end_sound` can be played, if there's one.
 /datum/looping_sound/proc/on_stop()
-	if(end_sound && loop_started)
+	if(loop_started) //monkestation edit - Allow null end_sound to stop sound
 		play(end_sound, end_volume)
 
 /// A simple proc to change who our parent is set to, also handling registering and unregistering the QDELETING signals on the parent.

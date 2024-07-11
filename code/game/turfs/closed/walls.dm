@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#define MAX_DENT_DECALS 15
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define LEANING_OFFSET 11
 
 /turf/closed/wall
@@ -34,6 +38,7 @@
 
 	var/list/dent_decals
 
+<<<<<<< HEAD
 /turf/closed/wall/mouse_drop_receive(atom/dropping, mob/user, params)
 	if(dropping != user)
 		return
@@ -90,6 +95,50 @@
 	))
 	animate(src, 0.2 SECONDS, pixel_x = base_pixel_x, pixel_y = base_pixel_y)
 	remove_traits(list(TRAIT_UNDENSE, TRAIT_EXPANDED_FOV), LEANING_TRAIT)
+=======
+/turf/closed/wall/MouseDrop_T(mob/living/carbon/carbon_mob, mob/user)
+	..()
+	if(carbon_mob != user)
+		return
+	if(carbon_mob.is_leaning == TRUE)
+		return
+	if(carbon_mob.pulledby)
+		return
+	if(!carbon_mob.density)
+		return
+	var/turf/checked_turf = get_step(carbon_mob, turn(carbon_mob.dir, 180))
+	if(checked_turf == src)
+		carbon_mob.start_leaning(src)
+
+/mob/living/carbon/proc/start_leaning(obj/wall)
+
+	switch(dir)
+		if(SOUTH)
+			pixel_y += LEANING_OFFSET
+		if(NORTH)
+			pixel_y += -LEANING_OFFSET
+		if(WEST)
+			pixel_x += LEANING_OFFSET
+		if(EAST)
+			pixel_x += -LEANING_OFFSET
+
+	ADD_TRAIT(src, TRAIT_UNDENSE, LEANING_TRAIT)
+	ADD_TRAIT(src, TRAIT_EXPANDED_FOV, LEANING_TRAIT)
+	visible_message(span_notice("[src] leans against \the [wall]!"), \
+						span_notice("You lean against \the [wall]!"))
+	RegisterSignals(src, list(COMSIG_MOB_CLIENT_PRE_MOVE, COMSIG_HUMAN_DISARM_HIT, COMSIG_LIVING_GET_PULLED, COMSIG_MOVABLE_TELEPORTING, COMSIG_ATOM_DIR_CHANGE), PROC_REF(stop_leaning))
+	update_fov()
+	is_leaning = TRUE
+
+/mob/living/carbon/proc/stop_leaning()
+	SIGNAL_HANDLER
+	UnregisterSignal(src, list(COMSIG_MOB_CLIENT_PRE_MOVE, COMSIG_HUMAN_DISARM_HIT, COMSIG_LIVING_GET_PULLED, COMSIG_MOVABLE_TELEPORTING, COMSIG_ATOM_DIR_CHANGE))
+	is_leaning = FALSE
+	pixel_y = base_pixel_y + body_position_pixel_x_offset
+	pixel_x = base_pixel_y + body_position_pixel_y_offset
+	REMOVE_TRAIT(src, TRAIT_UNDENSE, LEANING_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_EXPANDED_FOV, LEANING_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	update_fov()
 
 /turf/closed/wall/Initialize(mapload)
@@ -107,6 +156,10 @@
 			underlay_appearance.icon_state = fixed_underlay["icon_state"]
 		fixed_underlay = string_assoc_list(fixed_underlay)
 		underlays += underlay_appearance
+
+	//monkestation edit start
+	if(SSstation_coloring.wall_trims)
+		trim_color = SSstation_coloring.get_default_color()
 
 /turf/closed/wall/atom_destruction(damage_flag)
 	. = ..()
@@ -256,8 +309,8 @@
 
 	return ..()
 
-/turf/closed/wall/proc/try_clean(obj/item/W, mob/living/user)
-	if((user.combat_mode) || !LAZYLEN(dent_decals))
+/turf/closed/wall/proc/try_clean(obj/item/W, mob/living/user, turf/T)
+	if(((user.istate & ISTATE_HARM)) || !LAZYLEN(dent_decals))
 		return FALSE
 
 	if(W.tool_behaviour == TOOL_WELDER)
@@ -329,9 +382,15 @@
 /turf/closed/wall/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
 		if(RCD_DECONSTRUCT)
+<<<<<<< HEAD
 			return list("delay" = 4 SECONDS, "cost" = 26)
 		if(RCD_WALLFRAME)
 			return list("delay" = 1 SECONDS, "cost" = 8)
+=======
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 4 SECONDS, "cost" = 26)
+		if(RCD_WALLFRAME)
+			return list("mode" = RCD_WALLFRAME, "delay" = 1 SECONDS, "cost" = 8)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /turf/closed/wall/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)
@@ -385,4 +444,8 @@
 	. = ..()
 	SEND_SIGNAL(gone, COMSIG_LIVING_WALL_EXITED, src)
 
+<<<<<<< HEAD
+=======
+#undef MAX_DENT_DECALS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef LEANING_OFFSET

@@ -9,7 +9,11 @@
 	minimize_when_attached = FALSE
 	attachment_slot = NONE
 	greyscale_config = /datum/greyscale_config/waistcoat
+<<<<<<< HEAD
 	greyscale_config_worn = /datum/greyscale_config/waistcoat/worn
+=======
+	greyscale_config_worn = /datum/greyscale_config/waistcoat_worn
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	greyscale_colors = "#414344"
 	flags_1 = IS_PLAYER_COLORABLE_1
 

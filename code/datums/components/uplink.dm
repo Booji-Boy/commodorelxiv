@@ -113,6 +113,18 @@
 	new /obj/effect/decal/cleanable/ash(get_turf(uplink_item))
 	qdel(uplink_item)
 
+<<<<<<< HEAD
+=======
+/// Adds telecrystals to the uplink. It is bad practice to use this outside of the component itself.
+/datum/component/uplink/proc/add_telecrystals(telecrystals_added)
+	set_telecrystals(uplink_handler.telecrystals + telecrystals_added)
+
+/// Sets the telecrystals of the uplink. It is bad practice to use this outside of the component itself.
+/datum/component/uplink/proc/set_telecrystals(new_telecrystal_amount)
+	uplink_handler.telecrystals = new_telecrystal_amount
+	uplink_handler.on_update()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/component/uplink/InheritComponent(datum/component/uplink/uplink)
 	lockable |= uplink.lockable
 	active |= uplink.active
@@ -238,7 +250,7 @@
 			"limited_stock" = item.limited_stock,
 			"restricted_roles" = item.restricted_roles,
 			"restricted_species" = item.restricted_species,
-			"progression_minimum" = item.progression_minimum,
+			"progression_minimum" = 0,
 			"ref" = REF(item),
 		))
 
@@ -251,6 +263,25 @@
 	data["shop_locked"] = uplink_handler.shop_locked
 	data["purchased_items"] = length(uplink_handler.purchase_log?.purchase_log)
 	data["can_renegotiate"] = user.mind == uplink_handler.owner && uplink_handler.can_replace_objectives?.Invoke() == TRUE
+<<<<<<< HEAD
+=======
+//monkestation edit start
+	data["locked_entries"] = uplink_handler.locked_entries
+	data["is_contractor"] = (uplink_handler.uplink_flag == UPLINK_CONTRACTORS)
+	var/list/contractor_items = list()
+	for(var/datum/contractor_item/item in uplink_handler.contractor_market_items)
+		contractor_items += list(list(
+			"id" = item.type,
+			"name" = item.name,
+			"desc" = item.desc,
+			"cost" = item.cost,
+			"stock" = item.stock,
+			"item_icon" = item.item_icon,
+		))
+	data["contractor_items"] = contractor_items
+	data["contractor_rep"] = uplink_handler.contractor_rep
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return data
 
 /datum/component/uplink/ui_static_data(mob/user)
@@ -301,6 +332,15 @@
 
 	if(uplink_handler.owner?.current != ui.user || !uplink_handler.can_take_objectives)
 		return TRUE
+
+//monkestation edit start
+	switch(action)
+		if("buy_contractor")
+			var/item = params["item"]
+			for(var/datum/contractor_item/hub_item in uplink_handler.contractor_market_items)
+				if(hub_item.name == item)
+					hub_item.handle_purchase(uplink_handler, ui.user)
+//monkestation edit end
 
 	switch(action)
 		if("regenerate_objectives")

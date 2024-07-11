@@ -4,6 +4,7 @@
 	desc = "Play a prerecorded message for the benefit of those around you."
 	background_icon_state = "bg_tech_blue"
 	overlay_icon_state = "bg_tech_blue_border"
+<<<<<<< HEAD
 	button_icon = 'icons/obj/machines/wallmounts.dmi'
 	button_icon_state = "intercom"
 	cooldown_time = 5 SECONDS
@@ -15,6 +16,14 @@
 	var/max_buttons = 10
 	/// List of buttons that automatically correspond to an announcement and channel
 	var/list/buttons = list()
+=======
+	button_icon = 'icons/mob/actions/actions_AI.dmi'
+	button_icon_state = "intercom"
+	cooldown_time = 10 SECONDS
+	melee_cooldown_time = 0 SECONDS
+	/// List of strings to sound effects corresponding to automated messages we can play
+	var/list/automated_announcements
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/cooldown/bot_announcement/New(Target, original, list/automated_announcements)
 	src.automated_announcements = automated_announcements
@@ -34,6 +43,7 @@
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
 /datum/action/cooldown/bot_announcement/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -146,6 +156,17 @@
 /datum/action/cooldown/bot_announcement/Remove(mob/removed_from)
 	for(var/datum/action/action as anything in buttons)
 		action.Remove(removed_from)
+=======
+/datum/action/cooldown/bot_announcement/Activate(trigger_flags, atom/target)
+	var/picked
+	if (length(automated_announcements) > 1)
+		picked = tgui_input_list(owner, message = "Choose announcement to make.", title = "Select announcement", items = automated_announcements)
+	else
+		picked = pick(automated_announcements)
+	if (isnull(picked))
+		return
+	announce(picked)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /// Speak the provided line on the provided radio channel
@@ -154,9 +175,16 @@
 	if (!(bot_owner.bot_mode_flags & BOT_MODE_ON))
 		return
 
+<<<<<<< HEAD
 	bot_owner.say(line)
 	if (channel && bot_owner.internal_radio.channels[channel])
 		bot_owner.internal_radio.talk_into(bot_owner, message = line, channel = channel)
+=======
+	if (channel && bot_owner.internal_radio.channels[channel])
+		bot_owner.internal_radio.talk_into(bot_owner, message = line, channel = channel)
+	else
+		bot_owner.say(line)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if (length(automated_announcements) && !isnull(automated_announcements[line]))
 		playsound(bot_owner, automated_announcements[line], vol = 50, vary = FALSE)
@@ -169,6 +197,7 @@
 	if(!(bot_owner.medical_mode_flags & MEDBOT_SPEAK_MODE))
 		return
 	return ..()
+<<<<<<< HEAD
 
 /datum/action/cooldown/bot_announcement_shortcut
 	desc = "Play a prerecorded message for the benefit of those around you."
@@ -215,3 +244,5 @@
 	cooldown_time = linked.cooldown_time
 	linked.announce(message, channel)
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

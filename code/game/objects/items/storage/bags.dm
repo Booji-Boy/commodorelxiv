@@ -19,8 +19,8 @@
 
 //  Generic non-item
 /obj/item/storage/bag
-	slot_flags = ITEM_SLOT_BELT
-	w_class = WEIGHT_CLASS_BULKY
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
+	w_class = WEIGHT_CLASS_NORMAL
 
 /obj/item/storage/bag/Initialize(mapload)
 	. = ..()
@@ -122,8 +122,6 @@
 	icon = 'icons/obj/mining.dmi'
 	icon_state = "satchel"
 	worn_icon_state = "satchel"
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
-	w_class = WEIGHT_CLASS_NORMAL
 	///If this is TRUE, the holder won't receive any messages when they fail to pick up ore through crossing it
 	var/spam_protection = FALSE
 	var/mob/listeningTo
@@ -242,12 +240,21 @@
 	atom_storage.max_total_storage = 100
 	atom_storage.max_slots = 100
 	atom_storage.set_holdable(list(
+		/obj/item/seeds,
 		/obj/item/food/grown,
-		/obj/item/graft,
 		/obj/item/grown,
+<<<<<<< HEAD
 		/obj/item/food/honeycomb,
 		/obj/item/seeds,
 	))
+=======
+		/obj/item/reagent_containers/honeycomb,
+		/obj/item/graft,
+		/obj/item/disk/plantgene,
+		/obj/item/paper,
+		))
+////////
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/storage/bag/plants/portaseeder
 	name = "portable seed extractor"
@@ -337,6 +344,10 @@
 	atom_storage.set_holdable(list(
 		/obj/item/book,
 		/obj/item/spellbook,
+<<<<<<< HEAD
+=======
+		/obj/item/storage/book, //TG#75350 Refactors these to be just /obj/item/book, but it also add burning bibles. May look back at it another time
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/poster,
 	))
 
@@ -493,7 +504,13 @@
 		/obj/item/reagent_containers/cup/tube,
 		/obj/item/reagent_containers/hypospray/medipen,
 		/obj/item/reagent_containers/syringe,
+<<<<<<< HEAD
 	))
+=======
+		/obj/item/weapon/virusdish,//Monkestation Addition
+		/obj/item/food/monkeycube/mouse,//Monkestation Addition
+		))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  *  Science bag (mostly for xenobiologists)
@@ -524,7 +541,12 @@
 		/obj/item/reagent_containers/syringe,
 		/obj/item/slime_extract,
 		/obj/item/swab,
+<<<<<<< HEAD
 	))
+=======
+		/obj/item/stack/biomass // monke: make science bags able to hold biomass cubes
+		))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  *  Construction bag (for engineering, holds stock parts and electronics)
@@ -536,7 +558,6 @@
 	icon_state = "construction_bag"
 	worn_icon_state = "construction_bag"
 	desc = "A bag for storing small construction components."
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_POCKETS
 	resistance_flags = FLAMMABLE
 
 /obj/item/storage/bag/construction/Initialize(mapload)

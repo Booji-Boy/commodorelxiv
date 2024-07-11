@@ -13,10 +13,13 @@
 /obj/effect/decal/cleanable/blood/splatter/over_window,
 /turf/open/floor/iron/freezer,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "h" = (
 /obj/modular_map_connector,
 /turf/closed/wall/mineral/silver,
 /area/virtual_domain/safehouse)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "q" = (
 /obj/structure/urinal/directional/west,
 /turf/open/floor/iron/freezer,
@@ -107,7 +110,11 @@ G
 G
 G
 G
+<<<<<<< HEAD
 h
+=======
+G
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 G

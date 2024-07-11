@@ -14,8 +14,14 @@ Slimecrossing Mobs
 	invocation_type = INVOCATION_NONE
 	spell_requirements = NONE
 
+<<<<<<< HEAD
 	convert_damage_type = TOX
 	possible_shapes = list(/mob/living/basic/slime/transformed_slime)
+=======
+	convert_damage = TRUE
+	convert_damage_type = BRUTE // MONKESTATION EDIT: slimes take brute so we give the unshapeshift brute too
+	possible_shapes = list(/mob/living/basic/slime)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// If TRUE, we self-delete (remove ourselves) the next time we turn back into a human
 	var/remove_on_restore = FALSE
@@ -28,6 +34,7 @@ Slimecrossing Mobs
 	if(remove_on_restore)
 		qdel(src)
 
+<<<<<<< HEAD
 /// Transformed slime - from Burning Black
 /mob/living/basic/slime/transformed_slime
 
@@ -36,6 +43,8 @@ Slimecrossing Mobs
 	to_chat(src, span_warning("I can't reproduce...")) // Mood
 	return
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Slime corgi - Chilling Pink
 /mob/living/basic/pet/dog/corgi/puppy/slime
 	name = "\improper slime corgi puppy"

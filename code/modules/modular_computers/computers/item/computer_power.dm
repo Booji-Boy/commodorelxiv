@@ -29,12 +29,19 @@
 
 ///Shuts down the computer from powerloss.
 /obj/item/modular_computer/proc/power_failure()
+<<<<<<< HEAD
 	if(!enabled)
 		return
 	if(active_program)
 		active_program.event_powerfailure()
 	if(light_on)
 		set_light_on(FALSE)
+=======
+	if(!enabled) // Shut down the computer
+		return
+	if(active_program)
+		active_program.event_powerfailure()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/datum/computer_file/program/programs as anything in idle_threads)
 		programs.event_powerfailure()
 	shutdown_computer(loud = FALSE)

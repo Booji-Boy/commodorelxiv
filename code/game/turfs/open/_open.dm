@@ -7,7 +7,10 @@
 	var/barefootstep = null
 	var/clawfootstep = null
 	var/heavyfootstep = null
+	/// Pollution of this turf
+	var/datum/pollution/pollution
 
+<<<<<<< HEAD
 	/// Determines the type of damage overlay that will be used for the tile
 	var/damaged_dmi = null
 	var/broken = FALSE
@@ -78,6 +81,17 @@
 			return FALSE
 	return TRUE
 
+=======
+//direction is direction of travel of A
+/turf/open/zPassIn(direction)
+	if(direction != DOWN)
+		return FALSE
+	for(var/obj/on_us in contents)
+		if(on_us.obj_flags & BLOCK_Z_IN_DOWN)
+			return FALSE
+	return TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //direction is direction of travel of an atom
 /turf/open/zPassOut(direction)
 	if(direction != UP)
@@ -160,6 +174,9 @@
 	light_range = 3
 	light_color = LIGHT_COLOR_CYAN
 	light_on = TRUE
+
+/turf/open/indestructible/plating
+	icon_state = "plating"
 
 /turf/open/indestructible/permalube
 	icon_state = "darkfull"
@@ -383,7 +400,7 @@
 		slipper.Immobilize(1 SECONDS)
 		slipper.incapacitate(1 SECONDS)
 	else
-		slipper.Knockdown(knockdown_amount)
+		slipper.bananeer(total_time = knockdown_amount * 0.1, stun_duration = knockdown_amount, height = (knockdown_amount * 0.5), flip_count = round(knockdown_amount * 0.1))
 		slipper.Paralyze(paralyze_amount)
 		slipper.stop_pulling()
 

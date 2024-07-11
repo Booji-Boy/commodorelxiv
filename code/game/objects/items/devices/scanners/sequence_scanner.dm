@@ -48,6 +48,7 @@
 	if (!HAS_TRAIT(interacting_with, TRAIT_GENELESS) && !HAS_TRAIT(interacting_with, TRAIT_BADDNA))
 		user.visible_message(span_notice("[user] analyzes [interacting_with]'s genetic sequence."))
 		balloon_alert(user, "sequence analyzed")
+<<<<<<< HEAD
 		playsound(user, 'sound/items/healthanalyzer.ogg', 50) // close enough
 		gene_scan(interacting_with, user)
 		return ITEM_INTERACT_SUCCESS
@@ -80,6 +81,12 @@
 
 	user.visible_message(span_notice("[user] fails to analyze [interacting_with]'s genetic makeup."), span_warning("[interacting_with] has no readable genetic makeup!"))
 	return ITEM_INTERACT_BLOCKING
+=======
+		playsound(user.loc, 'sound/items/healthanalyzer.ogg', 50) // close enough
+		gene_scan(target, user)
+	else
+		user.visible_message(span_notice("[user] fails to analyze [target]'s genetic sequence."), span_warning("[target] has no readable genetic sequence!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/sequence_scanner/attack_self(mob/user)
 	display_sequence(user)

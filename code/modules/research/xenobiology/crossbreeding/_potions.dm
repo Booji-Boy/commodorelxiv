@@ -182,11 +182,15 @@ Slimecrossing Potions
 	icon = 'icons/obj/medical/chemical.dmi'
 	icon_state = "potsilver"
 
+<<<<<<< HEAD
 /obj/item/slimepotion/slime_reviver/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	. = ..()
 	if(. & ITEM_INTERACT_ANY_BLOCKER)
 		return .
 	var/mob/living/basic/slime/revive_target = interacting_with
+=======
+/obj/item/slimepotion/slime_reviver/attack(mob/living/basic/slime/revive_target, mob/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!isslime(revive_target))
 		to_chat(user, span_warning("The potion only works on slimes!"))
 		return ITEM_INTERACT_BLOCKING

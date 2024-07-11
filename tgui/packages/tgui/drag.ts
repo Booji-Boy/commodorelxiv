@@ -209,7 +209,11 @@ export const dragStartHandler = (event) => {
   dragPointOffset = vecSubtract(
     [event.screenX, event.screenY],
     getWindowPosition(),
+<<<<<<< HEAD
   ) as [number, number];
+=======
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   // Focus click target
   (event.target as HTMLElement)?.focus();
   document.addEventListener('mousemove', dragMoveHandler);
@@ -234,10 +238,14 @@ const dragMoveHandler = (event: MouseEvent) => {
   }
   event.preventDefault();
   setWindowPosition(
+<<<<<<< HEAD
     vecSubtract([event.screenX, event.screenY], dragPointOffset) as [
       number,
       number,
     ],
+=======
+    vecSubtract([event.screenX, event.screenY], dragPointOffset),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 };
 
@@ -250,7 +258,11 @@ export const resizeStartHandler =
     dragPointOffset = vecSubtract(
       [event.screenX, event.screenY],
       getWindowPosition(),
+<<<<<<< HEAD
     ) as [number, number];
+=======
+    );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     initialSize = getWindowSize();
     // Focus click target
     (event.target as HTMLElement)?.focus();

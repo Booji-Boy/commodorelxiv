@@ -1,3 +1,15 @@
+<<<<<<< HEAD:code/__DEFINES/_flags.dm
+=======
+//for convenience
+#define ENABLE_BITFIELD(variable, flag) (variable |= (flag))
+#define DISABLE_BITFIELD(variable, flag) (variable &= ~(flag))
+#define CHECK_BITFIELD(variable, flag) (variable & (flag))
+#define TOGGLE_BITFIELD(variable, flag) (variable ^= (flag))
+
+/*
+	These defines are specific to the atom/flags_1 bitmask
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/flags.dm
 #define ALL (~0) //For convenience.
 #define NONE 0
 
@@ -55,6 +67,9 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Yes I know this is a stupid flag, no you can't take him from me
 #define DECAL_INIT_UPDATE_EXPERIENCED_1 (1<<17)
 
+/// Used for items that cannot be used directly to harm people with, ex. loafs
+#define CANNOT_ATTACK_WITH (1<<21)
+
 // Update flags for [/atom/proc/update_appearance]
 /// Update the atom's name
 #define UPDATE_NAME (1<<0)
@@ -97,6 +112,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define TURF_BLOCKS_POPULATE_TERRAIN_FLORAFEATURES (1<<8)
 
 
+#define TURF_WEATHER (1<<8) //monkestation edit
 ////////////////Area flags\\\\\\\\\\\\\\
 /// If it's a valid territory for cult summoning or the CRAB-17 phone to spawn
 #define VALID_TERRITORY (1<<0)
@@ -127,11 +143,21 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Mobs that die in this area don't produce a dead chat message
 #define NO_DEATH_MESSAGE (1<<13)
 /// This area should have extra shielding from certain event effects
+<<<<<<< HEAD:code/__DEFINES/_flags.dm
 #define EVENT_PROTECTED (1<<14)
 /// This Area Doesn't have Flood or Bomb Admin Messages, but will still log
 #define QUIET_LOGS (1<<15)
 /// This area does not allow virtual entities to enter.
 #define VIRTUAL_SAFE_AREA (1<<16)
+=======
+#define EVENT_PROTECTED (1<<16)
+///is this a passive area
+#define PASSIVE_AREA (1<<17)
+///is this a ghost accessible area?
+#define GHOST_AREA (1<<18)
+///can we explode during rounds?
+#define NO_GHOSTS_DURING_ROUND (1<<19)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/flags.dm
 
 /*
 	These defines are used specifically with the atom/pass_flags bitmask
@@ -166,8 +192,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASSITEM (1<<12)
 /// Do not intercept click attempts during Adjacent() checks. See [turf/proc/ClickCross]. **ONLY MEANINGFUL ON pass_flags_self!**
 #define LETPASSCLICKS (1<<13)
+<<<<<<< HEAD:code/__DEFINES/_flags.dm
 /// Allows you to pass over windows and window-adjacent stuff, like windows and windoors. Does not include airlocks with glass in them.
 #define PASSWINDOW (1<<14)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/__DEFINES/flags.dm
 
 //Movement Types
 #define GROUND (1<<0)
@@ -211,7 +240,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 /// Zaps with this flag will generate less power through tesla coils
 #define ZAP_LOW_POWER_GEN (1<<6)
 
-#define ZAP_DEFAULT_FLAGS ZAP_MOB_STUN | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE
+#define ZAP_DEFAULT_FLAGS ZAP_MOB_STUN | ZAP_MOB_DAMAGE | ZAP_OBJ_DAMAGE | ZAP_GENERATES_POWER | ZAP_LOW_POWER_GEN
 #define ZAP_FUSION_FLAGS ZAP_OBJ_DAMAGE | ZAP_MOB_DAMAGE | ZAP_MOB_STUN
 #define ZAP_SUPERMATTER_FLAGS ZAP_GENERATES_POWER
 

@@ -28,7 +28,13 @@
 /mob/living/simple_animal/hostile/asteroid/elite/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/seethrough_mob)
+<<<<<<< HEAD
 	grant_actions_by_list(attack_action_types)
+=======
+	for(var/action_type in attack_action_types)
+		var/datum/action/innate/elite_attack/attack_action = new action_type()
+		attack_action.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Prevents elites from attacking members of their faction (can't hurt themselves either) and lets them mine rock with an attack despite not being able to smash walls.
 /mob/living/simple_animal/hostile/asteroid/elite/AttackingTarget(atom/attacked_target)
@@ -124,8 +130,13 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	icon_state = "tumor"
 	pixel_x = -16
 	base_pixel_x = -16
+<<<<<<< HEAD
 	light_color = "#FA8282"
 	light_range = 3
+=======
+	light_color = COLOR_SOFT_RED
+	light_outer_range = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	anchored = TRUE
 	density = FALSE
 	var/activity = TUMOR_INACTIVE
@@ -184,8 +195,21 @@ While using this makes the system rely on OnFire, it still gives options for tim
 				addtimer(CALLBACK(src, PROC_REF(spawn_elite)), 3 SECONDS)
 				return
 			visible_message(span_boldwarning("Something within [src] stirs..."))
+<<<<<<< HEAD
 			var/mob/chosen_one = SSpolling.poll_ghosts_for_target(check_jobban = ROLE_SENTIENCE, role = ROLE_SENTIENCE, poll_time = 5 SECONDS, checked_target = src, ignore_category = POLL_IGNORE_LAVALAND_ELITE, alert_pic = src, role_name_text = "lavaland elite")
 			if(chosen_one)
+=======
+			var/list/candidates = SSpolling.poll_ghost_candidates_for_mob(
+				"Do you want to play as a lavaland elite?",
+				role = ROLE_SENTIENCE,
+				poll_time = 5 SECONDS,
+				target_mob = src,
+				ignore_category = POLL_IGNORE_LAVALAND_ELITE,
+				pic_source = src,
+				role_name_text = "lavaland elite"
+			)
+			if(length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				audible_message(span_boldwarning("The stirring sounds increase in volume!"))
 				elitemind = chosen_one
 				elitemind.playsound_local(get_turf(elitemind), 'sound/effects/magic.ogg', 40, 0)
@@ -353,7 +377,6 @@ While using this makes the system rely on OnFire, it still gives options for tim
 		to_chat(mychild, "<b>Your max health has been halved, but can now heal by standing on your tumor. Note, it's your only way to heal.\n\
 			Bear in mind, if anyone interacts with your tumor, you'll be resummoned here to carry out another fight. In such a case, you will regain your full max health.\n\
 			Also, be weary of your fellow inhabitants, they likely won't be happy to see you!</b>")
-		to_chat(mychild, "<span class='big bold'>Note that you are a lavaland monster, and thus not allied to the station. You should not cooperate or act friendly with any station crew unless under extreme circumstances!</span>")
 
 /obj/item/tumor_shard
 	name = "tumor shard"
@@ -401,8 +424,13 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
 	color = rgb(255,0,0)
+<<<<<<< HEAD
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	light_color = "#FA8282"
+=======
+	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_color = COLOR_SOFT_RED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/weakref/activator_ref
 	var/datum/weakref/ourelite_ref
 

@@ -1,4 +1,5 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+<<<<<<< HEAD
 "ab" = (
 /obj/machinery/vending/cigarette/beach,
 /obj/effect/turf_decal/sand,
@@ -8,6 +9,18 @@
 "ag" = (
 /turf/open/floor/carpet/red,
 /area/virtual_domain/fullbright)
+=======
+"ac" = (
+/obj/item/reagent_containers/condiment/milk,
+/obj/item/reagent_containers/condiment/mayonnaise,
+/obj/item/reagent_containers/condiment/flour,
+/obj/item/reagent_containers/condiment/flour,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"ag" = (
+/turf/open/floor/carpet/red,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "as" = (
 /obj/structure/closet/crate/bin,
 /obj/item/tank/internals/emergency_oxygen,
@@ -16,6 +29,7 @@
 /obj/effect/turf_decal/sand,
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "aw" = (
 /obj/machinery/grill,
@@ -24,6 +38,16 @@
 "aE" = (
 /turf/open/floor/pod/light,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"aw" = (
+/obj/machinery/grill,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"aE" = (
+/turf/open/floor/pod/light,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "aZ" = (
 /obj/machinery/light/small/directional/east,
 /obj/structure/closet/crate{
@@ -32,43 +56,71 @@
 /obj/item/stack/sheet/mineral/coal/ten,
 /obj/item/stack/sheet/mineral/coal/ten,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"bd" = (
+/turf/open/floor/iron/grimy,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bf" = (
 /mob/living/basic/crab{
 	name = "Jonny"
 	},
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bC" = (
 /obj/effect/turf_decal/sand,
 /mob/living/basic/crab{
 	name = "James"
 	},
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bM" = (
 /mob/living/basic/crab{
 	name = "Jon"
 	},
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "bQ" = (
 /obj/structure/fluff/beach_umbrella/cap,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"bQ" = (
+/obj/structure/fluff/beach_umbrella/cap,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bS" = (
 /obj/machinery/chem_master/condimaster{
 	name = "CondiMaster Neo";
 	pixel_x = -4
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cb" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/pill/lsd,
 /obj/item/reagent_containers/pill/lsd,
 /obj/item/reagent_containers/pill/lsd,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "cv" = (
 /turf/open/floor/carpet/royalblue,
@@ -87,6 +139,47 @@
 /obj/structure/closet/secure_closet/bar/lavaland_bartender_booze,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"cv" = (
+/turf/open/floor/carpet/royalblue,
+/area/virtual_domain/powered)
+"cG" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+"db" = (
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/vending_refill/cigarette,
+/obj/item/vending_refill/boozeomat,
+/obj/structure/closet/secure_closet{
+	icon_state = "cabinet";
+	name = "booze storage";
+	req_access = list("bar")
+	},
+/obj/item/storage/backpack/duffelbag,
+/obj/item/etherealballdeployer,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/bottle/beer/light,
+/obj/item/reagent_containers/cup/glass/colocup,
+/obj/item/reagent_containers/cup/glass/colocup,
+/obj/item/reagent_containers/cup/glass/colocup,
+/obj/item/reagent_containers/cup/glass/colocup,
+/obj/item/reagent_containers/cup/glass/colocup,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "di" = (
 /obj/machinery/vending/boozeomat,
 /obj/effect/mapping_helpers/atom_injector/obj_flag{
@@ -94,18 +187,32 @@
 	target_type = /obj/machinery/vending/boozeomat
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "dj" = (
 /turf/open/misc/beach/coast{
 	dir = 1
 	},
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"do" = (
+/obj/item/food/meat/rawbacon,
+/obj/item/food/meat/rawbacon,
+/obj/item/food/meat/rawcutlet,
+/obj/item/food/meat/rawcutlet,
+/obj/item/food/meat/slab/rawcrab,
+/obj/item/food/meat/slab/rawcrab,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dx" = (
 /obj/effect/turf_decal/sand,
 /obj/effect/turf_decal/stripes/asteroid/line{
 	dir = 8
 	},
 /turf/open/floor/sepia,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "dI" = (
 /obj/machinery/light/directional/south,
@@ -115,23 +222,57 @@
 /obj/structure/bookcase/random/reference,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"dI" = (
+/obj/machinery/light/directional/south,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"dZ" = (
+/obj/structure/bookcase/random/reference,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ed" = (
 /obj/machinery/atmospherics/components/tank/air{
 	dir = 1
 	},
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "er" = (
 /obj/structure/noticeboard/staff,
 /turf/closed/wall/mineral/wood/nonmetal,
 /area/virtual_domain/fullbright)
 "fc" = (
+=======
+/area/virtual_domain/powered)
+"er" = (
+/obj/structure/noticeboard/staff,
+/turf/closed/wall/mineral/wood/nonmetal,
+/area/virtual_domain/powered)
+"fr" = (
+/obj/item/melee/skateboard/hoverboard,
+/obj/machinery/light/directional/west,
+/turf/open/floor/pod/light,
+/area/virtual_domain/powered)
+"gh" = (
+/obj/structure/flora/bush/stalky/style_random,
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+"gl" = (
+/turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
+/area/lavaland/surface/outdoors/virtual_domain)
+"gx" = (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/table/wood,
 /obj/item/reagent_containers/pill/happy,
 /obj/item/toy/figure/bartender{
 	pixel_x = -8;
 	pixel_y = -1
 	},
+<<<<<<< HEAD
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
 "fr" = (
@@ -163,12 +304,32 @@
 /obj/structure/sign/departments/restroom/directional/east,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/pina_colada{
+	pixel_y = 5;
+	pixel_x = 6
+	},
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"hk" = (
+/obj/structure/reagent_dispensers/watertank,
+/turf/open/floor/pod/light,
+/area/virtual_domain/powered)
+"hE" = (
+/obj/structure/sign/departments/restroom/directional/east,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "hG" = (
 /obj/machinery/door/airlock/sandstone{
 	name = "Surfer Shack 1"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "iz" = (
 /turf/closed/indestructible/binary,
 /area/lavaland/surface/outdoors/virtual_domain)
@@ -179,6 +340,7 @@
 /obj/item/reagent_containers/cup/rag,
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "jc" = (
 /turf/open/floor/iron/stairs/right,
@@ -191,6 +353,24 @@
 /obj/structure/flora/rock/pile/jungle/style_random,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"jc" = (
+/turf/open/floor/iron/stairs/right,
+/area/virtual_domain/powered)
+"jg" = (
+/obj/machinery/vending/hydronutrients,
+/turf/open/floor/iron/grimy,
+/area/virtual_domain/powered)
+"jl" = (
+/obj/structure/flora/rock/pile/jungle/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"js" = (
+/obj/machinery/light/directional/south,
+/turf/open/misc/beach/sand/coastline_b,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "jy" = (
 /obj/effect/turf_decal/sand{
 	density = 1
@@ -199,7 +379,11 @@
 /turf/open/floor/pod/light{
 	density = 1
 	},
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ke" = (
 /obj/structure/marker_beacon/bronze,
 /turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
@@ -211,7 +395,11 @@
 	},
 /obj/structure/chair/stool/bar/directional/west,
 /turf/open/floor/sepia,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "kv" = (
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/closed/indestructible/binary,
@@ -220,11 +408,16 @@
 /obj/structure/table,
 /obj/machinery/reagentgrinder,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "kK" = (
 /obj/structure/mirror/directional/west,
 /obj/structure/sink/kitchen/directional/south,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "kT" = (
 /obj/structure/chair/stool/bar/directional/south,
@@ -234,10 +427,22 @@
 /obj/item/melee/skateboard/hoverboard,
 /turf/open/floor/pod/light,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"kT" = (
+/obj/structure/chair/stool/bar/directional/south,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"lq" = (
+/obj/item/melee/skateboard/hoverboard,
+/turf/open/floor/pod/light,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "lB" = (
 /obj/item/toy/seashell,
 /obj/effect/turf_decal/sand,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "lS" = (
 /turf/open/floor/light/colour_cycle/dancefloor_a,
@@ -249,10 +454,20 @@
 /obj/structure/closet/secure_closet/freezer/kitchen/all_access,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"lS" = (
+/turf/open/floor/light/colour_cycle/dancefloor_a,
+/area/virtual_domain/powered)
+"ml" = (
+/turf/template_noop,
+/area/virtual_domain/safehouse)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "mG" = (
 /obj/structure/easel,
 /obj/item/canvas/twentythree_twentythree,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "mP" = (
 /turf/open/misc/beach/coast/corner{
@@ -269,10 +484,17 @@
 /obj/item/food/meat/slab/rawcrab,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"nO" = (
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "nP" = (
 /obj/item/stack/sheet/iron/fifty,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "oE" = (
 /obj/structure/railing/corner{
@@ -283,17 +505,31 @@
 	dir = 8
 	},
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"oy" = (
+/obj/effect/mob_spawn/ghost_role/human/bartender{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "oP" = (
 /obj/structure/table/wood,
 /obj/machinery/reagentgrinder,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "pr" = (
 /turf/template_noop,
 /area/template_noop)
 "pC" = (
 /obj/machinery/computer/arcade/battle,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "pT" = (
 /obj/effect/mapping_helpers/broken_floor,
@@ -313,17 +549,33 @@
 /obj/structure/sign/poster/contraband/space_up/directional/west,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"pT" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+"qc" = (
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "qR" = (
 /obj/effect/spawner/structure/window,
 /obj/structure/curtain,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "qW" = (
 /obj/item/melee/skateboard/hoverboard,
 /mob/living/basic/chicken{
 	name = "Chicken Joe"
 	},
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "rc" = (
 /obj/machinery/light/directional/east,
@@ -333,6 +585,17 @@
 /obj/structure/sign/poster/official/fruit_bowl,
 /turf/closed/wall/mineral/wood/nonmetal,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"rc" = (
+/obj/machinery/light/directional/east,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"ri" = (
+/obj/structure/sign/poster/official/fruit_bowl,
+/turf/closed/wall/mineral/wood/nonmetal,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "rm" = (
 /obj/item/storage/crayons,
 /obj/structure/closet/crate/wooden,
@@ -340,11 +603,19 @@
 /obj/item/canvas/twentythree_twentythree,
 /obj/item/canvas/twentythree_twentythree,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "rT" = (
 /obj/item/toy/seashell,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"rT" = (
+/obj/item/toy/seashell,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "sT" = (
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/template_noop,
@@ -354,6 +625,7 @@
 	name = "Resort Casino"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "tF" = (
 /obj/structure/extinguisher_cabinet/directional/east,
@@ -372,12 +644,45 @@
 /obj/structure/closet/secure_closet/bar/lavaland_bartender_clothes,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"tF" = (
+/obj/structure/extinguisher_cabinet/directional/east,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"tZ" = (
+/obj/structure/toilet,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"uc" = (
+/obj/machinery/light/small/directional/east,
+/obj/machinery/light/small/directional/east,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/virtual_domain/powered)
+"ug" = (
+/obj/structure/closet/secure_closet{
+	icon_state = "cabinet";
+	name = "bartender's closet";
+	req_access = list("bar")
+	},
+/obj/item/clothing/shoes/sandal{
+	desc = "A very fashionable pair of flip-flops.";
+	name = "flip-flops"
+	},
+/obj/item/clothing/neck/beads,
+/obj/item/clothing/glasses/sunglasses/reagent,
+/obj/item/clothing/suit/costume/hawaiian,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "uk" = (
 /obj/structure/closet/crate/hydroponics,
 /obj/item/shovel/spade,
 /obj/item/reagent_containers/cup/bucket,
 /obj/item/cultivator,
 /turf/open/floor/iron/grimy,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "uq" = (
 /obj/structure/table/wood,
@@ -398,6 +703,13 @@
 /obj/structure/flora/coconuts,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"uU" = (
+/obj/effect/turf_decal/sand,
+/turf/open/floor/sepia,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ve" = (
 /obj/item/toy/dodgeball,
 /obj/item/toy/dodgeball,
@@ -405,11 +717,16 @@
 /obj/item/toy/dodgeball,
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "vp" = (
 /obj/machinery/light/directional/east,
 /obj/structure/chair/stool/bar/directional/south,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "vq" = (
 /obj/machinery/oven/range,
@@ -419,12 +736,24 @@
 /obj/structure/chair/stool/directional/south,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"vq" = (
+/obj/machinery/oven/range,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"vv" = (
+/obj/structure/chair/stool/directional/south,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "vN" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/pill/morphine,
 /obj/item/reagent_containers/pill/morphine,
 /obj/item/reagent_containers/pill/morphine,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "vT" = (
 /obj/structure/railing{
@@ -432,6 +761,9 @@
 	},
 /turf/open/misc/beach/coast/corner,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "wb" = (
 /obj/structure/closet/crate/freezer{
 	name = "Cooler"
@@ -455,10 +787,17 @@
 /obj/item/reagent_containers/cup/glass/bottle/beer/light,
 /obj/item/reagent_containers/cup/glass/bottle/beer/light,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "wD" = (
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"wD" = (
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xb" = (
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors/virtual_domain)
@@ -467,16 +806,30 @@
 /obj/item/storage/dice,
 /obj/item/stack/spacecash/c1000,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xq" = (
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/item/megaphone,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "xw" = (
 /turf/open/floor/pod/dark,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"xw" = (
+/turf/open/floor/pod/dark,
+/area/virtual_domain/powered)
+"xz" = (
+/turf/open/misc/beach/sand/coastline_b,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xJ" = (
 /obj/structure/closet/cabinet,
 /obj/item/storage/backpack/duffelbag,
@@ -488,7 +841,11 @@
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/clothing/neck/beads,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xR" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/window/reinforced/spawner/directional/north{
@@ -499,7 +856,16 @@
 /obj/item/clothing/under/shorts/red,
 /obj/item/clothing/glasses/sunglasses,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"xT" = (
+/obj/machinery/vending/cigarette/beach,
+/obj/effect/turf_decal/sand,
+/turf/open/floor/iron,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xW" = (
 /turf/open/space/basic,
 /area/space)
@@ -509,14 +875,22 @@
 /obj/item/reagent_containers/pill/zoom,
 /obj/item/reagent_containers/pill/zoom,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yi" = (
 /obj/structure/sink/kitchen/directional/west{
 	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
 	name = "old sink"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yl" = (
 /obj/item/reagent_containers/cup/glass/colocup{
 	pixel_x = -7;
@@ -531,16 +905,25 @@
 	pixel_y = -3
 	},
 /turf/open/floor/carpet/red,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ys" = (
 /obj/effect/turf_decal/sand,
 /obj/machinery/light/directional/east,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yv" = (
 /obj/effect/turf_decal/sand,
 /obj/machinery/food_cart,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "yB" = (
 /obj/item/instrument/guitar,
@@ -564,10 +947,36 @@
 /obj/structure/punching_bag,
 /turf/open/floor/pod/dark,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"yB" = (
+/obj/item/instrument/guitar,
+/turf/open/floor/carpet/blue,
+/area/virtual_domain/powered)
+"yU" = (
+/obj/structure/sign/warning/gas_mask/directional/north,
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+"yX" = (
+/obj/structure/chair/stool/bar/directional/south,
+/turf/open/floor/carpet/red,
+/area/virtual_domain/powered)
+"zc" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/misc/beach/sand/coastline_b,
+/area/virtual_domain/powered)
+"zw" = (
+/obj/structure/punching_bag,
+/turf/open/floor/pod/dark,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "zI" = (
 /obj/structure/marker_beacon/indigo,
 /turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
 /area/lavaland/surface/outdoors/virtual_domain)
+<<<<<<< HEAD
 "zU" = (
 /obj/structure/flora/rock/pile/style_random,
 /turf/open/misc/beach/sand,
@@ -584,6 +993,20 @@
 /obj/structure/chair,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+"zQ" = (
+/obj/machinery/light/directional/east,
+/turf/open/misc/beach/sand/coastline_b,
+/area/virtual_domain/powered)
+"zU" = (
+/obj/structure/flora/rock/pile/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"Ae" = (
+/obj/structure/chair,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Al" = (
 /turf/closed/mineral/random/volcanic,
 /area/lavaland/surface/outdoors/virtual_domain)
@@ -594,19 +1017,31 @@
 "Au" = (
 /obj/structure/fluff/beach_umbrella/science,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "AI" = (
 /obj/structure/table/reinforced,
 /obj/machinery/reagentgrinder,
 /turf/open/floor/pod/light,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "AP" = (
 /obj/machinery/chem_dispenser/drinks/beer/fullupgrade{
 	dir = 1
 	},
 /obj/structure/table/wood,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Br" = (
 /obj/structure/table/wood/poker,
 /obj/item/toy/cards/deck/cas{
@@ -617,6 +1052,7 @@
 	pixel_y = 2
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Bu" = (
 /turf/open/misc/beach/coast{
@@ -627,15 +1063,27 @@
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Bw" = (
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "BD" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/condiment/saltshaker,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "BJ" = (
 /obj/structure/table/wood/poker,
 /obj/item/toy/cards/deck,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "BM" = (
 /turf/closed/wall/mineral/wood/nonmetal,
@@ -644,46 +1092,88 @@
 /obj/machinery/seed_extractor,
 /turf/open/floor/pod/light,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"BM" = (
+/turf/closed/wall/mineral/wood/nonmetal,
+/area/virtual_domain/powered)
+"BQ" = (
+/obj/machinery/seed_extractor,
+/turf/open/floor/pod/light,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Cb" = (
 /obj/machinery/light/directional/north,
 /mob/living/basic/crab{
 	name = "Eddie"
 	},
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Cv" = (
 /obj/machinery/hydroponics/constructable,
 /turf/open/floor/iron/grimy,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Cv" = (
+/obj/machinery/growing/tray,
+/turf/open/floor/iron/grimy,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "CA" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/effect/mob_spawn/ghost_role/human/beach/lifeguard,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "CO" = (
 /obj/machinery/vending/dinnerware,
 /obj/machinery/light/directional/east,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Db" = (
 /obj/machinery/barsign/all_access,
 /turf/closed/wall/mineral/wood/nonmetal,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Db" = (
+/obj/machinery/barsign/all_access,
+/turf/closed/wall/mineral/wood/nonmetal,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Ds" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Resort Lobby"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Dt" = (
 /obj/machinery/light/directional/east,
 /obj/effect/turf_decal/sand,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "DL" = (
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/closed/wall/mineral/sandstone,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"DL" = (
+/obj/effect/baseturf_helper/virtual_domain,
+/turf/closed/wall/mineral/sandstone,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Em" = (
 /obj/item/reagent_containers/condiment/enzyme{
 	layer = 5
@@ -693,11 +1183,16 @@
 	},
 /obj/structure/table,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Et" = (
 /obj/machinery/light/small/directional/east,
 /obj/effect/mapping_helpers/burnt_floor,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Ev" = (
 /obj/structure/reagent_dispensers/beerkeg,
@@ -707,10 +1202,22 @@
 /obj/structure/sign/warning/gas_mask/directional/west,
 /turf/open/floor/plating,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Ev" = (
+/obj/structure/reagent_dispensers/beerkeg,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"EC" = (
+/obj/structure/sign/warning/gas_mask/directional/west,
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "EP" = (
 /obj/machinery/light/directional/north,
 /obj/machinery/washing_machine,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Fn" = (
 /turf/closed/wall/mineral/sandstone,
@@ -719,6 +1226,14 @@
 /obj/modular_map_root/safehouse{
 	key = "mine"
 	},
+=======
+/area/virtual_domain/powered)
+"Fn" = (
+/turf/closed/wall/mineral/sandstone,
+/area/virtual_domain/powered)
+"FM" = (
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "FQ" = (
@@ -726,12 +1241,17 @@
 /obj/item/secateurs,
 /obj/item/reagent_containers/cup/bottle/nutrient/ez,
 /turf/open/floor/pod/light,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "FS" = (
 /obj/effect/turf_decal/sand,
 /obj/structure/sign/warning/no_smoking/circle/directional/east,
 /obj/machinery/light/directional/east,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "FY" = (
 /obj/structure/mineral_door/wood,
@@ -746,6 +1266,17 @@
 /obj/structure/flora/tree/palm,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"FY" = (
+/obj/structure/mineral_door/wood,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Gz" = (
+/obj/structure/flora/tree/palm,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "GA" = (
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/structure/window/reinforced/spawner/directional/west,
@@ -754,6 +1285,7 @@
 /obj/item/storage/medkit/regular,
 /obj/item/storage/medkit/brute,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Hs" = (
 /obj/machinery/shower/directional/west,
@@ -771,16 +1303,58 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron/stairs/left,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Hl" = (
+/obj/effect/turf_decal/sand,
+/obj/effect/turf_decal/stripes/asteroid/line{
+	dir = 8
+	},
+/obj/machinery/light/directional/west,
+/obj/structure/railing,
+/turf/open/floor/sepia,
+/area/virtual_domain/powered)
+"Hs" = (
+/obj/machinery/shower/directional/west,
+/turf/open/floor/iron/white,
+/area/virtual_domain/powered)
+"Hu" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/pina_colada{
+	pixel_x = 5;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/pina_colada,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"HF" = (
+/obj/machinery/deepfryer,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Ia" = (
+/obj/structure/urinal/directional/north,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Ii" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/iron/stairs/left,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Ir" = (
 /obj/machinery/vending/cola,
 /obj/effect/turf_decal/sand,
 /turf/open/floor/iron,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Iv" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/condiment/peppermill,
 /obj/item/reagent_containers/condiment/soysauce,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "IH" = (
 /obj/item/toy/beach_ball,
@@ -791,10 +1365,23 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron/grimy,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"IH" = (
+/obj/item/toy/beach_ball,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"IM" = (
+/obj/machinery/growing/tray,
+/obj/machinery/light/directional/east,
+/turf/open/floor/iron/grimy,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "IP" = (
 /obj/machinery/vending/snack,
 /obj/effect/turf_decal/sand,
 /turf/open/floor/iron,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Jt" = (
 /obj/item/reagent_containers/cup/glass/bottle/beer,
@@ -820,11 +1407,31 @@
 /obj/structure/sign/warning/secure_area,
 /turf/closed/wall/mineral/sandstone,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Jt" = (
+/obj/item/reagent_containers/cup/glass/bottle/beer,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"JC" = (
+/obj/structure/fluff/beach_umbrella/engine,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"JY" = (
+/obj/structure/flora/rock/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"Kd" = (
+/obj/structure/sign/warning/secure_area,
+/turf/closed/wall/mineral/sandstone,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "KH" = (
 /obj/structure/mineral_door/wood{
 	name = "Croupier's Booth"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "KZ" = (
 /obj/structure/flora/bush/stalky/style_random,
@@ -860,13 +1467,45 @@
 /area/virtual_domain/fullbright)
 "Nw" = (
 /obj/effect/spawner/random/bedsheet{
+=======
+/area/virtual_domain/powered)
+"KZ" = (
+/obj/structure/flora/bush/stalky/style_random,
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+"LD" = (
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+"LW" = (
+/obj/item/storage/cans/sixbeer,
+/turf/open/floor/carpet/orange,
+/area/virtual_domain/powered)
+"Mw" = (
+/obj/structure/chair/sofa/right/brown,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Mz" = (
+/obj/structure/chair/sofa/left/brown,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Nr" = (
+/obj/machinery/light/directional/north,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"Nw" = (
+/obj/item/bedsheet/dorms{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dir = 4
 	},
 /obj/structure/bed{
 	dir = 4
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "NM" = (
 /obj/structure/closet/crate/hydroponics,
 /obj/item/food/grown/ambrosia/vulgaris,
@@ -880,16 +1519,25 @@
 /obj/item/food/grown/ambrosia/vulgaris,
 /obj/item/food/grown/ambrosia/vulgaris,
 /turf/open/floor/iron/grimy,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "NX" = (
 /obj/effect/landmark/bitrunning/loot_signal,
 /turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"NX" = (
+/obj/effect/landmark/bitrunning/loot_signal,
+/turf/open/floor/light/colour_cycle/dancefloor_a,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "OE" = (
 /obj/effect/mob_spawn/ghost_role/human/beach{
 	dir = 4
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "OK" = (
 /obj/structure/sign/warning/gas_mask/directional/north,
@@ -899,13 +1547,28 @@
 /obj/machinery/light/directional/south,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"OK" = (
+/obj/structure/sign/warning/gas_mask/directional/north,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"OR" = (
+/obj/machinery/light/directional/south,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "OW" = (
 /obj/structure/sink/kitchen/directional/east{
 	desc = "A sink used for washing one's hands and face. It looks rusty and home-made";
 	name = "old sink"
 	},
 /turf/open/floor/pod/light,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "OZ" = (
 /obj/structure/marker_beacon/teal,
 /turf/open/misc/asteroid/basalt/lava_land_surface/no_ruins,
@@ -914,6 +1577,7 @@
 /obj/structure/chair/wood,
 /obj/machinery/light/directional/west,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Pg" = (
 /obj/structure/sign/poster/official/high_class_martini/directional/west,
@@ -938,6 +1602,32 @@
 /obj/structure/extinguisher_cabinet/directional/north,
 /turf/open/floor/wood,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"PM" = (
+/obj/machinery/door/airlock/external/ruin,
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+"Qb" = (
+/obj/machinery/griddle,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Qm" = (
+/obj/effect/turf_decal/sand,
+/obj/item/coin/gold,
+/obj/structure/railing,
+/obj/machinery/media/jukebox,
+/turf/open/floor/sepia,
+/area/virtual_domain/powered)
+"Qu" = (
+/obj/structure/curtain,
+/turf/open/floor/iron/white,
+/area/virtual_domain/powered)
+"QP" = (
+/obj/structure/extinguisher_cabinet/directional/north,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "QX" = (
 /obj/machinery/chem_dispenser/drinks/fullupgrade{
 	dir = 1
@@ -945,10 +1635,17 @@
 /obj/structure/table/wood,
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Rx" = (
 /turf/open/floor/iron/stairs/medium,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Rx" = (
+/turf/open/floor/iron/stairs/medium,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "RL" = (
 /obj/structure/closet/cabinet,
 /obj/item/storage/backpack/duffelbag,
@@ -960,29 +1657,42 @@
 /obj/item/clothing/glasses/sunglasses/big,
 /obj/item/clothing/neck/beads,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Sg" = (
 /obj/structure/flora/coconuts,
 /obj/machinery/light/directional/north,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "SB" = (
 /obj/machinery/door/airlock/sandstone{
 	name = "Resort Bathroom"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "SD" = (
 /obj/machinery/door/airlock/sandstone{
 	name = "Bar Access"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "SY" = (
 /obj/machinery/door/airlock/sandstone{
 	name = "Surfer Shack 2"
 	},
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "TG" = (
 /turf/open/floor/wood,
@@ -1006,10 +1716,32 @@
 /obj/structure/weightmachine/weightlifter,
 /turf/open/floor/pod/dark,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"TG" = (
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"TJ" = (
+/obj/structure/fluff/beach_umbrella/security,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"Ud" = (
+/obj/effect/turf_decal/sand,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"Uh" = (
+/turf/open/floor/iron/stairs/old,
+/area/virtual_domain/powered)
+"Uq" = (
+/obj/structure/weightmachine/weightlifter,
+/turf/open/floor/pod/dark,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "UU" = (
 /obj/structure/flora/bush/large/style_random,
 /obj/structure/flora/bush/jungle/a/style_random,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Ve" = (
 /obj/machinery/processor,
@@ -1027,12 +1759,32 @@
 /obj/structure/flora/bush/large/style_random,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Ve" = (
+/obj/machinery/processor,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"VA" = (
+/obj/machinery/computer/slot_machine,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"VH" = (
+/obj/machinery/light/directional/west,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"VX" = (
+/obj/structure/flora/bush/large/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "We" = (
 /obj/structure/table/wood,
 /obj/item/book/manual/wiki/cooking_to_serve_man,
 /obj/item/clothing/suit/apron/chef,
 /obj/item/clothing/head/utility/chefhat,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Wg" = (
 /obj/structure/dresser,
@@ -1049,26 +1801,62 @@
 /obj/structure/flora/bush/jungle/a/style_random,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Wg" = (
+/obj/structure/dresser,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Wr" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/pina_colada,
+/obj/item/reagent_containers/cup/glass/drinkingglass/filled/pina_colada{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"Ww" = (
+/turf/open/water/beach,
+/area/virtual_domain/powered)
+"WL" = (
+/obj/machinery/light/directional/north,
+/turf/open/floor/wood,
+/area/virtual_domain/powered)
+"WO" = (
+/obj/structure/flora/bush/jungle/a/style_random,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "WW" = (
 /obj/effect/turf_decal/sand,
 /obj/machinery/icecream_vat,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "WX" = (
 /obj/item/toy/plush/lizard_plushie/green{
 	name = "Soaks-The-Rays"
 	},
 /turf/open/floor/carpet/orange,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Xt" = (
 /turf/open/misc/beach/coast/corner{
 	dir = 4
 	},
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Xv" = (
 /obj/structure/table/wood,
 /obj/structure/bedsheetbin,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "XL" = (
 /obj/machinery/light/directional/east,
@@ -1080,33 +1868,68 @@
 "XP" = (
 /turf/open/floor/carpet/blue,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"XL" = (
+/obj/machinery/light/directional/east,
+/turf/open/misc/beach/sand,
+/area/virtual_domain/powered)
+"XP" = (
+/turf/open/floor/carpet/blue,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "XT" = (
 /obj/effect/turf_decal/sand,
 /obj/structure/sign/departments/botany/directional/south,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Yi" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
 /obj/item/toy/seashell,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Yq" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/open/floor/plating,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"Yq" = (
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/open/floor/plating,
+/area/virtual_domain/powered)
+"Yz" = (
+/obj/effect/turf_decal/sand,
+/obj/structure/railing,
+/turf/open/floor/sepia,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "YI" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Supply Room"
 	},
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "YJ" = (
 /turf/open/floor/carpet/purple,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+"YJ" = (
+/turf/open/floor/carpet/purple,
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "YN" = (
 /obj/effect/turf_decal/sand,
 /obj/machinery/light/directional/west,
 /turf/open/misc/beach/sand,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
 "Zb" = (
 /obj/structure/sign/poster/official/cohiba_robusto_ad/directional/west,
@@ -1116,17 +1939,28 @@
 /obj/structure/sign/poster/contraband/space_cola/directional/north,
 /turf/open/misc/beach/sand,
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Zg" = (
 /obj/structure/table,
 /obj/machinery/microwave,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Zt" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/pill/morphine,
 /obj/item/storage/fancy/donut_box,
 /turf/open/floor/wood,
+<<<<<<< HEAD
 /area/virtual_domain/fullbright)
+=======
+/area/virtual_domain/powered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 (1,1,1) = {"
 pr
@@ -1583,7 +2417,11 @@ bf
 Bw
 Fn
 Ev
+<<<<<<< HEAD
 Pg
+=======
+oy
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 iR
 kG
 di
@@ -1693,7 +2531,11 @@ Al
 Fn
 VA
 kT
+<<<<<<< HEAD
 Zb
+=======
+TG
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 TG
 Fn
 Fn
@@ -1713,9 +2555,15 @@ qc
 Fn
 Fn
 SD
+<<<<<<< HEAD
 Mp
 uq
 fc
+=======
+Hu
+Wr
+gx
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Fn
 Al
@@ -1759,7 +2607,11 @@ dx
 kn
 kn
 kn
+<<<<<<< HEAD
 Aa
+=======
+Hl
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 gl
@@ -1785,11 +2637,19 @@ BJ
 kT
 Fn
 as
+<<<<<<< HEAD
 ab
 Ir
 IP
 YN
 uV
+=======
+xT
+Ir
+IP
+YN
+wD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 wD
 wD
 wD
@@ -1802,7 +2662,11 @@ uU
 lS
 lS
 lS
+<<<<<<< HEAD
 uU
+=======
+Yz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 gl
@@ -1845,7 +2709,11 @@ uU
 lS
 NX
 lS
+<<<<<<< HEAD
 cz
+=======
+Qm
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 gl
@@ -1870,7 +2738,11 @@ Fn
 Fn
 KH
 Fn
+<<<<<<< HEAD
 Zd
+=======
+wD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 wD
 wD
 Bw
@@ -1888,7 +2760,11 @@ uU
 lS
 lS
 lS
+<<<<<<< HEAD
 uU
+=======
+Yz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 gl
@@ -1910,7 +2786,11 @@ Fn
 tE
 tE
 Fn
+<<<<<<< HEAD
 uV
+=======
+wD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 wD
 wD
 wD
@@ -1931,7 +2811,11 @@ uU
 uU
 uU
 uU
+<<<<<<< HEAD
 uU
+=======
+Yz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Fn
 gl
@@ -1969,6 +2853,7 @@ TJ
 wb
 wD
 wD
+<<<<<<< HEAD
 vT
 gJ
 gJ
@@ -1976,6 +2861,15 @@ gJ
 gJ
 gJ
 oE
+=======
+zc
+zc
+zc
+zc
+zc
+zc
+js
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 gl
 gl
@@ -2012,13 +2906,21 @@ yl
 ag
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 KZ
 Ww
 Ww
 Ww
 cG
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 Al
@@ -2047,7 +2949,11 @@ TG
 TG
 TG
 TG
+<<<<<<< HEAD
 mX
+=======
+do
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 BM
 wD
 wD
@@ -2055,13 +2961,21 @@ Au
 wD
 rT
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 Ww
 Ww
 Ww
 Ww
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2077,7 +2991,11 @@ iz
 (23,1,1) = {"
 iz
 Al
+<<<<<<< HEAD
 xb
+=======
+nO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Cb
 wD
@@ -2086,7 +3004,11 @@ wD
 BM
 HF
 TG
+<<<<<<< HEAD
 JE
+=======
+ac
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 BM
 aw
 TG
@@ -2098,13 +3020,21 @@ YJ
 YJ
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 Ww
 Ww
 Ww
 Ww
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2120,7 +3050,11 @@ xW
 (24,1,1) = {"
 iz
 Al
+<<<<<<< HEAD
 xb
+=======
+nO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 wD
 Gz
@@ -2129,7 +3063,11 @@ wD
 BM
 Em
 TG
+<<<<<<< HEAD
 mq
+=======
+TG
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ri
 Qb
 TG
@@ -2141,13 +3079,21 @@ bQ
 wD
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 Ww
 KZ
 KZ
 Ww
+<<<<<<< HEAD
 pZ
+=======
+js
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2163,7 +3109,11 @@ xW
 (25,1,1) = {"
 iz
 Al
+<<<<<<< HEAD
 xb
+=======
+nO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 OK
 Gz
@@ -2184,13 +3134,21 @@ XP
 yB
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 KZ
 Ww
 KZ
 gh
 Ww
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2206,9 +3164,15 @@ xW
 (26,1,1) = {"
 iz
 Al
+<<<<<<< HEAD
 xb
 Fn
 Sg
+=======
+nO
+Fn
+Nr
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 wD
 wD
 wD
@@ -2227,13 +3191,21 @@ XL
 wD
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 Ww
 Ww
 Ww
 Ww
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2270,13 +3242,21 @@ xq
 jy
 wD
 wD
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 cG
 Ww
 Ww
 KZ
+<<<<<<< HEAD
 dj
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2313,13 +3293,21 @@ CA
 Uh
 wD
 qW
+<<<<<<< HEAD
 XM
+=======
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ww
 Ww
 Ww
 Ww
 Ww
+<<<<<<< HEAD
 pZ
+=======
+js
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2355,6 +3343,7 @@ wD
 wD
 wD
 Jt
+<<<<<<< HEAD
 wD
 mP
 zn
@@ -2363,6 +3352,16 @@ Bu
 Bu
 Bu
 Xt
+=======
+xz
+xz
+zQ
+xz
+xz
+xz
+xz
+xz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Fn
 Al
 iz
@@ -2523,7 +3522,11 @@ OE
 Nw
 Fn
 Gz
+<<<<<<< HEAD
 uV
+=======
+wD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 wD
 wD
 Ud
@@ -2608,7 +3611,11 @@ Wg
 TG
 RL
 Fn
+<<<<<<< HEAD
 Gh
+=======
+Ud
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Ud
 Ud
 Ud
@@ -2644,7 +3651,11 @@ TG
 TG
 TG
 TG
+<<<<<<< HEAD
 qg
+=======
+TG
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 TG
 Fn
 Fn
@@ -2658,7 +3669,11 @@ YI
 Fn
 Fn
 Fn
+<<<<<<< HEAD
 TX
+=======
+bd
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 aE
 aE
 aE

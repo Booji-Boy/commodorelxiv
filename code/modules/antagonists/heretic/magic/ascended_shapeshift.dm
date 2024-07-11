@@ -4,10 +4,14 @@
 	desc = "A spell that allows you to take on the form of another eldritch creature, gaining their abilities. \
 		You can change your choice at any time, and if your form dies, you dont die."
 	cooldown_time = 20 SECONDS
+<<<<<<< HEAD
 	convert_damage = FALSE
 	die_with_shapeshifted_form = FALSE
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
 	button_icon_state = "lock_ascension"
+=======
+	die_with_shapeshifted_form = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	possible_shapes = list(
 		/mob/living/basic/heretic_summon/ash_spirit,
 		/mob/living/basic/heretic_summon/raw_prophet/ascended,

@@ -54,11 +54,18 @@
 	var/list/network = list(CAMERANET_NETWORK_SS13)
 	///The tag the camera has, which is essentially its name to security camera consoles.
 	var/c_tag = null
+<<<<<<< HEAD
 	///Boolean on whether the camera is activated, so can be seen on camera consoles or will just be static.
 	var/camera_enabled = TRUE
 	///Boolean for special cameras to bypass the random chance of being broken on roundstart.
 	var/start_active = FALSE
 	///The area this camera is built in, which we will add/remove ourselves to the list of cameras in that area from.
+=======
+	var/status = TRUE
+	var/start_active = FALSE //If it ignores the random chance to start broken on round start
+	var/invuln = null
+	var/datum/weakref/assembly_ref = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/area/myarea = null
 
 	///The max range (and default range) the camera can see.
@@ -103,7 +110,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	fire = 90
 	acid = 50
 
+<<<<<<< HEAD
 /obj/machinery/camera/Initialize(mapload, ndir, building)
+=======
+/obj/machinery/camera/preset/ordnance //Bomb test site in space
+	name = "Hardened Bomb-Test Camera"
+	desc = "A specially-reinforced camera with a long lasting battery, used to monitor the bomb testing site. An external light is attached to the top."
+	c_tag = "Bomb Testing Site"
+	network = list("rd","ordnance")
+	use_power = NO_POWER_USE //Test site is an unpowered area
+	invuln = TRUE
+	light_outer_range = 10
+	start_active = TRUE
+
+/obj/machinery/camera/Initialize(mapload, obj/structure/camera_assembly/old_assembly)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 
 	if(building)
@@ -135,7 +156,24 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 
 	RegisterSignal(src, COMSIG_HIT_BY_SABOTEUR, PROC_REF(on_saboteur))
 
+<<<<<<< HEAD
 /obj/machinery/camera/Destroy(force)
+=======
+/obj/machinery/camera/proc/create_prox_monitor()
+	if(!proximity_monitor)
+		proximity_monitor = new(src, 1)
+		RegisterSignal(proximity_monitor, COMSIG_QDELETING, PROC_REF(proximity_deleted))
+
+/obj/machinery/camera/proc/proximity_deleted()
+	SIGNAL_HANDLER
+	proximity_monitor = null
+
+/obj/machinery/camera/proc/set_area_motion(area/A)
+	area_motion = A
+	create_prox_monitor()
+
+/obj/machinery/camera/Destroy()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(can_use())
 		toggle_cam(null, 0) //kick anyone viewing out and remove from the camera chunks
 	GLOB.cameranet.removeCamera(src)
@@ -144,6 +182,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 	if(isarea(myarea))
 		LAZYREMOVE(myarea.cameras, src)
 	QDEL_NULL(alarm_manager)
+<<<<<<< HEAD
+=======
+	QDEL_NULL(assembly_ref)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	QDEL_NULL(last_shown_paper)
 	QDEL_NULL(xray_module)
 	QDEL_NULL(emp_module)
@@ -262,6 +304,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 		return
 	user.switchCamera(src)
 
+/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user)
+	if (!istype(user))
+		return
+	if (!can_use())
+		return
+	user.switchCamera(src)
+
 /obj/machinery/camera/proc/setViewRange(num = 7)
 	src.view_range = num
 	GLOB.cameranet.updateVisibility(src, 0)
@@ -274,6 +323,210 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/camera/xray, 0)
 /obj/machinery/camera/singularity_pull(S, current_size)
 	if (camera_enabled && current_size >= STAGE_FIVE) // If the singulo is strong enough to pull anchored objects and the camera is still active, turn off the camera as it gets ripped off the wall.
 		toggle_cam(null, 0)
+<<<<<<< HEAD
+=======
+	..()
+
+// Construction/Deconstruction
+/obj/machinery/camera/screwdriver_act(mob/living/user, obj/item/I)
+	if(..())
+		return TRUE
+	toggle_panel_open()
+	to_chat(user, span_notice("You screw the camera's panel [panel_open ? "open" : "closed"]."))
+	I.play_tool_sound(src)
+	update_appearance()
+	return TRUE
+
+/obj/machinery/camera/crowbar_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!panel_open)
+		return
+	var/obj/structure/camera_assembly/assembly = assembly_ref?.resolve()
+	if(!assembly)
+		assembly_ref = null
+		return
+	var/list/droppable_parts = list()
+	if(assembly.xray_module)
+		droppable_parts += assembly.xray_module
+	if(assembly.emp_module)
+		droppable_parts += assembly.emp_module
+	if(assembly.proxy_module)
+		droppable_parts += assembly.proxy_module
+	if(!length(droppable_parts))
+		return
+	var/obj/item/choice = tgui_input_list(user, "Select a part to remove", "Part Removal", sort_names(droppable_parts))
+	if(isnull(choice))
+		return
+	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return
+	to_chat(user, span_notice("You remove [choice] from [src]."))
+	if(choice == assembly.xray_module)
+		assembly.drop_upgrade(assembly.xray_module)
+		removeXRay()
+	if(choice == assembly.emp_module)
+		assembly.drop_upgrade(assembly.emp_module)
+		removeEmpProof()
+	if(choice == assembly.proxy_module)
+		assembly.drop_upgrade(assembly.proxy_module)
+		removeMotion()
+	I.play_tool_sound(src)
+	return TRUE
+
+/obj/machinery/camera/wirecutter_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!panel_open)
+		return
+	toggle_cam(user, 1)
+	atom_integrity = max_integrity //this is a pretty simplistic way to heal the camera, but there's no reason for this to be complex.
+	set_machine_stat(machine_stat & ~BROKEN)
+	I.play_tool_sound(src)
+	return TRUE
+
+/obj/machinery/camera/multitool_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!panel_open)
+		return
+
+	setViewRange((view_range == initial(view_range)) ? short_range : initial(view_range))
+	to_chat(user, span_notice("You [(view_range == initial(view_range)) ? "restore" : "mess up"] the camera's focus."))
+	return TRUE
+
+/obj/machinery/camera/welder_act(mob/living/user, obj/item/I)
+	. = ..()
+	if(!panel_open)
+		return
+
+	if(!I.tool_start_check(user, amount=0))
+		return TRUE
+
+	to_chat(user, span_notice("You start to weld [src]..."))
+	if(I.use_tool(src, user, 100, volume=50))
+		user.visible_message(span_warning("[user] unwelds [src], leaving it as just a frame bolted to the wall."),
+			span_warning("You unweld [src], leaving it as just a frame bolted to the wall"))
+		deconstruct(TRUE)
+
+	return TRUE
+
+/obj/machinery/camera/attackby(obj/item/attacking_item, mob/living/user, params)
+	// UPGRADES
+	if(panel_open)
+		var/obj/structure/camera_assembly/assembly = assembly_ref?.resolve()
+		if(!assembly)
+			assembly_ref = null
+		if(attacking_item.tool_behaviour == TOOL_ANALYZER)
+			if(!isXRay(TRUE)) //don't reveal it was already upgraded if was done via MALF AI Upgrade Camera Network ability
+				if(!user.temporarilyRemoveItemFromInventory(attacking_item))
+					return
+				upgradeXRay(FALSE, TRUE)
+				to_chat(user, span_notice("You attach [attacking_item] into [assembly]'s inner circuits."))
+				qdel(attacking_item)
+			else
+				to_chat(user, span_warning("[src] already has that upgrade!"))
+			return
+
+		else if(istype(attacking_item, /obj/item/stack/sheet/mineral/plasma))
+			if(!isEmpProof(TRUE)) //don't reveal it was already upgraded if was done via MALF AI Upgrade Camera Network ability
+				if(attacking_item.use_tool(src, user, 0, amount=1))
+					upgradeEmpProof(FALSE, TRUE)
+					to_chat(user, span_notice("You attach [attacking_item] into [assembly]'s inner circuits."))
+			else
+				to_chat(user, span_warning("[src] already has that upgrade!"))
+			return
+
+		else if(isprox(attacking_item))
+			if(!isMotion())
+				if(!user.temporarilyRemoveItemFromInventory(attacking_item))
+					return
+				upgradeMotion()
+				to_chat(user, span_notice("You attach [attacking_item] into [assembly]'s inner circuits."))
+				qdel(attacking_item)
+			else
+				to_chat(user, span_warning("[src] already has that upgrade!"))
+			return
+
+	// OTHER
+	if(istype(attacking_item, /obj/item/modular_computer/pda))
+		var/itemname = ""
+		var/info = ""
+
+		var/obj/item/modular_computer/computer = attacking_item
+		for(var/datum/computer_file/program/notepad/notepad_app in computer.stored_files)
+			info = notepad_app.written_note
+			break
+
+		itemname = computer.name
+		itemname = sanitize(itemname)
+		info = sanitize(info)
+		to_chat(user, span_notice("You hold \the [itemname] up to the camera..."))
+		user.log_talk(itemname, LOG_GAME, log_globally=TRUE, tag="Pressed to camera")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		for(var/mob/potential_viewer as anything in GLOB.player_list)
+			if(isAI(potential_viewer))
+				var/mob/living/silicon/ai/ai = potential_viewer
+				if(ai.control_disabled || (ai.stat == DEAD))
+					continue
+
+				ai.log_talk(itemname, LOG_VICTIM, tag="Pressed to camera from [key_name(user)]", log_globally=FALSE)
+				ai.last_tablet_note_seen = "<HTML><HEAD><TITLE>[itemname]</TITLE></HEAD><BODY><TT>[info]</TT></BODY></HTML>"
+
+				if(user.name == "Unknown")
+					to_chat(ai, "[span_name(user)] holds <a href='?_src_=usr;show_tablet=1;'>\a [itemname]</a> up to one of your cameras ...")
+				else
+					to_chat(ai, "<b><a href='?src=[REF(ai)];track=[html_encode(user.name)]'>[user]</a></b> holds <a href='?_src_=usr;last_shown_paper=1;'>\a [itemname]</a> up to one of your cameras ...")
+				continue
+
+			if (potential_viewer.client?.eye == src)
+				to_chat(potential_viewer, "[span_name("[user]")] holds \a [itemname] up to one of the cameras ...")
+				potential_viewer.log_talk(itemname, LOG_VICTIM, tag="Pressed to camera from [key_name(user)]", log_globally=FALSE)
+				potential_viewer << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
+		return
+
+	if(istype(attacking_item, /obj/item/paper))
+		// Grab the paper, sanitise the name as we're about to just throw it into chat wrapped in HTML tags.
+		var/obj/item/paper/paper = attacking_item
+
+		// Make a complete copy of the paper, store a ref to it locally on the camera.
+		last_shown_paper = paper.copy(paper.type, null);
+
+		// Then sanitise the name because we're putting it directly in chat later.
+		var/item_name = sanitize(last_shown_paper.name)
+
+		// Start the process of holding it up to the camera.
+		to_chat(user, span_notice("You hold \the [item_name] up to the camera..."))
+		user.log_talk(item_name, LOG_GAME, log_globally=TRUE, tag="Pressed to camera")
+		user.changeNext_move(CLICK_CD_MELEE)
+
+		// And make a weakref we can throw around to all potential viewers.
+		last_shown_paper.camera_holder = WEAKREF(src)
+
+		// Iterate over all living mobs and check if anyone is elibile to view the paper.
+		// This is backwards, but cameras don't store a list of people that are looking through them,
+		// and we'll have to iterate this list anyway so we can use it to pull out AIs too.
+		for(var/mob/potential_viewer in GLOB.player_list)
+			// All AIs view through cameras, so we need to check them regardless.
+			if(isAI(potential_viewer))
+				var/mob/living/silicon/ai/ai = potential_viewer
+				if(ai.control_disabled || (ai.stat == DEAD))
+					continue
+
+				ai.log_talk(item_name, LOG_VICTIM, tag="Pressed to camera from [key_name(user)]", log_globally=FALSE)
+				log_paper("[key_name(user)] held [last_shown_paper] up to [src], requesting [key_name(ai)] read it.")
+
+				if(user.name == "Unknown")
+					to_chat(ai, "[span_name(user.name)] holds <a href='?_src_=usr;show_paper_note=[REF(last_shown_paper)];'>\a [item_name]</a> up to one of your cameras ...")
+				else
+					to_chat(ai, "<b><a href='?src=[REF(ai)];track=[html_encode(user.name)]'>[user]</a></b> holds <a href='?_src_=usr;show_paper_note=[REF(last_shown_paper)];'>\a [item_name]</a> up to one of your cameras ...")
+				continue
+
+			// If it's not an AI, eye if the client's eye is set to the camera. I wonder if this even works anymore with tgui camera apps and stuff?
+			if (potential_viewer.client?.eye == src)
+				log_paper("[key_name(user)] held [last_shown_paper] up to [src], and [key_name(potential_viewer)] may read it.")
+				potential_viewer.log_talk(item_name, LOG_VICTIM, tag="Pressed to camera from [key_name(user)]", log_globally=FALSE)
+				to_chat(potential_viewer, "[span_name(user)] holds <a href='?_src_=usr;show_paper_note=[REF(last_shown_paper)];'>\a [item_name]</a> up to your camera...")
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 ///Drops a specific upgrade and nulls it where necessary.

@@ -10,6 +10,7 @@
 "u" = (
 /turf/open/floor/plating,
 /area/virtual_domain/safehouse)
+<<<<<<< HEAD
 "U" = (
 /obj/effect/landmark/bitrunning/hololadder_spawn,
 /obj/modular_map_connector,
@@ -19,6 +20,12 @@
 (1,1,1) = {"
 u
 U
+=======
+
+(1,1,1) = {"
+u
+d
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "}
 (2,1,1) = {"
 u

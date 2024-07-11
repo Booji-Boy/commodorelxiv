@@ -1,6 +1,7 @@
 import { useBackend } from '../backend';
 import { Box, Section, Table, Tooltip } from '../components';
 import { Window } from '../layouts';
+import type { InfernoNode } from 'inferno';
 
 type BindingInfo = {
   name: string;
@@ -33,7 +34,11 @@ const addColorModifier = (
   content: string,
   regex: RegExp,
   color: string,
+<<<<<<< HEAD
 ): JSX.Element | null => {
+=======
+): InfernoNode | null => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const match = content.match(regex);
 
   if (match) {
@@ -51,7 +56,7 @@ const addColorModifier = (
   return null;
 };
 
-const processColorModifiers = (content: string): string | JSX.Element => {
+const processColorModifiers = (content: string): string | InfernoNode => {
   const shifted = addColorModifier(content, shiftRegex, '#88f');
 
   if (shifted) {

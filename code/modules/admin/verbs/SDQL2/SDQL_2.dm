@@ -195,11 +195,24 @@
 		state = SDQL2_STATE_ERROR;\
 		CRASH("SDQL2 fatal error");};
 
+<<<<<<< HEAD
 ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATEGORY_DEBUG, query_text as message)
 	var/prompt = tgui_alert(user, "Run SDQL2 Query?", "SDQL2", list("Yes", "Cancel"))
 	if (prompt != "Yes")
 		return
 	var/list/results = world.SDQL2_query(query_text, key_name_admin(user), "[key_name(user)]")
+=======
+/client/proc/SDQL2_query(query_text as message)
+	set category = "Debug"
+	if(!check_rights(R_ADMIN))  //Shouldn't happen... but just to be safe.
+		message_admins(span_danger("ERROR: Non-admin [key_name(usr)] attempted to execute a SDQL query!"))
+		usr.log_message("non-admin attempted to execute a SDQL query!", LOG_ADMIN)
+		return FALSE
+	var/prompt = tgui_alert(usr, "Run SDQL2 Query?", "SDQL2", list("Yes", "Cancel"))
+	if (prompt != "Yes")
+		return
+	var/list/results = world.SDQL2_query(query_text, key_name_admin(usr), "[key_name(usr)]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(length(results) == 3)
 		for(var/I in 1 to 3)
 			to_chat(user, span_admin(results[I]), confidential = TRUE)

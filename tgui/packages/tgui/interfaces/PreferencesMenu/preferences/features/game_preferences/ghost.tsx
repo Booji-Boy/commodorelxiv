@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+=======
+import { multiline } from 'common/string';
+import {
+  CheckboxInput,
+  FeatureChoiced,
+  FeatureChoicedServerData,
+  FeatureDropdownInput,
+  FeatureToggle,
+  FeatureValueProps,
+} from '../base';
+import { Box, Dropdown, Flex } from '../../../../../components';
+import { classes } from 'common/react';
+import { InfernoNode } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { binaryInsertWith } from 'common/collections';
 import { classes } from 'common/react';
 import { ReactNode } from 'react';
@@ -83,10 +98,15 @@ const GhostFormInput = (
       autoScroll={false}
       disabled={!data.content_unlocked}
       selected={props.value}
+<<<<<<< HEAD
       placeholder={displayTexts[props.value]}
+=======
+      displayText={props.value ? displayTexts[props.value] : null}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       onSelected={props.handleSetValue}
       width="100%"
       options={options}
+      buttons
     />
   );
 };

@@ -7,7 +7,10 @@
 		/obj/item/fish/cardinal = 15,
 		/obj/item/fish/greenchromis = 15,
 		/obj/item/fish/lanternfish = 5,
+<<<<<<< HEAD
 		/obj/item/fish/zipzap = 5,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/fish/clownfish/lube = 3,
 	)
 	fish_counts = list(
@@ -68,7 +71,10 @@
 		/obj/item/fish/gunner_jellyfish = 5,
 		/obj/item/fish/needlefish = 5,
 		/obj/item/fish/armorfish = 5,
+<<<<<<< HEAD
 		/obj/item/fish/zipzap = 5,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	catalog_description = "Ocean dimension (Fishing portal generator)"
 	fishing_difficulty = FISHING_DEFAULT_DIFFICULTY + 10
@@ -99,7 +105,10 @@
 		FISHING_DUD = 5,
 		/obj/item/fish/donkfish = 5,
 		/obj/item/fish/emulsijack = 5,
+<<<<<<< HEAD
 		/obj/item/fish/jumpercable = 5,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	catalog_description = "Syndicate dimension (Fishing portal generator)"
 	radial_name = "Syndicate"
@@ -242,17 +251,28 @@
 	fish_table = list(
 		FISHING_DUD = 5,
 		/obj/item/fish/chasm_crab/ice = 15,
+<<<<<<< HEAD
 		/obj/item/fish/lavaloop/plasma_river = 15,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/coin/plasma = 3,
 		/obj/item/stack/ore/plasma = 3,
 		/mob/living/basic/mining/lobstrosity = 1,
 		/obj/effect/decal/remains/plasma = 1,
+<<<<<<< HEAD
 		/obj/item/stack/sheet/mineral/runite = 1,
+=======
+		/obj/item/stack/sheet/mineral/mythril = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/stack/sheet/mineral/adamantine = 1,
 	)
 	fish_counts = list(
 		/obj/item/stack/sheet/mineral/adamantine = 3,
+<<<<<<< HEAD
 		/obj/item/stack/sheet/mineral/runite = 2,
+=======
+		/obj/item/stack/sheet/mineral/mythril = 2,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/fish_source/moisture_trap
@@ -276,7 +296,11 @@
 	fish_counts = list(
 		/obj/item/storage/wallet/money = 2,
 	)
+<<<<<<< HEAD
 	fishing_difficulty = FISHING_EASY_DIFFICULTY //For beginners
+=======
+	fishing_difficulty = FISHING_DEFAULT_DIFFICULTY - 5 //For beginners
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/fish_source/holographic
 	catalog_description = "Holographic water"
@@ -289,9 +313,15 @@
 		/obj/item/fish/holo/checkered = 5,
 		/obj/item/fish/holo/halffish = 5,
 	)
+<<<<<<< HEAD
 	fishing_difficulty = FISHING_EASY_DIFFICULTY
 
 /datum/fish_source/holographic/reason_we_cant_fish(obj/item/fishing_rod/rod, mob/fisherman, atom/parent)
+=======
+	fishing_difficulty = FISHING_DEFAULT_DIFFICULTY - 5
+
+/datum/fish_source/holographic/reason_we_cant_fish(obj/item/fishing_rod/rod, mob/fisherman)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(!istype(get_area(fisherman), /area/station/holodeck))
 		return "You need to be inside the Holodeck to catch holographic fish."
@@ -324,6 +354,7 @@
 		/obj/item/fish/mastodon = 1,
 	)
 	fishing_difficulty = FISHING_DEFAULT_DIFFICULTY + 15
+<<<<<<< HEAD
 
 #define RANDOM_SEED "Random seed"
 
@@ -384,3 +415,5 @@
 	return new picked_path(get_turf(fishing_spot))
 
 #undef RANDOM_SEED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

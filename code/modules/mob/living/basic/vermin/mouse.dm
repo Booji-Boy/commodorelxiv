@@ -36,6 +36,8 @@
 	var/contributes_to_ratcap = TRUE
 	/// Probability that, if we successfully bite a shocked cable, that we will die to it.
 	var/cable_zap_prob = 85
+	/// responsible for disease stuff
+	var/list/ratdisease = list()
 
 /mob/living/basic/mouse/Initialize(mapload, tame = FALSE, new_body_color)
 	. = ..()
@@ -44,8 +46,12 @@
 	ADD_TRAIT(src, TRAIT_VENTCRAWLER_ALWAYS, INNATE_TRAIT)
 
 	src.tame = tame
+<<<<<<< HEAD
 	if(!isnull(new_body_color))
 		body_color = new_body_color
+=======
+	body_color = new_body_color
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(body_color))
 		body_color = pick("brown", "gray", "white")
 	held_state = "mouse_[body_color]" // not handled by variety element
@@ -108,6 +114,7 @@
 
 // On death, remove the mouse from the ratcap, and turn it into an item if applicable
 /mob/living/basic/mouse/death(gibbed)
+	var/list/data = list("viruses" = ratdisease)
 	SSmobs.cheeserats -= src
 	// Rats with a mind will not turn into a lizard snack on death
 	if(mind)
@@ -118,13 +125,20 @@
 	// Now if we were't ACTUALLY gibbed, spawn the dead mouse
 	if(!gibbed)
 		var/obj/item/food/deadmouse/mouse = new(loc)
+<<<<<<< HEAD
 		mouse.copy_corpse(src)
+=======
+		mouse.name = name
+		mouse.icon_state = icon_dead
+		mouse.reagents.add_reagent(/datum/reagent/blood, 2, data)
+		mouse.ratdisease = src.ratdisease
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(HAS_TRAIT(src, TRAIT_BEING_SHOCKED))
 			mouse.desc = "They're toast."
 			mouse.add_atom_colour("#3A3A3A", FIXED_COLOUR_PRIORITY)
 	qdel(src)
 
-/mob/living/basic/mouse/UnarmedAttack(atom/attack_target, proximity_flag, list/modifiers)
+/mob/living/basic/mouse/UnarmedAttack(atom/attack_target, proximity_flag)
 	. = ..()
 	if(!.)
 		return
@@ -300,13 +314,24 @@
 	decomp_req_handle = TRUE
 	ant_attracting = FALSE
 	decomp_type = /obj/item/food/deadmouse/moldy
+<<<<<<< HEAD
+=======
+	///responsible for holding diseases for dead rat
+	var/list/ratdisease = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/body_color = "gray"
 	var/critter_type = /mob/living/basic/mouse
 
-/obj/item/food/deadmouse/Initialize(mapload)
+/obj/item/food/deadmouse/Initialize(mapload, mob/living/basic/mouse/dead_critter)
 	. = ..()
+	if(dead_critter)
+		body_color = dead_critter.body_color
+		critter_type = dead_critter.type
+		name = dead_critter.name
+		icon_state = dead_critter.icon_dead
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_MOUSE, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 10)
 	RegisterSignal(src, COMSIG_ATOM_ON_LAZARUS_INJECTOR, PROC_REF(use_lazarus))
+<<<<<<< HEAD
 
 /// Copy properties from an imminently dead mouse
 /obj/item/food/deadmouse/proc/copy_corpse(mob/living/basic/mouse/dead_critter)
@@ -314,6 +339,8 @@
 	critter_type = dead_critter.type
 	name = dead_critter.name
 	icon_state = dead_critter.icon_dead
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/deadmouse/examine(mob/user)
 	. = ..()
@@ -333,9 +360,22 @@
 	qdel(src)
 	return LAZARUS_INJECTOR_USED
 
+///Spawn a new mouse from this dead mouse item when hit by a lazarus injector and conditions are met.
+/obj/item/food/deadmouse/proc/use_lazarus(datum/source, obj/item/lazarus_injector/injector, mob/user)
+	SIGNAL_HANDLER
+	if(injector.revive_type != SENTIENCE_ORGANIC)
+		balloon_alert(user, "invalid creature!")
+		return
+	var/mob/living/basic/mouse/revived_critter = new critter_type (drop_location(), FALSE, body_color)
+	revived_critter.name = name
+	revived_critter.lazarus_revive(user, injector.malfunctioning)
+	injector.expend(revived_critter, user)
+	qdel(src)
+	return LAZARUS_INJECTOR_USED
+
 /obj/item/food/deadmouse/attackby(obj/item/attacking_item, mob/user, params)
 	var/mob/living/living_user = user
-	if(istype(living_user) && attacking_item.get_sharpness() && living_user.combat_mode)
+	if(istype(living_user) && attacking_item.get_sharpness() && (living_user.istate & ISTATE_HARM))
 		if(!isturf(loc))
 			balloon_alert(user, "can't butcher here!")
 			return

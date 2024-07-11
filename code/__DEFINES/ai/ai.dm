@@ -13,7 +13,11 @@
 
 ///For JPS pathing, the maximum length of a path we'll try to generate. Should be modularized depending on what we're doing later on
 #define AI_MAX_PATH_LENGTH 30 // 30 is possibly overkill since by default we lose interest after 14 tiles of distance, but this gives wiggle room for weaving around obstacles
+<<<<<<< HEAD
 #define AI_BOT_PATH_LENGTH 75
+=======
+#define AI_BOT_PATH_LENGTH 150
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // How far should we, by default, be looking for interesting things to de-idle?
 #define AI_DEFAULT_INTERESTING_DIST 10
@@ -25,6 +29,7 @@
 ///Flags for ai_behavior new()
 #define AI_CONTROLLER_INCOMPATIBLE (1<<0)
 
+<<<<<<< HEAD
 //Return flags for ai_behavior/perform()
 ///Update this behavior's cooldown
 #define AI_BEHAVIOR_DELAY (1<<0)
@@ -35,6 +40,8 @@
 
 #define AI_BEHAVIOR_INSTANT (NONE)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Does this task require movement from the AI before it can be performed?
 #define AI_BEHAVIOR_REQUIRE_MOVEMENT (1<<0)
 ///Does this require the current_movement_target to be adjacent and in reach?
@@ -69,6 +76,7 @@
 #define SHOULD_RESIST(source) (source.on_fire || source.buckled || HAS_TRAIT(source, TRAIT_RESTRAINED) || (source.pulledby && source.pulledby.grab_state > GRAB_PASSIVE))
 ///macro for whether the pawn can act, used generally to prevent some horrifying ai disasters
 #define IS_DEAD_OR_INCAP(source) (source.incapacitated() || source.stat)
+<<<<<<< HEAD
 
 GLOBAL_LIST_INIT(all_radial_directions, list(
 	"NORTH" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTH),
@@ -80,3 +88,5 @@ GLOBAL_LIST_INIT(all_radial_directions, list(
 	"WEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = WEST),
 	"NORTHWEST" = image(icon = 'icons/testing/turf_analysis.dmi', icon_state = "red_arrow", dir = NORTHWEST)
 ))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

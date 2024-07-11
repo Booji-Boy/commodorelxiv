@@ -2,9 +2,9 @@
 	name = "Carp Migration"
 	typepath = /datum/round_event/carp_migration
 	weight = 15
-	min_players = 12
-	earliest_start = 10 MINUTES
-	max_occurrences = 6
+	min_players = 20 //monkie edit: 12 to 20
+	earliest_start = 40 MINUTES //monkie edit: 10 to 40
+	max_occurrences = 2 //monkie edit: 6 to 2
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Summons a school of space carp."
 	min_wizard_trigger_potency = 0
@@ -35,6 +35,7 @@
 
 /datum/round_event/carp_migration/setup()
 	start_when = rand(40, 60)
+	setup = TRUE //MONKESTATION ADDITION
 
 /datum/round_event/carp_migration/announce(fake)
 	priority_announce("[fluff_signal] have been detected near [station_name()], please stand-by.", "Lifesign Alert")

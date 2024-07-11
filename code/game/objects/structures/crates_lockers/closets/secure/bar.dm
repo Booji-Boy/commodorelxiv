@@ -17,6 +17,7 @@
 		new /obj/item/reagent_containers/cup/glass/bottle/beer(src)
 	new /obj/item/etherealballdeployer(src)
 	new /obj/item/roulette_wheel_beacon(src)
+<<<<<<< HEAD
 
 /obj/structure/closet/secure_closet/bar/all_access
 	req_access = null
@@ -39,3 +40,8 @@
 	new /obj/item/clothing/glasses/sunglasses/reagent(src)
 	new /obj/item/clothing/suit/costume/hawaiian(src)
 	new /obj/item/clothing/shoes/sandal/beach(src)
+=======
+	new /obj/item/storage/fancy/candle_box(src)
+	new /obj/item/storage/fancy/candle_box(src)
+	new /obj/item/jukebox_beacon(src) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

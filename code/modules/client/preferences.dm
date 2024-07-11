@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 	/// Ensures that we always load the last used save, QOL
 	var/default_slot = 1
 	/// The maximum number of slots we're allowed to contain
-	var/max_save_slots = 3
+	var/max_save_slots = 20
 
 	/// Bitflags for communications that are muted
 	var/muted = NONE
@@ -106,8 +106,9 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		if(load_and_save && !fexists(path))
 			try_savefile_type_migration()
 		unlock_content = !!parent.IsByondMember()
-		if(unlock_content)
-			max_save_slots = 8
+		// monke edit: more save slots
+		//if(unlock_content)
+		//	max_save_slots = 8
 	else
 		CRASH("attempted to create a preferences datum without a client or mock!")
 	load_savefile()
@@ -208,6 +209,8 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 		return
 
 	switch (action)
+		if ("update_body")
+			character_preview_view?.update_body()
 		if ("change_slot")
 			// Save existing character
 			save_character()
@@ -240,6 +243,15 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				tainted_character_profiles = TRUE
 
 			return TRUE
+
+		if ("open_store")
+			if(parent.open_store_ui)
+				parent.open_store_ui.ui_interact(usr)
+			else
+				var/datum/store_manager/tgui = new(usr)
+				tgui.ui_interact(usr)
+			return TRUE
+
 		if ("set_color_preference")
 			var/requested_preference_key = params["preference"]
 
@@ -253,12 +265,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			var/default_value = read_preference(requested_preference.type)
 
 			// Yielding
-			var/new_color = input(
+			var/new_color = tgui_color_picker(
 				usr,
 				"Select new color",
 				null,
 				default_value || COLOR_WHITE,
-			) as color | null
+			)
 
 			if (!new_color)
 				return FALSE
@@ -338,13 +350,19 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 /// A preview of a character for use in the preferences menu
 /atom/movable/screen/map_view/char_preview
 	name = "character_preview"
+	name = "default"
+	icon = 'monkestation/icons/hud/screen_gen64x32.dmi'
 
 	/// The body that is displayed
-	var/mob/living/carbon/human/dummy/body
+	var/mob/living/carbon/human/dummy/extra_tall/body
 	/// The preferences this refers to
 	var/datum/preferences/preferences
+<<<<<<< HEAD
 	/// Whether we show current job clothes or nude/loadout only
 	var/show_job_clothes = TRUE
+=======
+	bound_height = 64
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/screen/map_view/char_preview/Initialize(mapload, datum/preferences/preferences)
 	. = ..()
@@ -370,6 +388,12 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 	body = new
 
+<<<<<<< HEAD
+=======
+	// Without this, it doesn't show up in the menu
+	body.appearance_flags &= ~TILE_BOUND
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/preferences/proc/create_character_profiles()
 	var/list/profiles = list()
 

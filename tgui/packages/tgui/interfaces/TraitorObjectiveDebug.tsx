@@ -4,6 +4,10 @@ import { useBackend } from '../backend';
 import { Box, LabeledList, Stack, Tabs, Tooltip } from '../components';
 import { Window } from '../layouts';
 import { getDangerLevel } from './Uplink/calculateDangerLevel';
+<<<<<<< HEAD
+=======
+import type { InfernoNode } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Objective = {
   name: string;
@@ -131,7 +135,7 @@ const sortingOptions: SortingOption[] = [
 export const TraitorObjectiveDebug = (props) => {
   const { data, act } = useBackend<ObjectiveData>();
   const { objective_data, player_data, current_progression } = data;
-  const lines: JSX.Element[] = [];
+  const lines: InfernoNode[] = [];
   lines.sort();
   for (let i = 10; i < 100; i += 10) {
     lines.push(
@@ -159,7 +163,11 @@ export const TraitorObjectiveDebug = (props) => {
           top={0}
           left={1}
           style={{
+<<<<<<< HEAD
             zIndex: '5',
+=======
+            'z-index': 5,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           {/* Time in minutes of this threshold */}
@@ -169,10 +177,23 @@ export const TraitorObjectiveDebug = (props) => {
     );
   }
   let objectivesToRender: Objective[] = [];
+<<<<<<< HEAD
   const [currentTab, setCurrentTab] = useState('All');
   const [sortingFunc, setSortingFunc] = useState(sortingOptions[0].name);
   // true = ascending, false = descending
   const [sortDirection, setSortingDirection] = useState(true);
+=======
+  const [currentTab, setCurrentTab] = useLocalState('currentTab', 'All');
+  const [sortingFunc, setSortingFunc] = useLocalState(
+    'sortingFunc',
+    sortingOptions[0].name,
+  );
+  // true = ascending, false = descending
+  const [sortDirection, setSortingDirection] = useLocalState(
+    'sortDirection',
+    true,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   let actualSortingFunc;
   for (let index = 0; index < sortingOptions.length; index++) {
@@ -371,8 +392,13 @@ const ObjectiveBox = (props: ObjectiveBoxProps) => {
       <Stack vertical width="100%">
         <Stack.Item
           style={{
+<<<<<<< HEAD
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
+=======
+            'text-overflow': 'ellipsis',
+            'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             overflow: 'hidden',
           }}
         >
@@ -400,7 +426,11 @@ const ObjectiveBox = (props: ObjectiveBoxProps) => {
               (objective.progression_reward[1] / sizeLimit) * window.innerWidth
             }px`}
             style={{
+<<<<<<< HEAD
               whiteSpace: 'nowrap',
+=======
+              'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }}
           >
             {objective.progression_reward[0] / 600}
@@ -415,7 +445,11 @@ const ObjectiveBox = (props: ObjectiveBoxProps) => {
             backgroundColor="red"
             width={`${objective.telecrystal_reward[1] * 10}px`}
             style={{
+<<<<<<< HEAD
               whiteSpace: 'nowrap',
+=======
+              'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             }}
           >
             {objective.telecrystal_reward[0]}

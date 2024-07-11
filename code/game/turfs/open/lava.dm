@@ -12,7 +12,7 @@
 	baseturfs = /turf/open/lava //lava all the way down
 	slowdown = 2
 
-	light_range = 2
+	light_outer_range = 2
 	light_power = 0.75
 	light_color = LIGHT_COLOR_LAVA
 	light_on = FALSE
@@ -40,9 +40,12 @@
 	var/mask_state = "lava-lightmask"
 	/// The type for the preset fishing spot of this type of turf.
 	var/fish_source_type = /datum/fish_source/lavaland
+<<<<<<< HEAD
 	/// The color we use for our immersion overlay
 	var/immerse_overlay_color = "#a15e1b"
 	rust_resistance = RUST_RESISTANCE_ABSOLUTE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/lava/Initialize(mapload)
 	. = ..()
@@ -52,6 +55,13 @@
 	if(!smoothing_flags)
 		update_appearance()
 	AddElement(/datum/element/immerse, icon, icon_state, "immerse", immerse_overlay_color)
+
+/turf/open/lava/Destroy()
+	for(var/mob/living/leaving_mob in contents)
+		leaving_mob.RemoveElement(/datum/element/perma_fire_overlay)
+		REMOVE_TRAIT(leaving_mob, TRAIT_NO_EXTINGUISH, TURF_TRAIT)
+	return ..()
+
 
 /turf/open/lava/Destroy()
 	for(var/mob/living/leaving_mob in contents)
@@ -220,7 +230,13 @@
 		return TRUE
 
 /turf/open/lava/proc/is_safe()
+<<<<<<< HEAD
 	return HAS_TRAIT(src, TRAIT_LAVA_STOPPED)
+=======
+	if(HAS_TRAIT(src, TRAIT_LAVA_STOPPED))
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Generic return value of the can_burn_stuff() proc. Does nothing.
 #define LAVA_BE_IGNORING 0
@@ -355,7 +371,7 @@
 	baseturfs = /turf/open/lava/plasma
 	fish_source_type = /datum/fish_source/lavaland/icemoon
 
-	light_range = 3
+	light_outer_range = 3
 	light_power = 0.75
 	light_color = LIGHT_COLOR_PURPLE
 	immunity_trait = TRAIT_SNOWSTORM_IMMUNE

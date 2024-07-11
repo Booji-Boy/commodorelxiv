@@ -529,7 +529,11 @@
 	spawn_type = /obj/item/food/pickle
 	spawn_count = 10
 	contents_tag = "pickle"
+<<<<<<< HEAD
 	foldable_result = /obj/item/reagent_containers/cup/beaker/large
+=======
+	foldable_result = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT)
 	open_status = FANCY_CONTAINER_ALWAYS_OPEN
 	has_open_closed_states = FALSE

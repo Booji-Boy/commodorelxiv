@@ -43,7 +43,7 @@
 	return attack_hand(user, modifiers)
 
 /mob/living/silicon/attack_larva(mob/living/carbon/alien/larva/L, list/modifiers)
-	if(!L.combat_mode)
+	if(!(L.istate & ISTATE_HARM))
 		visible_message(span_notice("[L.name] rubs its head against [src]."))
 
 /mob/living/silicon/attack_hulk(mob/living/carbon/human/user)
@@ -57,6 +57,7 @@
 	to_chat(user, span_danger("You punch [src]!"))
 
 /mob/living/silicon/attack_hand(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	. = ..()
 	if(.)
 		return TRUE
@@ -66,6 +67,12 @@
 		return TRUE
 
 	if(has_buckled_mobs() && !user.combat_mode)
+=======
+	. = FALSE
+	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		. = TRUE
+	if(has_buckled_mobs() && !(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user_unbuckle_mob(buckled_mobs[1], user)
 		return TRUE
 	if(user.combat_mode)
@@ -76,10 +83,24 @@
 		to_chat(user, span_danger("You punch [src], but don't leave a dent!"))
 		return TRUE
 	else
+<<<<<<< HEAD
 		visible_message(span_notice("[user] pets [src]."), span_notice("[user] pets you."), null, null, user)
 		to_chat(user, span_notice("You pet [src]."))
 		SEND_SIGNAL(user, COMSIG_MOB_PAT_BORG)
 		return TRUE
+=======
+		if((user.istate & ISTATE_HARM))
+			user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+			playsound(src.loc, 'sound/effects/bang.ogg', 10, TRUE)
+			visible_message(span_danger("[user] punches [src], but doesn't leave a dent!"), \
+							span_warning("[user] punches you, but doesn't leave a dent!"), null, COMBAT_MESSAGE_RANGE, user)
+			to_chat(user, span_danger("You punch [src], but don't leave a dent!"))
+		else
+			visible_message(span_notice("[user] pets [src]."), \
+							span_notice("[user] pets you."), null, null, user)
+			to_chat(user, span_notice("You pet [src]."))
+			user.add_mood_event("pet_borg", /datum/mood_event/pet_borg)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/silicon/check_block(atom/hitby, damage, attack_text, attack_type, armour_penetration, damage_type, attack_flag)
 	. = ..()
@@ -92,12 +113,20 @@
 	return FALSE
 
 /mob/living/silicon/attack_drone(mob/living/basic/drone/user)
+<<<<<<< HEAD
 	if(user.combat_mode)
+=======
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	return ..()
 
 /mob/living/silicon/attack_drone_secondary(mob/living/basic/drone/user)
+<<<<<<< HEAD
 	if(user.combat_mode)
+=======
+	if((user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 

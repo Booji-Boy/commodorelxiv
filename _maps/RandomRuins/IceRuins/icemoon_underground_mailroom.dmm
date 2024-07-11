@@ -61,6 +61,15 @@
 /obj/structure/holobox,
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/ruin/powered/mailroom)
+<<<<<<< HEAD
+=======
+"gO" = (
+/obj/machinery/modular_computer/preset/civilian{
+	dir = 4
+	},
+/turf/open/floor/carpet/green,
+/area/ruin/powered/mailroom)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "hj" = (
 /obj/structure/filingcabinet/chestdrawer/wheeled,
 /obj/item/storage/fancy/heart_box,
@@ -119,6 +128,15 @@
 /obj/item/paper/crumpled/muddy/fluff/instructions,
 /turf/open/floor/carpet/royalblack,
 /area/ruin/powered/mailroom)
+<<<<<<< HEAD
+=======
+"lw" = (
+/obj/machinery/modular_computer/preset/civilian{
+	dir = 8
+	},
+/turf/open/floor/carpet/green,
+/area/ruin/powered/mailroom)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "lI" = (
 /turf/closed/mineral/random/snow,
 /area/icemoon/underground/unexplored)

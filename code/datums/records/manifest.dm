@@ -98,7 +98,7 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 
 
 /// Injects a record into the manifest.
-/datum/manifest/proc/inject(mob/living/carbon/human/person)
+/datum/manifest/proc/inject(mob/living/carbon/human/person, client/person_client)
 	set waitfor = FALSE
 	if(!(person.mind?.assigned_role.job_flags & JOB_CREW_MANIFEST))
 		return
@@ -116,6 +116,8 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 	var/datum/dna/stored/record_dna = new()
 	person.dna.copy_dna(record_dna)
 
+	var/chosen_assignment = person_client?.prefs.alt_job_titles[assignment] || assignment
+
 	var/datum/record/locked/lockfile = new(
 		age = person.age,
 		blood_type = record_dna.blood_type,
@@ -125,15 +127,25 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 		gender = person_gender,
 		initial_rank = assignment,
 		name = person.real_name,
+<<<<<<< HEAD
 		rank = assignment,
 		species = record_dna.species.name,
+=======
+		rank = chosen_assignment	,
+		species = person.dna.species.name,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		trim = assignment,
+		mind_ref = WEAKREF(person.mind), // monkestation edit: weakreffed mind ref
 		// Locked specifics
+<<<<<<< HEAD
 		locked_dna = record_dna,
 		mind_ref = person.mind,
+=======
+		dna_ref = person.dna,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
-	new /datum/record/crew(
+	var/datum/record/crew/crewfile = new (
 		age = person.age,
 		blood_type = record_dna.blood_type,
 		character_appearance = character_appearance,
@@ -142,9 +154,15 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 		gender = person_gender,
 		initial_rank = assignment,
 		name = person.real_name,
+<<<<<<< HEAD
 		rank = assignment,
 		species = record_dna.species.name,
+=======
+		rank = chosen_assignment,
+		species = person.dna.species.name,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		trim = assignment,
+		mind_ref = WEAKREF(person.mind), // monkestation edit: weakreffed mind ref
 		// Crew specific
 		lock_ref = REF(lockfile),
 		major_disabilities = person.get_quirk_string(FALSE, CAT_QUIRK_MAJOR_DISABILITY, from_scan = TRUE),
@@ -154,6 +172,14 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 		quirk_notes = person.get_quirk_string(TRUE, CAT_QUIRK_NOTES),
 	)
 
+<<<<<<< HEAD
+=======
+	person.mind.crewfile = crewfile
+	person.mind.lockfile = lockfile
+
+	return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Edits the rank and trim of the found record.
 /datum/manifest/proc/modify(name, assignment, trim)
 	var/datum/record/crew/target = find_record(name)

@@ -4,8 +4,12 @@
  * @license MIT
  */
 
+<<<<<<< HEAD
 import { useState } from 'react';
 
+=======
+import { useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   DraggableControl,
@@ -24,8 +28,13 @@ export const meta = {
 };
 
 const Story = (props) => {
+<<<<<<< HEAD
   const [number, setNumber] = useState(0);
   const [text, setText] = useState('Sample text');
+=======
+  const [number, setNumber] = useLocalState('number', 0);
+  const [text, setText] = useLocalState('text', 'Sample text');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <LabeledList>

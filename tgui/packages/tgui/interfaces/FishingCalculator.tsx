@@ -24,11 +24,22 @@ type FishingCalculatorData = {
 export const FishingCalculator = (props) => {
   const { act, data } = useBackend<FishingCalculatorData>();
 
+<<<<<<< HEAD
   const [bait, setBait] = useState('/obj/item/food/bait/worm');
   const [spot, setSpot] = useState(data.spot_types[0]);
   const [rod, setRod] = useState(data.rod_types[0]);
   const [hook, setHook] = useState(data.hook_types[0]);
   const [line, setLine] = useState(data.line_types[0]);
+=======
+  const [bait, setBait] = useLocalState<string>(
+    'bait',
+    '/obj/item/food/bait/worm',
+  );
+  const [spot, setSpot] = useLocalState<string>('spot', data.spot_types[0]);
+  const [rod, setRod] = useLocalState<string>('rod', data.rod_types[0]);
+  const [hook, setHook] = useLocalState<string>('hook', data.hook_types[0]);
+  const [line, setLine] = useLocalState<string>('line', data.line_types[0]);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const weight_sum = data.info?.reduce((s, w) => s + w.weight, 0) || 1;
 

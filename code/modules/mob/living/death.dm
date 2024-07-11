@@ -15,8 +15,13 @@
 	if(!prev_lying)
 		gib_animation()
 
+<<<<<<< HEAD
 	if(stat != DEAD)
 		death(TRUE)
+=======
+	ghostize()
+	spill_organs(no_brain, no_organs, no_bodyparts)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	ghostize()
 	spill_organs(drop_bitflags)
@@ -132,11 +137,16 @@
 	med_hud_set_status()
 	stop_pulling()
 
+	set_ssd_indicator(FALSE)
+
 	SEND_SIGNAL(src, COMSIG_LIVING_DEATH, gibbed)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_DEATH, src, gibbed)
 
 	if (client)
 		client.move_delay = initial(client.move_delay)
+<<<<<<< HEAD
 		client.player_details.time_of_death = timeofdeath
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return TRUE

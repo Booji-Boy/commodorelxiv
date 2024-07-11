@@ -97,7 +97,10 @@
 			new spess_suit(src) // Above allows me to get the helmet from a variable on the object
 			var/obj/item/clothing/head/helmet/space/syndicate/spess_helmet = GLOB.syndicate_space_suits_to_helmets[spess_suit]
 			new spess_helmet(src) // 4 TC for the space gear
+<<<<<<< HEAD
 			new /obj/item/encryptionkey/syndicate(src) // 2 tc
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if(KIT_MURDER)
 			new /obj/item/melee/energy/sword/saber(src) // 8 tc
@@ -262,7 +265,6 @@
 			new /obj/item/storage/belt/fannypack/yellow(src) // 0 tc
 			new /obj/item/grenade/spawnergrenade/buzzkill(src) // these are the random super bees this is definitely all of the tc budget for this one
 			new /obj/item/grenade/spawnergrenade/buzzkill(src) // 10 tc per grenade
-			new /obj/item/reagent_containers/cup/bottle/beesease(src) // 10 tc?
 			new /obj/item/melee/beesword(src) //priceless
 
 		if(KIT_MR_FREEZE)
@@ -747,11 +749,20 @@
 	implant_color = "r"
 
 /obj/item/implant/nuclear_operative/get_data()
+<<<<<<< HEAD
 	return "<b>Implant Specifications:</b><BR> \
 		<b>Name:</b> Suspicious Implant<BR> \
 		<b>Life:</b> UNKNOWN <BR> \
 		<b>Implant Details:</b> <BR> \
 		<b>Function:</b> Strange implant that seems to resist any attempts at scanning it."
+=======
+	var/dat = {"<b>Implant Specifications:</b><BR>
+				<b>Name:</b> Suspicious Implant<BR>
+				<b>Life:</b> UNKNOWN <BR>
+				<b>Implant Details:</b> <BR>
+				<b>Function:</b> Strange implant that seems to resist any attempts at scanning it."}
+	return dat
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/implant/nuclear_operative/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
 	. = ..()
@@ -813,6 +824,7 @@
 	for(var/i in 1 to poster_count)
 		new /obj/item/poster/traitor(src)
 
+<<<<<<< HEAD
 /obj/item/storage/box/syndie_kit/cowboy
 	name = "western outlaw pack"
 	desc = "Contains everything you'll need to be the rootin' tootin' cowboy you always wanted. Either play the Lone Ranger or go in with your posse of outlaws."
@@ -860,6 +872,8 @@
 	new /obj/item/storage/fancy/cigarettes/cigpack_syndicate(src)
 	new /obj/item/lighter(src)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef KIT_RECON
 #undef KIT_BLOODY_SPAI
 #undef KIT_STEALTHY

@@ -252,6 +252,16 @@
 
 /obj/item/mod/module/anomaly_locked/kinesis/prebuilt/locked
 	core_removable = FALSE
+<<<<<<< HEAD
+=======
+
+
+/obj/item/mod/module/anomaly_locked/kinesis/prebuilt/prototype
+	name = "MOD prototype kinesis module"
+	complexity = 0
+	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
+	removable = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/module/anomaly_locked/kinesis/prototype
 	name = "MOD prototype kinesis module"

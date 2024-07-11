@@ -25,7 +25,11 @@ First, let's look at the blackboard.
 ```dm
 /datum/ai_controller/basic/cow
 	blackboard = list(
+<<<<<<< HEAD
 		BB_TARGETING_STRATEGY = new /datum/targeting_strategy/basic/allow_items(),
+=======
+		BB_TARGETING_STRATEGY = GET_TARGETING_STRATEGY(/datum/targeting_strategy/basic/allow_items),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		BB_BASIC_MOB_TIP_REACTING = FALSE,
 		BB_BASIC_MOB_TIPPER = null,
 	)
@@ -113,7 +117,11 @@ And one of those behaviors, `basic_melee_attack`. As I have been doing so far, I
 	//targeting strategy will kill the action if not real anymore
 	var/datum/weakref/weak_target = controller.blackboard[target_key]
 	var/atom/target = weak_target?.resolve()
+<<<<<<< HEAD
 	var/datum/targeting_strategy/targeting_strategy = controller.blackboard[targeting_strategy_key]
+=======
+	var/datum/targeting_strategy/targetting_datum = controller.blackboard[targetting_datum_key]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!targeting_strategy.can_attack(basic_mob, target))
 		///We have a target that is no longer valid to attack. Remember that returning doesn't end the behavior, JUST this single performance. So we call "finish_action" with whether it succeeded in doing what it wanted to do (it didn't, so FALSE) and the blackboard keys passed into this behavior.

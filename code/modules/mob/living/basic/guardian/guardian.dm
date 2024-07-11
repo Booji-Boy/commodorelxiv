@@ -12,14 +12,21 @@
 	icon_dead = "magicbase"
 	gender = NEUTER
 	basic_mob_flags = DEL_ON_DEATH
+<<<<<<< HEAD
 	mob_biotypes = MOB_SPECIAL
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sentience_type = SENTIENCE_HUMANOID
 	hud_type = /datum/hud/guardian
 	faction = list()
 	speed = 0
 	maxHealth = INFINITY // The spirit itself is invincible and passes damage to its host
 	health = INFINITY
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 1)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	unsuitable_atmos_damage = 0
 	unsuitable_cold_damage = 0
 	unsuitable_heat_damage = 0
@@ -34,13 +41,21 @@
 	attack_sound = 'sound/weapons/punch1.ogg'
 	attack_verb_continuous = "punches"
 	attack_verb_simple = "punch"
+<<<<<<< HEAD
 	combat_mode = TRUE
+=======
+	istate = ISTATE_HARM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	obj_damage = 40
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	melee_attack_cooldown = CLICK_CD_MELEE
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 3
+=======
+	light_outer_range = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_on = FALSE
 
 	/// The summoner of the guardian, we share health with them and can't move too far away (usually)
@@ -137,7 +152,11 @@
 /mob/living/basic/guardian/proc/guardian_recolour()
 	if (isnull(client))
 		return
+<<<<<<< HEAD
 	var/chosen_guardian_colour = input(src, "What would you like your colour to be?", "Choose Your Colour", "#ffffff") as color|null
+=======
+	var/chosen_guardian_colour = tgui_color_picker(src, "What would you like your colour to be?", "Choose Your Colour", "#ffffff")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (isnull(chosen_guardian_colour)) //redo proc until we get a color
 		to_chat(src, span_warning("Invalid colour, please try again."))
 		return guardian_recolour()

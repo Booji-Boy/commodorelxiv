@@ -51,8 +51,12 @@
 	AddElement(/datum/element/basic_eating, heal_amt = 50, drinking = TRUE, food_types = good_drinks)
 	AddElement(/datum/element/basic_eating, heal_amt = 0, damage_amount = 25, damage_type = BURN, drinking = TRUE, food_types = bad_drinks)
 	ADD_TRAIT(src, TRAIT_SNOWSTORM_IMMUNE, INNATE_TRAIT)
+<<<<<<< HEAD
 	var/list/foods_list = good_drinks + bad_drinks
 	ai_controller?.set_blackboard_key(BB_BASIC_FOODS, typecacheof(foods_list))
+=======
+	ai_controller?.set_blackboard_key(BB_BASIC_FOODS, good_drinks + bad_drinks)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/skeleton/settler
 	name = "undead settler"
@@ -86,7 +90,11 @@
 	maxHealth = 150
 	health = 150
 	speed = 2
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 0.5, BURN = 0.5, TOX = 0, STAMINA = 0, OXY = 0) //trying to simulate actually having armor
+=======
+	force_threshold = 10 //trying to simulate actually having armor
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	obj_damage = 50
 	melee_damage_lower = 25
 	melee_damage_upper = 30
@@ -129,7 +137,7 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 20
 	light_color = LIGHT_COLOR_PURPLE
-	light_range = 2
+	light_outer_range = 2
 	death_message = "collapses into a pile of bones, their suit dissolving among the plasma!"
 	loot = list(/obj/effect/decal/remains/plasma)
 	outfit = /datum/outfit/plasma_miner

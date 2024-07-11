@@ -312,7 +312,10 @@
 		/obj/item/storage/toolbox = 1,
 	)
 	category = CAT_WEAPON_RANGED
+<<<<<<< HEAD
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/laser_musket
 	name = "Laser Musket"
@@ -332,6 +335,10 @@
 
 /datum/crafting_recipe/laser_musket_prime
 	name = "Heroic Laser Musket"
+<<<<<<< HEAD
+=======
+	always_available = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	result = /obj/item/gun/energy/laser/musket/prime
 	reqs = list(
 		/obj/item/gun/energy/laser/musket = 1,
@@ -340,11 +347,17 @@
 		/obj/item/stock_parts/water_recycler = 1,
 		/datum/reagent/consumable/nuka_cola = 15,
 	)
+<<<<<<< HEAD
 	tool_behaviors = list(TOOL_SCREWDRIVER)
 	tool_paths = list(/obj/item/clothing/head/cowboy, /obj/item/clothing/shoes/cowboy)
 	time = 30 SECONDS //contemplate for a bit
 	category = CAT_WEAPON_RANGED
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
+=======
+	tool_behaviors = list(TOOL_SCREWDRIVER) //monke edits. removed the need for the special clothing
+	time = 30 SECONDS //contemplate for a bit
+	category = CAT_WEAPON_RANGED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/smoothbore_disabler
 	name = "Smoothbore Disabler"
@@ -363,6 +376,10 @@
 
 /datum/crafting_recipe/smoothbore_disabler_prime
 	name = "Elite Smoothbore Disabler"
+<<<<<<< HEAD
+=======
+	always_available = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	result = /obj/item/gun/energy/disabler/smoothbore/prime
 	reqs = list(
 		/obj/item/gun/energy/disabler/smoothbore = 1,
@@ -373,4 +390,7 @@
 	tool_behaviors = list(TOOL_SCREWDRIVER)
 	time = 20 SECONDS
 	category = CAT_WEAPON_RANGED
+<<<<<<< HEAD
 	crafting_flags = CRAFT_CHECK_DENSITY | CRAFT_MUST_BE_LEARNED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -44,7 +44,11 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "fO" = (
 /turf/open/indestructible,
 /area/space)
@@ -59,7 +63,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/storage/toolbox/mechanical/old,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "hZ" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/indestructible/necropolis/air,
@@ -71,7 +79,11 @@
 /area/centcom/heretic_sacrifice/rust)
 "jt" = (
 /turf/closed/indestructible/reinforced,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "jB" = (
 /obj/machinery/light/very_dim/directional/south,
 /turf/open/misc/asteroid,
@@ -105,7 +117,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/spear,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "mZ" = (
 /obj/effect/decal/fakelattice{
 	density = 0
@@ -176,7 +192,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/storage/toolbox/mechanical/old,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "qu" = (
 /obj/effect/turf_decal/weather/dirt,
 /turf/open/misc/ashplanet/wateryrock{
@@ -234,7 +254,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/clothing/under/color/grey/ancient,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "uT" = (
 /obj/structure/cable,
 /turf/open/floor/plating/rust,
@@ -260,7 +284,11 @@
 /area/centcom/heretic_sacrifice/ash)
 "wo" = (
 /turf/closed/indestructible/grille,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "wt" = (
 /obj/structure/stone_tile/block{
 	dir = 1
@@ -282,10 +310,17 @@
 	fuel = 1e+031;
 	randomize_fuel = 0;
 	icon_state = "flare-on";
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 	start_on = 1
 	},
 /turf/open/indestructible/plating,
 /area/centcom/heretic_sacrifice/lock)
+=======
+	on = 1
+	},
+/turf/open/indestructible/plating,
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "wS" = (
 /turf/open/misc/dirt/jungle/dark{
 	planetary_atmos = 0;
@@ -326,13 +361,17 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/clothing/mask/gas,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "AH" = (
 /obj/effect/turf_decal/trimline/brown/corner,
 /turf/open/floor/plating/rust,
 /area/centcom/heretic_sacrifice/rust)
 "AN" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /obj/effect/decal/fakelattice{
 	density = 0
 	},
@@ -345,11 +384,19 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/clothing/mask/gas/tiki_mask/yalp_elor,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
 "AY" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/indestructible/plating,
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+"AY" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/indestructible/plating,
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "Bv" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/trimline/brown/line,
@@ -405,7 +452,11 @@
 /area/centcom/heretic_sacrifice/ash)
 "En" = (
 /turf/closed/indestructible/fakedoor/maintenance,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "ER" = (
 /turf/open/misc/ironsand,
 /area/centcom/heretic_sacrifice/rust)
@@ -540,10 +591,17 @@
 	fuel = 1e+031;
 	randomize_fuel = 0;
 	icon_state = "flare-on";
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 	start_on = 1
 	},
 /turf/open/indestructible/plating,
 /area/centcom/heretic_sacrifice/lock)
+=======
+	on = 1
+	},
+/turf/open/indestructible/plating,
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "Nh" = (
 /obj/effect/turf_decal/trimline/brown/line{
 	dir = 1
@@ -589,7 +647,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/clothing/under/color/grey/ancient,
 /turf/open/indestructible/plating,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /area/centcom/heretic_sacrifice/lock)
+=======
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "Pl" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 6
@@ -712,9 +774,15 @@
 "Zw" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/dirt/dust,
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 /obj/effect/landmark/heretic/lock,
 /turf/open/indestructible/plating,
 /area/centcom/heretic_sacrifice/lock)
+=======
+/obj/effect/landmark/heretic/knock,
+/turf/open/indestructible/plating,
+/area/centcom/heretic_sacrifice/knock)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "ZA" = (
 /turf/closed/indestructible/riveted/boss,
 /area/centcom/heretic_sacrifice/ash)
@@ -761,9 +829,28 @@ ab
 ab
 ab
 ab
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
+=======
+ab
+ab
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 "}
 (2,1,1) = {"
 ab
+ab
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
 Fd
 Fd
 Fd
@@ -807,6 +894,20 @@ ab
 "}
 (3,1,1) = {"
 ab
+ab
+Fd
+jt
+jt
+wo
+wo
+jt
+En
+En
+jt
+wo
+wo
+jt
+jt
 Fd
 jt
 jt
@@ -850,6 +951,20 @@ ab
 "}
 (4,1,1) = {"
 ab
+ab
+Fd
+jt
+AY
+AY
+AY
+AY
+AY
+AY
+AY
+AY
+fL
+AY
+jt
 Fd
 jt
 AY
@@ -893,6 +1008,20 @@ ab
 "}
 (5,1,1) = {"
 ab
+ab
+Fd
+wo
+AY
+fL
+uM
+AY
+AY
+qo
+fL
+AY
+mW
+MZ
+wo
 Fd
 wo
 AY
@@ -936,6 +1065,20 @@ ab
 "}
 (6,1,1) = {"
 ab
+ab
+Fd
+wo
+AY
+Aw
+fL
+AY
+wP
+fL
+fL
+AY
+qo
+AY
+wo
 Fd
 wo
 AY
@@ -979,6 +1122,20 @@ ab
 "}
 (7,1,1) = {"
 ab
+ab
+Fd
+jt
+AY
+fL
+fL
+AY
+AY
+fL
+AY
+AY
+fL
+Aw
+jt
 Fd
 jt
 AY
@@ -1022,6 +1179,20 @@ ab
 "}
 (8,1,1) = {"
 ab
+ab
+Fd
+En
+AY
+MZ
+fL
+AY
+Zw
+OW
+AY
+AY
+AY
+fL
+En
 Fd
 En
 AY
@@ -1065,6 +1236,20 @@ ab
 "}
 (9,1,1) = {"
 ab
+ab
+Fd
+En
+fL
+AY
+AY
+AY
+fL
+fL
+AY
+AY
+fL
+AY
+En
 Fd
 En
 fL
@@ -1108,6 +1293,20 @@ ab
 "}
 (10,1,1) = {"
 ab
+ab
+Fd
+jt
+AY
+AY
+fL
+AY
+fL
+AY
+fL
+AY
+AW
+fL
+jt
 Fd
 jt
 AY
@@ -1151,6 +1350,20 @@ ab
 "}
 (11,1,1) = {"
 ab
+ab
+Fd
+wo
+fL
+AY
+hE
+MZ
+AY
+AY
+hE
+fL
+wP
+AY
+wo
 Fd
 wo
 fL
@@ -1194,6 +1407,20 @@ ab
 "}
 (12,1,1) = {"
 ab
+ab
+Fd
+wo
+AY
+fL
+AY
+AY
+AY
+fL
+AY
+OW
+fL
+fL
+wo
 Fd
 wo
 AY
@@ -1237,6 +1464,20 @@ ab
 "}
 (13,1,1) = {"
 ab
+ab
+Fd
+jt
+AY
+AY
+fL
+fL
+AY
+AY
+AY
+AY
+AY
+AY
+jt
 Fd
 jt
 AY
@@ -1280,6 +1521,20 @@ ab
 "}
 (14,1,1) = {"
 ab
+ab
+Fd
+jt
+jt
+wo
+wo
+jt
+En
+En
+jt
+wo
+wo
+jt
+jt
 Fd
 jt
 jt
@@ -1323,6 +1578,20 @@ ab
 "}
 (15,1,1) = {"
 ab
+ab
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
 Fd
 Fd
 Fd
@@ -1366,6 +1635,20 @@ ab
 "}
 (16,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1409,6 +1692,20 @@ ab
 "}
 (17,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+xc
+xc
+xc
+xc
+xc
+fO
 Fd
 fO
 fO
@@ -1452,6 +1749,20 @@ ab
 "}
 (18,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+xc
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1495,6 +1806,20 @@ ab
 "}
 (19,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+xc
+xc
+xc
+xc
+xc
+fO
 Fd
 fO
 fO
@@ -1538,6 +1863,20 @@ ab
 "}
 (20,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1581,6 +1920,20 @@ ab
 "}
 (21,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+xc
+fO
+xc
+xc
+xc
+fO
 Fd
 fO
 fO
@@ -1624,6 +1977,20 @@ ab
 "}
 (22,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1667,6 +2034,20 @@ ab
 "}
 (23,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1710,6 +2091,20 @@ ab
 "}
 (24,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1753,6 +2148,20 @@ ab
 "}
 (25,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1796,6 +2205,20 @@ ab
 "}
 (26,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1839,6 +2262,20 @@ ab
 "}
 (27,1,1) = {"
 ab
+ab
+Fd
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
+fO
 Fd
 fO
 fO
@@ -1882,6 +2319,20 @@ ab
 "}
 (28,1,1) = {"
 ab
+ab
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
+Fd
 Fd
 Fd
 Fd
@@ -1961,7 +2412,13 @@ ab
 ab
 ab
 ab
+<<<<<<< HEAD:_maps/templates/lazy_templates/heretic_sacrifice.dmm
 Fd
+=======
+ab
+ab
+ab
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:_maps/templates/heretic_sacrifice_template.dmm
 ab
 ab
 ab

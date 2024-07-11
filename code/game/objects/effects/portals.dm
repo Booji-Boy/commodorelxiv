@@ -21,7 +21,11 @@
 	density = TRUE // dense for receiving bumbs
 	layer = HIGH_OBJ_LAYER
 	light_system = COMPLEX_LIGHT
+<<<<<<< HEAD
 	light_range = 3
+=======
+	light_outer_range = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_on = TRUE
 	light_color = COLOR_BLUE_LIGHT
@@ -44,9 +48,13 @@
 	/// Does this portal bypass teleport restrictions? like TRAIT_NO_TELEPORT and NOTELEPORT flags.
 	var/force_teleport = FALSE
 	/// Does this portal create spark effect when teleporting?
+<<<<<<< HEAD
 	var/sparkless = TRUE
 	/// If FALSE, the wibble filter will not be applied to this portal (only a visual effect).
 	var/wibbles = TRUE
+=======
+	var/sparkless = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/portal/anom
 	name = "wormhole"
@@ -57,7 +65,10 @@
 	mech_sized = TRUE
 	teleport_channel = TELEPORT_CHANNEL_WORMHOLE
 	light_on = FALSE
+<<<<<<< HEAD
 	wibbles = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/portal/Move(newloc)
 	for(var/T in newloc)

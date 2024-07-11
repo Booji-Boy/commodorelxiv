@@ -32,8 +32,13 @@
 	response_harm_continuous = "punches through"
 	response_harm_simple = "punch through"
 	unsuitable_atmos_damage = 0
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, STAMINA = 0, OXY = 0) //I don't know how you'd apply those, but revenants no-sell them anyway.
 	habitable_atmos = null
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0) //I don't know how you'd apply those, but revenants no-sell them anyway.
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = INFINITY
 
@@ -97,12 +102,22 @@
 	AddElement(/datum/element/simple_flying)
 	add_traits(list(TRAIT_SPACEWALK, TRAIT_SIXTHSENSE, TRAIT_FREE_HYPERSPACE_MOVEMENT), INNATE_TRAIT)
 
+<<<<<<< HEAD
 	grant_actions_by_list(abilities)
+=======
+	for(var/ability in abilities)
+		var/datum/action/spell = new ability(src)
+		spell.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	RegisterSignal(src, COMSIG_LIVING_BANED, PROC_REF(on_baned))
 	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_move))
 	RegisterSignal(src, COMSIG_LIVING_LIFE, PROC_REF(on_life))
+<<<<<<< HEAD
 	name = generate_random_mob_name()
+=======
+	set_random_revenant_name()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	GLOB.revenant_relay_mobs |= src
 
@@ -168,6 +183,7 @@
 		essencecolor = "#1D2953" //oh jeez you're dying
 	hud_used.healths.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]E</font></div>")
 
+<<<<<<< HEAD
 /mob/living/basic/revenant/say(
 	message,
 	bubble_type,
@@ -181,6 +197,9 @@
 	datum/saymode/saymode,
 	list/message_mods = list(),
 )
+=======
+/mob/living/basic/revenant/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, filterproof = null, message_range = 7, datum/saymode/saymode = null)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!message)
 		return
 
@@ -204,7 +223,11 @@
 		ShiftClickOn(A)
 		return
 	if(LAZYACCESS(modifiers, ALT_CLICK))
+<<<<<<< HEAD
 		base_click_alt(A)
+=======
+		AltClickNoInteract(src, A)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		ranged_secondary_attack(A, modifiers)
@@ -212,6 +235,7 @@
 
 	if(ishuman(A) && in_range(src, A))
 		attempt_harvest(A)
+<<<<<<< HEAD
 		return
 
 	// This is probably the most cringe place I could put this but whatever -
@@ -224,6 +248,8 @@
 		var/obj/structure/spirit_board/board = A
 		board.spirit_board_pick_letter(src)
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/revenant/ranged_secondary_attack(atom/target, modifiers)
 	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED) || HAS_TRAIT(src, TRAIT_REVENANT_REVEALED) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM) || !Adjacent(target) || !incorporeal_move_check(target))
@@ -281,7 +307,11 @@
 /mob/living/basic/revenant/gib()
 	death()
 
+<<<<<<< HEAD
 /mob/living/basic/revenant/can_perform_action(atom/target, action_bitflags)
+=======
+/mob/living/basic/revenant/can_perform_action(atom/movable/target, action_bitflags)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /mob/living/basic/revenant/ex_act(severity, target)
@@ -312,7 +342,11 @@
 		span_revendanger("NO! No... it's too late, you can feel your essence [pick("breaking apart", "drifting away")]..."),
 	)
 
+<<<<<<< HEAD
 	SetInvisibility(INVISIBILITY_NONE, id=type)
+=======
+	invisibility = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "revenant_draining"
 	playsound(src, 'sound/effects/screech.ogg', 100, TRUE)
 
@@ -357,13 +391,21 @@
 	returnable_list += span_bold("Be sure to read <a href=\"https://tgstation13.org/wiki/Revenant\">the wiki page</a> to learn more.")
 	return returnable_list
 
+<<<<<<< HEAD
 /mob/living/basic/revenant/generate_random_mob_name()
+=======
+/mob/living/basic/revenant/proc/set_random_revenant_name()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/built_name_strings = list()
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "spirit_type"))
 	built_name_strings += " of "
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "adverb"))
 	built_name_strings += pick(strings(REVENANT_NAME_FILE, "theme"))
+<<<<<<< HEAD
 	return built_name_strings.Join("")
+=======
+	name = built_name_strings.Join("")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/revenant/proc/on_baned(obj/item/weapon, mob/living/user)
 	SIGNAL_HANDLER
@@ -438,7 +480,11 @@
 	draining = FALSE
 	dormant = FALSE
 	incorporeal_move = INCORPOREAL_MOVE_JAUNT
+<<<<<<< HEAD
 	RemoveInvisibility(type)
+=======
+	invisibility = INVISIBILITY_REVENANT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	alpha = 255
 
 /mob/living/basic/revenant/proc/change_essence_amount(essence_to_change_by, silent = FALSE, source = null)

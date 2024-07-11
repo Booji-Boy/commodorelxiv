@@ -8,8 +8,21 @@
 
 //DIGITIGRADE PATHS
 ///The dmi containing digitigrade uniforms
+<<<<<<< HEAD
 #define DIGITIGRADE_UNIFORM_FILE 'icons/mob/human/species/misc/digitigrade.dmi'
 ///The dmi containing digitigrade shoes
 #define DIGITIGRADE_SHOES_FILE 'icons/mob/human/species/misc/digitigrade_shoes.dmi'
 ///The dmi containing digitigrade oversuits
 #define DIGITIGRADE_SUIT_FILE 'icons/mob/human/species/misc/digitigrade_suits.dmi'
+=======
+#define DIGITIGRADE_UNIFORM_FILE 'monkestation/icons/mob/species/misc/uniform_digi.dmi'
+///The dmi containing digitigrade shoes
+#define DIGITIGRADE_SHOES_FILE 'monkestation/icons/mob/species/misc/feet_digi.dmi'
+///The dmi containing digitigrade oversuits
+#define DIGITIGRADE_SUIT_FILE 'monkestation/icons/mob/species/misc/suit_digi.dmi'
+
+///The dmi containing snouted variation masks
+#define SNOUTED_MASK_FILE 'monkestation/icons/mob/species/misc/mask_muzzled.dmi'
+///The dmi containing snouted variation helmets
+#define SNOUTED_HEAD_FILE 'monkestation/icons/mob/species/misc/head_muzzled.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

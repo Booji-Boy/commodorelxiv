@@ -1,18 +1,36 @@
+<<<<<<< HEAD
 #define CPU_INTERACTABLE(user) (cpu && !HAS_TRAIT_FROM(src, TRAIT_MODPC_INTERACTING_WITH_FRAME, REF(user)))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Modular Computer - A machinery that is mostly just a host to the Modular Computer item.
 /obj/machinery/modular_computer
 	name = "modular computer"
 	desc = "You shouldn't see this. If you do, report it." //they should be examining the processor instead
+<<<<<<< HEAD
 	icon = 'icons/obj/machines/modular_console.dmi'
 	icon_state = "console"
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.025
+=======
+	icon = 'icons/obj/modular_console.dmi'
+	icon_state = "console"
+	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.05
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	density = TRUE
 	max_integrity = 300
 	integrity_failure = 0.5
 
+<<<<<<< HEAD
 	///A flag that describes this device type
 	var/hardware_flag = PROGRAM_CONSOLE
+=======
+	///The power cell, null by default as we use the APC we're in
+	var/internal_cell = null
+	///A flag that describes this device type
+	var/hardware_flag = PROGRAM_CONSOLE
+	///Power usage during last tick
+	var/last_power_usage = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Amount of programs that can be ran at once
 	var/max_idle_programs = 4
 
@@ -40,10 +58,16 @@
 /obj/machinery/modular_computer/Initialize(mapload)
 	. = ..()
 	cpu = new(src)
+<<<<<<< HEAD
 	cpu.screen_on = TRUE
 	cpu.add_shell_component(SHELL_CAPACITY_LARGE, SHELL_FLAG_USB_PORT)
 	update_appearance()
 	register_context()
+=======
+	cpu.physical = src
+	cpu.screen_on = TRUE
+	update_appearance()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/modular_computer/Destroy()
 	QDEL_NULL(cpu)
@@ -154,8 +178,15 @@
 /obj/machinery/modular_computer/welder_act(mob/user, obj/item/tool)
 	return CPU_INTERACTABLE(user) ? cpu.welder_act(user, tool) : ..()
 
+<<<<<<< HEAD
 /obj/machinery/modular_computer/attackby(obj/item/weapon, mob/living/user)
 	return (CPU_INTERACTABLE(user) && !user.combat_mode) ? cpu.attackby(weapon, user) : ..()
+=======
+/obj/machinery/modular_computer/attackby(obj/item/W as obj, mob/living/user)
+	if (cpu && !(user.istate & ISTATE_HARM) && !(flags_1 & NODECONSTRUCT_1))
+		return cpu.attackby(W, user)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/modular_computer/attacked_by(obj/item/attacking_item, mob/living/user)
 	return CPU_INTERACTABLE(user) ? cpu.attacked_by(attacking_item, user) : ..()

@@ -5,13 +5,22 @@
 	help_text = "Ever heard of 'Snakes and Ladders'? It's like that, but with \
 	instead of ladders its stairs and instead of snakes its a steep drop down a \
 	cliff into rough rocks or liquid plasma."
+<<<<<<< HEAD
 	difficulty = BITRUNNER_DIFFICULTY_LOW
 	completion_loot = list(/obj/item/clothing/suit/costume/snowman = 2)
 	secondary_loot = list(/obj/item/clothing/shoes/wheelys/skishoes = 2, /obj/item/clothing/head/costume/ushanka/polar = 1)
+=======
+	extra_loot = list(/obj/item/clothing/suit/costume/snowman = 2)
+	difficulty = BITRUNNER_DIFFICULTY_LOW
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	forced_outfit = /datum/outfit/job/virtual_domain_iceclimber
 	key = "stairs_and_cliffs"
 	map_name = "stairs_and_cliffs"
 	reward_points = BITRUNNER_REWARD_MEDIUM
+<<<<<<< HEAD
+=======
+	safehouse_path = /datum/map_template/safehouse/ice
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/cliff/snowrock/virtual_domain
 	name = "icy cliff"

@@ -20,7 +20,11 @@
  *
  * make sure you add an update to the schema_version stable in the db changelog
  */
+<<<<<<< HEAD
 #define DB_MINOR_VERSION 27
+=======
+#define DB_MINOR_VERSION 24
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 //! ## Timing subsystem
@@ -136,6 +140,8 @@
 #define INIT_ORDER_DBCORE 95
 #define INIT_ORDER_BLACKBOX 94
 #define INIT_ORDER_SERVER_MAINT 93
+#define INIT_ORDER_METRICS 91
+#define INIT_ORDER_OW 90
 #define INIT_ORDER_INPUT 85
 #define INIT_ORDER_ADMIN_VERBS 84 // needs to be pretty high, admins cant do much without it
 #define INIT_ORDER_SOUNDS 83
@@ -151,6 +157,7 @@
 #define INIT_ORDER_EVENTS 70
 #define INIT_ORDER_IDACCESS 66
 #define INIT_ORDER_JOBS 65 // Must init before atoms, to set up properly the dynamic job lists.
+#define INIT_ORDER_MEDIA_TRACKS 60
 #define INIT_ORDER_AI_MOVEMENT 56 //We need the movement setup
 #define INIT_ORDER_AI_CONTROLLERS 55 //So the controller can get the ref
 #define INIT_ORDER_TICKER 55
@@ -163,12 +170,21 @@
 #define INIT_ORDER_ECONOMY 40
 #define INIT_ORDER_OUTPUTS 35
 #define INIT_ORDER_RESTAURANT 34
+<<<<<<< HEAD
 #define INIT_ORDER_TTS 33
+=======
+#define INIT_ORDER_POLLUTION 32
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define INIT_ORDER_ATOMS 30
+#define INIT_ORDER_ARMAMENTS 27
 #define INIT_ORDER_LANGUAGE 25
 #define INIT_ORDER_MACHINES 20
 #define INIT_ORDER_SKILLS 15
+<<<<<<< HEAD
 #define INIT_ORDER_QUEUELINKS 10
+=======
+#define INIT_ORDER_PATHOGEN 14
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define INIT_ORDER_TIMER 1
 #define INIT_ORDER_DEFAULT 0
 #define INIT_ORDER_AIR -1
@@ -176,15 +192,20 @@
 #define INIT_ORDER_PERSISTENT_PAINTINGS -3 // Assets relies on this
 #define INIT_ORDER_VOTE -4 // Needs to be after persistence so that recent maps are not loaded.
 #define INIT_ORDER_ASSETS -5
-#define INIT_ORDER_ICON_SMOOTHING -6
-#define INIT_ORDER_OVERLAY -7
+#define INIT_ORDER_ICON_COLORING -6
+#define INIT_ORDER_ICON_SMOOTHING -7
+#define INIT_ORDER_OVERLAY -8
 #define INIT_ORDER_XKEYSCORE -10
 #define INIT_ORDER_STICKY_BAN -10
 #define INIT_ORDER_LIGHTING -20
-#define INIT_ORDER_SHUTTLE -21
+#define INIT_ORDER_OUTDOOR_EFFECTS -21 //monkestation addition
+#define INIT_ORDER_SHUTTLE -22 //monkestation edit -21 > -22
 #define INIT_ORDER_MINOR_MAPPING -40
 #define INIT_ORDER_PATH -50
 #define INIT_ORDER_EXPLOSIONS -69
+#define INIT_ORDER_REPLAYS -94
+#define INIT_ORDER_HOTSPOTS -95 ///only called on oshan so just call it near the end.
+#define INIT_ORDER_TWITCH -96
 #define INIT_ORDER_STATPANELS -97
 #define INIT_ORDER_BAN_CACHE -98
 #define INIT_ORDER_INIT_PROFILER -99 //Near the end, logs the costs of initialize
@@ -192,8 +213,11 @@
 
 // Subsystem fire priority, from lowest to highest priority
 // If the subsystem isn't listed here it's either DEFAULT or PROCESS (if it's a processing subsystem child)
-
 #define FIRE_PRIORITY_PING 10
+<<<<<<< HEAD
+=======
+#define FIRE_PRIORITY_TWITCH 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define FIRE_PRIORITY_SERVER_MAINT 10
 #define FIRE_PRIORITY_RESEARCH 10
 #define FIRE_PRIORITY_VIS 10
@@ -209,10 +233,16 @@
 #define FIRE_PRIORITY_NPC_ACTIONS 22
 #define FIRE_PRIORITY_PATHFINDING 23
 #define FIRE_PRIORITY_CLIFF_FALLING 24
+<<<<<<< HEAD
+=======
+#define FIRE_PRIORITY_MOVABLE_PHYSICS 24
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define FIRE_PRIORITY_PROCESS 25
 #define FIRE_PRIORITY_THROWING 25
 #define FIRE_PRIORITY_REAGENTS 26
 #define FIRE_PRIORITY_SPACEDRIFT 30
+#define FIRE_PRIORITY_HOTSPOT 30
+#define FIRE_PRIORITY_PATHOGEN 31
 #define FIRE_PRIORITY_SMOOTHING 35
 #define FIRE_PRIORITY_OBJ 40
 #define FIRE_PRIORITY_ACID 40
@@ -220,7 +250,11 @@
 #define FIRE_PRIORITY_DEFAULT 50
 #define FIRE_PRIORITY_PARALLAX 65
 #define FIRE_PRIORITY_INSTRUMENTS 80
+<<<<<<< HEAD
 #define FIRE_PRIORITY_FLUIDS 80
+=======
+#define FIRE_PRIORITY_STAMINA 95
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define FIRE_PRIORITY_MOBS 100
 #define FIRE_PRIORITY_TGUI 110
 #define FIRE_PRIORITY_TICKER 200
@@ -340,6 +374,7 @@
 /// Approval voting. Any number of selections per person, and the selection with the most votes wins.
 #define VOTE_COUNT_METHOD_MULTI 2
 
+<<<<<<< HEAD
 /// The choice with the most votes wins. Ties are broken by the first choice to reach that number of votes.
 #define VOTE_WINNER_METHOD_SIMPLE "Simple"
 /// The winning choice is selected randomly based on the number of votes each choice has.
@@ -349,3 +384,14 @@
 
 /// Returned by [/datum/vote/proc/can_be_initiated] to denote the vote is valid and can be initiated.
 #define VOTE_AVAILABLE "Vote Available"
+=======
+///liquid defines
+#define SSLIQUIDS_RUN_TYPE_TURFS 1
+#define SSLIQUIDS_RUN_TYPE_GROUPS 2
+#define SSLIQUIDS_RUN_TYPE_IMMUTABLES 3
+#define SSLIQUIDS_RUN_TYPE_EVAPORATION 4
+#define SSLIQUIDS_RUN_TYPE_FIRE 5
+#define SSLIQUIDS_RUN_TYPE_OCEAN 6
+#define SSLIQUIDS_RUN_TYPE_TEMPERATURE 7
+#define SSLIQUIDS_RUN_TYPE_CACHED_EDGES 8
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

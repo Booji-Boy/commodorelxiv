@@ -5,8 +5,13 @@
 	var/desc
 
 	///From __DEFINES/surgery.dm
+<<<<<<< HEAD
 	///Selection: SURGERY_IGNORE_CLOTHES | SURGERY_SELF_OPERABLE | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB | SURGERY_MORBID_CURIOSITY
 	var/surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB
+=======
+	///Selection: SURGERY_IGNORE_CLOTHES | SURGERY_SELF_OPERABLE | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
+	var/surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_SELF_OPERABLE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///The surgery step we're currently on, increases each time we do a step.
 	var/status = 1
 	///All steps the surgery has to do to complete.
@@ -77,6 +82,7 @@
 	if(replaced_by == /datum/surgery)
 		return FALSE
 
+<<<<<<< HEAD
 	// True surgeons (like abductor scientists) need no instructions
 	if(HAS_MIND_TRAIT(user, TRAIT_SURGEON))
 		if(replaced_by) // only show top-level surgeries
@@ -84,6 +90,8 @@
 		else
 			return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!requires_tech && !replaced_by)
 		return TRUE
 
@@ -95,6 +103,13 @@
 		return TRUE
 	if(surgery_signal & COMPONENT_CANCEL_SURGERY)
 		return FALSE
+
+	// True surgeons (like abductor scientists) need no instructions
+	if(HAS_TRAIT(user, TRAIT_ALL_SURGERIES) || (!isnull(user.mind) && HAS_TRAIT(user.mind, TRAIT_ALL_SURGERIES))) // monke edit: TRAIT_ALL_SURGERIES
+		if(replaced_by) // only show top-level surgeries
+			return FALSE
+		else
+			return TRUE
 
 	var/turf/patient_turf = get_turf(patient)
 
@@ -111,13 +126,13 @@
 /datum/surgery/proc/next_step(mob/living/user, modifiers)
 	if(location != user.zone_selected)
 		return FALSE
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return FALSE
 	if(step_in_progress)
 		return TRUE
 
 	var/try_to_fail = FALSE
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if((user.istate & ISTATE_SECONDARY))
 		try_to_fail = TRUE
 
 	var/datum/surgery_step/step = get_surgery_step()
@@ -143,7 +158,7 @@
 	return null
 
 /datum/surgery/proc/complete(mob/surgeon)
-	SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
+	SSblackbox.record_feedback("tally", "surgeries_completed", 1, name)
 	surgeon.add_mob_memory(/datum/memory/surgery, deuteragonist = surgeon, surgery_type = name)
 	qdel(src)
 
@@ -156,7 +171,10 @@
 	var/obj/machinery/computer/operating/operating_computer = operating_table?.computer
 
 	if (isnull(operating_computer))
-		return null
+		var/obj/machinery/stasis/stasisbed = locate(/obj/machinery/stasis, patient_turf)
+		operating_computer = stasisbed?.op_computer
+		if (isnull(operating_computer))
+			return null
 
 	if(operating_computer.machine_stat & (NOPOWER|BROKEN))
 		return null

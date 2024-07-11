@@ -320,6 +320,12 @@
 	spawn_pipe = FALSE
 	anchored = FALSE
 
+<<<<<<< HEAD
+=======
+/obj/structure/disposalpipe/broken/deconstruct()
+	qdel(src)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/disposalpipe/rotator
 	icon_state = "pipe-r1"
 	initialize_dirs = DISP_DIR_LEFT | DISP_DIR_RIGHT | DISP_DIR_FLIP

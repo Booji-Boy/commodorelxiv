@@ -60,12 +60,22 @@
 #define BIOGENERATOR (1<<4) //Uses biomass
 #define LIMBGROWER (1<<5) //Uses synthetic flesh
 #define SMELTER (1<<6) //uses various minerals
+#define NANITE_COMPILER (1<<7) //Prints nanite disks
 /// Protolathes for offstation roles. More limited tech tree.
 #define AWAY_LATHE (1<<8)
 /// Imprinters for offstation roles. More limited tech tree.
 #define AWAY_IMPRINTER (1<<9)
 /// For wiremod/integrated circuits. Uses various minerals.
 #define COMPONENT_PRINTER (1<<10)
+<<<<<<< HEAD
+=======
+//Note: More than one of these can be added to a design but imprinter and lathe designs are incompatable.
+/// Can be made by the orderable colony fabricator
+#define COLONY_FABRICATOR (1<<11)
+
+#define FIREDOOR_OPEN 1
+#define FIREDOOR_CLOSED 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define HYPERTORUS_INACTIVE 0 // No or minimal energy
 #define HYPERTORUS_NOMINAL 1 // Normal operation
@@ -78,11 +88,16 @@
 #define MACHINE_ELECTRIFIED_PERMANENT -1
 #define MACHINE_DEFAULT_ELECTRIFY_TIME 30
 
+//cloning defines. These are flags.
+#define CLONING_SUCCESS (1<<0)
+#define CLONING_DELETE_RECORD (1<<1)
+
 //mass drivers and related machinery
 #define MASSDRIVER_ORDNANCE "ordnancedriver"
 #define MASSDRIVER_CHAPEL "chapelgun"
 #define MASSDRIVER_DISPOSALS "trash"
 #define MASSDRIVER_SHACK "shack"
+#define MASSDRIVER_CARGO "cargo"
 
 //orion game states
 #define ORION_STATUS_START 0

@@ -1,11 +1,18 @@
 /datum/ai_controller/basic_controller/lobstrosity
 	blackboard = list(
+<<<<<<< HEAD
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/allow_items,
+=======
+		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		BB_TARGET_MINIMUM_STAT = HARD_CRIT,
 		BB_LOBSTROSITY_EXPLOIT_TRAITS = list(TRAIT_INCAPACITATED, TRAIT_FLOORED, TRAIT_IMMOBILIZED, TRAIT_KNOCKEDOUT),
 		BB_LOBSTROSITY_FINGER_LUST = 0
 	)
+<<<<<<< HEAD
 	ai_traits = PAUSE_DURING_DO_AFTER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	ai_movement = /datum/ai_movement/basic_avoidance
 	idle_behavior = /datum/idle_behavior/idle_random_walk
@@ -17,6 +24,7 @@
 		/datum/ai_planning_subtree/flee_target/lobster,
 		/datum/ai_planning_subtree/attack_obstacle_in_path,
 		/datum/ai_planning_subtree/basic_melee_attack_subtree/lobster,
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/find_food,
 		/datum/ai_planning_subtree/find_and_hunt_target/lobster_fishing,
 		/datum/ai_planning_subtree/find_fingers,
@@ -27,12 +35,20 @@
 	hunt_targets = list(/turf/open/lava)
 	hunting_behavior = /datum/ai_behavior/hunt_target/unarmed_attack_target/reset_target
 
+=======
+		/datum/ai_planning_subtree/find_fingers,
+	)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ai_planning_subtree/basic_melee_attack_subtree/lobster
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/lobster
 
 /datum/ai_planning_subtree/basic_melee_attack_subtree/lobster/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
+<<<<<<< HEAD
 	if(!isliving(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]))
 		return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (!controller.blackboard[BB_BASIC_MOB_STOP_FLEEING])
 		return
 	if (!isnull(controller.blackboard[BB_LOBSTROSITY_TARGET_LIMB]))
@@ -46,7 +62,11 @@
 
 /datum/ai_behavior/basic_melee_attack/lobster/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	var/mob/living/target = controller.blackboard[target_key]
+<<<<<<< HEAD
 	if (isnull(target) || !istype(target))
+=======
+	if (isnull(target))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ..()
 	var/is_vulnerable = FALSE
 	for (var/trait in controller.blackboard[BB_LOBSTROSITY_EXPLOIT_TRAITS])
@@ -57,8 +77,13 @@
 	if (!is_vulnerable)
 		controller.set_blackboard_key(BB_BASIC_MOB_STOP_FLEEING, FALSE)
 	if (!controller.blackboard[BB_BASIC_MOB_STOP_FLEEING])
+<<<<<<< HEAD
 		// We don't want to clear our target
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller = controller, succeeded = TRUE, target_key = target_key) // We don't want to clear our target
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/ai_planning_subtree/flee_target/lobster
@@ -82,7 +107,12 @@
 		if (!HAS_TRAIT(target, trait))
 			continue
 		controller.set_blackboard_key(BB_BASIC_MOB_STOP_FLEEING, TRUE)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mob/living/us = controller.pawn
 	if (us.pulling == target)
@@ -141,12 +171,23 @@
 	set_movement_target(controller, current_target)
 
 /datum/ai_behavior/grab_fingers/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
 	var/atom/current_target = controller.blackboard[target_key]
 	if (QDELETED(current_target))
 		return AI_BEHAVIOR_DELAY
 	var/mob/living/living_pawn = controller.pawn
 	living_pawn.start_pulling(current_target)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	. = ..()
+
+	var/atom/current_target = controller.blackboard[target_key]
+	if (QDELETED(current_target))
+		return
+	var/mob/living/living_pawn = controller.pawn
+	living_pawn.start_pulling(current_target)
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// How far we'll try to go before eating an arm
 #define FLEE_TO_RANGE 9
@@ -166,18 +207,26 @@
 	if (QDELETED(current_target))
 		set_movement_target(controller, get_turf(controller.pawn))
 		return
+<<<<<<< HEAD
 	var/perform_flags = target_step_away(controller, current_target, target_key)
 	if (perform_flags & AI_BEHAVIOR_SUCCEEDED)
 		finish_action(controller, TRUE, target_key)
 	else if(perform_flags & AI_BEHAVIOR_FAILED)
 		finish_action(controller, FALSE, target_key)
+=======
+	target_step_away(controller, current_target, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Find the next step to take away from the current target
 /datum/ai_behavior/hoard_fingers/proc/target_step_away(datum/ai_controller/controller, atom/current_target, target_key)
 	var/turf/next_step = get_step_away(controller.pawn, current_target)
 	if (!isnull(next_step) && !next_step.is_blocked_turf(exclude_mobs = TRUE))
 		set_movement_target(controller, next_step)
+<<<<<<< HEAD
 		return NONE
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/all_dirs = GLOB.alldirs.Copy()
 	all_dirs -= get_dir(controller.pawn, next_step)
 	all_dirs -= get_dir(controller.pawn, current_target)
@@ -186,6 +235,7 @@
 		next_step = get_step(controller.pawn, dir)
 		if (!isnull(next_step) && !next_step.is_blocked_turf(exclude_mobs = TRUE))
 			set_movement_target(controller, next_step)
+<<<<<<< HEAD
 			return NONE
 	return AI_BEHAVIOR_FAILED
 
@@ -208,15 +258,45 @@
 	if(target_step_away(controller, current_target, target_key))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+			return
+	finish_action(controller, succeeded = FALSE, target_key = target_key)
+	return
+
+/datum/ai_behavior/hoard_fingers/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+	. = ..()
+	var/current_patience = controller.blackboard[patience_key] + 1
+	if (current_patience >= MAX_LOBSTROSITY_PATIENCE)
+		eat_fingers(controller, target_key)
+		return
+	controller.set_blackboard_key(patience_key, current_patience)
+	var/mob/living/living_pawn = controller.pawn
+	if (isnull(living_pawn.pulling))
+		finish_action(controller, succeeded = FALSE, target_key = target_key)
+		return
+
+	var/atom/current_target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	if (QDELETED(current_target) || !can_see(controller.pawn, current_target, FLEE_TO_RANGE))
+		eat_fingers(controller, target_key)
+		return
+	target_step_away(controller, current_target, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Finally consume those delicious digits
 /datum/ai_behavior/hoard_fingers/proc/eat_fingers(datum/ai_controller/controller, target_key)
 	var/mob/living/basic/living_pawn = controller.pawn
 	var/atom/fingers = controller.blackboard[target_key]
 	if (QDELETED(fingers) || living_pawn.pulling != fingers)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_FAILED
 	living_pawn.melee_attack(fingers)
 	return AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, succeeded = FALSE, target_key = target_key)
+		return
+	living_pawn.melee_attack(fingers)
+	finish_action(controller, succeeded = TRUE, target_key = target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/hoard_fingers/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()

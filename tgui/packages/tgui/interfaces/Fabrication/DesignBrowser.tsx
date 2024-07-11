@@ -52,7 +52,11 @@ export type DesignBrowserProps<T extends Design = Design> = {
      * A callback to print the design.
      */
     onPrintDesign: (design: T, amount: number) => void,
+<<<<<<< HEAD
   ) => ReactNode;
+=======
+  ) => InfernoNode;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   /**
    * If provided, renders a node into each category in the output.
@@ -229,9 +233,14 @@ export const DesignBrowser = <T extends Design = Design>(
                     </div>
                   </div>
 
+<<<<<<< HEAD
                   {sortBy(
                     Object.values(root.subcategories),
                     (category: Category) => category.title,
+=======
+                  {sortBy((category: Category) => category.title)(
+                    Object.values(root.subcategories),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   ).map((category) => (
                     <DesignBrowserTab
                       key={category.title}
@@ -272,6 +281,7 @@ export const DesignBrowser = <T extends Design = Design>(
             <Stack.Item grow>
               <Section fill style={{ overflow: 'auto' }}>
                 {searchText.length > 0 ? (
+<<<<<<< HEAD
                   <VirtualList>
                     {sortBy(
                       Object.values(root.descendants),
@@ -295,6 +305,27 @@ export const DesignBrowser = <T extends Design = Design>(
                     {sortBy(
                       Object.values(root.descendants),
                       (design: T) => design.name,
+=======
+                  sortBy((design: T) => design.name)(
+                    Object.values(root.descendants),
+                  )
+                    .filter((design) =>
+                      design.name
+                        .toLowerCase()
+                        .includes(searchText.toLowerCase()),
+                    )
+                    .map((design) =>
+                      buildRecipeElement(
+                        design,
+                        availableMaterials || {},
+                        onPrintDesign || NOOP,
+                      ),
+                    )
+                ) : selectedCategory === ALL_CATEGORY ? (
+                  <>
+                    {sortBy((design: T) => design.name)(
+                      Object.values(root.descendants),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     ).map((design) =>
                       buildRecipeElement(
                         design,
@@ -319,8 +350,13 @@ export const DesignBrowser = <T extends Design = Design>(
             {!!busy && (
               <Dimmer
                 style={{
+<<<<<<< HEAD
                   fontSize: '2em',
                   textAlign: 'center',
+=======
+                  'font-size': '2em',
+                  'text-align': 'center',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 }}
               >
                 <Icon name="cog" spin />
@@ -383,9 +419,14 @@ const DesignBrowserTab = <T extends Design = Design>(
         Object.entries(category.subcategories).length > 0 &&
         selectedCategory === category.title && (
           <div className="FabricatorTabs">
+<<<<<<< HEAD
             {sortBy(
               Object.values(category.subcategories),
               (category: Category) => category.title,
+=======
+            {sortBy((category: Category) => category.title)(
+              Object.values(category.subcategories),
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             ).map((subcategory) => (
               <DesignBrowserTab
                 key={subcategory.title}
@@ -442,7 +483,11 @@ type CategoryViewProps<T extends Design = Design> = {
      * A callback to print the design.
      */
     onPrintDesign: (design: T, amount: number) => void,
+<<<<<<< HEAD
   ) => ReactNode;
+=======
+  ) => InfernoNode;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   /**
    * If provided, renders a node into each category in the output.
@@ -495,8 +540,12 @@ const CategoryView = <T extends Design = Design>(
   return (
     <Section
       title={category.title}
+<<<<<<< HEAD
       key={category.anchorKey}
       container_id={category.anchorKey}
+=======
+      id={category.anchorKey}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       buttons={categoryButtons && categoryButtons(category)}
     >
       {body}

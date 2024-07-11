@@ -1,7 +1,12 @@
 import { Box, Button, Flex } from '../../components';
 import {
+<<<<<<< HEAD
   DATATYPE_DISPLAY_HANDLERS,
   FUNDAMENTAL_DATA_TYPES,
+=======
+  FUNDAMENTAL_DATA_TYPES,
+  DATATYPE_DISPLAY_HANDLERS,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from './FundamentalTypes';
 
 export const DisplayName = (props) => {

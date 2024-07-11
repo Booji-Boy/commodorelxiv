@@ -55,6 +55,16 @@
 				this["desc"] = initial(joinable_mob.desc)
 		if(this["amount_left"] > 0)
 			data["spawners"] += list(this)
+	for(var/mob_type in GLOB.joinable_mobs)
+		var/list/this = list()
+		this["name"] = mob_type
+		this["amount_left"] = 0
+		for(var/mob/joinable_mob as anything in GLOB.joinable_mobs[mob_type])
+			this["amount_left"] += 1
+			if(!this["desc"])
+				this["desc"] = initial(joinable_mob.desc)
+		if(this["amount_left"] > 0)
+			data["spawners"] += list(this)
 	return data
 
 /datum/spawners_menu/ui_act(action, params, datum/tgui/ui)

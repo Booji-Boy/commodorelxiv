@@ -2,7 +2,7 @@
 	. = ..()
 	update_turf_movespeed(loc)
 	if(HAS_TRAIT(src, TRAIT_NEGATES_GRAVITY))
-		if(!isgroundlessturf(loc))
+		if(!isgroundlessturf(loc) || (/obj/structure/lattice in loc.contents))
 			ADD_TRAIT(src, TRAIT_IGNORING_GRAVITY, IGNORING_GRAVITY_NEGATION)
 		else
 			REMOVE_TRAIT(src, TRAIT_IGNORING_GRAVITY, IGNORING_GRAVITY_NEGATION)
@@ -68,12 +68,29 @@
 		return TRUE
 	return !mover.density || body_position == LYING_DOWN
 
+<<<<<<< HEAD
+=======
+/mob/living/set_move_intent()
+	. = ..()
+	update_move_intent_slowdown()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/update_config_movespeed()
 	update_move_intent_slowdown()
 	return ..()
 
 /mob/living/proc/update_move_intent_slowdown()
+<<<<<<< HEAD
 	add_movespeed_modifier((move_intent == MOVE_INTENT_WALK)? /datum/movespeed_modifier/config_walk_run/walk : /datum/movespeed_modifier/config_walk_run/run)
+=======
+	switch(m_intent)
+		if(MOVE_INTENT_WALK)
+			add_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/walk)
+		if(MOVE_INTENT_RUN)
+			add_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/run)
+		if(MOVE_INTENT_SPRINT)
+			add_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/sprint)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/proc/update_turf_movespeed(turf/open/turf)
 	if(isopenturf(turf) && !HAS_TRAIT(turf, TRAIT_TURF_IGNORE_SLOWDOWN))

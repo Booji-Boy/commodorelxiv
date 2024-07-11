@@ -83,7 +83,11 @@ const RangeDisplay = (props) => {
         value={range}
         minValue={0}
         maxValue={5}
+<<<<<<< HEAD
         onDrag={(value) =>
+=======
+        onDrag={(e, value) =>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           act('set_range', {
             new_range: value,
           })
@@ -98,11 +102,19 @@ const EyeColorDisplay = (props) => {
   const { eyeColor } = data;
   return (
     <>
+<<<<<<< HEAD
       <LabeledList.Item label="Match Color">
         <Button.Checkbox
           checked={eyeColor.mode}
           onClick={() => act('toggle_eye_color')}
           tooltip="Toggles whether eyecolor matches the color of the light."
+=======
+      <LabeledList.Item label="Match Colors">
+        <Button.Checkbox
+          checked={eyeColor.mode}
+          onClick={() => act('toggle_eye_color')}
+          tooltip="Toggle the eye color mode."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         />
       </LabeledList.Item>
       {!eyeColor.mode && (
@@ -119,7 +131,11 @@ const EyeColorDisplay = (props) => {
               onClick={() =>
                 act('random_color', { to_update: ToUpdate.LeftEye })
               }
+<<<<<<< HEAD
               tooltip="Randomizes the eye color."
+=======
+              tooltip="Randomizes the light color."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             />
             <Input
               value={eyeColor.left}
@@ -147,7 +163,11 @@ const EyeColorDisplay = (props) => {
               onClick={() =>
                 act('random_color', { to_update: ToUpdate.RightEye })
               }
+<<<<<<< HEAD
               tooltip="Randomizes the eye color."
+=======
+              tooltip="Randomizes the light color."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             />
             <Input
               value={eyeColor.right}

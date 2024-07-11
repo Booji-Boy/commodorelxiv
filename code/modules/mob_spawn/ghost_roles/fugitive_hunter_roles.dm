@@ -7,6 +7,13 @@
 	show_flavor = FALSE
 	var/back_story = "error"
 
+<<<<<<< HEAD
+=======
+/obj/effect/mob_spawn/ghost_role/human/fugitive/Initialize(mapload)
+	. = ..()
+	notify_ghosts("Hunters are waking up looking for refugees!", source = src, action = NOTIFY_PLAY, flashwindow = FALSE, ignore_key = POLL_IGNORE_FUGITIVE)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/mob_spawn/ghost_role/human/fugitive/special(mob/living/carbon/human/spawned_human)
 	. = ..()
 	var/datum/antagonist/fugitive_hunter/fughunter = new

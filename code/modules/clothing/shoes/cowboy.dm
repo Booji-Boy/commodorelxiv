@@ -5,6 +5,7 @@
 	armor_type = /datum/armor/shoes_cowboy
 	custom_price = PAYCHECK_CREW
 	can_be_tied = FALSE
+<<<<<<< HEAD
 	interaction_flags_mouse_drop = NEED_HANDS | NEED_DEXTERITY
 
 	var/max_occupants = 4
@@ -12,6 +13,9 @@
 	var/has_spurs = FALSE
 	/// The jingle jangle jingle of our spurs
 	var/list/spur_sound = list('sound/effects/footstep/spurs1.ogg'=1,'sound/effects/footstep/spurs2.ogg'=1,'sound/effects/footstep/spurs3.ogg'=1)
+=======
+	var/max_occupants = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/shoes_cowboy
 	bio = 90
@@ -24,9 +28,12 @@
 	if(prob(2))
 		//There's a snake in my boot
 		new /mob/living/basic/snake(src)
+<<<<<<< HEAD
 
 	if(has_spurs)
 		LoadComponent(/datum/component/squeak, spur_sound, 50, falloff_exponent = 20)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /obj/item/clothing/shoes/cowboy/equipped(mob/living/carbon/user, slot)

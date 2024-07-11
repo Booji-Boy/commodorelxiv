@@ -269,9 +269,15 @@
 	bare_wound_bonus = 10
 	item_flags = NO_BLOOD_ON_ITEM
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1.5
 	light_power = 1.3
 	light_color = "#FA8282"
+=======
+	light_outer_range = 1.5
+	light_power = 0.75
+	light_color = COLOR_SOFT_RED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_on = FALSE
 	dart_insert_projectile_icon_state = "overlay_edagger"
 	/// The real name of our item when extended.
@@ -449,7 +455,10 @@
 	desc = "A pen with an extendable screwdriver tip. This one has a yellow cap."
 	icon_state = "pendriver"
 	toolspeed = 1.2  // gotta have some downside
+<<<<<<< HEAD
 	dart_insert_projectile_icon_state = "overlay_pendriver"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/pen/screwdriver/get_all_tool_behaviours()
 	return list(TOOL_SCREWDRIVER)

@@ -118,7 +118,11 @@
 	ert_template = /datum/map_template/shuttle/ert/bounty
 
 /datum/ert/militia
+<<<<<<< HEAD
 	roles = list(/datum/antagonist/ert/militia)
+=======
+	roles = list(/datum/antagonist/ert/militia, /datum/antagonist/ert/militia/general)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	leader_role = /datum/antagonist/ert/militia/general
 	teamsize = 4
 	opendoors = FALSE

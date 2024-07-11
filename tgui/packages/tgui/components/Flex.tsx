@@ -82,11 +82,19 @@ export const computeFlexItemProps = (props: FlexItemProps) => {
   return computeBoxProps({
     style: {
       ...style,
+<<<<<<< HEAD
       flexGrow: grow !== undefined && Number(grow),
       flexShrink: shrink !== undefined && Number(shrink),
       flexBasis: unit(computedBasis),
       order: order,
       alignSelf: align,
+=======
+      'flex-grow': grow !== undefined && Number(grow),
+      'flex-shrink': shrink !== undefined && Number(shrink),
+      'flex-basis': unit(computedBasis),
+      order: order,
+      'align-self': align,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     },
     ...rest,
   });
@@ -97,6 +105,7 @@ const FlexItem = (props) => {
   return (
     <div
       className={classes([className, computeFlexItemClassName(props)])}
+      ref={props.innerRef}
       {...computeFlexItemProps(rest)}
     />
   );

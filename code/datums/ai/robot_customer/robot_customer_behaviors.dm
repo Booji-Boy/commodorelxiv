@@ -2,6 +2,10 @@
 	action_cooldown = 8 SECONDS
 
 /datum/ai_behavior/find_seat/perform(seconds_per_tick, datum/ai_controller/controller)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/robot_customer/customer_pawn = controller.pawn
 	var/datum/customer_data/customer_data = controller.blackboard[BB_CUSTOMER_CUSTOMERINFO]
 	var/datum/venue/attending_venue = controller.blackboard[BB_CUSTOMER_ATTENDING_VENUE]
@@ -41,6 +45,10 @@
 	required_distance = 0
 
 /datum/ai_behavior/order_food/perform(seconds_per_tick, datum/ai_controller/controller)
+<<<<<<< HEAD
+=======
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/robot_customer/customer_pawn = controller.pawn
 	var/datum/customer_data/customer_data = controller.blackboard[BB_CUSTOMER_CUSTOMERINFO]
 	var/obj/structure/holosign/robot_seat/seat_marker = controller.blackboard[BB_CUSTOMER_MY_SEAT]
@@ -52,7 +60,12 @@
 	var/datum/venue/attending_venue = controller.blackboard[BB_CUSTOMER_ATTENDING_VENUE]
 
 	controller.set_blackboard_key(BB_CUSTOMER_CURRENT_ORDER, attending_venue.order_food(customer_pawn, customer_data))
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/wait_for_food
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_MOVE_AND_PERFORM

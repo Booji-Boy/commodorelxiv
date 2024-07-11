@@ -10,13 +10,13 @@
 	endurance = 25
 	maturation = 15
 	production = 1
-	yield = 2
+	yield = 20
 	potency = 50
-	instability = 15
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing.dmi'
 	icon_dead = "cotton-dead"
-	mutatelist = list(/obj/item/seeds/cotton/durathread)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/durathread)
+	harvest_age = 100
 
 /obj/item/grown/cotton
 	seed = /obj/item/seeds/cotton
@@ -56,12 +56,17 @@
 	endurance = 50
 	maturation = 15
 	production = 1
-	yield = 2
+	yield = 20
 	potency = 50
+<<<<<<< HEAD
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing.dmi'
+=======
+	//growthstages = 3
+	//growing_icon = 'icons/obj/hydroponics/growing.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_dead = "cotton-dead"
-	mutatelist = null
+	possible_mutations = list()
 
 /obj/item/grown/cotton/durathread
 	seed = /obj/item/seeds/cotton/durathread

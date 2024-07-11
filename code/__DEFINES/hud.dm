@@ -11,9 +11,9 @@
 
 // Consider these images/atoms as part of the UI/HUD (apart of the appearance_flags)
 /// Used for progress bars and chat messages
-#define APPEARANCE_UI_IGNORE_ALPHA (RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|RESET_ALPHA|PIXEL_SCALE)
+#define APPEARANCE_UI_IGNORE_ALPHA (RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|RESET_ALPHA|PIXEL_SCALE|TILE_BOUND) // monkestation edit
 /// Used for HUD objects
-#define APPEARANCE_UI (RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|PIXEL_SCALE)
+#define APPEARANCE_UI (RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|PIXEL_SCALE|TILE_BOUND) // monkestation edit
 
 /*
 	These defines specificy screen locations.  For more information, see the byond documentation on the screen_loc var.
@@ -34,10 +34,12 @@
 	Therefore, the top right corner (except during admin shenanigans) is at "15,15"
 */
 
-/proc/ui_hand_position(i) //values based on old hand ui positions (CENTER:-/+16,SOUTH:5)
-	var/x_off = i % 2 ? 0 : -1
-	var/y_off = round((i-1) / 2)
-	return"CENTER+[x_off]:16,SOUTH+[y_off]:5"
+//Monkestation EDIT: START - CYBERNETICS
+/proc/ui_hand_position(i,y_offset = 0,y_pixel_offset = 0) //values based on old hand ui positions (CENTER:-/+16,SOUTH:5)
+	var/x_off = -(!(i % 2))
+	var/y_off = round((i-1) / 2) + y_offset
+	return"CENTER+[x_off]:16,SOUTH+[y_off]:[5 + y_pixel_offset]"
+//Monkestation EDIT: END - CYBERNETICS
 
 /proc/ui_equip_position(mob/M)
 	var/y_off = round((M.held_items.len-1) / 2) //values based on old equip ui position (CENTER: +/-16,SOUTH+1:5)
@@ -194,6 +196,10 @@
 #define ui_ghost_minigames "SOUTH: 6, CENTER+2:24"
 #define ui_ghost_language_menu "SOUTH: 22, CENTER+3:8"
 #define ui_ghost_floor_menu "SOUTH: 6, CENTER+3:8"
+
+//Team finder
+
+#define ui_team_finder "CENTER,CENTER"
 
 //Blobbernauts
 #define ui_blobbernaut_overmind_health "EAST-1:28,CENTER+0:19"

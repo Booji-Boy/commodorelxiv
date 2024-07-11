@@ -56,12 +56,21 @@
 
 /mob/living/basic/seedling/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/static/list/innate_actions = list(
 		/datum/action/cooldown/mob_cooldown/projectile_attack/rapid_fire/seedling = BB_RAPIDSEEDS_ABILITY,
 		/datum/action/cooldown/mob_cooldown/solarbeam = BB_SOLARBEAM_ABILITY,
 	)
 
 	grant_actions_by_list(innate_actions)
+=======
+	var/datum/action/cooldown/mob_cooldown/projectile_attack/rapid_fire/seedling/seed_attack = new(src)
+	seed_attack.Grant(src)
+	ai_controller.set_blackboard_key(BB_RAPIDSEEDS_ABILITY, seed_attack)
+	var/datum/action/cooldown/mob_cooldown/solarbeam/beam_attack = new(src)
+	beam_attack.Grant(src)
+	ai_controller.set_blackboard_key(BB_SOLARBEAM_ABILITY, beam_attack)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/petal_color = pick(possible_colors)
 
@@ -86,7 +95,11 @@
 /mob/living/basic/seedling/proc/pre_attack(mob/living/puncher, atom/target)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(istype(target, /obj/machinery/hydroponics))
+=======
+	if(target.GetComponent(/datum/component/plant_growing))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		treat_hydro_tray(target)
 		return COMPONENT_HOSTILE_NO_ATTACK
 
@@ -99,6 +112,7 @@
 
 
 ///seedlings can water trays, remove weeds, or remove dead plants
+<<<<<<< HEAD
 /mob/living/basic/seedling/proc/treat_hydro_tray(obj/machinery/hydroponics/hydro)
 
 	if(hydro.plant_status == HYDROTRAY_PLANT_DEAD)
@@ -110,13 +124,39 @@
 		balloon_alert(src, "weeds uprooted")
 		hydro.set_weedlevel(0)
 		return
+=======
+/mob/living/basic/seedling/proc/treat_hydro_tray(atom/movable/hydro)
+	var/datum/component/plant_growing/growing = hydro.GetComponent(/datum/component/plant_growing)
+	if(!growing)
+		return
+
+	for(var/item as anything in growing.managed_seeds)
+		var/obj/item/seeds/seed = growing.managed_seeds[item]
+		if(!seed)
+			continue
+		var/datum/component/growth_information/info = seed.GetComponent(/datum/component/growth_information)
+
+		if(info.plant_state == HYDROTRAY_PLANT_DEAD)
+			balloon_alert(src, "dead plant removed")
+			SEND_SIGNAL(hydro, COMSIG_REMOVE_PLANT, item)
+			return
+
+		if(growing.weed_level > 0)
+			balloon_alert(src, "weeds uprooted")
+			SEND_SIGNAL(hydro, COMSIG_PLANT_ADJUST_WEED, -10)
+			return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/can_reagents = held_can?.reagents.reagent_list
 
 	if(!length(can_reagents))
 		return
 
+<<<<<<< HEAD
 	if((locate(/datum/reagent/water) in can_reagents) && (hydro.waterlevel < hydro.maxwater))
+=======
+	if((locate(/datum/reagent/water) in can_reagents) && (growing.water_precent < 100))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		INVOKE_ASYNC(held_can, TYPE_PROC_REF(/obj/item, melee_attack_chain), src, hydro)
 		return
 
@@ -324,12 +364,26 @@
 /datum/action/cooldown/mob_cooldown/solarbeam/proc/launch_beam(mob/living/firer, turf/target_turf)
 	for(var/atom/target_atom as anything in target_turf)
 
+<<<<<<< HEAD
 		if(istype(target_atom, /obj/machinery/hydroponics))
 			var/obj/machinery/hydroponics/hydro = target_atom
 			hydro.adjust_plant_health(10)
 			new /obj/effect/temp_visual/heal(target_turf, COLOR_HEALING_CYAN)
 
 		if(!isliving(target_atom))
+=======
+		if(target_atom.GetComponent(/datum/component/plant_growing))
+			var/datum/component/plant_growing/growing = target_atom.GetComponent(/datum/component/plant_growing)
+			for(var/item as anything in growing.managed_seeds)
+				var/obj/item/seeds/seed = growing.managed_seeds[item]
+				if(!seed)
+					continue
+				SEND_SIGNAL(seed, COMSIG_ADJUST_PLANT_HEALTH, 10)
+
+			new /obj/effect/temp_visual/heal(target_turf, COLOR_HEALING_CYAN)
+
+		if(!isliving(target_atom) || istype(target_atom, /mob/living/basic/pet/potty))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			continue
 
 		var/mob/living/living_target = target_atom

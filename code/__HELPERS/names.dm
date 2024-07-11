@@ -13,10 +13,24 @@
 			language_weights[lang_type] = 1
 		language_weights[/datum/language/common] = 20
 
+<<<<<<< HEAD
 	var/datum/language/picked = GLOB.language_datum_instances[pick_weight(language_weights)]
 	if(unique)
 		return picked.get_random_unique_name(gender)
 	return picked.get_random_name(gender)
+=======
+/proc/simian_name(gender)
+	if(gender == MALE)
+		return "[pick(GLOB.simian_names_male)] [pick(GLOB.simian_last_names)]"
+	else
+		return "[pick(GLOB.simian_names_female)] [pick(GLOB.simian_last_names)]"
+
+/proc/ethereal_name()
+	var/tempname = "[pick(GLOB.ethereal_names)] [random_capital_letter()]"
+	if(prob(65))
+		tempname += random_capital_letter()
+	return tempname
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Generate a random name based off of a species

@@ -30,6 +30,13 @@
 #define IGNORE_STASIS (1<<1)
 /// If the incapacitated status effect will ignore a mob being agressively grabbed
 #define IGNORE_GRAB (1<<2)
+/// If the incapacited status effect will ignore a mob in cirt
+#define IGNORE_CRIT (1<<3)
+
+/// Maxamounts of fire stacks a mob can get
+#define MAX_FIRE_STACKS 20
+/// If a mob has a higher threshold than this, the icon shown will be increased to the big fire icon.
+#define MOB_BIG_FIRE_STACK_THRESHOLD 3
 
 /// Maxamounts of fire stacks a mob can get
 #define MAX_FIRE_STACKS 20
@@ -43,7 +50,10 @@
 #define STASIS_SHAPECHANGE_EFFECT "stasis_shapechange"
 #define STASIS_ADMIN "stasis_admin"
 #define STASIS_LEGION_EATEN "stasis_eaten"
+<<<<<<< HEAD
 #define STASIS_SLIME_BZ "stasis_slime_bz"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define STASIS_NETPOD_EFFECT "stasis_netpod"
 
@@ -168,6 +178,33 @@
 #define set_temp_blindness(duration) set_timed_status_effect(duration, /datum/status_effect/temporary_blindness)
 #define set_temp_blindness_if_lower(duration) set_timed_status_effect(duration, /datum/status_effect/temporary_blindness, TRUE)
 
+<<<<<<< HEAD
+=======
+
+///makes you run foward and bounce of walls
+#define SUGAR_RUSH /datum/status_effect/ranching/sugar_rush
+///the less powerful version of SUGAR_RUSH used by the chicken randomly
+#define HEN_RUSH /datum/status_effect/ranching/hen_rush
+///makes you blue and you leave an ice trail behind you
+#define SNOWY_EGG /datum/status_effect/ranching/snowy
+///lets you hear over the pigeon channel without an egg
+#define PIGEON /datum/status_effect/ranching/pigeon
+///fake death into a full heal
+#define DREAM_STATE /datum/status_effect/ranching/dream_state
+///gives you magic missle spell for the duration
+#define WIZNERD_EGG /datum/status_effect/ranching/wiznerd
+///makes you more resistant for the duration
+#define ARMORED_EGG /datum/status_effect/ranching/sword_chicken
+///gives you a sparkling effect for the duration
+#define GOLD_SPARKLE /datum/status_effect/ranching/gold_egg
+///used by sad clowns to speed towards their target ignoring obstacles
+#define ANGRY_HONK_SPEED /datum/status_effect/ranching/angry_honk
+///gives a petrification spit attack for the duration
+#define PETRIFICATION_SPIT /datum/status_effect/ranching/cockatrice_eaten
+///makes you a mime and gives you the wall ability for the duration
+#define MIME_EGG /datum/status_effect/ranching/mime
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define adjust_static_vision(duration) adjust_timed_status_effect(duration, /datum/status_effect/static_vision)
 #define adjust_static_vision_up_to(duration, up_to) adjust_timed_status_effect(duration, /datum/status_effect/static_vision, up_to)
 #define set_static_vision(duration) set_timed_status_effect(duration, /datum/status_effect/static_vision)

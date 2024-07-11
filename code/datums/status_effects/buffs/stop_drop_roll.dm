@@ -24,9 +24,12 @@
 	// Start with one weaker roll
 	owner.spin(spintime = actual_interval, speed = actual_interval / 4)
 	owner.adjust_fire_stacks(-0.25)
+<<<<<<< HEAD
 
 	for (var/obj/item/dropped in owner.loc)
 		dropped.extinguish() // Effectively extinguish your items by rolling on them
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /datum/status_effect/stop_drop_roll/on_remove()

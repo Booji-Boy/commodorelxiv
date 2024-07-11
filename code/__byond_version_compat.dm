@@ -8,12 +8,20 @@
 #error Your version of BYOND is too out-of-date to compile this project. Go to https://secure.byond.com/download and update.
 #error You need version 515.1627 or higher
 #endif
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Keep savefile compatibilty at minimum supported level
 /savefile/byond_version = MIN_COMPILER_VERSION
 
+<<<<<<< HEAD
 // So we want to have compile time guarantees these methods exist on local type
 // We use wrappers for this in case some part of the api ever changes, and to make their function more clear
+=======
+// So we want to have compile time guarantees these methods exist on local type, unfortunately 515 killed the .proc/procname and .verb/verbname syntax so we have to use nameof()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // For the record: GLOBAL_VERB_REF would be useless as verbs can't be global.
 
 /// Call by name proc references, checks if the proc exists on either this type or as a global proc.

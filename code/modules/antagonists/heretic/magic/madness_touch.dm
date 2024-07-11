@@ -1,7 +1,11 @@
 // Currently unused
 /datum/action/cooldown/spell/touch/mad_touch
 	name = "Touch of Madness"
+<<<<<<< HEAD
 	desc = "A touch spell that drains your enemy's sanity and knocks them down."
+=======
+	desc = "A touch spell that drains your enemy's sanity and knocks them down"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'

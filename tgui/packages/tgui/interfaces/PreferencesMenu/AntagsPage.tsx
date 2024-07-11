@@ -1,8 +1,12 @@
 import { binaryInsertWith } from 'common/collections';
 import { classes } from 'common/react';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../../backend';
+=======
+import { useBackend, useLocalState } from '../../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -49,7 +53,12 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
   const { act, data } = useBackend<PreferencesMenuData>();
   const className = 'PreferencesMenu__Antags__antagSelection';
 
+<<<<<<< HEAD
   const [predictedState, setPredictedState] = useState(
+=======
+  const [predictedState, setPredictedState] = useLocalState(
+    'AntagSelection_predictedState',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     new Set(data.selected_antags),
   );
 
@@ -125,10 +134,17 @@ const AntagSelection = (props: { antagonists: Antagonist[]; name: string }) => {
               <Stack align="center" vertical>
                 <Stack.Item
                   style={{
+<<<<<<< HEAD
                     fontWeight: 'bold',
                     marginTop: 'auto',
                     maxWidth: '100px',
                     textAlign: 'center',
+=======
+                    'font-weight': 'bold',
+                    'margin-top': 'auto',
+                    'max-width': '100px',
+                    'text-align': 'center',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }}
                 >
                   {antagonist.name}

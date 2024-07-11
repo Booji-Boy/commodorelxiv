@@ -321,11 +321,17 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/plating/airless,
 /area/shuttle/escape)
+<<<<<<< HEAD
 "Ms" = (
 /obj/structure/railing/corner{
 	dir = 1
 	},
 /turf/open/floor/light/colour_cycle/dancefloor_a,
+=======
+"KO" = (
+/mob/living/basic/drone/snowflake/bardrone,
+/turf/open/floor/wood,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/shuttle/escape)
 "Ow" = (
 /obj/structure/railing{
@@ -355,6 +361,7 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/shuttle/escape)
+<<<<<<< HEAD
 "Qv" = (
 /obj/structure/table/reinforced,
 /obj/item/pizzabox/meat{
@@ -366,6 +373,8 @@
 	},
 /turf/open/floor/wood/parquet,
 /area/shuttle/escape)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "QO" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -575,8 +584,13 @@ HS
 ys
 Cg
 ce
+<<<<<<< HEAD
 fX
 Qv
+=======
+ns
+KO
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 JR
 KJ
 od
@@ -626,6 +640,11 @@ ce
 SR
 Zf
 uN
+<<<<<<< HEAD
+=======
+KO
+Ow
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 KJ
 od
 "}

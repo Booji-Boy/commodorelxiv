@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 #define GRADE_D "D"
 #define GRADE_C "C"
 #define GRADE_B "B"
 #define GRADE_A "A"
 #define GRADE_S "S"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Handles calculating rewards based on number of players, parts, threats, etc
 /obj/machinery/quantum_server/proc/calculate_rewards()
 	var/rewards_base = 0.8
@@ -22,7 +25,10 @@
 
 /// Handles spawning the (new) crate and deleting the former
 /obj/machinery/quantum_server/proc/generate_loot(obj/cache, obj/machinery/byteforge/chosen_forge)
+<<<<<<< HEAD
 	SSblackbox.record_feedback("tally", "bitrunning_domain_primary_completed", 1, generated_domain.key)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/mob/person in cache.contents)
 		SEND_SIGNAL(person, COMSIG_BITRUNNER_CACHE_SEVER)
 
@@ -32,6 +38,7 @@
 
 	points += generated_domain.reward_points
 	playsound(src, 'sound/machines/terminal_success.ogg', 30, vary = TRUE)
+<<<<<<< HEAD
 
 	var/bonus = calculate_rewards()
 
@@ -40,6 +47,14 @@
 
 	var/obj/item/paper/certificate = new()
 	certificate.add_raw_text(get_completion_certificate(time_difference, grade))
+=======
+	radio.talk_into(src, "A prisoner has finished bitrunning, make sure to pick up the ore crate.", RADIO_CHANNEL_SECURITY) //MONKESTATION ADDITION: security forgets about crates so we make sure to remind them each time
+
+	var/bonus = calculate_rewards()
+
+	var/obj/item/paper/certificate = new()
+	certificate.add_raw_text(get_completion_certificate())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	certificate.name = "certificate of domain completion"
 	certificate.update_appearance()
 
@@ -47,6 +62,7 @@
 	reward_cache.manifest = certificate
 	reward_cache.update_appearance()
 
+<<<<<<< HEAD
 	if(can_generate_tech_disk(grade))
 		SSblackbox.record_feedback("tally", "bitrunning_bepis_rewarded", 1, generated_domain.key)
 		new /obj/item/disk/design_disk/bepis/remove_tech(reward_cache)
@@ -67,6 +83,13 @@
 
 /// Returns the markdown text containing domain completion information
 /obj/machinery/quantum_server/proc/get_completion_certificate(time_difference, grade)
+=======
+	chosen_forge.start_to_spawn(reward_cache)
+	return TRUE
+
+/// Returns the markdown text containing domain completion information
+/obj/machinery/quantum_server/proc/get_completion_certificate()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/base_points = generated_domain.reward_points
 	if(domain_randomized)
 		base_points -= 1
@@ -75,9 +98,17 @@
 
 	var/domain_threats = length(spawned_threat_refs)
 
+<<<<<<< HEAD
 	var/completion_time = "### Completion Time: [DisplayTimeText(time_difference)]\n"
 
 	var/completion_grade = "\n---\n\n# Rating: [grade]"
+=======
+	var/time_difference = world.time - generated_domain.start_time
+
+	var/completion_time = "### Completion Time: [DisplayTimeText(time_difference)]\n"
+
+	var/grade = "\n---\n\n# Rating: [grade_completion(time_difference)]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/text = "# Certificate of Domain Completion\n\n---\n\n"
 
@@ -89,7 +120,11 @@
 
 	if(bonuses <= 1)
 		text += completion_time
+<<<<<<< HEAD
 		text += completion_grade
+=======
+		text += grade
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return text
 
 	text += "### Bonuses\n"
@@ -108,6 +143,7 @@
 		text += "- **Components:** + [servo_rating]\n"
 
 	text += completion_time
+<<<<<<< HEAD
 	text += completion_grade
 
 	return text
@@ -126,6 +162,12 @@
 
 	return  generated_domain.difficulty >= BITRUNNER_DIFFICULTY_MEDIUM && (grade in passing_grades)
 
+=======
+	text += grade
+
+	return text
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Grades the player's run based on several factors
 /obj/machinery/quantum_server/proc/grade_completion(completion_time)
 	var/score = length(spawned_threat_refs) * 5
@@ -147,6 +189,7 @@
 
 	score += time_score * base
 
+<<<<<<< HEAD
 	// Increases the chance for glitches to spawn based on how well they're doing
 	threat += score
 
@@ -167,3 +210,16 @@
 #undef GRADE_B
 #undef GRADE_A
 #undef GRADE_S
+=======
+	switch(score)
+		if(1 to 4)
+			return "D"
+		if(5 to 7)
+			return "C"
+		if(8 to 10)
+			return "B"
+		if(11 to 13)
+			return "A"
+		else
+			return "S"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

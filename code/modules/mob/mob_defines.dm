@@ -28,8 +28,6 @@
 	/// HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 	var/client/canon_client
 
-	var/shift_to_open_context_menu = TRUE
-
 	/// Percentage of how much rgb to max the lighting plane at
 	/// This lets us brighten it without washing out color
 	/// Scale from 0-100, reset off update_sight()
@@ -134,6 +132,15 @@
 	/// What job does this mob have
 	var/job = null//Living
 
+<<<<<<< HEAD
+=======
+	/// Can this mob enter shuttles
+	var/move_on_shuttle = 1
+
+	///A weakref to the last mob/living/carbon to push/drag/grab this mob (exclusively used by slimes friend recognition)
+	var/datum/weakref/LAssailant = null
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// bitflags defining which status effects can be inflicted (replaces canknockdown, canstun, etc)
 	var/status_flags = CANSTUN|CANKNOCKDOWN|CANUNCONSCIOUS|CANPUSH
 

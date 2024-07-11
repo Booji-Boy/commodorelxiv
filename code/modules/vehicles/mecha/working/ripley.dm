@@ -5,7 +5,11 @@
 	base_icon_state = "ripley"
 	silicon_icon_state = "ripley-empty"
 	movedelay = 1.5 //Move speed, lower is faster.
+<<<<<<< HEAD
 	overclock_coeff = 1.25
+=======
+	encumbrance_gap = 1.6
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	max_temperature = 20000
 	max_integrity = 200
 	lights_power = 7
@@ -21,7 +25,11 @@
 	wreckage = /obj/structure/mecha_wreckage/ripley
 	mech_type = EXOSUIT_MODULE_RIPLEY
 	possible_int_damage = MECHA_INT_FIRE|MECHA_INT_CONTROL_LOST|MECHA_INT_SHORT_CIRCUIT
+<<<<<<< HEAD
 	accesses = list(ACCESS_MECH_ENGINE, ACCESS_MECH_SCIENCE, ACCESS_MECH_MINING)
+=======
+	enclosed = FALSE //Normal ripley has an open cockpit design
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	enter_delay = 10 //can enter in a quarter of the time of other mechs
 	exit_delay = 10
 	/// Custom Ripley step and turning sounds (from TGMC)
@@ -73,6 +81,7 @@
 	fast_pressure_step_in = 2 //step_in while in low pressure conditions
 	slow_pressure_step_in = 4 //step_in while in normal pressure conditions
 	movedelay = 4
+	encumbrance_gap = 2.4
 	max_temperature = 30000
 	max_integrity = 250
 	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | MMI_COMPATIBLE
@@ -200,9 +209,10 @@
 	name = "\improper DEATH-RIPLEY"
 	icon_state = "deathripley"
 	base_icon_state = "deathripley"
-	fast_pressure_step_in = 2 //step_in while in low pressure conditions
+	fast_pressure_step_in = 1.5 //step_in while in low pressure conditions
 	slow_pressure_step_in = 3 //step_in while in normal pressure conditions
-	movedelay = 4
+	movedelay = 3
+	encumbrance_gap = 3
 	lights_power = 7
 	wreckage = /obj/structure/mecha_wreckage/ripley/deathripley
 	step_energy_drain = 0

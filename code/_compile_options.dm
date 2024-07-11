@@ -48,7 +48,7 @@
 // Displays static object lighting updates
 // Also enables some debug vars on sslighting that can be used to modify
 // How extensively we prune lighting corners to update
-#define VISUALIZE_LIGHT_UPDATES
+// #define VISUALIZE_LIGHT_UPDATES
 
 #define VISUALIZE_ACTIVE_TURFS //Highlights atmos active turfs in green
 #define TRACK_MAX_SHARE //Allows max share tracking, for use in the atmos debugging ui
@@ -166,6 +166,7 @@
 		#warn In order to build, run BUILD.cmd in the root directory.
 		#warn Consider switching to VSCode editor instead, where you can press Ctrl+Shift+B to build.
 	#endif
+<<<<<<< HEAD
 #endif
 
 /// Runs the game in "map test mode"
@@ -175,4 +176,6 @@
 
 #ifdef MAP_TEST
 #warn Compiling in MAP_TEST mode. Certain game mechanics will be disabled.
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #endif

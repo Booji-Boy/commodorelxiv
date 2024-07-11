@@ -148,7 +148,46 @@
 	name = "chameleon security HUD"
 	desc = "A stolen security HUD integrated with Syndicate chameleon technology. Provides flash protection."
 	flash_protect = FLASH_PROTECTION_FLASH
+<<<<<<< HEAD
 	actions_types = list(/datum/action/item_action/chameleon/change/glasses/no_preset)
+=======
+
+	// Yes this code is the same as normal chameleon glasses, but we don't
+	// have multiple inheritance, okay?
+	var/datum/action/item_action/chameleon/change/chameleon_action
+
+/obj/item/clothing/glasses/hud/security/chameleon/Initialize(mapload)
+	. = ..()
+	chameleon_action = new(src)
+	chameleon_action.chameleon_type = /obj/item/clothing/glasses
+	chameleon_action.chameleon_name = "Glasses"
+	chameleon_action.chameleon_blacklist = typecacheof(/obj/item/clothing/glasses/changeling, only_root_path = TRUE)
+	chameleon_action.initialize_disguises()
+	add_item_action(chameleon_action)
+
+/obj/item/clothing/glasses/hud/security/chameleon/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
+	chameleon_action.emp_randomise()
+
+// MONKESTATION ADDITION START
+/obj/item/clothing/glasses/hud/security/chameleon/attackby(obj/item/W, mob/user, params)
+	if(W.tool_behaviour != TOOL_MULTITOOL)
+		return ..()
+
+	if(chameleon_action.hidden)
+		chameleon_action.hidden = FALSE
+		actions += chameleon_action
+		chameleon_action.Grant(user)
+		log_game("[key_name(user)] has removed the disguise lock on the chameleon security HUD ([name]) with [W]")
+	else
+		chameleon_action.hidden = TRUE
+		actions -= chameleon_action
+		chameleon_action.Remove(user)
+		log_game("[key_name(user)] has locked the disguise of the chameleon security HUD ([name]) with [W]")
+// MONKESTATION ADDITION END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch
 	name = "eyepatch HUD"
@@ -277,7 +316,7 @@
 
 /obj/item/clothing/glasses/hud/spacecop
 	name = "police aviators"
-	desc = "For thinking you look cool while brutalizing protestors and minorities."
+	desc = "For thinking you look like an action hero."
 	icon_state = "bigsunglasses"
 	flash_protect = FLASH_PROTECTION_FLASH
 	flags_cover = GLASSESCOVERSEYES

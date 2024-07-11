@@ -50,9 +50,13 @@
 	if(living_mob.see_invisible < the_target.invisibility) //Target's invisible to us, forget it
 		return FALSE
 
+<<<<<<< HEAD
 	if(!isturf(living_mob.loc))
 		return FALSE
 	if(isturf(the_target.loc) && living_mob.z != the_target.z) // z check will always fail if target is in a mech or pawn is shapeshifted or jaunting
+=======
+	if(isturf(living_mob.loc) && isturf(the_target.loc) && living_mob.z != the_target.z) // z check will always fail if target is in a mech or pawn is shapeshifted or jaunting
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	if(isliving(the_target)) //Targeting vs living mobs
@@ -128,10 +132,13 @@
 	find_smaller = FALSE
 	inclusive = FALSE
 
+<<<<<<< HEAD
 
 /datum/targeting_strategy/basic/of_size/smaller
 	inclusive = FALSE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Makes the mob only attack their own faction. Useful mostly if their attacks do something helpful (e.g. healing touch).
 /datum/targeting_strategy/basic/same_faction
 

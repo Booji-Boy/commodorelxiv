@@ -59,6 +59,10 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 	has_fov = FALSE
 	unique_death = 'sound/voice/sec_death.ogg'
 	COOLDOWN_DECLARE(hailer_cooldown)
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Decides the phrases available for use; defines used are the last index of a category of available phrases
 	var/aggressiveness = AGGR_BAD_COP
 	///Whether the hailer has been broken due to overuse or not
@@ -86,6 +90,10 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 	visor_flags_inv = 0
 	flags_cover = MASKCOVERSMOUTH | MASKCOVERSEYES | PEPPERPROOF
 	visor_flags_cover = MASKCOVERSMOUTH | MASKCOVERSEYES | PEPPERPROOF
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/mask/gas/sechailer/swat/spacepol
 	name = "spacepol mask"
@@ -129,12 +137,20 @@ GLOBAL_LIST_INIT(hailer_phrases, list(
 /obj/item/clothing/mask/gas/sechailer/attack_self()
 	halt()
 
+<<<<<<< HEAD
 /obj/item/clothing/mask/gas/sechailer/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(safety)
 		safety = FALSE
 		balloon_alert(user, "vocal circuit fried")
 		return TRUE
 	return FALSE
+=======
+/obj/item/clothing/mask/gas/sechailer/emag_act(mob/user)
+	if(safety)
+		safety = FALSE
+		to_chat(user, span_warning("You silently fry [src]'s vocal circuit."))
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
 	set category = "Object"

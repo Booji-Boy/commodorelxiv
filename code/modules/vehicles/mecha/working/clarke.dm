@@ -7,7 +7,11 @@
 	max_temperature = 65000
 	max_integrity = 200
 	movedelay = 1.25
+<<<<<<< HEAD
 	overclock_coeff = 1.25
+=======
+	encumbrance_gap = 1.6
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	lights_power = 7
 	step_energy_drain = 12 //slightly higher energy drain since you movin those wheels FAST
@@ -29,10 +33,14 @@
 	wreckage = /obj/structure/mecha_wreckage/clarke
 	mech_type = EXOSUIT_MODULE_CLARKE
 	enter_delay = 40
+<<<<<<< HEAD
 	mecha_flags = IS_ENCLOSED | HAS_LIGHTS | MMI_COMPATIBLE | OMNIDIRECTIONAL_ATTACKS
 	accesses = list(ACCESS_MECH_ENGINE, ACCESS_MECH_SCIENCE, ACCESS_MECH_MINING)
 	allow_diagonal_movement = FALSE
 	pivot_step = TRUE
+=======
+	mecha_flags = ADDING_ACCESS_POSSIBLE | IS_ENCLOSED | HAS_LIGHTS | MMI_COMPATIBLE | OMNIDIRECTIONAL_ATTACKS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/mecha_clarke
 	melee = 20

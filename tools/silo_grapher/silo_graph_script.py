@@ -11,7 +11,10 @@ import os
 import matplotlib.pyplot as plt
 
 show_json_figures = False  # Set to True to show all JSON-specific figures at the end
+<<<<<<< HEAD
 sheet_amount = 100 # How many units of material are a sheet worth right now?
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 materials = {
     "iron": {"total": 0, "spent": 0, "obtained": 0},
@@ -41,13 +44,20 @@ grand_total = {
     "plastic": {"grand_total": 0, "grand_spent": 0, "grand_obtained": 0},
 }
 
+<<<<<<< HEAD
 log_folder = "tools\silo_grapher\logs"
+=======
+log_folder = "logs"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 total_files = 0
 first_time_value = None
 first_time_setup = True
 
+<<<<<<< HEAD
 total_ores_mined = 0
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 for filename in os.listdir(log_folder):
     with open(os.path.join(log_folder, filename), "r") as file:
         total_files += 1
@@ -63,7 +73,11 @@ for filename in os.listdir(log_folder):
                 log = json.loads(line)
                 raw_materials = log.get("data", {}).get("raw_materials", "")
                 if first_time_setup:
+<<<<<<< HEAD
                     first_time_value = float(log["ts"])
+=======
+                    first_time_value = log["timestamp"]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     first_time_setup = False
                 if not raw_materials:
                     continue
@@ -76,8 +90,12 @@ for filename in os.listdir(log_folder):
                     else:
                         materials[material]["obtained"] += int(quantity[1:])
                         materials[material]["total"] += int(quantity[1:])
+<<<<<<< HEAD
                         total_ores_mined += int(quantity[1:])
                     time[material].append((float(log["w-state"]["timestamp"]) - float(first_time_value)) / 10.0)
+=======
+                    time[material].append((int(log["timestamp"]) - int(first_time_value)) / 10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     y[material].append(int(materials[material]["total"]))
 
             except Exception as e:
@@ -120,6 +138,7 @@ plt.show()
 
 for material, values in grand_total.items():
     if values["grand_obtained"] != 0:
+<<<<<<< HEAD
         grand_total[material]["grand_spent_percentage"] = values["grand_spent"] / values["grand_obtained"] * sheet_amount
     else:
         grand_total[material]["grand_spent_percentage"] = 0
@@ -135,3 +154,14 @@ for material, values in grand_total.items():
         f"{material} net: {round(values['grand_total']/(sheet_amount*total_files), 2)} | spent total: {round(values['grand_spent']/(sheet_amount*total_files), 2)} | obtained total: {round(values['grand_obtained']/(sheet_amount*total_files), 2)} | percentage spent: {values['grand_spent_percentage'] :.2f}%"
     )
 print(f"This is equivalent to a total of an average {int(total_ores_mined/(sheet_amount*3))} mineral tiles, or {int(total_ores_mined/(sheet_amount*3*total_files))} mineral walls per round.")
+=======
+        grand_total[material]["grand_spent_percentage"] = values["grand_spent"] / values["grand_obtained"] * 100
+    else:
+        grand_total[material]["grand_spent_percentage"] = 0
+
+print("Grand totals:")
+for material, values in grand_total.items():
+    print(
+        f"{material} total: {values['grand_total']} | spent total: {values['grand_spent']} | obtained total: {values['grand_obtained']} | percentage spent: {values['grand_spent_percentage']:.2f}%"
+    )
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -200,6 +200,13 @@
 	attack_verb_simple = list("shank", "shiv")
 	armor_type = /datum/armor/none
 	custom_materials = list(/datum/material/glass = SMALL_MATERIAL_AMOUNT * 4)
+<<<<<<< HEAD
+=======
+
+/obj/item/knife/shiv/Initialize(mapload)
+	flags_1 &= ~CONDUCT_1
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/knife/shiv/plasma
 	name = "plasma shiv"

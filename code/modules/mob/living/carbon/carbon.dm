@@ -5,6 +5,16 @@
 	register_context()
 
 	GLOB.carbon_list += src
+<<<<<<< HEAD
+=======
+	AddComponent(/datum/component/carbon_sprint)
+	immune_system = new(src)
+	var/static/list/loc_connections = list(
+		COMSIG_CARBON_DISARM_PRESHOVE = PROC_REF(disarm_precollide),
+		COMSIG_CARBON_DISARM_COLLIDE = PROC_REF(disarm_collision),
+	)
+	AddElement(/datum/element/connect_loc, loc_connections)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ADD_TRAIT(src, TRAIT_CAN_HOLD_ITEMS, INNATE_TRAIT) // Carbons are assumed to be innately capable of having arms, we check their arms count instead
 
 /mob/living/carbon/Destroy()
@@ -15,6 +25,7 @@
 	QDEL_LIST(organs)
 	QDEL_LIST(bodyparts)
 	QDEL_LIST(implants)
+	QDEL_NULL(immune_system)
 	for(var/wound in all_wounds) // these LAZYREMOVE themselves when deleted so no need to remove the list here
 		qdel(wound)
 	for(var/scar in all_scars)
@@ -23,6 +34,7 @@
 	QDEL_NULL(dna)
 	GLOB.carbon_list -= src
 
+<<<<<<< HEAD
 /mob/living/carbon/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	. = ..()
 	if(. & ITEM_INTERACT_ANY_BLOCKER)
@@ -34,6 +46,24 @@
 	return .
 
 /mob/living/carbon/click_ctrl_shift(mob/user)
+=======
+/mob/living/carbon/attackby(obj/item/item, mob/living/user, params)
+	if(!all_wounds || !(!(user.istate & ISTATE_HARM) || user == src))
+		return ..()
+
+	if(can_perform_surgery(user, params))
+		return TRUE
+
+	for(var/i in shuffle(all_wounds))
+		var/datum/wound/wound = i
+		if(wound.try_treating(item, user))
+			return TRUE
+
+	return ..()
+
+/mob/living/carbon/CtrlShiftClick(mob/user)
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(iscarbon(user))
 		var/mob/living/carbon/carbon_user = user
 		carbon_user.give(src)
@@ -174,6 +204,7 @@
 		power_throw++
 	if(isitem(thrown_thing))
 		var/obj/item/thrown_item = thrown_thing
+<<<<<<< HEAD
 		frequency_number = 1-(thrown_item.w_class-3)/8 //At normal weight, the frequency is at 1. For tiny, it is 1.25. For huge, it is 0.75.
 		if(thrown_item.throw_verb)
 			verb_text = thrown_item.throw_verb
@@ -192,6 +223,13 @@
 	visible_message(span_danger("[src] [verb_text][plural_s(verb_text)] [thrown_thing][power_throw_text]"), \
 					span_danger("You [verb_text] [thrown_thing][power_throw_text]"))
 	log_message("has thrown [thrown_thing] [power_throw_text]", LOG_ATTACK)
+=======
+		if(thrown_item.throw_verb)
+			verb_text = thrown_item.throw_verb
+	visible_message(span_danger("[src] [verb_text][plural_s(verb_text)] [thrown_thing][power_throw ? " really hard!" : "."]"), \
+					span_danger("You [verb_text] [thrown_thing][power_throw ? " really hard!" : "."]"))
+	log_message("has thrown [thrown_thing] [power_throw > 0 ? "really hard" : ""]", LOG_ATTACK)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/extra_throw_range = HAS_TRAIT(src, TRAIT_THROWINGARM) ? 2 : 0
 	newtonian_move(get_dir(target, src))
 	thrown_thing.safe_throw_at(target, thrown_thing.throw_range + extra_throw_range, max(1,thrown_thing.throw_speed + power_throw), src, null, null, null, move_force)
@@ -419,8 +457,13 @@
 	if((HAS_TRAIT(src, TRAIT_NOHUNGER) || HAS_TRAIT(src, TRAIT_TOXINLOVER)) && !force)
 		return TRUE
 
+<<<<<<< HEAD
 	if(!force && HAS_TRAIT(src, TRAIT_STRONG_STOMACH))
 		lost_nutrition *= 0.5
+=======
+	if(!has_mouth())
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	SEND_SIGNAL(src, COMSIG_CARBON_VOMITED, distance, force)
 
@@ -541,9 +584,15 @@
 	if(isnull(.))
 		return
 	if(new_value == LYING_DOWN)
-		add_movespeed_modifier(/datum/movespeed_modifier/carbon_crawling)
+		if(HAS_TRAIT(src, FOOD_SLIDE))
+			add_movespeed_modifier(/datum/movespeed_modifier/belly_slide)
+		else
+			add_movespeed_modifier(/datum/movespeed_modifier/carbon_crawling)
 	else
-		remove_movespeed_modifier(/datum/movespeed_modifier/carbon_crawling)
+		if(HAS_TRAIT(src, FOOD_SLIDE))
+			remove_movespeed_modifier(/datum/movespeed_modifier/belly_slide)
+		else
+			remove_movespeed_modifier(/datum/movespeed_modifier/carbon_crawling)
 
 
 //Updates the mob's health from bodyparts and mob damage variables
@@ -558,7 +607,7 @@
 		total_burn += (BP.burn_dam * BP.body_damage_coeff)
 	set_health(round(maxHealth - getOxyLoss() - getToxLoss() - total_burn - total_brute, DAMAGE_PRECISION))
 	update_stat()
-	update_stamina()
+	on_stamina_update()
 	if(((maxHealth - total_burn) < HEALTH_THRESHOLD_DEAD*2) && stat == DEAD )
 		become_husk(BURN)
 	med_hud_set_health()
@@ -568,6 +617,35 @@
 		remove_movespeed_modifier(/datum/movespeed_modifier/carbon_softcrit)
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
 
+<<<<<<< HEAD
+=======
+/mob/living/carbon/on_stamina_update()
+	if(!stamina)
+		return
+	var/stam = stamina.current
+	var/max = stamina.maximum
+	var/is_exhausted = HAS_TRAIT_FROM(src, TRAIT_EXHAUSTED, STAMINA)
+	var/is_stam_stunned = HAS_TRAIT_FROM(src, TRAIT_INCAPACITATED, STAMINA)
+	if((stam < max * STAMINA_EXHAUSTION_THRESHOLD_MODIFIER) && !is_exhausted)
+		ADD_TRAIT(src, TRAIT_EXHAUSTED, STAMINA)
+		ADD_TRAIT(src, TRAIT_NO_SPRINT, STAMINA)
+		add_movespeed_modifier(/datum/movespeed_modifier/exhaustion)
+
+	if((stam < max * STAMINA_STUN_THRESHOLD_MODIFIER) && !is_stam_stunned && stat <= SOFT_CRIT)
+		stamina_stun()
+
+	if(is_exhausted && (stam > max * STAMINA_EXHAUSTION_THRESHOLD_MODIFIER_EXIT))
+		REMOVE_TRAIT(src, TRAIT_EXHAUSTED, STAMINA)
+		REMOVE_TRAIT(src, TRAIT_NO_SPRINT, STAMINA)
+		remove_movespeed_modifier(/datum/movespeed_modifier/exhaustion)
+
+	update_stamina_hud()
+
+/datum/movespeed_modifier/exhaustion
+	id = "exhaustion"
+	multiplicative_slowdown = STAMINA_EXHAUSTION_MOVESPEED_SLOWDOWN
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/update_sight()
 	if(!client)
 		return
@@ -797,7 +875,7 @@
 	else
 
 		if(shown_stamina_loss == null)
-			shown_stamina_loss = getStaminaLoss()
+			shown_stamina_loss = stamina.loss
 
 		if(shown_stamina_loss >= stam_crit_threshold)
 			hud_used.stamina.icon_state = "stamina_crit"
@@ -935,6 +1013,7 @@
 		set_handcuffed(null)
 		update_handcuffed()
 
+	stamina.adjust(stamina.maximum, TRUE)
 	return ..()
 
 /mob/living/carbon/do_strange_reagent_revival(healing_amount)
@@ -1439,6 +1518,7 @@
 	var/turf/targ = get_ranged_target_turf(src, splatter_direction, splatter_strength)
 	our_splatter.fly_towards(targ, splatter_strength)
 
+<<<<<<< HEAD
 /mob/living/carbon/dropItemToGround(obj/item/item, force = FALSE, silent = FALSE, invdrop = TRUE)
 	if(item && ((item in organs) || (item in bodyparts))) //let's not do this, aight?
 		return FALSE
@@ -1468,6 +1548,8 @@
 		return FALSE
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/ominous_nosebleed()
 	var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
 	if(isnull(head))

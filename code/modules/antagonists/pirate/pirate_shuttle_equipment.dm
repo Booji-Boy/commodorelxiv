@@ -302,8 +302,12 @@
 	if(!value)
 		status_report += "0"
 
+<<<<<<< HEAD
 /// Deletes and sells the item
 /obj/machinery/computer/piratepad_control/proc/send()
+=======
+/obj/machinery/computer/piratepad_control/proc/send(mob/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!sending)
 		return
 
@@ -340,6 +344,7 @@
 	pad.icon_state = pad.idle_state
 	sending = FALSE
 
+<<<<<<< HEAD
 ///The loop that calculates the value of stuff on a pirate pad, or plain sell them if dry_run is FALSE.
 /obj/machinery/computer/piratepad_control/proc/pirate_export_loop(obj/machinery/piratepad/pad, dry_run = TRUE)
 	var/datum/export_report/report = new
@@ -369,6 +374,9 @@
 
 /// Prepares to sell the items on the pad
 /obj/machinery/computer/piratepad_control/proc/start_sending()
+=======
+/obj/machinery/computer/piratepad_control/proc/start_sending(mob/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/machinery/piratepad/pad = pad_ref?.resolve()
 	if(!pad)
 		status_report = "No pad detected. Build or link a pad."
@@ -384,7 +392,7 @@
 	status_report = "Sending... "
 	pad.visible_message(span_notice("[pad] starts charging up."))
 	pad.icon_state = pad.warmup_state
-	sending_timer = addtimer(CALLBACK(src, PROC_REF(send)),warmup_time, TIMER_STOPPABLE)
+	sending_timer = addtimer(CALLBACK(src, PROC_REF(send), user),warmup_time, TIMER_STOPPABLE)
 
 /// Finishes the sending state of the pad
 /obj/machinery/computer/piratepad_control/proc/stop_sending(custom_report)

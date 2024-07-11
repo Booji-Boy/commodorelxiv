@@ -33,6 +33,7 @@
 		/obj/item/stack/sheet/plastic = 3,
 	)
 	tool_paths = list(/obj/item/stamp/head/captain)
+<<<<<<< HEAD
 	category = CAT_MISC
 
 /datum/crafting_recipe/cardboard_id
@@ -43,4 +44,6 @@
 	reqs = list(
 		/obj/item/stack/sheet/cardboard = 1,
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = CAT_MISC

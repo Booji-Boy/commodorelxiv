@@ -11,6 +11,12 @@ import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Flex, Section, TextArea } from '../components';
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
+<<<<<<< HEAD
+=======
+import { marked } from 'marked';
+import { Component, createRef, RefObject, Inferno } from 'inferno';
+import { clamp } from 'common/math';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const Z_INDEX_STAMP = 1;
 const Z_INDEX_STAMP_PREVIEW = 2;
@@ -246,14 +252,22 @@ class PaperSheetStamper extends Component<PaperSheetStamperProps> {
 }
 
 // Creates a full stamp div to render the given stamp to the preview.
+<<<<<<< HEAD
 export const Stamp = (props) => {
+=======
+export const Stamp = (props): Inferno.HTMLAttributes<HTMLDivElement> => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { activeStamp, sprite, x, y, rotation, opacity, yOffset = 0 } = props;
   const stamp_transform = {
     left: x + 'px',
     top: y + yOffset + 'px',
     transform: 'rotate(' + rotation + 'deg)',
     opacity: opacity || 1.0,
+<<<<<<< HEAD
     zIndex: activeStamp ? Z_INDEX_STAMP_PREVIEW : Z_INDEX_STAMP,
+=======
+    'z-index': activeStamp ? Z_INDEX_STAMP_PREVIEW : Z_INDEX_STAMP,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   };
 
   return (
@@ -937,8 +951,13 @@ export class PreviewView extends Component<PreviewViewProps> {
         fill
         fitted
         scrollable
+<<<<<<< HEAD
         ref={scrollableRef}
         onScroll={handleOnScroll as any}
+=======
+        scrollableRef={scrollableRef}
+        onScroll={handleOnScroll}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       >
         <Box
           fillPositionedParent

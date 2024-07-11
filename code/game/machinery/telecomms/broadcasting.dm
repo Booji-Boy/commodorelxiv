@@ -91,9 +91,12 @@
 		"mods" = message_mods
 	)
 	levels = SSmapping.get_connected_levels(get_turf(source))
+<<<<<<< HEAD
 
 #undef COMPRESSION_VOCAL_SIGNAL_MIN
 #undef COMPRESSION_VOCAL_SIGNAL_MAX
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/signal/subspace/vocal/copy()
 	var/datum/signal/subspace/vocal/copy = new(source, frequency, virt, language)
@@ -155,7 +158,13 @@
 					radios += independent_radio
 
 	for(var/obj/item/radio/called_radio as anything in radios)
+<<<<<<< HEAD
 		called_radio.on_receive_message(data)
+=======
+		if(QDELETED(called_radio))
+			return
+		called_radio.on_recieve_message()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// From the list of radios, find all mobs who can hear those.
 	var/list/receive = get_hearers_in_radio_ranges(radios)
@@ -172,11 +181,15 @@
 	var/rendered = virt.compose_message(virt, language, message, frequency, spans)
 
 	for(var/atom/movable/hearer as anything in receive)
-		if(!hearer)
+		if(QDELETED(hearer))
 			stack_trace("null found in the hearers list returned by the spatial grid. this is bad")
 			continue
+<<<<<<< HEAD
 
 		hearer.Hear(rendered, virt, language, message, frequency, spans, message_mods, message_range = INFINITY)
+=======
+		hearer.Hear(rendered, virt, language, message, frequency, spans, message_mods)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// This following recording is intended for research and feedback in the use of department radio channels
 	if(length(receive))

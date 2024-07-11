@@ -4,7 +4,7 @@
 	if(!I)
 		return
 
-	if(I.tool_behaviour == TOOL_WIRECUTTER || I.tool_behaviour == TOOL_MULTITOOL)
+	if(I.tool_behaviour == TOOL_WIRECUTTER || I.tool_behaviour == TOOL_MULTITOOL || I.tool_behaviour == TOOL_HACKING)
 		return TRUE
 	if(isassembly(I))
 		var/obj/item/assembly/A = I
@@ -261,6 +261,7 @@
 		return TRUE
 
 	// Station blueprints do that too, but only if the wires are not randomized.
+<<<<<<< HEAD
 	if(!randomize)
 		if(user.is_holding_item_of_type(/obj/item/blueprints))
 			return TRUE
@@ -269,6 +270,12 @@
 				if(LAZYACCESS(studied_photos, REF(user.mind)) == REF(photo))
 					return TRUE
 
+=======
+	if(user.is_holding_item_of_type(/obj/item/areaeditor/blueprints) && !randomize)
+		return TRUE
+	if(revealed_wires)
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /**

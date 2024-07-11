@@ -45,12 +45,34 @@
 
 	return ..()
 
+<<<<<<< HEAD
 /obj/machinery/ore_silo/examine(mob/user)
 	. = ..()
 	. += span_notice("It can be linked to techfabs, circuit printers and protolathes with a multitool.")
 	. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "closed" : "open"].")
 	if(panel_open)
 		. += span_notice("The whole machine can be [EXAMINE_HINT("pried")] apart.")
+=======
+/obj/machinery/ore_silo/proc/remote_attackby(obj/machinery/M, mob/living/user, obj/item/stack/I, breakdown_flags=NONE)
+	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+	// stolen from /datum/component/material_container/proc/OnAttackBy
+	if((user.istate & ISTATE_HARM))
+		return
+	if(I.item_flags & ABSTRACT)
+		return
+	if(!istype(I) || (I.flags_1 & HOLOGRAM_1) || (I.item_flags & NO_MAT_REDEMPTION))
+		to_chat(user, span_warning("[M] won't accept [I]!"))
+		return
+	var/item_mats = materials.get_item_material_amount(I, breakdown_flags)
+	if(!item_mats)
+		to_chat(user, span_warning("[I] does not contain sufficient materials to be accepted by [M]."))
+		return
+	// assumes unlimited space...
+	var/amount = I.amount
+	materials.user_insert(I, user, breakdown_flags)
+	silo_log(M, "deposited", amount, "sheets", item_mats)
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/ore_silo/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = NONE
@@ -72,7 +94,32 @@
 /obj/machinery/ore_silo/proc/on_item_consumed(datum/component/material_container/container, obj/item/item_inserted, last_inserted_id, mats_consumed, amount_inserted, atom/context)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	silo_log(context, "deposited", amount_inserted, item_inserted.name, mats_consumed)
+=======
+/obj/machinery/ore_silo/proc/generate_ui()
+	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+	var/list/ui = list("<head><title>Ore Silo</title></head><body><div class='statusDisplay'><h2>Stored Material:</h2>")
+	var/any = FALSE
+	for(var/M in materials.materials)
+		var/datum/material/mat = M
+		var/amount = materials.materials[M]
+		var/sheets = round(amount) / SHEET_MATERIAL_AMOUNT
+		var/ref = REF(M)
+		if (sheets)
+			if (sheets >= 1)
+				ui += "<a href='?src=[REF(src)];ejectsheet=[ref];eject_amt=1'>Eject</a>"
+			else
+				ui += "<span class='linkOff'>Eject</span>"
+			if (sheets >= 20)
+				ui += "<a href='?src=[REF(src)];ejectsheet=[ref];eject_amt=20'>20x</a>"
+			else
+				ui += "<span class='linkOff'>20x</span>"
+			ui += "<b>[mat.name]</b>: [sheets] sheets<br>"
+			any = TRUE
+	if(!any)
+		ui += "Nothing!"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	SEND_SIGNAL(context, COMSIG_SILO_ITEM_CONSUMED, container, item_inserted, last_inserted_id, mats_consumed, amount_inserted)
 
@@ -86,10 +133,46 @@
 	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
 		return ITEM_INTERACT_SUCCESS
 
+<<<<<<< HEAD
 /obj/machinery/ore_silo/crowbar_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_BLOCKING
 	if(default_deconstruction_crowbar(tool))
 		return ITEM_INTERACT_SUCCESS
+=======
+/obj/machinery/ore_silo/Topic(href, href_list)
+	if(..())
+		return
+	add_fingerprint(usr)
+	usr.set_machine(src)
+
+	if(href_list["remove"])
+		var/datum/component/remote_materials/mats = locate(href_list["remove"]) in ore_connected_machines
+		if (mats)
+			mats.disconnect_from(src)
+			ore_connected_machines -= mats
+			updateUsrDialog()
+			return TRUE
+	else if(href_list["hold1"])
+		holds[href_list["hold1"]] = TRUE
+		updateUsrDialog()
+		return TRUE
+	else if(href_list["hold0"])
+		holds -= href_list["hold0"]
+		updateUsrDialog()
+		return TRUE
+	else if(href_list["ejectsheet"])
+		var/datum/material/eject_sheet = locate(href_list["ejectsheet"])
+		var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+		var/count = materials.retrieve_sheets(text2num(href_list["eject_amt"]), eject_sheet, drop_location())
+		var/list/matlist = list()
+		matlist[eject_sheet] = SHEET_MATERIAL_AMOUNT * count
+		silo_log(src, "ejected", -count, "sheets", matlist)
+		return TRUE
+	else if(href_list["page"])
+		log_page = text2num(href_list["page"]) || 1
+		updateUsrDialog()
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/ore_silo/multitool_act(mob/living/user, obj/item/multitool/I)
 	I.set_buffer(src)
@@ -245,6 +328,12 @@
 	amount = _amount
 	noun = _noun
 	materials = mats.Copy()
+<<<<<<< HEAD
+=======
+	for(var/each in materials)
+		materials[each] *= abs(_amount)
+	format()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/list/data = list(
 		"machine_name" = machine_name,
 		"area_name" = AREACOORD(M),
@@ -278,12 +367,19 @@
 		materials[each] += other.materials[each]
 	return TRUE
 
+<<<<<<< HEAD
 /**
  * Returns list/materials but with each entry joined by an seperator to create 1 string
  * Arguments
  *
  * * separator - the string used to concatenate all entries in list/materials
  */
+=======
+/datum/ore_silo_log/proc/format()
+	name = "[machine_name]: [action] [amount]x [noun]"
+	formatted = "([timestamp]) <b>[machine_name]</b> in [area_name]<br>[action] [abs(amount)]x [noun]<br> [get_raw_materials("")]"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ore_silo_log/proc/get_raw_materials(separator)
 	var/list/msg = list()
 	for(var/key in materials)

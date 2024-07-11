@@ -4,6 +4,7 @@
  * @license MIT
  */
 
+<<<<<<< HEAD
 import { BooleanLike, classes } from 'common/react';
 import {
   createElement,
@@ -12,6 +13,12 @@ import {
   ReactNode,
   UIEventHandler,
 } from 'react';
+=======
+import { BooleanLike, classes, pureComponentHooks } from 'common/react';
+import { Inferno, createVNode, InfernoNode } from 'inferno';
+import { ChildFlags, VNodeFlags } from 'inferno-vnode-flags';
+import { CSS_COLORS } from '../constants';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { CSS_COLORS } from '../constants';
 import { logger } from '../logging';
@@ -202,6 +209,12 @@ export const computeBoxProps = (props) => {
   const computedProps: Record<string, any> = {};
   const computedStyles: Record<string, string | number> = {};
 
+<<<<<<< HEAD
+=======
+export const computeBoxProps = (props: BoxProps) => {
+  const computedProps: Inferno.HTMLAttributes<any> = {};
+  const computedStyles = {};
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   // Compute props
   for (let propName of Object.keys(props)) {
     if (propName === 'style') {
@@ -235,7 +248,11 @@ export const computeBoxClassName = (props: BoxProps) => {
   ]);
 };
 
+<<<<<<< HEAD
 export const Box = (props: BoxProps & DangerDoNotUse) => {
+=======
+export const Box = (props: BoxProps) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { as = 'div', className, children, ...rest } = props;
 
   // Compute class name and styles
@@ -258,5 +275,11 @@ export const Box = (props: BoxProps & DangerDoNotUse) => {
       className: computedClassName,
     },
     children,
+<<<<<<< HEAD
+=======
+    ChildFlags.UnknownChildren,
+    computedProps,
+    undefined,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 };

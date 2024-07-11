@@ -176,6 +176,7 @@
 	overlay_state_active = "module_jetpackadv_on"
 	full_speed = TRUE
 
+<<<<<<< HEAD
 /// Cooldown to use if we didn't actually launch a jump jet
 #define FAILED_ACTIVATION_COOLDOWN 3 SECONDS
 
@@ -218,6 +219,8 @@
 
 #undef FAILED_ACTIVATION_COOLDOWN
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Status Readout - Puts a lot of information including health, nutrition, fingerprints, temperature to the suit TGUI.
 /obj/item/mod/module/status_readout
 	name = "MOD status readout module"
@@ -228,6 +231,7 @@
 		to alert anyone nearby that someone has, in fact, died."
 	icon_state = "status"
 	complexity = 1
+<<<<<<< HEAD
 	use_energy_cost = DEFAULT_CHARGE_DRAIN * 0.1
 	incompatible_modules = list(/obj/item/mod/module/status_readout)
 	tgui_id = "status_readout"
@@ -238,6 +242,13 @@
 	var/display_dna = FALSE
 	/// Does this show the round ID and shift time?
 	var/display_time = FALSE
+=======
+	use_power_cost = DEFAULT_CHARGE_DRAIN * 0.1
+	incompatible_modules = list(/obj/item/mod/module/status_readout)
+	tgui_id = "status_readout"
+	/// Does this show the round ID and shift time?
+	var/show_time = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Death sound. May or may not be funny. Vareditable at your own risk.
 	var/death_sound = 'sound/effects/flatline3.ogg'
 	/// Death sound volume. Please be responsible with this.
@@ -245,6 +256,7 @@
 
 /obj/item/mod/module/status_readout/add_ui_data()
 	. = ..()
+<<<<<<< HEAD
 	.["display_time"] = display_time
 	.["shift_time"] = station_time_timestamp()
 	.["shift_id"] = GLOB.round_id
@@ -261,6 +273,22 @@
 		.["dna_unique_identity"] = mod.wearer ? md5(mod.wearer.dna.unique_identity) : null
 		.["dna_unique_enzymes"] = mod.wearer?.dna.unique_enzymes
 	.["viruses"] = null
+=======
+	.["show_time"] = show_time
+	.["statustime"] = station_time_timestamp()
+	.["statusid"] = GLOB.round_id
+	.["statushealth"] = mod.wearer?.health || 0
+	.["statusmaxhealth"] = mod.wearer?.getMaxHealth() || 0
+	.["statusbrute"] = mod.wearer?.getBruteLoss() || 0
+	.["statusburn"] = mod.wearer?.getFireLoss() || 0
+	.["statustoxin"] = mod.wearer?.getToxLoss() || 0
+	.["statusoxy"] = mod.wearer?.getOxyLoss() || 0
+	.["statustemp"] = mod.wearer?.bodytemperature || 0
+	.["statusnutrition"] = mod.wearer?.nutrition || 0
+	.["statusfingerprints"] = mod.wearer ? md5(mod.wearer.dna.unique_identity) : null
+	.["statusdna"] = mod.wearer?.dna.unique_enzymes
+	.["statusviruses"] = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!length(mod.wearer?.diseases))
 		return .
 	var/list/viruses = list()
@@ -272,6 +300,7 @@
 		virus_data["maxstage"] = virus.max_stages
 		virus_data["cure"] = virus.cure_text
 		viruses += list(virus_data)
+<<<<<<< HEAD
 	.["viruses"] = viruses
 
 	return .
@@ -288,6 +317,12 @@
 		if("display_dna")
 			display_dna = text2num(value)
 
+=======
+	.["statusviruses"] = viruses
+
+	return .
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/mod/module/status_readout/on_suit_activation()
 	RegisterSignal(mod.wearer, COMSIG_LIVING_DEATH, PROC_REF(death_sound))
 
@@ -320,6 +355,7 @@
 	var/former_visor_mask_flags = NONE
 
 /obj/item/mod/module/mouthhole/on_install()
+<<<<<<< HEAD
 	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 	if(istype(helmet))
 		former_helmet_flags = helmet.flags_cover
@@ -332,6 +368,12 @@
 		former_visor_mask_flags = mask.visor_flags_cover
 		mask.flags_cover &= ~(MASKCOVERSMOUTH |PEPPERPROOF)
 		mask.visor_flags_cover &= ~(MASKCOVERSMOUTH |PEPPERPROOF)
+=======
+	former_flags = mod.helmet.flags_cover
+	former_visor_flags = mod.helmet.visor_flags_cover
+	mod.helmet.flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
+	mod.helmet.visor_flags_cover &= ~(HEADCOVERSMOUTH|PEPPERPROOF)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/module/mouthhole/on_uninstall(deleting = FALSE)
 	if(deleting)
@@ -391,7 +433,7 @@
 	overlay_state_inactive = "module_light"
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
 	light_color = COLOR_WHITE
-	light_range = 4
+	light_outer_range = 4
 	light_power = 1
 	light_on = FALSE
 	required_slots = list(ITEM_SLOT_HEAD|ITEM_SLOT_MASK)
@@ -411,7 +453,7 @@
 /obj/item/mod/module/flashlight/on_activation()
 	set_light_flags(light_flags | LIGHT_ATTACHED)
 	set_light_on(active)
-	active_power_cost = base_power * light_range
+	active_power_cost = base_power * light_outer_range
 
 /obj/item/mod/module/flashlight/on_deactivation(display_message = TRUE, deleting = FALSE)
 	set_light_flags(light_flags & ~LIGHT_ATTACHED)
@@ -424,7 +466,7 @@
 		return COMSIG_SABOTEUR_SUCCESS
 
 /obj/item/mod/module/flashlight/on_process(seconds_per_tick)
-	active_power_cost = base_power * light_range
+	active_power_cost = base_power * light_outer_range
 	return ..()
 
 /obj/item/mod/module/flashlight/generate_worn_overlay(mutable_appearance/standing)
@@ -439,12 +481,12 @@
 /obj/item/mod/module/flashlight/get_configuration()
 	. = ..()
 	.["light_color"] = add_ui_configuration("Light Color", "color", light_color)
-	.["light_range"] = add_ui_configuration("Light Range", "number", light_range)
+	.["light_range"] = add_ui_configuration("Light Range", "number", light_outer_range)
 
 /obj/item/mod/module/flashlight/configure_edit(key, value)
 	switch(key)
 		if("light_color")
-			value = input(usr, "Pick new light color", "Flashlight Color") as color|null
+			value = tgui_color_picker(usr, "Pick new light color", "Flashlight Color")
 			if(!value)
 				return
 			if(is_color_dark(value, 50))
@@ -579,7 +621,11 @@
 	icon_state = "dnalock"
 	module_type = MODULE_USABLE
 	complexity = 1
+<<<<<<< HEAD
 	use_energy_cost = DEFAULT_CHARGE_DRAIN * 3
+=======
+	use_power_cost = DEFAULT_CHARGE_DRAIN * 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	incompatible_modules = list(/obj/item/mod/module/dna_lock, /obj/item/mod/module/eradication_lock)
 	cooldown_time = 0.5 SECONDS
 	/// The DNA we lock with.
@@ -663,6 +709,11 @@
 		return list()
 	return ..()
 
+/obj/item/mod/module/plasma_stabilizer/generate_worn_overlay()
+	if(locate(/obj/item/mod/module/infiltrator) in mod.modules)
+		return list()
+	return ..()
+
 /obj/item/mod/module/plasma_stabilizer/on_equip()
 	ADD_TRAIT(mod.wearer, TRAIT_NOSELFIGNITION_HEAD_ONLY, MOD_TRAIT)
 
@@ -690,24 +741,36 @@
 	var/former_visor_flags
 
 /obj/item/mod/module/hat_stabilizer/on_suit_activation()
+<<<<<<< HEAD
 	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 	if(!istype(helmet))
 		return
 	RegisterSignal(helmet, COMSIG_ATOM_EXAMINE, PROC_REF(add_examine))
 	RegisterSignal(helmet, COMSIG_ATOM_ATTACKBY, PROC_REF(place_hat))
 	RegisterSignal(helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(remove_hat))
+=======
+	RegisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE, PROC_REF(add_examine))
+	RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY, PROC_REF(place_hat))
+	RegisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY, PROC_REF(remove_hat))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/module/hat_stabilizer/on_suit_deactivation(deleting = FALSE)
 	if(deleting)
 		return
 	if(attached_hat)	//knock off the helmet if its on their head. Or, technically, auto-rightclick it for them; that way it saves us code, AND gives them the bubble
 		remove_hat(src, mod.wearer)
+<<<<<<< HEAD
 	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 	if(!istype(helmet))
 		return
 	UnregisterSignal(helmet, COMSIG_ATOM_EXAMINE)
 	UnregisterSignal(helmet, COMSIG_ATOM_ATTACKBY)
 	UnregisterSignal(helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
+=======
+	UnregisterSignal(mod.helmet, COMSIG_ATOM_EXAMINE)
+	UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACKBY)
+	UnregisterSignal(mod.helmet, COMSIG_ATOM_ATTACK_HAND_SECONDARY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/module/hat_stabilizer/proc/add_examine(datum/source, mob/user, list/base_examine)
 	SIGNAL_HANDLER
@@ -731,6 +794,7 @@
 		balloon_alert(user, "invalid hat!")
 		return
 	if(mod.wearer.transferItemToLoc(hitting_item, src, force = FALSE, silent = TRUE))
+<<<<<<< HEAD
 		attached_hat = hat
 		var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 		if(istype(helmet))
@@ -738,6 +802,13 @@
 			former_visor_flags = helmet.visor_flags_cover
 			helmet.flags_cover |= attached_hat.flags_cover
 			helmet.visor_flags_cover |= attached_hat.visor_flags_cover
+=======
+		attached_hat = hitting_item
+		former_flags = mod.helmet.flags_cover
+		former_visor_flags = mod.helmet.visor_flags_cover
+		mod.helmet.flags_cover |= attached_hat.flags_cover
+		mod.helmet.visor_flags_cover |= attached_hat.visor_flags_cover
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "hat attached, right-click to remove")
 		mod.wearer.update_clothing(mod.slot_flags)
 
@@ -757,10 +828,15 @@
 	else
 		balloon_alert_to_viewers("the hat falls to the floor!")
 	attached_hat = null
+<<<<<<< HEAD
 	var/obj/item/clothing/helmet = mod.get_part_from_slot(ITEM_SLOT_HEAD)
 	if(istype(helmet))
 		helmet.flags_cover = former_flags
 		helmet.visor_flags_cover = former_visor_flags
+=======
+	mod.helmet.flags_cover = former_flags
+	mod.helmet.visor_flags_cover = former_visor_flags
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mod.wearer.update_clothing(mod.slot_flags)
 
 /obj/item/mod/module/hat_stabilizer/syndicate

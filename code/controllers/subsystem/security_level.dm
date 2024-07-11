@@ -42,6 +42,12 @@ SUBSYSTEM_DEF(security_level)
 
 	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))
 		SSnightshift.next_fire = world.time + 7 SECONDS // Fire nightshift after the security level announcement is complete
+<<<<<<< HEAD
+=======
+
+	if(announce)
+		level_announce(selected_level, current_security_level.number_level) // We want to announce BEFORE updating to the new level
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(announce)
 		level_announce(selected_level, current_security_level.number_level) // We want to announce BEFORE updating to the new level

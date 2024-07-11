@@ -1,3 +1,6 @@
+#define AUGGED_LIMB_EMP_BRUTE_DAMAGE 3
+#define AUGGED_LIMB_EMP_BURN_DAMAGE 2
+
 /obj/item/bodypart
 	name = "limb"
 	desc = "Why is it detached..."
@@ -34,10 +37,15 @@
 	 * Set to BIO_STANDARD_UNJOINTED because most species have both flesh bone and blood in their limbs.
 	 */
 	var/biological_state = BIO_STANDARD_UNJOINTED
+<<<<<<< HEAD
 	///A bitfield of bodytypes for surgery, and misc information
 	var/bodytype = BODYTYPE_ORGANIC
 	///A bitfield of bodyshapes for clothing and other sprite information
 	var/bodyshape = BODYSHAPE_HUMANOID
+=======
+	///A bitfield of bodytypes for clothing, surgery, and misc information
+	var/bodytype = BODYTYPE_HUMANOID | BODYTYPE_ORGANIC
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Defines when a bodypart should not be changed. Example: BP_BLOCK_CHANGE_SPECIES prevents the limb from being overwritten on species gain
 	var/change_exempt_flags = NONE
 	///Random flags that describe this bodypart
@@ -197,8 +205,11 @@
 	var/any_existing_wound_can_mangle_our_exterior
 	/// If false, no wound that can be applied to us can mangle our interior. Used for determining if we should use [hp_percent_to_dismemberable] instead of normal dismemberment.
 	var/any_existing_wound_can_mangle_our_interior
+<<<<<<< HEAD
 	/// get_damage() / total_damage must surpass this to allow our limb to be disabled, even temporarily, by an EMP.
 	var/robotic_emp_paralyze_damage_percent_threshold = 0.3
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/apply_fantasy_bonuses(bonus)
 	. = ..()
@@ -215,6 +226,10 @@
 	burn_modifier = reset_fantasy_variable("burn_modifier", burn_modifier)
 	wound_resistance = reset_fantasy_variable("wound_resistance", wound_resistance)
 	return ..()
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/Initialize(mapload)
 	. = ..()
@@ -346,9 +361,15 @@
 			if(WOUND_SEVERITY_MODERATE)
 				check_list += "\t [span_warning("Your [name] is suffering [wound.a_or_from] [LOWER_TEXT(wound.name)]!")]"
 			if(WOUND_SEVERITY_SEVERE)
+<<<<<<< HEAD
 				check_list += "\t [span_boldwarning("Your [name] is suffering [wound.a_or_from] [LOWER_TEXT(wound.name)]!!")]"
 			if(WOUND_SEVERITY_CRITICAL)
 				check_list += "\t [span_boldwarning("Your [name] is suffering [wound.a_or_from] [LOWER_TEXT(wound.name)]!!!")]"
+=======
+				check_list += "\t [span_boldwarning("Your [name] is suffering [wound.a_or_from] [lowertext(wound.name)]!!")]"
+			if(WOUND_SEVERITY_CRITICAL)
+				check_list += "\t [span_boldwarning("Your [name] is suffering [wound.a_or_from] [lowertext(wound.name)]!!!")]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for(var/obj/item/embedded_thing in embedded_objects)
 		var/stuck_word = embedded_thing.isEmbedHarmless() ? "stuck" : "embedded"
@@ -435,6 +456,7 @@
 /obj/item/bodypart/proc/on_life(seconds_per_tick, times_fired)
 	SHOULD_CALL_PARENT(TRUE)
 
+<<<<<<< HEAD
 /**
  * #receive_damage
  *
@@ -453,8 +475,17 @@
  * attack_direction - The direction the bodypart is attacked from, used to send blood flying in the opposite direction.
  * damage_source - The source of damage, typically a weapon.
  */
+=======
+//Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
+//Damage will not exceed max_damage using this proc
+//Cannot apply negative damage
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, blocked = 0, updating_health = TRUE, forced = FALSE, required_bodytype = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = NONE, attack_direction = null, damage_source)
 	SHOULD_CALL_PARENT(TRUE)
+	var/area/target_area = get_area(src.owner)
+	if(target_area)
+		if((target_area.area_flags & PASSIVE_AREA))
+			return FALSE
 
 	var/hit_percent = forced ? 1 : (100-blocked)/100
 	if((!brute && !burn) || hit_percent <= 0)
@@ -639,8 +670,14 @@
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, updating_health = TRUE, forced = FALSE, required_bodytype)
 	SHOULD_CALL_PARENT(TRUE)
+<<<<<<< HEAD
 
 	if(!forced && required_bodytype && !(bodytype & required_bodytype)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
+=======
+	if(HAS_TRAIT(owner, TRAIT_NO_HEALS))
+		return
+	if(required_bodytype && !(bodytype & required_bodytype)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(brute)
@@ -648,11 +685,23 @@
 	if(burn)
 		set_burn_dam(round(max(burn_dam - burn, 0), DAMAGE_PRECISION))
 
+	if(owner.dna && owner.dna.species && (REVIVESBYHEALING in owner.dna.species.species_traits))
+		if(owner.health > 0)
+			owner.revive(0)
+			owner.cure_husk(0) // If it has REVIVESBYHEALING, it probably can't be cloned. No husk cure.
+
 	if(owner)
 		if(can_be_disabled)
 			update_disabled()
 		if(updating_health)
 			owner.updatehealth()
+
+		//monkestation edit start
+		if(owner.stat == DEAD && HAS_TRAIT(owner, TRAIT_REVIVES_BY_HEALING))
+			if(owner.health > 50)
+				owner.revive(FALSE)
+		//monkestation edit end
+
 	cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
 	return update_bodypart_damage_state()
 
@@ -692,7 +741,6 @@
 
 	if(!can_be_disabled)
 		set_disabled(FALSE)
-		CRASH("update_disabled called with can_be_disabled false")
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		set_disabled(TRUE)
@@ -932,7 +980,12 @@
 		skin_tone = human_owner.skin_tone
 	else if(HAS_TRAIT(human_owner, TRAIT_MUTANT_COLORS))
 		skin_tone = ""
+<<<<<<< HEAD
 		var/datum/species/owner_species = human_owner.dna.species
+=======
+
+	if(((MUTCOLORS in owner_species.species_traits) || (DYNCOLORS in owner_species.species_traits) || (SPECIES_FUR in owner_species.species_traits))) //Ethereal code. Motherfuckers.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(owner_species.fixed_mut_color)
 			species_color = owner_species.fixed_mut_color
 		else
@@ -1026,7 +1079,10 @@
 		// For some reason this was applied as an overlay on the aux image and limb image before.
 		// I am very sure that this is unnecessary, and i need to treat it as part of the return list
 		// to be able to mask it proper in case this limb is a leg.
+<<<<<<< HEAD
 	if(!is_husked)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(blocks_emissive != EMISSIVE_BLOCK_NONE)
 			var/atom/location = loc || owner || src
 			var/mutable_appearance/limb_em_block = emissive_blocker(limb.icon, limb.icon_state, location, layer = limb.layer, alpha = limb.alpha)
@@ -1059,6 +1115,11 @@
 			for(var/external_layer in overlay.all_layers)
 				if(overlay.layers & external_layer)
 					. += overlay.get_overlay(external_layer, src)
+					if(overlay.get_secondary_overlay(external_layer, src))
+						. += overlay.get_secondary_overlay(external_layer, src)
+					if(overlay.get_extended_overlay(external_layer, src))
+						for(var/mutable_appearance/item as anything in overlay.get_extended_overlay(external_layer, src))
+							. += item
 
 	return .
 
@@ -1310,6 +1371,7 @@
 	else
 		update_icon_dropped()
 
+<<<<<<< HEAD
 // Note: For effects on subtypes, use the emp_effect() proc instead
 /obj/item/bodypart/emp_act(severity)
 	var/protection = ..()
@@ -1334,6 +1396,18 @@
 	// 3 hits to crit with an ion rifle on someone fully augged at a total of 100.8 damage, although im p sure mood can boost max hp above 100
 	// dont forget emps pierce armor, debilitate augs, and usually comes with splash damage e.g. ion rifles or grenades
 	var/time_needed = AUGGED_LIMB_EMP_PARALYZE_TIME
+=======
+/obj/item/bodypart/emp_act(severity)
+	. = ..()
+	if(. & EMP_PROTECT_WIRES || !IS_ROBOTIC_LIMB(src))
+		return FALSE
+	owner.visible_message(span_danger("[owner]'s [src.name] seems to malfunction!"))
+
+	// with defines at the time of writing, this is 3 brute and 2 burn
+	// 3 + 2 = 5, with 6 limbs thats 30, on a heavy 60
+	// 60 * 0.8 = 48
+	var/time_needed = 10 SECONDS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/brute_damage = AUGGED_LIMB_EMP_BRUTE_DAMAGE
 	var/burn_damage = AUGGED_LIMB_EMP_BURN_DAMAGE
 	if(severity == EMP_HEAVY)
@@ -1342,6 +1416,7 @@
 		burn_damage *= 2
 
 	receive_damage(brute_damage, burn_damage)
+<<<<<<< HEAD
 	do_sparks(number = 1, cardinal_only = FALSE, source = owner || src)
 
 	if(can_be_disabled && (get_damage() / max_damage) >= robotic_emp_paralyze_damage_percent_threshold)
@@ -1351,6 +1426,16 @@
 
 	return TRUE
 
+=======
+	do_sparks(number = 1, cardinal_only = FALSE, source = owner)
+	ADD_TRAIT(src, TRAIT_PARALYSIS, EMP_TRAIT)
+	addtimer(CALLBACK(src, PROC_REF(un_paralyze)), time_needed)
+	return TRUE
+
+/obj/item/bodypart/proc/un_paralyze()
+	REMOVE_TRAITS_IN(src, EMP_TRAIT)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Returns the generic description of our BIO_EXTERNAL feature(s), prioritizing certain ones over others. Returns error on failure.
 /obj/item/bodypart/proc/get_external_description()
 	if (biological_state & BIO_FLESH)

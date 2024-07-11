@@ -87,7 +87,10 @@
 	name = "Implant Removal"
 	requires_bodypart_type = BODYTYPE_ROBOTIC
 	target_mobtypes = list(/mob/living/carbon/human) // Simpler mobs don't have bodypart types
+<<<<<<< HEAD
 	surgery_flags = parent_type::surgery_flags | SURGERY_REQUIRE_LIMB
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	steps = list(
 		/datum/surgery_step/mechanic_open,
 		/datum/surgery_step/open_hatch,

@@ -3,8 +3,9 @@
 	typepath = /datum/round_event/ghost_role/space_dragon
 	weight = 7
 	max_occurrences = 1
-	min_players = 20
-	dynamic_should_hijack = TRUE
+	min_players = 30 //monke edit: 20 to 30
+	earliest_start = 60 MINUTES //monke edit: 20 to 60
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Spawns a space dragon, which will try to take over the station."
 	min_wizard_trigger_potency = 6
@@ -19,14 +20,27 @@
 	priority_announce("A large organic energy flux has been recorded near [station_name()], please stand by.", "Lifesign Alert")
 
 /datum/round_event/ghost_role/space_dragon/spawn_role()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SPACE_DRAGON, role = ROLE_SPACE_DRAGON, alert_pic = /mob/living/basic/space_dragon, amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_SPACE_DRAGON, role = ROLE_SPACE_DRAGON, pic_source = /mob/living/basic/space_dragon)
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/spawn_location = find_space_spawn()
 	if(isnull(spawn_location))
 		return MAP_ERROR
+<<<<<<< HEAD
 	var/mob/living/basic/space_dragon/dragon = new(spawn_location)
 	dragon.key = chosen_one.key
+=======
+
+	var/mob/living/basic/space_dragon/dragon = new (spawn_location)
+	dragon.key = key
+	dragon.mind.set_assigned_role(SSjob.GetJobType(/datum/job/space_dragon))
+	dragon.mind.special_role = ROLE_SPACE_DRAGON
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	dragon.mind.add_antag_datum(/datum/antagonist/space_dragon)
 	playsound(dragon, 'sound/magic/ethereal_exit.ogg', 50, TRUE, -1)
 	message_admins("[ADMIN_LOOKUPFLW(dragon)] has been made into a Space Dragon by an event.")

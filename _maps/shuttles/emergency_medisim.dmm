@@ -1392,6 +1392,33 @@
 	},
 /turf/template_noop,
 /area/shuttle/escape)
+<<<<<<< HEAD
+=======
+"ZU" = (
+/obj/structure/closet/crate/medical,
+/obj/item/storage/medkit/regular,
+/obj/item/storage/medkit/o2{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/storage/medkit/toxin{
+	pixel_x = -4;
+	pixel_y = 3
+	},
+/obj/item/healthanalyzer{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/lazarus_injector,
+/mob/living/basic/bot/medbot{
+	name = "\improper emergency medibot";
+	pixel_x = -3;
+	pixel_y = 2
+	},
+/obj/machinery/light/directional/west,
+/turf/open/floor/mineral/titanium/yellow,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 (1,1,1) = {"
 EN

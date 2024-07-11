@@ -1,8 +1,14 @@
 import { BooleanLike, classes } from 'common/react';
+<<<<<<< HEAD
 import { capitalizeAll } from 'common/string';
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { multiline } from 'common/string';
+import { capitalizeAll } from 'common/string';
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -10,8 +16,13 @@ import {
   LabeledList,
   Section,
   Stack,
+<<<<<<< HEAD
   Table,
   Tabs,
+=======
+  Tabs,
+  Table,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -27,6 +38,10 @@ export const ICON_BY_CATEGORY_NAME = {
   Devices: 'microchip',
   'Heat Exchange': 'thermometer-half',
   'Station Equipment': 'microchip',
+<<<<<<< HEAD
+=======
+  'Air Sensors': 'microchip',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 };
 
 const TOOLS = [
@@ -215,6 +230,10 @@ const SelectionSection = (props) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+// MONKESTATION ADDITION -- added context to layer select and useBackend<Data>()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 const LayerSelect = (props) => {
   const { act, data } = useBackend<Data>();
   const { pipe_layers } = data;
@@ -254,12 +273,20 @@ const PreviewSelect = (props) => {
         <Button
           ml={0}
           key={preview.dir}
+<<<<<<< HEAD
           tooltip={preview.dir_name}
+=======
+          title={preview.dir_name}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           selected={preview.selected}
           style={{
             width: '40px',
             height: '40px',
+<<<<<<< HEAD
             padding: '0',
+=======
+            padding: 0,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
           onClick={() => {
             act('pipe_type', {
@@ -290,16 +317,30 @@ const PreviewSelect = (props) => {
 const PipeTypeSection = (props) => {
   const { act, data } = useBackend<Data>();
   const { categories = [], selected_category, selected_recipe } = data;
+<<<<<<< HEAD
   const [categoryName, setCategoryName] = useState(selected_category);
   const shownCategory =
     categories.find((category) => category.cat_name === categoryName) ||
     categories[0];
 
+=======
+  const [categoryName, setCategoryName] = useLocalState(
+    'categoryName',
+    selected_category,
+  );
+  const shownCategory =
+    categories.find((category) => category.cat_name === categoryName) ||
+    categories[0];
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section>
       <Tabs>
         {categories.map((category, i) => (
           <Tabs.Tab
+<<<<<<< HEAD
+=======
+            fluid
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             key={category.cat_name}
             icon={ICON_BY_CATEGORY_NAME[category.cat_name]}
             selected={category.cat_name === shownCategory.cat_name}
@@ -313,7 +354,11 @@ const PipeTypeSection = (props) => {
         {shownCategory?.recipes.map((recipe) => (
           <Table.Row
             key={recipe.pipe_index}
+<<<<<<< HEAD
             style={{ borderBottom: '1px solid #333' }}
+=======
+            style={{ 'border-bottom': '1px solid #333' }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           >
             <Table.Cell collapsing py="2px" pb="1px">
               <PreviewSelect
@@ -323,7 +368,11 @@ const PipeTypeSection = (props) => {
               />
             </Table.Cell>
             <Table.Cell />
+<<<<<<< HEAD
             <Table.Cell style={{ verticalAlign: 'middle' }}>
+=======
+            <Table.Cell style={{ 'vertical-align': 'middle' }}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               {recipe.pipe_name}
             </Table.Cell>
           </Table.Row>
@@ -346,10 +395,18 @@ export const SmartPipeBlockSection = (props) => {
                 color="transparent"
                 icon="info"
                 tooltipPosition="right"
+<<<<<<< HEAD
                 tooltip="This is a panel for blocking certain connection
                 directions for the smart pipes.
                 The button in the center resets to
                 default (all directions can connect)"
+=======
+                tooltip={multiline`
+                This is a panel for blocking certain connection
+                directions for the smart pipes.
+                The button in the center resets to
+                default (all directions can connect)`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               />
             </Stack.Item>
             <Stack.Item>

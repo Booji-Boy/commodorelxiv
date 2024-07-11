@@ -25,9 +25,16 @@
 	habitable_atmos = null
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = 1500
-	combat_mode = TRUE
+	istate = ISTATE_HARM | ISTATE_BLOCKING
 	move_resist = INFINITY // This mob IS the floor
+<<<<<<< HEAD
 
+=======
+	/// Action which sends a line of spikes chasing a player
+	var/datum/action/cooldown/mob_cooldown/chasing_spikes/spikes
+	/// Action which summons areas the player can't stand in
+	var/datum/action/cooldown/mob_cooldown/spine_traps/traps
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Looping heartbeat sound
 	var/datum/looping_sound/heartbeat/soundloop
 
@@ -38,11 +45,22 @@
 	AddElement(/datum/element/death_drops, death_loot)
 	AddElement(/datum/element/relay_attackers)
 
+<<<<<<< HEAD
 	var/static/list/innate_actions = list(
 		SPIKES_ABILITY_TYPEPATH = BB_METEOR_HEART_GROUND_SPIKES,
 		/datum/action/cooldown/mob_cooldown/spine_traps = BB_METEOR_HEART_SPINE_TRAPS,
 	)
 	grant_actions_by_list(innate_actions)
+=======
+	spikes = new(src)
+	spikes.Grant(src)
+	ai_controller.set_blackboard_key(BB_METEOR_HEART_GROUND_SPIKES, spikes)
+
+	traps = new(src)
+	traps.Grant(src)
+	ai_controller.set_blackboard_key(BB_METEOR_HEART_SPINE_TRAPS, traps)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller.set_ai_status(AI_STATUS_OFF)
 
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(used_ability))

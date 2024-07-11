@@ -157,7 +157,11 @@
 /datum/element/elevation_core/proc/on_exited(turf/source, atom/movable/gone)
 	SIGNAL_HANDLER
 	if((isnull(gone.loc) || !HAS_TRAIT_FROM(gone.loc, TRAIT_ELEVATED_TURF, REF(src))) && isliving(gone))
+<<<<<<< HEAD
 		// Always unregister the signals, we're still leaving even if not affected by elevation.
+=======
+		// Always unregister the signals, we're still leaving even if not effected by elevation.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		UnregisterSignal(gone, list(COMSIG_LIVING_SET_BUCKLED, SIGNAL_ADDTRAIT(TRAIT_IGNORE_ELEVATION), SIGNAL_REMOVETRAIT(TRAIT_IGNORE_ELEVATION)))
 		if(!HAS_TRAIT_FROM(gone, TRAIT_ON_ELEVATED_SURFACE, REF(src)))
 			return

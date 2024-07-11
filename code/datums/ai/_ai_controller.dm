@@ -167,11 +167,16 @@ multiple modular subtrees with behaviors
 /datum/ai_controller/proc/should_idle()
 	if(!can_idle || isnull(our_cells))
 		return FALSE
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/datum/spatial_grid_cell/grid as anything in our_cells.member_cells)
 		if(length(grid.client_contents))
 			return FALSE
 	return TRUE
 
+<<<<<<< HEAD
 /datum/ai_controller/proc/recalculate_idle(datum/exited)
 	if(ai_status == AI_STATUS_OFF)
 		return
@@ -179,6 +184,11 @@ multiple modular subtrees with behaviors
 	if(exited && (get_dist(pawn, (islist(exited) ? exited[1] : exited)) <= interesting_dist)) //is our target in between interesting cells?
 		return
 
+=======
+/datum/ai_controller/proc/recalculate_idle()
+	if(ai_status == AI_STATUS_OFF)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(should_idle())
 		set_ai_status(AI_STATUS_IDLE)
 
@@ -191,7 +201,11 @@ multiple modular subtrees with behaviors
 /datum/ai_controller/proc/on_client_exit(datum/source, datum/exited)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	recalculate_idle(exited)
+=======
+	recalculate_idle()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Sets the AI on or off based on current conditions, call to reset after you've manually disabled it somewhere
 /datum/ai_controller/proc/reset_ai_status()
@@ -221,7 +235,11 @@ multiple modular subtrees with behaviors
 	if(!pawn_turf)
 		CRASH("AI controller [src] controlling pawn ([pawn]) is not on a turf.")
 #endif
+<<<<<<< HEAD
 	if(!length(SSmobs.clients_by_zlevel[pawn_turf.z]))
+=======
+	if(!length(SSmobs.clients_by_zlevel[pawn_turf?.z]))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return AI_STATUS_OFF
 	if(should_idle())
 		return AI_STATUS_IDLE
@@ -235,10 +253,16 @@ multiple modular subtrees with behaviors
 ///Called when the AI controller pawn changes z levels, we check if there's any clients on the new one and wake up the AI if there is.
 /datum/ai_controller/proc/on_changed_z_level(atom/source, turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if (ismob(pawn))
 		var/mob/mob_pawn = pawn
 		if((mob_pawn?.client && !continue_processing_when_client))
 			return
+=======
+	var/mob/mob_pawn = pawn
+	if((mob_pawn?.client && !continue_processing_when_client))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(old_turf)
 		SSai_controllers.ai_controllers_by_zlevel[old_turf.z] -= src
 	if(new_turf)
@@ -312,6 +336,7 @@ multiple modular subtrees with behaviors
 		if(current_behavior.behavior_flags & AI_BEHAVIOR_REQUIRE_MOVEMENT) //Might need to move closer
 			if(!current_movement_target)
 				stack_trace("[pawn] wants to perform action type [current_behavior.type] which requires movement, but has no current movement target!")
+				current_behavior.finish_action(src, FALSE)
 				return //This can cause issues, so don't let these slide.
 			///Stops pawns from performing such actions that should require the target to be adjacent.
 			var/atom/movable/moving_pawn = pawn
@@ -364,7 +389,13 @@ multiple modular subtrees with behaviors
 				break
 
 	SEND_SIGNAL(src, COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS, current_behaviors, planned_behaviors)
+<<<<<<< HEAD
 	for(var/datum/ai_behavior/forgotten_behavior as anything in current_behaviors - planned_behaviors)
+=======
+	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
+		if(LAZYACCESS(planned_behaviors, current_behavior))
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/list/arguments = list(src, FALSE)
 		var/list/stored_arguments = behavior_args[type]
 		if(stored_arguments)
@@ -386,13 +417,23 @@ multiple modular subtrees with behaviors
 			START_PROCESSING(SSai_behaviors, src)
 		if(AI_STATUS_OFF, AI_STATUS_IDLE)
 			STOP_PROCESSING(SSai_behaviors, src)
+<<<<<<< HEAD
+=======
+			CancelActions()
+		if(AI_STATUS_IDLE)
+			STOP_PROCESSING(SSai_behaviors, src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			CancelActions()
 
 /datum/ai_controller/proc/PauseAi(time)
 	paused_until = world.time + time
 
 /datum/ai_controller/proc/modify_cooldown(datum/ai_behavior/behavior, new_cooldown)
+<<<<<<< HEAD
 	behavior_cooldowns[behavior] = new_cooldown
+=======
+	behavior_cooldowns[behavior.type] = new_cooldown
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Call this to add a behavior to the stack.
 /datum/ai_controller/proc/queue_behavior(behavior_type, ...)
@@ -463,7 +504,11 @@ multiple modular subtrees with behaviors
 	set_ai_status(AI_STATUS_IDLE) //Can't do anything while player is connected
 	RegisterSignal(pawn, COMSIG_MOB_LOGIN, PROC_REF(on_sentience_gained))
 
+<<<<<<< HEAD
 // Turn the controller off if the pawn has been qdeleted
+=======
+// Turn the controller off the controller if the pawn has been qdeleted
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ai_controller/proc/on_pawn_qdeleted()
 	SIGNAL_HANDLER
 	set_ai_status(AI_STATUS_OFF)
@@ -715,8 +760,11 @@ multiple modular subtrees with behaviors
 /datum/ai_controller/proc/clear_blackboard_key(key)
 	if(isnull(blackboard[key]))
 		return
+<<<<<<< HEAD
 	if(pawn && (SEND_SIGNAL(pawn, COMSIG_AI_BLACKBOARD_KEY_PRECLEAR(key))))
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	CLEAR_AI_DATUM_TARGET(blackboard[key], key)
 	blackboard[key] = null
 	if(isnull(pawn))
@@ -757,6 +805,7 @@ multiple modular subtrees with behaviors
 	CRASH("remove_thing_from_blackboard_key called with an invalid \"thing\" argument ([thing]). \
 		(The passed value is not tracked in the passed list.)")
 
+<<<<<<< HEAD
 ///removes a tracked object from a lazylist
 /datum/ai_controller/proc/remove_from_blackboard_lazylist_key(key, thing)
 	var/lazylist = blackboard[key]
@@ -770,6 +819,8 @@ multiple modular subtrees with behaviors
 	if(!LAZYLEN(lazylist))
 		clear_blackboard_key(key)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Signal proc to go through every key and remove the datum from all keys it finds
 /datum/ai_controller/proc/sig_remove_from_blackboard(datum/source)
 	SIGNAL_HANDLER

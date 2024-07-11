@@ -359,13 +359,21 @@
 		if (machine_stat & BROKEN)
 			balloon_alert(user, "too damaged to repair!")
 			return
+<<<<<<< HEAD
 		if(!welder.tool_start_check(user, amount=1))
+=======
+		if(!welder.tool_start_check(user, amount=0))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 		balloon_alert(user, "repairing...")
 		if(welder.use_tool(src, user, 4 SECONDS, volume = 50))
 			update_integrity(min(atom_integrity += 50,max_integrity))
 			balloon_alert(user, "repaired")
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
+=======
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//disassembling the frame
 	if(!opened || has_electronics || terminal)
@@ -396,13 +404,21 @@
 		if(machine_stat & BROKEN)
 			balloon_alert(user, "frame is too damaged!")
 			return FALSE
+<<<<<<< HEAD
 		return list("delay" = 2 SECONDS, "cost" = 1)
+=======
+		return list("mode" = RCD_WALLFRAME, "delay" = 2 SECONDS, "cost" = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!cell)
 		if(machine_stat & MAINT)
 			balloon_alert(user, "no board for a cell!")
 			return FALSE
+<<<<<<< HEAD
 		return list("delay" = 5 SECONDS, "cost" = 10)
+=======
+		return list("mode" = RCD_WALLFRAME, "delay" = 5 SECONDS, "cost" = 10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	balloon_alert(user, "has both board and cell!")
 	return FALSE
@@ -454,7 +470,10 @@
 		locked = FALSE
 		balloon_alert(user, "interface damaged")
 		update_appearance()
+<<<<<<< HEAD
 		flicker_hacked_icon()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 // damage and destruction acts

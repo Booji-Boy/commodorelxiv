@@ -4,7 +4,11 @@
 	name = "Monkey"
 	id = SPECIES_MONKEY
 	external_organs = list(
+<<<<<<< HEAD
 		/obj/item/organ/external/tail/monkey = "Monkey",
+=======
+		/obj/item/organ/external/tail/simian = "Chimp"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	mutanttongue = /obj/item/organ/internal/tongue/monkey
 	mutantbrain = /obj/item/organ/internal/brain/primate
@@ -71,14 +75,6 @@
 /datum/species/monkey/get_species_description()
 	return "Monkeys are a type of primate that exist between humans and animals on the evolutionary chain. \
 		Every year, on Monkey Day, Nanotrasen shows their respect for the little guys by allowing them to roam the station freely."
-
-/datum/species/monkey/get_species_lore()
-	return list(
-		"Monkeys are commonly used as test subjects on board Space Station Thirteen. \
-		But what if... for one day... the Monkeys were allowed to be the scientists? \
-		What experiments would they come up it? Would they (stereotypically) be related to bananas somehow? \
-		There's only one way to find out.",
-	)
 
 /datum/species/monkey/create_pref_unique_perks()
 	var/list/to_add = list()
@@ -167,7 +163,18 @@
 	SIGNAL_HANDLER
 	if(!tripping || !crossing_mob.combat_mode)
 		return
+<<<<<<< HEAD
 	crossing_mob.knockOver(owner)
+=======
+	if(IS_DEAD_OR_INCAP(owner) || !isliving(crossed))
+		return
+	var/mob/living/in_the_way_mob = crossed
+	if(iscarbon(in_the_way_mob) && !(in_the_way_mob.istate & ISTATE_HARM))
+		return
+	if(in_the_way_mob.pass_flags & PASSTABLE)
+		return
+	in_the_way_mob.knockOver(owner)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/organ/internal/brain/primate/get_attacking_limb(mob/living/carbon/human/target)
 	if(!HAS_TRAIT(owner, TRAIT_ADVANCEDTOOLUSER))

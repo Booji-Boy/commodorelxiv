@@ -40,5 +40,16 @@
 	icon_state = "water"
 	base_icon_state = "water"
 	baseturfs = /turf/open/water/beach
+<<<<<<< HEAD
 	immerse_overlay_color = "#7799AA"
 	fishing_datum = /datum/fish_source/ocean/beach
+=======
+
+/turf/open/water/beach/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/lazy_fishing_spot, /datum/fish_source/ocean/beach)
+
+//Same turf, but instead used in the Beach Biodome
+/turf/open/water/beach/biodome
+	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

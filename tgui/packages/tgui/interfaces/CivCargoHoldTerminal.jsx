@@ -96,11 +96,16 @@ const BountyTextBox = (props) => {
 
 const BountyPickBox = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const { id_bounty_names, id_bounty_infos, id_bounty_values } = data;
+=======
+  const { id_bounty_names, id_bounty_values } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section title="Please Select a Bounty:" textAlign="center">
       <Flex width="100%" wrap>
         <Flex.Item shrink={0} grow={0.5}>
+<<<<<<< HEAD
           <BountyPickButton
             bounty_name={id_bounty_names[0]}
             bounty_info={id_bounty_infos[0]}
@@ -126,6 +131,36 @@ const BountyPickBox = (props) => {
             pick_value={3}
             act={act}
           />
+=======
+          <Button
+            fluid
+            color="green"
+            content={id_bounty_names[0]}
+            onClick={() => act('pick', { value: 1 })}
+          >
+            <Box fontSize="14px">Payout: {id_bounty_values[0]} cr</Box>
+          </Button>
+        </Flex.Item>
+        <Flex.Item shrink={0} grow={0.5} px={1}>
+          <Button
+            fluid
+            color="green"
+            content={id_bounty_names[1]}
+            onClick={() => act('pick', { value: 2 })}
+          >
+            <Box fontSize="14px">Payout: {id_bounty_values[1]} cr</Box>
+          </Button>
+        </Flex.Item>
+        <Flex.Item shrink={0} grow={0.5}>
+          <Button
+            fluid
+            color="green"
+            content={id_bounty_names[2]}
+            onClick={() => act('pick', { value: 3 })}
+          >
+            <Box fontSize="14px">Payout: {id_bounty_values[2]} cr</Box>
+          </Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Flex.Item>
       </Flex>
     </Section>

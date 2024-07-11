@@ -199,6 +199,7 @@
 		var/atom/throw_target = get_edge_target_turf(disabled, pick(GLOB.cardinals))
 		unbuckle_mob(disabled)
 		disabled.throw_at(throw_target, 2, 3)
+<<<<<<< HEAD
 		disabled.Knockdown(10 SECONDS)
 		disabled.adjustStaminaLoss(40)
 		if(isliving(bumped_atom))
@@ -207,6 +208,16 @@
 			ramtarget.throw_at(throw_target, 2, 3)
 			ramtarget.Knockdown(8 SECONDS)
 			ramtarget.adjustStaminaLoss(35)
+=======
+		disabled.Knockdown(100)
+		disabled.stamina.adjust(-40)
+		if(isliving(A))
+			var/mob/living/ramtarget = A
+			throw_target = get_edge_target_turf(ramtarget, pick(GLOB.cardinals))
+			ramtarget.throw_at(throw_target, 2, 3)
+			ramtarget.Knockdown(80)
+			ramtarget.stamina.adjust(-35)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			visible_message(span_danger("[src] crashes into [ramtarget], sending [disabled] and [ramtarget] flying!"))
 		else
 			visible_message(span_danger("[src] crashes into [bumped_atom], sending [disabled] flying!"))
@@ -224,6 +235,7 @@
 	visible_message(span_warning("A bomb appears in [src], what the fuck?"))
 	obj_flags |= EMAGGED
 	return TRUE
+<<<<<<< HEAD
 
 ///Version with slightly better components. Used by deathmatches.
 /obj/vehicle/ridden/wheelchair/motorized/improved
@@ -233,3 +245,5 @@
 	component_parts += GLOB.stock_part_datums[/datum/stock_part/servo/tier2]
 	component_parts += GLOB.stock_part_datums[/datum/stock_part/servo]
 	power_cell = new /obj/item/stock_parts/cell/upgraded/plus(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

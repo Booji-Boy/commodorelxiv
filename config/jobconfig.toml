@@ -203,8 +203,12 @@
 [PRISONER]
 "# Playtime Requirements" = 0
 "# Required Account Age" = 0
+<<<<<<< HEAD
 "# Required Character Age" = 0
 "# Spawn Positions" = 2
+=======
+"# Spawn Positions" = 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "# Total Positions" = 0
 
 [PSYCHOLOGIST]

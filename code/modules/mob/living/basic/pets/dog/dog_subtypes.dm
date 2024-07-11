@@ -9,7 +9,10 @@
 	icon_living = "pug"
 	icon_dead = "pug_dead"
 	butcher_results = list(/obj/item/food/meat/slab/pug = 3)
+<<<<<<< HEAD
 	cult_icon_state = "pug_cult"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	gold_core_spawnable = FRIENDLY_SPAWN
 	collar_icon_state = "pug"
 	held_state = "pug"
@@ -38,6 +41,7 @@
 	collar_icon_state = "bullterrier"
 	held_state = "bullterrier"
 
+<<<<<<< HEAD
 /mob/living/basic/pet/dog/bullterrier/lavaland_party
 	name = "Saint Nick's Helpful Associate"
 	desc = "Undergraduate in 'Being a Good Boy'."
@@ -45,6 +49,8 @@
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/pet/dog/breaddog //Most of the code originates from Cak
 	name = "Kobun"
 	real_name = "Kobun"
@@ -56,7 +62,11 @@
 	health = 50
 	maxHealth = 50
 	gender = NEUTER
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 3, BURN = 3, TOX = 1, STAMINA = 0, OXY = 1)
+=======
+	damage_coeff = list(BRUTE = 3, BURN = 3, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	butcher_results = list(/obj/item/organ/internal/brain = 1, /obj/item/organ/internal/heart = 1, /obj/item/food/breadslice/plain = 3,  \
 	/obj/item/food/meat/slab = 2)
 	response_harm_continuous = "takes a bite out of"
@@ -94,6 +104,10 @@
 
 /mob/living/basic/pet/dog/breaddog/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
+<<<<<<< HEAD
 	if(user.combat_mode && user.reagents && !stat)
+=======
+	if((user.istate & ISTATE_HARM) && user.reagents && !stat)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.reagents.add_reagent(/datum/reagent/consumable/nutriment, 0.4)
 		user.reagents.add_reagent(/datum/reagent/consumable/nutriment/vitamin, 0.4)

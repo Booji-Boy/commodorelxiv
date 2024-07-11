@@ -484,13 +484,20 @@
 
 /obj/item/skillchip/master_angler
 	name = "Mast-Angl-Er skillchip"
+<<<<<<< HEAD
 	auto_traits = list(TRAIT_REVEAL_FISH, TRAIT_EXAMINE_FISHING_SPOT)
 	skill_name = "Fisherman's Discernment"
 	skill_description = "Lists fishes when examining a fishing spot, and gives a hint of whatever thing's biting the hook."
+=======
+	auto_traits = list(TRAIT_REVEAL_FISH)
+	skill_name = "Fisherman's Discernment"
+	skill_description = "While fishing, it'll make a smidge easier to guess whatever you're trying to catch."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	skill_icon = "fish"
 	activate_message = span_notice("You feel the knowledge and passion of several sunbaked, seasoned fishermen burn within you.")
 	deactivate_message = span_notice("You no longer feel like casting a fishing rod by the sunny riverside.")
 
+<<<<<<< HEAD
 /obj/item/skillchip/intj
 	name = "Integrated Intuitive Thinking and Judging skillchip"
 	auto_traits = list(TRAIT_REMOTE_TASTING)
@@ -524,3 +531,6 @@
 	ADD_TRAIT(source, TRAIT_UNHITTABLE_BY_PROJECTILES, SKILLCHIP_TRAIT)
 	source.adjustStaminaLoss(20)
 	addtimer(TRAIT_CALLBACK_REMOVE(source, TRAIT_UNHITTABLE_BY_PROJECTILES, SKILLCHIP_TRAIT), FLIP_EMOTE_DURATION + 0.1 SECONDS)
+=======
+#undef SKILLCHIP_CATEGORY_GENERAL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

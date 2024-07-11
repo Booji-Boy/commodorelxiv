@@ -108,7 +108,11 @@
 			valid_suppliers += supplier
 	var/suppliersLeft = valid_suppliers.len
 	if(!suppliersLeft)
+<<<<<<< HEAD
 		return FALSE
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//take an equal amount from each supplier
 	var/currentRequest
@@ -123,7 +127,6 @@
 /datum/component/plumbing/proc/can_give(amount, reagent, datum/ductnet/net)
 	if(amount <= 0)
 		return
-
 	if(reagent) //only asked for one type of reagent
 		for(var/datum/reagent/contained_reagent as anything in reagents.reagent_list)
 			if(contained_reagent.type == reagent)

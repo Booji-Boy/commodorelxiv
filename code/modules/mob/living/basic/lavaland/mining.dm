@@ -1,8 +1,12 @@
 ///prototype for mining mobs
 /mob/living/basic/mining
 	icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
+<<<<<<< HEAD
 	combat_mode = TRUE
 	status_flags = NONE //don't inherit standard basicmob flags
+=======
+	istate = ISTATE_HARM|ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mob_size = MOB_SIZE_LARGE
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	faction = list(FACTION_MINING)
@@ -24,14 +28,21 @@
 	. = ..()
 	add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE, TRAIT_SNOWSTORM_IMMUNE), INNATE_TRAIT)
 	AddElement(/datum/element/mob_killed_tally, "mobs_killed_mining")
+<<<<<<< HEAD
 	var/static/list/vulnerable_projectiles
 	if(!vulnerable_projectiles)
 		vulnerable_projectiles = string_list(MINING_MOB_PROJECTILE_VULNERABILITY)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(\
 		/datum/element/ranged_armour,\
 		minimum_projectile_force = 30,\
 		below_projectile_multiplier = 0.3,\
+<<<<<<< HEAD
 		vulnerable_projectile_types = vulnerable_projectiles,\
+=======
+		vulnerable_projectile_types = MINING_MOB_PROJECTILE_VULNERABILITY,\
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		minimum_thrown_force = 20,\
 		throw_blocked_message = throw_blocked_message,\
 	)

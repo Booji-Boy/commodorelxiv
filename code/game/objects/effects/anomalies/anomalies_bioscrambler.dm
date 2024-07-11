@@ -19,6 +19,10 @@
 	. = ..()
 	pursuit_target = WEAKREF(find_nearest_target())
 
+/obj/effect/anomaly/bioscrambler/Initialize(mapload, new_lifespan, drops_core)
+	. = ..()
+	pursuit_target = WEAKREF(find_nearest_target())
+
 /obj/effect/anomaly/bioscrambler/anomalyEffect(seconds_per_tick)
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, pulse_cooldown))
@@ -79,6 +83,7 @@
 
 /obj/effect/anomaly/bioscrambler/docile/update_target()
 	return
+<<<<<<< HEAD
 
 /// Visual effect spawned when the bioscrambler scrambles your bio
 /obj/effect/temp_visual/bioscrambler_wave
@@ -96,3 +101,5 @@
 	animate(alpha = 0, time = duration * 0.4)
 	apply_wibbly_filters(src)
 	return ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

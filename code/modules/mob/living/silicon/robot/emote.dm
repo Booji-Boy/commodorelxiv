@@ -1,5 +1,11 @@
 /datum/emote/silicon
+<<<<<<< HEAD
 	mob_type_allowed_typecache = list(/mob/living/silicon, /mob/living/simple_animal/bot, /mob/living/basic/bot)
+=======
+	// MONKESTATION REMOVAL - Replaced with `/datum/emote/silicon/can_run_emote()`, which is used to
+	// enable silicon emotes for users with synthetic voice boxes.
+	//mob_type_allowed_typecache = list(/mob/living/silicon, /mob/living/simple_animal/bot)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	emote_type = EMOTE_AUDIBLE
 
 /datum/emote/silicon/boop

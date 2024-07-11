@@ -10,6 +10,8 @@
 	var/list/available_items = list()
 	/// Item categories available from this market, only items which are in these categories can be gotten from this market. Automatically assigned, so don't manually adjust.
 	var/list/categories = list()
+	/// flags we want to add to markets
+	var/market_flags = NONE
 
 /// Adds item to the available items and add it's category if it is not in categories yet.
 /datum/market/proc/add_item(datum/market_item/item)
@@ -24,11 +26,20 @@
 	RegisterSignal(item, COMSIG_QDELETING, PROC_REF(on_item_del))
 	return TRUE
 
+<<<<<<< HEAD
 /datum/market/proc/on_item_del(datum/market_item/item)
 	SIGNAL_HANDLER
 	available_items[item.category] -= item.identifier
 	if(!length(available_items[item.category]))
 		available_items -= item.category
+=======
+/datum/market/proc/try_process()
+	return
+
+///called before purchase override if you want to potentially stop purchases //monkestation edit - MODULAR_GUNS
+/datum/market/proc/pre_purchase(item, category, method, obj/item/market_uplink/uplink, user)
+	purchase(item, category, method, uplink, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Handles buying the item, this is mainly for future use and moving the code away from the uplink.
 /datum/market/proc/purchase(identifier, category, method, obj/item/market_uplink/uplink, user)
@@ -36,7 +47,32 @@
 	if(isnull(item))
 		return FALSE
 
+<<<<<<< HEAD
 	if(!istype(uplink) || !((method in shipping) || (method in item.shipping_override)))
+=======
+	for(var/datum/market_item/I in available_items[category])
+		if(I.type != item)
+			continue
+		var/price = I.price + shipping[method]
+
+		if(!uplink.current_user)///There is no ID card on the user, or the ID card has no account
+			to_chat(user, span_warning("The uplink sparks, as it can't identify an ID card with a bank account on you."))
+			return FALSE
+		var/balance = uplink?.current_user.account_balance
+
+		// I can't get the price of the item and shipping in a clean way to the UI, so I have to do this.
+		if(balance < price)
+			to_chat(user, span_warning("You don't have enough credits in [uplink] for [I] with [method] shipping."))
+			return FALSE
+
+		if(I.buy(uplink, user, method))
+			uplink.current_user.adjust_money(-price, "Other: Third Party Transaction")
+			logger.Log(LOG_CATEGORY_BLACKMARKET, "[user] has just bought the [I] for [price] in the [name]")
+			if(ismob(user))
+				var/mob/m_user = user
+				m_user.playsound_local(get_turf(m_user), 'sound/machines/twobeep_high.ogg', 50, TRUE)
+			return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	var/shipment_fee = item.shipping_override?[method]

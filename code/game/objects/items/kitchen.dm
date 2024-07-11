@@ -27,7 +27,11 @@
 	throw_speed = 3
 	throw_range = 5
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 0.8)
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attack_verb_continuous = list("attacks", "stabs", "pokes")
 	attack_verb_simple = list("attack", "stab", "poke")
 	hitsound = 'sound/weapons/bladeslice.ogg'
@@ -169,7 +173,11 @@
 	icon_state = "metal_rolling_pin"
 	inhand_icon_state = "metal_rolling_pin"
 	force = 12
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/plastic = SHEET_MATERIAL_AMOUNT * 1.5)
 	custom_price = PAYCHECK_CREW * 2
 	bare_wound_bonus = 14

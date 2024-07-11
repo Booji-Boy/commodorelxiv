@@ -8,7 +8,10 @@
 	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.05
 	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 0.02
 	power_channel = AREA_USAGE_ENVIRON
-	req_access = list(ACCESS_ATMOSPHERICS)
+	// monkestation edit: let engineers unlock air alarms
+	req_access = null
+	req_one_access = list(ACCESS_ATMOSPHERICS, ACCESS_ENGINE_EQUIP)
+	// monkestation end
 	max_integrity = 250
 	integrity_failure = 0.33
 	armor_type = /datum/armor/machinery_airalarm
@@ -59,6 +62,7 @@
 	/// Used for air alarm helper called tlv_no_ckecks to remove alarm thresholds.
 	var/tlv_no_checks = FALSE
 
+<<<<<<< HEAD
 
 	///Warning message spoken by air alarms
 	var/warning_message = null
@@ -69,6 +73,8 @@
 	///Cooldown on sending warning messages
 	COOLDOWN_DECLARE(warning_cooldown)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Used for connecting air alarm to a remote tile/zone via air sensor instead of the tile/zone of the air alarm
 	var/obj/machinery/air_sensor/connected_sensor
 	/// Used to link air alarm to air sensor via map helpers
@@ -76,6 +82,10 @@
 	/// Whether it is possible to link/unlink this air alarm from a sensor
 	var/allow_link_change = TRUE
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /datum/armor/machinery_airalarm
@@ -142,6 +152,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	GLOB.air_alarms -= src
 	return ..()
 
+<<<<<<< HEAD
 /obj/machinery/airalarm/proc/check_enviroment()
 	var/turf/our_turf = connected_sensor ? get_turf(connected_sensor) : get_turf(src)
 	var/datum/gas_mixture/environment = our_turf.return_air()
@@ -153,6 +164,12 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 /obj/machinery/airalarm/power_change()
 	check_enviroment()
+=======
+/obj/machinery/airalarm/power_change()
+	var/turf/our_turf = connected_sensor ? get_turf(connected_sensor) : get_turf(src)
+	var/datum/gas_mixture/environment = our_turf.return_air()
+	check_danger(our_turf, environment, environment.temperature)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/machinery/airalarm/on_enter_area(datum/source, area/area_to_register)
@@ -202,10 +219,17 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	if(istype(multi_tool.buffer, /obj/machinery/air_sensor))
 		if(!allow_link_change)
 			balloon_alert(user, "linking disabled")
+<<<<<<< HEAD
 			return ITEM_INTERACT_BLOCKING
 		connect_sensor(multi_tool.buffer)
 		balloon_alert(user, "connected sensor")
 		return ITEM_INTERACT_SUCCESS
+=======
+			return TOOL_ACT_SIGNAL_BLOCKING
+		connect_sensor(multi_tool.buffer)
+		balloon_alert(user, "connected sensor")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/airalarm/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -238,7 +262,12 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	data["sensor"] = !!connected_sensor
 	data["allowLinkChange"] = allow_link_change
 
+<<<<<<< HEAD
 	var/datum/gas_mixture/environment = get_enviroment()
+=======
+	var/turf/turf = connected_sensor ? get_turf(connected_sensor) : get_turf(src)
+	var/datum/gas_mixture/environment = turf.return_air()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/total_moles = environment.total_moles()
 	var/temp = environment.temperature
 	var/pressure = environment.return_pressure()
@@ -367,6 +396,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			powering.on = !!params["val"]
 			powering.atmos_conditions_changed()
 			powering.update_appearance(UPDATE_ICON)
+<<<<<<< HEAD
 
 		if("overclock")
 			if(isnull(vent))
@@ -375,6 +405,8 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			vent.update_appearance(UPDATE_ICON)
 			return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if ("direction")
 			if (isnull(vent))
 				return TRUE
@@ -466,7 +498,13 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			tlv.set_value(threshold_type, value)
 			investigate_log("threshold value for [threshold]:[threshold_type] was set to [value] by [key_name(usr)]", INVESTIGATE_ATMOS)
 
+<<<<<<< HEAD
 			check_enviroment()
+=======
+			var/turf/our_turf = connected_sensor ? get_turf(connected_sensor) : get_turf(src)
+			var/datum/gas_mixture/environment = our_turf.return_air()
+			check_danger(our_turf, environment, environment.temperature)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if("reset_threshold")
 			var/threshold = text2path(params["threshold"]) || params["threshold"]
@@ -477,7 +515,13 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			tlv.reset_value(threshold_type)
 			investigate_log("threshold value for [threshold]:[threshold_type] was reset by [key_name(usr)]", INVESTIGATE_ATMOS)
 
+<<<<<<< HEAD
 			check_enviroment()
+=======
+			var/turf/our_turf = connected_sensor ? get_turf(connected_sensor) : get_turf(src)
+			var/datum/gas_mixture/environment = our_turf.return_air()
+			check_danger(our_turf, environment, environment.temperature)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		if ("alarm")
 			if (alarm_manager.send_alarm(ALARM_ATMOS))
@@ -491,9 +535,35 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 			if(allow_link_change)
 				disconnect_sensor()
 
+<<<<<<< HEAD
 		if ("lock")
 			togglelock(usr)
 			return TRUE
+=======
+		/* monke start: air conditioning: */
+		if("air_conditioning")
+			if(!isnum(params["value"]))
+				return
+			if(params["value"])
+				stop_ac()
+			else
+				start_ac()
+			investigate_log("has had its air conditioning turned [air_conditioning ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			. = TRUE
+
+		if("set_ac_target")
+			if(!isnum(params["target"]))
+				return
+			set_ac_target(params["target"])
+			investigate_log("has had its air conditioning target set to [params["target"]] by [key_name(usr)]", INVESTIGATE_ATMOS)
+			. = TRUE
+
+		if("default_ac_target")
+			set_ac_target(initial(ac_temp_target))
+			investigate_log("has had its air conditioning target reset to default by [key_name(usr)]", INVESTIGATE_ATMOS)
+			. = TRUE
+		/* monke end */
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	update_appearance()
 
@@ -514,7 +584,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 	else
 		color = "#00FFCC" // teal
 
-	set_light(1.5, 1, color)
+	set_light(l_outer_range = 1.4, l_power = 1, l_color = color)
 
 /obj/machinery/airalarm/update_icon_state()
 	if(panel_open)
@@ -619,6 +689,7 @@ GLOBAL_LIST_EMPTY_TYPED(air_alarms, /obj/machinery/airalarm)
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 
+<<<<<<< HEAD
 /obj/machinery/airalarm/proc/speak(warning_message)
 	if(machine_stat & (BROKEN|NOPOWER))
 		return
@@ -629,6 +700,8 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 
 	say(warning_message)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Used for unlocked air alarm helper, which unlocks the air alarm.
 /obj/machinery/airalarm/proc/unlock()
 	locked = FALSE
@@ -689,7 +762,13 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 	RegisterSignal(connected_sensor, COMSIG_QDELETING, PROC_REF(disconnect_sensor))
 	my_area = get_area(connected_sensor)
 
+<<<<<<< HEAD
 	check_enviroment()
+=======
+	var/turf/our_turf = get_turf(connected_sensor)
+	var/datum/gas_mixture/environment = our_turf.return_air()
+	check_danger(our_turf, environment, environment.temperature)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	update_appearance()
 	update_name()
@@ -700,9 +779,18 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/airalarm, 27)
 	connected_sensor = null
 	my_area = get_area(src)
 
+<<<<<<< HEAD
 	check_enviroment()
 
 	update_appearance()
 	update_name()
 
 #undef AIRALARM_WARNING_COOLDOWN
+=======
+	var/turf/our_turf = get_turf(src)
+	var/datum/gas_mixture/environment = our_turf.return_air()
+	check_danger(our_turf, environment, environment.temperature)
+
+	update_appearance()
+	update_name()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

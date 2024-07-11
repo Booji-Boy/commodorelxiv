@@ -29,7 +29,11 @@
 	. = ..()
 	make_meaty(T, amount, material_flags)
 
+<<<<<<< HEAD
 /datum/material/meat/proc/make_meaty(atom/source, amount, material_flags)
+=======
+/datum/material/meat/proc/make_edible(atom/source, amount, material_flags)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/nutriment_count = 3 * (amount / SHEET_MATERIAL_AMOUNT)
 	var/oil_count = 2 * (amount / SHEET_MATERIAL_AMOUNT)
 	source.AddComponent(/datum/component/edible, \

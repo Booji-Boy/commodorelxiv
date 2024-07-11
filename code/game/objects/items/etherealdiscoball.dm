@@ -60,9 +60,15 @@
 
 /obj/structure/etherealball/proc/DiscoFever()
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
+<<<<<<< HEAD
 	current_color = random_color()
 	set_light(range, power, "#[current_color]")
 	add_atom_colour("#[current_color]", FIXED_COLOUR_PRIORITY)
+=======
+	current_color = "#[random_color()]"
+	set_light(l_outer_range = range, l_power = power, l_color = current_color)
+	add_atom_colour(current_color, FIXED_COLOUR_PRIORITY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	update_appearance()
 	TimerID = addtimer(CALLBACK(src, PROC_REF(DiscoFever)), 5, TIMER_STOPPABLE)  //Call ourselves every 0.5 seconds to change colors
 

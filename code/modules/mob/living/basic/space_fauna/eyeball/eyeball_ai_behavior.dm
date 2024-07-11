@@ -1,11 +1,21 @@
 /datum/ai_behavior/find_the_blind
 
 /datum/ai_behavior/find_the_blind/perform(seconds_per_tick, datum/ai_controller/controller, blind_key, threshold_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living_pawn = controller.pawn
 	var/list/blind_list = list()
 	var/eye_damage_threshold = controller.blackboard[threshold_key]
 	if(!eye_damage_threshold)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/mob/living/carbon/blind in oview(9, living_pawn))
 		var/obj/item/organ/internal/eyes/eyes = blind.get_organ_slot(ORGAN_SLOT_EYES)
 		if(isnull(eyes))
@@ -15,10 +25,18 @@
 		blind_list += blind
 
 	if(!length(blind_list))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 	controller.set_blackboard_key(blind_key, pick(blind_list))
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, FALSE)
+		return
+
+	controller.set_blackboard_key(blind_key, pick(blind_list))
+	finish_action(controller, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/heal_eye_damage
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_REQUIRE_REACH
@@ -31,16 +49,30 @@
 	set_movement_target(controller, target)
 
 /datum/ai_behavior/heal_eye_damage/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/carbon/target = controller.blackboard[target_key]
 	var/mob/living/living_pawn = controller.pawn
 
 	if(QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, target_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/organ/internal/eyes/eyes = target.get_organ_slot(ORGAN_SLOT_EYES)
 	var/datum/callback/callback = CALLBACK(living_pawn, TYPE_PROC_REF(/mob/living/basic/eyeball, heal_eye_damage), target, eyes)
 	callback.Invoke()
 
+<<<<<<< HEAD
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+	finish_action(controller, TRUE, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/heal_eye_damage/finish_action(datum/ai_controller/controller, succeeded, target_key)
 	. = ..()
@@ -70,11 +102,17 @@
 	var/mob/living/target = controller.blackboard[target_key]
 
 	if(QDELETED(ability) || QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, ability_key, target_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/direction_to_compare = get_dir(target, controller.pawn)
 	var/target_direction = target.dir
 	if(direction_to_compare != target_direction)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
 
 	var/result = ability.InterceptClickOn(controller.pawn, null, target)
@@ -82,6 +120,13 @@
 		return AI_BEHAVIOR_INSTANT
 	else
 		return AI_BEHAVIOR_INSTANT | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE, ability_key, target_key)
+		return
+
+	var/result = ability.InterceptClickOn(controller.pawn, null, target)
+	finish_action(controller, result, ability_key, target_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_behavior/hunt_target/unarmed_attack_target/carrot
 	hunt_cooldown = 2 SECONDS

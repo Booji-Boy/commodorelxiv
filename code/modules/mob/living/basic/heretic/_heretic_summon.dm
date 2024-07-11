@@ -8,8 +8,13 @@
 	gender = NEUTER
 	mob_biotypes = NONE
 
+<<<<<<< HEAD
 	habitable_atmos = null
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, STAMINA = 0, OXY = 0)
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	speed = 0
 	melee_attack_cooldown = CLICK_CD_MELEE
 
@@ -26,7 +31,11 @@
 	unsuitable_cold_damage = 0
 	unsuitable_heat_damage = 0
 
+<<<<<<< HEAD
 	combat_mode = TRUE
+=======
+	istate = ISTATE_HARM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller = null
 	speak_emote = list("screams")
 	gold_core_spawnable = NO_SPAWN

@@ -79,7 +79,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	var/stability = 100
 	///Did we take something like mutagen? In that case we cant get our genes scanned to instantly cheese all the powers.
 	var/scrambled = FALSE
-
+	var/delete_species = TRUE //Set to FALSE when a body is scanned by a cloner to fix #38875
 
 /datum/dna/New(mob/living/new_holder)
 	if(istype(new_holder))
@@ -93,7 +93,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 			cholder.dna = null
 	holder = null
 
-	QDEL_NULL(species)
+	if(delete_species)
+		QDEL_NULL(species)
 
 	mutations.Cut() //This only references mutations, just dereference.
 	temporary_mutations.Cut() //^
@@ -205,6 +206,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 
 	if(features["mcolor"])
 		L[DNA_MUTANT_COLOR_BLOCK] = sanitize_hexcolor(features["mcolor"], include_crunch = FALSE)
+	if(features["mcolor_secondary"])
+		L[DNA_MUTANT_COLOR_SECONDARY] = sanitize_hexcolor(features["mcolor_secondary"], include_crunch = FALSE)
 	if(features["ethcolor"])
 		L[DNA_ETHEREAL_COLOR_BLOCK] = sanitize_hexcolor(features["ethcolor"], include_crunch = FALSE)
 	if(features["lizard_markings"])
@@ -351,6 +354,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	switch(blocknumber)
 		if(DNA_MUTANT_COLOR_BLOCK)
 			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["mcolor"], include_crunch = FALSE))
+		if(DNA_MUTANT_COLOR_SECONDARY)
+			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["mcolor_secondary"], include_crunch = FALSE))
 		if(DNA_ETHEREAL_COLOR_BLOCK)
 			set_uni_feature_block(blocknumber, sanitize_hexcolor(features["ethcolor"], include_crunch = FALSE))
 		if(DNA_LIZARD_MARKINGS_BLOCK)
@@ -647,6 +652,8 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	var/features = dna.unique_features
 	if(dna.features["mcolor"])
 		dna.features["mcolor"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_MUTANT_COLOR_BLOCK))
+	if(dna.features["mcolor_secondary"])
+		dna.features["mcolor_secondary"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_MUTANT_COLOR_SECONDARY))
 	if(dna.features["ethcolor"])
 		dna.features["ethcolor"] = sanitize_hexcolor(get_uni_feature_block(features, DNA_ETHEREAL_COLOR_BLOCK))
 	if(dna.features["lizard_markings"])
@@ -893,7 +900,12 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 				apply_status_effect(/datum/status_effect/go_away)
 			if(7)
 				to_chat(src, span_notice("Oh, I actually feel quite alright!"))
+<<<<<<< HEAD
 				ForceContractDisease(new /datum/disease/decloning) // slow acting, non-viral GBS
+=======
+				infect_disease_predefined(DISEASE_DECLONING, TRUE, "[ROUND_TIME()] Infected by DNA Instability")
+				//ForceContractDisease(new/datum/disease/decloning()) //slow acting, non-viral clone damage based GBS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(8)
 				var/list/elligible_organs = list()
 				for(var/obj/item/organ/internal/internal_organ in organs) //make sure we dont get an implant or cavity item
@@ -907,7 +919,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 					if(prob(20))
 						O.animate_atom_living()
 			if(9 to 10)
-				ForceContractDisease(new/datum/disease/gastrolosis())
+				//ForceContractDisease(new/datum/disease/gastrolosis())
 				to_chat(src, span_notice("Oh, I actually feel quite alright!"))
 			if(11)
 				to_chat(src, span_notice("Your DNA mutates into the ultimate biological form!"))

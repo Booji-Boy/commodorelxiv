@@ -14,9 +14,11 @@
 
 	var/static/list/allowed_devices = typecacheof(list(
 		/obj/item/gun/energy,
+		/obj/item/gun/microfusion, //monkestation edit
 		/obj/item/melee/baton/security,
 		/obj/item/ammo_box/magazine/recharge,
 		/obj/item/modular_computer,
+		/obj/item/stock_parts/cell/microfusion, //monkestation edit
 	))
 
 /obj/machinery/recharger/RefreshParts()
@@ -75,6 +77,70 @@
 		update_use_power(IDLE_POWER_USE)
 		using_power = FALSE
 		update_appearance()
+<<<<<<< HEAD
+=======
+
+/obj/machinery/recharger/attackby(obj/item/G, mob/user, params)
+	if(G.tool_behaviour == TOOL_WRENCH)
+		if(charging)
+			to_chat(user, span_notice("Remove the charging item first!"))
+			return
+		set_anchored(!anchored)
+		power_change()
+		to_chat(user, span_notice("You [anchored ? "attached" : "detached"] [src]."))
+		G.play_tool_sound(src)
+		return
+
+	var/allowed = is_type_in_typecache(G, allowed_devices)
+
+	if(allowed)
+		if(anchored)
+			if(charging || panel_open)
+				return 1
+
+			//Checks to make sure he's not in space doing it, and that the area got proper power.
+			var/area/a = get_area(src)
+			if(!isarea(a) || a.power_equip == 0)
+				to_chat(user, span_notice("[src] blinks red as you try to insert [G]."))
+				return 1
+
+			if (istype(G, /obj/item/gun/energy))
+				var/obj/item/gun/energy/E = G
+				if(!E.can_charge)
+					to_chat(user, span_notice("Your gun has no external power connector."))
+					return 1
+
+			//MONKESTATION EDIT ADDITION
+			if (istype(G, /obj/item/gun/microfusion))
+				var/obj/item/gun/microfusion/microfusion_gun = G
+				if(microfusion_gun.cell?.chargerate <= 0)
+					to_chat(user, span_notice("[microfusion_gun] cannot be recharged!"))
+					return TRUE
+
+			if(istype(G, /obj/item/stock_parts/cell/microfusion))
+				var/obj/item/stock_parts/cell/microfusion/inserting_cell = G
+				if(inserting_cell.chargerate <= 0)
+					to_chat(user, span_notice("[inserting_cell] cannot be recharged!"))
+					return TRUE
+			//MONKESTATION EDIT END
+			if(!user.transferItemToLoc(G, src))
+				return 1
+			setCharging(G)
+
+		else
+			to_chat(user, span_notice("[src] isn't connected to anything!"))
+		return 1
+
+	if(anchored && !charging)
+		if(default_deconstruction_screwdriver(user, "recharger", "recharger", G))
+			update_appearance()
+			return
+
+		if(panel_open && G.tool_behaviour == TOOL_CROWBAR)
+			default_deconstruction_crowbar(G)
+			return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/machinery/recharger/attackby(obj/item/attacking_item, mob/user, params)

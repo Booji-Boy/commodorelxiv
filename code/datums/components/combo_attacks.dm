@@ -32,7 +32,11 @@
 	src.leniency_time = leniency_time
 	src.can_attack_callback = can_attack_callback
 
+<<<<<<< HEAD
 /datum/component/combo_attacks/Destroy(force)
+=======
+/datum/component/combo_attacks/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	can_attack_callback = null
 	return ..()
 

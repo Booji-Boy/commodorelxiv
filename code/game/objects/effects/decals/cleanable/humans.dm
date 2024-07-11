@@ -12,6 +12,10 @@
 	var/dryname = "dried blood" //when the blood lasts long enough, it becomes dry and gets a new name
 	var/drydesc = "Looks like it's been here a while. Eew." //as above
 	var/drytime = 0
+<<<<<<< HEAD
+=======
+	var/count = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/footprint_sprite = null
 
 /obj/effect/decal/cleanable/blood/Initialize(mapload)
@@ -324,7 +328,15 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 			if(species == "unknown")
 				. += "Some <B>feet</B>."
 			else if(species == SPECIES_MONKEY)
+<<<<<<< HEAD
 				. += "[icon2html('icons/mob/human/human.dmi', user, "monkey")] Some <B>monkey paws</B>."
+=======
+				. += "[icon2html('icons/mob/species/human/human.dmi', user, "monkey")] Some <B>monkey paws</B>."
+			else if(species == SPECIES_SIMIAN)
+				. += "[icon2html('monkestation/icons/mob/species/simian/bodyparts.dmi', user, "simian_l_leg")] Some <B>simian paws</B>."
+			else if(species == SPECIES_LIZARD)
+				. += "[icon2html('icons/mob/species/lizard/bodyparts.dmi', user, "digitigrade_l_leg")] Some <B>lizard claws</B>."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			else if(species == SPECIES_HUMAN)
 				. += "[icon2html('icons/mob/human/bodyparts.dmi', user, "default_human_l_leg")] Some <B>human feet</B>."
 			else

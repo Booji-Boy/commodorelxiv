@@ -29,6 +29,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		// burning particles look pretty bad when they stack on mobs, so that behavior is not wanted for items
 		particle_effect = new(atom_parent, fire_particles, isitem(atom_parent) ? NONE : PARTICLE_ATTACH_MOB)
 	START_PROCESSING(SSburning, src)
+<<<<<<< HEAD
 
 /datum/component/burning/Destroy(force)
 	STOP_PROCESSING(SSburning, src)
@@ -36,6 +37,29 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(particle_effect)
 		QDEL_NULL(particle_effect)
 	return ..()
+=======
+
+/datum/component/burning/Destroy(force, silent)
+	STOP_PROCESSING(SSburning, src)
+	if(particle_effect)
+		QDEL_NULL(particle_effect)
+	return ..()
+
+/datum/component/burning/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_update_overlays))
+	RegisterSignal(parent, COMSIG_ATOM_EXTINGUISH, PROC_REF(on_extinguish))
+	var/atom/atom_parent = parent
+	atom_parent.resistance_flags |= ON_FIRE
+	atom_parent.update_appearance()
+
+/datum/component/burning/UnregisterFromParent()
+	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ATOM_UPDATE_OVERLAYS, COMSIG_ATOM_EXTINGUISH))
+	var/atom/atom_parent = parent
+	if(!QDELETED(atom_parent))
+		atom_parent.resistance_flags &= ~ON_FIRE
+		atom_parent.update_appearance()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/burning/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, PROC_REF(on_attack_hand))
@@ -70,6 +94,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 /datum/component/burning/proc/on_examine(atom/source, mob/user, list/examine_list)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	examine_list += span_danger("[source.p_Theyre()] burning!")
 
 /// Handles searing the hand of anyone who tries to touch parent without protection.
@@ -92,6 +117,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	playsound(source, SFX_SEAR, 50, TRUE)
 	user.update_damage_overlays()
 	return COMPONENT_CANCEL_ATTACK_CHAIN
+=======
+	examine_list += span_danger("[source.p_theyre(TRUE)] burning!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Maintains the burning overlay on the parent atom
 /datum/component/burning/proc/on_update_overlays(atom/source, list/overlays)

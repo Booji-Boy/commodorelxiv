@@ -2,10 +2,13 @@ import { useBackend } from 'tgui/backend';
 import { Box, Button, Icon, NoticeBox, Stack } from 'tgui/components';
 import { Window } from 'tgui/layouts';
 
+<<<<<<< HEAD
 import { SecurityRecordTabs } from './RecordTabs';
 import { SecurityRecordView } from './RecordView';
 import { SecurityRecordsData } from './types';
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 export const SecurityRecords = (props) => {
   const { data } = useBackend<SecurityRecordsData>();
   const { authenticated } = data;

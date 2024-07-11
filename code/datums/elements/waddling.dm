@@ -4,8 +4,11 @@
 	. = ..()
 	if(!ismovable(target))
 		return ELEMENT_INCOMPATIBLE
+<<<<<<< HEAD
 	if(!HAS_TRAIT(target, TRAIT_WADDLING))
 		stack_trace("[type] added to [target] without adding TRAIT_WADDLING first. Please use AddElementTrait instead.")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(Waddle))
 
 /datum/element/waddling/Detach(datum/source)

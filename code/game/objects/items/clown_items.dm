@@ -154,8 +154,13 @@
 		return CLEAN_BLOCKED
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/soap/storage_insert_on_interaction(datum/storage, atom/storage_holder, mob/living/user)
 	return !user.combat_mode  // only cleans a storage item if on combat
+=======
+/obj/item/soap/attackby_storage_insert(datum/storage, atom/storage_holder, mob/living/user)
+	return !(user?.istate & ISTATE_HARM)  // only cleans a storage item if on combat
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  * Bike Horns

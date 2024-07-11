@@ -134,14 +134,22 @@ SUBSYSTEM_DEF(vote)
 	// If user has already voted, remove their specific vote
 	if(voter.ckey in current_vote.choices_by_ckey)
 		var/their_old_vote = current_vote.choices_by_ckey[voter.ckey]
-		current_vote.choices[their_old_vote]--
-
+		//monkestation edit start
+		if(current_vote.donator_multiplier && voter?.client?.patreon?.access_rank >= 3)
+			current_vote.choices[their_old_vote] -= current_vote.donator_multiplier
+		else
+			current_vote.choices[their_old_vote]--
+		//monkestation edit end
 	else
 		voted += voter.ckey
 
 	current_vote.choices_by_ckey[voter.ckey] = their_vote
-	current_vote.choices[their_vote]++
-
+	//monkestation edit start
+	if(current_vote.donator_multiplier && voter?.client?.patreon?.access_rank >= 3)
+		current_vote.choices[their_vote] += current_vote.donator_multiplier
+	else
+		current_vote.choices[their_vote]++
+	//monkestation edit end
 	return TRUE
 
 /**
@@ -160,12 +168,21 @@ SUBSYSTEM_DEF(vote)
 
 	if(current_vote.choices_by_ckey[voter.ckey + their_vote] == 1)
 		current_vote.choices_by_ckey[voter.ckey + their_vote] = 0
-		current_vote.choices[their_vote]--
+		//monkestation edit start
+		if(current_vote.donator_multiplier && voter?.client?.patreon?.access_rank >= 3)
+			current_vote.choices[their_vote] -= current_vote.donator_multiplier
+		else
+			current_vote.choices[their_vote]--
+		//monkestation edit end
 
 	else
 		current_vote.choices_by_ckey[voter.ckey + their_vote] = 1
-		current_vote.choices[their_vote]++
-
+		//monkestation edit start
+		if(current_vote.donator_multiplier && voter?.client?.patreon?.access_rank >= 3)
+			current_vote.choices[their_vote] += current_vote.donator_multiplier
+		else
+			current_vote.choices[their_vote]++
+		//monkestation edit end
 	return TRUE
 
 /**
@@ -316,12 +333,16 @@ SUBSYSTEM_DEF(vote)
 			"message" = can_vote == VOTE_AVAILABLE ? vote.default_message : can_vote,
 		)
 
+		if(vote.has_desc)
+			vote_data += list("desc" = vote.return_desc(vote_name))
+
 		if(vote == current_vote)
 			var/list/choices = list()
 			for(var/key in current_vote.choices)
 				choices += list(list(
 					"name" = key,
 					"votes" = current_vote.choices[key],
+					"desc" = current_vote.return_desc(key)
 				))
 
 			data["currentVote"] = list(

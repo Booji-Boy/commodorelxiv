@@ -26,8 +26,12 @@
 	data["barcode_split"] = cut_multiplier * 100
 	return data
 
+<<<<<<< HEAD
 /datum/computer_file/program/shipping/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
+=======
+/datum/computer_file/program/shipping/ui_act(action, list/params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!computer.computer_id_slot) //We need an ID to successfully run
 		return FALSE
 

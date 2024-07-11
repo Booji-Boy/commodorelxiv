@@ -95,6 +95,7 @@
 	name = "Grounding Solution"
 	item_path = /obj/item/reagent_containers/condiment/grounding_solution
 	cost_per_order = 30
+<<<<<<< HEAD
 
 /datum/orderable_item/reagents/honey
 	name = "Honey"
@@ -105,3 +106,5 @@
 	name = "Mayonnaise"
 	item_path = /obj/item/reagent_containers/condiment/mayonnaise
 	cost_per_order = 30
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -20,8 +20,12 @@
 	custom_materials = list(/datum/material/iron= SMALL_MATERIAL_AMOUNT * 0.5, /datum/material/glass= SMALL_MATERIAL_AMOUNT * 0.2)
 	actions_types = list(/datum/action/item_action/toggle_light)
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_color = COLOR_LIGHT_ORANGE
 	light_range = 4
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_power = 1
 	light_on = FALSE
 	/// If we've been forcibly disabled for a temporary amount of time.
@@ -32,13 +36,23 @@
 	var/sound_on = 'sound/weapons/magin.ogg'
 	/// The sound the light makes when it's turned off
 	var/sound_off = 'sound/weapons/magout.ogg'
+<<<<<<< HEAD
 	/// Should the flashlight start turned on?
+=======
+	/// Is the light turned on or off currently
+	var/on = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/start_on = FALSE
 
 /obj/item/flashlight/Initialize(mapload)
 	. = ..()
 	if(start_on)
 		set_light_on(TRUE)
+<<<<<<< HEAD
+=======
+	if(icon_state == "[initial(icon_state)]-on")
+		on = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	update_brightness()
 	register_context()
 	if(toggle_context)
@@ -73,9 +87,13 @@
 		icon_state = initial(icon_state)
 		if(!isnull(inhand_icon_state))
 			inhand_icon_state = initial(inhand_icon_state)
+<<<<<<< HEAD
 
 /obj/item/flashlight/proc/update_brightness()
 	update_appearance(UPDATE_ICON)
+=======
+	set_light_on(on)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(light_system == COMPLEX_LIGHT)
 		update_light()
 
@@ -126,10 +144,151 @@
 		user.visible_message(span_warning("[user] shines [src] into [M.p_their()] eyes."), ignored_mobs = user)
 		. += span_info("You direct [src] to into your eyes:\n")
 
+<<<<<<< HEAD
 		if(M.is_blind())
 			. += "<span class='notice ml-1'>You're not entirely certain what you were expecting...</span>\n"
 		else
 			. += "<span class='notice ml-1'>Trippy!</span>\n"
+=======
+		if(light_power < 1)
+			to_chat(user, "[span_warning("\The [src] isn't bright enough to see anything!")] ")
+			return
+
+		var/render_list = list()//information will be packaged in a list for clean display to the user
+
+		switch(user.zone_selected)
+			if(BODY_ZONE_PRECISE_EYES)
+				if((M.head && M.head.flags_cover & HEADCOVERSEYES) || (M.wear_mask && M.wear_mask.flags_cover & MASKCOVERSEYES) || (M.glasses && M.glasses.flags_cover & GLASSESCOVERSEYES))
+					to_chat(user, span_warning("You're going to need to remove that [(M.head && M.head.flags_cover & HEADCOVERSEYES) ? "helmet" : (M.wear_mask && M.wear_mask.flags_cover & MASKCOVERSEYES) ? "mask": "glasses"] first!"))
+					return
+
+				var/obj/item/organ/internal/eyes/E = M.get_organ_slot(ORGAN_SLOT_EYES)
+				var/obj/item/organ/internal/brain = M.get_organ_slot(ORGAN_SLOT_BRAIN)
+				if(!E)
+					to_chat(user, span_warning("[M] doesn't have any eyes!"))
+					return
+
+				M.flash_act(visual = TRUE, length = (user.istate & ISTATE_HARM) ? 2.5 SECONDS : 1 SECONDS) // Apply a 1 second flash effect to the target. The duration increases to 2.5 Seconds if you have combat mode on.
+
+				if(M == user) //they're using it on themselves
+					user.visible_message(span_warning("[user] shines [src] into [M.p_their()] eyes."), ignored_mobs = user)
+					render_list += span_info("You direct [src] to into your eyes:\n")
+
+					if(M.is_blind())
+						render_list += "<span class='notice ml-1'>You're not entirely certain what you were expecting...</span>\n"
+					else
+						render_list += "<span class='notice ml-1'>Trippy!</span>\n"
+
+				else
+					user.visible_message(span_warning("[user] directs [src] to [M]'s eyes."), ignored_mobs = user)
+					render_list += span_info("You direct [src] to [M]'s eyes:\n")
+
+					if(M.stat == DEAD || M.is_blind())
+						render_list += "<span class='danger ml-1'>[M.p_their(TRUE)] pupils don't react to the light!</span>\n"//mob is dead
+					else if(brain.damage > 20)
+						render_list += "<span class='danger ml-1'>[M.p_their(TRUE)] pupils contract unevenly!</span>\n"//mob has sustained damage to their brain
+					else
+						render_list += "<span class='notice ml-1'>[M.p_their(TRUE)] pupils narrow.</span>\n"//they're okay :D
+
+					if(M.dna && M.dna.check_mutation(/datum/mutation/human/xray))
+						render_list += "<span class='danger ml-1'>[M.p_their(TRUE)] pupils give an eerie glow!</span>\n"//mob has X-ray vision
+
+				//display our packaged information in an examine block for easy reading
+				to_chat(user, examine_block(jointext(render_list, "")), type = MESSAGE_TYPE_INFO)
+
+			if(BODY_ZONE_PRECISE_MOUTH)
+
+				if(M.is_mouth_covered())
+					to_chat(user, span_warning("You're going to need to remove that [(M.head && M.head.flags_cover & HEADCOVERSMOUTH) ? "helmet" : "mask"] first!"))
+					return
+
+				var/list/mouth_organs = new
+				for(var/obj/item/organ/organ as anything in M.organs)
+					if(organ.zone == BODY_ZONE_PRECISE_MOUTH)
+						mouth_organs.Add(organ)
+				var/organ_list = ""
+				var/organ_count = LAZYLEN(mouth_organs)
+				if(organ_count)
+					for(var/I in 1 to organ_count)
+						if(I > 1)
+							if(I == mouth_organs.len)
+								organ_list += ", and "
+							else
+								organ_list += ", "
+						var/obj/item/organ/O = mouth_organs[I]
+						organ_list += (O.gender == "plural" ? O.name : "\an [O.name]")
+
+				var/pill_count = 0
+				for(var/datum/action/item_action/hands_free/activate_pill/AP in M.actions)
+					pill_count++
+
+				if(M == user)//if we're looking on our own mouth
+					var/can_use_mirror = FALSE
+					if(isturf(user.loc))
+						var/obj/structure/mirror/mirror = locate(/obj/structure/mirror, user.loc)
+						if(mirror)
+							switch(user.dir)
+								if(NORTH)
+									can_use_mirror = mirror.pixel_y > 0
+								if(SOUTH)
+									can_use_mirror = mirror.pixel_y < 0
+								if(EAST)
+									can_use_mirror = mirror.pixel_x > 0
+								if(WEST)
+									can_use_mirror = mirror.pixel_x < 0
+
+					M.visible_message(span_notice("[M] directs [src] to [ M.p_their()] mouth."), ignored_mobs = user)
+					render_list += span_info("You point [src] into your mouth:\n")
+					if(!can_use_mirror)
+						to_chat(user, span_notice("You can't see anything without a mirror."))
+						return
+					if(organ_count)
+						render_list += "<span class='notice ml-1'>Inside your mouth [organ_count > 1 ? "are" : "is"] [organ_list].</span>\n"
+					else
+						render_list += "<span class='notice ml-1'>There's nothing inside your mouth.</span>\n"
+					if(pill_count)
+						render_list += "<span class='notice ml-1'>You have [pill_count] implanted pill[pill_count > 1 ? "s" : ""].</span>\n"
+
+				else //if we're looking in someone elses mouth
+					user.visible_message(span_notice("[user] directs [src] to [M]'s mouth."), ignored_mobs = user)
+					render_list += span_info("You point [src] into [M]'s mouth:\n")
+					if(organ_count)
+						render_list += "<span class='notice ml-1'>Inside [ M.p_their()] mouth [organ_count > 1 ? "are" : "is"] [organ_list].</span>\n"
+					else
+						render_list += "<span class='notice ml-1'>[M] doesn't have any organs in [ M.p_their()] mouth.</span>\n"
+					if(pill_count)
+						render_list += "<span class='notice ml-1'>[M] has [pill_count] pill[pill_count > 1 ? "s" : ""] implanted in [ M.p_their()] teeth.</span>\n"
+
+				//assess any suffocation damage
+				var/hypoxia_status = M.getOxyLoss() > 20
+
+				if(M == user)
+					if(hypoxia_status)
+						render_list += "<span class='danger ml-1'>Your lips appear blue!</span>\n"//you have suffocation damage
+					else
+						render_list += "<span class='notice ml-1'>Your lips appear healthy.</span>\n"//you're okay!
+				else
+					if(hypoxia_status)
+						render_list += "<span class='danger ml-1'>[M.p_their(TRUE)] lips appear blue!</span>\n"//they have suffocation damage
+					else
+						render_list += "<span class='notice ml-1'>[M.p_their(TRUE)] lips appear healthy.</span>\n"//they're okay!
+
+				//assess blood level
+				if(M == user)
+					render_list += span_info("You press a finger to your gums:\n")
+				else
+					render_list += span_info("You press a finger to [M.p_their()] gums:\n")
+
+				if(M.blood_volume <= BLOOD_VOLUME_SAFE && M.blood_volume > BLOOD_VOLUME_OKAY)
+					render_list += "<span class='danger ml-1'>Color returns slowly!</span>\n"//low blood
+				else if(M.blood_volume <= BLOOD_VOLUME_OKAY)
+					render_list += "<span class='danger ml-1'>Color does not return!</span>\n"//critical blood
+				else
+					render_list += "<span class='notice ml-1'>Color returns quickly.</span>\n"//they're okay :D
+
+				//display our packaged information in an examine block for easy reading
+				to_chat(user, examine_block(jointext(render_list, "")), type = MESSAGE_TYPE_INFO)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	else
 		user.visible_message(span_warning("[user] directs [src] to [M]'s eyes."), ignored_mobs = user)
@@ -301,17 +460,24 @@
 	inhand_icon_state = ""
 	worn_icon_state = "pen"
 	w_class = WEIGHT_CLASS_TINY
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
 	light_range = 2
 	light_power = 0.8
 	light_color = "#CCFFFF"
 	COOLDOWN_DECLARE(holosign_cooldown)
+=======
+	flags_1 = CONDUCT_1
+	light_outer_range = 2
+	var/holo_cooldown = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/flashlight/pen/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!COOLDOWN_FINISHED(src, holosign_cooldown))
 		balloon_alert(user, "not ready!")
 		return ITEM_INTERACT_BLOCKING
 
+<<<<<<< HEAD
 	var/turf/target_turf = get_turf(interacting_with)
 	var/mob/living/living_target = locate(/mob/living) in target_turf
 
@@ -323,6 +489,8 @@
 	COOLDOWN_START(src, holosign_cooldown, 10 SECONDS)
 	return ITEM_INTERACT_SUCCESS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // see: [/datum/wound/burn/flesh/proc/uv()]
 /obj/item/flashlight/pen/paramedic
 	name = "paramedic penlight"
@@ -358,9 +526,13 @@
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
 	force = 9 // Not as good as a stun baton.
+<<<<<<< HEAD
 	light_range = 5 // A little better than the standard flashlight.
 	light_power = 0.8
 	light_color = "#99ccff"
+=======
+	light_outer_range = 5 // A little better than the standard flashlight.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hitsound = 'sound/weapons/genhit1.ogg'
 
 // the desk lamps are a bit special
@@ -372,7 +544,11 @@
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	force = 10
+<<<<<<< HEAD
 	light_range = 3.5
+=======
+	light_outer_range = 3.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_system = COMPLEX_LIGHT
 	light_color = LIGHT_COLOR_FAINT_BLUE
 	w_class = WEIGHT_CLASS_BULKY
@@ -399,7 +575,7 @@
 /obj/item/flashlight/flare
 	name = "flare"
 	desc = "A red Nanotrasen issued flare. There are instructions on the side, it reads 'pull cord, make light'."
-	light_range = 7 // Pretty bright.
+	light_outer_range = 7 // Pretty bright.
 	icon_state = "flare"
 	inhand_icon_state = "flare"
 	worn_icon_state = "flare"
@@ -407,7 +583,10 @@
 	heat = 1000
 	light_color = LIGHT_COLOR_FLARE
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_power = 2
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	grind_results = list(/datum/reagent/sulfur = 15)
 	sound_on = 'sound/items/match_strike.ogg'
 	toggle_context = FALSE
@@ -443,7 +622,11 @@
 	if(!isliving(victim))
 		return ..()
 
+<<<<<<< HEAD
 	if(light_on && victim.ignite_mob())
+=======
+	if(on && victim.ignite_mob())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(victim)] on fire with [src] at [AREACOORD(user)]")
 		user.log_message("set [key_name(victim)] on fire with [src]", LOG_ATTACK)
 
@@ -533,9 +716,14 @@
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	w_class = WEIGHT_CLASS_TINY
 	heat = 1000
+<<<<<<< HEAD
 	light_range = 2
 	light_power = 1.5
 	light_color = LIGHT_COLOR_FIRE
+=======
+	light_color = LIGHT_COLOR_FIRE
+	light_outer_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	fuel = 35 MINUTES
 	randomize_fuel = FALSE
 	trash_type = /obj/item/trash/candle
@@ -544,6 +732,9 @@
 	var/current_wax_level = 1
 	/// The previous wax level, remembered so we only have to make 3 update_appearance calls total as opposed to every tick
 	var/last_wax_level = 1
+
+	/// Pollutant type for scented candles
+	var/scented_type
 
 /obj/item/flashlight/flare/candle/Initialize(mapload)
 	. = ..()
@@ -635,6 +826,11 @@
 
 /obj/item/flashlight/flare/candle/process(seconds_per_tick)
 	. = ..()
+
+	if(scented_type)
+		var/turf/my_turf = get_turf(src)
+		my_turf.pollute_turf(scented_type, 5)
+
 	check_wax_level()
 
 /obj/item/flashlight/flare/candle/infinite
@@ -647,8 +843,12 @@
 /obj/item/flashlight/flare/torch
 	name = "torch"
 	desc = "A torch fashioned from some leaves and a log."
+<<<<<<< HEAD
 	light_range = 4
 	light_power = 1.3
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "torch"
 	inhand_icon_state = "torch"
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
@@ -666,6 +866,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
 	desc = "A mining lantern."
+<<<<<<< HEAD
 	light_range = 5 // luminosity when on
 	light_power = 1.5
 	light_color = "#ffcc66"
@@ -673,20 +874,32 @@
 
 /obj/item/flashlight/lantern/on
 	start_on = TRUE
+=======
+	light_outer_range = 6 // luminosity when on
+	light_system = OVERLAY_LIGHT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/flashlight/lantern/heirloom_moth
 	name = "old lantern"
 	desc = "An old lantern that has seen plenty of use."
+<<<<<<< HEAD
 	light_range = 3.5
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/flashlight/lantern/syndicate
 	name = "suspicious lantern"
 	desc = "A suspicious looking lantern."
 	icon_state = "syndilantern"
 	inhand_icon_state = "syndilantern"
+<<<<<<< HEAD
 	light_range = 6
 	light_power = 2
 	light_color = "#ffffe6"
+=======
+	light_outer_range = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/flashlight/lantern/jade
 	name = "jade lantern"
@@ -704,8 +917,12 @@
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_BELT
 	custom_materials = null
+<<<<<<< HEAD
 	light_range = 6 //luminosity when on
 	light_color = "#ffff66"
+=======
+	light_outer_range = 7 //luminosity when on
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_system = OVERLAY_LIGHT
 
 /obj/item/flashlight/emp
@@ -769,8 +986,12 @@
 	desc = "A military-grade glowstick."
 	custom_price = PAYCHECK_LOWER
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	light_range = 3.5
 	light_power = 2
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_system = OVERLAY_LIGHT
 	color = LIGHT_COLOR_GREEN
 	icon_state = "glowstick"
@@ -925,8 +1146,13 @@
 	desc = "Groovy..."
 	icon_state = null
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 4
 	light_power = 2
+=======
+	light_outer_range = 4
+	light_power = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	alpha = 0
 	plane = FLOOR_PLANE
 	anchored = TRUE
@@ -934,13 +1160,17 @@
 	///Boolean that switches when a full color flip ends, so the light can appear in all colors.
 	var/even_cycle = FALSE
 	///Base light_range that can be set on Initialize to use in smooth light range expansions and contractions.
+<<<<<<< HEAD
 	var/base_light_range = 4
 	start_on = TRUE
+=======
+	var/base_light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/flashlight/spotlight/Initialize(mapload, _light_range, _light_power, _light_color)
 	. = ..()
 	if(!isnull(_light_range))
-		base_light_range = _light_range
+		base_light_outer_range = _light_range
 		set_light_range(_light_range)
 	if(!isnull(_light_power))
 		set_light_power(_light_power)
@@ -953,9 +1183,13 @@
 	icon_state = "flashdark"
 	inhand_icon_state = "flashdark"
 	light_system = COMPLEX_LIGHT //The overlay light component is not yet ready to produce darkness.
+<<<<<<< HEAD
 	light_range = 0
+=======
+	light_outer_range = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Variable to preserve old lighting behavior in flashlights, to handle darkness.
-	var/dark_light_range = 2.5
+	var/dark_light_outer_range = 2.5
 	///Variable to preserve old lighting behavior in flashlights, to handle darkness.
 	var/dark_light_power = -3
 	var/on = FALSE
@@ -963,7 +1197,7 @@
 /obj/item/flashlight/flashdark/update_brightness()
 	. = ..()
 	if(on)
-		set_light(dark_light_range, dark_light_power)
+		set_light(l_outer_range = dark_light_outer_range, l_power = dark_light_power)
 	else
 		set_light(0)
 
@@ -971,6 +1205,7 @@
 /obj/item/flashlight/eyelight
 	name = "eyelight"
 	desc = "This shouldn't exist outside of someone's head, how are you seeing this?"
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
 	item_flags = DROPDEL
 	actions_types = list()
@@ -980,6 +1215,28 @@
 	light_range = 4
 	light_power = 2
 
+=======
+	light_system = OVERLAY_LIGHT
+	light_outer_range = 15
+	light_power = 1
+	flags_1 = CONDUCT_1
+	item_flags = DROPDEL
+	actions_types = list()
+
+/obj/item/flashlight/eyelight/adapted
+	name = "adaptedlight"
+	desc = "There is no possible way for a player to see this, so I can safely talk at length about why this exists. Adapted eyes come \
+	with icons that go above the lighting layer so to make sure the red eyes that pierce the darkness are always visible we make the \
+	human emit the smallest amount of light possible. Thanks for reading :)"
+	light_outer_range = 1
+	light_power = 0.07
+
+/obj/item/flashlight/eyelight/glow
+	light_system = MOVABLE_LIGHT_BEAM
+	light_outer_range = 4
+	light_power = 2
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef FAILURE
 #undef SUCCESS
 #undef NO_FUEL

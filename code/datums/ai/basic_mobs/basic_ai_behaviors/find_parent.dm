@@ -3,13 +3,23 @@
 	var/look_range = 7
 
 /datum/ai_behavior/find_mom/perform(seconds_per_tick, datum/ai_controller/controller, mom_key, ignore_mom_key, found_mom)
+<<<<<<< HEAD
+=======
+	. = ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living_pawn = controller.pawn
 	var/list/mom_types = controller.blackboard[mom_key]
 	var/list/all_moms = list()
 	var/list/ignore_types = controller.blackboard[ignore_mom_key]
 
 	if(!length(mom_types))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for(var/mob/mother in oview(look_range, living_pawn))
 		if(!is_type_in_list(mother, mom_types))
@@ -19,6 +29,16 @@
 		all_moms += mother
 
 	if(length(all_moms))
+<<<<<<< HEAD
 		controller.set_blackboard_key(found_mom, pick(all_moms))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		var/mob/mom = pick(all_moms)
+		controller.set_blackboard_key(found_mom, mom)
+		if(isbasicmob(mom))
+			controller.set_blackboard_key(BB_FRIENDS_LIST, mom.ai_controller.blackboard[BB_FRIENDS_LIST])
+		finish_action(controller, TRUE)
+		return
+	finish_action(controller, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

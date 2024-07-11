@@ -31,11 +31,16 @@
 /datum/element/atmos_sensitive/proc/react_to_move(atom/source, atom/movable/oldloc, direction, forced)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(oldloc)
 		source.UnregisterSignal(oldloc, COMSIG_TURF_EXPOSE)
 	if(source.loc)
 		source.RegisterSignal(source.loc, COMSIG_TURF_EXPOSE, TYPE_PROC_REF(/atom, check_atmos_process))
 	source.atmos_conditions_changed() //Make sure you're properly registered
+=======
+	var/atom/atom_source = source
+	atom_source.atmos_conditions_changed() //Make sure you're properly registered
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/proc/check_atmos_process(datum/source, datum/gas_mixture/air, exposed_temperature)
 	SIGNAL_HANDLER

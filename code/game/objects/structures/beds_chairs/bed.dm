@@ -18,10 +18,16 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 100
 	integrity_failure = 0.35
+<<<<<<< HEAD
 	/// What material this bed is made of
 	var/build_stack_type = /obj/item/stack/sheet/iron
 	/// How many mats to drop when deconstructed
 	var/build_stack_amount = 2
+=======
+	var/buildstacktype = /obj/item/stack/sheet/iron
+	var/buildstackamount = 2
+	var/bolts = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Mobs standing on it are nudged up by this amount. Also used to align the person back when buckled to it after init.
 	var/elevation = 8
 
@@ -30,7 +36,10 @@
 	AddElement(/datum/element/soft_landing)
 	if(elevation)
 		AddElement(/datum/element/elevation, pixel_shift = elevation)
+<<<<<<< HEAD
 	register_context()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/bed/examine(mob/user)
 	. = ..()
@@ -190,7 +199,32 @@
 	qdel(src)
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
+<<<<<<< HEAD
 /obj/item/emergency_bed
+=======
+/obj/structure/bed/roller/post_buckle_mob(mob/living/M)
+	. = ..()
+	set_density(TRUE)
+	icon_state = "up"
+	//Push them up from the normal lying position
+	M.pixel_y = M.base_pixel_y
+
+/obj/structure/bed/roller/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, TRUE)
+
+
+/obj/structure/bed/roller/post_unbuckle_mob(mob/living/M)
+	. = ..()
+	set_density(FALSE)
+	icon_state = "down"
+	//Set them back down to the normal lying position
+	M.pixel_y = M.base_pixel_y + M.body_position_pixel_y_offset
+
+
+/obj/item/roller
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "roller bed"
 	desc = "A collapsed medical bed that can be carried around."
 	icon = 'icons/obj/medical/medical_bed.dmi'
@@ -257,8 +291,13 @@
 	icon_state = "dogbed"
 	desc = "A comfy-looking dog bed. You can even strap your pet in, in case the gravity turns off."
 	anchored = FALSE
+<<<<<<< HEAD
 	build_stack_type = /obj/item/stack/sheet/mineral/wood
 	build_stack_amount = 10
+=======
+	buildstacktype = /obj/item/stack/sheet/mineral/wood
+	buildstackamount = 10
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	elevation = 0
 	var/owned = FALSE
 
@@ -327,17 +366,30 @@
 	icon_state = "bed_double"
 	build_stack_amount = 4
 	max_buckled_mobs = 2
+<<<<<<< HEAD
 	/// The mob who buckled to this bed second, to avoid other mobs getting pixel-shifted before he unbuckles.
+=======
+	///The mob who buckled to this bed second, to avoid other mobs getting pixel-shifted before they unbuckle.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/goldilocks
 
 /obj/structure/bed/double/post_buckle_mob(mob/living/target)
 	. = ..()
+<<<<<<< HEAD
 	if(buckled_mobs.len > 1 && !goldilocks) // Push the second buckled mob a bit higher from the normal lying position
 		target.pixel_y += 6
+=======
+	if(length(buckled_mobs) > 1 && !goldilocks) // Push the second buckled mob a bit higher from the normal lying position
+		target.pixel_y += 14
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		goldilocks = target
 
 /obj/structure/bed/double/post_unbuckle_mob(mob/living/target)
 	. = ..()
 	if(target == goldilocks)
+<<<<<<< HEAD
 		target.pixel_y -= 6
+=======
+		target.pixel_y -= 14
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		goldilocks = null

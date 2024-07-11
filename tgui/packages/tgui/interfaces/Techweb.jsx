@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { useBackend, useLocalState } from '../backend';
 import {
+<<<<<<< HEAD
   Box,
   Button,
   Collapsible,
@@ -17,6 +18,21 @@ import {
   VirtualList,
 } from '../components';
 import { NtosWindow, Window } from '../layouts';
+=======
+  Button,
+  Section,
+  Modal,
+  Tabs,
+  Box,
+  Input,
+  Flex,
+  ProgressBar,
+  Collapsible,
+  Icon,
+  Divider,
+} from '../components';
+import { Window, NtosWindow } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Experiment } from './ExperimentConfigure';
 
 // Data reshaping / ingestion (thanks stylemistake for the help, very cool!)
@@ -86,6 +102,17 @@ const useRemappedBackend = () => {
   };
 };
 
+<<<<<<< HEAD
+=======
+// Utility Functions
+
+const abbreviations = {
+  'General Research': 'Gen. Res.',
+  'Nanite Research': 'Nanite Res.',
+};
+const abbreviateName = (name) => abbreviations[name] ?? name;
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Actual Components
 
 export const Techweb = (props) => {
@@ -149,7 +176,11 @@ export const TechwebContent = (props) => {
     locked,
   } = data;
   const [techwebRoute, setTechwebRoute] = useLocalState('techwebRoute', null);
+<<<<<<< HEAD
   const [lastPoints, setLastPoints] = useState({});
+=======
+  const [lastPoints, setLastPoints] = useLocalState('lastPoints', {});
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Flex direction="column" className="Techweb__Viewport" height="100%">
@@ -232,7 +263,11 @@ const TechwebRouter = (props) => {
 const TechwebOverview = (props) => {
   const { act, data } = useRemappedBackend();
   const { nodes, node_cache, design_cache } = data;
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(1);
+=======
+  const [tabIndex, setTabIndex] = useLocalState('overviewTabIndex', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [searchText, setSearchText] = useLocalState('searchText');
 
   // Only search when 3 or more characters have been input
@@ -255,7 +290,10 @@ const TechwebOverview = (props) => {
       tabIndex < 2
         ? nodes.filter((x) => x.tier === tabIndex)
         : nodes.filter((x) => x.tier >= tabIndex),
+<<<<<<< HEAD
       (x) => node_cache[x.id].name,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     );
   }
 
@@ -422,7 +460,11 @@ const TechNodeDetail = (props) => {
   const { node } = props;
   const { id } = node;
   const { prereq_ids, unlock_ids } = node_cache[id];
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(0);
+=======
+  const [tabIndex, setTabIndex] = useLocalState('nodeDetailTabIndex', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [techwebRoute, setTechwebRoute] = useLocalState('techwebRoute', null);
 
   const prereqNodes = nodes.filter((x) => prereq_ids.includes(x.id));
@@ -486,6 +528,7 @@ const TechNodeDetail = (props) => {
 
 const TechNode = (props) => {
   const { act, data } = useRemappedBackend();
+<<<<<<< HEAD
   const {
     node_cache,
     design_cache,
@@ -494,6 +537,9 @@ const TechNode = (props) => {
     nodes,
     point_types_abbreviations = [],
   } = data;
+=======
+  const { node_cache, design_cache, experiments, points, nodes } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { node, nodetails, nocontrols } = props;
   const { id, can_unlock, tier } = node;
   const {
@@ -506,7 +552,11 @@ const TechNode = (props) => {
     discount_experiments,
   } = node_cache[id];
   const [techwebRoute, setTechwebRoute] = useLocalState('techwebRoute', null);
+<<<<<<< HEAD
   const [tabIndex, setTabIndex] = useState(0);
+=======
+  const [tabIndex, setTabIndex] = useLocalState('nodeDetailTabIndex', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const expcompl = required_experiments.filter(
     (x) => experiments[x]?.completed,
@@ -598,7 +648,11 @@ const TechNode = (props) => {
                       : Math.min(1, (points[k.type] || 0) / reqPts)
                   }
                 >
+<<<<<<< HEAD
                   {point_types_abbreviations[k.type]} ({nodeProg}/{reqPts})
+=======
+                  {abbreviateName(k.type)} ({nodeProg}/{reqPts})
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </ProgressBar>
               </Flex.Item>
             );
@@ -633,7 +687,11 @@ const TechNode = (props) => {
           className="Techweb__NodeExperimentsRequired"
           title="Required Experiments"
         >
+<<<<<<< HEAD
           {required_experiments.map((k, index) => {
+=======
+          {required_experiments.map((k) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             const thisExp = experiments[k];
             if (thisExp === null || thisExp === undefined) {
               return <LockedExperiment key={index} />;
@@ -647,7 +705,11 @@ const TechNode = (props) => {
           className="TechwebNodeExperimentsRequired"
           title="Discount-Eligible Experiments"
         >
+<<<<<<< HEAD
           {Object.keys(discount_experiments).map((k, index) => {
+=======
+          {Object.keys(discount_experiments).map((k) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             const thisExp = experiments[k];
             if (thisExp === null || thisExp === undefined) {
               return <LockedExperiment key={index} />;

@@ -225,12 +225,18 @@
 			user.put_in_hands(holding)
 		else
 			holding.forceMove(get_turf(src))
+<<<<<<< HEAD
 		playsound(src, remove_sound, sound_vol)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		UnregisterSignal(holding, COMSIG_QDELETING)
 		holding = null
 	else if(new_tank)//we insert the tank
 		holding = new_tank
+<<<<<<< HEAD
 		playsound(src, insert_sound, sound_vol)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		RegisterSignal(holding, COMSIG_QDELETING, PROC_REF(unregister_holding))
 
 	SSair.start_processing_machine(src)

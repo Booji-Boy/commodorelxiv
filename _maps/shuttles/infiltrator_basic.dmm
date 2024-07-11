@@ -832,6 +832,31 @@
 /obj/effect/turf_decal/siding/thinplating_new/dark,
 /turf/open/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate/hallway)
+<<<<<<< HEAD
+=======
+"zj" = (
+/obj/machinery/light/directional/west,
+/obj/effect/turf_decal/tile/blue{
+	dir = 8
+	},
+/obj/structure/table/reinforced,
+/obj/item/storage/backpack/duffelbag/syndie/surgery,
+/turf/open/floor/iron/white/side,
+/area/shuttle/syndicate/medical)
+"zL" = (
+/obj/machinery/status_display/evac{
+	pixel_x = -32
+	},
+/obj/machinery/light/directional/west,
+/obj/machinery/computer/records/medical/syndie{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/shuttle/syndicate/bridge)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "zR" = (
 /obj/effect/turf_decal/syndicateemblem/top/left,
 /obj/item/radio/intercom/directional/west,

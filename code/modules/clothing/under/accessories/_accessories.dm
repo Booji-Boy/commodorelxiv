@@ -30,6 +30,7 @@
 	. = ..()
 	register_context()
 
+<<<<<<< HEAD
 /obj/item/clothing/accessory/setup_reskinning()
 	if(!check_setup_reskinning())
 		return
@@ -37,6 +38,8 @@
 	// We already register context regardless in Initialize.
 	RegisterSignal(src, COMSIG_CLICK_ALT, PROC_REF(on_click_alt_reskin))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Can we be attached to the passed clothing article?
  */
@@ -61,6 +64,7 @@
 
 	return TRUE
 
+<<<<<<< HEAD
 // If accessory is being worn, make sure it updates on the player
 /obj/item/clothing/accessory/update_greyscale()
 	. = ..()
@@ -77,6 +81,8 @@
 
 	attached_to.update_accessory_overlay()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Actually attach this accessory to the passed clothing article.
  *
@@ -86,10 +92,15 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	if(atom_storage)
+<<<<<<< HEAD
 		atom_storage.close_all()
 		attach_to.clone_storage(atom_storage)
 		attach_to.atom_storage.set_real_location(src)
 		attach_to.atom_storage.rustle_sound = TRUE // it's on the suit now
+=======
+		attach_to.clone_storage(atom_storage)
+		attach_to.atom_storage.set_real_location(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/num_other_accessories = LAZYLEN(attach_to.attached_accessories)
 	layer = FLOAT_LAYER + clamp(attach_to.max_number_of_accessories - num_other_accessories, 0, 10)
@@ -127,8 +138,14 @@
 /obj/item/clothing/accessory/proc/detach(obj/item/clothing/under/detach_from)
 	SHOULD_CALL_PARENT(TRUE)
 
+<<<<<<< HEAD
 	if(detach_from.atom_storage?.real_location == src)
 		// Ensure void items do not stick around
+=======
+	if(IS_WEAKREF_OF(src, detach_from.atom_storage?.real_location))
+		// Ensure void items do not stick around
+		atom_storage.close_all()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		detach_from.atom_storage.close_all()
 		// And clean up the storage we made
 		QDEL_NULL(detach_from.atom_storage)
@@ -165,17 +182,27 @@
 	SIGNAL_HANDLER
 
 	accessory_dropped(source, user)
+<<<<<<< HEAD
 	user.update_clothing(ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING|ITEM_SLOT_NECK)
 
 /// Called when the uniform this accessory is pinned to is equipped in a valid slot
 /obj/item/clothing/accessory/proc/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
 	equipped(user, user.get_slot_by_item(clothes)) // so we get any actions, item_flags get set, etc
 	user.update_clothing(ITEM_SLOT_OCLOTHING|ITEM_SLOT_NECK)
+=======
+	user.update_clothing(ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING)
+
+/// Called when the uniform this accessory is pinned to is equipped in a valid slot
+/obj/item/clothing/accessory/proc/accessory_equipped(obj/item/clothing/under/clothes, mob/living/user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return
 
 /// Called when the uniform this accessory is pinned to is dropped
 /obj/item/clothing/accessory/proc/accessory_dropped(obj/item/clothing/under/clothes, mob/living/user)
+<<<<<<< HEAD
 	dropped(user)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return
 
 /// Signal proc for [COMSIG_CLOTHING_UNDER_ADJUSTED] on the uniform we're pinned to
@@ -211,9 +238,14 @@
 	. += "It can be worn above or below your suit. Right-click to toggle."
 
 /obj/item/clothing/accessory/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+<<<<<<< HEAD
 	. = ..()
 	if(held_item != source)
 		return .
+=======
+	if(!isnull(held_item))
+		return NONE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	context[SCREENTIP_CONTEXT_RMB] = "Wear [above_suit ? "below" : "above"] suit"
 	return CONTEXTUAL_SCREENTIP_SET

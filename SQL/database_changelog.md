@@ -2,15 +2,26 @@ Any time you make a change to the schema files, remember to increment the databa
 
 Make sure to also update `DB_MAJOR_VERSION` and `DB_MINOR_VERSION`, which can be found in `code/__DEFINES/subsystem.dm`.
 
+<<<<<<< HEAD
 The latest database version is 5.27; The query to update the schema revision table is:
 
 ```sql
 INSERT INTO `schema_revision` (`major`, `minor`) VALUES (5, 27);
+=======
+The latest database version is 5.24; The query to update the schema revision table is:
+
+```sql
+INSERT INTO `schema_revision` (`major`, `minor`) VALUES (5, 24);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ```
 or
 
 ```sql
+<<<<<<< HEAD
 INSERT INTO `SS13_schema_revision` (`major`, `minor`) VALUES (5, 27);
+=======
+INSERT INTO `SS13_schema_revision` (`major`, `minor`) VALUES (5, 24);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ```
 
 In any query remember to add a prefix to the table names if you use one.
@@ -40,6 +51,14 @@ Version 5.25, 27 September 2023, by Jimmyl
 Removes the text_adventures table because it is no longer used
 ```sql
  DROP TABLE IF EXISTS `text_adventures`;
+```
+
+-----------------------------------------------------
+Version 5.24, 17 May 2023, by LemonInTheDark
+Modified the library action table to fit ckeys properly, and to properly store ips.
+```sql
+ ALTER TABLE `library_action` MODIFY COLUMN `ckey` varchar(32) NOT NULL;
+ ALTER TABLE `library_action` MODIFY COLUMN `ip_addr` int(10) unsigned NOT NULL;
 ```
 
 -----------------------------------------------------

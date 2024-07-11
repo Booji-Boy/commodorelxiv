@@ -29,9 +29,14 @@ export const StationAlertConsoleContent = (props) => {
     Camera: 5,
   };
 
+<<<<<<< HEAD
   const sortedAlarms = sortBy(
     data.alarms || [],
     (alarm) => sortingKey[alarm.name],
+=======
+  const sortedAlarms = flow([sortBy((alarm) => sortingKey[alarm.name])])(
+    data.alarms || [],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 
   return (

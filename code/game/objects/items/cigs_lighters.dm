@@ -44,6 +44,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(lit || burnt)
 		return
 
+	var/turf/my_turf = get_turf(src)
+	my_turf.pollute_turf(/datum/pollutant/sulphur, 5)
+
 	playsound(src, 'sound/items/match_strike.ogg', 15, TRUE)
 	lit = TRUE
 	icon_state = "match_lit"
@@ -95,7 +98,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		user.log_message("set [key_name(M)] on fire with [src]", LOG_ATTACK)
 
 	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(M)
-	if(!lit || !cig || user.combat_mode)
+	if(!lit || !cig || (user.istate & ISTATE_HARM))
 		..()
 		return
 
@@ -139,6 +142,10 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	body_parts_covered = null
 	grind_results = list()
 	heat = 1000
+<<<<<<< HEAD
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	throw_verb = "flick"
 	/// Whether this cigarette has been lit.
 	VAR_FINAL/lit = FALSE
@@ -173,6 +180,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/choke_forever = FALSE
 	/// When choking, what is the maximum amount of time we COULD choke for
 	var/choke_time_max = 30 SECONDS // I am mean
+<<<<<<< HEAD
+=======
+	/// What type of pollution does this produce on smoking, changed to weed pollution sometimes
+	var/pollution_type = /datum/pollutant/smoke
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// The particle effect of the smoke rising out of the cigarette when lit
 	VAR_PRIVATE/obj/effect/abstract/particle_holder/cig_smoke
 	/// The particle effect of the smoke rising out of the mob when...smoked
@@ -279,6 +291,16 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return FALSE
 	var/mob/living/carbon/the_smoker = user
 	return the_smoker.can_breathe_helmet()
+<<<<<<< HEAD
+=======
+
+/obj/item/clothing/mask/cigarette/afterattack(obj/item/reagent_containers/cup/glass, mob/user, proximity)
+	. = ..()
+	if(!proximity || lit) //can't dip if cigarette is lit (it will heat the reagents in the glass instead)
+		return
+	if(!istype(glass)) //you can dip cigarettes into beakers
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/mask/cigarette/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(lit) //can't dip if cigarette is lit (it will heat the reagents in the glass instead)
@@ -334,6 +356,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		e.start(src)
 		qdel(src)
 		return
+
+	// Setting the puffed pollutant to cannabis if we're smoking the space drugs reagent(obtained from cannabis)
+	if(reagents.has_reagent(/datum/reagent/drug/space_drugs))
+		pollution_type = /datum/pollutant/smoke/cannabis
+
 	// allowing reagents to react after being lit
 	reagents.flags &= ~(NO_REACT)
 	reagents.handle_reactions()
@@ -374,6 +401,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!isturf(smoker.loc))
 		return
 
+<<<<<<< HEAD
+=======
+	// monkestation edit: pollution
+	var/turf/smoker_turf = smoker.loc
+	smoker_turf.pollute_turf(pollution_type, 30)
+	// monkestation end
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/effect/abstract/particle_holder/big_smoke = new(smoker.loc, /particles/smoke/cig/big)
 	update_particle_position(big_smoke, smoker.dir)
 	QDEL_IN(big_smoke, big_smoke.particles.lifespan)
@@ -417,11 +452,17 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/process(seconds_per_tick)
 	var/mob/living/user = isliving(loc) ? loc : null
+	var/turf/location = get_turf(src)
 	user?.ignite_mob()
 
 	if(!check_oxygen(user))
 		extinguish()
 		return
+<<<<<<< HEAD
+=======
+
+	location.pollute_turf(pollution_type, 5, POLLUTION_PASSIVE_EMITTER_CAP)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	smoketime -= seconds_per_tick * (1 SECONDS)
 	if(smoketime <= 0)
@@ -461,7 +502,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		light(span_notice("[user] lights [src] with [M]'s burning body. What a cold-blooded badass."))
 		return
 	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(M)
-	if(!lit || !cig || user.combat_mode)
+	if(!lit || !cig || (user.istate & ISTATE_HARM))
 		return ..()
 
 	if(cig.lit)
@@ -550,6 +591,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 50
 	list_reagents = null
 	choke_time_max = 40 SECONDS
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
 
 /obj/item/clothing/mask/cigarette/rollie/Initialize(mapload)
 	name = pick(list(
@@ -673,6 +715,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	smoketime = 20 MINUTES
 	chem_volume = 80
 	list_reagents = list(/datum/reagent/drug/nicotine = 40)
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
 
 /obj/item/clothing/mask/cigarette/cigar/havana
 	name = "premium Havanian cigar"
@@ -683,6 +726,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	smoketime = 30 MINUTES
 	chem_volume = 60
 	list_reagents = list(/datum/reagent/drug/nicotine = 45)
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
 
 /obj/item/cigbutt
 	name = "cigarette butt"
@@ -705,7 +749,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "smoking pipe"
 	desc = "A pipe, for smoking. Probably made of meerschaum or something."
 	icon_state = "pipeoff"
+<<<<<<< HEAD
 	icon_on = "pipeoff"  //Note - these are in masks.dmi
+=======
+	icon_on = "pipeff"  //Note - these are in masks.dmi
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_off = "pipeoff"
 	inhand_icon_state = null
 	inhand_icon_on = null
@@ -715,6 +763,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	list_reagents = null
 	w_class = WEIGHT_CLASS_SMALL
 	choke_forever = TRUE
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
 	///name of the stuff packed inside this pipe
 	var/packeditem
 
@@ -776,7 +825,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	name = "corn cob pipe"
 	desc = "A nicotine delivery system popularized by folksy backwoodsmen and kept popular in the modern age and beyond by space hipsters. Can be loaded with objects."
 	icon_state = "cobpipeoff"
+<<<<<<< HEAD
 	icon_on = "cobpipeoff"  //Note - these are in masks.dmi
+=======
+	icon_on = "cobpipeff"  //Note - these are in masks.dmi
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_off = "cobpipeoff"
 	inhand_icon_on = null
 	inhand_icon_off = null
@@ -799,8 +852,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/fuel = 5, /datum/reagent/fuel/oil = 5)
 	custom_price = PAYCHECK_CREW * 1.1
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 2
 	light_power = 1.3
+=======
+	light_outer_range = 2
+	light_power = 0.6
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_FIRE
 	light_on = FALSE
 	/// Whether the lighter is lit.
@@ -832,7 +890,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /// Destroy the lighter when it's shot by a bullet
 /obj/item/lighter/proc/on_intercepted_bullet(mob/living/victim, obj/projectile/bullet)
 	victim.visible_message(span_warning("\The [bullet] shatters on [victim]'s lighter!"))
+<<<<<<< HEAD
 	playsound(victim, SFX_RICOCHET, 100, TRUE)
+=======
+	playsound(victim, get_sfx(SFX_RICOCHET), 100, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/effect/decal/cleanable/oil(get_turf(src))
 	do_sparks(1, TRUE, src)
 	victim.dropItemToGround(src, force = TRUE, silent = TRUE)
@@ -954,7 +1016,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		message_admins("[ADMIN_LOOKUPFLW(user)] set [key_name_admin(M)] on fire with [src] at [AREACOORD(user)]")
 		log_game("[key_name(user)] set [key_name(M)] on fire with [src] at [AREACOORD(user)]")
 	var/obj/item/clothing/mask/cigarette/cig = help_light_cig(M)
-	if(!lit || !cig || user.combat_mode)
+	if(!lit || !cig || (user.istate & ISTATE_HARM))
 		..()
 		return
 
@@ -1049,9 +1111,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	heat = 0 //I swear it's a real lighter dude you just can't see the flame dude I promise
 	overlay_state = "mime"
 	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/toxin/mutetoxin = 5, /datum/reagent/consumable/nothing = 10)
-	light_range = 0
+	light_outer_range = 0
 	light_power = 0
-	fancy = FALSE
 
 /obj/item/lighter/mime/ignition_effect(atom/A, mob/user)
 	. = span_infoplain("[user] lifts the [name] to the [A], which miraculously lights!")
@@ -1063,9 +1124,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	light_color = LIGHT_COLOR_ELECTRIC_CYAN
 	overlay_state = "bright"
 	grind_results = list(/datum/reagent/iron = 1, /datum/reagent/flash_powder = 10)
-	light_range = 8
+	light_outer_range = 8
 	light_power = 3 //Irritatingly bright and large enough to cover a small room.
-	fancy = FALSE
 
 /obj/item/lighter/bright/examine(mob/user)
 	. = ..()
@@ -1101,7 +1161,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/rollingpaper/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/clothing/mask/cigarette/rollie, CUSTOM_INGREDIENT_ICON_NOCHANGE, ingredient_type=CUSTOM_INGREDIENT_TYPE_DRYABLE, max_ingredients=2)
+	AddComponent(/datum/component/customizable_reagent_holder, /obj/item/clothing/mask/cigarette/rollie, CUSTOM_INGREDIENT_ICON_NOCHANGE, ingredient_type=CUSTOM_INGREDIENT_TYPE_DRYABLE, max_ingredients=2, job_xp = 1, job = JOB_BOTANIST)
 
 
 ///////////////
@@ -1262,6 +1322,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 	//Time to start puffing those fat vapes, yo.
 	COOLDOWN_START(src, drag_cooldown, dragtime)
+
+	//open flame removed because vapes are a closed system, they won't light anything on fire
+	var/turf/my_turf = get_turf(src)
+	my_turf.pollute_turf(/datum/pollutant/smoke/vape, 5, POLLUTION_PASSIVE_EMITTER_CAP)
+
 	if(obj_flags & EMAGGED)
 		var/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/puff = new
 		puff.set_up(4, holder = src, location = loc, carry = reagents, efficiency = 24)

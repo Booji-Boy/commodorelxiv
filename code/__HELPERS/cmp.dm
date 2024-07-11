@@ -192,6 +192,9 @@
 /// Orders mobs by health
 /proc/cmp_mob_health(mob/living/mob_a, mob/living/mob_b)
 	return mob_b.health - mob_a.health
+<<<<<<< HEAD
 
 /proc/cmp_deathmatch_mods(datum/deathmatch_modifier/a, datum/deathmatch_modifier/b)
 	return sorttext(b.name, a.name)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

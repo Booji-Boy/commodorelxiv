@@ -4,8 +4,13 @@
 /obj/structure/bed/abductor
 	name = "resting contraption"
 	desc = "This looks similar to contraptions from Earth. Could aliens be stealing our technology?"
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
 	build_stack_type = /obj/item/stack/sheet/mineral/abductor
+=======
+	icon = 'icons/obj/abductor.dmi'
+	buildstacktype = /obj/item/stack/sheet/mineral/abductor
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "bed"
 
 /obj/structure/table_frame/abductor
@@ -31,7 +36,11 @@
 			to_chat(user, span_warning("You need one alien alloy sheet to do this!"))
 			return
 		to_chat(user, span_notice("You start adding [stacked_sheets] to [src]..."))
+<<<<<<< HEAD
 		if(do_after(user, 5 SECONDS, target = src))
+=======
+		if(do_after(user, 50, target = src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			stacked_sheets.use(1)
 			new /obj/structure/table/abductor(src.loc)
 			qdel(src)
@@ -42,7 +51,11 @@
 			to_chat(user, span_warning("You need one sheet of silver to do this!"))
 			return
 		to_chat(user, span_notice("You start adding [stacked_sheets] to [src]..."))
+<<<<<<< HEAD
 		if(do_after(user, 5 SECONDS, target = src))
+=======
+		if(do_after(user, 50, target = src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			stacked_sheets.use(1)
 			new /obj/structure/table/optable/abductor(src.loc)
 			qdel(src)
@@ -70,7 +83,11 @@
 	framestack = /obj/item/stack/sheet/mineral/abductor
 	buildstackamount = 1
 	framestackamount = 1
+<<<<<<< HEAD
 	icon = 'icons/obj/antags/abductor.dmi'
+=======
+	icon = 'icons/obj/abductor.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "bed"
 	can_buckle = TRUE
 	buckle_lying = 90

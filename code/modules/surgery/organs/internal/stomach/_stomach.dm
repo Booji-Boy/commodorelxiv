@@ -151,8 +151,12 @@
 			human.satiety++
 			if(SPT_PROB(round(-human.satiety/77), seconds_per_tick))
 				human.set_jitter_if_lower(10 SECONDS)
+<<<<<<< HEAD:code/modules/surgery/organs/internal/stomach/_stomach.dm
 			hunger_rate = 3 * HUNGER_FACTOR
 		hunger_rate *= hunger_modifier
+=======
+			hunger_rate = 2 * HUNGER_FACTOR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/stomach/_stomach.dm
 		hunger_rate *= human.physiology.hunger_mod
 		human.adjust_nutrition(-hunger_rate * seconds_per_tick)
 

@@ -15,7 +15,11 @@
 
 /datum/orderable_item/toys_drones/mining_drone
 	item_path = /mob/living/basic/mining_drone
+<<<<<<< HEAD
 	cost_per_order = 675
+=======
+	cost_per_order = 800
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/orderable_item/toys_drones/drone_health
 	item_path = /obj/item/mine_bot_upgrade/health

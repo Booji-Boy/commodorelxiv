@@ -322,22 +322,27 @@
 	icon = 'icons/hud/screen_midnight.dmi'
 	icon_state = "combat_off"
 	screen_loc = ui_combat_toggle
+	var/datum/interaction_mode/combat_mode/combat_mode
 
 /atom/movable/screen/combattoggle/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
 	update_appearance()
 
+/atom/movable/screen/combattoggle/Destroy()
+	. = ..()
+	combat_mode = null
+
 /atom/movable/screen/combattoggle/Click()
 	if(isliving(usr))
-		var/mob/living/owner = usr
-		owner.set_combat_mode(!owner.combat_mode, FALSE)
+		combat_mode.combat_mode = !combat_mode.combat_mode
+		combat_mode.update_istate(usr, null)
 		update_appearance()
 
 /atom/movable/screen/combattoggle/update_icon_state()
 	var/mob/living/user = hud?.mymob
 	if(!istype(user) || !user.client)
 		return ..()
-	icon_state = user.combat_mode ? "combat" : "combat_off" //Treats the combat_mode
+	icon_state = combat_mode.combat_mode ? "combat" : "combat_off" //Treats the combat_mode
 	return ..()
 
 //Version of the combat toggle with the flashy overlay
@@ -351,7 +356,7 @@
 	if(!istype(user) || !user.client)
 		return
 
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		return
 
 	if(!flashy)
@@ -362,6 +367,27 @@
 /atom/movable/screen/combattoggle/robot
 	icon = 'icons/hud/screen_cyborg.dmi'
 	screen_loc = ui_borg_intents
+
+/atom/movable/screen/act_intent3
+	name = "intent"
+	icon_state = "help"
+	screen_loc = ui_acti
+	var/datum/interaction_mode/intents3/intents
+
+/atom/movable/screen/act_intent3/Click(location, control, params)
+	var/list/paramlist = params2list(params)
+	var/_x = text2num(paramlist["icon-x"])
+	var/_y = text2num(paramlist["icon-y"])
+	if(_x < 17 && _y < 17)
+		intents.intent = INTENT_HARM
+	else if(_x >= 17 && _y >= 17)
+		intents.intent = INTENT_DISARM
+	else if(_x < 17 && _y >= 17 )
+		intents.intent = INTENT_HELP
+	else if(_x >= 17 && _y < 17)
+		intents.intent = INTENT_GRAB
+
+	intents.update_istate(usr, null)
 
 /atom/movable/screen/spacesuit
 	name = "Space suit cell status"
@@ -385,12 +411,21 @@
 			icon_state = "walking"
 		if(MOVE_INTENT_RUN)
 			icon_state = "running"
+		if(MOVE_INTENT_SPRINT)
+			icon_state = "sprinting"
 	return ..()
 
 /atom/movable/screen/mov_intent/proc/toggle(mob/living/user)
 	if(!istype(user))
 		return
+<<<<<<< HEAD
 	user.toggle_move_intent()
+=======
+	if(user.m_intent != MOVE_INTENT_WALK)
+		user.set_move_intent(MOVE_INTENT_WALK)
+	else
+		user.set_move_intent(MOVE_INTENT_RUN)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/screen/pull
 	name = "stop pulling"

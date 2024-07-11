@@ -3,7 +3,7 @@
 	typepath = /datum/round_event/ghost_role/nightmare
 	max_occurrences = 1
 	min_players = 20
-	dynamic_should_hijack = TRUE
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Spawns a nightmare, aiming to darken the station."
 	min_wizard_trigger_potency = 6
@@ -15,8 +15,20 @@
 	fakeable = FALSE
 
 /datum/round_event/ghost_role/nightmare/spawn_role()
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_ALIEN, role = ROLE_NIGHTMARE, role_name_text = role_name, amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		"Do you want to play as a Nightmare?",
+		role = ROLE_NIGHTMARE,
+		check_jobban = ROLE_NIGHTMARE,
+		poll_time = 20 SECONDS,
+		pic_source = /datum/antagonist/nightmare,
+		role_name_text = "nightmare"
+	)
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/datum/mind/player_mind = new /datum/mind(chosen_one.key)
 	player_mind.active = TRUE

@@ -335,6 +335,31 @@
 /obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hellfactoryoffice)
+<<<<<<< HEAD
+=======
+"bg" = (
+/obj/machinery/modular_computer/preset/civilian,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/hellfactory)
+"bh" = (
+/obj/machinery/light/directional/north,
+/obj/item/chair/plastic{
+	pixel_y = 4
+	},
+/obj/item/chair/plastic{
+	pixel_y = 8
+	},
+/obj/item/chair/plastic{
+	pixel_y = 12
+	},
+/obj/structure/rack,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/hellfactory)
+"bi" = (
+/obj/machinery/light/directional/north,
+/turf/open/floor/plating,
+/area/ruin/space/has_grav/hellfactory)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bj" = (
 /obj/structure/grille,
 /turf/open/floor/plating,
@@ -826,6 +851,7 @@
 /obj/structure/sign/poster/random/directional/east,
 /turf/open/floor/iron/checker,
 /area/ruin/space/has_grav/hellfactory)
+<<<<<<< HEAD
 "lP" = (
 /obj/item/chair/plastic{
 	pixel_y = 4
@@ -838,6 +864,12 @@
 	},
 /obj/structure/rack,
 /turf/open/floor/iron,
+=======
+"lR" = (
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/bot_white/right,
+/turf/open/floor/iron/dark,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/hellfactory)
 "nd" = (
 /obj/structure/sign/warning/vacuum,
@@ -871,6 +903,15 @@
 /obj/effect/spawner/random/exotic/languagebook,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/hellfactory)
+<<<<<<< HEAD
+=======
+"ry" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/floor/has_bulb,
+/obj/effect/turf_decal/bot_white/left,
+/turf/open/floor/iron/dark,
+/area/ruin/space/has_grav/hellfactory)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "sk" = (
 /obj/structure/extinguisher_cabinet/directional/north,
 /turf/open/floor/iron,
@@ -880,8 +921,13 @@
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/hellfactory)
 "uL" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/floor,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/light/floor/has_bulb,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/turf_decal/bot_white/right,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hellfactory)
@@ -904,7 +950,7 @@
 /turf/open/floor/holofloor/wood,
 /area/ruin/space/has_grav/hellfactory)
 "BC" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /obj/effect/turf_decal/bot_white/left,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hellfactory)

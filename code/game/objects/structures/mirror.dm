@@ -61,6 +61,22 @@
 		return FALSE
 	return TRUE
 
+/obj/structure/mirror/Initialize(mapload)
+	. = ..()
+	var/static/list/reflection_filter = alpha_mask_filter(icon = icon('icons/obj/watercloset.dmi', "mirror_mask"))
+	var/static/matrix/reflection_matrix = matrix(0.75, 0, 0, 0, 0.75, 0)
+	var/datum/callback/can_reflect = CALLBACK(src, PROC_REF(can_reflect))
+	var/list/update_signals = list(COMSIG_ATOM_BREAK)
+	AddComponent(/datum/component/reflection, reflection_filter = reflection_filter, reflection_matrix = reflection_matrix, can_reflect = can_reflect, update_signals = update_signals)
+
+/obj/structure/mirror/proc/can_reflect(atom/movable/target)
+	///I'm doing it this way too, because the signal is sent before the broken variable is set to TRUE.
+	if(atom_integrity <= integrity_failure * max_integrity)
+		return FALSE
+	if(broken || !isliving(target) || HAS_TRAIT(target, TRAIT_NO_MIRROR_REFLECTION))
+		return FALSE
+	return TRUE
+
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror, 28)
 
 /obj/structure/mirror/Initialize(mapload)
@@ -120,6 +136,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror/broken, 28)
 
 	var/new_style = tgui_input_list(beard_dresser, "Select a facial hairstyle", "Grooming", SSaccessories.facial_hairstyles_list)
 
+<<<<<<< HEAD
+=======
+	//handle normal hair
+	var/new_style = tgui_input_list(user, "Select a hairstyle", "Grooming", GLOB.roundstart_hairstyles_list)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(new_style))
 		return TRUE
 
@@ -277,7 +298,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror/broken, 28)
 
 /obj/structure/mirror/welder_act(mob/living/user, obj/item/I)
 	..()
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return FALSE
 
 	if(!broken)
@@ -363,11 +384,129 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/mirror/broken, 28)
 	if(HAS_TRAIT(user, TRAIT_ADVANCEDTOOLUSER) && HAS_TRAIT(user, TRAIT_LITERATE))
 		return TRUE
 
+<<<<<<< HEAD
 	to_chat(user, span_alert("You feel quite intelligent."))
 	// Prevents wizards from being soft locked out of everything
 	// If this stays after the species was changed once more, well, the magic mirror did it. It's magic i aint gotta explain shit
 	user.add_traits(list(TRAIT_LITERATE, TRAIT_ADVANCEDTOOLUSER), SPECIES_TRAIT)
 	return TRUE
+=======
+	var/mob/living/carbon/human/amazed_human = user
+
+	var/choice = tgui_input_list(user, "Something to change?", "Magical Grooming", list("name", "race", "gender", "hair", "eyes"))
+	if(isnull(choice))
+		return TRUE
+
+	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return TRUE
+
+	switch(choice)
+		if("name")
+			var/newname = sanitize_name(tgui_input_text(amazed_human, "Who are we again?", "Name change", amazed_human.name, MAX_NAME_LEN), allow_numbers = TRUE) //It's magic so whatever.
+			if(!newname)
+				return TRUE
+			if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+				return TRUE
+			amazed_human.real_name = newname
+			amazed_human.name = newname
+			if(amazed_human.dna)
+				amazed_human.dna.real_name = newname
+			if(amazed_human.mind)
+				amazed_human.mind.name = newname
+
+		if("race")
+			var/racechoice = tgui_input_list(amazed_human, "What are we again?", "Race change", selectable_races)
+			if(isnull(racechoice))
+				return TRUE
+			if(!selectable_races[racechoice])
+				return TRUE
+			if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+				return TRUE
+
+			var/datum/species/newrace = selectable_races[racechoice]
+			amazed_human.set_species(newrace, icon_update = FALSE)
+
+			if(amazed_human.dna.species.use_skintones)
+				var/new_s_tone = tgui_input_list(user, "Choose your skin tone", "Race change", GLOB.skin_tones)
+				if(new_s_tone)
+					amazed_human.skin_tone = new_s_tone
+					amazed_human.dna.update_ui_block(DNA_SKIN_TONE_BLOCK)
+
+			if(MUTCOLORS in amazed_human.dna.species.species_traits)
+				var/new_mutantcolor = tgui_color_picker(user, "Choose your skin color:", "Race change", amazed_human.dna.features["mcolor"])
+				if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+					return TRUE
+				if(new_mutantcolor)
+					var/temp_hsv = RGBtoHSV(new_mutantcolor)
+
+					if(ReadHSV(temp_hsv)[3] >= ReadHSV("#7F7F7F")[3]) // mutantcolors must be bright
+						amazed_human.dna.features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
+						amazed_human.dna.update_uf_block(DNA_MUTANT_COLOR_BLOCK)
+
+					else
+						to_chat(amazed_human, span_notice("Invalid color. Your color is not bright enough."))
+						return TRUE
+
+			amazed_human.update_body(is_creating = TRUE)
+			amazed_human.update_mutations_overlay() // no hulk lizard
+
+		if("gender")
+			if(!(amazed_human.gender in list("male", "female"))) //blame the patriarchy
+				return TRUE
+			if(amazed_human.gender == "male")
+				if(tgui_alert(amazed_human, "Become a Witch?", "Confirmation", list("Yes", "No")) == "Yes")
+					if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+						return TRUE
+					amazed_human.gender = FEMALE
+					amazed_human.physique = FEMALE
+					to_chat(amazed_human, span_notice("Man, you feel like a woman!"))
+				else
+					return TRUE
+
+			else
+				if(tgui_alert(amazed_human, "Become a Warlock?", "Confirmation", list("Yes", "No")) == "Yes")
+					if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+						return TRUE
+					amazed_human.gender = MALE
+					amazed_human.physique = MALE
+					to_chat(amazed_human, span_notice("Whoa man, you feel like a man!"))
+				else
+					return TRUE
+			amazed_human.dna.update_ui_block(DNA_GENDER_BLOCK)
+			amazed_human.update_body(is_creating = TRUE) //MONKESTATION EDIT
+			amazed_human.update_mutations_overlay() //(hulk male/female)
+
+		if("hair")
+			var/hairchoice = tgui_alert(amazed_human, "Hairstyle or hair color?", "Change Hair", list("Style", "Color"))
+			if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+				return TRUE
+			if(hairchoice == "Style") //So you just want to use a mirror then?
+				return ..()
+			else
+				var/new_hair_color = tgui_color_picker(amazed_human, "Choose your hair color", "Hair Color", amazed_human.hair_color)
+				if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+					return TRUE
+				if(new_hair_color)
+					amazed_human.hair_color = sanitize_hexcolor(new_hair_color)
+					amazed_human.dna.update_ui_block(DNA_HAIR_COLOR_BLOCK)
+				if(amazed_human.gender == "male")
+					var/new_face_color = tgui_color_picker(amazed_human, "Choose your facial hair color", "Hair Color", amazed_human.facial_hair_color)
+					if(new_face_color)
+						amazed_human.facial_hair_color = sanitize_hexcolor(new_face_color)
+						amazed_human.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
+				amazed_human.update_body_parts()
+
+		if(BODY_ZONE_PRECISE_EYES)
+			var/new_eye_color = tgui_color_picker(amazed_human, "Choose your eye color", "Eye Color", amazed_human.eye_color_left)
+			if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+				return TRUE
+			if(new_eye_color)
+				amazed_human.eye_color_left = sanitize_hexcolor(new_eye_color)
+				amazed_human.eye_color_right = sanitize_hexcolor(new_eye_color)
+				amazed_human.dna.update_ui_block(DNA_EYE_COLOR_LEFT_BLOCK)
+				amazed_human.dna.update_ui_block(DNA_EYE_COLOR_RIGHT_BLOCK)
+				amazed_human.update_body()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/mirror/magic/lesser/Initialize(mapload)
 	// Roundstart species don't have a flag, so it has to be set on Initialize.

@@ -18,7 +18,11 @@
 	/// Because the lighting system does not like overlay lights getting set_light() called.
 	switch(atom_target.light_system)
 		if(COMPLEX_LIGHT)
+<<<<<<< HEAD
 			target.set_light(0, 0, null, l_on = FALSE)
+=======
+			target.set_light(0, 0, null, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		else
 			target.set_light_power(0)
 			target.set_light_range(0)
@@ -44,9 +48,9 @@
 	return NONE
 
 /// Prevents the light range of the target atom from exceeding 0 while the light power is greater than 0.
-/datum/element/light_eaten/proc/block_light_range(atom/eaten_light, new_range)
+/datum/element/light_eaten/proc/block_light_range(atom/eaten_light, new_inner_range, new_outer_range)
 	SIGNAL_HANDLER
-	if(new_range <= 0)
+	if(new_outer_range <= 0)
 		return NONE
 	if(eaten_light.light_power <= 0)
 		return NONE

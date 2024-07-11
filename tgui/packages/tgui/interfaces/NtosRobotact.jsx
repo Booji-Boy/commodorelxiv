@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useSharedState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   AnimatedNumber,
   Box,
@@ -12,8 +16,11 @@ import {
   Slider,
   Tabs,
 } from '../components';
+<<<<<<< HEAD
 import { formatEnergy } from '../format';
 import { formatPower } from '../format';
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { NtosWindow } from '../layouts';
 
 export const NtosRobotact = (props) => {
@@ -28,8 +35,13 @@ export const NtosRobotact = (props) => {
 
 export const NtosRobotactContent = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const [tab_main, setTab_main] = useState(1);
   const [tab_sub, setTab_sub] = useState(1);
+=======
+  const [tab_main, setTab_main] = useSharedState('tab_main', 1);
+  const [tab_sub, setTab_sub] = useSharedState('tab_sub', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const {
     charge,
     maxcharge,
@@ -111,10 +123,14 @@ export const NtosRobotactContent = (props) => {
                     bad: [-Infinity, 0.1],
                   }}
                 >
+<<<<<<< HEAD
                   <AnimatedNumber
                     value={charge}
                     format={(charge) => formatEnergy(charge)}
                   />
+=======
+                  <AnimatedNumber value={charge} />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 </ProgressBar>
                 Chassis Integrity:
                 <ProgressBar

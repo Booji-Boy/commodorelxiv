@@ -60,7 +60,11 @@
 	icon_state = "tactifool"
 	inhand_icon_state = "bl_suit"
 	has_sensor = HAS_SENSORS
+<<<<<<< HEAD
 	armor_type = /datum/armor/clothing_under/syndicate_tacticool
+=======
+	armor_type = /datum/armor/syndicate_tacticool
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	stubborn_stains = TRUE
 
 /datum/armor/clothing_under/syndicate_tacticool

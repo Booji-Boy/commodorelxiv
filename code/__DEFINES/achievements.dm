@@ -17,6 +17,7 @@
 #define MEDAL_PULSE "Jackpot"
 #define MEDAL_TIMEWASTE "Overextended The Joke"
 #define MEDAL_RODSUPLEX "Feat of Strength"
+#define MEDAL_SINGULARITY_BUSTER "Scrungularity" // Singularity Nullified
 #define MEDAL_CLOWNCARKING "Round and Full"
 #define MEDAL_THANKSALOT "The Best Driver"
 #define MEDAL_HELBITALJANKEN "Hel-bent on Winning"
@@ -41,7 +42,11 @@
 #define MEDAL_VOID_ASCENSION "Void"
 #define MEDAL_BLADE_ASCENSION "Blade"
 #define MEDAL_COSMOS_ASCENSION "Cosmos"
+<<<<<<< HEAD
 #define MEDAL_LOCK_ASCENSION "Knock"
+=======
+#define MEDAL_KNOCK_ASCENSION "Knock"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define MEDAL_MOON_ASCENSION "Moon"
 #define MEDAL_TOOLBOX_SOUL "Toolsoul"
 #define MEDAL_HOT_DAMN "Hot Damn!"
@@ -52,12 +57,19 @@
 #define MEDAL_NARSUPREME "Narsupreme"
 #define MEDAL_SPRINGLOCK "The Man Inside the Modsuit"
 #define MEDAL_HEALTHY "Heart Healthy"
+<<<<<<< HEAD
 #define MEDAL_GODS_WRATH "God's Wrath"
 #define MEDAL_EARTHQUAKE_VICTIM "Earthquake Victim"
 #define MEDAL_DEBT_EXTINGUISHED "Debt Extinguished"
 #define MEDAL_SISYPHUS "Sisyphus"
 #define MEDAL_ARCHMAGE "Archmage"
 #define MEDAL_THEORETICAL_LIMITS "All Within Theoretical Limits"
+=======
+#define MEDAL_DEBT_EXTINGUISHED "Debt Extinguished"
+#define MEDAL_ARCHMAGE "Archmage"
+#define MEDAL_THEORETICAL_LIMITS "All Within Theoretical Limits"
+#define MEDAL_JARED_LETO "Jared Leto" // Monkestation addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Skill medal hub IDs
 #define MEDAL_LEGENDARY_MINER "Legendary Miner"

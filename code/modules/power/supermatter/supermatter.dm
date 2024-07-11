@@ -175,6 +175,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	/// Lazy list of the crazy engineers who managed to turn a cascading engine around.
 	var/list/datum/weakref/saviors = null
 
+<<<<<<< HEAD
 	/// If a sliver of the supermatter has been removed. Almost certainly by a traitor. Lowers the delamination countdown time.
 	var/supermatter_sliver_removed = FALSE
 
@@ -184,6 +185,8 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	/// Cooldown for sending emergency alerts to the common radio channel
 	COOLDOWN_DECLARE(common_radio_cooldown)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/power/supermatter_crystal/Initialize(mapload)
 	. = ..()
 	current_gas_behavior = init_sm_gas()
@@ -293,7 +296,11 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 
 	// PART 3: POWER PROCESSING
 	internal_energy_factors = calculate_internal_energy()
+<<<<<<< HEAD
 	zap_factors = calculate_zap_transmission_rate()
+=======
+	zap_factors = calculate_zap_multiplier()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(internal_energy && (last_power_zap + (4 - internal_energy * 0.001) SECONDS) < world.time)
 		playsound(src, 'sound/weapons/emitter2.ogg', 70, TRUE)
 		hue_angle_shift = clamp(903 * log(10, (internal_energy + 8000)) - 3590, -50, 240)
@@ -304,9 +311,15 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		supermatter_zap(
 			zapstart = src,
 			range = 3,
+<<<<<<< HEAD
 			zap_str = internal_energy * zap_transmission_rate * delta_time,
 			zap_flags = ZAP_SUPERMATTER_FLAGS,
 			zap_cutoff = 240 KILO WATTS * delta_time,
+=======
+			zap_str = 1.25 * internal_energy * zap_multiplier * delta_time,
+			zap_flags = ZAP_SUPERMATTER_FLAGS,
+			zap_cutoff = 300 * delta_time,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			power_level = internal_energy,
 			color = zap_color,
 		)
@@ -557,6 +570,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		return
 
 	final_countdown = TRUE
+	SEND_GLOBAL_SIGNAL(COMSIG_MAIN_SM_DELAMINATING, final_countdown)
 
 	notify_ghosts(
 		"[src] has begun the delamination process!",
@@ -652,10 +666,14 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	if(total_moles < MINIMUM_MOLE_COUNT) //it's not worth processing small amounts like these, total_moles can also be 0 in vacuume
 		return
 	for (var/gas_path in absorbed_gasmix.gases)
+<<<<<<< HEAD
 		var/mole_count = absorbed_gasmix.gases[gas_path][MOLES]
 		if(mole_count < MINIMUM_MOLE_COUNT) //save processing power from small amounts like these
 			continue
 		gas_percentage[gas_path] = mole_count / total_moles
+=======
+		gas_percentage[gas_path] = absorbed_gasmix.gases[gas_path][MOLES] / total_moles
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/datum/sm_gas/sm_gas = current_gas_behavior[gas_path]
 		if(!sm_gas)
 			continue

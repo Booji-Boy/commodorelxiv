@@ -60,6 +60,10 @@
 	desc = "A device which causes kinetic accelerators to permanently gain damage against creature types killed with it."
 	id = "bountymod"
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*2, /datum/material/silver = SHEET_MATERIAL_AMOUNT*2, /datum/material/gold = SHEET_MATERIAL_AMOUNT*2, /datum/material/bluespace = SHEET_MATERIAL_AMOUNT*2)
+<<<<<<< HEAD
+=======
+	reagents_list = list(/datum/reagent/blood = 40)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/borg/upgrade/modkit/bounty
 
 //Spooky special loot
@@ -105,22 +109,41 @@
 		return
 	var/failText = span_warning("The snake seems unsatisfied with your incomplete oath and returns to its previous place on the rod, returning to its dormant, wooden state. You must stand still while completing your oath!")
 	to_chat(itemUser, span_notice("The wooden snake that was carved into the rod seems to suddenly come alive and begins to slither down your arm! The compulsion to help others grows abnormally strong..."))
+<<<<<<< HEAD
 	if(do_after(itemUser, 4 SECONDS, target = itemUser))
+=======
+	//The "iscarbon" is to prevent telekinetic grabs using the rod.
+	//If we don't do this, we create a memory leak if someone uses telekinetic grab on the rod and binds it.
+	//For consistency (and the safety - we want to prevent this at all costs), we do this on each step.
+	if(do_after(itemUser, 40, target = itemUser) && iscarbon(src.loc))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		itemUser.say("I swear to fulfill, to the best of my ability and judgment, this covenant:", forced = "hippocratic oath")
 	else
 		to_chat(itemUser, failText)
 		return
+<<<<<<< HEAD
 	if(do_after(itemUser, 2 SECONDS, target = itemUser))
+=======
+	if(do_after(itemUser, 20, target = itemUser) && iscarbon(src.loc))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		itemUser.say("I will apply, for the benefit of the sick, all measures that are required, avoiding those twin traps of overtreatment and therapeutic nihilism.", forced = "hippocratic oath")
 	else
 		to_chat(itemUser, failText)
 		return
+<<<<<<< HEAD
 	if(do_after(itemUser, 3 SECONDS, target = itemUser))
+=======
+	if(do_after(itemUser, 30, target = itemUser) && iscarbon(src.loc))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		itemUser.say("I will remember that I remain a member of society, with special obligations to all my fellow human beings, those sound of mind and body as well as the infirm.", forced = "hippocratic oath")
 	else
 		to_chat(itemUser, failText)
 		return
+<<<<<<< HEAD
 	if(do_after(itemUser, 3 SECONDS, target = itemUser))
+=======
+	if(do_after(itemUser, 30, target = itemUser) && iscarbon(src.loc))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		itemUser.say("If I do not violate this oath, may I enjoy life and art, respected while I live and remembered with affection thereafter. May I always act so as to preserve the finest traditions of my calling and may I long experience the joy of healing those who seek my help.", forced = "hippocratic oath")
 	else
 		to_chat(itemUser, failText)
@@ -272,9 +295,13 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "orb"
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 6
 	light_power = 1.2
 	light_color = "#79f1ff"
+=======
+	light_outer_range = 7
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_flags = LIGHT_ATTACHED
 	layer = ABOVE_ALL_MOB_LAYER
 	plane = ABOVE_GAME_PLANE
@@ -532,6 +559,7 @@
 	name = "Flight Potion"
 	description = "Strange mutagenic compound of unknown origins."
 	reagent_state = LIQUID
+	process_flags = ORGANIC | SYNTHETIC
 	color = "#976230"
 
 /datum/reagent/flightpotion/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume, show_message = TRUE)
@@ -924,6 +952,7 @@
 	name = "Scan Target"
 	desc = "Contact may or may not be close."
 
+<<<<<<< HEAD
 /obj/item/organ/internal/cyberimp/arm/shard
 	name = "dark spoon shard"
 	desc = "An eerie metal shard surrounded by dark energies...of soup drinking. You probably don't think you should have been able to find this."
@@ -935,6 +964,21 @@
 	retract_sound = 'sound/items/sheath.ogg'
 
 /obj/item/organ/internal/cyberimp/arm/shard/attack_self(mob/user, modifiers)
+=======
+/obj/item/organ/internal/cyberimp/arm/item_set/katana
+	name = "dark shard"
+	desc = "An eerie metal shard surrounded by dark energies."
+	icon = 'icons/obj/lavaland/artefacts.dmi'
+	icon_state = "cursed_katana_organ"
+	status = ORGAN_ORGANIC
+	encode_info = AUGMENT_NO_REQ
+	organ_flags = ORGAN_FROZEN|ORGAN_UNREMOVABLE
+	items_to_create = list(/obj/item/cursed_katana)
+	extend_sound = 'sound/items/unsheath.ogg'
+	retract_sound = 'sound/items/sheath.ogg'
+
+/obj/item/organ/internal/cyberimp/arm/item_set/katana/attack_self(mob/user, modifiers)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	to_chat(user, span_userdanger("The mass goes up your arm and goes inside it!"))
 	playsound(user, 'sound/magic/demon_consume.ogg', 50, TRUE)
@@ -944,6 +988,7 @@
 	user.temporarilyRemoveItemFromInventory(src, TRUE)
 	Insert(user)
 
+<<<<<<< HEAD
 /obj/item/organ/internal/cyberimp/arm/shard/screwdriver_act(mob/living/user, obj/item/screwtool)
 	return
 
@@ -953,6 +998,12 @@
 	items_to_create = list(/obj/item/cursed_katana)
 
 /obj/item/organ/internal/cyberimp/arm/shard/katana/Retract()
+=======
+/obj/item/organ/internal/cyberimp/arm/item_set/katana/screwdriver_act(mob/living/user, obj/item/screwtool)
+	return
+
+/obj/item/organ/internal/cyberimp/arm/item_set/katana/Retract()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/obj/item/cursed_katana/katana = active_item
 	if(!katana || katana.shattered)
 		return FALSE

@@ -15,9 +15,17 @@
 				set_light_color(LIGHT_COLOR_BLUE)
 			if(APC_FULLY_CHARGED)
 				set_light_color(LIGHT_COLOR_GREEN)
-		set_light(light_on_range)
+		set_light(l_outer_range = light_on_outer_range, l_inner_range = light_on_inner_range)
 		return
 
+<<<<<<< HEAD
+=======
+	if(update_state & UPSTATE_BLUESCREEN)
+		set_light_color(LIGHT_COLOR_BLUE)
+		set_light(l_outer_range = light_on_outer_range, l_inner_range = light_on_inner_range)
+		return
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_light(0)
 
 /obj/machinery/power/apc/update_icon_state()

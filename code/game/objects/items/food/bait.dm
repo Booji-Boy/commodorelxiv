@@ -38,6 +38,10 @@
 	inhand_icon_state = "pen"
 	food_reagents = list(/datum/reagent/drug/kronkaine = 2) //The kronkaine is the thing that makes this a great bait.
 	tastes = list("hypocrisy" = 1)
+<<<<<<< HEAD
+=======
+	bait_quality = TRAIT_GREAT_QUALITY_BAIT
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/bait/doughball
 	name = "doughball"
@@ -65,4 +69,8 @@
 
 /obj/item/food/bait/doughball/synthetic/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	ADD_TRAIT(src, TRAIT_OMNI_BAIT, INNATE_TRAIT)
+=======
+	ADD_TRAIT(src, OMNI_BAIT_TRAIT, INNATE_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

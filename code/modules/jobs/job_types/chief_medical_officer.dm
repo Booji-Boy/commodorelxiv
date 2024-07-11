@@ -11,7 +11,7 @@
 	supervisors = SUPERVISOR_CAPTAIN
 	req_admin_notify = 1
 	minimal_player_age = 7
-	exp_requirements = 180
+	exp_requirements = 300
 	exp_required_type = EXP_TYPE_CREW
 	exp_required_type_department = EXP_TYPE_MEDICAL
 	exp_granted_type = EXP_TYPE_CREW
@@ -61,6 +61,7 @@
 	suit_store = /obj/item/flashlight/pen/paramedic
 	backpack_contents = list(
 		/obj/item/melee/baton/telescopic = 1,
+		/obj/item/extrapolator = 1,
 		)
 	belt = /obj/item/modular_computer/pda/heads/cmo
 	ears = /obj/item/radio/headset/heads/cmo
@@ -72,7 +73,11 @@
 	backpack = /obj/item/storage/backpack/medic
 	satchel = /obj/item/storage/backpack/satchel/med
 	duffelbag = /obj/item/storage/backpack/duffelbag/med
+<<<<<<< HEAD
 	messenger = /obj/item/storage/backpack/messenger/med
+=======
+	implants = list(/obj/item/implant/mindshield)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	box = /obj/item/storage/box/survival/medical
 	chameleon_extras = list(

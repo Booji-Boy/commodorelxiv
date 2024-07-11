@@ -25,6 +25,23 @@ import {
 import { processedText } from '../process';
 import { BountyBoardContent } from './BountyBoard';
 import { UserDetails } from './Vending';
+<<<<<<< HEAD
+=======
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Divider,
+  LabeledList,
+  Modal,
+  Section,
+  Stack,
+  Tabs,
+  TextArea,
+} from '../components';
+import { marked } from 'marked';
+import { sanitizeText } from '../sanitize';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const CENSOR_MESSAGE =
   'This channel has been deemed as threatening to \
@@ -75,7 +92,11 @@ export const Newscaster = (props) => {
 /** The modal menu that contains the prompts to making new channels. */
 const NewscasterChannelCreation = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const [lockedmode, setLockedmode] = useState(true);
+=======
+  const [lockedmode, setLockedmode] = useLocalState('lockedmode', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { creating_channel, name, desc } = data;
   if (!creating_channel) {
     return null;
@@ -513,6 +534,23 @@ const NewscasterChannelSelector = (props) => {
   );
 };
 
+<<<<<<< HEAD
+=======
+const processedText = (value) => {
+  const textHtml = {
+    __html: sanitizeText(
+      marked(value, {
+        breaks: true,
+        smartypants: true,
+        smartLists: true,
+        baseUrl: 'thisshouldbreakhttp',
+      }),
+    ),
+  };
+  return textHtml;
+};
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /** This is where the channels comments get spangled out (tm) */
 const NewscasterChannelMessages = (props) => {
   const { act, data } = useBackend();

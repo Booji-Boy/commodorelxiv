@@ -24,7 +24,11 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(applyplate))
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(dropplates))
+<<<<<<< HEAD
 	if(istype(parent, /obj/vehicle/sealed/mecha/ripley))
+=======
+	if(istype(parent, /obj/vehicle/sealed/mecha/working/ripley))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		RegisterSignal(parent, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(apply_mech_overlays))
 
 	if(maxamount)

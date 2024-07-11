@@ -49,8 +49,11 @@
 		if (victim.apply_status_effect(/datum/status_effect/incapacitating/stun/goliath_tentacled, grapple_time, src))
 			buckle_mob(victim, TRUE)
 			SEND_SIGNAL(victim, COMSIG_GOLIATH_TENTACLED_GRABBED)
+<<<<<<< HEAD
 	for (var/obj/vehicle/sealed/mecha/mech in loc)
 		mech.take_damage(rand(min_damage, max_damage), damage_type = BRUTE, damage_flag = MELEE, sound_effect = TRUE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if (!has_buckled_mobs())
 		retract()
 		return

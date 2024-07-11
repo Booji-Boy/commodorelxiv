@@ -14,6 +14,7 @@
 	var/can_gain = TRUE
 	var/random_gain = TRUE //can this be gained through random traumas?
 	var/resilience = TRAUMA_RESILIENCE_BASIC //how hard is this to cure?
+	var/clonable = TRUE // will this transfer if the brain is cloned?
 
 	/// Tracks abstract types of brain traumas, useful for determining traumas that should not exist
 	var/abstract_type = /datum/brain_trauma
@@ -27,6 +28,10 @@
 		owner = null
 	return ..()
 
+/datum/brain_trauma/proc/on_clone()
+	if(clonable)
+		return new type
+		
 //Called on life ticks
 /datum/brain_trauma/proc/on_life(seconds_per_tick, times_fired)
 	return

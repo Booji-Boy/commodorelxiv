@@ -8,6 +8,13 @@
 	},
 /turf/open/floor/wood,
 /area/ruin/syndicate_lava_base/telecomms)
+"d" = (
+/obj/machinery/computer/records/medical/syndie{
+	dir = 2;
+	req_access = list("syndicate")
+	},
+/turf/open/floor/wood,
+/area/ruin/syndicate_lava_base/telecomms)
 "h" = (
 /obj/item/storage/toolbox/syndicate,
 /obj/item/multitool,
@@ -98,6 +105,11 @@
 /turf/open/floor/wood,
 /area/ruin/syndicate_lava_base/telecomms)
 "H" = (
+<<<<<<< HEAD
+=======
+/obj/machinery/airalarm/directional/west,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/filingcabinet/security,
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 4
@@ -217,7 +229,7 @@ k
 (5,1,1) = {"
 a
 K
-y
+d
 y
 y
 Q

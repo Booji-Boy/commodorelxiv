@@ -29,7 +29,11 @@
 	can_be_held = FALSE
 	health = 100
 	maxHealth = 100
+<<<<<<< HEAD
 	light_range = 1.5 // Bioluminescence!
+=======
+	light_outer_range = 1.5 // Bioluminescence!
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = T20C - 100
 	maximum_survivable_temperature = T20C + 120
 	light_color = "#d43229" // The ants that comprise the giant ant still glow red despite the sludge.

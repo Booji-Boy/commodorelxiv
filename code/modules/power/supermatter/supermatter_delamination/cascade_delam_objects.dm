@@ -10,7 +10,7 @@
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	light_power = 1
-	light_range = 5
+	light_outer_range = 5
 	light_color = COLOR_VIVID_YELLOW
 	move_resist = INFINITY
 	///All dirs we can expand to
@@ -22,6 +22,9 @@
 
 /obj/crystal_mass/Initialize(mapload, dir_to_remove)
 	. = ..()
+	// sanity check, I'm just throwing shit at the wall to hope one of these checks prevents the server crash bug
+	if(!isturf(loc) || QDELING(loc))
+		return INITIALIZE_HINT_QDEL
 	icon_state = "crystal_cascade_[rand(1,6)]"
 	START_PROCESSING(SSsupermatter_cascade, src)
 
@@ -44,7 +47,7 @@
 	if(!COOLDOWN_FINISHED(src, sm_wall_cooldown))
 		return
 
-	if(!available_dirs || available_dirs.len <= 0)
+	if(!length(available_dirs))
 		return PROCESS_KILL
 
 	COOLDOWN_START(src, sm_wall_cooldown, rand(0, 3 SECONDS))
@@ -54,7 +57,12 @@
 
 	icon_state = "crystal_cascade_[rand(1,6)]"
 
-	if(!next_turf || locate(/obj/crystal_mass) in next_turf)
+	// we gotta stop the cascade from eating reality itself, so we're going to go a bit overboard on the checks here.
+	// ensure the next turf actually fucking exists
+	if(!istype(next_turf) || QDELING(next_turf))
+		return
+	// ensure there's no crystal mass in the next turf
+	if(locate(/obj/crystal_mass) in next_turf)
 		return
 
 	for(var/atom/movable/checked_atom as anything in next_turf)
@@ -117,7 +125,7 @@
 	plane = MASSIVE_OBJ_PLANE
 	light_color = COLOR_RED
 	light_power = 0.7
-	light_range = 15
+	light_outer_range = 15
 	move_resist = INFINITY
 	pixel_x = -96
 	pixel_y = -96

@@ -279,9 +279,17 @@
 /datum/antagonist/ert/militia
 	name = "Frontier Militia"
 	outfit = /datum/outfit/centcom/militia
+<<<<<<< HEAD
 	role = "Volunteer"
+=======
+	role = "Minuteman"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/ert/militia/general
 	name = "Frontier Militia General"
 	outfit = /datum/outfit/centcom/militia/general
+<<<<<<< HEAD
 	role = "General"
+=======
+	role = "Minuteman Leader"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

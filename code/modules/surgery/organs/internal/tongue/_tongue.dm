@@ -89,6 +89,8 @@
 		/datum/language/shadowtongue,
 		/datum/language/terrum,
 		/datum/language/nekomimetic,
+		/datum/language/ratvar, //Monkestation Edit
+		/datum/language/goblin, //Monkestation Addition
 	)
 
 /obj/item/organ/internal/tongue/proc/handle_speech(datum/source, list/speech_args)
@@ -126,7 +128,13 @@
 		return
 	if(modifies_speech)
 		RegisterSignal(tongue_owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+<<<<<<< HEAD:code/modules/surgery/organs/internal/tongue/_tongue.dm
 	tongue_owner.voice_filter = voice_filter
+=======
+
+	if(!(organ_flags & ORGAN_FAILING))
+		ADD_TRAIT(tongue_owner, TRAIT_SPEAKS_CLEARLY, SPEAKING_FROM_TONGUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/tongue.dm
 	/* This could be slightly simpler, by making the removal of the
 	* NO_TONGUE_TRAIT conditional on the tongue's `sense_of_taste`, but
 	* then you can distinguish between ageusia from no tongue, and
@@ -180,10 +188,25 @@
 	say_mod = "hisses"
 	taste_sensitivity = 10 // combined nose + tongue, extra sensitive
 	modifies_speech = TRUE
+<<<<<<< HEAD:code/modules/surgery/organs/internal/tongue/_tongue.dm
 	languages_native = list(/datum/language/draconic)
 	liked_foodtypes = GORE | MEAT | SEAFOOD | NUTS | BUGS
 	disliked_foodtypes = GRAIN | DAIRY | CLOTH | GROSS
 	voice_filter = @{"[0:a] asplit [out0][out2]; [out0] asetrate=%SAMPLE_RATE%*0.9,aresample=%SAMPLE_RATE%,atempo=1/0.9,aformat=channel_layouts=mono,volume=0.2 [p0]; [out2] asetrate=%SAMPLE_RATE%*1.1,aresample=%SAMPLE_RATE%,atempo=1/1.1,aformat=channel_layouts=mono,volume=0.2[p2]; [p0][0][p2] amix=inputs=3"}
+=======
+	languages_native = list(/datum/language/draconic, /datum/language/ashtongue)
+
+	//MONKESTATION EDIT START
+
+	/// How long is our hissssssss?
+	var/draw_length = 3
+
+/obj/item/organ/internal/tongue/lizard/Initialize(mapload)
+	. = ..()
+	draw_length = rand(2, 6)
+	if(prob(10))
+		draw_length += 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/tongue.dm
 
 /obj/item/organ/internal/tongue/lizard/modify_speech(datum/source, list/speech_args)
 	var/static/regex/lizard_hiss = new("s+", "g")
@@ -194,13 +217,15 @@
 	var/static/regex/lizard_eckS = new(@"\bX([\-|r|R]|\b)", "g")
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(message[1] != "*")
-		message = lizard_hiss.Replace(message, "sss")
-		message = lizard_hiSS.Replace(message, "SSS")
-		message = lizard_kss.Replace(message, "$1kss")
-		message = lizard_kSS.Replace(message, "$1KSS")
-		message = lizard_ecks.Replace(message, "ecks$1")
-		message = lizard_eckS.Replace(message, "ECKS$1")
+		message = lizard_hiss.Replace(message, repeat_string(draw_length, "s"))
+		message = lizard_hiSS.Replace(message, repeat_string(draw_length, "S"))
+		message = lizard_kss.Replace(message, "$1k[repeat_string(max(draw_length - 1, 1), "s")]")
+		message = lizard_kSS.Replace(message, "$1K[repeat_string(max(draw_length - 1, 1), "S")]")
+		message = lizard_ecks.Replace(message, "eck[repeat_string(max(draw_length - 2, 1), "s")]$1")
+		message = lizard_eckS.Replace(message, "ECK[repeat_string(max(draw_length - 2, 1), "S")]$1")
 	speech_args[SPEECH_MESSAGE] = message
+
+	//MONKESTATION EDIT END
 
 /obj/item/organ/internal/tongue/lizard/silver
 	name = "silver tongue"
@@ -222,6 +247,7 @@
 
 /datum/action/cooldown/turn_to_statue/New(Target)
 	. = ..()
+<<<<<<< HEAD:code/modules/surgery/organs/internal/tongue/_tongue.dm
 	if(!istype(Target, /obj/item/organ/internal/tongue/lizard/silver))
 		stack_trace("Non-silverscale tongue initialized a turn to statue action.")
 		qdel(src)
@@ -234,6 +260,14 @@
 	return ..()
 
 /datum/action/cooldown/turn_to_statue/IsAvailable(feedback)
+=======
+	statue = new
+	RegisterSignal(statue, COMSIG_QDELETING, PROC_REF(statue_destroyed))
+
+/datum/action/item_action/organ_action/statue/Destroy()
+	UnregisterSignal(statue, COMSIG_QDELETING)
+	QDEL_NULL(statue)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/tongue.dm
 	. = ..()
 	if(!.)
 		return FALSE
@@ -244,6 +278,7 @@
 	if(tongue_target.owner != owner)
 		return FALSE
 
+<<<<<<< HEAD:code/modules/surgery/organs/internal/tongue/_tongue.dm
 	if(isnull(statue))
 		if(feedback)
 			owner.balloon_alert(owner, "you can't seem to statue-ize!")
@@ -274,6 +309,12 @@
 
 	statue.name = "statue of [owner.real_name]"
 	statue.desc = "statue depicting [owner.real_name]"
+=======
+	if(statue.name == initial(statue.name)) //statue has not been set up
+		statue.name = "statue of [becoming_statue.real_name]"
+		statue.desc = "statue depicting [becoming_statue.real_name]"
+		statue.set_custom_materials(list(/datum/material/silver=SHEET_MATERIAL_AMOUNT*5))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/surgery/organs/tongue.dm
 
 	if(is_statue)
 		statue.visible_message(span_danger("[statue] becomes animated!"))

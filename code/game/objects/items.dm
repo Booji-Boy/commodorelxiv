@@ -39,6 +39,17 @@
 	///The config type to use for greyscaled belt overlays. Both this and greyscale_colors must be assigned to work.
 	var/greyscale_config_belt
 
+	//Overrides for digitigrade and snouted clothing handling
+	//Icon file for mob worn overlays, if the user is digitigrade.
+	var/icon/worn_icon_digitigrade
+	//Same as above, but for if the user is snouted.
+	var/icon/worn_icon_snouted
+
+	var/greyscale_config_worn_digitigrade
+	var/greyscale_config_worn_snouted
+
+	/// Used for BODYTYPE_CUSTOM: Needs to follow this syntax: a list() with the x and y coordinates of the pixel you want to get the color from. Colors are filled in as GAGs values for fallback.
+	var/list/species_clothing_color_coords[3]
 	/* !!!!!!!!!!!!!!! IMPORTANT !!!!!!!!!!!!!!
 
 		IF YOU ADD MORE ICON CRAP TO THIS
@@ -219,6 +230,7 @@
 	var/override_notes = FALSE
 	/// Used if we want to have a custom verb text for throwing. "John Spaceman flicks the ciggerate" for example.
 	var/throw_verb
+<<<<<<< HEAD
 
 	/// A lazylist used for applying fantasy values, contains the actual modification applied to a variable.
 	var/list/fantasy_modifications = null
@@ -229,6 +241,12 @@
 	var/list/unique_reskin
 	/// Do we apply a click cooldown when resisting this object if it is restraining them?
 	var/resist_cooldown = CLICK_CD_BREAKOUT
+=======
+	/// Does this use the advanced reskinning setup?
+	var/uses_advanced_reskins = FALSE
+	/// A lazylist used for applying fantasy values, contains the actual modification applied to a variable.
+	var/list/fantasy_modifications = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/Initialize(mapload)
 	if(attack_verb_continuous)
@@ -334,7 +352,16 @@
 
 	LAZYADD(actions, action)
 	RegisterSignal(action, COMSIG_QDELETING, PROC_REF(on_action_deleted))
+<<<<<<< HEAD
 	grant_action_to_bearer(action)
+=======
+	if(ismob(loc))
+		// We're being held or are equipped by someone while adding an action?
+		// Then they should also probably be granted the action, given it's in a correct slot
+		var/mob/holder = loc
+		give_item_action(action, holder, holder.get_slot_by_item(src))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return action
 
 /// Grant the action to anyone who has this item equipped to an appropriate slot
@@ -405,6 +432,10 @@
 		return
 	if(greyscale_config_worn)
 		worn_icon = SSgreyscale.GetColoredIconByType(greyscale_config_worn, greyscale_colors)
+	if(greyscale_config_worn_digitigrade)
+		worn_icon_digitigrade = SSgreyscale.GetColoredIconByType(greyscale_config_worn_digitigrade, greyscale_colors)
+	if(greyscale_config_worn_snouted)
+		worn_icon_snouted = SSgreyscale.GetColoredIconByType(greyscale_config_worn_snouted, greyscale_colors)
 	if(greyscale_config_inhand_left)
 		lefthand_file = SSgreyscale.GetColoredIconByType(greyscale_config_inhand_left, greyscale_colors)
 	if(greyscale_config_inhand_right)
@@ -499,13 +530,16 @@
 
 /obj/item/vv_get_dropdown()
 	. = ..()
+	VV_DROPDOWN_OPTION("", "-------------") //monkestation edit
 	VV_DROPDOWN_OPTION(VV_HK_ADD_FANTASY_AFFIX, "Add Fantasy Affix")
+	VV_DROPDOWN_OPTION(VV_HK_POSSESS_ITEM, "Create Possessed Version") //monkestation edit
 
 /obj/item/vv_do_topic(list/href_list)
 	. = ..()
 
 	if(!.)
 		return
+	monkestation_vv_do_topic(href_list) //monkestation edit
 
 	if(href_list[VV_HK_ADD_FANTASY_AFFIX])
 		if(!check_rights(R_FUN))
@@ -596,6 +630,8 @@
 			return
 
 	. = FALSE
+	if(cant_grab)
+		return FALSE
 	pickup(user)
 	add_fingerprint(user)
 	if(!user.put_in_active_hand(src, ignore_animation = !outside_storage))
@@ -609,7 +645,40 @@
 	. = ..()
 	if(. || !user || anchored)
 		return
+<<<<<<< HEAD
 	return attempt_pickup(user)
+=======
+	if(!user)
+		return
+	if(anchored)
+		return
+
+	. = TRUE
+
+	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP)) //See if we're supposed to auto pickup.
+		return
+
+	//If the item is in a storage item, take it out
+	if(loc.atom_storage && !loc.atom_storage.remove_single(user, src, user.loc, silent = TRUE))
+		return
+	if(QDELETED(src)) //moving it out of the storage to the floor destroyed it.
+		return
+
+	if(throwing)
+		throwing.finalize(FALSE)
+	if(loc == user)
+		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src))
+			return
+
+	. = FALSE
+	if(cant_grab)
+		return FALSE
+	pickup(user)
+	add_fingerprint(user)
+	if(!user.put_in_active_hand(src, FALSE, FALSE))
+		user.dropItemToGround(src)
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/attack_alien(mob/user, list/modifiers)
 	var/mob/living/carbon/alien/ayy = user
@@ -674,6 +743,8 @@
 		qdel(src)
 	item_flags &= ~IN_INVENTORY
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED, user)
+	if(user && iscarbon(user))
+		SEND_SIGNAL(user, COMSIG_CARBON_ITEM_DROPPED, src)
 	if(!silent)
 		playsound(src, drop_sound, DROP_SOUND_VOLUME, ignore_walls = FALSE)
 	user?.update_equipment_speed_mods()
@@ -683,6 +754,8 @@
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
 	SEND_SIGNAL(user, COMSIG_LIVING_PICKED_UP_ITEM, src)
+	if(iscarbon(user))
+		SEND_SIGNAL(user, COMSIG_CARBON_ITEM_PICKED_UP, src)
 	item_flags |= IN_INVENTORY
 
 /// called when "found" in pockets and storage items. Returns 1 if the search should end.
@@ -828,8 +901,11 @@
 		return
 	if(SEND_SIGNAL(hit_atom, COMSIG_ATOM_PREHITBY, src, throwingdatum) & COMSIG_HIT_PREVENTED)
 		return
+<<<<<<< HEAD
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_IMPACT, hit_atom, throwingdatum)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(get_temperature() && isliving(hit_atom))
 		var/mob/living/L = hit_atom
 		L.ignite_mob()
@@ -968,12 +1044,12 @@
 
 /obj/item/attack_hulk(mob/living/carbon/human/user)
 	return FALSE
-
+/* overrided in the monkestation/modules/possession folder
 /obj/item/attack_animal(mob/living/simple_animal/user, list/modifiers)
 	if (obj_flags & CAN_BE_HIT)
 		return ..()
 	return 0
-
+*/
 /obj/item/burn()
 	if(!QDELETED(src))
 		var/turf/T = get_turf(src)
@@ -1426,7 +1502,12 @@
 // Update icons if this is being carried by a mob
 /obj/item/wash(clean_types)
 	. = ..()
+<<<<<<< HEAD
 	if(ismob(loc))
+=======
+
+	if(ismob(loc) && ..())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/mob/mob_loc = loc
 		mob_loc.update_clothing(slot_flags)
 
@@ -1459,6 +1540,75 @@
 /obj/item/proc/on_offer_taken(mob/living/carbon/offerer, mob/living/carbon/taker)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_OFFER_TAKEN, offerer, taker) & COMPONENT_OFFER_INTERRUPT)
 		return TRUE
+
+/obj/item/clothing/glasses	//Code to let you switch the side your eyepatch is on! Woo! Just an explanation, this is added to the base glasses so it works on eyepatch-huds too
+	var/can_switch_eye = FALSE	//Having this default to false means that its easy to make sure this doesnt apply to any pre-existing items
+
+/obj/item/reskin_obj(mob/M)
+	if(!uses_advanced_reskins)
+		return ..()
+	if(!LAZYLEN(unique_reskin))
+		return
+
+	/// Is the obj a glasses icon with swappable item states?
+	var/is_swappable = FALSE
+	/// if the item are glasses, this variable stores the item.
+	var/obj/item/clothing/glasses/reskinned_glasses
+
+	if(istype(src, /obj/item/clothing/glasses)) // TODO - Remove this mess about glasses, it shouldn't be necessary anymore.
+		reskinned_glasses = src
+		if(reskinned_glasses.can_switch_eye)
+			is_swappable = TRUE
+
+	var/list/items = list()
+
+
+	for(var/reskin_option in unique_reskin)
+		var/image/item_image = image(icon = unique_reskin[reskin_option][RESKIN_ICON] ? unique_reskin[reskin_option][RESKIN_ICON] : icon, icon_state = "[unique_reskin[reskin_option][RESKIN_ICON_STATE]]")
+		items += list("[reskin_option]" = item_image)
+	sort_list(items)
+
+	var/pick = show_radial_menu(M, src, items, custom_check = CALLBACK(src, PROC_REF(check_reskin_menu), M), radius = 38, require_near = TRUE)
+	if(!pick)
+		return
+	if(!unique_reskin[pick])
+		return
+	current_skin = pick
+
+	if(unique_reskin[pick][RESKIN_ICON])
+		icon = unique_reskin[pick][RESKIN_ICON]
+
+	if(unique_reskin[pick][RESKIN_ICON_STATE])
+		if(is_swappable)
+			base_icon_state = unique_reskin[pick][RESKIN_ICON_STATE]
+			icon_state = base_icon_state
+		else
+			icon_state = unique_reskin[pick][RESKIN_ICON_STATE]
+
+	if(unique_reskin[pick][RESKIN_WORN_ICON])
+		worn_icon = unique_reskin[pick][RESKIN_WORN_ICON]
+
+	if(unique_reskin[pick][RESKIN_WORN_ICON_STATE])
+		worn_icon_state = unique_reskin[pick][RESKIN_WORN_ICON_STATE]
+
+	if(unique_reskin[pick][RESKIN_INHAND_L])
+		lefthand_file = unique_reskin[pick][RESKIN_INHAND_L]
+	if(unique_reskin[pick][RESKIN_INHAND_R])
+		righthand_file = unique_reskin[pick][RESKIN_INHAND_R]
+	if(unique_reskin[pick][RESKIN_INHAND_STATE])
+		inhand_icon_state = unique_reskin[pick][RESKIN_INHAND_STATE]
+	if(unique_reskin[pick][RESKIN_SUPPORTS_VARIATIONS_FLAGS])
+		supports_variations_flags = unique_reskin[pick][RESKIN_SUPPORTS_VARIATIONS_FLAGS]
+	if(ishuman(M))
+		var/mob/living/carbon/human/wearer = M
+		wearer.regenerate_icons() // update that mf
+	to_chat(M, "[src] is now skinned as '[pick].'")
+	post_reskin(M)
+	return TRUE
+
+/// Automatically called after a reskin, for any extra variable changes.
+/obj/item/proc/post_reskin(mob/our_mob)
+	return
 
 /// Special stuff you want to do when an outfit equips this item.
 /obj/item/proc/on_outfit_equip(mob/living/carbon/human/outfit_wearer, visuals_only, item_slot)
@@ -1591,7 +1741,7 @@
 
 /// Common proc used by painting tools like spraycans and palettes that can access the entire 24 bits color space.
 /obj/item/proc/pick_painting_tool_color(mob/user, default_color)
-	var/chosen_color = input(user,"Pick new color", "[src]", default_color) as color|null
+	var/chosen_color = tgui_color_picker(user, "Pick new color", "[src]", default_color)
 	if(!chosen_color || QDELETED(src) || IS_DEAD_OR_INCAP(user) || !user.is_holding(src))
 		return
 	set_painting_tool_color(chosen_color)
@@ -1722,6 +1872,7 @@
 	if (!isnull(tool_behaviour))
 		return list(tool_behaviour)
 	return null
+<<<<<<< HEAD
 
 /obj/item/animate_atom_living(mob/living/owner)
 	new /mob/living/simple_animal/hostile/mimic/copy(drop_location(), src, owner)
@@ -1746,3 +1897,5 @@
 	if(!isnull(loc))
 		SEND_SIGNAL(loc, COMSIG_ATOM_CONTENTS_WEIGHT_CLASS_CHANGED, src, old_w_class, new_w_class)
 	return TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

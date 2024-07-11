@@ -1,6 +1,21 @@
+<<<<<<< HEAD
 import { isEscape, KEY } from 'common/keys';
 import { BooleanLike } from 'common/react';
 import { KeyboardEvent, useState } from 'react';
+=======
+import { Loader } from './common/Loader';
+import { useBackend, useLocalState } from '../backend';
+import {
+  KEY_ENTER,
+  KEY_ESCAPE,
+  KEY_LEFT,
+  KEY_RIGHT,
+  KEY_SPACE,
+  KEY_TAB,
+} from '../../common/keycodes';
+import { Autofocus, Box, Button, Flex, Section, Stack } from '../components';
+import { Window } from '../layouts';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { useBackend } from '../backend';
 import { Autofocus, Box, Button, Section, Stack } from '../components';
@@ -22,8 +37,13 @@ enum DIRECTION {
   Decrement = -1,
 }
 
+<<<<<<< HEAD
 export function AlertModal(props) {
   const { act, data } = useBackend<Data>();
+=======
+export const AlertModal = (props) => {
+  const { act, data } = useBackend<AlertModalData>();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const {
     autofocus,
     buttons = [],
@@ -32,6 +52,7 @@ export function AlertModal(props) {
     timeout,
     title,
   } = data;
+<<<<<<< HEAD
 
   const [selected, setSelected] = useState(0);
 
@@ -39,6 +60,9 @@ export function AlertModal(props) {
   const isVerbose = buttons.some((button) => button.length > 10);
   const largeSpacing = isVerbose && large_buttons ? 20 : 15;
 
+=======
+  const [selected, setSelected] = useLocalState<number>('selected', 0);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   // Dynamically sets window dimensions
   const windowHeight =
     120 +
@@ -82,7 +106,30 @@ export function AlertModal(props) {
   return (
     <Window height={windowHeight} title={title} width={windowWidth}>
       {!!timeout && <Loader value={timeout} />}
+<<<<<<< HEAD
       <Window.Content onKeyDown={keyDownHandler}>
+=======
+      <Window.Content
+        onKeyDown={(e) => {
+          const keyCode = window.event ? e.which : e.keyCode;
+          /**
+           * Simulate a click when pressing space or enter,
+           * allow keyboard navigation, override tab behavior
+           */
+          if (keyCode === KEY_SPACE || keyCode === KEY_ENTER) {
+            act('choose', { choice: buttons[selected] });
+          } else if (keyCode === KEY_ESCAPE) {
+            act('cancel');
+          } else if (keyCode === KEY_LEFT) {
+            e.preventDefault();
+            onKey(KEY_DECREMENT);
+          } else if (keyCode === KEY_TAB || keyCode === KEY_RIGHT) {
+            e.preventDefault();
+            onKey(KEY_INCREMENT);
+          }
+        }}
+      >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         <Section fill>
           <Stack fill vertical>
             <Stack.Item m={1}>
@@ -112,12 +159,18 @@ type ButtonDisplayProps = {
 /**
  * Displays a list of buttons ordered by user prefs.
  */
+<<<<<<< HEAD
 function HorizontalButtons(props: ButtonDisplayProps) {
   const { act, data } = useBackend<Data>();
+=======
+const ButtonDisplay = (props) => {
+  const { data } = useBackend<AlertModalData>();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { buttons = [], large_buttons, swapped_buttons } = data;
   const { selected } = props;
 
   return (
+<<<<<<< HEAD
     <Stack fill justify="space-around" reverse={!swapped_buttons}>
       {buttons.map((button, index) => (
         <Stack.Item grow={large_buttons ? 1 : undefined} key={index}>
@@ -136,6 +189,35 @@ function HorizontalButtons(props: ButtonDisplayProps) {
         </Stack.Item>
       ))}
     </Stack>
+=======
+    <Flex
+      align="center"
+      direction={!swapped_buttons ? 'row-reverse' : 'row'}
+      fill
+      justify="space-around"
+      wrap
+    >
+      {buttons?.map((button, index) =>
+        !!large_buttons && buttons.length < 3 ? (
+          <Flex.Item grow key={index}>
+            <AlertButton
+              button={button}
+              id={index.toString()}
+              selected={selected === index}
+            />
+          </Flex.Item>
+        ) : (
+          <Flex.Item key={index}>
+            <AlertButton
+              button={button}
+              id={index.toString()}
+              selected={selected === index}
+            />
+          </Flex.Item>
+        ),
+      )}
+    </Flex>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 }
 
@@ -143,6 +225,7 @@ function HorizontalButtons(props: ButtonDisplayProps) {
  * Technically the parent handles more than 2 buttons, but you
  * should just be using a list input in that case.
  */
+<<<<<<< HEAD
 function VerticalButtons(props: ButtonDisplayProps) {
   const { act, data } = useBackend<Data>();
   const { buttons = [], large_buttons, swapped_buttons } = data;
@@ -178,5 +261,28 @@ function VerticalButtons(props: ButtonDisplayProps) {
         </Stack.Item>
       ))}
     </Stack>
+=======
+const AlertButton = (props) => {
+  const { act, data } = useBackend<AlertModalData>();
+  const { large_buttons } = data;
+  const { button, selected } = props;
+  const buttonWidth = button.length > 7 ? button.length : 7;
+
+  return (
+    <Button
+      fluid={!!large_buttons}
+      height={!!large_buttons && 2}
+      onClick={() => act('choose', { choice: button })}
+      m={0.5}
+      pl={2}
+      pr={2}
+      pt={large_buttons ? 0.33 : 0}
+      selected={selected}
+      textAlign="center"
+      width={!large_buttons && buttonWidth}
+    >
+      {!large_buttons ? button : button.toUpperCase()}
+    </Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 }

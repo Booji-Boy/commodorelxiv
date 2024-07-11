@@ -250,6 +250,24 @@
  * Supply
  */
 
+//Monkestation Edits Start - QM is not a head, knocking QM's PDA down, removed status display and science programs. The redefinition of the QM's PDA will be reflected in the job.
+
+/obj/item/modular_computer/pda/quartermaster
+	name = "quartermaster PDA"
+	greyscale_config = /datum/greyscale_config/tablet/stripe_thick
+	greyscale_colors = "#D6B328#6506CA#927444"
+	inserted_item = /obj/item/pen/survival
+	stored_paper = 20
+	starting_programs = list(
+		/datum/computer_file/program/crew_manifest,
+		/datum/computer_file/program/robocontrol,
+		/datum/computer_file/program/budgetorders,
+		/datum/computer_file/program/shipping,
+		/datum/computer_file/program/robocontrol,
+	)
+
+//Monkestation Edits End
+
 /obj/item/modular_computer/pda/cargo
 	name = "cargo technician PDA"
 	greyscale_colors = "#8b4c31#2c2e32"

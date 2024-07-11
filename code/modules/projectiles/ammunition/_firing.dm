@@ -30,9 +30,13 @@
 			var/throwtarget = get_step(fired_from, get_dir(target, fired_from))
 			firer.safe_throw_at(throwtarget, 1, 2)
 	update_appearance()
+<<<<<<< HEAD
 
 	SEND_SIGNAL(src, COMSIG_FIRE_CASING, target, user, fired_from, randomspread, spread, zone_override, params, distro, thrown_proj)
 
+=======
+	SEND_SIGNAL(src, COMSIG_FIRE_CASING, target, user, fired_from, randomspread, spread, zone_override, params, distro, thrown_proj)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /obj/item/ammo_casing/proc/tk_firing(mob/living/user, atom/fired_from)
@@ -44,7 +48,7 @@
 	loaded_projectile.original = target
 	loaded_projectile.firer = user
 	loaded_projectile.fired_from = fired_from
-	loaded_projectile.hit_prone_targets = user.combat_mode
+	loaded_projectile.hit_prone_targets = (user.istate & ISTATE_HARM)
 	if (zone_override)
 		loaded_projectile.def_zone = zone_override
 	else
@@ -65,6 +69,8 @@
 	if(reagents && loaded_projectile.reagents)
 		reagents.trans_to(loaded_projectile, reagents.total_volume, transferred_by = user) //For chemical darts/bullets
 		qdel(reagents)
+	SEND_SIGNAL(src, COMSIG_CASING_READY_PROJECTILE, target, user, quiet, zone_override, fired_from)
+
 	SEND_SIGNAL(src, COMSIG_CASING_READY_PROJECTILE, target, user, quiet, zone_override, fired_from)
 
 /obj/item/ammo_casing/proc/throw_proj(atom/target, turf/targloc, mob/living/user, params, spread, atom/fired_from)

@@ -135,6 +135,7 @@
 	icon_state = "mook_leap_cloud"
 	layer = BELOW_MOB_LAYER
 	plane = GAME_PLANE
+<<<<<<< HEAD
 	pixel_x = -16
 	pixel_y = -16
 	base_pixel_y = -16
@@ -146,3 +147,8 @@
 /obj/effect/temp_visual/mook_dust/small/Initialize(mapload)
 	. = ..()
 	transform = transform.Scale(0.5)
+=======
+	base_pixel_y = -16
+	base_pixel_x = -16
+	duration = 1 SECONDS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

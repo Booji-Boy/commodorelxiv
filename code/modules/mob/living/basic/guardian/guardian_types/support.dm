@@ -2,7 +2,11 @@
 /mob/living/basic/guardian/support
 	guardian_type = GUARDIAN_SUPPORT
 	speed = 0
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 0.7, BURN = 0.7, TOX = 0.7, STAMINA = 0, OXY = 0.7)
+=======
+	damage_coeff = list(BRUTE = 0.7, BURN = 0.7, TOX = 0.7, CLONE = 0.7, STAMINA = 0, OXY = 0.7)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	playstyle_string = span_holoparasite("As a <b>support</b> type, you may right-click to heal targets. In addition, alt-clicking on an adjacent object or mob will warp them to your bluespace beacon after a short delay.")
@@ -14,6 +18,20 @@
 
 /mob/living/basic/guardian/support/Initialize(mapload, datum/guardian_fluff/theme)
 	. = ..()
+<<<<<<< HEAD
+=======
+	//MONKESTATION EDIT START
+	// Fixes support guardian not being able to heal. The original `required_modifier` check is
+	// bugged due to our codebase having both Combat Mode and Intents. We instead use the
+	// `extra_checks` feature here, to check if the user is right-clicking, by checking to see if
+	// they're performing a secondary action.
+	//
+	// Note: You may notice the original AddComponent macro is entirely commented out, instead of
+	// just the relevant part. I tried to only comment out the relevant part, but no matter what I
+	// do, it just kept returning errors about the macro syntax. So instead of trying to fix it, I
+	// opted for... this.
+	/*
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(\
 		/datum/component/healing_touch,\
 		heal_brute = healing_amount,\
@@ -25,7 +43,25 @@
 		complete_text = "",\
 		required_modifier = RIGHT_CLICK,\
 		after_healed = CALLBACK(src, PROC_REF(after_healed)),\
+<<<<<<< HEAD
 	)
+=======
+	) //MONKESTATION EDIT ORIGINAL
+	*/
+	AddComponent(\
+		/datum/component/healing_touch,\
+		heal_brute = healing_amount,\
+		heal_burn = healing_amount,\
+		heal_tox = healing_amount,\
+		heal_oxy = healing_amount,\
+		heal_time = 0,\
+		action_text = "",\
+		complete_text = "",\
+		extra_checks = CALLBACK(src, PROC_REF(wants_to_heal)),\
+		after_healed = CALLBACK(src, PROC_REF(after_healed)),\
+	)
+	//MONKESTATION EDIT END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/datum/atom_hud/medsensor = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 	medsensor.show_to(src)
@@ -37,6 +73,18 @@
 	. = ..()
 	AddComponent(/datum/component/healing_touch, heal_color = guardian_colour)
 
+<<<<<<< HEAD
+=======
+//MONKESTATION ADDITION START
+/// Called by the healing_touch component to check if we want this attack to heal
+/mob/living/basic/guardian/support/proc/wants_to_heal(mob/living/source, mob/living/target)
+	var/is_right_clicking = (istate & ISTATE_SECONDARY)
+	if(is_right_clicking)
+		return TRUE
+	return FALSE
+//MONKESTATION ADDITION END
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Called after we heal someone, show some visuals
 /mob/living/basic/guardian/support/proc/after_healed(mob/living/healed)
 	do_attack_animation(healed, ATTACK_EFFECT_PUNCH)
@@ -157,7 +205,11 @@
 	icon = 'icons/turf/floors.dmi'
 	desc = "A glowing zone which acts as a beacon for teleportation."
 	icon_state = "light_on-8"
+<<<<<<< HEAD
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+=======
+	light_outer_range = MINIMUM_USEFUL_LIGHT_RANGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	density = FALSE
 	anchored = TRUE
 	plane = FLOOR_PLANE

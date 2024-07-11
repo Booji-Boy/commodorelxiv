@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+// MONKE: replaced by <monkestation\code\modules\antagonists\brainwashing\brainwashing.dm>
+/*
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /proc/brainwash(mob/living/brainwash_victim, directives)
 	if(!brainwash_victim.mind)
 		return
@@ -83,3 +88,4 @@
 
 /datum/objective/brainwashing
 	completed = TRUE
+*/

@@ -78,6 +78,16 @@
 	if((input_starting_pressure < VOLUME_PUMP_MINIMUM_OUTPUT_PRESSURE) || ((output_starting_pressure > VOLUME_PUMP_MAX_OUTPUT_PRESSURE)) && !overclocked)
 		return
 
+<<<<<<< HEAD
+=======
+///Monkestation edit begin
+/*  Volume pumps can now pump infinitely while overclocked -
+	if(overclocked && (output_starting_pressure-input_starting_pressure > 1000))//Overclocked pumps can only force gas a certain amount.
+		return
+*/
+///Monkestation edit end
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/transfer_ratio = transfer_rate / air1.volume
 
 	var/datum/gas_mixture/removed = air1.remove_ratio(transfer_ratio)

@@ -72,6 +72,7 @@
 // A more docile subtype that won't attack other animals.
 /mob/living/basic/pet/fox/docile
 	ai_controller = /datum/ai_controller/basic_controller/fox/docile
+<<<<<<< HEAD
 
 /mob/living/basic/pet/fox/icemoon
 	name = "icemoon fox"
@@ -79,3 +80,5 @@
 	gold_core_spawnable = NO_SPAWN
 	habitable_atmos = null
 	minimum_survivable_temperature = ICEBOX_MIN_TEMPERATURE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

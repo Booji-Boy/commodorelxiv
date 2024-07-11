@@ -226,6 +226,7 @@
 	eggshell = null
 	return ..()
 
+<<<<<<< HEAD
 /obj/effect/mob_spawn/ghost_role/human/ash_walker/allow_spawn(mob/user, silent = FALSE)
 	if(!(user.ckey in team.players_spawned))//one per person unless you get a bonus spawn
 		return TRUE
@@ -233,6 +234,8 @@
 		to_chat(user, span_warning("You have exhausted your usefulness to the Necropolis."))
 	return FALSE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/mob_spawn/ghost_role/human/ash_walker/special(mob/living/carbon/human/spawned_human)
 	. = ..()
 	spawned_human.fully_replace_character_name(null, spawned_human.generate_random_mob_name(TRUE))
@@ -253,6 +256,7 @@
 	eggshell.egg = src
 	src.forceMove(eggshell)
 	if(spawner_area)
+<<<<<<< HEAD
 		notify_ghosts(
 			"An ash walker egg is ready to hatch in \the [spawner_area.name].",
 			source = src,
@@ -261,6 +265,9 @@
 			ignore_key = POLL_IGNORE_ASHWALKER,
 			notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		)
+=======
+		notify_ghosts("An ash walker egg is ready to hatch in \the [spawner_area.name].", source = src, action = NOTIFY_PLAY, flashwindow = FALSE, ignore_key = POLL_IGNORE_ASHWALKER)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/outfit/ashwalker
 	name = "Ash Walker"

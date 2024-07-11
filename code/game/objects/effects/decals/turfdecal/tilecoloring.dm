@@ -5,8 +5,15 @@
 	alpha = 110
 	use_holiday_colors = TRUE
 
+<<<<<<< HEAD
 /obj/effect/turf_decal/tile/neutral/tram
 	pattern = PATTERN_VERTICAL_STRIPE
+=======
+/obj/effect/turf_decal/tile/Initialize(mapload)
+	if (check_holidays(APRIL_FOOLS))
+		color = "#[random_short_color()]"
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Automatically generates all subtypes for a decal with the given path.
 #define TILE_DECAL_SUBTYPE_HELPER(path)\

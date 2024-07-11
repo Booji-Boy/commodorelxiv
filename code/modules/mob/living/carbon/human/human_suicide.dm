@@ -19,7 +19,7 @@
 		return
 
 	// if no specific item or damage type we want to deal, default to doing the deed with our own bare hands.
-	if(combat_mode)
+	if((istate & ISTATE_HARM))
 		send_applicable_messages(HUMAN_COMBAT_MODE_SUICIDE_MESSAGE)
 	else
 		var/obj/item/organ/internal/brain/userbrain = get_organ_by_type(/obj/item/organ/internal/brain)
@@ -36,7 +36,7 @@
 		return ..()
 
 	if(damage_type & SHAME)
-		adjustStaminaLoss(200)
+		stamina.adjust(-200)
 		set_suicide(FALSE)
 		add_mood_event("shameful_suicide", /datum/mood_event/shameful_suicide)
 		return FALSE

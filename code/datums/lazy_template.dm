@@ -13,10 +13,13 @@
 	var/map_dir = "_maps/templates/lazy_templates"
 	/// The filename (without extension) of the map to load
 	var/map_name
+<<<<<<< HEAD
 	/// place_on_top: Whether to use /turf/proc/PlaceOnTop rather than /turf/proc/ChangeTurf
 	var/place_on_top = FALSE
 	/// type of turf reservation
 	var/turf_reservation_type = /datum/turf_reservation
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/lazy_template/New()
 	reservations = list()
@@ -64,7 +67,10 @@
 		width,
 		height,
 		parsed_template.parsed_bounds[MAP_MAXZ],
+<<<<<<< HEAD
 		reservation_type = turf_reservation_type,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	if(!reservation)
 		CRASH("Failed to reserve a block for lazy template: '[key]'")
@@ -76,11 +82,17 @@
 
 	var/list/obj/structure/cable/loaded_cables = list()
 	var/list/obj/machinery/atmospherics/loaded_atmospherics = list()
+<<<<<<< HEAD
 
 	for(var/z_idx in parsed_template.parsed_bounds[MAP_MAXZ] to 1 step -1)
 		var/turf/bottom_left = reservation.bottom_left_turfs[z_idx]
 		var/turf/top_right = reservation.top_right_turfs[z_idx]
 
+=======
+	for(var/z_idx in parsed_template.parsed_bounds[MAP_MAXZ] to 1 step -1)
+		var/turf/bottom_left = reservation.bottom_left_turfs[z_idx]
+		var/turf/top_right = reservation.top_right_turfs[z_idx]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		load_map(
 			file(load_path),
 			bottom_left.x,
@@ -88,12 +100,18 @@
 			bottom_left.z,
 			z_upper = z_idx,
 			z_lower = z_idx,
+<<<<<<< HEAD
 			place_on_top = place_on_top,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 		for(var/turf/turf as anything in block(bottom_left, top_right))
 			loaded_turfs += turf
 			loaded_areas |= get_area(turf)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			// atoms can actually be in the contents of two or more turfs based on its icon/bound size
 			// see https://www.byond.com/docs/ref/index.html#/atom/var/contents
 			for(var/thing in (turf.get_all_contents() - turf))
@@ -106,7 +124,10 @@
 	SSatoms.InitializeAtoms(loaded_areas + loaded_atom_movables + loaded_turfs)
 	SSmachines.setup_template_powernets(loaded_cables)
 	SSair.setup_template_machinery(loaded_atmospherics)
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(src, COMSIG_LAZY_TEMPLATE_LOADED, loaded_atom_movables, loaded_turfs, loaded_areas)
 	reservations += reservation
 	return reservation

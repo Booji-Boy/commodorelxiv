@@ -3,6 +3,7 @@
 	desc = "A polaroid camera, some say it can see ghosts!"
 	see_ghosts = CAMERA_SEE_GHOSTS_BASIC
 
+<<<<<<< HEAD
 /obj/item/camera/spooky/steal_souls(list/victims)
 	for(var/mob/living/target in victims)
 		if(!(target.mob_biotypes & MOB_SPIRIT))
@@ -19,6 +20,8 @@
 			span_revendanger("You feel your essence draining away from having your picture taken!"),
 		)
 		target.apply_damage(rand(10, 15))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/camera/spooky/badmin
 	desc = "A polaroid camera, some say it can see ghosts! It seems to have an extra magnifier on the end."

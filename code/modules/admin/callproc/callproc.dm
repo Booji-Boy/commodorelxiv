@@ -96,7 +96,7 @@ ADMIN_VERB(advanced_proc_call, R_DEBUG, "Advanced ProcCall", "Call a proc on any
 	user.callproc_blocking()
 
 /client/proc/callproc_blocking(list/get_retval)
-	if(!check_rights(R_DEBUG))
+	if(!check_rights(R_ADMIN))
 		return
 
 	var/datum/target
@@ -227,8 +227,20 @@ GLOBAL_PROTECT(LastAdminCalledProc)
 	return (GLOB.AdminProcCaller && GLOB.AdminProcCaller == usr?.client?.ckey) || (GLOB.AdminProcCallHandler && usr == GLOB.AdminProcCallHandler)
 #endif
 
+<<<<<<< HEAD
 ADMIN_VERB_ONLY_CONTEXT_MENU(call_proc_datum, R_DEBUG, "Atom ProcCall", datum/thing as null|area|mob|obj|turf)
 	var/procname = input(user, "Proc name, eg: fake_blood","Proc:", null) as text|null
+=======
+/client/proc/callproc_datum(datum/A as null|area|mob|obj|turf)
+	set category = "Debug"
+	set name = "Atom ProcCall"
+	set waitfor = FALSE
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/procname = input("Proc name, eg: fake_blood","Proc:", null) as text|null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!procname)
 		return
 	if(!hascall(thing, procname))

@@ -35,6 +35,11 @@
 	/// The time remaining in this vote's run.
 	VAR_FINAL/time_remaining = -1
 
+	/// Multipliers donators get for this vote type
+	var/donator_multiplier = 0
+	// can we start this vote by a player
+	var/player_startable = TRUE
+
 /**
  * Used to determine if this vote is a possible
  * vote type for the vote subsystem.
@@ -80,6 +85,10 @@
  */
 /datum/vote/proc/can_be_initiated(forced = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
+	//monkestation edit begin
+	if(!player_startable && !forced)
+		return FALSE
+	//monkestation edit end
 
 	if(!forced && !is_config_enabled())
 		return "This vote is currently disabled by the server configuration."
@@ -96,6 +105,8 @@
 
 	for(var/key in default_choices)
 		choices[key] = 0
+
+	list_clear_nulls(choices) // monke edit: ensure no nulls end up in a vote
 
 	return TRUE
 

@@ -7,6 +7,7 @@
 //Admin
 #define COMSIG_KB_ADMIN_ASAY_DOWN "keybinding_admin_asay_down"
 #define COMSIG_KB_ADMIN_DSAY_DOWN "keybinding_admin_dsay_down"
+#define COMSIG_KB_ADMIN_MSAY_DOWN "keybinding_admin_msay_down"
 #define COMSIG_KB_ADMIN_TOGGLEBUILDMODE_DOWN "keybinding_admin_togglebuildmode_down"
 #define COMSIG_KB_ADMIN_AGHOST_DOWN "keybinding_admin_aghost_down"
 #define COMSIG_KB_ADMIN_PLAYERPANELNEW_DOWN "keybinding_admin_playerpanelnew_down"
@@ -22,6 +23,8 @@
 #define COMSIG_KB_CARBON_TOGGLETHROWMODE_DOWN "keybinding_carbon_togglethrowmode_down"
 #define COMSIG_KB_CARBON_HOLDTHROWMODE_DOWN "keybinding_carbon_holdthrowmode_down"
 #define COMSIG_KB_CARBON_GIVEITEM_DOWN "keybinding_carbon_giveitem_down"
+#define COMSIG_KB_CARBON_SPRINT_DOWN "keybinding_carbon_sprint_down"
+#define COMSIG_KB_CARBON_SPRINT_UP "keybinding_carbon_sprint_up"
 
 //Client
 #define COMSIG_KB_CLIENT_GETHELP_DOWN "keybinding_client_gethelp_down"
@@ -49,11 +52,19 @@
 #define COMSIG_KB_LIVING_LOOKUP_DOWN "keybinding_living_lookup_down"
 #define COMSIG_KB_LIVING_LOOKDOWN_DOWN "keybinding_living_lookdown_down"
 #define COMSIG_KB_LIVING_REST_DOWN "keybinding_living_rest_down"
+<<<<<<< HEAD
 #define COMSIG_KB_LIVING_TOGGLE_COMBAT_DOWN "keybinding_living_toggle_combat_down"
 #define COMSIG_KB_LIVING_ENABLE_COMBAT_DOWN "keybinding_living_enable_combat_down"
 #define COMSIG_KB_LIVING_DISABLE_COMBAT_DOWN "keybinding_living_disable_combat_down"
 #define COMSIG_KB_LIVING_TOGGLEMOVEINTENT_DOWN "keybinding_mob_togglemoveintent_down"
 #define COMSIG_KB_LIVING_TOGGLEMOVEINTENTALT_DOWN "keybinding_mob_togglemoveintentalt_down"
+=======
+#define COMSIG_KB_LIVING_INTERACT_ACTION_1 "keybinding_living_interact_1"
+#define COMSIG_KB_LIVING_INTERACT_ACTION_2 "keybinding_living_interact_2"
+#define COMSIG_KB_LIVING_INTERACT_ACTION_3 "keybinding_living_interact_3"
+#define COMSIG_KB_LIVING_INTERACT_ACTION_4 "keybinding_living_interact_4"
+#define COMSIG_KB_LIVING_INTERACT_ACTION_5 "keybinding_living_interact_5"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Mob
 #define COMSIG_KB_MOB_FACENORTH_DOWN "keybinding_mob_facenorth_down"
@@ -77,6 +88,7 @@
 #define COMSIG_KB_MOB_TARGETBODYGROIN_DOWN "keybinding_mob_targetbodygroin_down"
 #define COMSIG_KB_MOB_TARGETLEFTLEG_DOWN "keybinding_mob_targetleftleg_down"
 #define COMSIG_KB_MOB_BLOCKMOVEMENT_DOWN "keybinding_mob_blockmovement_down"
+#define COMSIG_KB_MOB_SHOW_NAMES_DOWN "keybinding_mob_show_names_down"
 
 //Robot
 #define COMSIG_KB_SILICON_TOGGLEMODULEONE_DOWN "keybinding_silicon_togglemoduleone_down"

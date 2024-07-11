@@ -126,6 +126,7 @@
 		Voiceless Dead are mute ghouls and only have 50 health, but can use Bloody Blades effectively. \
 		You can only create two at a time."
 	gain_text = "I found notes of a dark ritual, unfinished... yet still, I pushed forward."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/mark/flesh_mark,
 		/datum/heretic_knowledge/void_cloak,
@@ -168,8 +169,20 @@
 
 	if(!soon_to_be_ghoul.mind || !soon_to_be_ghoul.client)
 		message_admins("[ADMIN_LOOKUPFLW(user)] is creating a voiceless dead of a body with no player.")
+<<<<<<< HEAD
 		var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_danger(soon_to_be_ghoul.real_name)], a [span_notice("voiceless dead")]?", check_jobban = ROLE_HERETIC, role = ROLE_HERETIC, poll_time = 5 SECONDS, checked_target = soon_to_be_ghoul, alert_pic = mutable_appearance('icons/mob/human/human.dmi', "husk"), jump_target = soon_to_be_ghoul, role_name_text = "voiceless dead")
 		if(isnull(chosen_one))
+=======
+		var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob(
+			"Do you want to play as a [soon_to_be_ghoul.real_name], a voiceless dead?",
+			check_jobban = ROLE_HERETIC,
+			role = ROLE_HERETIC,
+			poll_time = 5 SECONDS,
+			target_mob = soon_to_be_ghoul,
+			role_name_text = "voiceless dead"
+		)
+		if(!LAZYLEN(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			loc.balloon_alert(user, "ritual failed, no ghosts!")
 			return FALSE
 		message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(soon_to_be_ghoul)]) to replace an AFK player.")
@@ -235,6 +248,7 @@
 		the ability to link minds to communicate with ease, but are very fragile and weak in combat."
 	gain_text = "I could not continue alone. I was able to summon The Uncanny Man to help me see more. \
 		The screams... once constant, now silenced by their wretched appearance. Nothing was out of reach."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/blade_upgrade/flesh,
 		/datum/heretic_knowledge/reroll_targets,
@@ -276,6 +290,7 @@
 		Stalkers can jaunt, release EMPs, shapeshift into animals or automatons, and are strong in combat."
 	gain_text = "I was able to combine my greed and desires to summon an eldritch beast I had never seen before. \
 		An ever shapeshifting mass of flesh, it knew well my goals. The Marshal approved."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/ultimate/flesh_final,
 		/datum/heretic_knowledge/spell/apetra_vulnera,
@@ -314,7 +329,11 @@
 	priority_announce(
 		text = "[generate_heretic_text()] Ever coiling vortex. Reality unfolded. ARMS OUTREACHED, THE LORD OF THE NIGHT, [user.real_name] has ascended! Fear the ever twisting hand! [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
+<<<<<<< HEAD
 		sound = 'sound/ambience/antag/heretic/ascend_flesh.ogg',
+=======
+		sound = 'monkestation/sound/ambience/antag/heretic/ascend_flesh.ogg',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		color_override = "pink",
 	)
 

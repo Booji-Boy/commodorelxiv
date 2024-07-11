@@ -674,6 +674,7 @@
 		return
 	var/list/datum/admin_message/messages = list()
 	while(query_get_message_output.NextRow())
+<<<<<<< HEAD
 		var/datum/admin_message/message = new()
 		message.id = query_get_message_output.item[1]
 		message.admin_key = query_get_message_output.item[2]
@@ -681,6 +682,28 @@
 		message.timestamp = query_get_message_output.item[4]
 		message.editor_key = query_get_message_output.item[5]
 		messages += message
+=======
+		var/message_id = query_get_message_output.item[1]
+		var/admin_key = query_get_message_output.item[2]
+		var/text = query_get_message_output.item[3]
+		var/timestamp = query_get_message_output.item[4]
+		var/editor_key = query_get_message_output.item[5]
+		switch(type)
+			if("message")
+				output += "<font color='[COLOR_RED]' size='3'><b>Admin message left by [span_prefix("[admin_key]")] on [timestamp]</b></font>"
+				output += "<br><font color='[COLOR_RED]'>[text] <A href='?_src_=holder;[HrefToken()];messageread=[message_id]'>(Click here to verify you have read this message)</A></font><br>"
+			if("note")
+				output += "<font color='[COLOR_RED]' size='3'><b>Note left by [span_prefix("[admin_key]")] on [timestamp]</b></font>"
+				output += "<br><font color='[COLOR_RED]'>[text]</font><br>"
+			if("watchlist entry")
+				message_high_admins("<font color='[COLOR_RED]'><B>Notice: </B></font><font color='[COLOR_ADMIN_PINK]'>[key_name_admin(target_ckey)] has been on the watchlist since [timestamp] and has just connected - Reason: [text]</font>")
+				send2tgs_adminless_only("Watchlist", "[key_name(target_ckey)] is on the watchlist and has just connected - Reason: [text]")
+			if("memo")
+				output += "[span_memo("Memo by <span class='prefix'>[admin_key]")] on [timestamp]"
+				if(editor_key)
+					output += "<br>[span_memoedit("Last edit by [editor_key] <A href='?_src_=holder;[HrefToken()];messageedits=[message_id]'>(Click here to see edit log)</A>")]"
+				output += "<br>[text]</span><br>"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(query_get_message_output)
 	if(!length(messages))
 		return

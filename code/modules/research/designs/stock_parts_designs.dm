@@ -7,7 +7,11 @@
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	id = "rped"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*5, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5)
+=======
+	materials = list(/datum/material/iron = 10000, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5) //hardcore
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/storage/part_replacer
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_EXCHANGERS
@@ -19,7 +23,11 @@
 	desc = "Powered by bluespace technology, this RPED variant can upgrade buildings from a distance, without needing to remove the panel first."
 	id = "bs_rped"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT*7.5, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/silver = HALF_SHEET_MATERIAL_AMOUNT*2.5)
+=======
+	materials = list(/datum/material/iron = 15000, /datum/material/glass =SHEET_MATERIAL_AMOUNT * 2.5, /datum/material/silver = 2500) //hardcore
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/storage/part_replacer/bluespace
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_EXCHANGERS
@@ -98,7 +106,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "adv_scanning"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*1.5, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 150, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/scanning_module/adv
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_2
@@ -111,7 +123,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "phasic_scanning"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass = SMALL_MATERIAL_AMOUNT*1.5, /datum/material/silver = SMALL_MATERIAL_AMOUNT*0.6)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass = 150, /datum/material/silver = 60)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/scanning_module/phasic
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_3
@@ -124,7 +140,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "triphasic_scanning"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2, /datum/material/diamond = SMALL_MATERIAL_AMOUNT*0.3, /datum/material/bluespace = SMALL_MATERIAL_AMOUNT*0.5)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2, /datum/material/diamond = 30, /datum/material/bluespace = 30)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/scanning_module/triphasic
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_4
@@ -139,7 +159,11 @@
 	id = "micro_servo"
 	build_type = PROTOLATHE | AWAY_LATHE | AUTOLATHE
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	build_path = /obj/item/stock_parts/servo
+=======
+	build_path = /obj/item/stock_parts/manipulator
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_1
 	)
@@ -165,7 +189,11 @@
 	id = "pico_servo"
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2)
+<<<<<<< HEAD
 	build_path = /obj/item/stock_parts/servo/pico
+=======
+	build_path = /obj/item/stock_parts/manipulator/pico
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_3
 	)
@@ -177,8 +205,13 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "femto_servo"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/diamond = SMALL_MATERIAL_AMOUNT*0.3, /datum/material/titanium = SMALL_MATERIAL_AMOUNT*0.3)
 	build_path = /obj/item/stock_parts/servo/femto
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/diamond = 30, /datum/material/titanium = 30)
+	build_path = /obj/item/stock_parts/manipulator/femto
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_4
 	)
@@ -204,7 +237,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "high_micro_laser"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*1.5, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 150, /datum/material/glass =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/micro_laser/high
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_2
@@ -217,7 +254,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "ultra_micro_laser"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass = SMALL_MATERIAL_AMOUNT*1.5, /datum/material/uranium = SMALL_MATERIAL_AMOUNT*0.6)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass = 150, /datum/material/uranium = 60)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/micro_laser/ultra
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_3
@@ -230,7 +271,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "quadultra_micro_laser"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2, /datum/material/uranium =SMALL_MATERIAL_AMOUNT, /datum/material/diamond = SMALL_MATERIAL_AMOUNT*0.6)
+=======
+	materials = list(/datum/material/iron =SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass =SMALL_MATERIAL_AMOUNT * 2, /datum/material/uranium =SMALL_MATERIAL_AMOUNT, /datum/material/diamond = 60)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/micro_laser/quadultra
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_4
@@ -282,7 +327,11 @@
 	desc = "A stock part used in the construction of various devices."
 	id = "bluespace_matter_bin"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*2.5, /datum/material/diamond =SMALL_MATERIAL_AMOUNT, /datum/material/bluespace =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/iron = 250, /datum/material/diamond =SMALL_MATERIAL_AMOUNT, /datum/material/bluespace =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/matter_bin/bluespace
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_4
@@ -356,7 +405,11 @@
 	desc = "A sophisticated analyzer capable of analyzing cryptic subspace wavelengths."
 	id = "s_crystal"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/glass = SMALL_MATERIAL_AMOUNT*8, /datum/material/silver =SMALL_MATERIAL_AMOUNT, /datum/material/gold =SMALL_MATERIAL_AMOUNT)
+=======
+	materials = list(/datum/material/glass = 800, /datum/material/silver =SMALL_MATERIAL_AMOUNT, /datum/material/gold =SMALL_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/subspace/crystal
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_TELECOMMS
@@ -380,7 +433,11 @@
 	desc = "A small magnetic card reader, used for devices that take and transmit holocredits."
 	id = "c-reader"
 	build_type = PROTOLATHE | AWAY_LATHE
+<<<<<<< HEAD
 	materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*0.5, /datum/material/glass=SMALL_MATERIAL_AMOUNT*0.1)
+=======
+	materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*0.5, /datum/material/glass=10)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	build_path = /obj/item/stock_parts/card_reader
 	category = list(
 		RND_CATEGORY_STOCK_PARTS + RND_SUBCATEGORY_STOCK_PARTS_MISC

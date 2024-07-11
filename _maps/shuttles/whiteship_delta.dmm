@@ -19,7 +19,7 @@
 	dir = 2;
 	shuttle_id = "whiteship";
 	launch_status = 0;
-	movement_force = list("KNOCKDOWN" = 0, "THROW" = 0);
+	movement_force = list("KNOCKDOWN"=0,"THROW"=0);
 	name = "NT Frigate";
 	port_direction = 8;
 	preferred_direction = 4
@@ -455,6 +455,22 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood/old,
+<<<<<<< HEAD
+=======
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/old,
+/mob/living/basic/spider/giant/hunter/scrawny,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/old,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/spider/giant/hunter/scrawny,
 /obj/effect/turf_decal/tile/bar/opposingcorners,
 /turf/open/floor/iron,
@@ -495,7 +511,11 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -820,8 +840,13 @@
 /turf/open/floor/plating,
 /area/shuttle/abandoned/bridge)
 "bU" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/east,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/machinery/light/small/built/directional/east,
@@ -927,23 +952,33 @@
 	pixel_y = 12
 	},
 /obj/item/camera,
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/light/small/directional/west,
 /obj/machinery/power/apc/auto_name/directional/west,
 /obj/structure/cable,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
 	dir = 8
 	},
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/iron/dark,
 /area/shuttle/abandoned/bridge)
 "cf" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/gun/energy/laser/retro,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
-	dir = 8
-	},
+/obj/item/gun/energy/laser/retro,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/structure/cable,
+<<<<<<< HEAD
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/spider/giant/tarantula/scrawny,
 /turf/open/floor/iron/dark,
 /area/shuttle/abandoned/bridge)
@@ -1001,8 +1036,13 @@
 	pixel_y = 14
 	},
 /obj/item/megaphone,
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/effect/turf_decal/tile/blue/half/contrasted{
@@ -1222,7 +1262,11 @@
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/west,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/structure/spider/stickyweb,
@@ -1502,6 +1546,20 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+<<<<<<< HEAD
+=======
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/mob/living/basic/spider/giant/nurse/scrawny,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/spider/giant/nurse/scrawny,
 /turf/open/floor/iron,
 /area/shuttle/abandoned/cargo)
@@ -1572,8 +1630,15 @@
 /turf/open/floor/iron/white/side,
 /area/shuttle/abandoned/medbay)
 "dG" = (
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/cable,
+=======
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/spider/giant/hunter/scrawny,
 /turf/open/floor/iron,
 /area/shuttle/abandoned/medbay)
@@ -1624,8 +1689,13 @@
 /obj/item/surgery_tray/full{
 	pixel_y = 4
 	},
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/south,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /turf/open/floor/iron/white,
@@ -1775,7 +1845,6 @@
 	},
 /obj/structure/closet/crate,
 /obj/item/grenade/chem_grenade/metalfoam,
-/obj/item/relic,
 /obj/item/t_scanner,
 /obj/effect/spawner/random/maintenance/three,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -1861,7 +1930,11 @@
 "La" = (
 /obj/machinery/airalarm/directional/south,
 /obj/effect/mapping_helpers/airalarm/all_access,
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/closet/secure_closet/freezer{
 	locked = 0;
 	name = "fridge"
@@ -1903,7 +1976,11 @@
 /obj/effect/spawner/random/maintenance,
 /obj/item/extinguisher,
 /obj/item/extinguisher,
+<<<<<<< HEAD
 /obj/effect/decal/cleanable/dirt,
+=======
+/obj/effect/decal/cleanable/dirt/dust,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/all_access,
 /obj/effect/turf_decal/box/white/corners{

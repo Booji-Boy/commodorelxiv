@@ -1,6 +1,6 @@
 
 /datum/chemical_reaction/slime
-	reaction_flags = REACTION_INSTANT
+
 	reaction_tags = REACTION_TAG_EASY | REACTION_TAG_SLIME
 	required_other = TRUE
 	var/deletes_extract = TRUE
@@ -31,8 +31,13 @@
 	required_container = /obj/item/slime_extract/grey
 
 /datum/chemical_reaction/slime/slimespawn/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
+<<<<<<< HEAD
 	var/mob/living/basic/slime/spawning_slime = new(get_turf(holder.my_atom), /datum/slime_type/grey)
 	spawning_slime.visible_message(span_danger("Infused with plasma, the core begins to quiver and grow, and a new baby slime emerges from it!"))
+=======
+	var/mob/living/basic/slime/S = new(get_turf(holder.my_atom), /datum/slime_color/grey)
+	S.visible_message(span_danger("Infused with plasma, the core begins to quiver and grow, and a new baby slime emerges from it!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	..()
 
 /datum/chemical_reaction/slime/slimeinaprov
@@ -46,7 +51,7 @@
 
 /datum/chemical_reaction/slime/slimemonkey/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	for(var/i in 1 to 3)
-		new /obj/item/food/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/stack/biomass(get_turf(holder.my_atom))
 	..()
 
 //Green
@@ -125,7 +130,11 @@
 
 /datum/chemical_reaction/slime/slimemobspawn/spider/summon_mobs(datum/reagents/holder, turf/T)
 	T.visible_message(span_danger("The slime extract begins to vibrate crikey-ingly!"))
+<<<<<<< HEAD
 	addtimer(CALLBACK(src, PROC_REF(chemical_mob_spawn), holder, 3, "Traitor Spider Slime", /mob/living/basic/spider/giant/midwife, FACTION_NEUTRAL, FALSE), 5 SECONDS)
+=======
+	addtimer(CALLBACK(src, PROC_REF(chemical_mob_spawn), holder, 3, "Traitor Spider Slime", /mob/living/basic/spider/giant/midwife, FACTION_NEUTRAL, FALSE), 50)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 //Silver
@@ -314,12 +323,21 @@
 
 /datum/chemical_reaction/slime/slimebloodlust/on_reaction(datum/reagents/holder, datum/equilibrium/reaction, created_volume)
 	for(var/mob/living/basic/slime/slime in viewers(get_turf(holder.my_atom), null))
+<<<<<<< HEAD
 		if(slime.hunger_disabled) //Undoes docility, but doesn't make rabid.
 			slime.visible_message(span_danger("[slime] forgets its training, becoming wild once again!"))
 			slime.set_default_behaviour()
 			slime.update_name()
 			continue
 		slime.set_enraged_behaviour()
+=======
+		if(slime.has_slime_trait(/datum/slime_trait/docility)) //Undoes docility, but doesn't make rabid.
+			slime.visible_message(span_danger("[slime] forgets its training, becoming wild once again!"))
+			slime.remove_trait(/datum/slime_trait/docility)
+			slime.update_name()
+			continue
+		ADD_TRAIT(slime, TRAIT_SLIME_RABID, "bloodlust")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		slime.visible_message(span_danger("The [slime] is driven into a frenzy!"))
 	..()
 
@@ -527,8 +545,13 @@
 		S.active = TRUE
 		addtimer(CALLBACK(S, TYPE_PROC_REF(/obj/item/grenade, detonate)), rand(1.5 SECONDS, 6 SECONDS))
 	else
+<<<<<<< HEAD
 		var/mob/living/basic/slime/random/random_slime = new (get_turf(holder.my_atom))
 		random_slime.visible_message(span_danger("Infused with plasma, the core begins to quiver and grow, and a new baby slime emerges from it!"))
+=======
+		var/mob/living/basic/slime/random/S = new (get_turf(holder.my_atom))
+		S.visible_message(span_danger("Infused with plasma, the core begins to quiver and grow, and a new baby slime emerges from it!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	..()
 
 /datum/chemical_reaction/slime/slimebomb

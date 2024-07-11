@@ -13,6 +13,11 @@
 #define STYLE_GONDOLA 13
 #define STYLE_SEETHROUGH 14
 
+//Monkestation Edit: Two new drop pods, the beater car and the washing machine
+#define STYLE_WASHER 15
+#define STYLE_CAR 16
+//Monkestation Edit End
+
 #define POD_SHAPE 1
 #define POD_BASE 2
 #define POD_DOOR 3
@@ -56,6 +61,7 @@
 ///Used by coupons to define that they're cursed
 #define COUPON_OMEN "omen"
 
+<<<<<<< HEAD
 ///Discount categories for coupons. This one is for anything that isn't discountable.
 #define SUPPLY_PACK_NOT_DISCOUNTABLE null
 ///Discount category for the standard stuff, mostly goodies.
@@ -71,3 +77,27 @@
 #define EXPORT_SOLD 1
 ///Sell the item, but for the love of god, don't delete it, we're handling it in a fancier way.
 #define EXPORT_SOLD_DONT_DELETE 2
+=======
+GLOBAL_LIST_INIT(podstyles, list(\
+	list(POD_SHAPE_NORML, "pod",         TRUE, "default", "yellow",   RUBBLE_NORMAL, "supply pod",     "A Nanotrasen supply drop pod."),\
+	list(POD_SHAPE_NORML, "advpod",      TRUE, "bluespace", "blue",     RUBBLE_NORMAL, "bluespace supply pod" ,     "A Nanotrasen Bluespace supply pod. Teleports back to CentCom after delivery."),\
+	list(POD_SHAPE_NORML, "advpod",      TRUE, "centcom", "blue",     RUBBLE_NORMAL, "\improper CentCom supply pod", "A Nanotrasen supply pod, this one has been marked with Central Command's designations. Teleports back to CentCom after delivery."),\
+	list(POD_SHAPE_NORML, "darkpod",     TRUE, "syndicate", "red",      RUBBLE_NORMAL, "blood-red supply pod", "An intimidating supply pod, covered in the blood-red markings of the Syndicate. It's probably best to stand back from this."),\
+	list(POD_SHAPE_NORML, "darkpod",     TRUE, "deathsquad", "blue",     RUBBLE_NORMAL, "\improper Deathsquad drop pod",     "A Nanotrasen drop pod. This one has been marked the markings of Nanotrasen's elite strike team."),\
+	list(POD_SHAPE_NORML, "pod",         TRUE, "cultist", "red",      RUBBLE_NORMAL, "bloody supply pod",     "A Nanotrasen supply pod covered in scratch-marks, blood, and strange runes."),\
+	list(POD_SHAPE_OTHER, "missile",     FALSE, FALSE, FALSE,   RUBBLE_THIN,     "cruise missile", "A big ass missile that didn't seem to fully detonate. It was likely launched from some far-off deep space missile silo. There appears to be an auxillery payload hatch on the side, though manually opening it is likely impossible."),\
+	list(POD_SHAPE_OTHER, "smissile",    FALSE, FALSE,         FALSE,   RUBBLE_THIN,     "\improper Syndicate cruise missile", "A big ass, blood-red missile that didn't seem to fully detonate. It was likely launched from some deep space Syndicate missile silo. There appears to be an auxillery payload hatch on the side, though manually opening it is likely impossible."),\
+	list(POD_SHAPE_OTHER, "box",         TRUE, FALSE,            FALSE,   RUBBLE_WIDE, "\improper Aussec supply crate", "An incredibly sturdy supply crate, designed to withstand orbital re-entry. Has 'Aussec Armory - 2532' engraved on the side."),\
+	list(POD_SHAPE_NORML, "clownpod",    TRUE, "clown", "green",    RUBBLE_NORMAL, "\improper HONK pod",     "A brightly-colored supply pod. It likely originated from the Clown Federation."),\
+	list(POD_SHAPE_OTHER, "orange",      TRUE, FALSE, FALSE,   RUBBLE_NONE,     "\improper Orange", "An angry orange."),\
+	list(POD_SHAPE_OTHER, FALSE,         FALSE,    FALSE,            FALSE,   RUBBLE_NONE,     "\improper S.T.E.A.L.T.H. pod MKVII", "A supply pod that, under normal circumstances, is completely invisible to conventional methods of detection. How are you even seeing this?"),\
+	list(POD_SHAPE_OTHER, "gondola",     FALSE, FALSE, FALSE,   RUBBLE_NONE,     "gondola",     "The silent walker. This one seems to be part of a delivery agency."),\
+	list(POD_SHAPE_OTHER, FALSE,         FALSE,    FALSE,            FALSE,   RUBBLE_NONE,         FALSE,      FALSE,      "rl_click", "give_po"),\
+	list(POD_SHAPE_OTHER, "washer",      TRUE, FALSE, FALSE,   RUBBLE_NONE, "washing machine",     "A washing machine rigged to fly straight for the target."),\
+	list(POD_SHAPE_OTHER, "beat_car",    	TRUE, FALSE, FALSE,   RUBBLE_NONE, "beat up car",     "An ancient car, you have no idea how it got here.")\
+))
+//Monkestation Edit: Two new drop pods, the beater car and the washing machine
+//Nearby reference because nobody else did this:
+//The order is: Shape, Base, Door, Decal, Glow Color, Rubble Type, Name, Description
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

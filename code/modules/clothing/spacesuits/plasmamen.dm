@@ -53,9 +53,13 @@
 	armor_type = /datum/armor/space_plasmaman
 	resistance_flags = FIRE_PROOF
 	light_system = OVERLAY_LIGHT_DIRECTIONAL
+<<<<<<< HEAD
 	light_range = 4
 	light_power = 0.8
 	light_color = "#ffcc99"
+=======
+	light_outer_range = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_on = FALSE
 	var/helmet_on = FALSE
 	var/smile = FALSE

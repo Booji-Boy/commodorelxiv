@@ -1,4 +1,15 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+<<<<<<< HEAD
+=======
+"aa" = (
+/obj/machinery/light/directional/north,
+/turf/open/floor/grass,
+/area/ruin/space/has_grav/spinwardsmoothies)
+"dq" = (
+/mob/living/basic/butterfly,
+/turf/open/floor/grass,
+/area/ruin/space/has_grav/spinwardsmoothies)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dD" = (
 /obj/structure/billboard/smoothies{
 	pixel_y = 14
@@ -10,7 +21,7 @@
 /obj/effect/turf_decal/siding/thinplating/terracotta{
 	dir = 10
 	},
-/obj/machinery/hydroponics/constructable,
+/obj/machinery/growing/tray,
 /turf/open/floor/bamboo{
 	smoothing_flags = 0
 	},
@@ -25,6 +36,14 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/iron/dark/textured,
 /area/ruin/space/has_grav/spinwardsmoothies)
+<<<<<<< HEAD
+=======
+"rf" = (
+/obj/structure/flora/bush/flowers_br/style_random,
+/mob/living/basic/butterfly,
+/turf/open/floor/grass,
+/area/ruin/space/has_grav/spinwardsmoothies)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ri" = (
 /obj/machinery/light/directional/east,
 /obj/structure/flora/bush/flowers_pp/style_random,
@@ -52,11 +71,14 @@
 "wv" = (
 /obj/structure/flora/bush/flowers_pp/style_random,
 /mob/living/basic/butterfly,
+<<<<<<< HEAD
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/spinwardsmoothies)
 "wH" = (
 /obj/structure/flora/bush/flowers_yw/style_random,
 /obj/machinery/light/directional/south,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/spinwardsmoothies)
 "xc" = (
@@ -87,6 +109,24 @@
 "AW" = (
 /turf/open/floor/grass,
 /area/ruin/space/has_grav/spinwardsmoothies)
+<<<<<<< HEAD
+=======
+"CK" = (
+/obj/structure/flora/bush/flowers_br/style_random,
+/obj/machinery/light/directional/south,
+/turf/open/floor/grass,
+/area/ruin/space/has_grav/spinwardsmoothies)
+"CV" = (
+/obj/machinery/light/directional/east,
+/obj/effect/turf_decal/siding/thinplating/terracotta{
+	dir = 8
+	},
+/obj/machinery/growing/tray,
+/turf/open/floor/bamboo{
+	smoothing_flags = 0
+	},
+/area/ruin/space/has_grav/spinwardsmoothies)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Dh" = (
 /obj/structure/table/wood,
 /obj/effect/turf_decal/siding/thinplating/terracotta{
@@ -184,6 +224,7 @@
 "TE" = (
 /turf/closed/wall/mineral/wood,
 /area/ruin/space/has_grav/spinwardsmoothies)
+<<<<<<< HEAD
 "Ws" = (
 /obj/structure/hedge{
 	pixel_y = 8
@@ -191,9 +232,15 @@
 /obj/effect/turf_decal/siding/thinplating/terracotta,
 /obj/machinery/light/directional/north,
 /turf/open/floor/wood/tile,
+=======
+"UZ" = (
+/obj/structure/flora/bush/flowers_yw/style_random,
+/mob/living/basic/butterfly,
+/turf/open/floor/grass,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/ruin/space/has_grav/spinwardsmoothies)
 "XG" = (
-/obj/machinery/hydroponics/constructable,
+/obj/machinery/growing/tray,
 /obj/effect/turf_decal/siding/thinplating/terracotta{
 	dir = 9
 	},

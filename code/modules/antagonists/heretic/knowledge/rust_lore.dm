@@ -85,6 +85,7 @@
 	name = "Leeching Walk"
 	desc = "Grants you passive healing and resistance to batons while standing over rust."
 	gain_text = "The speed was unparalleled, the strength unnatural. The Blacksmith was smiling."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/mark/rust_mark,
 		/datum/heretic_knowledge/armor,
@@ -130,6 +131,7 @@
 		return
 
 	// Heals all damage + Stamina
+<<<<<<< HEAD
 	var/need_mob_update = FALSE
 	need_mob_update += source.adjustBruteLoss(-3, updating_health = FALSE)
 	need_mob_update += source.adjustFireLoss(-3, updating_health = FALSE)
@@ -138,6 +140,13 @@
 	need_mob_update += source.adjustStaminaLoss(-10, updating_stamina = FALSE)
 	if(need_mob_update)
 		source.updatehealth()
+=======
+	source.adjustBruteLoss(-2, FALSE)
+	source.adjustFireLoss(-2, FALSE)
+	source.adjustToxLoss(-2, FALSE, forced = TRUE) // Slimes are people to
+	source.adjustOxyLoss(-0.5, FALSE)
+	source.stamina.adjust(2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Reduces duration of stuns/etc
 	source.AdjustAllImmobility(-0.5 SECONDS)
 	// Heals blood loss
@@ -170,7 +179,10 @@
 		Anyone overtop the wall will be throw aside (or upwards) and sustain damage."
 	gain_text = "Images of foreign and ominous structures began to dance in my mind. Covered head to toe in thick rust, \
 		they no longer looked man made. Or perhaps they never were in the first place."
-	next_knowledge = list(/datum/heretic_knowledge/spell/area_conversion)
+	next_knowledge = list(
+		/datum/heretic_knowledge/spell/area_conversion,
+		/datum/heretic_knowledge/rifle,
+	)
 	spell_to_add = /datum/action/cooldown/spell/pointed/rust_construction
 	cost = 1
 	route = PATH_RUST
@@ -180,6 +192,7 @@
 	desc = "Grants you Aggressive Spread, a spell that spreads rust to nearby surfaces. \
 		Already rusted surfaces are destroyed \ Also improves the rusting abilities of non rust-heretics."
 	gain_text = "All wise men know well not to visit the Rusted Hills... Yet the Blacksmith's tale was inspiring."
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/blade_upgrade/rust,
 		/datum/heretic_knowledge/reroll_targets,
@@ -220,8 +233,13 @@
 		at friend or foe wildly. Also rusts and destroys and surfaces it hits and improves the rusting abilities of non-rust heretics."
 	gain_text = "The corrosion was unstoppable. The rust was unpleasable. \
 		The Blacksmith was gone, and you hold their blade. Champions of hope, the Rustbringer is nigh!"
+	adds_sidepath_points = 1
 	next_knowledge = list(
 		/datum/heretic_knowledge/ultimate/rust_final,
+<<<<<<< HEAD
+=======
+		/datum/heretic_knowledge/summon/rusty,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/heretic_knowledge/spell/rust_charge,
 	)
 	spell_to_add = /datum/action/cooldown/spell/cone/staggered/entropic_plume
@@ -287,10 +305,17 @@
 	priority_announce(
 		text = "[generate_heretic_text()] Fear the decay, for the Rustbringer, [user.real_name] has ascended! None shall escape the corrosion! [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
+<<<<<<< HEAD
 		sound = 'sound/ambience/antag/heretic/ascend_rust.ogg',
 		color_override = "pink",
 	)
 	trigger(loc)
+=======
+		sound = 'monkestation/sound/ambience/antag/heretic/ascend_rust.ogg',
+		color_override = "pink",
+	)
+	new /datum/rust_spread(loc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(user, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
 	RegisterSignal(user, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	user.client?.give_award(/datum/award/achievement/misc/rust_ascension, user)
@@ -364,6 +389,7 @@
 	if(!HAS_TRAIT(our_turf, TRAIT_RUSTY))
 		return
 
+<<<<<<< HEAD
 	var/need_mob_update = FALSE
 	need_mob_update += source.adjustBruteLoss(-5, updating_health = FALSE)
 	need_mob_update += source.adjustFireLoss(-5, updating_health = FALSE)
@@ -374,3 +400,85 @@
 		source.blood_volume += 5 * seconds_per_tick
 	if(need_mob_update)
 		source.updatehealth()
+=======
+	source.adjustBruteLoss(-4, FALSE)
+	source.adjustFireLoss(-4, FALSE)
+	source.adjustToxLoss(-4, FALSE, forced = TRUE)
+	source.adjustOxyLoss(-4, FALSE)
+	source.stamina.adjust(20)
+
+/**
+ * #Rust spread datum
+ *
+ * Simple datum that automatically spreads rust around it.
+ *
+ * Simple implementation of automatically growing entity.
+ */
+/datum/rust_spread
+	/// The rate of spread every tick.
+	var/spread_per_sec = 6
+	/// The very center of the spread.
+	var/turf/centre
+	/// List of turfs at the edge of our rust (but not yet rusted).
+	var/list/edge_turfs = list()
+	/// List of all turfs we've afflicted.
+	var/list/rusted_turfs = list()
+	/// Static blacklist of turfs we can't spread to.
+	var/static/list/blacklisted_turfs = typecacheof(list(
+		/turf/open/indestructible,
+		/turf/closed/indestructible,
+		/turf/open/space,
+		/turf/open/lava,
+		/turf/open/chasm
+	))
+
+/datum/rust_spread/New(loc)
+	centre = get_turf(loc)
+	centre.rust_heretic_act()
+	rusted_turfs += centre
+	START_PROCESSING(SSprocessing, src)
+
+/datum/rust_spread/Destroy(force, ...)
+	centre = null
+	edge_turfs.Cut()
+	rusted_turfs.Cut()
+	STOP_PROCESSING(SSprocessing, src)
+	return ..()
+
+/datum/rust_spread/process(seconds_per_tick)
+	var/spread_amount = round(spread_per_sec * seconds_per_tick)
+
+	if(length(edge_turfs) < spread_amount)
+		compile_turfs()
+
+	for(var/i in 0 to spread_amount)
+		if(!length(edge_turfs))
+			break
+		var/turf/afflicted_turf = pick_n_take(edge_turfs)
+		afflicted_turf.rust_heretic_act()
+		rusted_turfs |= afflicted_turf
+
+/**
+ * Compile turfs
+ *
+ * Recreates the edge_turfs list.
+ * Updates the rusted_turfs list, in case any turfs within were un-rusted.
+ */
+/datum/rust_spread/proc/compile_turfs()
+	edge_turfs.Cut()
+
+	var/max_dist = 1
+	for(var/turf/found_turf as anything in rusted_turfs)
+		if(!HAS_TRAIT(found_turf, TRAIT_RUSTY))
+			rusted_turfs -= found_turf
+		max_dist = max(max_dist, get_dist(found_turf, centre) + 1)
+
+	for(var/turf/nearby_turf as anything in spiral_range_turfs(max_dist, centre, FALSE))
+		if(nearby_turf in rusted_turfs || is_type_in_typecache(nearby_turf, blacklisted_turfs))
+			continue
+
+		for(var/turf/line_turf as anything in get_line(nearby_turf, centre))
+			if(get_dist(nearby_turf, line_turf) <= 1)
+				edge_turfs |= nearby_turf
+		CHECK_TICK
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

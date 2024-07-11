@@ -141,10 +141,15 @@
 #define COMSIG_ITEM_PICKUP "item_pickup"
 ///from base of obj/item/on_outfit_equip(): (mob/equipper, visuals_only, slot)
 #define COMSIG_ITEM_EQUIPPED_AS_OUTFIT "item_equip_as_outfit"
+<<<<<<< HEAD
 ///from base of datum/storage/handle_enter(): (datum/storage/storage)
 #define COMSIG_ITEM_STORED "item_stored"
 ///from base of datum/storage/handle_exit(): (datum/storage/storage)
 #define COMSIG_ITEM_UNSTORED "item_unstored"
+=======
+///from base of datum/storage/attempt_insert(): ()
+#define COMSIG_ITEM_STORED "item_stored"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///from base of obj/item/apply_fantasy_bonuses(): (bonus)
 #define COMSIG_ITEM_APPLY_FANTASY_BONUSES "item_apply_fantasy_bonuses"
@@ -205,7 +210,11 @@
 #define COMSIG_STACK_CAN_MERGE "stack_can_merge"
 	#define CANCEL_STACK_MERGE (1<<0)
 
+<<<<<<< HEAD
 ///from /obj/item/book/bible/interact_with_atom(): (mob/user)
+=======
+///from /obj/item/book/bible/afterattack(): (mob/user, proximity)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define COMSIG_BIBLE_SMACKED "bible_smacked"
 	///stops the bible chain from continuing. When all of the effects of the bible smacking have been moved to a signal we can kill this
 	#define COMSIG_END_BIBLE_CHAIN (1<<0)
@@ -340,6 +349,12 @@
 #define COMSIG_GUN_CHAMBER_PROCESSED "gun_chamber_processed"
 ///called in /obj/item/gun/ballistic/process_chamber (casing)
 #define COMSIG_CASING_EJECTED "casing_ejected"
+///sent to targets during the process_hit proc of projectiles
+#define COMSIG_FIRE_CASING "fire_casing"
+///from the base of /obj/item/ammo_casing/ready_proj() : (atom/target, mob/living/user, quiet, zone_override, atom/fired_from)
+#define COMSIG_CASING_READY_PROJECTILE "casing_ready_projectile"
+///sent to the projectile after an item is spawned by the projectile_drop element: (new_item)
+#define COMSIG_PROJECTILE_ON_SPAWN_DROP "projectile_on_spawn_drop"
 
 // Jetpack things
 // Please kill me
@@ -497,6 +512,10 @@
 /// from /obj/machinery/mineral/ore_redemption/pickup_item when it successfully picks something up
 #define COMSIG_ORM_COLLECTED_ORE "orm_collected_ore"
 
+<<<<<<< HEAD
+=======
+#define COMSIG_RADIATION_RECIEVED "radiation_recieved"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// from /obj/plunger_act when an object is being plungered
 #define COMSIG_PLUNGER_ACT "plunger_act"
 
@@ -510,6 +529,7 @@
 
 /// from /obj/structure/cursed_slot_machine/determine_victor() when someone finally wins.
 #define COMSIG_GLOB_CURSED_SLOT_MACHINE_WON "cursed_slot_machine_won"
+<<<<<<< HEAD
 
 /// from /datum/component/dart_insert/add_to_dart() : (obj/item/ammo_casing, mob/user)
 #define COMSIG_DART_INSERT_ADDED "dart_insert_added"
@@ -524,3 +544,5 @@
 #define COMSIG_ITEM_WEIGHT_CLASS_CHANGED "item_weight_class_changed"
 /// Sent from /obj/item/update_weight_class(), to it's loc. (obj/item/changed_item, old_w_class, new_w_class)
 #define COMSIG_ATOM_CONTENTS_WEIGHT_CLASS_CHANGED "atom_contents_weight_class_changed"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

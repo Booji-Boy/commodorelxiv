@@ -420,11 +420,18 @@
 						current_thing.take_damage(150)
 						continue
 
+<<<<<<< HEAD
 					if(istype(current_thing, /obj/machinery/computer) && prob(30))
 						if(istype(current_thing, /obj/machinery/computer/communications))
 							continue //To prevent the shuttle from getting autocalled at the start of the round
 						current_thing.take_damage(160)
 						continue
+=======
+				if(istype(current_thing, /obj/machinery/vending) && prob(45))
+					var/obj/machinery/vending/vendor_to_trash = current_thing
+					if(prob(50))
+						vendor_to_trash.tilt(get_turf(vendor_to_trash), 0) // crit effects can do some real weird shit, lets disable it
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 					if(istype(current_thing, /obj/machinery/vending) && prob(45))
 						var/obj/machinery/vending/vendor_to_trash = current_thing

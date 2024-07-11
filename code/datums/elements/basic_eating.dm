@@ -56,8 +56,11 @@
 /datum/element/basic_eating/proc/try_eating(mob/living/eater, atom/target)
 	if(!is_type_in_list(target, food_types))
 		return FALSE
+<<<<<<< HEAD
 	if(SEND_SIGNAL(eater, COMSIG_MOB_PRE_EAT, target) & COMSIG_MOB_CANCEL_EAT)
 		return FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/eat_verb
 	if(drinking)
 		eat_verb = pick("slurp","sip","guzzle","drink","quaff","suck")
@@ -83,15 +86,28 @@
 	return TRUE
 
 /datum/element/basic_eating/proc/finish_eating(mob/living/eater, atom/target)
+<<<<<<< HEAD
 	set waitfor = FALSE
 	SEND_SIGNAL(eater, COMSIG_MOB_ATE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(drinking)
 		playsound(eater.loc,'sound/items/drink.ogg', rand(10,50), TRUE)
 	else
 		playsound(eater.loc,'sound/items/eatfood.ogg', rand(10,50), TRUE)
+<<<<<<< HEAD
 	var/atom/final_target = target
 	if(isstack(target)) //if stack, only consume 1
 		var/obj/item/stack/food_stack = target
 		final_target = food_stack.split_stack(eater, 1)
 	eater.log_message("has eaten [target]!", LOG_ATTACK)
 	qdel(final_target)
+=======
+	SEND_SIGNAL(eater, COMSIG_LIVING_ATE, target)
+	SEND_SIGNAL(eater, COMSIG_EMOTION_STORE, null, EMOTION_HAPPY, "I ate [target], I really like [target].")
+	if (isstack(target))
+		var/obj/item/stack/stack = target
+		stack.use(1)
+		return
+	qdel(target)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

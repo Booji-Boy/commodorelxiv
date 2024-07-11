@@ -9,6 +9,7 @@
 /datum/proc/p_They(temp_gender)
 	return capitalize(p_they(temp_gender))
 
+<<<<<<< HEAD
 /datum/proc/p_their(temp_gender)
 	return "its"
 
@@ -26,6 +27,15 @@
 
 /datum/proc/p_Them(temp_gender)
 	return capitalize(p_them(temp_gender))
+=======
+/datum/proc/p_Their(temp_gender)
+	return capitalize(p_their(temp_gender))
+
+/datum/proc/p_them(capitalized, temp_gender)
+	. = "it"
+	if(capitalized)
+		. = capitalize(.)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/proc/p_have(temp_gender)
 	return "has"
@@ -42,11 +52,22 @@
 /datum/proc/p_theyve(temp_gender)
 	return p_they(temp_gender) + "'" + copytext_char(p_have(temp_gender), 3)
 
+<<<<<<< HEAD
 /datum/proc/p_Theyve(temp_gender)
 	return p_They(temp_gender) + "'" + copytext_char(p_have(temp_gender), 3)
 
 /datum/proc/p_theyre(temp_gender)
 	return p_they(temp_gender) + "'" + copytext_char(p_are(temp_gender), 2)
+
+/datum/proc/p_Theyre(temp_gender)
+	return p_They(temp_gender) + "'" + copytext_char(p_are(temp_gender), 2)
+=======
+/datum/proc/p_Theyve(capitalized, temp_gender)
+	. = p_They(capitalized, temp_gender) + "'" + copytext_char(p_have(temp_gender), 3)
+
+/datum/proc/p_theyre(capitalized, temp_gender)
+	. = p_they(capitalized, temp_gender) + "'" + copytext_char(p_are(temp_gender), 2)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/proc/p_Theyre(temp_gender)
 	return p_They(temp_gender) + "'" + copytext_char(p_are(temp_gender), 2)

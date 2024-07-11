@@ -11,11 +11,22 @@
 	return isitem(target) && isturf(target.loc) && !target.anchored
 
 /datum/ai_behavior/pick_up_item/perform(seconds_per_tick, datum/ai_controller/controller, target_key, storage_key)
+<<<<<<< HEAD
 	var/obj/item/target = controller.blackboard[target_key]
 	if(QDELETED(target) || !isturf(target.loc)) // Someone picked it up or it got deleted
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 	if(!controller.pawn.Adjacent(target)) // It teleported
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	. = ..()
+	var/obj/item/target = controller.blackboard[target_key]
+	if(QDELETED(target) || !isturf(target.loc)) // Someone picked it up or it got deleted
+		finish_action(controller, FALSE, target_key)
+		return
+	if(!controller.pawn.Adjacent(target)) // It teleported
+		finish_action(controller, FALSE, target_key)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	pickup_item(controller, target, storage_key)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
 

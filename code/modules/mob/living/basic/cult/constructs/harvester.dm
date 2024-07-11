@@ -50,7 +50,11 @@
 
 	carbon_target.Paralyze(6 SECONDS)
 	visible_message(span_danger("[src] knocks [carbon_target] down!"))
+<<<<<<< HEAD
 	to_chat(src, span_cult_large("\"Bring [carbon_target.p_them()] to me.\""))
+=======
+	to_chat(src, span_cultlarge("\"Bring [carbon_target.p_them()] to me.\""))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/innate/seek_master
 	name = "Seek your Master"

@@ -8,7 +8,10 @@
 	desc = "A scavenger that eats raw ores, often found alongside ash walkers. Produces a thick, nutritious milk."
 	icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
 	icon_state = "gutlunch"
+<<<<<<< HEAD
 	combat_mode = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_living = "gutlunch"
 	icon_dead = "gutlunch"
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
@@ -55,7 +58,11 @@
 /mob/living/basic/mining/gutlunch/proc/pre_attack(mob/living/puncher, atom/target)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(!istype(target, /obj/structure/ore_container/food_trough/gutlunch_trough))
+=======
+	if(!istype(target, /obj/structure/ore_container/gutlunch_trough))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	var/obj/ore_food = locate(/obj/item/stack/ore) in target

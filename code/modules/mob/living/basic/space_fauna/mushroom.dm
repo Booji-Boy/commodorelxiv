@@ -173,7 +173,11 @@
 	if(istype(mush, /obj/item/food/grown/mushroom))
 		recover(mush)
 		return
+<<<<<<< HEAD
 	if(mush.force || user.combat_mode)
+=======
+	if(mush.force || (user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		bruised = TRUE
 	return ..()
 

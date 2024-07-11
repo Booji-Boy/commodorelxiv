@@ -3,7 +3,11 @@ import { BooleanLike } from 'common/react';
 import { useBackend } from '../backend';
 import { BlockQuote, Button, Dimmer, Section, Stack } from '../components';
 import { Window } from '../layouts';
+<<<<<<< HEAD
 import { Objective, ObjectivePrintout } from './common/Objectives';
+=======
+import { ObjectivePrintout, Objective } from './common/Objectives';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const allystyle = {
   fontWeight: 'bold',
@@ -223,7 +227,11 @@ const CodewordsSection = (props) => {
 
 export const AntagInfoTraitor = (props) => {
   const { data } = useBackend<Info>();
+<<<<<<< HEAD
   const { theme, given_uplink } = data;
+=======
+  const { theme } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window width={620} height={580} theme={theme}>
       <Window.Content>

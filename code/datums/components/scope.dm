@@ -25,6 +25,7 @@
 
 /datum/component/scope/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))
+<<<<<<< HEAD
 	switch(zoom_method)
 		if(ZOOM_METHOD_RIGHT_CLICK)
 			RegisterSignal(parent, COMSIG_RANGED_ITEM_INTERACTING_WITH_ATOM_SECONDARY, PROC_REF(do_secondary_zoom))
@@ -38,6 +39,11 @@
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	if(isgun(parent))
 		RegisterSignal(parent, COMSIG_GUN_TRY_FIRE, PROC_REF(on_gun_fire))
+=======
+	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK_SECONDARY, PROC_REF(on_secondary_afterattack))
+	RegisterSignal(parent, COMSIG_GUN_TRY_FIRE, PROC_REF(on_gun_fire))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/scope/UnregisterFromParent()
 	if(item_action_type)

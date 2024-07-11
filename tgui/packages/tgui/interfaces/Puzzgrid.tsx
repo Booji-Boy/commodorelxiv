@@ -1,7 +1,11 @@
 import { range } from 'common/collections';
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { PropsWithChildren } from 'react';
 
+=======
+import { Inferno } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../backend';
 import { Box, Button, FitText, Stack } from '../components';
 import { Window } from '../layouts';
@@ -24,12 +28,19 @@ type PuzzgridData = {
   wrong_group_select_cooldown: BooleanLike;
 };
 
+<<<<<<< HEAD
 const PuzzgridButton = (
   props: {
     // In the future, this would be the TypeScript props of the button
     [key: string]: unknown;
   } & PropsWithChildren,
 ) => {
+=======
+const PuzzgridButton: Inferno.SFC<{
+  // In the future, this would be the TypeScript props of the button
+  [key: string]: unknown;
+}> = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Button
       verticalAlignContent="middle"

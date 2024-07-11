@@ -73,7 +73,7 @@
 			turret.layer = OBJ_LAYER
 
 /obj/vehicle/ridden/atv/welder_act(mob/living/user, obj/item/W)
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 	. = TRUE
 	if(DOING_INTERACTION(user, src))

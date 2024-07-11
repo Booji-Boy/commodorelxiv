@@ -101,6 +101,7 @@
 	mood_change = -2
 	timeout = 2 MINUTES
 
+<<<<<<< HEAD
 /datum/mood_event/table/add_effects()
 	if(isfelinid(owner)) //Holy snowflake batman!
 		var/mob/living/carbon/human/feline = owner
@@ -108,6 +109,8 @@
 		description = "They want to play on the table!"
 		mood_change = 2
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/mood_event/table_limbsmash
 	description = "That fucking table, man that hurts..."
 	mood_change = -3
@@ -302,6 +305,13 @@
 	mood_change *= people_laughing_at_you
 	return ..()
 
+<<<<<<< HEAD
+=======
+//These are unused so far but I want to remember them to use them later
+/datum/mood_event/cloned_corpse
+	description = "I recently saw my own corpse..."
+	mood_change = -6
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/mood_event/surgery
 	description = "THEY'RE CUTTING ME OPEN!!"
 	mood_change = -8
@@ -454,21 +464,29 @@
 	mood_change = -3
 	timeout = 5 MINUTES
 
+<<<<<<< HEAD
 /datum/mood_event/amulet_insanity
+=======
+/datum/mood_event/amulette_insanity
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	description = "I sEe THe LiGHt, It mUsT BE stOPPed"
 	mood_change = -6
 	timeout = 5 MINUTES
 
+<<<<<<< HEAD
 /datum/mood_event/mallet_humiliation
 	description = "Getting hit by such a stupid weapon feels rather humiliating..."
 	mood_change = -3
 	timeout = 10 SECONDS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Wizard cheesy grand finale - what everyone but the wizard gets
 /datum/mood_event/madness_despair
 	description = "UNWORTHY, UNWORTHY, UNWORTHY!!!"
 	mood_change = -200
 	special_screen_obj = "mood_despair"
+<<<<<<< HEAD
 
 /datum/mood_event/all_nighter
 	description = "I didn't sleep at all last night. I'm exhausted."
@@ -485,3 +503,5 @@
 	description = "I DIDN'T MEAN TO HURT THEM!"
 	mood_change = -20
 	timeout = 10 MINUTES
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

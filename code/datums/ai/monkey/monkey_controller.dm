@@ -71,7 +71,11 @@ have ways of interacting with a specific mob and control it.
 	if(. & AI_CONTROLLER_INCOMPATIBLE)
 		return
 	pawn = new_pawn
+<<<<<<< HEAD
 	set_blackboard_key(BB_MONKEY_AGGRESSIVE, TRUE) //Angry cunt
+=======
+	set_blackboard_key(BB_MONKEY_AGGRESSIVE, TRUE) //Angry
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_trip_mode(mode = FALSE)
 
 /datum/ai_controller/monkey/TryPossessPawn(atom/new_pawn)
@@ -172,6 +176,21 @@ have ways of interacting with a specific mob and control it.
 		return
 
 	add_blackboard_key_assoc(BB_MONKEY_ENEMIES, living_mob, MONKEY_HATRED_AMOUNT)
+<<<<<<< HEAD
+=======
+	if(HAS_TRAIT(living_mob, TRAIT_MONKEYFRIEND))
+		REMOVE_TRAIT(living_mob, TRAIT_MONKEYFRIEND, SPECIES_TRAIT)
+		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(monkeyfriend_check), living_mob), 60 SECONDS)
+
+/proc/monkeyfriend_check(mob/living/user)
+	var/obj/item/clothing/suit/costume/monkeysuit/S
+	var/obj/item/clothing/mask/gas/monkeymask/M
+	var/list/equipped = user.get_equipped_items(FALSE)
+	if(issimian(user))
+		ADD_TRAIT(user, TRAIT_MONKEYFRIEND, SPECIES_TRAIT)
+	if(((M in equipped) && (S in equipped)))
+		ADD_TRAIT(user, TRAIT_MONKEYFRIEND, CLOTHING_TRAIT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/ai_controller/monkey/proc/on_attacked(datum/source, mob/attacker)
 	SIGNAL_HANDLER

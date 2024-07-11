@@ -4,7 +4,7 @@
 	max_stages = 5
 	spread_text = "Airborne"
 	cure_text = "Spaceacillin & Convermol"
-	cures = list(/datum/reagent/medicine/spaceacillin, /datum/reagent/medicine/c2/convermol)
+	cures = list(/datum/reagent/medicine/antipathogenic/spaceacillin, /datum/reagent/medicine/c2/convermol)
 	agent = "Fungal Tubercle bacillus Cosmosis"
 	viable_mobtypes = list(/mob/living/carbon/human)
 	cure_chance = 2.5 //like hell are you getting out of hell
@@ -47,9 +47,15 @@
 			var/need_mob_update = FALSE
 			if(SPT_PROB(1, seconds_per_tick))
 				to_chat(affected_mob, span_userdanger("[pick("You feel your heart slowing...", "You relax and slow your heartbeat.")]"))
+<<<<<<< HEAD
 				need_mob_update += affected_mob.adjustStaminaLoss(70, updating_stamina = FALSE)
 			if(SPT_PROB(5, seconds_per_tick))
 				need_mob_update += affected_mob.adjustStaminaLoss(100, updating_stamina = FALSE)
+=======
+				affected_mob.stamina.adjust(-70, FALSE)
+			if(SPT_PROB(5, seconds_per_tick))
+				affected_mob.stamina.adjust(-100, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				affected_mob.visible_message(span_warning("[affected_mob] faints!"), span_userdanger("You surrender yourself and feel at peace..."))
 				affected_mob.AdjustSleeping(100)
 			if(SPT_PROB(1, seconds_per_tick))

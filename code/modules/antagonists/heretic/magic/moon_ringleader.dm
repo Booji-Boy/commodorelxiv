@@ -1,8 +1,13 @@
 /datum/action/cooldown/spell/aoe/moon_ringleader
 	name = "Ringleaders Rise"
+<<<<<<< HEAD
 	desc = "Big AoE spell that deals brain damage and causes hallucinations to everyone in the AoE. \
 			The worse their sanity, the stronger this spell becomes. \
 			If their sanity is low enough, they even snap and go insane, and the spell then further halves their sanity."
+=======
+	desc = "Big AoE spell that deals more brain damage the lower the sanity of everyone in the AoE and it also causes hallucinations with those who have less sanity getting more. \
+			If their sanity is low enough they snap and go insane, the spell then halves their sanity."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
@@ -45,15 +50,22 @@
 	var/victim_sanity = victim.mob_mood.sanity
 
 	victim.adjustOrganLoss(ORGAN_SLOT_BRAIN, 100 - victim_sanity, 160)
+<<<<<<< HEAD
 	for(var/i in 1 to round((120 - victim_sanity) / 10))
 		victim.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body), name)
+=======
+	repeat_string((120 - victim_sanity) / 10,victim.cause_hallucination(get_random_valid_hallucination_subtype(/datum/hallucination/body),"ringleaders rise"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(victim_sanity < 15)
 		victim.apply_status_effect(/datum/status_effect/moon_converted)
 		caster.log_message("made [victim] insane.", LOG_GAME)
 		victim.log_message("was driven insane by [caster]")
 	victim.mob_mood.set_sanity(victim_sanity * 0.5)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/effect/temp_visual/moon_ringleader
 	icon = 'icons/effects/eldritch.dmi'
 	icon_state = "ring_leader_effect"

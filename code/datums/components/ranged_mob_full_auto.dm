@@ -56,7 +56,11 @@
 	if (get_dist(living_parent, target) <= 0)
 		set_target(get_step(living_parent, living_parent.dir)) // Shoot in the direction faced if the mouse is on the same tile as we are.
 		target_loc = target
+<<<<<<< HEAD
 	else if (!CAN_THEY_SEE(target, living_parent))
+=======
+	else if (!in_view_range(living_parent, target))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		stop_firing()
 		return FALSE // Can't see shit
 

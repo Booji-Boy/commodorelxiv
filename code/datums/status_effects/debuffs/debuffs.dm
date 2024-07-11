@@ -43,6 +43,7 @@
 
 /datum/status_effect/incapacitating/stun/on_remove()
 	owner.remove_traits(list(TRAIT_INCAPACITATED, TRAIT_IMMOBILIZED, TRAIT_HANDS_BLOCKED), TRAIT_STATUS_EFFECT(id))
+	owner.stun_diminish = 1
 	return ..()
 
 //KNOCKDOWN
@@ -57,6 +58,7 @@
 
 /datum/status_effect/incapacitating/knockdown/on_remove()
 	REMOVE_TRAIT(owner, TRAIT_FLOORED, TRAIT_STATUS_EFFECT(id))
+	owner.knockdown_diminish = 1
 	return ..()
 
 
@@ -87,6 +89,7 @@
 
 /datum/status_effect/incapacitating/paralyzed/on_remove()
 	owner.remove_traits(list(TRAIT_INCAPACITATED, TRAIT_IMMOBILIZED, TRAIT_FLOORED, TRAIT_HANDS_BLOCKED), TRAIT_STATUS_EFFECT(id))
+	owner.paralyze_diminish = 1
 	return ..()
 
 //INCAPACITATED
@@ -122,9 +125,15 @@
 	REMOVE_TRAIT(owner, TRAIT_KNOCKEDOUT, TRAIT_STATUS_EFFECT(id))
 	return ..()
 
+<<<<<<< HEAD
 /datum/status_effect/incapacitating/unconscious/tick(seconds_between_ticks)
 	if(owner.getStaminaLoss())
 		owner.adjustStaminaLoss(-0.3) //reduce stamina loss by 0.3 per tick, 6 per 2 seconds
+=======
+/datum/status_effect/incapacitating/unconscious/tick()
+	if(owner.stamina.loss)
+		owner.stamina.adjust(0.3) //reduce stamina loss by 0.3 per tick, 6 per 2 seconds
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 //SLEEPING
@@ -210,6 +219,7 @@
 		if(locate(/obj/item/pillow) in owner.loc)
 			sleep_quality += 0.1
 
+<<<<<<< HEAD
 		var/need_mob_update = FALSE
 		if(sleep_quality > 0)
 			if(iscarbon(owner))
@@ -238,6 +248,13 @@
 		need_mob_update += owner.adjustStaminaLoss(min(-0.4 * sleep_quality * seconds_between_ticks, -0.4 * HEALING_SLEEP_DEFAULT * seconds_between_ticks), updating_stamina = FALSE)
 		if(need_mob_update)
 			owner.updatehealth()
+=======
+		if(healing > 0 && health_ratio > 0.8)
+			owner.adjustBruteLoss(-1 * healing, required_bodytype = BODYTYPE_ORGANIC)
+			owner.adjustFireLoss(-1 * healing, required_bodytype = BODYTYPE_ORGANIC)
+			owner.adjustToxLoss(-1 * healing * 0.5, TRUE, TRUE, required_biotype = MOB_ORGANIC)
+		owner.stamina.adjust(-min(-1 * healing, -1 * HEALING_SLEEP_DEFAULT))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Drunkenness gets reduced by 0.3% per tick (6% per 2 seconds)
 	owner.set_drunk_effect(owner.get_drunk_amount() * 0.997)
 
@@ -999,6 +1016,7 @@
 
 /datum/movespeed_modifier/careful_driving
 	multiplicative_slowdown = 3
+<<<<<<< HEAD
 
 /datum/status_effect/midas_blight
 	id = "midas_blight"
@@ -1069,3 +1087,5 @@
 #undef HEALING_SLEEP_DEFAULT
 #undef HEALING_SLEEP_ORGAN_MULTIPLIER
 #undef SLEEP_QUALITY_WORKOUT_MULTIPLER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

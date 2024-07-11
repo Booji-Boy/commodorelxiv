@@ -53,8 +53,12 @@ export type MaterialCostSequenceProps = {
  * Otherwise, the labels are white.
  */
 export const MaterialCostSequence = (props: MaterialCostSequenceProps) => {
+<<<<<<< HEAD
   const { design, amount, available, align, justify, SHEET_MATERIAL_AMOUNT } =
     props;
+=======
+  const { design, amount, available, align, justify } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   let { costMap } = props;
 
   if (!costMap && !design) {
@@ -92,10 +96,14 @@ export const MaterialCostSequence = (props: MaterialCostSequenceProps) => {
                 }
               }
             >
+<<<<<<< HEAD
               {formatSiUnit(
                 ((amount || 1) * quantity) / SHEET_MATERIAL_AMOUNT,
                 0,
               )}
+=======
+              {formatSiUnit((amount || 1) * quantity, 0)}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             </Flex.Item>
           </Flex>
         </Flex.Item>

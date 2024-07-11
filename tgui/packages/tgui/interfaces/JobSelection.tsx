@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+=======
+import { useBackend } from '../backend';
+import {
+  Box,
+  Button,
+  StyleableSection,
+  Icon,
+  Stack,
+  NoticeBox,
+} from '../components';
+import { Window } from '../layouts';
+import { Color } from 'common/color';
+import { Inferno } from 'inferno';
+import { JOB2ICON } from './common/JobToIcon';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { deepMerge } from 'common/collections';
 import { Color } from 'common/color';
 import { BooleanLike } from 'common/react';
@@ -39,7 +55,11 @@ type Data = {
   round_duration: string;
 };
 
+<<<<<<< HEAD
 export const JobEntry = (data: {
+=======
+export const JobEntry: Inferno.SFC<{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   jobName: string;
   job: Job;
   department: Department;
@@ -62,7 +82,11 @@ export const JobEntry = (data: {
         color: job.unavailable_reason
           ? '#616161' // Dark grey font
           : Color.fromHex(department.color).darken(90).toString(),
+<<<<<<< HEAD
         fontSize: '1.1rem',
+=======
+        'font-size': '1.1rem',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         cursor: job.unavailable_reason ? 'initial' : 'pointer',
       }}
       tooltip={
@@ -87,7 +111,11 @@ export const JobEntry = (data: {
         {job.command ? <b>{jobName}</b> : jobName}
         <span
           style={{
+<<<<<<< HEAD
             whiteSpace: 'nowrap',
+=======
+            'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             position: 'absolute',
             right: '0.5em',
           }}
@@ -113,6 +141,13 @@ export const JobSelection = (props) => {
     <Window
       width={1012}
       height={data.shuttle_status ? 690 : 666 /* Hahahahahaha */}
+<<<<<<< HEAD
+=======
+      onComponentDidMount={() => {
+        // Send a heartbeat back to DM to let it know the window is alive and well
+        act('ui_mounted_with_no_bluescreen');
+      }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     >
       <Window.Content scrollable>
         <StyleableSection
@@ -132,9 +167,15 @@ export const JobSelection = (props) => {
               />
             </>
           }
+<<<<<<< HEAD
           titleStyle={{ minHeight: '3.4em' }}
         >
           <Box style={{ columns: '20em' }}>
+=======
+          titleStyle={{ 'min-height': '3.4em' }}
+        >
+          <Box wrap="wrap" style={{ columns: '20em' }}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             {Object.entries(departments).map((departmentEntry) => {
               const departmentName = departmentEntry[0];
               const entry = departmentEntry[1];
@@ -146,8 +187,13 @@ export const JobSelection = (props) => {
                         {departmentName}
                         <span
                           style={{
+<<<<<<< HEAD
                             fontSize: '1rem',
                             whiteSpace: 'nowrap',
+=======
+                            'font-size': '1rem',
+                            'white-space': 'nowrap',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                             position: 'absolute',
                             right: '1em',
                             color: Color.fromHex(entry.color)

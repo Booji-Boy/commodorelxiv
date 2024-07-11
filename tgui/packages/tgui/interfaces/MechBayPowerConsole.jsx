@@ -1,12 +1,19 @@
 import { useBackend } from '../backend';
 import {
+<<<<<<< HEAD
+=======
+  AnimatedNumber,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Button,
   LabeledList,
   NoticeBox,
   ProgressBar,
   Section,
 } from '../components';
+<<<<<<< HEAD
 import { formatEnergy } from '../format';
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 
 export const MechBayPowerConsole = (props) => {
@@ -58,9 +65,14 @@ export const MechBayPowerConsole = (props) => {
                       bad: [-Infinity, 0.3],
                     }}
                   >
+<<<<<<< HEAD
                     {formatEnergy(cell.charge) +
                       '/' +
                       formatEnergy(cell.maxcharge)}
+=======
+                    <AnimatedNumber value={cell.charge} />
+                    {' / ' + cell.maxcharge}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </ProgressBar>
                 )}
             </LabeledList.Item>

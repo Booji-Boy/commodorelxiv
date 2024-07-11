@@ -4,11 +4,14 @@
 #define BB_BILEWORM_RESURFACE "BB_bileworm_resurface"
 #define BB_BILEWORM_DEVOUR "BB_bileworm_devour"
 
+<<<<<<< HEAD
 // GOOSE AI keys
 
 #define BB_VOMIT_ABILITY "BB_vomit_ability" //stores our vomit ability
 #define	BB_GOOSE_PICKUPTARGET "BB_goose_pickuptarget" //stores the item we're trying to eat
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // Meteor Heart AI keys
 /// Key where we keep the spike trail ability
 #define BB_METEOR_HEART_GROUND_SPIKES "BB_meteor_ground_spikes"
@@ -50,8 +53,11 @@
 #define BB_CURRENT_HOME "BB_current_home"
 ///the hydro we will pollinate
 #define BB_TARGET_HYDRO "BB_target_hydro"
+<<<<<<< HEAD
 ///key to swarm around
 #define BB_SWARM_TARGET "BB_swarm_target"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // bear keys
 ///the hive with honey that we will steal from
@@ -66,6 +72,14 @@
 /// We increment this counter every time we try to move while dragging an arm and if we go too long we'll give up trying to get out of line of sight and just eat the fingers
 #define BB_LOBSTROSITY_FINGER_LUST "BB_lobstrosity_finger_lust"
 
+<<<<<<< HEAD
+=======
+/// Key containing overwatch ability information
+#define BB_WATCHER_OVERWATCH "BB_watcher_overwatch"
+/// Key containing gazae ability information
+#define BB_WATCHER_GAZE "BB_watcher_gaze"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 // eyeball keys
 ///the death glare ability
 #define BB_GLARE_ABILITY "BB_glare_ability"
@@ -121,10 +135,13 @@
 #define BB_ORE_TARGET "BB_ore_target"
 /// which ore types we will not eat
 #define BB_ORE_IGNORE_TYPES "BB_ore_ignore_types"
+<<<<<<< HEAD
 /// key that holds the boulder we will break
 #define BB_BOULDER_TARGET "BB_boulder_target"
 /// key that holds the ore_vent we will harvest boulders from
 #define BB_VENT_TARGET "BB_vent_target"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // minebot keys
 /// key that stores our toggle light ability
@@ -133,10 +150,13 @@
 #define BB_MINEBOT_DUMP_ABILITY "minebot_dump_ability"
 /// key that stores our target turf
 #define BB_TARGET_MINERAL_TURF "target_mineral_turf"
+<<<<<<< HEAD
 ///key that holds our missile ability
 #define BB_MINEBOT_MISSILE_ABILITY "minebot_missile_ability"
 ///key that holds our landmine ability
 #define BB_MINEBOT_LANDMINE_ABILITY "minebot_landmine_ability"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// key that stores list of the turfs we ignore
 #define BB_BLACKLIST_MINERAL_TURFS "blacklist_mineral_turfs"
 /// key that stores the previous blocked wall
@@ -145,6 +165,7 @@
 #define BB_AUTOMATED_MINING "automated_mining"
 /// key that stores the nearest dead human
 #define BB_NEARBY_DEAD_MINER "nearby_dead_miner"
+<<<<<<< HEAD
 ///key that holds the drone we defend
 #define BB_DRONE_DEFEND "defend_drone"
 ///key that holds the minimum distance before we flee
@@ -159,6 +180,8 @@
 #define BB_MINEBOT_REPAIR_DRONE "minebot_repair_drone"
 ///should we plant mines?
 #define BB_MINEBOT_PLANT_MINES "minebot_plant_mines"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //seedling keys
 /// the water can we will pick up
@@ -246,6 +269,7 @@
 #define BB_WIZARD_BLINK_SPELL "BB_wizard_blink_spell"
 /// Key for the next time we can cast a spell
 #define BB_WIZARD_SPELL_COOLDOWN "BB_wizard_spell_cooldown"
+<<<<<<< HEAD
 
 
 //cat AI keys
@@ -278,3 +302,5 @@
 //netguardians
 /// rocket launcher
 #define BB_NETGUARDIAN_ROCKET_ABILITY "netguardian_rocket"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

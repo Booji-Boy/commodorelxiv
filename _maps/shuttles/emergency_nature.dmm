@@ -221,7 +221,7 @@
 /area/shuttle/escape)
 "gR" = (
 /obj/effect/turf_decal/weather/dirt,
-/obj/machinery/hydroponics/soil,
+/obj/machinery/growing/soil,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "hC" = (
@@ -391,6 +391,15 @@
 /obj/structure/sign/warning/no_smoking/directional/north,
 /turf/open/floor/iron/white,
 /area/shuttle/escape)
+<<<<<<< HEAD
+=======
+"mq" = (
+/mob/living/carbon/human/species/monkey,
+/obj/machinery/light/floor/has_bulb,
+/obj/structure/flora/bush/sparsegrass/style_random,
+/turf/open/floor/grass,
+/area/shuttle/escape)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "mw" = (
 /obj/effect/turf_decal/weather/dirt{
 	dir = 10
@@ -674,7 +683,7 @@
 /turf/open/floor/iron/white,
 /area/shuttle/escape)
 "zs" = (
-/obj/machinery/light/floor,
+/obj/machinery/light/floor/has_bulb,
 /obj/structure/flora/bush/sparsegrass/style_random,
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -1112,7 +1121,7 @@
 /obj/effect/turf_decal/weather/dirt{
 	dir = 1
 	},
-/obj/machinery/hydroponics/soil,
+/obj/machinery/growing/soil,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "TH" = (
@@ -1310,7 +1319,7 @@
 /turf/open/floor/iron/white,
 /area/shuttle/escape)
 "ZL" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/growing/soil,
 /obj/item/seeds/banana,
 /turf/open/floor/grass,
 /area/shuttle/escape)

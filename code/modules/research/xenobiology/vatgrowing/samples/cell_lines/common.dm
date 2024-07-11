@@ -426,7 +426,7 @@
 		/datum/reagent/consumable/nutriment/protein,
 		/datum/reagent/consumable/nutriment/vitamin,
 		/datum/reagent/consumable/nutriment/peptides,
-		/datum/reagent/consumable/liquidelectricity/enriched,
+		/datum/reagent/consumable/liquidelectricity,
 		/datum/reagent/growthserum,
 		/datum/reagent/yuck)
 
@@ -664,6 +664,31 @@
 
 /datum/micro_organism/cell_line/butterfly
 	desc = "Papilionoidea cells"
+<<<<<<< HEAD
+=======
+	required_reagents = list(
+		/datum/reagent/consumable/nutriment/protein,
+	)
+	supplementary_reagents = list(
+		/datum/reagent/consumable/honey = 4,
+		/datum/reagent/consumable/korta_nectar = 3,
+		/datum/reagent/consumable/applejuice = 2,
+		/datum/reagent/water = 1,
+		/datum/reagent/consumable/sugar = 1,
+	)
+
+	suppressive_reagents = list(
+		/datum/reagent/toxin/pestkiller = -3,
+		/datum/reagent/toxin/carpotoxin = -2,
+		/datum/reagent/toxin = -2,
+	)
+
+	virus_suspectibility = 0
+	resulting_atoms = list(/mob/living/basic/butterfly = 3)
+
+/datum/micro_organism/cell_line/leaper
+	desc = "atypical amphibian cells"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	required_reagents = list(
 		/datum/reagent/consumable/nutriment/protein,
 	)

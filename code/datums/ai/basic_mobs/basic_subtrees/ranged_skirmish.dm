@@ -26,6 +26,7 @@
 	return !QDELETED(target)
 
 /datum/ai_behavior/ranged_skirmish/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key, max_range, min_range)
+<<<<<<< HEAD
 	var/atom/target = controller.blackboard[target_key]
 	if (QDELETED(target))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
@@ -33,6 +34,18 @@
 	var/datum/targeting_strategy/targeting_strategy = GET_TARGETING_STRATEGY(controller.blackboard[targeting_strategy_key])
 	if(!targeting_strategy.can_attack(controller.pawn, target))
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+	. = ..()
+	var/atom/target = controller.blackboard[target_key]
+	if (QDELETED(target))
+		finish_action(controller, succeeded = FALSE)
+		return
+
+	var/datum/targeting_strategy/targeting_strategy = GET_TARGETING_STRATEGY(controller.blackboard[targeting_strategy_key])
+	if(!targeting_strategy.can_attack(controller.pawn, target))
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/hiding_target = targeting_strategy.find_hidden_mobs(controller.pawn, target)
 	controller.set_blackboard_key(hiding_location_key, hiding_target)
@@ -41,8 +54,17 @@
 
 	var/distance = get_dist(controller.pawn, target)
 	if (distance > max_range || distance < min_range)
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
 
 	var/mob/living/basic/gunman = controller.pawn
 	gunman.RangedAttack(target)
 	return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_SUCCEEDED
+=======
+		finish_action(controller, succeeded = FALSE)
+		return
+
+	var/mob/living/basic/gunman = controller.pawn
+	gunman.RangedAttack(target)
+	finish_action(controller, succeeded = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

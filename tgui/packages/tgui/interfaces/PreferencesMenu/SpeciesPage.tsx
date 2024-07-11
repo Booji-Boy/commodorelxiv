@@ -2,7 +2,10 @@ import { classes } from 'common/react';
 
 import { useBackend } from '../../backend';
 import {
+<<<<<<< HEAD
   BlockQuote,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Box,
   Button,
   Divider,
@@ -176,7 +179,11 @@ const SpeciesPerk = (props: { className: string; perk: Perk }) => {
         </Box>
       }
     >
+<<<<<<< HEAD
       <Box className={className} width="32px" height="32px">
+=======
+      <Box class={className} width="32px" height="32px">
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         <Icon
           name={perk.ui_icon}
           size={1.5}
@@ -327,24 +334,6 @@ const SpeciesPageInner = (props: {
                     />
                   </Stack.Item>
                 </Stack>
-              </Box>
-
-              <Box mt={1}>
-                <Section title="Lore">
-                  <BlockQuote>
-                    {currentSpecies.lore.map((text, index) => (
-                      <Box key={index} maxWidth="100%">
-                        {text}
-                        {index !== currentSpecies.lore.length - 1 && (
-                          <>
-                            <br />
-                            <br />
-                          </>
-                        )}
-                      </Box>
-                    ))}
-                  </BlockQuote>
-                </Section>
               </Box>
             </Box>
           </Stack.Item>

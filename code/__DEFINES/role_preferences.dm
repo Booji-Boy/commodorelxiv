@@ -16,7 +16,11 @@
 #define ROLE_OPERATIVE "Operative"
 #define ROLE_TRAITOR "Traitor"
 #define ROLE_WIZARD "Wizard"
+<<<<<<< HEAD
 #define ROLE_SPY "Spy"
+=======
+#define ROLE_CLOCK_CULTIST "Clock Cultist" //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Midround roles
 #define ROLE_ABDUCTOR "Abductor"
@@ -24,6 +28,7 @@
 #define ROLE_BLOB "Blob"
 #define ROLE_BLOB_INFECTION "Blob Infection"
 #define ROLE_CHANGELING_MIDROUND "Changeling (Midround)"
+#define ROLE_CYBER_POLICE "Cyber Police"
 #define ROLE_FUGITIVE "Fugitive"
 #define ROLE_LONE_OPERATIVE "Lone Operative"
 #define ROLE_MALF_MIDROUND "Malf AI (Midround)"
@@ -37,6 +42,11 @@
 #define ROLE_SPACE_DRAGON "Space Dragon"
 #define ROLE_SPIDER "Spider"
 #define ROLE_WIZARD_MIDROUND "Wizard (Midround)"
+// monke midrounds
+#define ROLE_CORTICAL_BORER "Cortical Borer"
+#define ROLE_DRIFTING_CONTRACTOR "Drifting Contractor"
+#define ROLE_FLORIDA_MAN "Florida Man"
+#define ROLE_SLASHER "Slasher"
 
 // Latejoin roles
 #define ROLE_HERETIC_SMUGGLER "Heretic Smuggler"
@@ -52,6 +62,7 @@
 #define ROLE_EMAGGED_BOT "Malfunctioning Bot"
 #define ROLE_HIVE "Hivemind Host" //Role removed, left here for safety.
 #define ROLE_HYPNOTIZED "Hypnotized Victim"
+<<<<<<< HEAD
 #define ROLE_LAVALAND "Lavaland"
 #define ROLE_LAZARUS_BAD "Slaved Revived Mob"
 #define ROLE_LAZARUS_GOOD "Friendly Revived Mob"
@@ -65,6 +76,22 @@
 #define ROLE_REVENANT "Revenant"
 #define ROLE_SENTIENCE "Sentience Potion Spawn"
 #define ROLE_SYNDICATE "Syndicate"
+=======
+#define ROLE_SYNDICATE "Syndicate"
+#define ROLE_REV "Revolutionary"
+#define ROLE_REV_SUCCESSFUL "Victorious Revolutionary"
+#define ROLE_PAI "pAI"
+#define ROLE_MONKEY_HELMET "Monkey Mind Magnification Helmet"
+#define ROLE_REVENANT "Revenant"
+#define ROLE_OVERTHROW "Syndicate Mutineer" //Role removed, left here for safety.
+#define ROLE_SENTIENCE "Sentience Potion Spawn"
+#define ROLE_PYROCLASTIC_SLIME "Pyroclastic Anomaly Slime"
+#define ROLE_MIND_TRANSFER "Mind Transfer Potion"
+#define ROLE_POSIBRAIN "Posibrain"
+#define ROLE_LAVALAND "Lavaland"
+#define ROLE_LAZARUS_BAD "Slaved Revived Mob"
+#define ROLE_LAZARUS_GOOD "Friendly Revived Mob"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define ROLE_CLOWN_OPERATIVE "Clown Operative"
 #define ROLE_FREE_GOLEM "Free Golem"
@@ -75,12 +102,15 @@
 #define ROLE_SERVANT_GOLEM "Servant Golem"
 #define ROLE_SLAUGHTER_DEMON "Slaughter Demon"
 #define ROLE_WIZARD_APPRENTICE "apprentice"
+<<<<<<< HEAD
 #define ROLE_SYNDICATE_MONKEY "Syndicate Monkey Agent"
 #define ROLE_CONTRACTOR_SUPPORT "Contractor Support Unit"
 #define ROLE_OPERATIVE_OVERWATCH "Operative Overwatch Agent"
 #define ROLE_SYNDICATE_SABOBORG "Syndicate Sabotage Cyborg"
 #define ROLE_SYNDICATE_MEDBORG "Syndicate Medical Cyborg"
 #define ROLE_SYNDICATE_ASSAULTBORG "Syndicate Assault Cyborg"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Spawner roles
 #define ROLE_ANCIENT_CREW "Ancient Crew"
@@ -106,7 +136,12 @@
 #define ROLE_SPACE_PIRATE "Space Pirate"
 #define ROLE_SPACE_SYNDICATE "Space Syndicate"
 #define ROLE_SYNDICATE_CYBERSUN "Cybersun Space Syndicate" //Ghost role syndi from Forgottenship ruin
+<<<<<<< HEAD
 #define ROLE_SYNDICATE_CYBERSUN_CAPTAIN "Cybersun Space Syndicate Captain" //Forgottenship captain syndie
+=======
+#define ROLE_SYNDICATE_CYBERSUN_CAPTAIN "Cybersun Space Syndicate Captain" //Forgottenship captain syndi
+#define ROLE_ZOMBIE "Zombie"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define ROLE_SYNDICATE_DRONE "Syndicate Drone"
 #define ROLE_VENUSHUMANTRAP "Venus Human Trap"
 #define ROLE_ZOMBIE "Zombie"
@@ -132,7 +167,12 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_REV_HEAD = 14,
 	ROLE_TRAITOR = 0,
 	ROLE_WIZARD = 14,
+<<<<<<< HEAD
 	ROLE_SPY = 0,
+=======
+	ROLE_CLOCK_CULTIST = 14,
+	ROLE_BLOODSUCKER = 0,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// Midround
 	ROLE_ABDUCTOR = 0,
@@ -140,6 +180,7 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_BLOB = 0,
 	ROLE_BLOB_INFECTION = 0,
 	ROLE_CHANGELING_MIDROUND = 0,
+	ROLE_CYBER_POLICE = 0,
 	ROLE_FUGITIVE = 0,
 	ROLE_LONE_OPERATIVE = 14,
 	ROLE_MALF_MIDROUND = 0,
@@ -153,12 +194,25 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_SPACE_DRAGON = 0,
 	ROLE_SPIDER = 0,
 	ROLE_WIZARD_MIDROUND = 14,
+//monkestation edit start
+	ROLE_CORTICAL_BORER = 0,  // Module ID: CORTICAL_BORERS
+	ROLE_DRIFTING_CONTRACTOR = 0,
+	ROLE_VAMPIRICACCIDENT = 0,
+	ROLE_MONSTERHUNTER = 0,
+	ROLE_SLASHER = 0,
+	ROLE_FLORIDA_MAN = 0,
+	ROLE_OPFOR_CANDIDATE = 0,
+//monkestation edit end
 
 	// Latejoin
 	ROLE_HERETIC_SMUGGLER = 0,
 	ROLE_PROVOCATEUR = 14,
 	ROLE_SYNDICATE_INFILTRATOR = 0,
+<<<<<<< HEAD
 	ROLE_STOWAWAY_CHANGELING = 0,
+=======
+	ROLE_BLOODSUCKERBREAKOUT = 0,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// I'm not too sure why these are here, but they're not moving.
 	ROLE_GLITCH = 0,

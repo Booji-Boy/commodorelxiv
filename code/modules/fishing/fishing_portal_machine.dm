@@ -33,7 +33,11 @@
 	playsound(src, SFX_SPARKS, 25, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	return TRUE
 
+<<<<<<< HEAD
 /obj/machinery/fishing_portal_generator/interact(mob/user)
+=======
+/obj/machinery/fishing_portal_generator/interact(mob/user, special_state)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(active)
 		deactivate()

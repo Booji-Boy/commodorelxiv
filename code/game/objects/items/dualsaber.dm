@@ -18,7 +18,11 @@
 	hitsound = SFX_SWING_HIT
 	armour_penetration = 35
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 6 //TWICE AS BRIGHT AS A REGULAR ESWORD
+=======
+	light_outer_range = 6 //TWICE AS BRIGHT AS A REGULAR ESWORD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_ELECTRIC_GREEN
 	light_on = FALSE
 	attack_verb_continuous = list("attacks", "slashes", "stabs", "slices", "tears", "lacerates", "rips", "dices", "cuts")
@@ -147,7 +151,7 @@
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
 		user.take_bodypart_damage(20,25,check_armor = TRUE)
 	else
-		user.adjustStaminaLoss(25)
+		user.stamina.adjust(-25)
 
 /obj/item/dualsaber/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
 	if(!HAS_TRAIT(src, TRAIT_WIELDED))

@@ -1,10 +1,18 @@
 /obj/item/bitrunning_host_monitor
 	name = "host monitor"
+<<<<<<< HEAD
 
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2)
 	desc = "A complex electronic that will analyze the connection health between host and avatar."
 	obj_flags = CONDUCTS_ELECTRICITY
 	icon = 'icons/obj/devices/scanner.dmi'
+=======
+//	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2) // MONKEYSTATION EDIT ORIGINAL - we use the other material system
+	custom_materials = list(/datum/material/iron = 200) // MONKEYSTATION EDIT NEW
+	desc = "A complex electronic that will analyze the connection health between host and avatar."
+	flags_1 = CONDUCT_1
+	icon = 'icons/obj/device.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "host_monitor"
 	inhand_icon_state = "electronic"
 	item_flags = NOBLUDGEON

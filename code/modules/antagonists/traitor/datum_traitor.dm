@@ -16,11 +16,14 @@
 	preview_outfit = /datum/outfit/traitor
 	can_assign_self_objectives = TRUE
 	default_custom_objective = "Perform an overcomplicated heist on valuable Nanotrasen assets."
+<<<<<<< HEAD
 	hardcore_random_bonus = TRUE
 
 	///The flag of uplink that this traitor is supposed to have.
 	var/uplink_flag_given = UPLINK_TRAITORS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/give_objectives = TRUE
 	/// Whether to give secondary objectives to the traitor, which aren't necessary but can be completed for a progression and TC boost.
 	var/give_secondary_objectives = TRUE
@@ -56,8 +59,12 @@
 	// Progression elements are best left to the roundstart antagonists
 	// There will still be a timelock on uplink items
 	name = "\improper Infiltrator"
+<<<<<<< HEAD
 	give_secondary_objectives = FALSE
 	uplink_flag_given = UPLINK_INFILTRATORS
+=======
+	give_secondary_objectives = TRUE // Changed from FALSE to TRUE - MONKEYSTATION EDIT CHANGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/traitor/infiltrator/sleeper_agent
 	name = "\improper Syndicate Sleeper Agent"
@@ -88,6 +95,13 @@
 		if(give_secondary_objectives)
 			uplink_handler.has_objectives = TRUE
 			uplink_handler.generate_objectives()
+<<<<<<< HEAD
+=======
+//monkestation edit start
+		else
+			uplink_handler.has_objectives = FALSE
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		uplink_handler.can_replace_objectives = CALLBACK(src, PROC_REF(can_change_objectives))
 		uplink_handler.replace_objectives = CALLBACK(src, PROC_REF(submit_player_objective))
@@ -104,7 +118,7 @@
 				if((uplink_handler.assigned_role in item.restricted_roles) || (uplink_handler.assigned_species in item.restricted_species))
 					uplink_items += item
 					continue
-		uplink_handler.extra_purchasable += create_uplink_sales(uplink_sale_count, /datum/uplink_category/discounts, 1, uplink_items)
+		uplink_handler.extra_purchasable += create_uplink_sales(uplink_sale_count, /datum/uplink_category/discounts, 5, uplink_items) //monkestation edit: from 1 stock to 5
 
 	if(give_objectives)
 		forge_traitor_objectives()
@@ -123,9 +137,12 @@
 		uplink_handler.has_objectives = FALSE
 		uplink_handler.can_replace_objectives = null
 		uplink_handler.replace_objectives = null
+<<<<<<< HEAD
 	owner.take_uplink()
 	owner.special_role = null
 	owner.forget_crafting_recipe(/datum/crafting_recipe/syndicate_uplink_beacon)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/antagonist/traitor/proc/traitor_objective_to_html(datum/traitor_objective/to_display)
@@ -356,11 +373,28 @@
 	result += objectives_text
 
 	if(uplink_handler)
+<<<<<<< HEAD
 		if (uplink_handler.contractor_hub)
 			result += contractor_round_end()
 		result += "<br>The traitor had a total of [DISPLAY_PROGRESSION(uplink_handler.progression_points)] Reputation and [uplink_handler.telecrystals] Unused Telecrystals."
 
 	var/special_role_text = LOWER_TEXT(name)
+=======
+		var/completed_objectives_text = "Completed Uplink Objectives: "
+		for(var/datum/traitor_objective/objective as anything in uplink_handler.completed_objectives)
+			if(objective.objective_state == OBJECTIVE_STATE_COMPLETED)
+				completed_objectives_text += "<br><B>[objective.name]</B> - ([objective.telecrystal_reward] TC, [DISPLAY_PROGRESSION(objective.progression_reward)] Threat Level)"
+//monkestation edit on previous line: replaced "Reputation" with "Threat Level"
+		result += completed_objectives_text
+		result += "<br>The traitor had a total of [DISPLAY_PROGRESSION(uplink_handler.progression_points)] Threat Level and [uplink_handler.telecrystals] Unused Telecrystals."
+//monkestation edit on previous line: replaced "Reputation" with "Threat Level"
+	var/special_role_text = lowertext(name)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
+//monkestation edit start
+	if(uplink_handler?.purchased_contractor_items)
+		result += contractor_round_end()
+//monkestation edit end
 
 	if(traitor_won)
 		result += span_greentext("The [special_role_text] was successful!")

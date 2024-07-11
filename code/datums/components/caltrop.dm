@@ -89,7 +89,11 @@
 		return
 
 	var/picked_def_zone = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+<<<<<<< HEAD
 	var/obj/item/bodypart/leg = digitigrade_fan.get_bodypart(picked_def_zone)
+=======
+	var/obj/item/bodypart/leg = H.get_bodypart(picked_def_zone)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!istype(leg))
 		return
 
@@ -97,7 +101,15 @@
 		return
 
 	if (!(flags & CALTROP_BYPASS_SHOES))
+<<<<<<< HEAD
 		if ((digitigrade_fan.wear_suit?.body_parts_covered | digitigrade_fan.w_uniform?.body_parts_covered | digitigrade_fan.shoes?.body_parts_covered) & FEET)
+=======
+		// Monkestation addition start, taken from Skyrat
+		if(HAS_TRAIT(H, TRAIT_HARD_SOLES))
+			return
+		// Monkestation addition end, taken from Skyrat
+		if ((H.wear_suit?.body_parts_covered | H.w_uniform?.body_parts_covered | H.shoes?.body_parts_covered) & FEET)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 
 	var/damage = rand(min_damage, max_damage)
@@ -115,10 +127,17 @@
 	digitigrade_fan.apply_damage(damage, BRUTE, picked_def_zone, wound_bonus = CANT_WOUND, attacking_item = parent)
 
 	if(!(flags & CALTROP_NOSTUN)) // Won't set off the paralysis.
+<<<<<<< HEAD
 		if(!HAS_TRAIT(digitigrade_fan, TRAIT_LIGHT_STEP))
 			digitigrade_fan.Paralyze(paralyze_duration)
 		else
 			digitigrade_fan.Knockdown(paralyze_duration)
+=======
+		if(!HAS_TRAIT(H, TRAIT_LIGHT_STEP))
+			H.Paralyze(paralyze_duration)
+		else
+			H.Knockdown(paralyze_duration)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!soundfile)
 		return
 	playsound(digitigrade_fan, soundfile, 15, TRUE, -3)

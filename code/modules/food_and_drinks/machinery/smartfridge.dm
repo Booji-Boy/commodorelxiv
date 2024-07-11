@@ -302,13 +302,20 @@
 				to_chat(user, span_warning("There is nothing in [weapon] to put in [src]!"))
 				return FALSE
 
+<<<<<<< HEAD
 	if(!user.combat_mode)
 		to_chat(user, span_warning("\The [src] smartly refuses [weapon]."))
+=======
+	if(!(user.istate & ISTATE_HARM))
+		to_chat(user, span_warning("\The [src] smartly refuses [O]."))
+		SStgui.update_uis(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	else
 		return ..()
 
+<<<<<<< HEAD
 /**
  * Can this item be accepted by the smart fridge
  * Arguments
@@ -322,6 +329,12 @@
 		/obj/item/graft,
 	)
 	return is_type_in_list(weapon, accepted_items)
+=======
+/obj/machinery/smartfridge/proc/accept_check(obj/item/O)
+	if(istype(O, /obj/item/food/grown/) || istype(O, /obj/item/seeds/) || istype(O, /obj/item/grown/) || istype(O, /obj/item/graft/) || istype(O, /obj/item/food/))
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Loads the item into the smart fridge
@@ -624,11 +637,18 @@
 	base_build_path = /obj/machinery/smartfridge/extract
 	base_icon_state = "slime"
 
+<<<<<<< HEAD
 /obj/machinery/smartfridge/extract/accept_check(obj/item/weapon)
 	return (istype(weapon, /obj/item/slime_extract) || istype(weapon, /obj/item/slime_scanner))
+=======
+/obj/machinery/smartfridge/extract/accept_check(obj/item/O)
+	if(istype(O, /obj/item/slime_extract))
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/smartfridge/extract/preloaded
-	initial_contents = list(/obj/item/slime_scanner = 2)
+	initial_contents = list(/obj/item/slime_extract/grey = 2)
 
 // -------------------------------------
 // Cytology Petri Dish Smartfridge

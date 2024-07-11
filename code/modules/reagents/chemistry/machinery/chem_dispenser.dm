@@ -71,7 +71,8 @@
 		/datum/reagent/sulfur,
 		/datum/reagent/toxin/acid,
 		/datum/reagent/water,
-		/datum/reagent/fuel
+		/datum/reagent/fuel,
+		/datum/reagent/silver,
 	)
 	/// The default list of reagents upgrade_reagents
 	var/static/list/default_upgrade_reagents = list(
@@ -163,6 +164,10 @@
 		beaker_overlay = display_beaker()
 		. += beaker_overlay
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/chem_dispenser/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		balloon_alert(user, "already emagged!")
@@ -215,7 +220,33 @@
 	.["displayedMaxEnergy"] = display_energy(cell.maxcharge)
 	.["showpH"] = isnull(recording_recipe) ? show_ph : FALSE //virtual beakers have no ph to compute & display
 
+<<<<<<< HEAD
 	var/list/chemicals = list()
+=======
+	var/beakerContents[0]
+	var/beakerCurrentVolume = 0
+	if(beaker && beaker.reagents && beaker.reagents.reagent_list.len)
+		for(var/datum/reagent/R in beaker.reagents.reagent_list)
+			var/chem_name = R.name
+			if(istype(R, /datum/reagent/ammonia/urine) && user.client?.prefs.read_preference(/datum/preference/toggle/prude_mode))
+				chem_name = "Ammonia?"
+			beakerContents.Add(list(list("name" = chem_name, "volume" = round(R.volume, 0.01), "pH" = R.ph, "purity" = R.purity))) // list in a list because Byond merges the first list...
+			beakerCurrentVolume += R.volume
+	data["beakerContents"] = beakerContents
+
+	if (beaker)
+		data["beakerCurrentVolume"] = round(beakerCurrentVolume, 0.01)
+		data["beakerMaxVolume"] = beaker.volume
+		data["beakerTransferAmounts"] = beaker.possible_transfer_amounts
+		data["beakerCurrentpH"] = round(beaker.reagents.ph, 0.01)
+	else
+		data["beakerCurrentVolume"] = null
+		data["beakerMaxVolume"] = null
+		data["beakerTransferAmounts"] = null
+		data["beakerCurrentpH"] = null
+
+	var/chemicals[0]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/is_hallucinating = FALSE
 	if(isliving(user))
 		var/mob/living/living_user = user
@@ -400,9 +431,17 @@
 			return ITEM_INTERACT_BLOCKING
 		replace_beaker(user, tool)
 		ui_interact(user)
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
 
 	return NONE
+=======
+	else if(!(user.istate & ISTATE_HARM) && !istype(I, /obj/item/card/emag))
+		to_chat(user, span_warning("You can't load [I] into [src]!"))
+		return ..()
+	else
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/chem_dispenser/get_cell()
 	return cell
@@ -735,7 +774,7 @@
 		/datum/reagent/toxin,
 		/datum/reagent/toxin/plasma,
 		/datum/reagent/uranium,
-		/datum/reagent/consumable/liquidelectricity/enriched,
+		/datum/reagent/consumable/liquidelectricity,
 		/datum/reagent/medicine/c2/synthflesh
 	)
 

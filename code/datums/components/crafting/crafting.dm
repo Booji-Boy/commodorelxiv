@@ -191,12 +191,42 @@
 
 	var/list/contents = get_surroundings(crafter, recipe.blacklist)
 	var/send_feedback = 1
+<<<<<<< HEAD
 	var/turf/dest_turf = get_turf(crafter)
 
 	if(!check_contents(crafter, recipe, contents))
 		return ", missing component."
 
 	if(!check_tools(crafter, recipe, contents))
+=======
+	if(check_contents(a, R, contents))
+		if(check_tools(a, R, contents))
+			if(R.one_per_turf)
+				for(var/content in get_turf(a))
+					if(istype(content, R.result))
+						return ", object already present."
+			//If we're a mob we'll try a do_after; non mobs will instead instantly construct the item
+			if(ismob(a) && !do_after(a, R.time, target = a))
+				return "."
+			contents = get_surroundings(a,R.blacklist)
+			if(!check_contents(a, R, contents))
+				return ", missing component."
+			if(!check_tools(a, R, contents))
+				return ", missing tool."
+			var/list/parts = del_reqs(R, a)
+			var/atom/movable/I
+			if(ispath(R.result, /obj/item/stack))
+				I = new R.result (get_turf(a.loc), R.result_amount || 1)
+			else
+				I = new R.result (get_turf(a.loc))
+				if(I.atom_storage && R.delete_contents)
+					for(var/obj/item/thing in I)
+						qdel(thing)
+			I.CheckParts(parts, R)
+			if(send_feedback)
+				SSblackbox.record_feedback("tally", "object_crafted", 1, I.name)
+			return I //Send the item back to whatever called this proc so it can handle whatever it wants to do with the new item
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return ", missing tool."
 
 

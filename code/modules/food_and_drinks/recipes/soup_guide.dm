@@ -37,6 +37,13 @@
 		return
 	for(var/obj/item/ingredienttype as anything in chemical_reaction.required_ingredients)
 		LAZYSET(reqs, ingredienttype, chemical_reaction.required_ingredients[ingredienttype])
+<<<<<<< HEAD
+=======
+
+	if(ispath(result, /datum/reagent/consumable))
+		var/datum/reagent/consumable/soup_result = result
+		total_nutriment_factor += initial(soup_result.nutriment_factor) * result_amount
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/crafting_recipe/food/reaction/soup/meatball_soup
 	reaction = /datum/chemical_reaction/food/soup/meatballsoup

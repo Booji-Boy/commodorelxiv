@@ -47,6 +47,7 @@
 		return
 	detonation_area = objective.detonation_location
 
+<<<<<<< HEAD
 /obj/item/grenade/c4/ninja/plant_c4(atom/bomb_target, mob/living/user)
 	if(!IS_SPACE_NINJA(user))
 		say("Access denied.")
@@ -57,6 +58,17 @@
 		return FALSE
 	detonator = WEAKREF(user)
 	return TRUE
+=======
+/obj/item/grenade/c4/ninja/afterattack(atom/movable/target, mob/ninja, flag)
+	if(!IS_SPACE_NINJA(ninja))
+		say("Access denied.")
+		return
+	. |= AFTERATTACK_PROCESSED_ITEM
+	if (!check_loc(ninja))
+		return .
+	detonator = WEAKREF(ninja)
+	return . | ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/grenade/c4/ninja/detonate(mob/living/lanced_by)
 	if(!check_loc(detonator.resolve())) // if its moved, deactivate the c4
@@ -69,10 +81,10 @@
 	//Since we already did the checks in afterattack, the denonator must be a ninja with the bomb objective.
 	if(isnull(detonator))
 		return
-	var/mob/ninja = detonator.resolve()
 	. = ..()
 	if(!.)
 		return
+	var/mob/ninja = detonator.resolve()
 	if (isnull(ninja))
 		return
 	var/datum/antagonist/ninja/ninja_antag = ninja.mind.has_antag_datum(/datum/antagonist/ninja)

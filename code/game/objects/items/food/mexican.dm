@@ -78,7 +78,11 @@
 	foodtypes = GRAIN
 	w_class = WEIGHT_CLASS_SMALL
 	venue_value = FOOD_PRICE_LEGENDARY
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_3
+=======
+	food_buffs = STATUS_EFFECT_FOOD_FIREBURPS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/nachos
 	name = "nachos"
@@ -124,7 +128,11 @@
 	tastes = list("nachos" = 2, "hot pepper" = 1)
 	foodtypes = VEGETABLES | FRIED | DAIRY
 	w_class = WEIGHT_CLASS_SMALL
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_2
+=======
+	food_buffs = STATUS_EFFECT_FOOD_FIREBURPS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/taco
 	name = "classic taco"

@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { isEscape, KEY } from 'common/keys';
 import { useState } from 'react';
 
+=======
+import { KEY } from 'common/keys';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend, useLocalState } from '../backend';
 import { Autofocus, Box, Button, Section, Stack } from '../components';
 import { Window } from '../layouts';
@@ -15,12 +19,20 @@ type KeyInputData = {
   title: string;
 };
 
+<<<<<<< HEAD
 const isStandardKey = (event: React.KeyboardEvent<HTMLDivElement>): boolean => {
+=======
+const isStandardKey = (event: KeyboardEvent): boolean => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     event.key !== KEY.Alt &&
     event.key !== KEY.Control &&
     event.key !== KEY.Shift &&
+<<<<<<< HEAD
     !isEscape(event.key)
+=======
+    event.key !== KEY.Escape
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 };
 
@@ -40,9 +52,13 @@ const KEY_CODE_TO_BYOND: Record<string, string> = {
 
 const DOM_KEY_LOCATION_NUMPAD = 3;
 
+<<<<<<< HEAD
 const formatKeyboardEvent = (
   event: React.KeyboardEvent<HTMLDivElement>,
 ): string => {
+=======
+const formatKeyboardEvent = (event: KeyboardEvent): string => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   let text = '';
 
   if (event.altKey) {
@@ -72,7 +88,11 @@ const formatKeyboardEvent = (
 export const KeyComboModal = (props) => {
   const { act, data } = useBackend<KeyInputData>();
   const { init_value, large_buttons, message = '', title, timeout } = data;
+<<<<<<< HEAD
   const [input, setInput] = useState(init_value);
+=======
+  const [input, setInput] = useLocalState('input', init_value);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const [binding, setBinding] = useLocalState('binding', true);
 
   const setValue = (value: string) => {
@@ -97,7 +117,11 @@ export const KeyComboModal = (props) => {
             if (event.key === KEY.Enter) {
               act('submit', { entry: input });
             }
+<<<<<<< HEAD
             if (isEscape(event.key)) {
+=======
+            if (event.key === KEY.Escape) {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               act('cancel');
             }
             return;
@@ -109,7 +133,11 @@ export const KeyComboModal = (props) => {
             setValue(formatKeyboardEvent(event));
             setBinding(false);
             return;
+<<<<<<< HEAD
           } else if (isEscape(event.key)) {
+=======
+          } else if (event.key === KEY.Escape) {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             setValue(init_value);
             setBinding(false);
             return;

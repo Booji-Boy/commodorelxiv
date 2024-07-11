@@ -20,8 +20,13 @@
 	var/deconstruction = BLASTDOOR_FINISHED
 	/// The door's ID (used for buttons, etc to control the door)
 	var/id = 1
+<<<<<<< HEAD
 	/// The sound that plays when the door opens/closes
 	var/animation_sound = 'sound/machines/blastdoor.ogg'
+=======
+	var/open_sound = 'monkestation/sound/machines/poddoors/blastdoor.ogg'
+	var/close_sound = 'monkestation/sound/machines/poddoors/blastdoor.ogg'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/door_poddoor
 	melee = 50
@@ -32,8 +37,91 @@
 	fire = 100
 	acid = 70
 
+<<<<<<< HEAD
 /obj/machinery/door/poddoor/get_save_vars()
 	return ..() + NAMEOF(src, id)
+=======
+/obj/machinery/door/poddoor/screwdriver_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if (density)
+		balloon_alert(user, "open the door first!")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	else if (default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/door/poddoor/multitool_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if (density)
+		balloon_alert(user, "open the door first!")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if (!panel_open)
+		return
+	if (deconstruction != BLASTDOOR_FINISHED)
+		return
+	var/change_id = tgui_input_number(user, "Set the door controllers ID (Current: [id])", "Door Controller ID", isnum(id) ? id : null, 100)
+	if(!change_id || QDELETED(usr) || QDELETED(src) || !usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return
+	id = change_id
+	to_chat(user, span_notice("You change the ID to [id]."))
+	balloon_alert(user, "id changed")
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/door/poddoor/crowbar_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if(machine_stat & NOPOWER)
+		open(TRUE)
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if (density)
+		balloon_alert(user, "open the door first!")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if (!panel_open)
+		return
+	if (deconstruction != BLASTDOOR_FINISHED)
+		return
+	balloon_alert(user, "removing airlock electronics...")
+	if(tool.use_tool(src, user, 10 SECONDS, volume = 50))
+		new /obj/item/electronics/airlock(loc)
+		id = null
+		deconstruction = BLASTDOOR_NEEDS_ELECTRONICS
+		balloon_alert(user, "removed airlock electronics")
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/door/poddoor/wirecutter_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if (density)
+		balloon_alert(user, "open the door first!")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if (!panel_open)
+		return
+	if (deconstruction != BLASTDOOR_NEEDS_ELECTRONICS)
+		return
+	balloon_alert(user, "removing internal cables...")
+	if(tool.use_tool(src, user, 10 SECONDS, volume = 50))
+		var/datum/crafting_recipe/recipe = locate(recipe_type) in GLOB.crafting_recipes
+		var/amount = recipe.reqs[/obj/item/stack/cable_coil]
+		new /obj/item/stack/cable_coil(loc, amount)
+		deconstruction = BLASTDOOR_NEEDS_WIRES
+		balloon_alert(user, "removed internal cables")
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/door/poddoor/welder_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if (density)
+		balloon_alert(user, "open the door first!")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+	if (!panel_open)
+		return
+	if (deconstruction != BLASTDOOR_NEEDS_WIRES)
+		return
+	balloon_alert(user, "tearing apart...") //You're tearing me apart, Lisa!
+	if(tool.use_tool(src, user, 15 SECONDS, volume = 50))
+		var/datum/crafting_recipe/recipe = locate(recipe_type) in GLOB.crafting_recipes
+		var/amount = recipe.reqs[/obj/item/stack/sheet/plasteel]
+		new /obj/item/stack/sheet/plasteel(loc, amount)
+		user.balloon_alert(user, "torn apart")
+		qdel(src)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/door/poddoor/examine(mob/user)
 	. = ..()
@@ -199,14 +287,22 @@
 	switch(animation)
 		if("opening")
 			flick("opening", src)
+<<<<<<< HEAD
 			playsound(src, animation_sound, 50, TRUE)
 		if("closing")
 			flick("closing", src)
 			playsound(src, animation_sound, 50, TRUE)
+=======
+			playsound(src, open_sound, 30, TRUE)
+		if("closing")
+			flick("closing", src)
+			playsound(src, close_sound, 30, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/door/poddoor/update_icon_state()
 	. = ..()
 	icon_state = density ? "closed" : "open"
+	SSdemo.mark_dirty(src) //Monkestation Edit: REPLAYS
 
 /obj/machinery/door/poddoor/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
 	if(density & !(resistance_flags & INDESTRUCTIBLE))
@@ -241,10 +337,11 @@
 /obj/machinery/door/poddoor/shuttledock
 	var/checkdir = 4 //door won't open if turf in this dir is `turftype`
 	var/turftype = /turf/open/space
+	max_integrity = 100000 ///lol
 
 /obj/machinery/door/poddoor/shuttledock/proc/check()
 	var/turf/turf = get_step(src, checkdir)
-	if(!istype(turf, turftype))
+	if(!istype(turf, turftype) && SSticker.current_state == GAME_STATE_PLAYING)
 		INVOKE_ASYNC(src, PROC_REF(open))
 	else
 		INVOKE_ASYNC(src, PROC_REF(close))

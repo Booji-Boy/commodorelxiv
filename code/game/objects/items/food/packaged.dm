@@ -191,6 +191,10 @@
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment/vitamin = 3
 	)
+<<<<<<< HEAD
+=======
+	burns_on_grill = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	tastes = list("meat" = 1)
 	foodtypes = MEAT
 	w_class = WEIGHT_CLASS_SMALL

@@ -26,6 +26,8 @@
 	var/hotkeys
 	var/tgui_say
 	var/typing_indicators
+	var/datum/interaction_mode/imode
+	var/context_menu_requires_shift = FALSE
 
 /datum/client_interface/New()
 	..()
@@ -49,5 +51,9 @@
 /datum/client_interface/proc/set_macros()
 	return
 
+<<<<<<< HEAD
 /datum/client_interface/proc/update_ambience_pref()
+=======
+/datum/client_interface/proc/set_right_click_menu_mode()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return

@@ -1,7 +1,11 @@
 import { classes } from 'common/react';
 import { capitalizeAll } from 'common/string';
+<<<<<<< HEAD
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
+=======
+import { useBackend, useLocalState } from 'tgui/backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
@@ -84,7 +88,12 @@ export const Vending = (props) => {
     stock,
   } = data;
 
+<<<<<<< HEAD
   const [selectedCategory, setSelectedCategory] = useState(
+=======
+  const [selectedCategory, setSelectedCategory] = useLocalState<string>(
+    'selectedCategory',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     Object.keys(data.categories)[0],
   );
 
@@ -284,6 +293,7 @@ const ProductImage = (props) => {
   const { product } = props;
 
   return product.img ? (
+<<<<<<< HEAD
     <img
       src={`data:image/jpeg;base64,${product.img}`}
       style={{
@@ -297,6 +307,11 @@ const ProductImage = (props) => {
         verticalAlign: 'middle',
       }}
     />
+=======
+    <img src={`data:image/jpeg;base64,${product.img}`} />
+  ) : (
+    <span className={classes(['vending32x32', product.path])} />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   );
 };
 
@@ -337,7 +352,11 @@ const ProductStock = (props) => {
 /** The main button to purchase an item. */
 const ProductButton = (props) => {
   const { act, data } = useBackend<VendingData>();
+<<<<<<< HEAD
   const { access, displayed_currency_name } = data;
+=======
+  const { access } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { custom, discount, disabled, free, product, redPrice } = props;
   const customPrice = access ? 'FREE' : product.price;
   let standardPrice = product.price;
@@ -352,7 +371,11 @@ const ProductButton = (props) => {
       disabled={disabled}
       onClick={() =>
         act('dispense', {
+<<<<<<< HEAD
           item: product.path,
+=======
+          item: product.name,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         })
       }
     >
@@ -389,6 +412,7 @@ const CategorySelector = (props: {
 
   return (
     <Section>
+<<<<<<< HEAD
       {Object.entries(categories).map(([name, category]) => (
         <Button
           key={name}
@@ -400,6 +424,23 @@ const CategorySelector = (props: {
           {name}
         </Button>
       ))}
+=======
+      <Stack grow>
+        <Stack.Item>
+          {Object.entries(categories).map(([name, category]) => (
+            <Button
+              key={name}
+              selected={name === selectedCategory}
+              color={CATEGORY_COLORS[name]}
+              icon={category.icon}
+              onClick={() => onSelect(name)}
+            >
+              {name}
+            </Button>
+          ))}
+        </Stack.Item>
+      </Stack>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     </Section>
   );
 };

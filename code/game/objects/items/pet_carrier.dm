@@ -18,8 +18,11 @@
 	throw_speed = 2
 	throw_range = 3
 	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 7.5, /datum/material/glass = SMALL_MATERIAL_AMOUNT)
+<<<<<<< HEAD
 	interaction_flags_mouse_drop = NEED_DEXTERITY
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/open = TRUE
 	var/locked = FALSE
 	var/list/occupants = list()
@@ -80,20 +83,22 @@
 	update_appearance()
 	return CLICK_ACTION_SUCCESS
 
+<<<<<<< HEAD
 /obj/item/pet_carrier/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.combat_mode || !isliving(interacting_with))
 		return NONE
+=======
+/obj/item/pet_carrier/attack(mob/living/target, mob/living/user)
+	if((user.istate & ISTATE_HARM))
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!open)
 		to_chat(user, span_warning("You need to open [src]'s door!"))
 		return ITEM_INTERACT_BLOCKING
 	var/mob/living/target = interacting_with
 	if(target.mob_size > max_occupant_weight)
 		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
-			if(isfelinid(H))
-				to_chat(user, span_warning("You'd need a lot of catnip and treats, plus maybe a laser pointer, for that to work."))
-			else
-				to_chat(user, span_warning("Humans, generally, do not fit into pet carriers."))
+			to_chat(user, span_warning("Humans, generally, do not fit into pet carriers."))
 		else
 			to_chat(user, span_warning("You get the feeling [target] isn't meant for a [name]."))
 		return ITEM_INTERACT_BLOCKING

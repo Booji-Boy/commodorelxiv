@@ -57,6 +57,12 @@
 	elimination = TRUE
 	appearance_flags = LONG_GLIDE
 	mouse_opacity = MOUSE_OPACITY_ICON
+<<<<<<< HEAD
+=======
+	attack_action_types = list(/datum/action/innate/megafauna_attack/create_skull,
+							   /datum/action/innate/megafauna_attack/charge_target,
+							   /datum/action/innate/megafauna_attack/create_turrets)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/size = LEGION_LARGE
 	/// Create Skulls ability
 	var/datum/action/cooldown/mob_cooldown/create_legion_skull/create_legion_skull
@@ -117,7 +123,40 @@
 		if(3)
 			chase_target.Trigger(target = target)
 		if(4)
+<<<<<<< HEAD
 			create_legion_turrets.Trigger(target = target)
+=======
+			create_legion_turrets()
+
+//SKULLS
+
+///Attack proc. Spawns a singular legion skull.
+/mob/living/simple_animal/hostile/megafauna/legion/proc/create_legion_skull()
+	var/mob/living/basic/legion_brood/minion = new(loc)
+	minion.assign_creator(src)
+	minion.ai_controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET] = target
+
+//CHARGE
+
+///Attack proc. Gives legion some movespeed buffs and switches the AI to melee. At lower sizes, this also throws the skull at the player.
+/mob/living/simple_animal/hostile/megafauna/legion/proc/charge_target()
+	visible_message(span_warning("<b>[src] charges!</b>"))
+	SpinAnimation(speed = 20, loops = 3, parallel = FALSE)
+	ranged = FALSE
+	retreat_distance = 0
+	minimum_distance = 0
+	set_varspeed(0)
+	charging = TRUE
+	addtimer(CALLBACK(src, PROC_REF(reset_charge)), 60)
+	var/mob/living/L = target
+	if(!istype(L) || L.stat != DEAD) //I know, weird syntax, but it just works.
+		addtimer(CALLBACK(src, PROC_REF(throw_thyself)), 20)
+
+///This is the proc that actually does the throwing. Charge only adds a timer for this.
+/mob/living/simple_animal/hostile/megafauna/legion/proc/throw_thyself()
+	playsound(src, 'sound/weapons/sonic_jackhammer.ogg', 50, TRUE)
+	throw_at(target, 7, 1.1, src, FALSE, FALSE, CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, 'sound/effects/meteorimpact.ogg', 50 * size, TRUE, 2), INFINITY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Deals some extra damage on throw impact.
 /mob/living/simple_animal/hostile/megafauna/legion/throw_impact(mob/living/hit_atom, datum/thrownthing/throwingdatum)
@@ -184,6 +223,96 @@
 			new /mob/living/simple_animal/hostile/megafauna/legion/medium/right(loc)
 			new /mob/living/simple_animal/hostile/megafauna/legion/medium/eye(loc)
 
+<<<<<<< HEAD
+=======
+///A basic turret that shoots at nearby mobs. Intended to be used for the legion megafauna.
+/obj/structure/legionturret
+	name = "\improper Legion sentinel"
+	desc = "The eye pierces your soul."
+	icon = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
+	icon_state = "legion_turret"
+	light_power = 0.5
+	light_outer_range = 2
+	max_integrity = 80
+	luminosity = 6
+	anchored = TRUE
+	density = TRUE
+	layer = ABOVE_OBJ_LAYER
+	armor_type = /datum/armor/structure_legionturret
+	//Compared with the targeted mobs. If they have the faction, turret won't shoot.
+	faction = list(FACTION_MINING)
+	///What kind of projectile the actual damaging part should be.
+	var/projectile_type = /obj/projectile/beam/legion
+	///Time until the tracer gets shot
+	var/initial_firing_time = 18
+	///How long it takes between shooting the tracer and the projectile.
+	var/shot_delay = 8
+
+/datum/armor/structure_legionturret
+	laser = 100
+
+/obj/structure/legionturret/Initialize(mapload)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(set_up_shot)), initial_firing_time)
+	ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, INNATE_TRAIT)
+
+///Handles an extremely basic AI
+/obj/structure/legionturret/proc/set_up_shot()
+	for(var/mob/living/L in oview(9, src))
+		if(L.stat == DEAD || L.stat == UNCONSCIOUS)
+			continue
+		if(faction_check(faction, L.faction))
+			continue
+		fire(L)
+		return
+	fire(get_edge_target_turf(src, pick(GLOB.cardinals)))
+
+///Called when attacking a target. Shoots a projectile at the turf underneath the target.
+/obj/structure/legionturret/proc/fire(atom/target)
+	var/turf/T = get_turf(target)
+	var/turf/T1 = get_turf(src)
+	if(!T || !T1)
+		return
+	//Now we generate the tracer.
+	var/angle = get_angle(T1, T)
+	var/datum/point/vector/V = new(T1.x, T1.y, T1.z, 0, 0, angle)
+	generate_tracer_between_points(V, V.return_vector_after_increments(6), /obj/effect/projectile/tracer/legion/tracer, 0, shot_delay, 0, 0, 0, null)
+	playsound(src, 'sound/machines/airlockopen.ogg', 100, TRUE)
+	addtimer(CALLBACK(src, PROC_REF(fire_beam), angle), shot_delay)
+
+///Called shot_delay after the turret shot the tracer. Shoots a projectile into the same direction.
+/obj/structure/legionturret/proc/fire_beam(angle)
+	var/obj/projectile/ouchie = new projectile_type(loc)
+	ouchie.firer = src
+	ouchie.fire(angle)
+	playsound(src, 'sound/effects/bin_close.ogg', 100, TRUE)
+	QDEL_IN(src, 5)
+
+///Used for the legion turret.
+/obj/projectile/beam/legion
+	name = "blood pulse"
+	hitsound = 'sound/magic/magic_missile.ogg'
+	damage = 19
+	range = 6
+	light_color = COLOR_SOFT_RED
+	impact_effect_type = /obj/effect/temp_visual/kinetic_blast
+	tracer_type = /obj/effect/projectile/tracer/legion
+	muzzle_type = /obj/effect/projectile/tracer/legion
+	impact_type = /obj/effect/projectile/tracer/legion
+	hitscan = TRUE
+	projectile_piercing = ALL
+
+///Used for the legion turret tracer.
+/obj/effect/projectile/tracer/legion/tracer
+	icon = 'icons/effects/beam.dmi'
+	icon_state = "blood_light"
+
+///Used for the legion turret beam.
+/obj/effect/projectile/tracer/legion
+	icon = 'icons/effects/beam.dmi'
+	icon_state = "blood"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef LEGION_LARGE
 #undef LEGION_MEDIUM
 #undef LEGION_SMALL

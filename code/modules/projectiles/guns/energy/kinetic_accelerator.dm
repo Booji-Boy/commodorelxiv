@@ -13,6 +13,7 @@
 	knife_x_offset = 20
 	knife_y_offset = 12
 	gun_flags = NOT_A_REAL_GUN
+<<<<<<< HEAD
 	///List of all mobs that projectiles fired from this gun will ignore.
 	var/list/ignored_mob_types
 	///List of all modkits currently in the kinetic accelerator.
@@ -31,6 +32,9 @@
 		/datum/component/slapcrafting,\
 		slapcraft_recipes = slapcraft_recipe_list,\
 	)
+=======
+	var/disablemodification = FALSE //monkeedit - stops removal and addition of mods
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/apply_fantasy_bonuses(bonus)
 	. = ..()
@@ -76,7 +80,7 @@
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/crowbar_act(mob/living/user, obj/item/I)
 	. = TRUE
-	if(modkits.len)
+	if(modkits.len && !disablemodification) //monkeedit
 		to_chat(user, span_notice("You pry all the modifications out."))
 		I.play_tool_sound(src, 100)
 		for(var/obj/item/borg/upgrade/modkit/modkit_upgrade as anything in modkits)
@@ -136,7 +140,7 @@
 		modkits |= arrived
 
 /obj/item/gun/energy/recharge/kinetic_accelerator/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/borg/upgrade/modkit))
+	if(istype(I, /obj/item/borg/upgrade/modkit) && !disablemodification) //monkeedit
 		var/obj/item/borg/upgrade/modkit/MK = I
 		MK.install(src, user)
 	else
@@ -596,6 +600,17 @@
 	var/chassis_name = "super-kinetic accelerator"
 
 /obj/item/borg/upgrade/modkit/chassis_mod/install(obj/item/gun/energy/recharge/kinetic_accelerator/KA, mob/user)
+//monkestation edit start
+	if(is_type_in_list(KA, list(/obj/item/gun/energy/recharge/kinetic_accelerator/glock,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/m79,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/meme,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/railgun,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/repeater,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/shockwave,
+								/obj/item/gun/energy/recharge/kinetic_accelerator/shotgun)))
+		to_chat(user, span_warning("[src] is not compatible with [KA]."))
+		return FALSE
+//monkestation edit end
 	. = ..()
 	if(.)
 		KA.icon_state = chassis_icon
@@ -642,5 +657,9 @@
 /obj/item/borg/upgrade/modkit/tracer/adjustable/proc/choose_bolt_color(mob/user)
 	set waitfor = FALSE
 
+<<<<<<< HEAD
 	var/new_color = input(user,"","Choose Color",bolt_color) as color|null
+=======
+	var/new_color = tgui_color_picker(user, "", "Choose Color", bolt_color)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bolt_color = new_color || bolt_color

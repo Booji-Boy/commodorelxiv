@@ -89,6 +89,8 @@ To add a crossbreed:
 		if(SLIME_TYPE_ADAMANTINE)
 			itemcolor = "#008B8B"
 	add_atom_colour(itemcolor, FIXED_COLOUR_PRIORITY)
+	if(colour == "rainbow")
+		rainbow_effect()
 
 /obj/item/slimecrossbeaker //To be used as a result for extract reactions that make chemicals.
 	name = "result extract"

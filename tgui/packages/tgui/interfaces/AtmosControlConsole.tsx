@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -7,6 +8,15 @@ import {
   Dropdown,
   LabeledList,
   NumberInput,
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  Box,
+  Button,
+  LabeledList,
+  NumberInput,
+  Dropdown,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Section,
   Stack,
 } from '../components';
@@ -34,7 +44,11 @@ export const AtmosControlConsole = (props) => {
     control: boolean;
   }>();
   const chambers = data.chambers || [];
+<<<<<<< HEAD
   const [chamberId, setChamberId] = useState(chambers[0]?.id);
+=======
+  const [chamberId, setChamberId] = useLocalState('chamberId', chambers[0]?.id);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const selectedChamber =
     chambers.length === 1
       ? chambers[0]

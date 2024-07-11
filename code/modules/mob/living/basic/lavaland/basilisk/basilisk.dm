@@ -6,7 +6,11 @@
 	icon_living = "basilisk"
 	icon_dead = "basilisk_dead"
 	speak_emote = list("chimes")
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 0.1, TOX = 1, STAMINA = 0, OXY = 1)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 0.1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	speed = 20
 	maxHealth = 200
 	health = 200

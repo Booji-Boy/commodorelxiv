@@ -16,27 +16,47 @@
 		return ELEMENT_INCOMPATIBLE
 	src.pry_time = pry_time
 	src.interaction_key = interaction_key
+<<<<<<< HEAD
 	RegisterSignal(target, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_attack))
 
 /datum/element/door_pryer/Detach(datum/source)
 	. = ..()
 	UnregisterSignal(source, COMSIG_LIVING_UNARMED_ATTACK)
+=======
+	RegisterSignals(target, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK), PROC_REF(on_attack))
+
+/datum/element/door_pryer/Detach(datum/source)
+	. = ..()
+	UnregisterSignal(source, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HUMAN_MELEE_UNARMED_ATTACK))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// If we're targeting an airlock, open it
 /datum/element/door_pryer/proc/on_attack(mob/living/basic/attacker, atom/target, proximity_flag)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	if(!proximity_flag || !istype(target, /obj/machinery/door/airlock))
 		return NONE
 	var/obj/machinery/door/airlock/airlock_target = target
 	if (!airlock_target.density)
 		return NONE // It's already open numbnuts
+=======
+	if(!istype(target, /obj/machinery/door/airlock))
+		return
+	var/obj/machinery/door/airlock/airlock_target = target
+	if (!airlock_target.density)
+		return // It's already open numbnuts
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(DOING_INTERACTION_WITH_TARGET(attacker, target) || (!isnull(interaction_key) && DOING_INTERACTION(attacker, interaction_key)))
 		attacker.balloon_alert(attacker, "busy!")
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	if (airlock_target.locked || airlock_target.welded || airlock_target.seal)
+<<<<<<< HEAD
 		if (!attacker.combat_mode)
+=======
+		if (!(attacker.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			airlock_target.balloon_alert(attacker, "it's sealed!")
 			return COMPONENT_CANCEL_ATTACK_CHAIN
 		return // Attack the door

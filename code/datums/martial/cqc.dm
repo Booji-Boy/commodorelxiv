@@ -17,12 +17,20 @@
 
 /datum/martial_art/cqc/on_teach(mob/living/new_holder)
 	. = ..()
+<<<<<<< HEAD
 	RegisterSignal(new_holder, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 	RegisterSignal(new_holder, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(check_block))
 
 /datum/martial_art/cqc/on_remove(mob/living/remove_from)
 	UnregisterSignal(remove_from, list(COMSIG_ATOM_ATTACKBY, COMSIG_LIVING_CHECK_BLOCK))
 	return ..()
+=======
+	RegisterSignal(cqc_user, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
+
+/datum/martial_art/cqc/on_remove(mob/living/cqc_user)
+	UnregisterSignal(cqc_user, COMSIG_ATOM_ATTACKBY)
+	. = ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Signal from getting attacked with an item, for a special interaction with touch spells
 /datum/martial_art/cqc/proc/on_attackby(mob/living/cqc_user, obj/item/attack_weapon, mob/attacker, params)
@@ -32,10 +40,14 @@
 		return
 	if(!can_use(cqc_user))
 		return
+	// monkestation edit: improved messaging
 	cqc_user.visible_message(
 		span_danger("[cqc_user] twists [attacker]'s arm, sending their [attack_weapon] back towards them!"),
 		span_userdanger("Making sure to avoid [attacker]'s [attack_weapon], you twist their arm to send it right back at them!"),
+		ignored_mobs = list(attacker),
 	)
+	to_chat(attacker, span_userdanger("[cqc_user] swiftly grabs and twists your arm, hitting you with your own [attack_weapon]!"), type = MESSAGE_TYPE_COMBAT)
+	// monkestation end
 	var/obj/item/melee/touch_attack/touch_weapon = attack_weapon
 	var/datum/action/cooldown/spell/touch/touch_spell = touch_weapon.spell_which_made_us?.resolve()
 	if(!touch_spell)
@@ -162,13 +174,19 @@
 		attacker,
 	)
 	to_chat(attacker, span_danger("You punch [defender]'s neck!"))
+<<<<<<< HEAD
 	defender.adjustStaminaLoss(60)
 	playsound(attacker, 'sound/weapons/cqchit1.ogg', 50, TRUE, -1)
+=======
+	defender.stamina.adjust(-60)
+	playsound(get_turf(attacker), 'sound/weapons/cqchit1.ogg', 50, TRUE, -1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /datum/martial_art/cqc/proc/Restrain(mob/living/attacker, mob/living/defender)
 	if(restraining_mob?.resolve())
 		return FALSE
+<<<<<<< HEAD
 	if(defender.stat != CONSCIOUS)
 		return FALSE
 
@@ -186,10 +204,23 @@
 	restraining_mob = WEAKREF(defender)
 	addtimer(VARSET_CALLBACK(src, restraining_mob, null), 5 SECONDS, TIMER_UNIQUE)
 	return TRUE
+=======
+	if(!defender.stat)
+		log_combat(attacker, defender, "restrained (CQC)")
+		defender.visible_message(span_warning("[attacker] locks [defender] into a restraining position!"), \
+						span_userdanger("You're locked into a restraining position by [attacker]!"), span_hear("You hear shuffling and a muffled groan!"), null, attacker)
+		to_chat(attacker, span_danger("You lock [defender] into a restraining position!"))
+		defender.stamina.adjust(-20)
+		defender.Stun(10 SECONDS)
+		restraining_mob = defender
+		addtimer(VARSET_CALLBACK(src, restraining_mob, null), 50, TIMER_UNIQUE)
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/martial_art/cqc/proc/Consecutive(mob/living/attacker, mob/living/defender)
 	if(defender.stat != CONSCIOUS)
 		return FALSE
+<<<<<<< HEAD
 
 	attacker.do_attack_animation(defender)
 	log_combat(attacker, defender, "consecutive CQC'd (CQC)")
@@ -208,6 +239,20 @@
 	defender.adjustStaminaLoss(50)
 	defender.apply_damage(25, attacker.get_attack_type())
 	return TRUE
+=======
+	if(!defender.stat)
+		log_combat(attacker, defender, "consecutive CQC'd (CQC)")
+		defender.visible_message(span_danger("[attacker] strikes [defender]'s abdomen, neck and back consecutively"), \
+						span_userdanger("Your abdomen, neck and back are struck consecutively by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), COMBAT_MESSAGE_RANGE, attacker)
+		to_chat(attacker, span_danger("You strike [defender]'s abdomen, neck and back consecutively!"))
+		playsound(get_turf(defender), 'sound/weapons/cqchit2.ogg', 50, TRUE, -1)
+		var/obj/item/held_item = defender.get_active_held_item()
+		if(held_item && defender.temporarilyRemoveItemFromInventory(held_item))
+			attacker.put_in_hands(held_item)
+		defender.stamina.adjust(-50)
+		defender.apply_damage(25, attacker.get_attack_type())
+		return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/martial_art/cqc/grab_act(mob/living/attacker, mob/living/defender)
 	if(attacker == defender)
@@ -238,6 +283,11 @@
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/cqc/harm_act(mob/living/attacker, mob/living/defender)
+<<<<<<< HEAD
+=======
+	if(!can_use(attacker))
+		return MARTIAL_ATTACK_FAIL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(attacker.grab_state == GRAB_KILL \
 		&& attacker.zone_selected == BODY_ZONE_HEAD \
 		&& attacker.pulling == defender \
@@ -260,6 +310,7 @@
 				defender.investigate_log("has had [defender.p_their()] neck snapped by [attacker].", INVESTIGATE_DEATHS)
 			return MARTIAL_ATTACK_SUCCESS
 
+<<<<<<< HEAD
 	if(defender.check_block(attacker, 10, attacker.name, UNARMED_ATTACK))
 		return MARTIAL_ATTACK_FAIL
 
@@ -283,6 +334,12 @@
 	add_to_streak("H", defender)
 	if(check_streak(attacker, defender))
 		return MARTIAL_ATTACK_SUCCESS
+=======
+	add_to_streak("H", defender)
+	if(check_streak(attacker, defender))
+		return MARTIAL_ATTACK_SUCCESS
+	log_combat(attacker, defender, "attacked (CQC)")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	attacker.do_attack_animation(defender)
 	var/picked_hit_type = pick("CQC", "Big Boss")
 	var/bonus_damage = 13
@@ -301,7 +358,19 @@
 		attacker,
 	)
 	to_chat(attacker, span_danger("You [picked_hit_type] [defender]!"))
+<<<<<<< HEAD
 	log_combat(attacker, defender, "attacked ([picked_hit_type]'d)(CQC)")
+=======
+	log_combat(attacker, defender, "[picked_hit_type]s (CQC)")
+	if(attacker.resting && !defender.stat && !defender.IsParalyzed())
+		defender.visible_message(span_danger("[attacker] leg sweeps [defender]!"), \
+						span_userdanger("Your legs are sweeped by [attacker]!"), span_hear("You hear a sickening sound of flesh hitting flesh!"), null, attacker)
+		to_chat(attacker, span_danger("You leg sweep [defender]!"))
+		playsound(get_turf(attacker), 'sound/effects/hit_kick.ogg', 50, TRUE, -1)
+		defender.apply_damage(10, BRUTE)
+		defender.Paralyze(6 SECONDS)
+		log_combat(attacker, defender, "sweeped (CQC)")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return MARTIAL_ATTACK_SUCCESS
 
 /datum/martial_art/cqc/disarm_act(mob/living/attacker, mob/living/defender)

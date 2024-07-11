@@ -31,7 +31,11 @@ const PlaytimeSection = (props) => {
               collapsing
               p={0.5}
               style={{
+<<<<<<< HEAD
                 verticalAlign: 'middle',
+=======
+                'vertical-align': 'middle',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               }}
             >
               <Box align="right">{jobName}</Box>

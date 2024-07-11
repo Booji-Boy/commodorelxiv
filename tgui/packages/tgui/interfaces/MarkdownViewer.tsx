@@ -1,5 +1,8 @@
 import { marked } from 'marked';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { sanitizeText } from '../sanitize';
@@ -13,7 +16,11 @@ type MarkdownViewerData = {
 export const MarkdownViewer = (_: any) => {
   const { data } = useBackend<MarkdownViewerData>();
   return (
+<<<<<<< HEAD
     <Window theme="paper" title={data.title} width={300} height={300}>
+=======
+    <Window theme="paper" title={data.title}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       <Window.Content scrollable backgroundColor={'#FFFFFF'}>
         <MarkdownRenderer content={data.content} />
       </Window.Content>

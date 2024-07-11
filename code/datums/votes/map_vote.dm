@@ -1,9 +1,15 @@
 /datum/vote/map_vote
 	name = "Map"
+<<<<<<< HEAD
 	default_message = "Vote for next round's map!"
 	count_method = VOTE_COUNT_METHOD_SINGLE
 	winner_method = VOTE_WINNER_METHOD_WEIGHTED_RANDOM
 	display_statistics = FALSE
+=======
+	message = "Vote for next round's map!"
+	count_method = VOTE_COUNT_METHOD_MULTI
+	donator_multiplier = 3 //monkestation addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/vote/map_vote/New()
 	. = ..()

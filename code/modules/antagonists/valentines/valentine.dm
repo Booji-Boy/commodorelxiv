@@ -8,8 +8,13 @@
 	// Not 'true' antags, this disables certain interactions that assume the owner is a baddie
 	antag_flags = FLAG_FAKE_ANTAG
 	count_against_dynamic_roll_chance = FALSE
+<<<<<<< HEAD
 	/// Reference to our date's mind
 	VAR_FINAL/datum/mind/date
+=======
+	// Not 'true' antags, this disables certain interactions that assume the owner is a baddie
+	antag_flags = FLAG_FAKE_ANTAG
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/valentine/forge_objectives()
 	var/datum/objective/protect/valentine/objective = new()

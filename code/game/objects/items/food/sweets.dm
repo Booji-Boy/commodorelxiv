@@ -370,7 +370,11 @@
 	foodtypes = JUNKFOOD | SUGAR
 	food_flags = FOOD_FINGER_FOOD
 	slot_flags = ITEM_SLOT_MASK
+<<<<<<< HEAD
 	crafting_complexity = FOOD_COMPLEXITY_1
+=======
+	//crafting_complexity = FOOD_COMPLEXITY_1 Monkestation Removal: no crafting complexity
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/swirl_lollipop/Initialize(mapload)
 	. = ..()

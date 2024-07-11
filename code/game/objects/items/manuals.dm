@@ -162,7 +162,7 @@
 				Put ingredients on table, then click and drag the table onto yourself to see what recipes you can prepare.
 
 				<h2>Microwave:</h2>
-				Use it to cook or boil food ingredients (meats, doughs, egg, spaghetti, donkpocket, etc...).
+				Use it to cook or boil food ingredients (meats, doughs, egg, donkpocket, etc...).
 				It can cook multiple items at once.
 
 				<h2>Processor:</h2>
@@ -183,7 +183,7 @@
 				<b>Popcorn:</b> Microwave corn.<br>
 				<b>Meat Steak:</b> Microwave meat.<br>
 				<b>Meat Pie:</b> 1 plain pie + 1u black pepper + 1u salt + 2 meat cutlets<br>
-				<b>Boiled Spagetti:</b> Microwave spaghetti.<br>
+				<b>Boiled Spaghetti:</b>Raw Spaghetti + 50u water at 450+K<br>
 				<b>Donuts:</b> 1u sugar + 1 pastry base<br>
 				<b>Fries:</b> Process potato.
 
@@ -191,7 +191,7 @@
 				You can put your meals on your kitchen counter or load them in the snack vending machines.
 				</body>
 				</html>
-			"}
+			"}// Monkestation Edit: Removed spaghetti from microwave recipes
 
 /obj/item/book/manual/nuclear
 	name = "Fission Mailed: Nuclear Sabotage 101"
@@ -232,3 +232,245 @@
 			Good luck!
 			</body>
 			</html>"}
+<<<<<<< HEAD
+=======
+
+// Wiki books that are linked to the configured wiki link.
+
+// A book that links to the wiki
+/obj/item/book/manual/wiki
+	var/page_link = ""
+	window_size = "970x710"
+
+/obj/item/book/manual/wiki/attack_self()
+	var/wikiurl = CONFIG_GET(string/wikiurl)
+	if(!wikiurl)
+		return
+	usr.client << link("[wikiurl]/[page_link]")
+	return ..()
+
+/*
+/obj/item/book/manual/wiki/proc/initialize_wikibook()
+	var/wikiurl = CONFIG_GET(string/wikiurl)
+	if(wikiurl)
+		var/wikiinfo = {"
+
+			<html>
+			<head>
+			<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+			<style>
+				iframe {
+					display: none;
+				}
+			</style>
+			</head>
+			<body>
+			<script type="text/javascript">
+				function pageloaded(myframe) {
+					document.getElementById("loading").style.display = "none";
+					myframe.style.display = "inline";
+			}
+			</script>
+			<p id='loading'>You start skimming through the manual...</p>
+			<iframe width='100%' height='97%' onload="pageloaded(this)" src="[wikiurl]/[page_link]" frameborder="0" id="main_frame"></iframe>
+			</body>
+
+			</html>
+
+			"}
+		book_data.set_content(wikiinfo, trusted = TRUE)
+*/
+
+//MONKESTATION EDIT BEGIN - basically there isn't a single thing that's not touched below this line. Just going to make this abundantly obvious that we have a lot of changes, between names of some manuals being changed to reflect different jobs to all of the links to the wiki. There's basically zero excuse for me to not leave an edit comment on here.
+
+/obj/item/book/manual/wiki/chemistry
+	name = "Chemistry Textbook"
+	icon_state ="chemistrybook"
+	starting_author = "Nanotrasen"
+	starting_title = "Chemistry Textbook"
+	page_link = "en/jobs/medical/guide-to-chemistry"
+
+/obj/item/book/manual/wiki/engineering_construction
+	name = "Station Repairs and Construction"
+	icon_state ="bookEngineering"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Station Repairs and Construction"
+	page_link = "en/jobs/engineering/guide-to-construction"
+
+/obj/item/book/manual/wiki/engineering_guide
+	name = "Engineering Textbook"
+	icon_state ="bookEngineering2"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Engineering Textbook"
+	page_link = "en/jobs/engineering/station-engineer"
+
+/obj/item/book/manual/wiki/security_space_law
+	name = "Space Law"
+	desc = "A set of Nanotrasen guidelines for keeping law and order on their space stations."
+	icon_state = "bookSpaceLaw"
+	starting_author = "Nanotrasen"
+	starting_title = "Space Law"
+	page_link = "en/space-laws"
+
+/obj/item/book/manual/wiki/security_space_law/suicide_act(mob/living/user)
+	user.visible_message(span_suicide("[user] pretends to read \the [src] intently... then promptly dies of laughter!"))
+	return OXYLOSS
+
+/obj/item/book/manual/wiki/infections
+	name = "Pathology 101 - Curing Problems"
+	icon_state = "bookInfections"
+	starting_author = "Infections Encyclopedia"
+	starting_title = "Pathology 101 - Curing Problems"
+	page_link = "en/jobs/medical/guide-to-pathology"
+
+/obj/item/book/manual/wiki/telescience
+	name = "Teleportation Science - Bluespace for dummies!"
+	icon_state = "book7"
+	starting_author = "University of Bluespace"
+	starting_title = "Teleportation Science - Bluespace for dummies!"
+	page_link = "Guide_to_telescience"
+
+/obj/item/book/manual/wiki/engineering_hacking
+	name = "Hacking"
+	icon_state ="bookHacking"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Hacking"
+	page_link = "Hacking"
+
+/obj/item/book/manual/wiki/detective
+	name = "The Film Noir: Proper Procedures for Investigations"
+	icon_state ="bookDetective"
+	starting_author = "Nanotrasen"
+	starting_title = "The Film Noir: Proper Procedures for Investigations"
+	page_link = "en/jobs/security/detective"
+
+/obj/item/book/manual/wiki/barman_recipes
+	name = "Barman Recipes: Mixing Drinks and Changing Lives"
+	icon_state = "barbook"
+	starting_author = "Sir John Rose"
+	starting_title = "Barman Recipes: Mixing Drinks and Changing Lives"
+	page_link = "Guide_to_drinks"
+
+/obj/item/book/manual/wiki/robotics_cyborgs
+	name = "Robotics for Dummies"
+	icon_state = "borgbook"
+	starting_author = "XISC"
+	starting_title = "Robotics for Dummies"
+	page_link = "en/jobs/science/guide-to-robotics"
+
+/obj/item/book/manual/wiki/research_and_development
+	name = "Research and Development 101"
+	icon_state = "rdbook"
+	starting_author = "Dr. L. Ight"
+	starting_title = "Research and Development 101"
+	page_link = "en/jobs/science/guide-to-rnd"
+
+/obj/item/book/manual/wiki/cooking_to_serve_man
+	name = "To Serve Man"
+	desc = "It's a cookbook!"
+	icon_state ="cooked_book"
+	starting_author = "the Kanamitan Empire"
+	starting_title = "To Serve Man"
+	page_link = "Guide_to_food"
+
+/obj/item/book/manual/wiki/tcomms
+	name = "Subspace Telecommunications And You"
+	icon_state = "book3"
+	starting_author = "Engineering Encyclopedia"
+	starting_title = "Subspace Telecommunications And You"
+	page_link = "en/jobs/engineering/guide-to-telcom"
+
+/obj/item/book/manual/wiki/atmospherics
+	name = "Lexica Atmosia"
+	icon_state = "book5"
+	starting_author = "the City-state of Atmosia"
+	starting_title = "Lexica Atmosia"
+	page_link = "en/jobs/engineering/guide-to-atmospherics"
+
+/obj/item/book/manual/wiki/medicine
+	name = "Medical Space Compendium, Volume 638"
+	icon_state = "book8"
+	starting_author = "Medical Journal"
+	starting_title = "Medical Space Compendium, Volume 638"
+	page_link = "en/jobs/medical/guide-to-medicine"
+
+/obj/item/book/manual/wiki/surgery
+	name = "Brain Surgery for Dummies"
+	icon_state = "book4"
+	starting_author = "Dr. F. Fran"
+	starting_title = "Brain Surgery for Dummies"
+	page_link = "en/jobs/medical/guide-to-surgery"
+
+/obj/item/book/manual/wiki/grenades
+	name = "DIY Chemical Grenades"
+	icon_state = "book2"
+	starting_author = "W. Powell"
+	starting_title = "DIY Chemical Grenades"
+	page_link = "en/jobs/medical/guide-to-grenades"
+
+/obj/item/book/manual/wiki/ordnance
+	name = "Ordnance for Dummies or: How I Learned to Stop Worrying and Love the Maxcap"
+	icon_state = "book6"
+	starting_author = "Cuban Pete"
+	starting_title = "Ordnance for Dummies or: How I Learned to Stop Worrying and Love the Maxcap"
+	page_link = "en/jobs/science/guide-to-ordnance"
+
+/obj/item/book/manual/wiki/ordnance/suicide_act(mob/living/user)
+	var/mob/living/carbon/human/H = user
+	user.visible_message(span_suicide("[user] starts dancing to the Rhumba Beat! It looks like [user.p_theyre()] trying to commit suicide!"))
+	playsound(loc, 'sound/effects/spray.ogg', 10, TRUE, -3)
+	if (!QDELETED(H))
+		H.emote("spin")
+		sleep(2 SECONDS)
+		for(var/obj/item/W in H)
+			H.dropItemToGround(W)
+			if(prob(50))
+				step(W, pick(GLOB.alldirs))
+		ADD_TRAIT(H, TRAIT_DISFIGURED, TRAIT_GENERIC)
+		for(var/obj/item/bodypart/part as anything in H.bodyparts)
+			part.adjustBleedStacks(5)
+		H.gib_animation()
+		sleep(0.3 SECONDS)
+		H.adjustBruteLoss(1000) //to make the body super-bloody
+		H.spawn_gibs()
+		H.spill_organs()
+		H.spread_bodyparts()
+	return BRUTELOSS
+
+/obj/item/book/manual/wiki/plumbing
+	name = "Chemical Factories Without Narcotics"
+	icon_state ="plumbingbook"
+	starting_author = "Nanotrasen"
+	starting_title = "Chemical Factories Without Narcotics"
+	page_link = "en/jobs/medical/guide-to-plumbing"
+
+/obj/item/book/manual/wiki/cytology
+	name = "Unethically Grown Organics"
+	icon_state ="cytologybook"
+	starting_author = "Kryson"
+	starting_title = "Unethically Grown Organics"
+	page_link = "en/jobs/science/guide-to-cytology"
+
+/obj/item/book/manual/wiki/tgc
+	name = "Tactical Game Cards - Player's Handbook"
+	icon_state = "tgcbook"
+	starting_author = "Nanotrasen Edu-tainment Division"
+	starting_title = "Tactical Game Cards - Player's Handbook"
+	page_link = "Tactical_Game_Cards"
+
+/obj/item/book/manual/wiki/artsci // manual specific for Artifact Science!
+	name = "Artifact Science!"
+	icon_state = "book6"
+	starting_author = "Dr. Mobius"
+	starting_title = "Artifact Science!"
+	page_link = "en/jobs/science/guide-to-artsci"
+
+/obj/item/book/manual/wiki/banned //manual specific for... well, handing a funny book to people that might be on the verge of breaking rules but we can have a funny way of handling those situations.
+	name = "How to Avoid Getting Banned"
+	icon_state = "bookSpaceLaw"
+	starting_author = "God"
+	starting_title = "How to Avoid Getting Banned"
+	page_link = "en/guides/how-to-avoid-getting-banned"
+
+//MONKESTATION EDIT END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

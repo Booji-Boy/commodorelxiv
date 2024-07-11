@@ -10,6 +10,7 @@
 	energy_drain = 0.01 * STANDARD_CELL_CHARGE
 	tool_behaviour = TOOL_RETRACTOR
 	range = MECHA_MELEE
+	movedelay = 0.2
 	toolspeed = 0.8
 	harmful = TRUE
 	mech_flags = EXOSUIT_MODULE_RIPLEY
@@ -86,7 +87,7 @@
 		if(M.stat == DEAD)
 			return
 
-		if(!source.combat_mode)
+		if(!(source.istate & ISTATE_HARM))
 			step_away(M,chassis)
 			if(killer_clamp)
 				target.visible_message(span_danger("[chassis] tosses [target] like a piece of paper!"), \
@@ -96,7 +97,7 @@
 				chassis.visible_message(span_notice("[chassis] pushes [target] out of the way."), \
 				span_notice("[chassis] pushes you aside."))
 			return ..()
-		else if(LAZYACCESS(modifiers, RIGHT_CLICK) && iscarbon(M))//meme clamp here
+		else if((source.istate & ISTATE_SECONDARY) && iscarbon(M))//meme clamp here
 			if(!killer_clamp)
 				to_chat(source, span_notice("You longingly wish to tear [M]'s arms off."))
 				return
@@ -116,7 +117,7 @@
 			playsound(src, get_dismember_sound(), 80, TRUE)
 			target.visible_message(span_danger("[chassis] rips [target]'s arms off!"), \
 						span_userdanger("[chassis] rips your arms off!"))
-			log_combat(source, M, "removed both arms with a real clamp,", "[name]", "(COMBAT MODE: [uppertext(source.combat_mode)] (DAMTYPE: [uppertext(damtype)])")
+			log_combat(source, M, "removed both arms with a real clamp,", "[name]", "(COMBAT MODE: [uppertext((source.istate & ISTATE_HARM))] (DAMTYPE: [uppertext(damtype)])")
 			return ..()
 
 		M.take_overall_damage(clamp_damage)
@@ -127,7 +128,7 @@
 		target.visible_message(span_danger("[chassis] squeezes [target]!"), \
 							span_userdanger("[chassis] squeezes you!"),\
 							span_hear("You hear something crack."))
-		log_combat(source, M, "attacked", "[name]", "(Combat mode: [source.combat_mode ? "On" : "Off"]) (DAMTYPE: [uppertext(damtype)])")
+		log_combat(source, M, "attacked", "[name]", "(Combat mode: [(source.istate & ISTATE_HARM) ? "On" : "Off"]) (DAMTYPE: [uppertext(damtype)])")
 	return ..()
 
 
@@ -137,6 +138,7 @@
 	name = "\improper KILL CLAMP"
 	desc = "They won't know what clamped them! This time for real!"
 	killer_clamp = TRUE
+	movedelay = 0
 
 /obj/item/mecha_parts/mecha_equipment/hydraulic_clamp/kill/fake//harmless fake for pranks
 	desc = "They won't know what clamped them!"
@@ -152,6 +154,7 @@
 	energy_drain = 0
 	equipment_slot = MECHA_UTILITY
 	range = MECHA_MELEE|MECHA_RANGED
+	movedelay = 0.2
 	mech_flags = EXOSUIT_MODULE_WORKING
 	///Minimum amount of reagent needed to activate.
 	var/required_amount = 80
@@ -221,6 +224,7 @@
 	equip_cooldown = 0 // internal RCD already handles it
 	energy_drain = 0 // internal RCD handles power consumption based on matter use
 	range = MECHA_MELEE|MECHA_RANGED
+	movedelay = 0.4
 	item_flags = NO_MAT_REDEMPTION
 	///Maximum range the RCD can construct at.
 	var/rcd_range = 3

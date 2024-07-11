@@ -1,8 +1,13 @@
 /// A mini-tool used to apply label items onto something to modify its name.
 /obj/item/hand_labeler
 	name = "hand labeler"
+<<<<<<< HEAD
 	desc = "A combined label printer, applicator, and remover, all in a single portable device. Designed to be easy to operate and use."
 	icon = 'icons/obj/service/bureaucracy.dmi'
+=======
+	desc = "A combined label printer, applicator, and remover, all in a single portable device. Designed to be easy to operate and use.\nUse while powered off to remove existing labels."
+	icon = 'icons/obj/bureaucracy.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "labeler0"
 	item_flags = NOBLUDGEON
 	w_class = WEIGHT_CLASS_SMALL
@@ -59,6 +64,7 @@
 
 /obj/item/hand_labeler/proc/apply_label(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!labels_left)
+<<<<<<< HEAD
 		balloon_alert(user, "no labels left!")
 		return FALSE
 	if(!length(label))
@@ -70,6 +76,16 @@
 	if(ismob(interacting_with))
 		interacting_with.balloon_alert(user, "can't label!")
 		return FALSE
+=======
+		to_chat(user, span_warning("No labels left!"))
+		return
+	if(!label || !length(label))
+		to_chat(user, span_warning("No text set!"))
+		return
+	if(length(A.name) + length(label) > 64)
+		to_chat(user, span_warning("Label too big!"))
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/cursor_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	var/cursor_y = text2num(LAZYACCESS(modifiers, ICON_Y))

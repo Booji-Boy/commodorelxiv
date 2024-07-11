@@ -46,6 +46,7 @@
 	throw_range = 5
 	custom_materials = list(/datum/material/iron= SMALL_MATERIAL_AMOUNT * 5)
 	breakouttime = 1 MINUTES
+	var/handcuff_time = 3 SECONDS
 	armor_type = /datum/armor/restraints_handcuffs
 	custom_price = PAYCHECK_COMMAND * 0.35
 
@@ -76,12 +77,16 @@
 	if(!iscarbon(target_mob))
 		return
 
+<<<<<<< HEAD
 	attempt_to_cuff(target_mob, user)
 
 /// Handles all of the checks and application in a typical situation where someone attacks a carbon victim with the handcuff item.
 /obj/item/restraints/handcuffs/proc/attempt_to_cuff(mob/living/carbon/victim, mob/living/user)
 	if(SEND_SIGNAL(victim, COMSIG_CARBON_CUFF_ATTEMPTED, user) & COMSIG_CARBON_CUFF_PREVENT)
 		victim.balloon_alert(user, "can't be handcuffed!")
+=======
+	if(SEND_SIGNAL(C, COMSIG_CARBON_CUFF_ATTEMPTED, user) & COMSIG_CARBON_CUFF_PREVENT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(iscarbon(user) && (HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))) //Clumsy people have a 50% chance to handcuff themselves instead of their target.
@@ -89,6 +94,7 @@
 		apply_cuffs(user, user)
 		return
 
+<<<<<<< HEAD
 	if(!isnull(victim.handcuffed))
 		victim.balloon_alert(user, "already handcuffed!")
 		return
@@ -128,6 +134,24 @@
 
 	log_combat(user, victim, "successfully handcuffed")
 	SSblackbox.record_feedback("tally", "handcuffs", 1, type)
+=======
+	if(!C.handcuffed)
+		if(C.canBeHandcuffed())
+			C.visible_message(span_danger("[user] is trying to put [src] on [C]!"), \
+								span_userdanger("[user] is trying to put [src] on you!"))
+			if(C.is_blind())
+				to_chat(C, span_userdanger("As you feel someone grab your wrists, [src] start digging into your skin!"))
+			playsound(loc, cuffsound, 30, TRUE, -2)
+			log_combat(user, C, "attempted to handcuff")
+			if(do_after(user, handcuff_time, C, timed_action_flags = IGNORE_SLOWDOWNS) && C.canBeHandcuffed())
+				if(iscyborg(user))
+					apply_cuffs(C, user, TRUE)
+				else
+					apply_cuffs(C, user)
+				C.visible_message(span_notice("[user] handcuffs [C]."), \
+									span_userdanger("[user] handcuffs you."))
+				SSblackbox.record_feedback("tally", "handcuffs", 1, type)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 /**

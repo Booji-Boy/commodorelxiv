@@ -99,7 +99,14 @@ const TileRotateSection = (props) => {
 const TileDesignSection = (props) => {
   const { act, data } = useBackend<Data>();
   const { categories = [], selected_category, selected_recipe } = data;
+<<<<<<< HEAD
   const [categoryName, setCategoryName] = useState(selected_category);
+=======
+  const [categoryName, setCategoryName] = useLocalState(
+    'categoryName',
+    selected_category,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const shownCategory =
     categories.find((category) => category.category_name === categoryName) ||
     categories[0];

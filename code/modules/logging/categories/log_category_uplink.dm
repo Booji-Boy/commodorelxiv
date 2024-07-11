@@ -21,8 +21,11 @@
 	category = LOG_CATEGORY_UPLINK_SPELL
 	config_flag = /datum/config_entry/flag/log_uplink
 	master_category = /datum/log_category/uplink
+<<<<<<< HEAD
 
 /datum/log_category/uplink_spy
 	category = LOG_CATEGORY_UPLINK_SPY
 	config_flag = /datum/config_entry/flag/log_uplink
 	master_category = /datum/log_category/uplink
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

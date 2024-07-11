@@ -13,7 +13,10 @@
 	suicide_cry = "FOR THE HIVE!!"
 	can_assign_self_objectives = TRUE
 	default_custom_objective = "Consume the station's most valuable genomes."
+<<<<<<< HEAD
 	hardcore_random_bonus = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Whether to give this changeling objectives or not
 	var/give_objectives = TRUE
 	/// Weather we assign objectives which compete with other lings
@@ -103,6 +106,8 @@
 
 	///	Keeps track of the currently selected profile.
 	var/datum/changeling_profile/current_profile
+	/// the amount of oozeling revives we have left
+	var/oozeling_revives = 3
 
 /datum/antagonist/changeling/New()
 	. = ..()
@@ -164,8 +169,16 @@
 		return
 
 	// Brains are optional for lings.
+<<<<<<< HEAD
 	// This is automatically cleared if the ling is.
 	our_ling_brain.AddComponent(/datum/component/ling_decoy_brain, src)
+=======
+	if(!isoozeling(living_mob))
+		var/obj/item/organ/internal/brain/our_ling_brain = living_mob.get_organ_slot(ORGAN_SLOT_BRAIN)
+		if(our_ling_brain)
+			our_ling_brain.organ_flags &= ~ORGAN_VITAL
+			our_ling_brain.decoy_override = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/antagonist/changeling/proc/generate_name()
 	var/honorific
@@ -350,12 +363,20 @@
 /datum/antagonist/changeling/proc/regain_powers()
 	emporium_action.Grant(owner.current)
 	for(var/datum/action/changeling/power as anything in innate_powers)
+<<<<<<< HEAD
 		power.on_purchase(owner.current)
+=======
+		power.Grant(owner.current)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	for(var/power_path in purchased_powers)
 		var/datum/action/changeling/power = purchased_powers[power_path]
 		if(istype(power))
+<<<<<<< HEAD
 			power.on_purchase(owner.current)
+=======
+			power.Grant(owner.current)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  * The act of purchasing a certain power for a changeling.
@@ -537,6 +558,7 @@
 	new_profile.underwear_color = target.underwear_color
 	new_profile.undershirt = target.undershirt
 	new_profile.socks = target.socks
+	new_profile.socks_color = target.socks_color //MONKESTATION EDIT
 
 	// Grab skillchips they have
 	new_profile.skillchips = target.clone_skillchip_list(TRUE)
@@ -688,6 +710,10 @@
 		else
 			var/datum/objective/maroon/maroon_objective = new
 			maroon_objective.owner = owner
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 			if (!(locate(/datum/objective/escape) in objectives) && escape_objective_possible)
 				var/datum/objective/escape/escape_with_identity/identity_theft = new
@@ -702,7 +728,10 @@
 			else
 				maroon_objective.find_target()
 				objectives += maroon_objective
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if (!(locate(/datum/objective/escape) in objectives) && escape_objective_possible)
 		if(prob(50))
@@ -761,6 +790,7 @@
 	user.underwear_color = chosen_profile.underwear_color
 	user.undershirt = chosen_profile.undershirt
 	user.socks = chosen_profile.socks
+	user.socks_color =chosen_profile.socks_color  //MONKESTATION EDIT
 	user.age = chosen_profile.age
 	user.physique = chosen_profile.physique
 	user.mind?.set_level(/datum/skill/athletics, chosen_profile.athletics_level, silent = TRUE)
@@ -897,6 +927,8 @@
 	var/undershirt
 	/// The socks worn by the profile source
 	var/socks
+	/// The colour of the socks worn by profile source
+	var/socks_color //MONKESTATION EDIT
 	/// A list of paths for any skill chips the profile source had installed
 	var/list/skillchips = list()
 	/// What scars the profile sorce had, in string form (like persistent scars)
@@ -944,6 +976,7 @@
 	new_profile.underwear_color = underwear_color
 	new_profile.undershirt = undershirt
 	new_profile.socks = socks
+	new_profile.socks_color = socks_color //MONKESTATION EDIT
 	new_profile.worn_icon_list = worn_icon_list.Copy()
 	new_profile.worn_icon_state_list = worn_icon_state_list.Copy()
 	new_profile.skillchips = skillchips.Copy()
@@ -982,7 +1015,9 @@
 
 	return parts.Join("<br>")
 
-/datum/antagonist/changeling/get_preview_icon()
+// monkestation start: refactor to use [get_base_preview_icon] for better midround polling images
+/datum/antagonist/changeling/get_base_preview_icon()
+	RETURN_TYPE(/icon)
 	var/icon/final_icon = render_preview_outfit(/datum/outfit/changeling)
 	var/icon/split_icon = render_preview_outfit(/datum/outfit/job/engineer)
 
@@ -994,7 +1029,11 @@
 
 	final_icon.Blend(split_icon, ICON_OVERLAY)
 
-	return finish_preview_icon(final_icon)
+	return final_icon
+
+/datum/antagonist/changeling/get_preview_icon()
+	return finish_preview_icon(get_base_preview_icon())
+// monkestation end
 
 /datum/antagonist/changeling/ui_data(mob/user)
 	var/list/data = list()

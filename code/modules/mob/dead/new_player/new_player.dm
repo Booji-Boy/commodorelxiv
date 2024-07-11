@@ -7,6 +7,7 @@
 	stat = DEAD
 	hud_type = /datum/hud/new_player
 	hud_possible = list()
+	rclick_always_context_menu = TRUE
 
 	var/ready = FALSE
 	/// Referenced when you want to delete the new_player later on in the code.
@@ -99,7 +100,7 @@
 		observer.client.init_verbs()
 		observer.client.player_details.time_of_death = world.time
 	observer.update_appearance()
-	observer.stop_sound_channel(CHANNEL_LOBBYMUSIC)
+	observer.client.media.stop_music()
 	deadchat_broadcast(" has observed.", "<b>[observer.real_name]</b>", follow_target = observer, turf_target = get_turf(observer), message_type = DEADCHAT_DEATHRATTLE)
 	QDEL_NULL(mind)
 	qdel(src)
@@ -179,7 +180,15 @@
 		return FALSE
 
 	mind.late_joiner = TRUE
-	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
+	var/atom/destination
+	var/obj/effect/oshan_launch_point/player/picked_point
+
+	if(length(GLOB.oshan_launch_points))
+		picked_point = pick(GLOB.oshan_launch_points)
+		destination = get_edge_target_turf(picked_point, picked_point.map_edge_direction)
+	else
+		destination = mind.assigned_role.get_latejoin_spawn_point()
+
 	if(!destination)
 		CRASH("Failed to find a latejoin spawn point.")
 	var/mob/living/character = create_character(destination)
@@ -187,9 +196,20 @@
 		CRASH("Failed to create a character for latejoin.")
 	transfer_character()
 
+	if(picked_point)
+		destination.JoinLaunchTowards(character, picked_point)
+
 	SSjob.EquipRank(character, job, character.client)
 	job.after_latejoin_spawn(character)
 
+	if(character.client && length(character.client?.active_challenges))
+		SSchallenges.apply_challenges(character.client)
+	for(var/processing_reward_bitflags in SSticker.bitflags_to_reward)//you really should use department bitflags if possible
+		if(character.mind.assigned_role.departments_bitflags & processing_reward_bitflags)
+			character.client.reward_this_person += 425
+	for(var/processing_reward_jobs in SSticker.jobs_to_reward)//just in case you really only want to reward a specific job
+		if(character.job == processing_reward_jobs)
+			character.client.reward_this_person += 425
 	#define IS_NOT_CAPTAIN 0
 	#define IS_ACTING_CAPTAIN 1
 	#define IS_FULL_CAPTAIN 2
@@ -216,14 +236,26 @@
 		humanc = character //Let's retypecast the var to be human,
 
 	if(humanc) //These procs all expect humans
+<<<<<<< HEAD
+=======
+		var/chosen_rank = humanc.client?.prefs.alt_job_titles[rank] || rank
+		GLOB.manifest.inject(humanc, humanc.client)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(SSshuttle.arrivals)
-			SSshuttle.arrivals.QueueAnnounce(humanc, rank)
+			SSshuttle.arrivals.QueueAnnounce(humanc, chosen_rank)
 		else
-			announce_arrival(humanc, rank)
+			announce_arrival(humanc, chosen_rank)
 		AddEmploymentContract(humanc)
 
 		humanc.increment_scar_slot()
 		humanc.load_persistent_scars()
+		SSpersistence.load_modular_persistence(humanc.get_organ_slot(ORGAN_SLOT_BRAIN))
+
+		//monkestation edit start
+		if(GLOB.dj_booth)
+			var/obj/machinery/cassette/dj_station/dj = GLOB.dj_booth
+			dj.add_new_player(humanc)
+		//monkestation edit end
 
 		if(GLOB.curse_of_madness_triggered)
 			give_madness(humanc, GLOB.curse_of_madness_triggered)
@@ -242,6 +274,7 @@
 	if((job.job_flags & JOB_ASSIGN_QUIRKS) && humanc && CONFIG_GET(flag/roundstart_traits))
 		SSquirks.AssignQuirks(humanc, humanc.client)
 
+<<<<<<< HEAD
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
 		GLOB.manifest.inject(humanc)
 
@@ -249,6 +282,18 @@
 	if(humanc && arrivals && !arrivals.power_environ) //arrivals depowered
 		humanc.put_in_hands(new /obj/item/crowbar/large/emergency(get_turf(humanc))) //if hands full then just drops on the floor
 	log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
+=======
+	var/area/station/arrivals = GLOB.areas_by_type[/area/station/hallway/secondary/entry]
+	if(humanc && arrivals && !arrivals.power_environ) //arrivals depowered
+		humanc.put_in_hands(new /obj/item/crowbar/large/emergency(get_turf(humanc))) //if hands full then just drops on the floor
+	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
+
+	if(humanc)
+		for(var/datum/loadout_item/item as anything in loadout_list_to_datums(humanc?.client?.prefs?.loadout_list))
+			if (item.restricted_roles && length(item.restricted_roles) && !(job.title in item.restricted_roles))
+				continue
+			item.post_equip_item(humanc.client?.prefs, humanc)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/dead/new_player/proc/AddEmploymentContract(mob/living/carbon/human/employee)
 	//TODO:  figure out a way to exclude wizards/nukeops/demons from this.
@@ -354,6 +399,7 @@
 	add_verb(src, /mob/dead/new_player/proc/open_interview)
 	add_verb(client, /client/verb/fix_tgui_panel)
 
+<<<<<<< HEAD
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
 /mob/dead/new_player/proc/reset_menu_hud()
 	set name = "Reset Lobby Menu HUD"
@@ -371,3 +417,24 @@
 	hud_used.show_hud(hud_used.hud_version)
 
 #undef RESET_HUD_INTERVAL
+=======
+/client/proc/register_for_interview()
+	// First we detain them by removing all the verbs they have on client
+	for (var/v in verbs)
+		var/procpath/verb_path = v
+		remove_verb(src, verb_path)
+
+	// Then remove those on their mob as well
+	for (var/v in mob.verbs)
+		var/procpath/verb_path = v
+		remove_verb(mob, verb_path)
+
+	// Then we create the interview form and show it to the client
+	var/datum/interview/I = GLOB.interviews.interview_for_client(mob)
+	if (I)
+		I.ui_interact(mob)
+
+	// Add verb for re-opening the interview panel, fixing chat and re-init the verbs for the stat panel
+	add_verb(mob, /mob/dead/new_player/proc/open_interview)
+	add_verb(src, /client/verb/fix_tgui_panel)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

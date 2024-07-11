@@ -21,9 +21,16 @@
 	desc = "A box full of mail counterfeit devices. Devices that actually able to counterfeit NT's mail. Those devices also able to place a trap inside of mail for malicious actions. Trap will \"activate\" any item inside of mail. Also counterfieted mail might be used for contraband purposes. Integrated micro-computer will give you great configuration optionality for your needs. \nNothing stops the mail."
 	item = /obj/item/storage/box/syndie_kit/mail_counterfeit
 	cost = 2
+<<<<<<< HEAD
 	illegal_tech = FALSE
 	restricted_roles = list(JOB_CARGO_TECHNICIAN, JOB_QUARTERMASTER)
 	surplus = 5
+=======
+	limited_stock = 1
+	item = /obj/item/devices/bureaucratic_error_remote
+	restricted_roles = list(JOB_HEAD_OF_PERSONNEL, JOB_QUARTERMASTER)
+	surplus = 40 //monkestation edit: from 5 to 40
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/uplink_item/role_restricted/bureaucratic_error
 	name = "Organic Capital Disturbance Virus"
@@ -71,7 +78,7 @@
 	item = /obj/item/firing_pin/clown/ultra
 	restricted_roles = list(JOB_CLOWN)
 	illegal_tech = FALSE
-	surplus = 25
+	surplus = 0 //monkestation edit: from 25 to 0
 
 /datum/uplink_item/role_restricted/clownsuperpin
 	name = "Super Ultra Hilarious Firing Pin"
@@ -80,7 +87,7 @@
 	item = /obj/item/firing_pin/clown/ultra/selfdestruct
 	restricted_roles = list(JOB_CLOWN)
 	illegal_tech = FALSE
-	surplus = 25
+	surplus = 0 //monkestation edit: from 25 to 0
 
 /datum/uplink_item/role_restricted/syndimmi
 	name = "Syndicate Brand MMI"
@@ -113,7 +120,7 @@
 			The acid only affects carbon-based creatures."
 	item = /obj/item/storage/box/syndie_kit/ez_clean
 	cost = 6
-	surplus = 20
+	surplus = 40 //monkestation edit: from 20 to 40
 	restricted_roles = list(JOB_JANITOR)
 
 /datum/uplink_item/role_restricted/reverse_bear_trap
@@ -267,7 +274,7 @@
 	item = /obj/item/sbeacondrop/clownbomb
 	cost = 15
 	restricted_roles = list(JOB_CLOWN)
-	surplus = 10
+	surplus = 50 //monkestation edit: from 10 to 50
 
 /datum/uplink_item/role_restricted/clown_bomb/New()
 	. = ..()
@@ -349,6 +356,7 @@
 	item = /obj/item/seeds/seedling/evil
 	cost = 8
 	restricted_roles = list(JOB_BOTANIST)
+<<<<<<< HEAD
 
 /datum/uplink_item/role_restricted/bee_smoker
 	name = "Bee Smoker"
@@ -390,3 +398,5 @@
 	restricted = TRUE
 	refundable = FALSE
 	purchasable_from = parent_type::purchasable_from & ~UPLINK_SPY
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

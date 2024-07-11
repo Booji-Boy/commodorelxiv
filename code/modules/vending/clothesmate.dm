@@ -25,6 +25,7 @@
 				/obj/item/clothing/neck/large_scarf/green = 6,
 				/obj/item/clothing/neck/large_scarf/blue = 6,
 				/obj/item/clothing/neck/infinity_scarf = 6,
+				/obj/item/clothing/neck/ascot = 6,
 				/obj/item/clothing/neck/tie = 6,
 				/obj/item/clothing/neck/bowtie = 6,
 				/obj/item/clothing/head/rasta = 3,
@@ -45,7 +46,6 @@
 			"name" = "Accessories",
 			"icon" = "glasses",
 			"products" = list(
-				/obj/item/clothing/accessory/pride = 15,
 				/obj/item/clothing/accessory/waistcoat = 4,
 				/obj/item/clothing/suit/toggle/suspenders = 4,
 				/obj/item/clothing/neck/tie/horrible = 3,
@@ -162,10 +162,15 @@
 				/obj/item/clothing/suit/hooded/ethereal_raincoat = 3,
 				/obj/item/clothing/under/ethereal_tunic = 3,
 
+<<<<<<< HEAD
 				/obj/item/clothing/mask/kitsune = 3,
 				/obj/item/clothing/mask/rebellion = 6,
 				/obj/item/clothing/suit/costume/wellworn_shirt/graphic/ian = 1,
 				/obj/item/clothing/suit/costume/irs = 20,
+=======
+				/obj/item/clothing/suit/costume/ianshirt = 1,
+				/obj/item/clothing/suit/hooded/dinojammies = 3,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				/obj/item/clothing/head/costume/irs = 20,
 				/obj/item/clothing/head/costume/tmc = 20,
 				/obj/item/clothing/head/costume/deckers = 20,

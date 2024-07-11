@@ -46,6 +46,14 @@
 	new /obj/item/stack/sheet/iron(drop_location(), 1)
 	return ..()
 
+<<<<<<< HEAD
+=======
+/obj/vehicle/ridden/wheelchair/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(!forced && !check_move_loop_flags(MOVEMENT_LOOP_DRAGGING))
+		playsound(src, 'sound/effects/roll.ogg', 75, TRUE)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/vehicle/ridden/wheelchair/post_buckle_mob(mob/living/user)
 	. = ..()
 	update_appearance()

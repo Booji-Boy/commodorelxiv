@@ -30,7 +30,12 @@
 	// /atom doesn't have vis_contents, /turf and /atom/movable do
 	var/atom/movable/lie_about_areas = parent
 	lie_about_areas.vis_contents += src
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_deleted))
+=======
+	if(!ismovable(loc))
+		RegisterSignal(loc, COMSIG_QDELETING, PROC_REF(immovable_deleted))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(particle_flags & PARTICLE_ATTACH_MOB)
 		RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_move))

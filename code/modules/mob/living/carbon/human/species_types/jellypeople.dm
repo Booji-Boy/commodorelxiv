@@ -10,10 +10,22 @@
 	name = "\improper Jellyperson"
 	plural_form = "Jellypeople"
 	id = SPECIES_JELLYPERSON
+<<<<<<< HEAD
 	examine_limb_id = SPECIES_JELLYPERSON
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID|MOB_SLIME
 	inherent_traits = list(
 		TRAIT_MUTANT_COLORS,
+=======
+	species_traits = list(
+		MUTCOLORS,
+		EYECOLOR,
+		HAIR, // monke edit: allow them to have hair (it's the future, why not)
+	)
+	hair_color = "mutcolor"
+	hair_alpha = 150
+	inherent_traits = list(
+		TRAIT_CAN_USE_FLIGHT_POTION,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		TRAIT_TOXINLOVER,
 		TRAIT_NOBLOOD,
 	)
@@ -30,9 +42,15 @@
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_PRIDE | MIRROR_MAGIC | RACE_SWAP | ERT_SPAWN | SLIME_EXTRACT
 	inherent_factions = list(FACTION_SLIME)
 	species_language_holder = /datum/language_holder/jelly
+<<<<<<< HEAD
 	hair_color_mode = USE_MUTANT_COLOR
 	hair_alpha = 150
 	facial_hair_alpha = 150
+=======
+	ass_image = 'icons/ass/assslime.png'
+	wing_types = list(/obj/item/organ/external/wings/functional/slime)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bodypart_overrides = list(
 		BODY_ZONE_L_ARM = /obj/item/bodypart/arm/left/jelly,
 		BODY_ZONE_R_ARM = /obj/item/bodypart/arm/right/jelly,
@@ -312,6 +330,13 @@
 	spare.domutcheck()
 	spare.Move(get_step(H.loc, pick(NORTH,SOUTH,EAST,WEST)))
 
+	var/datum/component/nanites/owner_nanites = H.GetComponent(/datum/component/nanites)
+	if(owner_nanites)
+		//copying over nanite programs/cloud sync with 50% saturation in host and spare
+		owner_nanites.nanite_volume *= 0.5
+		spare.AddComponent(/datum/component/nanites, owner_nanites.nanite_volume)
+		SEND_SIGNAL(spare, COMSIG_NANITE_SYNC, owner_nanites, TRUE, TRUE) //The trues are to copy activation as well
+
 	H.blood_volume *= 0.45
 	REMOVE_TRAIT(H, TRAIT_NO_TRANSFORM, REF(src))
 
@@ -503,10 +528,13 @@
 	/// The cooldown of us using exteracts
 	COOLDOWN_DECLARE(extract_cooldown)
 
+<<<<<<< HEAD
 /datum/species/jelly/luminescent/get_physical_attributes()
 	return "Luminescent are able to integrate slime extracts into themselves for wondrous effects. \
 		Most things that are toxic heal them, but most things that prevent toxicity damage them!"
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Species datums don't normally implement destroy, but JELLIES SUCK ASS OUT OF A STEEL STRAW and have to i guess
 /datum/species/jelly/luminescent/Destroy(force)
 	current_extract = null

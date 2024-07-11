@@ -90,7 +90,11 @@
 		RegisterSignal(parent, COMSIG_SUPPLYPOD_LANDED, PROC_REF(create_blast_pellets))
 
 /datum/component/pellet_cloud/UnregisterFromParent()
+<<<<<<< HEAD
 	UnregisterSignal(parent, list(COMSIG_PREQDELETED, COMSIG_FIRE_CASING, COMSIG_GRENADE_DETONATE, COMSIG_GRENADE_ARMED, COMSIG_MOVABLE_MOVED, COMSIG_MINE_TRIGGERED, COMSIG_ITEM_DROPPED))
+=======
+	UnregisterSignal(parent, list(COMSIG_PREQDELETED, COMSIG_PELLET_CLOUD_INIT, COMSIG_GRENADE_DETONATE, COMSIG_GRENADE_ARMED, COMSIG_MOVABLE_MOVED, COMSIG_MINE_TRIGGERED, COMSIG_ITEM_DROPPED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * create_casing_pellets() is for directed pellet clouds for ammo casings that have multiple pellets (buckshot and scatter lasers for instance)

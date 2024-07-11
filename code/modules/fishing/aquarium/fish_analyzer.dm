@@ -1,20 +1,32 @@
 ///An item that can be used to gather information on the fish, such as but not limited to: health, hunger and traits.
 /obj/item/fish_analyzer
 	name = "fish analyzer"
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/scanner.dmi'
+=======
+	icon = 'icons/obj/device.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "fish_analyzer_map"
 	base_icon_state = "fish_analyzer"
 	inhand_icon_state = "fish_analyzer"
 	worn_icon_state = "fish_analyzer"
 	desc = "A fish-shaped scanner used to monitor fish's status and evolutionary traits."
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	item_flags = NOBLUDGEON
 	slot_flags = ITEM_SLOT_BELT
 	throwforce = 3
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
 	throw_range = 7
+<<<<<<< HEAD
 	custom_materials = list(/datum/material/iron= SMALL_MATERIAL_AMOUNT *2)
+=======
+	custom_materials = list(/datum/material/iron= 200)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	greyscale_config_inhand_left = /datum/greyscale_config/fish_analyzer_inhand_left
 	greyscale_config_inhand_right = /datum/greyscale_config/fish_analyzer_inhand_right
 	greyscale_config_worn = /datum/greyscale_config/fish_analyzer_worn
@@ -33,6 +45,7 @@
 	case_color = rgb(rand(16, 255), rand(16, 255), rand(16, 255))
 	set_greyscale(colors = list(case_color))
 	. = ..()
+<<<<<<< HEAD
 
 	var/static/list/fishe_signals = list(
 		COMSIG_FISH_ANALYZER_ANALYZE_STATUS = TYPE_PROC_REF(/datum/component/experiment_handler, try_run_handheld_experiment),
@@ -44,6 +57,8 @@
 		experiment_signals = fishe_signals, \
 	)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	register_item_context()
 	update_appearance()
 
@@ -53,10 +68,13 @@
 	radial_choices = null
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/fish_analyzer/examine(mob/user)
 	. = ..()
 	. += span_notice("<b>Alt-Click</b> to access the Experiment Configuration UI")
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/fish_analyzer/update_icon_state()
 	. = ..()
 	icon_state = base_icon_state
@@ -78,6 +96,7 @@
 		return CONTEXTUAL_SCREENTIP_SET
 	return NONE
 
+<<<<<<< HEAD
 /obj/item/fish_analyzer/interact_with_atom(atom/target, mob/living/user, list/modifiers)
 	if(!isfish(target) && !isaquarium(target))
 		return NONE
@@ -86,10 +105,21 @@
 
 	if(isfish(target))
 		balloon_alert(user, "analyzing stats")
+=======
+/obj/item/fish_analyzer/afterattack(atom/target, mob/user, proximity)
+	. = ..()
+	if(!proximity || !user.can_read(src) || user.is_blind())
+		return
+
+	if(isfish(target))
+		balloon_alert(user, "analyzing stats")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.visible_message(span_notice("[user] analyzes [target]."), span_notice("You analyze [target]."))
 		analyze_status(target, user)
 	else if(istype(target, /obj/structure/aquarium))
 		scan_aquarium(target, user)
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/fish_analyzer/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
@@ -101,6 +131,21 @@
 	balloon_alert(user, "analyzing traits")
 	analyze_traits(interacting_with, user)
 	return ITEM_INTERACT_SUCCESS
+=======
+
+
+/obj/item/fish_analyzer/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
+	if(!isfish(target))
+		return
+
+	if(!proximity_flag || !user.can_read(src) || user.is_blind())
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	balloon_alert(user, "analyzing traits")
+
+	analyze_traits(target, user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///Instantiates the radial menu, populates the list of choices, shows it and register signals on the aquarium.
 /obj/item/fish_analyzer/proc/scan_aquarium(obj/structure/aquarium/aquarium, mob/user)
@@ -219,8 +264,11 @@
 
 	to_chat(user, examine_block(jointext(render_list, "")), type = MESSAGE_TYPE_INFO)
 
+<<<<<<< HEAD
 	SEND_SIGNAL(src, COMSIG_FISH_ANALYZER_ANALYZE_STATUS, fish, user)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Called when a fish or a menu choice is left-clicked.
  * This returns the fish's progenitors, traits and their inheritability.

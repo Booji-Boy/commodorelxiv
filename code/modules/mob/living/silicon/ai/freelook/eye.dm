@@ -202,6 +202,10 @@
 		current = null
 	if(ai_tracking_tool)
 		ai_tracking_tool.reset_tracking()
+<<<<<<< HEAD
+=======
+	unset_machine()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(isturf(loc) && (QDELETED(eyeobj) || !eyeobj.loc))
 		to_chat(src, "ERROR: Eyeobj not found. Creating new eye...")
@@ -220,6 +224,7 @@
 	eyeobj.setLoc(loc)
 	eyeobj.name = "[name] (AI Eye)"
 	eyeobj.real_name = eyeobj.name
+	eyeobj.update_name_tag() // monkestation edit: name tags
 	set_eyeobj_visible(TRUE)
 
 /mob/living/silicon/ai/proc/set_eyeobj_visible(state = TRUE)

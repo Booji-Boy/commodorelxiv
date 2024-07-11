@@ -45,7 +45,27 @@
 /obj/structure/closet/cardboard/proc/ResetMoveDelay()
 	move_delay = FALSE
 
+<<<<<<< HEAD
 /obj/structure/closet/cardboard/before_open(mob/living/user, force)
+=======
+/obj/structure/closet/cardboard/open(mob/living/user, force = FALSE)
+	var/do_alert = (COOLDOWN_FINISHED(src, alert_cooldown) && (locate(/mob/living) in contents))
+
+	if(!do_alert)
+		return ..()
+
+	// Get mobs in view before we open the box.
+	var/list/alerted = list()
+	for(var/mob/living/alerted_mob in viewers(7, src))
+		if(alerted_mob.stat != CONSCIOUS || alerted_mob.is_blind())
+			continue
+		alerted += alerted_mob
+
+	// There are no mobs to alert?
+	if(!length(alerted))
+		return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(!.)
 		return FALSE
@@ -70,8 +90,11 @@
 	COOLDOWN_START(src, alert_cooldown, time_between_alerts)
 
 	for(var/mob/living/alerted_mob as anything in alerted)
+<<<<<<< HEAD
 		if(alerted_mob.stat != CONSCIOUS || alerted_mob.is_blind())
 			continue
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!alerted_mob.incapacitated(IGNORE_RESTRAINTS))
 			alerted_mob.face_atom(src)
 		alerted_mob.do_alert_animation()

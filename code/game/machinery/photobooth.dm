@@ -13,7 +13,11 @@
 	state_open = TRUE
 	circuit = /obj/item/circuitboard/machine/photobooth
 	light_system = OVERLAY_LIGHT_DIRECTIONAL //Used as a flash here.
+<<<<<<< HEAD
 	light_range = 6
+=======
+	light_outer_range = 6
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_WHITE
 	light_power = FLASH_LIGHT_POWER
 	light_on = FALSE
@@ -104,12 +108,20 @@
 /obj/machinery/photobooth/screwdriver_act(mob/living/user, obj/item/tool)
 	if(!has_buckled_mobs() && default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
 		update_appearance(UPDATE_ICON)
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/machinery/photobooth/crowbar_act(mob/living/user, obj/item/tool)
 	if(default_deconstruction_crowbar(tool))
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
+=======
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/machinery/photobooth/emag_act(mob/user, obj/item/card/emag/emag_card)

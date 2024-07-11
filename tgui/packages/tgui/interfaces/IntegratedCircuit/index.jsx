@@ -6,6 +6,18 @@ import { Box, Button, InfinitePlane, Input, Stack } from '../../components';
 import { Window } from '../../layouts';
 import { Connections } from '../common/Connections';
 import { CircuitInfo } from './CircuitInfo';
+<<<<<<< HEAD
+=======
+import {
+  ABSOLUTE_Y_OFFSET,
+  MOUSE_BUTTON_LEFT,
+  TIME_UNTIL_PORT_RELEASE_WORKS,
+} from './constants';
+import { Connections } from './Connections';
+import { ObjectComponent } from './ObjectComponent';
+import { DisplayComponent } from './DisplayComponent';
+import { VariableMenu } from './VariableMenu';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { ComponentMenu } from './ComponentMenu';
 import {
   ABSOLUTE_Y_OFFSET,
@@ -527,7 +539,11 @@ export class IntegratedCircuit extends Component {
       >
         <Window.Content
           style={{
+<<<<<<< HEAD
             backgroundImage: 'none',
+=======
+            'background-image': 'none',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           <InfinitePlane

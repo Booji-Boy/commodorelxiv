@@ -22,6 +22,9 @@
 
 	var/list/modifiers = params2list(params)
 
+	if (client)
+		client.imode.update_istate(src, modifiers)
+
 	if(SEND_SIGNAL(src, COMSIG_MOB_CLICKON, A, modifiers) & COMSIG_MOB_CANCEL_CLICKON)
 		return
 
@@ -63,7 +66,7 @@
 	if(LAZYACCESS(modifiers, MIDDLE_CLICK))
 		MiddleClickOn(A, params)
 		return
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if((istate & ISTATE_SECONDARY))
 		var/secondary_result = A.attack_ai_secondary(src, modifiers)
 		if(secondary_result == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || secondary_result == SECONDARY_ATTACK_CONTINUE_CHAIN)
 			return
@@ -86,7 +89,7 @@
 	The below is only really for safety, or you can alter the way
 	it functions and re-insert it above.
 */
-/mob/living/silicon/ai/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
+/mob/living/silicon/ai/UnarmedAttack(atom/A, proximity_flag)
 	A.attack_ai(src)
 
 /mob/living/silicon/ai/RangedAttack(atom/A)

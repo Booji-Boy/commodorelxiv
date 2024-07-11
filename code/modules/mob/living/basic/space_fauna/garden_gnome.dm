@@ -18,7 +18,11 @@
 	attack_verb_simple = "punch"
 	attack_sound = 'sound/weapons/punch1.ogg'
 	melee_attack_cooldown = 1.2 SECONDS
+<<<<<<< HEAD
 	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, STAMINA = 0, OXY = 1)
+=======
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 1, CLONE = 1, STAMINA = 0, OXY = 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	speak_emote = list("announces")
 
 	unsuitable_atmos_damage = 0

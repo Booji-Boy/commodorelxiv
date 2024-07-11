@@ -29,11 +29,19 @@
 #define COMSIG_BODYPART_ATTACHED "bodypart_attached"
 ///from base of /obj/item/bodypart/proc/try_attach_limb(): (new_limb, special)
 #define COMSIG_CARBON_POST_ATTACH_LIMB "carbon_post_attach_limb"
+<<<<<<< HEAD
 ///from /obj/item/bodypart/proc/receive_damage, sent from the limb owner (limb, brute, burn)
 #define COMSIG_CARBON_LIMB_DAMAGED "carbon_limb_damaged"
 	#define COMPONENT_PREVENT_LIMB_DAMAGE (1 << 0)
 /// from /obj/item/bodypart/proc/apply_gauze(/obj/item/stack/gauze): (/obj/item/stack/medical/gauze/applied_gauze, /obj/item/stack/medical/gauze/stack_used)
 #define COMSIG_BODYPART_GAUZED "bodypart_gauzed"
+=======
+#define COMSIG_BODYPART_GAUZED "bodypart_gauzed" // from /obj/item/bodypart/proc/apply_gauze(/obj/item/stack/gauze)
+#define COMSIG_BODYPART_GAUZE_DESTROYED "bodypart_degauzed" // from [/obj/item/bodypart/proc/seep_gauze] when it runs out of absorption
+///from /obj/item/bodypart/proc/receive_damage, sent from the limb owner (limb, brute, burn)
+#define COMSIG_CARBON_LIMB_DAMAGED "carbon_limb_damaged"
+	#define COMPONENT_PREVENT_LIMB_DAMAGE (1 << 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// from /obj/item/stack/medical/gauze/Destroy(): (/obj/item/stack/medical/gauze/removed_gauze)
 #define COMSIG_BODYPART_UNGAUZED "bodypart_ungauzed"
 
@@ -151,6 +159,7 @@
 ///from /atom/movable/screen/alert/give/proc/handle_transfer(): (taker, item)
 #define COMSIG_CARBON_ITEM_GIVEN "carbon_item_given"
 
+<<<<<<< HEAD
 /// Sent from /mob/living/carbon/human/handle_blood(): (seconds_per_tick, times_fired)
 #define COMSIG_HUMAN_ON_HANDLE_BLOOD "human_on_handle_blood"
 	/// Return to prevent all default blood handling
@@ -163,3 +172,7 @@
 /// from /datum/status_effect/limp/proc/check_step(mob/whocares, OldLoc, Dir, forced) iodk where it shuld go
 #define COMSIG_CARBON_LIMPING "mob_limp_check"
 	#define COMPONENT_CANCEL_LIMP (1<<0)
+=======
+#define COMSIG_CARBON_PRE_SPRINT "carbon_pre_sprint"
+	#define INTERRUPT_SPRINT (1<<0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

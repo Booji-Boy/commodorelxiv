@@ -1,5 +1,6 @@
 
 // The proc you should always use to set the light of this atom.
+<<<<<<< HEAD
 /atom/proc/set_light(l_range, l_power, l_color = NONSENSICAL_VALUE, l_angle, l_dir, l_height, l_on)
 	// We null everything but l_dir, because we don't want to allow for modifications while frozen
 	if(light_flags & LIGHT_FROZEN)
@@ -14,13 +15,29 @@
 		l_range = MINIMUM_USEFUL_LIGHT_RANGE //Brings the range up to 1.4, which is just barely brighter than the soft lighting that surrounds players.
 
 	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT, l_range, l_power, l_color, l_on) & COMPONENT_BLOCK_LIGHT_UPDATE)
+=======
+// Nonesensical value for l_color default, so we can detect if it gets set to null.
+/atom/proc/set_light(l_outer_range, l_inner_range, l_power, l_falloff_curve = LIGHTING_DEFAULT_FALLOFF_CURVE, l_color = NONSENSICAL_VALUE, l_on)
+	if(!isnum(l_power) && !isnull(l_power))
+		return
+	if(l_outer_range > 0 && l_outer_range < MINIMUM_USEFUL_LIGHT_RANGE)
+		l_outer_range = MINIMUM_USEFUL_LIGHT_RANGE //Brings the range up to 1.4, which is just barely brighter than the soft lighting that surrounds players.
+	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT, l_inner_range, l_outer_range, l_power, l_falloff_curve, l_color, l_on) & COMPONENT_BLOCK_LIGHT_UPDATE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	if(!isnull(l_power))
 		set_light_power(l_power)
 
-	if(!isnull(l_range))
-		set_light_range(l_range)
+	if(!isnull(l_inner_range) || !isnull(l_outer_range))
+		if(l_inner_range >= l_outer_range)
+			l_inner_range = l_outer_range / 4
+		set_light_range(l_inner_range, l_outer_range)
+
+	if(l_falloff_curve != NONSENSICAL_VALUE)
+		if(!l_falloff_curve || l_falloff_curve <= 0)
+			l_falloff_curve = LIGHTING_DEFAULT_FALLOFF_CURVE
+		set_light_curve(l_falloff_curve)
 
 	if(l_color != NONSENSICAL_VALUE)
 		set_light_color(l_color)
@@ -37,8 +54,11 @@
 	if(!isnull(l_height))
 		set_light_height(l_height)
 
+<<<<<<< HEAD
 	update_light()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will update the light (duh).
 /// Creates or destroys it if needed, makes it update values, makes sure it's got the correct source turf...
 /atom/proc/update_light()
@@ -47,7 +67,7 @@
 	if(light_system != COMPLEX_LIGHT)
 		CRASH("update_light() for [src] with following light_system value: [light_system]")
 
-	if (!light_power || !light_range || !light_on) // We won't emit light anyways, destroy the light source.
+	if (!light_power || !light_outer_range || !light_on) // We won't emit light anyways, destroy the light source.
 		QDEL_NULL(light)
 	else
 		if (!ismovable(loc)) // We choose what atom should be the top atom of the light here.
@@ -59,7 +79,10 @@
 			light.update(.)
 		else
 			light = new/datum/light_source(src, .)
+<<<<<<< HEAD
 		return .
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Updates the atom's opacity value.
@@ -73,7 +96,10 @@
 	SEND_SIGNAL(src, COMSIG_ATOM_SET_OPACITY, new_opacity)
 	. = opacity
 	opacity = new_opacity
+<<<<<<< HEAD
 	return .
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/set_opacity(new_opacity)
 	. = ..()
@@ -116,15 +142,45 @@
 	return .
 
 /// Setter for the light range of this atom.
+<<<<<<< HEAD
 /atom/proc/set_light_range(new_range)
 	if(new_range == light_range || light_flags & LIGHT_FROZEN)
+=======
+/atom/proc/set_light_range(new_inner_range, new_outer_range)
+	if(isnull(new_inner_range) && new_outer_range)
+		new_inner_range = new_outer_range/4
+	if(isnull(new_outer_range) && new_inner_range)
+		new_outer_range = new_inner_range
+
+	if((new_inner_range == light_inner_range) && (new_outer_range == light_outer_range))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
-	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_RANGE, new_range) & COMPONENT_BLOCK_LIGHT_UPDATE)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_RANGE, new_inner_range, new_outer_range) & COMPONENT_BLOCK_LIGHT_UPDATE)
 		return
+<<<<<<< HEAD
 	. = light_range
 	light_range = new_range
 	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_RANGE, .)
 	return .
+=======
+	var/old_outer_range = light_outer_range
+	var/old_inner_range = light_inner_range
+
+	light_outer_range = new_outer_range
+	light_inner_range = new_inner_range
+	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_RANGE, old_inner_range, old_outer_range)
+
+
+/// Setter for this atom's light falloff curve.
+/atom/proc/set_light_curve(new_curve)
+	if(new_curve == light_falloff_curve)
+		return
+	if(SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_CURVE, new_curve) & COMPONENT_BLOCK_LIGHT_UPDATE)
+		return
+	. = light_falloff_curve
+	light_falloff_curve = new_curve
+	SEND_SIGNAL(src, COMSIG_ATOM_UPDATE_LIGHT_CURVE, .)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Setter for the light color of this atom.
 /atom/proc/set_light_color(new_color)

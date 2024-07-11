@@ -121,7 +121,7 @@
 				return TRUE
 			to_chat(user, span_notice("\The [RG] is full."))
 			return FALSE
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		to_chat(user, span_notice("You won't have any luck getting \the [O] out if you drop it in the oil."))
 		return 1
 	else
@@ -147,10 +147,15 @@
 	breakout_time = 2 MINUTES
 	open_sound = 'sound/effects/shovel_dig.ogg'
 	close_sound = 'sound/effects/shovel_dig.ogg'
+<<<<<<< HEAD
 	can_install_electronics = FALSE
 	can_weld_shut = FALSE
 	cutting_tool = null
 	paint_jobs = null
+=======
+	cutting_tool = /obj/item/shovel
+	can_install_electronics = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	elevation = 4 //It's a small mound.
 	elevation_open = 0
 
@@ -158,6 +163,7 @@
 	var/lead_tomb = FALSE
 	/// was this grave opened for the first time
 	var/first_open = FALSE
+<<<<<<< HEAD
 	/// was a shovel used to close this grave
 	var/dug_closed = FALSE
 	/// do we have a mood effect tied to accessing this type of grave?
@@ -184,6 +190,8 @@
 
 /obj/structure/closet/crate/grave/filled
 	affect_mood = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/closet/crate/grave/filled/PopulateContents()  //GRAVEROBBING IS NOW A FEATURE
 	..()
@@ -217,6 +225,7 @@
 /obj/structure/closet/crate/grave/closet_update_overlays(list/new_overlays)
 	return
 
+<<<<<<< HEAD
 /obj/structure/closet/crate/grave/before_open(mob/living/user, force)
 	. = ..()
 	if(!.)
@@ -261,6 +270,37 @@
 			if(HAS_MIND_TRAIT(user, TRAIT_MORBID))
 				user.add_mood_event("morbid_graverobbing", /datum/mood_event/morbid_graverobbing)
 			else
+=======
+/obj/structure/closet/crate/grave/tool_interact(obj/item/S, mob/living/carbon/user)
+	if(!(user.istate & ISTATE_HARM)) //checks to attempt to dig the grave, must be done with combat mode off only.
+		if(!opened)
+			if(istype(S,cutting_tool) && S.tool_behaviour == TOOL_SHOVEL)
+				to_chat(user, span_notice("You start start to dig open \the [src]  with \the [S]..."))
+				if (do_after(user,20, target = src))
+					opened = TRUE
+					locked = TRUE
+					dump_contents()
+					update_appearance()
+					user.add_mood_event("graverobbing", /datum/mood_event/graverobbing)
+					if(lead_tomb == TRUE && first_open == TRUE)
+						user.gain_trauma(/datum/brain_trauma/magic/stalker)
+						to_chat(user, span_boldwarning("Oh no, no no no, THEY'RE EVERYWHERE! EVERY ONE OF THEM IS EVERYWHERE!"))
+						first_open = FALSE
+					return 1
+				return 1
+			else
+				to_chat(user, span_notice("You can't dig up a grave with \the [S.name]."))
+				return 1
+		else
+			to_chat(user, span_notice("The grave has already been dug up."))
+			return 1
+
+	else if(((user.istate & ISTATE_HARM)) && opened) //checks to attempt to remove the grave entirely.
+		if(istype(S,cutting_tool) && S.tool_behaviour == TOOL_SHOVEL)
+			to_chat(user, span_notice("You start to remove \the [src]  with \the [S]."))
+			if (do_after(user,15, target = src))
+				to_chat(user, span_notice("You remove \the [src]  completely."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				user.add_mood_event("graverobbing", /datum/mood_event/graverobbing)
 			if(lead_tomb && first_open)
 				if(HAS_MIND_TRAIT(user, TRAIT_MORBID))

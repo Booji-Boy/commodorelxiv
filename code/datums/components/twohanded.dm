@@ -76,7 +76,11 @@
 	if(require_twohands)
 		ADD_TRAIT(parent, TRAIT_NEEDS_TWO_HANDS, ABSTRACT_ITEM_TRAIT)
 
+<<<<<<< HEAD
 /datum/component/two_handed/Destroy(force)
+=======
+/datum/component/two_handed/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	offhand_item = null
 	wield_callback = null
 	unwield_callback = null
@@ -131,6 +135,26 @@
 	RegisterSignal(parent, COMSIG_ITEM_SHARPEN_ACT, PROC_REF(on_sharpen))
 	RegisterSignal(parent, COMSIG_ITEM_APPLY_FANTASY_BONUSES, PROC_REF(apply_fantasy_bonuses))
 	RegisterSignal(parent, COMSIG_ITEM_REMOVE_FANTASY_BONUSES, PROC_REF(remove_fantasy_bonuses))
+<<<<<<< HEAD
+=======
+
+/datum/component/two_handed/proc/apply_fantasy_bonuses(obj/item/source, bonus)
+	SIGNAL_HANDLER
+	force_wielded = source.modify_fantasy_variable("force_wielded", force_wielded, bonus)
+	force_unwielded = source.modify_fantasy_variable("force_unwielded", force_unwielded, bonus)
+	if(wielded && ismob(source.loc))
+		unwield(source.loc)
+	if(force_multiplier)
+		force_multiplier = source.modify_fantasy_variable("force_multiplier", force_multiplier, bonus/10, minimum = 1)
+
+/datum/component/two_handed/proc/remove_fantasy_bonuses(obj/item/source, bonus)
+	SIGNAL_HANDLER
+	force_wielded = source.reset_fantasy_variable("force_wielded", force_wielded)
+	force_unwielded = source.reset_fantasy_variable("force_unwielded", force_unwielded)
+	if(wielded && ismob(source.loc))
+		unwield(source.loc)
+	force_multiplier = source.reset_fantasy_variable("force_multiplier", force_multiplier)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Remove all siginals registered to the parent item
 /datum/component/two_handed/UnregisterFromParent()
@@ -191,6 +215,7 @@
 /datum/component/two_handed/proc/wield(mob/living/carbon/user)
 	if(wielded)
 		return
+<<<<<<< HEAD
 
 	var/atom/atom_parent = parent
 	if(HAS_TRAIT(user, TRAIT_NO_TWOHANDING))
@@ -200,6 +225,8 @@
 		else
 			atom_parent.balloon_alert(user, "too weak to wield with both hands!")
 		return COMPONENT_EQUIPPED_FAILED
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(user.get_inactive_held_item())
 		if(require_twohands)
 			atom_parent.balloon_alert(user, "can't carry in one hand!")

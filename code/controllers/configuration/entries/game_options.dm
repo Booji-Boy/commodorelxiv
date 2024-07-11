@@ -240,6 +240,14 @@
 	var/datum/movespeed_modifier/config_walk_run/M = get_cached_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/walk)
 	M.sync()
 
+/datum/config_entry/number/movedelay/sprint_delay
+	integer = FALSE
+
+/datum/config_entry/number/movedelay/sprint_delay/ValidateAndSet()
+	. = ..()
+	var/datum/movespeed_modifier/config_walk_run/M = get_cached_movespeed_modifier(/datum/movespeed_modifier/config_walk_run/sprint)
+	M.sync()
+
 /////////////////////////////////////////////////Outdated move delay
 /datum/config_entry/number/outdated_movedelay
 	deprecated_by = /datum/config_entry/keyed_list/multiplicative_movespeed
@@ -256,8 +264,12 @@
 	movedelay_type = /mob/living/silicon/robot
 /datum/config_entry/number/outdated_movedelay/alien_delay
 	movedelay_type = /mob/living/carbon/alien
+<<<<<<< HEAD
 /datum/config_entry/number/outdated_movedelay/slime_delay
 	movedelay_type = /mob/living/basic/slime
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/config_entry/number/outdated_movedelay/animal_delay
 	movedelay_type = /mob/living/simple_animal
 /////////////////////////////////////////////////
@@ -315,6 +327,8 @@
 
 /datum/config_entry/string/overflow_job
 	default = JOB_ASSISTANT
+
+/datum/config_entry/flag/spooktober_enabled
 
 /datum/config_entry/flag/grey_assistants
 
@@ -439,6 +453,7 @@
 
 /datum/config_entry/flag/give_tutorials_without_db
 
+<<<<<<< HEAD
 /datum/config_entry/string/new_player_alert_role_id
 
 /datum/config_entry/keyed_list/positive_station_traits
@@ -464,3 +479,7 @@
 /datum/config_entry/number/max_positive_quirks
 	default = 6
 	min_val = -1
+=======
+/datum/config_entry/string/metacurrency_name
+	config_entry_value = "Monkecoins"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

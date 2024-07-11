@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(trash_loot, list(//junk: useless, very easy to get, or ghetto c
 		/obj/item/rack_parts = 1,
 		/obj/item/shard = 1,
 
-		/obj/item/reagent_containers/pill/maintenance/achievement = 1,
+		/obj/item/reagent_containers/pill/maintenance/achievement = 3,
 		/obj/item/toy/eightball = 1,
 		) = 8,
 
@@ -158,6 +158,9 @@ GLOBAL_LIST_INIT(common_loot, list( //common: basic items
 		/obj/item/flashlight = 1,
 		/obj/item/flashlight/flare = 1,
 		) = 1,
+	list(//pills
+		/obj/item/reagent_containers/pill/maintenance/achievement = 3,
+	) = 8,
 	))
 
 
@@ -194,8 +197,8 @@ GLOBAL_LIST_INIT(uncommon_loot, list(//uncommon: useful items
 		/obj/item/pen/screwdriver = 1,
 		) = 8,
 
-	list(//strange objects
-		/obj/item/relic = 5,
+	list(//artifacts
+		/obj/effect/artifact_spawner = 4,
 		) = 8,
 
 	list(//construction and crafting
@@ -226,6 +229,7 @@ GLOBAL_LIST_INIT(uncommon_loot, list(//uncommon: useful items
 		list(//drinks
 			/obj/item/reagent_containers/cup/glass/bottle/vodka = 1,
 			/obj/item/reagent_containers/cup/glass/drinkingglass/filled/nuka_cola = 1,
+			/obj/item/reagent_containers/cup/glass/drinkingglass/filled/sunset_sarsaparilla = 1, //monkestation edit
 			/obj/item/reagent_containers/cup/soda_cans/grey_bull = 1,
 			) = 1,
 		list(//sprayers
@@ -300,19 +304,20 @@ GLOBAL_LIST_INIT(rarity_loot, list(//rare: really good items
 		/obj/item/knife/kitchen = 1,
 		/obj/item/melee/baton/security/cattleprod/teleprod = 1,
 		/obj/item/pen/survival = 1,
-		/obj/item/restraints/handcuffs = 1,
 		/obj/item/shield/buckler = 1,
 		/obj/item/shield/improvised = 1,
 		/obj/item/throwing_star = 1,
 		/obj/item/weldingtool/hugetank = 1,
 		/obj/item/fishing_rod/telescopic/master = 1,
+<<<<<<< HEAD
 		/obj/item/spess_knife = 1,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		) = 1,
 
 	list(//equipment
 		/obj/item/clothing/glasses/hud/security = 1,
 		/obj/item/clothing/glasses/sunglasses = 1,
-		/obj/item/clothing/gloves/color/black = 1,
 		/obj/item/clothing/gloves/color/yellow = 1,
 		/obj/item/clothing/gloves/tackler/combat = 1,
 		/obj/item/clothing/head/helmet/toggleable/justice = 1,
@@ -344,12 +349,19 @@ GLOBAL_LIST_INIT(rarity_loot, list(//rare: really good items
 			/obj/item/reagent_containers/hypospray/medipen/salacid = 1,
 			/obj/item/reagent_containers/syringe/contraband/methamphetamine = 1,
 			) = 1,
+		/obj/item/storage/pill_bottle/maintenance_pill/full = 1, //monkestation edit
 		) = 1,
 
 	list(//misc
+<<<<<<< HEAD
 		/obj/item/book/granter/crafting_recipe/dusting/pipegun_prime = 1,
 		/obj/item/book/granter/crafting_recipe/trash_cannon = 1,
 		/obj/item/book/granter/crafting_recipe/dusting/laser_musket_prime = 1,
+=======
+		/obj/item/book/granter/crafting_recipe/maint_gun/pipegun_prime = 1,
+		/obj/item/book/granter/crafting_recipe/trash_cannon = 1,
+		/obj/item/book/granter/crafting_recipe/maint_gun/laser_musket_prime = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/book/granter/sign_language = 1,
 		/obj/item/disk/nuclear/fake = 1,
 		/obj/item/disk/surgery/advanced_plastic_surgery = 1,
@@ -372,22 +384,32 @@ GLOBAL_LIST_INIT(oddity_loot, list(//oddity: strange or crazy items
 		/obj/item/dice/d20/fate/stealth/one_use = 1, //Looks like a d20, keep the d20 in the uncommon pool.
 		/obj/item/shadowcloak = 1,
 		/obj/item/spear/grey_tide = 1,
-		/obj/item/storage/box/donkpockets/donkpocketgondola = 1,
+		/* MONKESTATION EDIT - removal of self antag items from maints loot
 		list(//music
 			/obj/item/instrument/saxophone/spectral = 1,
 			/obj/item/instrument/trombone/spectral = 1,
 			/obj/item/instrument/trumpet/spectral = 1,
 			) = 1,
+		*/ // MONKESTATION EDIT END
 		/obj/item/toy/cards/deck/tarot/haunted = 1,
+		/obj/item/gun/magic/wand/polymorph = 1, //monkestation edit
+		/obj/item/organ/internal/butt/atomic = 1, //monkestation edit
 	))
+
+
+GLOBAL_LIST_INIT(maint_fauna, list(//fauna: there be critters living in yer maint tunnels
+		/mob/living/basic/bee/friendly = 1,
+	))
+
 
 //Maintenance loot spawner pools
 #define maint_trash_weight 4500
-#define maint_common_weight 4500
+#define maint_common_weight 4497 //monkestation edit: from 4500 to 4497
 #define maint_uncommon_weight 900
 #define maint_rarity_weight 99
-#define maint_oddity_weight 1 //1 out of 10,000 would give metastation (180 spawns) a 2 in 111 chance of spawning an oddity per round, similar to xeno egg
+#define maint_oddity_weight 4 //1 out of 10,000 would give metastation (180 spawns) a 2 in 111 chance of spawning an oddity per round, similar to xeno egg, monkestation edit: from 1 to 4
 #define maint_holiday_weight 3500 // When holiday loot is enabled, it'll give every loot item a 25% chance of being a holiday item
+#define maint_fauna_weight 150 //monkestation edit: adds friendly maintenance bees, also allows for other maintenance fauna to be coded in.
 
 //Loot pool used by default maintenance loot spawners
 GLOBAL_LIST_INIT(maintenance_loot, list(
@@ -396,6 +418,7 @@ GLOBAL_LIST_INIT(maintenance_loot, list(
 	GLOB.uncommon_loot = maint_uncommon_weight,
 	GLOB.rarity_loot = maint_rarity_weight,
 	GLOB.oddity_loot = maint_oddity_weight,
+	GLOB.maint_fauna = maint_fauna_weight,
 	))
 
 GLOBAL_LIST_INIT(ratking_trash, list(//Garbage: used by the regal rat mob when spawning garbage.

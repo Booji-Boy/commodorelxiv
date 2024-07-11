@@ -32,11 +32,14 @@
 	if(istype(weapon, /obj/item/reagent_containers))
 		update_appearance(UPDATE_OVERLAYS)
 		return FALSE // skip attack animation when refilling cart
-
+	if(istype(weapon, /obj/item/mop))
+		reagents.trans_to(src, weapon.reagents.maximum_volume, transfered_by = user)
+		balloon_alert(user, "wring mop")
 	return ..()
 
 /obj/structure/mop_bucket/attackby_secondary(obj/item/weapon, mob/user, params)
 	if(istype(weapon, /obj/item/mop))
+<<<<<<< HEAD
 		if(weapon.reagents.total_volume >= weapon.reagents.maximum_volume)
 			balloon_alert(user, "already soaked!")
 			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -46,6 +49,22 @@
 		reagents.trans_to(weapon, weapon.reagents.maximum_volume, transferred_by = user)
 		balloon_alert(user, "doused mop")
 		playsound(src, 'sound/effects/slosh.ogg', 25, vary = TRUE)
+=======
+		if(!weapon.reagents.total_volume)
+			if(weapon.reagents.total_volume >= weapon.reagents.maximum_volume)
+				balloon_alert(user, "mop is already soaked!")
+				return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+			if(!CART_HAS_MINIMUM_REAGENT_VOLUME)
+				balloon_alert(user, "mop bucket is empty!")
+				return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+			reagents.trans_to(weapon, weapon.reagents.maximum_volume, transfered_by = user)
+			balloon_alert(user, "wet mop")
+			playsound(src, 'sound/effects/slosh.ogg', 25, vary = TRUE)
+		else
+			var/obj/item/mop/attacked_mop = weapon
+			to_chat(user, "You completly wring out the [attacked_mop.name] into the waste bucket of the cart.")
+			attacked_mop.reagents.remove_all(attacked_mop.max_reagent_volume)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(istype(weapon, /obj/item/reagent_containers) || istype(weapon, /obj/item/mop))
 		update_appearance(UPDATE_OVERLAYS)

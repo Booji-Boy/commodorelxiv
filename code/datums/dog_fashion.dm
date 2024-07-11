@@ -237,9 +237,19 @@
 	emote_see = list("shakes a little.", "looks around.")
 	emote_hear = list("licks a trickle of the butter up.", "smiles.")
 
+<<<<<<< HEAD
 /datum/dog_fashion/head/eyepatch
 	name = "Punished %REAL_NAME%"
 	desc = "%REAL_NAME% has really been going through it today."
 	obj_icon_state = "eyepatch"
 	emote_hear = list("sighs gruffly.", "groans.")
 	emote_see = list("considers their own mortality.", "stares bleakly into the middle distance.", "ponders the horrors of warfare.")
+=======
+/datum/dog_fashion/head/berserker
+	name = "%REAL_NAME% the Berserker"
+	desc = "%REAL_NAME% has gone into a rage from lack of petting."
+	obj_icon_state = "berserker"
+	speak = list("RAAARGH!", "Grrrrrr!")
+	emote_see = list("bares his fangs", "practices his warcry")
+	emote_hear = list("plans the demise of his owner.")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

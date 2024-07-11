@@ -299,7 +299,11 @@
 	/// How much charge we are currently storing.
 	var/charge = 10 * STANDARD_CELL_CHARGE
 	/// Associated list of charge sources and how much they charge, only stacks allowed.
+<<<<<<< HEAD
 	var/list/charger_list = list(/obj/item/stack/ore/plasma = PLASMA_CORE_ORE_CHARGE, /obj/item/stack/sheet/mineral/plasma = PLASMA_CORE_SHEET_CHARGE)
+=======
+	var/list/charger_list = list(/obj/item/stack/ore/plasma = 1500, /obj/item/stack/sheet/mineral/plasma =SHEET_MATERIAL_AMOUNT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mod/core/plasma/install(obj/item/mod/control/mod_unit)
 	. = ..()

@@ -205,10 +205,10 @@
 	if(objective_state != OBJECTIVE_STATE_INACTIVE && objective_state != OBJECTIVE_STATE_ACTIVE)
 		return
 	SEND_SIGNAL(src, COMSIG_TRAITOR_OBJECTIVE_COMPLETED)
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_TRAITOR_OBJECTIVE_COMPLETED, src)
 	handle_cleanup()
 	log_traitor("[key_name(handler.owner)] [objective_state == OBJECTIVE_STATE_INACTIVE? "missed" : "completed"] [to_debug_string()]")
 	objective_state = OBJECTIVE_STATE_COMPLETED
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_TRAITOR_OBJECTIVE_COMPLETED, src)
 	save_objective()
 	handler.on_update() // Trigger an update to the UI
 
@@ -227,7 +227,15 @@
 /// Called when rewards should be given to the user.
 /datum/traitor_objective/proc/completion_payout()
 	handler.progression_points += progression_reward
+<<<<<<< HEAD
 	handler.add_telecrystals(telecrystal_reward)
+=======
+	handler.telecrystals += telecrystal_reward
+//monkestation edit start
+	if(given_contractor_rep)
+		handler.contractor_rep += given_contractor_rep
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Used for sending data to the uplink UI
 /datum/traitor_objective/proc/uplink_ui_data(mob/user)
@@ -241,6 +249,7 @@
 		"objective_state" = objective_state,
 		"original_progression" = original_progression,
 		"telecrystal_penalty" = telecrystal_penalty,
+		"contractor_rep" = given_contractor_rep, //monkestation edit
 	)
 
 /datum/traitor_objective/proc/on_objective_taken(mob/user)

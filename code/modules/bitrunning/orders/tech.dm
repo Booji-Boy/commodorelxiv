@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /datum/orderable_item/bitrunning_tech
 	category_index = CATEGORY_BITRUNNING_TECH
 
@@ -54,3 +55,28 @@
 	item_path = /obj/item/bitrunning_disk/item/pkc_mods/premium
 	cost_per_order = 1800
 	desc = "This disk contains a program that lets you equip stronger trophies for the proto-kinetic crusher. Proto-kinetic crusher not included."
+=======
+/datum/orderable_item/bepis
+	category_index = CATEGORY_BEPIS
+
+/datum/orderable_item/bepis/circuit_stack
+	item_path = /obj/item/stack/circuit_stack/full
+	cost_per_order = 150
+
+/datum/orderable_item/bepis/survival_pen
+	item_path = /obj/item/pen/survival
+	cost_per_order = 150
+
+/datum/orderable_item/bepis/party_sleeper
+	item_path = /obj/item/circuitboard/machine/sleeper/party
+	cost_per_order = 750
+	desc = "A decommissioned sleeper circuitboard, repurposed for recreational purposes."
+
+/datum/orderable_item/bepis/sprayoncan
+	item_path = /obj/item/toy/sprayoncan
+	cost_per_order = 750
+
+/datum/orderable_item/bepis/pristine
+	item_path = /obj/item/disk/design_disk/bepis/remove_tech
+	cost_per_order = 1000
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

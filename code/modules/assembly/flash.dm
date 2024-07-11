@@ -12,7 +12,11 @@
 	w_class = WEIGHT_CLASS_TINY
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*3, /datum/material/glass = SMALL_MATERIAL_AMOUNT*3)
 	light_system = OVERLAY_LIGHT //Used as a flash here.
+<<<<<<< HEAD
 	light_range = FLASH_LIGHT_RANGE
+=======
+	light_outer_range = FLASH_LIGHT_RANGE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = COLOR_WHITE
 	light_power = FLASH_LIGHT_POWER
 	light_on = FALSE
@@ -170,10 +174,19 @@
 			flashed.set_confusion_if_lower(confusion_duration * CONFUSION_STACK_MAX_MULTIPLIER)
 			visible_message(span_danger("[user] blinds [flashed] with the flash!"), span_userdanger("[user] blinds you with the flash!"))
 			//easy way to make sure that you can only long stun someone who is facing in your direction
+<<<<<<< HEAD
 			flashed.adjustStaminaLoss(rand(80, 120) * (1 - (deviation * 0.5)))
 			flashed.Knockdown(rand(25, 50) * (1 - (deviation * 0.5)))
+=======
+			flashed.stamina.adjust(-rand(40, 90) * (1 - (deviation * 0.5)))
+			var/paralyze_duration = 2 SECONDS
+			if(ishuman(flashed))
+				var/mob/living/carbon/human/flashed_human = flashed
+				if(ismoth(flashed_human))
+					paralyze_duration = 6 SECONDS
+			flashed.Disorient(7 SECONDS, 110, paralyze = paralyze_duration)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			SEND_SIGNAL(user, COMSIG_MOB_SUCCESSFUL_FLASHED_CARBON, flashed, src, deviation)
-
 		else if(user)
 			visible_message(span_warning("[user] fails to blind [flashed] with the flash!"), span_danger("[user] fails to blind you with the flash!"))
 		else
@@ -256,6 +269,13 @@
 			flashed_borgo.set_confusion_if_lower(5 SECONDS * CONFUSION_STACK_MAX_MULTIPLIER)
 		else
 			user.visible_message(span_warning("[user] fails to blind [flashed_borgo] with the flash!"), span_warning("You fail to blind [flashed_borgo] with the flash!"))
+<<<<<<< HEAD
+=======
+			return
+		flashed_borgo.Paralyze(7 SECONDS)
+		flashed_borgo.set_confusion_if_lower(5 SECONDS * CONFUSION_STACK_MAX_MULTIPLIER)
+		user.visible_message(span_warning("[user] overloads [flashed_borgo]'s sensors with the flash!"), span_danger("You overload [flashed_borgo]'s sensors with the flash!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	user.visible_message(span_warning("[user] fails to blind [M] with the flash!"), span_warning("You fail to blind [M] with the flash!"))
@@ -313,7 +333,7 @@
 	var/datum/weakref/arm
 
 /obj/item/assembly/flash/armimplant/burn_out()
-	var/obj/item/organ/internal/cyberimp/arm/flash/real_arm = arm.resolve()
+	var/obj/item/organ/internal/cyberimp/arm/item_set/flash/real_arm = arm.resolve()
 	if(real_arm?.owner)
 		to_chat(real_arm.owner, span_warning("Your photon projector implant overheats and deactivates!"))
 		real_arm.Retract()
@@ -322,7 +342,7 @@
 
 /obj/item/assembly/flash/armimplant/try_use_flash(mob/user = null)
 	if(overheat)
-		var/obj/item/organ/internal/cyberimp/arm/flash/real_arm = arm.resolve()
+		var/obj/item/organ/internal/cyberimp/arm/item_set/flash/real_arm = arm.resolve()
 		if(real_arm?.owner)
 			to_chat(real_arm.owner, span_warning("Your photon projector is running too hot to be used again so quickly!"))
 		return FALSE

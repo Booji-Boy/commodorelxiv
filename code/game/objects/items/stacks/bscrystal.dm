@@ -13,6 +13,7 @@
 	grind_results = list(/datum/reagent/bluespace = 20)
 	scan_state = "rock_BScrystal"
 	merge_type = /obj/item/stack/ore/bluespace_crystal
+	material_type = /datum/material/bluespace
 	/// The teleport range when crushed/thrown at someone.
 	var/blink_range = 8
 
@@ -78,6 +79,9 @@
 	merge_type = /obj/item/stack/sheet/bluespace_crystal
 	material_type = /datum/material/bluespace
 	var/crystal_type = /obj/item/stack/ore/bluespace_crystal/refined
+
+/obj/item/stack/sheet/bluespace_crystal/five
+	amount = 5
 
 /obj/item/stack/sheet/bluespace_crystal/attack_self(mob/user)// to prevent the construction menu from ever happening
 	to_chat(user, span_warning("You cannot crush the polycrystal in-hand, try breaking one off."))

@@ -23,8 +23,17 @@ export function getAntagCategories(antagonists: Antagonist[]): AntagGroup[] {
     return 0;
   });
 
+<<<<<<< HEAD
   return sorted;
 }
+=======
+  const sortedAntagonists = sortBy<AntagGroup>(([key]) => key)(
+    Object.entries(categories),
+  );
+
+  return sortedAntagonists;
+};
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /** Returns a disguised name in case the person is wearing someone else's ID */
 export function getDisplayName(full_name: string, nickname?: string): string {
@@ -44,9 +53,26 @@ export function getDisplayName(full_name: string, nickname?: string): string {
   return `"${full_name.split(/ \[| \(/)[0]}"`;
 }
 
+<<<<<<< HEAD
 /** Returns the department the player is in */
 export function getDepartmentByJob(job: string): string | undefined {
   const withoutParenthesis = job.replace(/ \(.*\)/, '');
+=======
+export const getMostRelevant = (
+  searchQuery: string,
+  observables: Observable[][],
+) => {
+  /** Returns the most orbited observable that matches the search. */
+  const mostRelevant: Observable = flow([
+    // Filters out anything that doesn't match search
+    filter<Observable>((observable) =>
+      isJobOrNameMatch(observable, searchQuery),
+    ),
+    // Sorts descending by orbiters
+    sortBy<Observable>((observable) => -(observable.orbiters || 0)),
+    // Makes a single Observables list for an easy search
+  ])(observables.flat())[0];
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   for (const department in DEPARTMENT2COLOR) {
     if (DEPARTMENT2COLOR[department].trims.includes(withoutParenthesis)) {
@@ -94,12 +120,19 @@ function getThreatColor(orbiters = 0): string {
 /** Displays color for buttons based on the health or orbiter count. */
 export function getDisplayColor(
   item: Observable,
+<<<<<<< HEAD
   mode: ViewMode,
   override?: string,
 ): string {
   const { job, health, orbiters } = item;
 
   // Things like blob camera, etc
+=======
+  heatMap: boolean,
+  color?: string,
+) => {
+  const { health, orbiters } = item;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   if (typeof health !== 'number') {
     return override ? 'good' : 'grey';
   }
@@ -123,9 +156,16 @@ export function getDisplayColor(
 export function isJobOrNameMatch(
   observable: Observable,
   searchQuery: string,
+<<<<<<< HEAD
 ): boolean {
   if (!searchQuery) return true;
 
+=======
+) => {
+  if (!searchQuery) {
+    return true;
+  }
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { full_name, job } = observable;
 
   return (

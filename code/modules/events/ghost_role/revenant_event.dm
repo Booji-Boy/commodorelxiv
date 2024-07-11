@@ -6,12 +6,11 @@
 	weight = 7
 	max_occurrences = 1
 	min_players = 5
-	dynamic_should_hijack = TRUE
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_ENTITIES
 	description = "Spawns an angry, soul sucking ghost."
 	min_wizard_trigger_potency = 4
 	max_wizard_trigger_potency = 7
-
 
 /datum/round_event/ghost_role/revenant
 	var/ignore_mobcheck = FALSE
@@ -30,8 +29,13 @@
 			message_admins("Event attempted to spawn a revenant, but there were only [deadMobs]/[REVENANT_SPAWN_THRESHOLD] dead mobs.")
 			return WAITING_FOR_SOMETHING
 
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghost_candidates(check_jobban = ROLE_REVENANT, role = ROLE_REVENANT, alert_pic = /mob/living/basic/revenant, amount_to_pick = 1)
 	if(isnull(chosen_one))
+=======
+	var/list/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_REVENANT, role = ROLE_REVENANT, pic_source = /mob/living/basic/revenant)
+	if(!length(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return NOT_ENOUGH_PLAYERS
 	var/list/spawn_locs = list()
 	for(var/mob/living/carbon/human/L in GLOB.dead_mob_list) //look for any harvestable bodies
@@ -51,11 +55,19 @@
 		return MAP_ERROR
 
 	var/mob/living/basic/revenant/revvie = new(pick(spawn_locs))
+<<<<<<< HEAD
 	revvie.key = chosen_one.key
 	message_admins("[ADMIN_LOOKUPFLW(revvie)] has been made into a revenant by an event.")
 	revvie.log_message("was spawned as a revenant by an event.", LOG_GAME)
 	spawned_mobs += revvie
 	qdel(chosen_one)
+=======
+	revvie.key = selected.key
+	message_admins("[ADMIN_LOOKUPFLW(revvie)] has been made into a revenant by an event.")
+	revvie.log_message("was spawned as a revenant by an event.", LOG_GAME)
+	spawned_mobs += revvie
+	qdel(selected)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return SUCCESSFUL_SPAWN
 
 #undef REVENANT_SPAWN_THRESHOLD

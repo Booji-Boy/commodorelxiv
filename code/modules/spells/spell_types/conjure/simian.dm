@@ -13,9 +13,12 @@
 	invocation = "OOGA OOGA OOGA!!!!"
 	invocation_type = INVOCATION_SHOUT
 
+<<<<<<< HEAD
 	///Our gorilla transformation spell, additionally granted to the user at max level.
 	var/datum/action/cooldown/spell/shapeshift/gorilla/gorilla_transformation
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	summon_radius = 2
 	summon_type = list(
 		/mob/living/basic/gorilla/lesser,
@@ -24,18 +27,27 @@
 	)
 	summon_amount = 4
 
+<<<<<<< HEAD
 /datum/action/cooldown/spell/conjure/simian/Destroy()
 	. = ..()
 	QDEL_NULL(gorilla_transformation)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/cooldown/spell/conjure/simian/level_spell(bypass_cap)
 	. = ..()
 	summon_amount++ // MORE, MOOOOORE
 	if(spell_level == spell_max_level) // We reward the faithful.
+<<<<<<< HEAD
 		gorilla_transformation = new(owner)
 		gorilla_transformation.Grant(owner)
 		spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC // Max level lets you cast it naked, for monkey larp.
 		to_chat(owner, span_notice("Your simian power has reached maximum capacity! You can now cast this spell naked, and have additionally been granted a gorilla transformation spell!"))
+=======
+		summon_type = list(/mob/living/carbon/human/species/monkey/angry, /mob/living/basic/gorilla)
+		spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC // Max level lets you cast it naked, for monkey larp.
+		to_chat(owner, span_notice("Your simian power has reached maximum capacity! You can now cast this spell naked, and you will create adult Gorillas with each cast."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/cooldown/spell/conjure/simian/cast(atom/cast_on)
 	. = ..()

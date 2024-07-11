@@ -1,9 +1,27 @@
+<<<<<<< HEAD
 ADMIN_VERB(get_server_logs, R_ADMIN, "Get Server Logs", "View or retrieve logfiles.", ADMIN_CATEGORY_MAIN)
 	user.browseserverlogs()
 
 ADMIN_VERB(get_current_logs, R_ADMIN, "Get Current Logs", "View or retrieve logfiles for the current round.", ADMIN_CATEGORY_MAIN)
 	user.browseserverlogs(current=TRUE)
+=======
+//This proc allows download of past server logs saved within the data/logs/ folder.
+/client/proc/getserverlogs()
+	set name = "Get Server Logs"
+	set desc = "View/retrieve logfiles."
+	set category = "Admin.Logging"
 
+	browseserverlogs()
+
+/client/proc/getcurrentlogs()
+	set name = "Get Current Logs"
+	set desc = "View/retrieve logfiles for the current round."
+	set category = "Admin.Logging"
+
+	browseserverlogs(current = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
+/* monkestation edit: replaced in [monkestation\code\modules\admin\verbs\getlogs.dm]
 /client/proc/browseserverlogs(current=FALSE)
 	var/path = browse_files(current ? BROWSE_ROOT_CURRENT_LOGS : BROWSE_ROOT_ALL_LOGS)
 	if(!path)
@@ -23,3 +41,8 @@ ADMIN_VERB(get_current_logs, R_ADMIN, "Get Current Logs", "View or retrieve logf
 		else
 			return
 	to_chat(src, "Attempting to send [path], this may take a fair few minutes if the file is very large.", confidential = TRUE)
+<<<<<<< HEAD
+=======
+	return
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -11,10 +11,17 @@
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
 
+<<<<<<< HEAD
 	RegisterSignals(target, list(COMSIG_LIVING_DEATH, COMSIG_LIVING_ON_WABBAJACKED, COMSIG_LIVING_UNSHAPESHIFTED, COMSIG_MOB_CHANGED_TYPE), PROC_REF(barf_contents))
 
 /datum/element/content_barfer/Detach(datum/target)
 	UnregisterSignal(target, list(COMSIG_LIVING_DEATH, COMSIG_LIVING_ON_WABBAJACKED, COMSIG_LIVING_UNSHAPESHIFTED, COMSIG_MOB_CHANGED_TYPE))
+=======
+	RegisterSignals(target, list(COMSIG_LIVING_DEATH, COMSIG_LIVING_ON_WABBAJACKED, COMSIG_MOB_CHANGED_TYPE), PROC_REF(barf_contents))
+
+/datum/element/content_barfer/Detach(datum/target)
+	UnregisterSignal(target, list(COMSIG_LIVING_DEATH, COMSIG_LIVING_ON_WABBAJACKED, COMSIG_MOB_CHANGED_TYPE))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/element/content_barfer/proc/barf_contents(mob/living/target)

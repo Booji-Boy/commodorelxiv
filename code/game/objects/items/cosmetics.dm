@@ -183,8 +183,14 @@
 	icon = 'icons/obj/cosmetic.dmi'
 	icon_state = "razor"
 	inhand_icon_state = "razor"
+<<<<<<< HEAD
 	obj_flags = CONDUCTS_ELECTRICITY
+=======
+	toolspeed = 1
+	flags_1 = CONDUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	w_class = WEIGHT_CLASS_TINY
+	var/unlocked = FALSE //for unlocking super hairstyles
 
 /obj/item/razor/suicide_act(mob/living/carbon/user)
 	user.visible_message(span_suicide("[user] begins shaving [user.p_them()]self without the razor guard! It looks like [user.p_theyre()] trying to commit suicide!"))
@@ -192,6 +198,7 @@
 	shave(user, BODY_ZONE_HEAD)//doesnt need to be BODY_ZONE_HEAD specifically, but whatever
 	return BRUTELOSS
 
+<<<<<<< HEAD
 /obj/item/razor/proc/shave(mob/living/carbon/human/skinhead, location = BODY_ZONE_PRECISE_MOUTH)
 	if(location == BODY_ZONE_PRECISE_MOUTH)
 		skinhead.set_facial_hairstyle("Shaved", update = TRUE)
@@ -218,6 +225,81 @@
 				if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 					return
 				var/new_style = tgui_input_list(user, "Select a facial hairstyle", "Grooming", SSaccessories.facial_hairstyles_list)
+=======
+/obj/item/razor/attack(mob/M, mob/living/user)
+	if(SEND_SIGNAL(M, COMSIG_MOB_SHEARED, toolspeed, src, user))
+		return
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/location = user.zone_selected
+		if((location in list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_HEAD)) && !H.get_bodypart(BODY_ZONE_HEAD))
+			to_chat(user, span_warning("[H] doesn't have a head!"))
+			return
+		if(location == BODY_ZONE_PRECISE_MOUTH)
+			if(!(user.istate & ISTATE_HARM))
+				if(H.gender == MALE)
+					if (H == user)
+						to_chat(user, span_warning("You need a mirror to properly style your own facial hair!"))
+						return
+					if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+						return
+					var/new_style = tgui_input_list(user, "Select a facial hairstyle", "Grooming", GLOB.facial_hairstyles_list)
+					if(isnull(new_style))
+						return
+					if(!get_location_accessible(H, location))
+						to_chat(user, span_warning("The mask is in the way!"))
+						return
+					if(HAS_TRAIT(H, TRAIT_SHAVED))
+						to_chat(user, span_warning("[H] is just way too shaved. Like, really really shaved."))
+						return
+					user.visible_message(span_notice("[user] tries to change [H]'s facial hairstyle using [src]."), span_notice("You try to change [H]'s facial hairstyle using [src]."))
+					if(new_style && do_after(user, 60, target = H))
+						user.visible_message(span_notice("[user] successfully changes [H]'s facial hairstyle using [src]."), span_notice("You successfully change [H]'s facial hairstyle using [src]."))
+						H.facial_hairstyle = new_style
+						H.update_body_parts()
+						return
+				else
+					return
+
+			else
+				if(!(FACEHAIR in H.dna.species.species_traits))
+					to_chat(user, span_warning("There is no facial hair to shave!"))
+					return
+				if(!get_location_accessible(H, location))
+					to_chat(user, span_warning("The mask is in the way!"))
+					return
+				if(H.facial_hairstyle == "Shaved")
+					to_chat(user, span_warning("Already clean-shaven!"))
+					return
+
+				if(H == user) //shaving yourself
+					user.visible_message(span_notice("[user] starts to shave [user.p_their()] facial hair with [src]."), \
+						span_notice("You take a moment to shave your facial hair with [src]..."))
+					if(do_after(user, 50, target = H))
+						user.visible_message(span_notice("[user] shaves [user.p_their()] facial hair clean with [src]."), \
+							span_notice("You finish shaving with [src]. Fast and clean!"))
+						shave(H, location)
+				else
+					user.visible_message(span_warning("[user] tries to shave [H]'s facial hair with [src]."), \
+						span_notice("You start shaving [H]'s facial hair..."))
+					if(do_after(user, 50, target = H))
+						user.visible_message(span_warning("[user] shaves off [H]'s facial hair with [src]."), \
+							span_notice("You shave [H]'s facial hair clean off."))
+						shave(H, location)
+
+		else if(location == BODY_ZONE_HEAD)
+			if(!(user.istate & ISTATE_HARM))
+				if (H == user)
+					to_chat(user, span_warning("You need a mirror to properly style your own hair!"))
+					return
+				if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+					return
+				var/new_style
+				if(src.unlocked)
+					new_style = tgui_input_list(user, "Select a hair style", "Grooming", GLOB.hairstyles_list)
+				else
+					new_style = tgui_input_list(user, "Select a hair style", "Grooming", GLOB.roundstart_hairstyles_list)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				if(isnull(new_style))
 					return
 				if(!get_location_accessible(human_target, location))
@@ -237,6 +319,7 @@
 			else
 				return
 		else
+<<<<<<< HEAD
 			if(!get_location_accessible(human_target, location))
 				to_chat(user, span_warning("The mask is in the way!"))
 				return
@@ -328,3 +411,23 @@
 #undef UPPER_LIP
 #undef MIDDLE_LIP
 #undef LOWER_LIP
+=======
+			..()
+	else
+		..()
+
+/obj/item/razor/attackby(obj/item/item, mob/user, params)
+	.=..()
+	if(istype(item, /obj/item/stack/sheet/mineral/bananium))
+		if(unlocked)
+			to_chat(user, "<span class='userdanger'>[src] is already powered by bananium!</span>")
+			return
+		item.use_tool(src, user, amount=1)
+		unlocked = TRUE
+		to_chat(user, "<span class='userdanger'>You insert the bananium into the battery pack.</span>")
+
+/obj/item/razor/gigarazor
+	name = "shmick 9000"
+	desc = "It gets the job done."
+	unlocked = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

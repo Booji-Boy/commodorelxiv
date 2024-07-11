@@ -1,3 +1,81 @@
+<<<<<<< HEAD
+=======
+//Some information about how html sanitization is handled
+//All book info datums should store sanitized data. This cannot be worked around
+//All inputs and outputs from the round (DB calls) need to use sanitized data
+//All tgui menus should get unsanitized data, since jsx handles that on its own
+//Everything else should use sanitized data. Yes including names, it's an xss vuln because of how chat works
+///A datum which contains all the metadata of a book
+/datum/book_info
+	///The title of the book
+	var/title
+	///The "author" of the book
+	var/author
+	///The info inside the book
+	var/content
+
+/datum/book_info/New(_title, _author, _content)
+	title = _title
+	author = _author
+	content = _content
+
+/datum/book_info/proc/set_title(_title, trusted = FALSE)  //Trusted should only be used for books read from the db, or in cases that we can be sure the info has already been sanitized
+	if(trusted)
+		title = _title
+		return
+	title = reject_bad_text(trim(html_encode(_title), 30))
+
+/datum/book_info/proc/get_title(default="N/A") //Loads in an html decoded version of the title. Only use this for tgui menus, absolutely nothing else.
+	return html_decode(title) || "N/A"
+
+/datum/book_info/proc/set_author(_author, trusted = FALSE)
+	if(trusted)
+		author = _author
+		return
+	author = trim(html_encode(_author), MAX_NAME_LEN)
+
+/datum/book_info/proc/get_author(default="N/A")
+	return html_decode(author) || "N/A"
+
+/datum/book_info/proc/set_content(_content, trusted = FALSE)
+	if(trusted)
+		content = _content
+		return
+	content = trim(html_encode(_content), MAX_PAPER_LENGTH)
+
+/datum/book_info/proc/set_content_using_paper(obj/item/paper/paper)
+	// Just the paper's raw data.
+	var/raw_content = ""
+	for(var/datum/paper_input/text_input as anything in paper.raw_text_inputs)
+		raw_content += text_input.to_raw_html()
+
+	content = trim(html_encode(raw_content), MAX_PAPER_LENGTH)
+
+/datum/book_info/proc/get_content(default="N/A")
+	return html_decode(content) || "N/A"
+
+///Returns a copy of the book_info datum
+/datum/book_info/proc/return_copy()
+	var/datum/book_info/copycat = new(title, author, content)
+	return copycat
+
+///Modify an existing book_info datum to match your data
+/datum/book_info/proc/copy_into(datum/book_info/copycat)
+	copycat.set_title(title, trusted = TRUE)
+	copycat.set_author(author, trusted = TRUE)
+	copycat.set_content(content, trusted = TRUE)
+	return copycat
+
+/datum/book_info/proc/compare(datum/book_info/cmp_with)
+	if(author != cmp_with.author)
+		return FALSE
+	if(title != cmp_with.title)
+		return FALSE
+	if(content != cmp_with.content)
+		return FALSE
+	return TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/book
 	name = "book"
 	desc = "Crack it open, inhale the musk of its pages, and learn something new."
@@ -36,6 +114,7 @@
 
 	AddElement(/datum/element/falling_hazard, damage = 5, wound_bonus = 0, hardhat_safety = TRUE, crushes = FALSE, impact_sound = drop_sound)
 
+<<<<<<< HEAD
 /obj/item/book/examine(mob/user)
 	. = ..()
 	if(carved)
@@ -49,6 +128,27 @@
 	return data
 
 /obj/item/book/ui_interact(mob/living/user, datum/tgui/ui)
+=======
+/obj/item/book/ui_static_data(mob/user)
+	var/list/data = list()
+	data["author"] = book_data.get_author()
+	data["title"] = book_data.get_title()
+	data["content"] = book_data.get_content()
+	return data
+
+/obj/item/book/ui_interact(mob/living/user, datum/tgui/ui)
+	if(!length(book_data.get_content()))
+		balloon_alert(user, "this book is blank!")
+		return
+
+	if(istype(user) && !isnull(user.mind))
+		LAZYINITLIST(user.mind.book_titles_read)
+		var/has_not_read_book = !(starting_title in user.mind.book_titles_read)
+		if(has_not_read_book)
+			user.add_mood_event("book_nerd", /datum/mood_event/book_nerd)
+			user.mind.book_titles_read[starting_title] = TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "MarkdownViewer", name)
@@ -63,6 +163,7 @@
 /obj/item/book/proc/can_read_book(mob/living/user)
 	if(user.is_blind())
 		to_chat(user, span_warning("You are blind and can't read anything!"))
+<<<<<<< HEAD
 		return FALSE
 
 	if(!user.can_read(src))
@@ -101,6 +202,17 @@
 	if(burn_paper_product_attackby_check(attacking_item, user))
 		return
 
+=======
+		return
+
+	if(!user.can_read(src))
+		return
+
+	user.visible_message(span_notice("[user] opens a book titled \"[book_data.title]\" and begins reading intently."))
+	ui_interact(user)
+
+/obj/item/book/attackby(obj/item/attacking_item, mob/user, params)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(istype(attacking_item, /obj/item/pen))
 		if(!user.can_perform_action(src) || !user.can_write(attacking_item))
 			return
@@ -166,7 +278,10 @@
 					checkouts -= checkout_ref
 					computer.checkout_update()
 					user.balloon_alert(user, "book checked in")
+<<<<<<< HEAD
 					playsound(loc, 'sound/items/barcodebeep.ogg', 20, FALSE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 					return
 
 				user.balloon_alert(user, "book not checked out!")
@@ -176,9 +291,29 @@
 				computer.inventory[ref(our_copy)] = our_copy
 				computer.inventory_update()
 				user.balloon_alert(user, "book added to inventory")
+<<<<<<< HEAD
 				playsound(loc, 'sound/items/barcodebeep.ogg', 20, FALSE)
 
 	else if(try_carve(attacking_item, user, params))
+=======
+
+	else if((istype(attacking_item, /obj/item/knife) || attacking_item.tool_behaviour == TOOL_WIRECUTTER) && !(flags_1 & HOLOGRAM_1))
+		to_chat(user, span_notice("You begin to carve out [book_data.title]..."))
+		if(do_after(user, 30, target = src))
+			to_chat(user, span_notice("You carve out the pages from [book_data.title]! You didn't want to read it anyway."))
+			var/obj/item/storage/book/carved_out = new
+			carved_out.name = src.name
+			carved_out.title = book_data.title
+			carved_out.icon_state = src.icon_state
+			if(user.is_holding(src))
+				qdel(src)
+				user.put_in_hands(carved_out)
+				return
+			else
+				carved_out.forceMove(drop_location())
+				qdel(src)
+				return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	return ..()
 

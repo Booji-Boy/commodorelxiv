@@ -1,4 +1,5 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
@@ -7,6 +8,14 @@ import { Window } from '../layouts';
 import {
   ColorItem,
   ICON_BY_CATEGORY_NAME,
+=======
+import { useBackend, useLocalState } from '../backend';
+import { Button, LabeledList, Section, Stack, Tabs } from '../components';
+import { Window } from '../layouts';
+import {
+  ICON_BY_CATEGORY_NAME,
+  ColorItem,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   SmartPipeBlockSection,
 } from './RapidPipeDispenser';
 import { LayerSelect } from './RapidPlumbingDevice';
@@ -59,16 +68,30 @@ type Recipe = {
 const PipeTypeSection = (props) => {
   const { act, data } = useBackend<Data>();
   const { categories = [] } = data;
+<<<<<<< HEAD
   const [categoryName, setCategoryName] = useState(categories[0].cat_name);
   const shownCategory =
     categories.find((category) => category.cat_name === categoryName) ||
     categories[0];
 
+=======
+  const [categoryName, setCategoryName] = useLocalState(
+    'categoryName',
+    categories[0].cat_name,
+  );
+  const shownCategory =
+    categories.find((category) => category.cat_name === categoryName) ||
+    categories[0];
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Section fill scrollable>
       <Tabs>
         {categories.map((category, i) => (
           <Tabs.Tab
+<<<<<<< HEAD
+=======
+            fluid
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             key={category.cat_name}
             icon={ICON_BY_CATEGORY_NAME[category.cat_name]}
             selected={category.cat_name === shownCategory.cat_name}
@@ -83,7 +106,12 @@ const PipeTypeSection = (props) => {
           key={recipe.pipe_index}
           fluid
           ellipsis
+<<<<<<< HEAD
           tooltip={recipe.pipe_name}
+=======
+          content={recipe.pipe_name}
+          title={recipe.pipe_name}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           onClick={() =>
             act('pipe_type', {
               pipe_type: recipe.pipe_index,
@@ -91,9 +119,13 @@ const PipeTypeSection = (props) => {
               category: shownCategory.cat_name,
             })
           }
+<<<<<<< HEAD
         >
           {recipe.pipe_name}
         </Button>
+=======
+        />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       ))}
     </Section>
   );

@@ -3,7 +3,11 @@ import { BooleanLike } from 'common/react';
 import { useBackend } from '../backend';
 import { Box, Section, Stack } from '../components';
 import { Window } from '../layouts';
+<<<<<<< HEAD
 import { Objective, ObjectivePrintout } from './common/Objectives';
+=======
+import { ObjectivePrintout, Objective } from './common/Objectives';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const jauntstyle = {
   color: 'lightblue',

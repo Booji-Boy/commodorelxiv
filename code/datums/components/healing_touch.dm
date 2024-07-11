@@ -101,13 +101,25 @@
 )
 	src.heal_color = heal_color
 
+// Let's populate this list as we actually use it, this thing has too many args
+/datum/component/healing_touch/InheritComponent(
+	datum/component/new_component,
+	i_am_original,
+	heal_color,
+)
+	src.heal_color = heal_color
+
 /datum/component/healing_touch/UnregisterFromParent()
 	var/mob/living/living_parent = parent
 	living_parent.ai_controller?.set_blackboard_key(BB_BASIC_MOB_HEALER, FALSE)
 	UnregisterSignal(parent, list(COMSIG_LIVING_UNARMED_ATTACK, COMSIG_HOSTILE_PRE_ATTACKINGTARGET))
 	return ..()
 
+<<<<<<< HEAD
 /datum/component/healing_touch/Destroy(force)
+=======
+/datum/component/healing_touch/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	extra_checks = null
 	return ..()
 
@@ -124,7 +136,10 @@
 		return // Fall back to attacking it
 
 	if (extra_checks && !extra_checks.Invoke(healer, target))
-		return COMPONENT_CANCEL_ATTACK_CHAIN
+		//MONKESTATION EDIT START - why would failing the extra checks cancel our attack chain?
+		//return COMPONENT_CANCEL_ATTACK_CHAIN //MONKESTATION EDIT ORIGINAL
+		return
+		//MONKESTATION EDIT END
 
 	if (DOING_INTERACTION(healer, interaction_key))
 		healer.balloon_alert(healer, "busy!")
@@ -161,7 +176,15 @@
 /datum/component/healing_touch/proc/has_healable_damage(mob/living/target)
 	if (!isnull(valid_biotypes) && !(valid_biotypes & target.mob_biotypes))
 		return FALSE
+<<<<<<< HEAD
 	if (target.getStaminaLoss() > 0 && heal_stamina)
+=======
+	if  (target.stamina.loss > 0 && heal_stamina)
+		return TRUE
+	if (target.getOxyLoss() > 0 && heal_oxy)
+		return TRUE
+	if (target.getToxLoss() > 0 && heal_tox)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	if (target.getOxyLoss() > 0 && heal_oxy)
 		return TRUE
@@ -198,9 +221,28 @@
 		updating_health = FALSE,
 	)
 	healed += target.adjustOxyLoss(-heal_oxy, updating_health = FALSE, required_biotype = valid_biotypes)
+<<<<<<< HEAD
 	healed += target.adjustToxLoss(-heal_tox, updating_health = FALSE, required_biotype = valid_biotypes)
 	if (healed <= 0)
 		return
+=======
+	healed += target.adjustToxLoss(-heal_tox, updating_health = FALSE, forced = TRUE, required_biotype = valid_biotypes)
+	//MONKESTATION REMOVAL START
+	// While removing this could cause some issues, keeping it seems to cause more than it would
+	// solve. In particular, the above procs are somewhat bugged and don't return the values we
+	// expect - meaning this could cause a return even if the target was actually healed.
+	//
+	// Because of this, and because the UI update is behind this check, I've opted to remove it for
+	// now. Maybe later when the above procs are fixed, we can revisit this removal.
+	//
+	// (As an aside: If we ever undo this removal, we should probably include a balloon alert
+	// saying "nothing to heal!")
+	/*
+	if (healed <= 0)
+		return
+	*/
+	//MONKESTATION REMOVAL END
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	target.updatehealth()
 	new /obj/effect/temp_visual/heal(get_turf(target), heal_color)

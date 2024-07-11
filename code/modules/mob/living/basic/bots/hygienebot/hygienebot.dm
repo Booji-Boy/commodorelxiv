@@ -6,14 +6,22 @@
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "hygienebot"
 	base_icon_state = "hygienebot"
+<<<<<<< HEAD
 	pass_flags = parent_type::pass_flags | PASSTABLE
+=======
+	pass_flags = PASSMOB | PASSFLAPS | PASSTABLE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	layer = MOB_UPPER_LAYER
 	density = FALSE
 	anchored = FALSE
 	health = 100
 	maxHealth = 100
 	path_image_color = "#80dae7"
+<<<<<<< HEAD
 	req_one_access = list(ACCESS_ROBOTICS, ACCESS_JANITOR)
+=======
+	maints_access_required = list(ACCESS_ROBOTICS, ACCESS_JANITOR)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	radio_key = /obj/item/encryptionkey/headset_service
 	radio_channel = RADIO_CHANNEL_SERVICE
 	bot_type = HYGIENE_BOT
@@ -36,7 +44,10 @@
 		HYGIENEBOT_VOICED_THREAT_AIRLOCK = 'sound/voice/hygienebot/dragyouout.ogg',
 		HYGIENEBOT_VOICED_FOUL_SMELL = 'sound/voice/hygienebot/foulsmelling.ogg',
 		HYGIENEBOT_VOICED_TROGLODYTE = 'sound/voice/hygienebot/troglodyte.ogg',
+<<<<<<< HEAD
 		HYGIENEBOT_VOICED_GREEN_CLOUD = 'sound/voice/hygienebot/greencloud.ogg',
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		HYGIENEBOT_VOICED_ARSEHOLE = 'sound/voice/hygienebot/letmeclean.ogg',
 		HYGIENEBOT_VOICED_THREAT_ARTERIES = 'sound/voice/hygienebot/cutarteries.ogg',
 		HYGIENEBOT_VOICED_STOP_RUNNING = 'sound/voice/hygienebot/stoprunning.ogg',

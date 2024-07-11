@@ -13,10 +13,16 @@ type PreferenceChild = {
   children: ReactNode;
 };
 
+<<<<<<< HEAD
 const binaryInsertPreference = (
   collection: PreferenceChild[],
   value: PreferenceChild,
 ) => binaryInsertWith(collection, value, (child) => child.name);
+=======
+const binaryInsertPreference = binaryInsertWith<PreferenceChild>(
+  (child) => child.name,
+);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 const sortByName = (array: [string, PreferenceChild[]][]) =>
   sortBy(array, ([name]) => name);
@@ -38,7 +44,11 @@ export const GamePreferencesPage = (props) => {
         <Box
           as="span"
           style={{
+<<<<<<< HEAD
             borderBottom: '2px dotted rgba(255, 255, 255, 0.8)',
+=======
+            'border-bottom': '2px dotted rgba(255, 255, 255, 0.8)',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           {nameInner}
@@ -94,7 +104,11 @@ export const GamePreferencesPage = (props) => {
     );
   }
 
+<<<<<<< HEAD
   const gamePreferenceEntries: [string, ReactNode][] = sortByName(
+=======
+  const gamePreferenceEntries: [string, InfernoNode][] = sortByName(
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     Object.entries(gamePreferences),
   ).map(([category, preferences]) => {
     return [category, preferences.map((entry) => entry.children)];

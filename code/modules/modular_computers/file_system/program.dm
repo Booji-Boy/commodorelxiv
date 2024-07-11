@@ -3,6 +3,7 @@
 	filetype = "PRG"
 	/// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NTNET!
 	filename = "UnknownProgram"
+<<<<<<< HEAD
 
 	/// Program-specific bitflags that tell the app what it runs on.
 	/// (PROGRAM_ALL | PROGRAM_CONSOLE | PROGRAM_LAPTOP | PROGRAM_PDA)
@@ -17,6 +18,12 @@
 	var/list/run_access = list()
 	///List of required access to download or file host the program. Any match will do.
 	var/list/download_access = list()
+=======
+	/// List of required accesses to *run* the program. Any match will do.
+	var/list/required_access = list()
+	/// List of required access to download or file host the program. Any match will do.
+	var/list/transfer_access = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// User-friendly name of this program.
 	var/filedesc = "Unknown Program"
 	/// Short description of this program's function.
@@ -44,6 +51,7 @@
 	var/alert_pending = FALSE
 	/// How well this program will help combat detomatix viruses.
 	var/detomatix_resistance = NONE
+<<<<<<< HEAD
 	/// Unremovable circuit componentn added to the physical computer while the program is installed
 	var/obj/item/circuit_component/mod_program/circuit_comp_type
 
@@ -78,27 +86,43 @@
 			computer.shell.unremovable_circuit_components -= comp
 			qdel(comp)
 	return ..()
+=======
+	///Boolean on whether or not only one copy of the app can exist. This means it deletes itself when cloned elsewhere.
+	var/unique_copy = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/computer_file/program/clone()
 	var/datum/computer_file/program/temp = ..()
 	temp.run_access = run_access
 	temp.filedesc = filedesc
+<<<<<<< HEAD
 	temp.program_open_overlay = program_open_overlay
 	temp.program_flags = program_flags
 	temp.can_run_on_flags = can_run_on_flags
 	if(program_flags & PROGRAM_UNIQUE_COPY)
+=======
+	temp.program_icon_state = program_icon_state
+	temp.requires_ntnet = requires_ntnet
+	temp.usage_flags = usage_flags
+	if(unique_copy)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(computer)
 			computer.remove_file(src)
 		if(disk_host)
 			disk_host.remove_file(src)
 	return temp
 
+<<<<<<< HEAD
 /**
  * WARNING: this proc does not work the same as normal `ui_interact`, as the
  * computer takes care of opening the UI. The `datum/tgui/ui` parameter will always exist.
  * This proc only serves as a callback.
  */
 /datum/computer_file/program/ui_interact(mob/user, datum/tgui/ui)
+=======
+///We are not calling parent as it's handled by the computer itself, this is only called after.
+/datum/computer_file/program/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SHOULD_CALL_PARENT(FALSE)
 
 // Relays icon update to the computer.
@@ -197,6 +221,7 @@
  **/
 /datum/computer_file/program/proc/on_start(mob/living/user)
 	SHOULD_CALL_PARENT(TRUE)
+<<<<<<< HEAD
 	if(!can_run(user, loud = TRUE))
 		return FALSE
 	if(program_flags & PROGRAM_REQUIRES_NTNET)
@@ -204,6 +229,14 @@
 		generate_network_log("Connection opened -- Program ID:[filename] User:[ID?"[ID.registered_name]":"None"]")
 	SEND_SIGNAL(src, COMSIG_COMPUTER_PROGRAM_START, user)
 	return TRUE
+=======
+	if(can_run(user, loud = TRUE))
+		if(requires_ntnet)
+			var/obj/item/card/id/ID = computer.computer_id_slot?.GetID()
+			generate_network_log("Connection opened -- Program ID:[filename] User:[ID?"[ID.registered_name]":"None"]")
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Kills the running program
@@ -218,6 +251,7 @@
 
 	if(src == computer.active_program)
 		computer.active_program = null
+<<<<<<< HEAD
 		if(!QDELETED(computer) && computer.enabled)
 			INVOKE_ASYNC(computer, TYPE_PROC_REF(/obj/item/modular_computer, update_tablet_open_uis), user)
 	else if(src in computer.idle_threads)
@@ -226,10 +260,19 @@
 		return FALSE
 
 	if(program_flags & PROGRAM_REQUIRES_NTNET)
+=======
+		if(computer.enabled)
+			computer.update_tablet_open_uis(usr)
+	if(src in computer.idle_threads)
+		computer.idle_threads.Remove(src)
+
+	if(requires_ntnet)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/obj/item/card/id/ID = computer.computer_id_slot?.GetID()
 		generate_network_log("Connection closed -- Program ID: [filename] User:[ID ? "[ID.registered_name]" : "None"]")
 
 	computer.update_appearance(UPDATE_ICON)
+<<<<<<< HEAD
 	SEND_SIGNAL(src, COMSIG_COMPUTER_PROGRAM_KILL, user)
 	return TRUE
 
@@ -237,12 +280,24 @@
 /datum/computer_file/program/proc/background_program(mob/user)
 	SHOULD_CALL_PARENT(TRUE)
 	if(program_flags & PROGRAM_HEADER || length(computer.idle_threads) > computer.max_idle_programs)
+=======
+	return TRUE
+
+///Sends the running program to the background/idle threads. Header programs can't be minimized and will kill instead.
+/datum/computer_file/program/proc/background_program()
+	SHOULD_CALL_PARENT(TRUE)
+	if(header_program)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return kill_program()
 
 	computer.idle_threads.Add(src)
 	computer.active_program = null
 
+<<<<<<< HEAD
 	if(user)
 		INVOKE_ASYNC(computer, TYPE_PROC_REF(/obj/item/modular_computer, update_tablet_open_uis), user)
+=======
+	computer.update_tablet_open_uis(usr)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	computer.update_appearance(UPDATE_ICON)
 	return TRUE

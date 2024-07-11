@@ -148,6 +148,7 @@
 	QDEL_NULL(egg)
 	var/datum/antagonist/spider/spider_antag = new granted_datum(directive)
 	spawned_mob.mind.add_antag_datum(spider_antag)
+<<<<<<< HEAD
 
 /obj/effect/mob_spawn/ghost_role/spider/abnormal
 	name = "abnormal egg cluster"
@@ -158,6 +159,8 @@
 		/mob/living/basic/spider/growing/spiderling/viper,
 	)
 	flash_window = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/mob_spawn/ghost_role/spider/enriched
 	name = "enriched egg cluster"
@@ -166,7 +169,11 @@
 	cluster_type = /obj/structure/spider/eggcluster/enriched
 	potentialspawns = list(
 		/mob/living/basic/spider/growing/spiderling/tarantula,
+<<<<<<< HEAD
 		/mob/living/basic/spider/growing/spiderling/breacher,
+=======
+		/mob/living/basic/spider/growing/spiderling/viper,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/mob/living/basic/spider/growing/spiderling/midwife,
 	)
 	flash_window = TRUE
@@ -183,7 +190,10 @@
 	potentialspawns = list(
 		/mob/living/basic/flesh_spider,
 	)
+<<<<<<< HEAD
 	flash_window = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	granted_datum = /datum/antagonist/spider/flesh
 
 /obj/effect/mob_spawn/ghost_role/spider/midwife
@@ -193,7 +203,11 @@
 	directive = "Ensure the survival of the spider species and overtake whatever structure you find yourself in."
 	cluster_type = /obj/structure/spider/eggcluster/midwife
 	potentialspawns = list(
+<<<<<<< HEAD
 		/mob/living/basic/spider/growing/spiderling/midwife, // We don't want the event to end instantly because broodmothers got a bad spawn
+=======
+		/mob/living/basic/spider/giant/midwife, // We don't want the event to end instantly because of a 2 hp spiderling dying
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	flash_window = TRUE
 
@@ -237,5 +251,9 @@
 		display_spiders[initial(spider.name)] = option
 	sort_list(display_spiders)
 
+<<<<<<< HEAD
 	var/chosen_spider = show_radial_menu(user, egg, display_spiders, radius = 38, require_near = TRUE)
+=======
+	var/chosen_spider = show_radial_menu(user, egg, display_spiders, radius = 38)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return spider_list[chosen_spider]

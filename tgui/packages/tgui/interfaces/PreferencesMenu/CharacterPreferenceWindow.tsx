@@ -11,11 +11,16 @@ import { LoadoutPage } from './loadout/index';
 import { MainPage } from './MainPage';
 import { PageButton } from './PageButton';
 import { QuirksPage } from './QuirksPage';
+<<<<<<< HEAD
 import { SpeciesPage } from './SpeciesPage';
+=======
+import { LoadoutManager } from './LoadoutPage';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 enum Page {
   Antags,
   Main,
+  Loadout,
   Jobs,
   Species,
   Quirks,
@@ -51,7 +56,11 @@ const CharacterProfiles = (props: {
 export const CharacterPreferenceWindow = (props) => {
   const { act, data } = useBackend<PreferencesMenuData>();
 
+<<<<<<< HEAD
   const [currentPage, setCurrentPage] = useState(Page.Main);
+=======
+  const [currentPage, setCurrentPage] = useLocalState('currentPage', Page.Main);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   let pageContents;
 
@@ -61,6 +70,9 @@ export const CharacterPreferenceWindow = (props) => {
       break;
     case Page.Jobs:
       pageContents = <JobsPage />;
+      break;
+    case Page.Loadout:
+      pageContents = <LoadoutManager />;
       break;
     case Page.Main:
       pageContents = (
@@ -87,7 +99,12 @@ export const CharacterPreferenceWindow = (props) => {
   }
 
   return (
-    <Window title="Character Preferences" width={920} height={770}>
+    <Window
+      title="Character Preferences"
+      width={1200}
+      height={770}
+      theme="generic"
+    >
       <Window.Content scrollable>
         <Stack vertical fill>
           <Stack.Item>
@@ -101,11 +118,15 @@ export const CharacterPreferenceWindow = (props) => {
               profiles={data.character_profiles}
             />
           </Stack.Item>
+<<<<<<< HEAD
           {!data.content_unlocked && (
             <Stack.Item align="center">
               Buy BYOND premium for more slots!
             </Stack.Item>
           )}
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           <Stack.Divider />
           <Stack.Item>
             <Stack fill>
@@ -126,6 +147,13 @@ export const CharacterPreferenceWindow = (props) => {
                   page={Page.Loadout}
                   setPage={setCurrentPage}
                 >
+<<<<<<< HEAD
+=======
+                  {/*
+                    Fun fact: This isn't "Jobs" so that it intentionally
+                    catches your eyes, because it's really important!
+                  */}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   Loadout
                 </PageButton>
               </Stack.Item>

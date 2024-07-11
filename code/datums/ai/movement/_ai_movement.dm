@@ -27,7 +27,11 @@
 /datum/ai_movement/proc/reset_pathing_failures(datum/ai_controller/controller)
 	controller.consecutive_pathing_attempts = 0
 
+<<<<<<< HEAD
 ///Should the movement be allowed to happen? return TRUE if it can, FALSE otherwise
+=======
+///Should the movement be allowed to happen? As of writing this, MOVELOOP_SKIP_STEP is defined as (1<<0) so be careful on using (return TRUE) or (can_move = TRUE; return can_move)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ai_movement/proc/allowed_to_move(datum/move_loop/source)
 	SHOULD_BE_PURE(TRUE)
 

@@ -163,10 +163,17 @@
 
 /datum/gas_reaction/zauker_decomp/init_factors() //Fixed reaction rate
 	factor = list(
+<<<<<<< HEAD
 		/datum/gas/zauker = "Zauker is consumed at [ZAUKER_DECOMPOSITION_MAX_RATE SECONDS / SSair.wait] moles per second in any unique gas mixture.",
 		/datum/gas/nitrogen = "At least [MINIMUM_MOLE_COUNT] moles of Nitrogen needs to be present for this reaction to occur. Nitrogen is produced at 0.7 moles per mole of Zauker decomposed.",
 		/datum/gas/oxygen = "Oxygen is produced at 0.3 moles per mole of zauker decomposed.",
 		"Energy" = "[ZAUKER_DECOMPOSITION_ENERGY] joules of energy is released per mole of zauker decomposed.",
+=======
+		/datum/gas/zauker = "Zauker is consumed at 1 reaction rate",
+		/datum/gas/water_vapor = "At least [MINIMUM_MOLE_COUNT] moles of H2O needs to be present for this reaction to occur. H2O is produced at 0.7 reaction rate", //monke edit, changes nitrogen to water_vapor
+		/datum/gas/oxygen = "Oxygen is produced at 0.3 reaction rate",
+		"Energy" = "[ZAUKER_DECOMPOSITION_ENERGY] joules of energy is released per reaction rate",
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/gas_reaction/proto_nitrate_formation/init_factors()

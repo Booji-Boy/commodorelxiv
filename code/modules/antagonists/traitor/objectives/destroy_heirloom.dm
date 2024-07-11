@@ -76,13 +76,19 @@
 	telecrystal_reward = list(1, 2)
 	target_jobs = list(
 		// Cargo
+<<<<<<< HEAD
 		/datum/job/bitrunner,
+=======
+		/datum/job/quartermaster,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/job/shaft_miner,
 		// Service
 		/datum/job/chaplain,
 		/datum/job/bartender,
 		/datum/job/cook,
 		/datum/job/curator,
+		// Monkestation edit: security assistants
+		/datum/job/security_assistant,
 	)
 
 /datum/traitor_objective/destroy_heirloom/rare
@@ -100,8 +106,11 @@
 		/datum/job/head_of_personnel,
 		/datum/job/chief_medical_officer,
 		/datum/job/research_director,
+<<<<<<< HEAD
 		/datum/job/quartermaster,
 		/datum/job/chief_engineer,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/traitor_objective/destroy_heirloom/captain

@@ -152,6 +152,13 @@ DEFINE_BITFIELD(no_equip_flags, list(
 #define CLOTHING_DIGITIGRADE_VARIATION (1<<1)
 ///The sprite works fine for digitigrade legs as-is.
 #define CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON (1<<2)
+<<<<<<< HEAD
+=======
+///has a sprite for monkeys
+#define CLOTHING_MONKEY_VARIATION (1<<3)
+///Has a sprite for snouted heads specifically.
+#define CLOTHING_SNOUTED_VARIATION (1<<4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //flags for covering body parts
 #define GLASSESCOVERSEYES (1<<0)
@@ -184,6 +191,7 @@ GLOBAL_LIST_INIT(detective_vest_allowed, list(
 	/obj/item/flashlight,
 	/obj/item/gun/ballistic,
 	/obj/item/gun/energy,
+	/obj/item/gun/microfusion, //monkestation edit
 	/obj/item/lighter,
 	/obj/item/melee/baton,
 	/obj/item/reagent_containers/spray/pepper,
@@ -202,6 +210,7 @@ GLOBAL_LIST_INIT(security_vest_allowed, list(
 	/obj/item/flashlight,
 	/obj/item/gun/ballistic,
 	/obj/item/gun/energy,
+	/obj/item/gun/microfusion, //monkestation edit
 	/obj/item/knife/combat,
 	/obj/item/melee/baton,
 	/obj/item/reagent_containers/spray/pepper,
@@ -211,13 +220,18 @@ GLOBAL_LIST_INIT(security_vest_allowed, list(
 	/obj/item/storage/belt/holster/detective,
 	/obj/item/storage/belt/holster/nukie,
 	/obj/item/storage/belt/holster/energy,
+<<<<<<< HEAD
 	/obj/item/gun/ballistic/shotgun/automatic/combat/compact,
 	/obj/item/pen/red/security,
+=======
+	/obj/item/clothing/mask/breath/sec_bandana
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ))
 
 GLOBAL_LIST_INIT(security_wintercoat_allowed, list(
 	/obj/item/gun/ballistic,
 	/obj/item/gun/energy,
+	/obj/item/gun/microfusion, //monkestation edit
 	/obj/item/melee/baton,
 	/obj/item/reagent_containers/spray/pepper,
 	/obj/item/restraints/handcuffs,

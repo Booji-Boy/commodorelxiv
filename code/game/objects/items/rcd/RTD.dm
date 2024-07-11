@@ -23,7 +23,11 @@
 	slot_flags = ITEM_SLOT_BELT
 	item_flags = NO_MAT_REDEMPTION | NOBLUDGEON
 	has_ammobar = TRUE
+<<<<<<< HEAD
 	banned_upgrades = RCD_ALL_UPGRADES & ~RCD_UPGRADE_SILO_LINK
+=======
+	banned_upgrades = RCD_UPGRADE_FRAMES | RCD_UPGRADE_SIMPLE_CIRCUITS | RCD_UPGRADE_FURNISHING | RCD_UPGRADE_ANTI_INTERRUPT | RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// main category for tile design
 	var/root_category = "Conventional"

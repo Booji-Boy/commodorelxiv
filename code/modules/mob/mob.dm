@@ -30,6 +30,7 @@
 	else if(ckey)
 		stack_trace("Mob without client but with associated ckey, [ckey], has been deleted.")
 
+	unset_machine()
 	remove_from_mob_list()
 	remove_from_dead_mob_list()
 	remove_from_alive_mob_list()
@@ -52,6 +53,10 @@
 
 	if(mock_client)
 		mock_client.mob = null
+
+	if(SSparticle_weather.running_weather)
+		if(src in SSparticle_weather.running_weather.messaged_mobs)
+			SSparticle_weather.running_weather.messaged_mobs -= src
 
 	return ..()
 
@@ -589,7 +594,11 @@
 	if(is_blind()) //blind people see things differently (through touch)
 		if(!blind_examine_check(examinify))
 			return
+<<<<<<< HEAD
 	else if(examine_turf && !(examine_turf.luminosity || examine_turf.dynamic_lumcount) && \
+=======
+	else if(!(examine_turf?.luminosity || examine_turf?.dynamic_lumcount) && \
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		get_dist(src, examine_turf) > 1 && \
 		!has_nightvision()) // If you aren't blind, it's in darkness (that you can't see) and farther then next to you
 		return
@@ -672,7 +681,7 @@
 
 	//now we touch the thing we're examining
 	/// our current intent, so we can go back to it after touching
-	var/previous_combat_mode = combat_mode
+	var/previous_combat_mode = (istate & ISTATE_HARM)
 	set_combat_mode(FALSE)
 	INVOKE_ASYNC(examined_thing, TYPE_PROC_REF(/atom, attack_hand), src)
 	set_combat_mode(previous_combat_mode)
@@ -972,7 +981,11 @@
 		selected_hand = (active_hand_index % held_items.len)+1
 
 	if(istext(selected_hand))
+<<<<<<< HEAD
 		selected_hand = LOWER_TEXT(selected_hand)
+=======
+		selected_hand = lowertext(selected_hand)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(selected_hand == "right" || selected_hand == "r")
 			selected_hand = 2
 		if(selected_hand == "left" || selected_hand == "l")
@@ -1092,7 +1105,7 @@
  * You can buckle on mobs if you're next to them since most are dense
  */
 /mob/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE, buckle_mob_flags= NONE)
-	if(M.buckled)
+	if(M.buckled && LAZYLEN(buckled_mobs) >= max_buckled_mobs)
 		return FALSE
 	return ..(M, force, check_loc, buckle_mob_flags)
 
@@ -1299,6 +1312,13 @@
 		return
 	for(var/atom/movable/screen/plane_master/rendering_plate/lighting/light as anything in hud_used.get_true_plane_masters(RENDER_PLANE_LIGHTING))
 		light.set_light_cutoff(lighting_cutoff, lighting_color_cutoffs)
+	for(var/atom/movable/screen/plane_master/additive_lighting/light as anything in hud_used.get_true_plane_masters(LIGHTING_PLANE_ADDITIVE))
+		if(!client)
+			return
+		if(!client.prefs.read_preference(/datum/preference/toggle/bloom))
+			light.alpha = 0
+		else
+			light.alpha = 140
 
 ///Update the mouse pointer of the attached client in this mob
 /mob/proc/update_mouse_pointer()
@@ -1306,7 +1326,7 @@
 		return
 	if(client.mouse_pointer_icon != initial(client.mouse_pointer_icon))//only send changes to the client if theyre needed
 		client.mouse_pointer_icon = initial(client.mouse_pointer_icon)
-	if(examine_cursor_icon && client.keys_held["Shift"]) //mouse shit is hardcoded, make this non hard-coded once we make mouse modifiers bindable
+	if(examine_cursor_icon && client.keys_held["Shift"] && client.context_menu_requires_shift) //mouse shit is hardcoded, make this non hard-coded once we make mouse modifiers bindable
 		client.mouse_pointer_icon = examine_cursor_icon
 	if(istype(loc, /obj/vehicle/sealed))
 		var/obj/vehicle/sealed/E = loc
@@ -1520,6 +1540,7 @@
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
 		return
 
+<<<<<<< HEAD
 	nutrition = max(0, set_to)
 	hud_used?.hunger?.update_appearance()
 
@@ -1527,6 +1548,8 @@
 	. = ..()
 	mob_mood?.update_nutrition_moodlets()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Apply a proper movespeed modifier based on items we have equipped
 /mob/proc/update_equipment_speed_mods()
 	var/speedies = 0
@@ -1536,6 +1559,7 @@
 			immutable_speedies += thing.slowdown
 		else
 			speedies += thing.slowdown
+<<<<<<< HEAD
 
 	//if  we have TRAIT_STURDY_FRAME, we reduce our overall speed penalty UNLESS that penalty would be a negative value, and therefore a speed boost.
 	if(speedies > 0 && HAS_TRAIT(src, TRAIT_STURDY_FRAME))
@@ -1549,6 +1573,16 @@
 	else
 		remove_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod/immutable)
 
+=======
+	if(immutable_speedies)
+		add_or_update_variable_movespeed_modifier(
+			/datum/movespeed_modifier/equipment_speedmod/immutable,
+			multiplicative_slowdown = immutable_speedies,
+		)
+	else
+		remove_movespeed_modifier(/datum/movespeed_modifier/equipment_speedmod/immutable)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(speedies)
 		add_or_update_variable_movespeed_modifier(
 			/datum/movespeed_modifier/equipment_speedmod,

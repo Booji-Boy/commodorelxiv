@@ -34,6 +34,7 @@ export const filter = <T>(
 
 type MapFunction = {
   <T, U>(
+<<<<<<< HEAD
     collection: T[],
     iterateeFn: (value: T, index: number, collection: T[]) => U,
   ): U[];
@@ -42,6 +43,14 @@ type MapFunction = {
     collection: Record<K, T>,
     iterateeFn: (value: T, index: K, collection: Record<K, T>) => U,
   ): U[];
+=======
+    iterateeFn: (value: T, index: number, collection: T[]) => U,
+  ): (collection: T[]) => U[];
+
+  <T, U, K extends string | number>(
+    iterateeFn: (value: T, index: K, collection: Record<K, T>) => U,
+  ): (collection: Record<K, T>) => U[];
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 };
 
 /**
@@ -52,9 +61,47 @@ type MapFunction = {
  * If collection is 'null' or 'undefined', it will be returned "as is"
  * without emitting any errors (which can be useful in some cases).
  */
+<<<<<<< HEAD
 export const map: MapFunction = (collection, iterateeFn) => {
   if (collection === null || collection === undefined) {
     return collection;
+=======
+export const map: MapFunction =
+  <T, U>(iterateeFn) =>
+  (collection: T[]): U[] => {
+    if (collection === null || collection === undefined) {
+      return collection;
+    }
+
+    if (Array.isArray(collection)) {
+      return collection.map(iterateeFn);
+    }
+
+    if (typeof collection === 'object') {
+      return Object.entries(collection).map(([key, value]) => {
+        return iterateeFn(value, key, collection);
+      });
+    }
+
+    throw new Error(`map() can't iterate on type ${typeof collection}`);
+  };
+
+/**
+ * Given a collection, will run each element through an iteratee function.
+ * Will then filter out undefined values.
+ */
+export const filterMap = <T, U>(
+  collection: T[],
+  iterateeFn: (value: T) => U | undefined,
+): U[] => {
+  const finalCollection: U[] = [];
+
+  for (const value of collection) {
+    const output = iterateeFn(value);
+    if (output !== undefined) {
+      finalCollection.push(output);
+    }
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   }
 
   if (Array.isArray(collection)) {

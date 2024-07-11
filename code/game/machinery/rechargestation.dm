@@ -85,7 +85,7 @@
 		if(materials.silo)
 			. += span_notice("The ore silo link indicator is lit, and cyborg restocking can be toggled by <b>Right-Clicking</b> [src].")
 		if(repairs)
-			. += span_notice("[src] has been upgraded to support automatic repairs.")
+			. += span_notice("[src] has been upgraded to support automatic repairs and will not overcharge ethereals.")
 
 /obj/machinery/recharge_station/on_set_is_operational(old_value)
 	if(old_value) //Turned off

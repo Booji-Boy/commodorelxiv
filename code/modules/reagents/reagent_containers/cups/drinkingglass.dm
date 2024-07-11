@@ -122,6 +122,7 @@
 	name = "Pina Colada"
 	list_reagents = list(/datum/reagent/consumable/ethanol/pina_colada = 50)
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/cup/glass/drinkingglass/filled/half_full
 	name = "half full glass of water"
 	desc  = "It's a glass of water. It seems half full. Or is it half empty? You're pretty sure it's full of shit."
@@ -130,3 +131,5 @@
 /obj/item/reagent_containers/cup/glass/drinkingglass/filled/half_full/Initialize(mapload, vol)
 	. = ..()
 	name = "[pick("half full", "half empty")] glass of water"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

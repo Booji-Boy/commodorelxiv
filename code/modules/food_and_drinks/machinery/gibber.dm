@@ -188,7 +188,11 @@
 
 	if(ishuman(occupant))
 		var/mob/living/carbon/human/gibee = occupant
+<<<<<<< HEAD
 		if(prob(40) && (sourcejob in list(JOB_SECURITY_OFFICER,JOB_WARDEN,JOB_HEAD_OF_SECURITY)))
+=======
+		if(prob(40) && (sourcejob in list(JOB_SECURITY_OFFICER,JOB_WARDEN,JOB_HEAD_OF_SECURITY,JOB_SECURITY_ASSISTANT))) // monkestation edit: add secass
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			typeofmeat = /obj/item/food/meat/slab/pig
 		else if(gibee.dna && gibee.dna.species)
 			typeofmeat = gibee.dna.species.meat

@@ -5,7 +5,11 @@
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"
 	button_icon = 'icons/mob/actions/actions_ecult.dmi'
+<<<<<<< HEAD
 	button_icon_state = "apetra_vulnera"
+=======
+	button_icon_state = "cleave"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	school = SCHOOL_FORBIDDEN
 	cooldown_time = 45 SECONDS
@@ -23,7 +27,11 @@
 
 /datum/action/cooldown/spell/pointed/apetra_vulnera/cast(mob/living/carbon/human/cast_on)
 	. = ..()
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(IS_HERETIC_OR_MONSTER(cast_on))
 		return FALSE
 
@@ -44,7 +52,11 @@
 		a_limb_got_damaged = TRUE
 		var/datum/wound/slash/crit_wound = new wound_type()
 		crit_wound.apply_wound(bodypart)
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!a_limb_got_damaged)
 		var/datum/wound/slash/crit_wound = new wound_type()
 		crit_wound.apply_wound(pick(cast_on.bodyparts))
@@ -53,7 +65,11 @@
 		span_danger("[cast_on]'s scratches and bruises are torn open by an unholy force!"),
 		span_danger("Your scratches and bruises are torn open by some horrible unholy force!")
 	)
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/effect/temp_visual/cleave(get_turf(cast_on))
 
 	return TRUE

@@ -1,3 +1,5 @@
+#define VERY_LATE_ARRIVAL_TOAST_PROB 20
+
 SUBSYSTEM_DEF(job)
 	name = "Jobs"
 	init_order = INIT_ORDER_JOBS
@@ -43,6 +45,8 @@ SUBSYSTEM_DEF(job)
 	 * Assumed Captain is always the highest in the chain of command.
 	 * See [/datum/controller/subsystem/ticker/proc/equip_characters]
 	 */
+	// Monkestation Edit Start: QM IS NOT A HEAD! removed this line 		JOB_QUARTERMASTER = 7,
+
 	var/list/chain_of_command = list(
 		JOB_CAPTAIN = 1,
 		JOB_HEAD_OF_PERSONNEL = 2,
@@ -50,8 +54,8 @@ SUBSYSTEM_DEF(job)
 		JOB_CHIEF_ENGINEER = 4,
 		JOB_CHIEF_MEDICAL_OFFICER = 5,
 		JOB_HEAD_OF_SECURITY = 6,
-		JOB_QUARTERMASTER = 7,
 	)
+	// Monkestation Edit End
 
 	/// If TRUE, some player has been assigned Captaincy or Acting Captaincy at some point during the shift and has been given the spare ID safe code.
 	var/assigned_captain = FALSE
@@ -158,6 +162,8 @@ SUBSYSTEM_DEF(job)
 		if(!job.map_check()) //Even though we initialize before mapping, this is fine because the config is loaded at new
 			log_job_debug("Removed [job.title] due to map config")
 			continue
+		if(!CONFIG_GET(flag/spooktober_enabled) && job.job_flags & JOB_SPOOKTOBER) //if spooktober's not enabled, don't load spooktober jobs
+			continue
 		new_all_occupations += job
 		name_occupations[job.title] = job
 		for(var/alt_title in job.alternate_titles)
@@ -240,6 +246,11 @@ SUBSYSTEM_DEF(job)
 		return FALSE
 
 	JobDebug("Player: [player] is now Rank: [job.title], JCP:[job.current_positions], JPL:[latejoin ? job.total_positions : job.spawn_positions]")
+//monkestation edit start
+	if(player.temp_assignment)
+		player.temp_assignment.current_positions--
+	player.temp_assignment = null
+//monkestation edit end
 	player.mind.set_assigned_role(job)
 	unassigned -= player
 	job.current_positions++
@@ -268,16 +279,20 @@ SUBSYSTEM_DEF(job)
 		if(check_job_eligibility(player, job, "FOC", add_job_to_log = FALSE) != JOB_AVAILABLE)
 			continue
 
-		// They have the job enabled, at this priority level, with no restrictions applying to them.
+//monkestation edit start
+		if(!assignable_by_job[job.type])
+			assignable_by_job[job.type] = list("[JP_LOW]" = list(), "[JP_MEDIUM]" = list(), "[JP_HIGH]" = list())
+		assignable_by_job[job.type]["[player_job_level]"] |= player
+//monkestation edit end
 		JobDebug("FOC pass, Player: [player], Level: [job_priority_level_to_string(level)]")
 		candidates += player
 	return candidates
 
 
-/datum/controller/subsystem/job/proc/GiveRandomJob(mob/dead/new_player/player)
+/datum/controller/subsystem/job/proc/GiveRandomJob(mob/dead/new_player/player, roundstart = FALSE, list/restricted_jobs = list()) //monkestation edit: adds roundstart and restricted_jobs
 	JobDebug("GRJ Giving random job, Player: [player]")
 	. = FALSE
-	for(var/datum/job/job as anything in shuffle(joinable_occupations))
+	for(var/datum/job/job as anything in shuffle(joinable_occupations - restricted_jobs)) //monkestation edit: adds - restricted_jobs
 		if(QDELETED(player))
 			JobDebug("GRJ player is deleted, aborting")
 			break
@@ -298,9 +313,15 @@ SUBSYSTEM_DEF(job)
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
 			continue
 
-		if(AssignRole(player, job, do_eligibility_checks = FALSE))
-			JobDebug("GRJ Random job given, Player: [player], Job: [job]")
-			return TRUE
+//monkestation edit start
+		if(roundstart)
+			if(handle_temp_assignments(player, job))
+				return TRUE
+		else
+//monkestation edit end
+			if(AssignRole(player, job, do_eligibility_checks = FALSE))
+				JobDebug("GRJ Random job given, Player: [player], Job: [job]")
+				return TRUE
 
 		JobDebug("GRJ Player eligible but AssignRole failed, Player: [player], Job: [job]")
 
@@ -339,8 +360,14 @@ SUBSYSTEM_DEF(job)
 				continue
 			var/mob/dead/new_player/candidate = pick(candidates)
 			// Eligibility checks done as part of FindOccupationCandidates.
-			if(AssignRole(candidate, job, do_eligibility_checks = FALSE))
+//monkestation removal start
+//			if(AssignRole(candidate, job, do_eligibility_checks = FALSE))
+//				return TRUE
+//monkestation removal end
+//monkestation edit start
+			if(handle_temp_assignments(candidate, job))
 				return TRUE
+//monkestation edit end
 	return FALSE
 
 
@@ -362,7 +389,8 @@ SUBSYSTEM_DEF(job)
 			continue
 		var/mob/dead/new_player/candidate = pick(candidates)
 		// Eligibility checks done as part of FindOccupationCandidates
-		AssignRole(candidate, job, do_eligibility_checks = FALSE)
+//		AssignRole(candidate, job, do_eligibility_checks = FALSE) //monkestation removal
+		handle_temp_assignments(candidate, job) //monkestation edit
 
 /// Attempts to fill out all available AI positions.
 /datum/controller/subsystem/job/proc/fill_ai_positions()
@@ -377,8 +405,14 @@ SUBSYSTEM_DEF(job)
 			if(candidates.len)
 				var/mob/dead/new_player/candidate = pick(candidates)
 				// Eligibility checks done as part of FindOccupationCandidates
-				if(AssignRole(candidate, GetJobType(/datum/job/ai), do_eligibility_checks = FALSE))
+//monkestation removal start
+//				if(AssignRole(candidate, GetJobType(/datum/job/ai), do_eligibility_checks = FALSE))
+//					break
+//monkestation removal end
+//monkestation edit start
+				if(handle_temp_assignments(candidate, GetJobType(/datum/job/ai)))
 					break
+//monkestation edit end
 
 
 /** Proc DivideOccupations
@@ -428,7 +462,8 @@ SUBSYSTEM_DEF(job)
 	for(var/mob/dead/new_player/player in overflow_candidates)
 		JobDebug("AC1 pass, Player: [player]")
 		// Eligibility checks done as part of FindOccupationCandidates
-		AssignRole(player, GetJobType(overflow_role), do_eligibility_checks = FALSE)
+//		AssignRole(player, GetJobType(overflow_role), do_eligibility_checks = FALSE) //monkestation removal
+		handle_temp_assignments(player, GetJobType(overflow_role)) //monkestation edit
 		overflow_candidates -= player
 	JobDebug("DO, AC1 end")
 
@@ -486,7 +521,8 @@ SUBSYSTEM_DEF(job)
 					continue
 
 				JobDebug("DO pass, Player: [player], Level:[level], Job:[job.title]")
-				AssignRole(player, job, do_eligibility_checks = FALSE)
+//				AssignRole(player, job, do_eligibility_checks = FALSE) //monkestation removal
+				handle_temp_assignments(player, job) //monkestation edit
 				unassigned -= player
 				break
 
@@ -499,7 +535,8 @@ SUBSYSTEM_DEF(job)
 		HandleUnassigned(player, allow_all)
 	JobDebug("DO, Ending handle unassigned.")
 
-	JobDebug("DO, Handle unrejectable unassigned")
+//monkestation removal start: we handle selecting antags after this
+/*	JobDebug("DO, Handle unrejectable unassigned")
 	//Mop up people who can't leave.
 	for(var/mob/dead/new_player/player in unassigned) //Players that wanted to back out but couldn't because they're antags (can you feel the edge case?)
 		if(!GiveRandomJob(player))
@@ -508,8 +545,10 @@ SUBSYSTEM_DEF(job)
 				JobDebug("---------------------------------------------------")
 				run_divide_occupation_pure = FALSE
 				return FALSE //Living on the edge, the forced antagonist couldn't be assigned to overflow role (bans, client age) - just reroll
-	JobDebug("DO, Ending handle unrejectable unassigned")
+	JobDebug("DO, Ending handle unrejectable unassigned")*/
+//monkestation removal end
 
+	handle_final_setup() //monkestation edit
 	JobDebug("All divide occupations tasks completed.")
 	JobDebug("---------------------------------------------------")
 	run_divide_occupation_pure = FALSE
@@ -532,11 +571,12 @@ SUBSYSTEM_DEF(job)
 				RejectPlayer(player)
 				return
 
-			if(!AssignRole(player, overflow_role_datum, do_eligibility_checks = FALSE))
+//			if(!AssignRole(player, overflow_role_datum, do_eligibility_checks = FALSE)) //monkestation removal
+			if(!handle_temp_assignments(player, overflow_role_datum)) //monkestation edit
 				RejectPlayer(player)
 				return
 		if (BERANDOMJOB)
-			if(!GiveRandomJob(player))
+			if(!GiveRandomJob(player, TRUE)) //monkestation edit: adds second arg
 				RejectPlayer(player)
 				return
 		if (RETURNTOLOBBY)
@@ -552,13 +592,27 @@ SUBSYSTEM_DEF(job)
 
 //Gives the player the stuff he should have with his rank
 /datum/controller/subsystem/job/proc/EquipRank(mob/living/equipping, datum/job/job, client/player_client)
+
+	if(isnull(player_client?.prefs.alt_job_titles))
+		player_client.prefs.alt_job_titles = list()
+
+	var/chosen_title = player_client?.prefs.alt_job_titles[job.title] || job.title
+	var/default_title = job.title
+
 	equipping.job = job.title
 
 	SEND_SIGNAL(equipping, COMSIG_JOB_RECEIVED, job)
 
 	equipping.mind?.set_assigned_role_with_greeting(job, player_client)
+<<<<<<< HEAD
 	equipping.on_job_equipping(job, player_client)
 	job.announce_job(equipping)
+=======
+
+	equipping.on_job_equipping(job, player_client?.prefs)
+
+	job.announce_job(equipping, chosen_title)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(player_client?.holder)
 		if(CONFIG_GET(flag/auto_deadmin_players) || (player_client.prefs?.toggles & DEADMIN_ALWAYS))
@@ -566,6 +620,35 @@ SUBSYSTEM_DEF(job)
 		else
 			handle_auto_deadmin_roles(player_client, job.title)
 
+<<<<<<< HEAD
+=======
+	if(player_client)
+		to_chat(player_client, "<span class='infoplain'><b>As the [job.title] you answer directly to [job.supervisors]. Special circumstances may change this.</b></span>")
+
+	job.radio_help_message(equipping)
+
+	if(player_client)
+		if(job.req_admin_notify)
+			to_chat(player_client, span_infoplain("<b>You are playing a job that is important for Game Progression. \
+				If you have to disconnect, please notify the admins via adminhelp.</b>"))
+		if(CONFIG_GET(number/minimal_access_threshold))
+			to_chat(player_client, span_boldnotice("As this station was initially staffed with a \
+				[CONFIG_GET(flag/jobs_have_minimal_access) ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] \
+				have been added to your ID card."))
+
+		if(chosen_title != default_title)
+			to_chat(player_client, span_infoplain(span_warning("Remember that alternate titles are purely for flavor and roleplay.")))
+			to_chat(player_client, span_infoplain(span_doyourjobidiot("Do not use your \"[chosen_title]\" alt title as an excuse to forego your duties as a [job.title].")))
+
+	if(ishuman(equipping))
+		var/mob/living/carbon/human/wageslave = equipping
+		wageslave.add_mob_memory(/datum/memory/key/account, remembered_id = wageslave.account_id)
+
+		setup_alt_job_items(wageslave, job, player_client)
+		if(EMERGENCY_PAST_POINT_OF_NO_RETURN && prob(VERY_LATE_ARRIVAL_TOAST_PROB))
+			equipping.equip_to_slot_or_del(new /obj/item/food/griddle_toast(equipping), ITEM_SLOT_MASK)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	job.after_spawn(equipping, player_client)
 
 /datum/controller/subsystem/job/proc/handle_auto_deadmin_roles(client/C, rank)
@@ -696,8 +779,21 @@ SUBSYSTEM_DEF(job)
 	if(buckle && isliving(joining_mob))
 		buckle_mob(joining_mob, FALSE, FALSE)
 
+
+/atom/proc/JoinLaunchTowards(mob/joining_mob, obj/effect/oshan_launch_point/player/launched_point)
+	var/obj/structure/closet/stasis_pod/new_pod = new(src)
+	joining_mob.forceMove(new_pod)
+	new_pod.throw_at(launched_point, get_dist(src, launched_point) + 4, 4, null, FALSE)
+
 /datum/controller/subsystem/job/proc/SendToLateJoin(mob/M, buckle = TRUE)
 	var/atom/destination
+
+	if(length(GLOB.oshan_launch_points))
+		var/obj/effect/oshan_launch_point/player/picked_point = pick(GLOB.oshan_launch_points)
+		destination = get_edge_target_turf(picked_point, picked_point.map_edge_direction)
+		destination.JoinLaunchTowards(M, picked_point)
+		return TRUE
+
 	if(M.mind && !is_unassigned_job(M.mind.assigned_role) && length(GLOB.jobspawn_overrides[M.mind.assigned_role.title])) //We're doing something special today.
 		destination = pick(GLOB.jobspawn_overrides[M.mind.assigned_role.title])
 		destination.JoinPlayerHere(M, FALSE)
@@ -924,3 +1020,18 @@ SUBSYSTEM_DEF(job)
 		return TRUE
 
 	return FALSE
+<<<<<<< HEAD
+=======
+
+///trys to free up a job slot via the rank
+/datum/controller/subsystem/job/proc/FreeRole(rank)
+	if(!rank)
+		return
+	JobDebug("Freeing role: [rank]")
+	var/datum/job/job = GetJob(rank)
+	if(!job)
+		return FALSE
+	job.current_positions = max(0, job.current_positions - 1)
+
+#undef VERY_LATE_ARRIVAL_TOAST_PROB
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

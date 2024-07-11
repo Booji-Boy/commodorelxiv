@@ -97,6 +97,7 @@
 		. += span_warning("The fan is broken.")
 
 /obj/machinery/atmospherics/components/unary/vent_pump/multitool_act(mob/living/user, obj/item/multitool/multi_tool)
+<<<<<<< HEAD
 	if(istype(multi_tool.buffer, /obj/machinery/air_sensor))
 		var/obj/machinery/air_sensor/sensor = multi_tool.buffer
 		multi_tool.set_buffer(src)
@@ -130,6 +131,20 @@
 	set_is_operational(FALSE)
 	update_appearance()
 	return ..()
+=======
+	. = ..()
+
+	if(istype(multi_tool.buffer, /obj/machinery/air_sensor))
+		var/obj/machinery/air_sensor/sensor = multi_tool.buffer
+		sensor.outlet_id = id_tag
+		multi_tool.buffer = null
+		balloon_alert(user, "output linked to sensor")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+
+	balloon_alert(user, "saved in buffer")
+	multi_tool.buffer = src
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/atmospherics/components/unary/vent_pump/Destroy()
 	disconnect_from_area()

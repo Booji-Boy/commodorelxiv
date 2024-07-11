@@ -20,7 +20,10 @@
 	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL
 	atom_storage.max_total_storage = 21
 	atom_storage.set_holdable(list(
+<<<<<<< HEAD
 		/obj/item/ammo_box/strilka310/lionhunter,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/bodypart, // Bodyparts are often used in rituals.
 		/obj/item/clothing/neck/eldritch_amulet,
 		/obj/item/clothing/neck/heretic_focus,
@@ -44,6 +47,7 @@
 	if(!(slot & slot_flags))
 		return
 
+<<<<<<< HEAD
 	RegisterSignal(user, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(shield_reaction))
 
 	if(!IS_HERETIC(user))
@@ -67,6 +71,11 @@
 	if(hit_reaction(owner, hitby, attack_text, 0, damage, attack_type) && (owner.belt == src))
 		return SUCCESSFUL_BLOCK
 	return NONE
+=======
+	if(!IS_HERETIC(user))
+		to_chat(user, span_warning("The curio wraps around you, and you feel the beating of something dark inside it..."))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // Our on hit effect
 /obj/item/storage/belt/unfathomable_curio/proc/shield_damaged(mob/living/carbon/wearer, attack_text, new_current_charges)
@@ -94,5 +103,8 @@
 	user.adjustOrganLoss(ORGAN_SLOT_BRAIN, 10, 160)
 	user.adjust_temp_blindness(5 SECONDS)
 	. += span_notice("It. It looked. IT WRAPS ITSELF AROUND ME.")
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

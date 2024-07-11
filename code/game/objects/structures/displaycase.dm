@@ -132,7 +132,11 @@
 			toggle_lock(user)
 		else
 			to_chat(user, span_alert("Access denied."))
+<<<<<<< HEAD
 	else if(attacking_item.tool_behaviour == TOOL_WELDER && !user.combat_mode && !broken)
+=======
+	else if(tool.tool_behaviour == TOOL_WELDER && !(user.istate & ISTATE_HARM) && !broken)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(atom_integrity < max_integrity)
 			if(!attacking_item.tool_start_check(user, amount=1))
 				return
@@ -208,7 +212,7 @@
 		//prevents remote "kicks" with TK
 		if (!Adjacent(user))
 			return
-		if (!user.combat_mode)
+		if (!(user.istate & ISTATE_HARM))
 			if(!open && !autoexamine_while_closed)
 				return
 			if(!user.is_blind())
@@ -315,7 +319,7 @@
 //The lab cage and captain's display case do not spawn with electronics, which is why req_access is needed.
 /obj/structure/displaycase/captain
 	start_showpiece_type = /obj/item/gun/energy/laser/captain
-	req_access = list(ACCESS_CENT_SPECOPS) //this was intentional, presumably to make it slightly harder for caps to grab their gun roundstart
+	req_access = list(ACCESS_CAPTAIN) //Monkestation Edit
 
 /obj/structure/displaycase/labcage
 	name = "lab cage"
@@ -401,8 +405,10 @@
 	data["max_length"] = MAX_PLAQUE_LEN
 	data["has_showpiece"] = showpiece ? TRUE : FALSE
 	if(showpiece)
-		data["showpiece_name"] = capitalize(format_text(showpiece.name))
-		data["showpiece_description"] = trophy_message ? format_text(trophy_message) : null
+		// monkestation start: fix double-encoded trophy info
+		data["showpiece_name"] = capitalize(html_decode(format_text(showpiece.name)))
+		data["showpiece_description"] = trophy_message ? html_decode(format_text(trophy_message)) : null
+		// monkestation end
 	return data
 
 /obj/structure/displaycase/trophy/ui_static_data(mob/user)
@@ -442,7 +448,7 @@
 		return
 	if(isliving(usr))
 		var/mob/living/living_usr = usr
-		if(living_usr.combat_mode)
+		if((living_usr.istate & ISTATE_HARM))
 			return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -636,7 +642,7 @@
 
 /obj/structure/displaycase/forsale/wrench_act(mob/living/user, obj/item/I)
 	. = ..()
-	if(open && !user.combat_mode)
+	if(open && !(user.istate & ISTATE_HARM))
 		if(anchored)
 			to_chat(user, span_notice("You start unsecuring [src]..."))
 		else
@@ -650,7 +656,7 @@
 				to_chat(user, span_notice("You secure [src]."))
 			set_anchored(!anchored)
 			return TRUE
-	else if(!open && !user.combat_mode)
+	else if(!open && !(user.istate & ISTATE_HARM))
 		to_chat(user, span_notice("[src] must be open to move it."))
 		return
 

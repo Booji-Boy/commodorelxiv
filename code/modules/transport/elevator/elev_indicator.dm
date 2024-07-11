@@ -14,7 +14,7 @@
 	anchored = TRUE
 	density = FALSE
 
-	light_range = 1
+	light_outer_range = 1
 	light_power = 1
 	light_color = COLOR_DISPLAY_BLUE
 
@@ -145,7 +145,11 @@
 		return
 
 	set_light(l_on = TRUE)
+<<<<<<< HEAD:code/modules/transport/elevator/elev_indicator.dm
 	maptext = "<div style='font-family: TinyUnicode; font-size: 12pt; color: [COLOR_DISPLAY_BLUE]'>[current_lift_floor]</div>"
+=======
+	maptext = "<div style='font-family: TinyUnicode; font-size: 12pt; color: [LIGHT_COLOR_DARK_BLUE]'>[current_lift_floor]</div>"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9:code/modules/industrial_lift/elevator/elevator_indicator.dm
 
 /obj/machinery/lift_indicator/update_overlays()
 	. = ..()

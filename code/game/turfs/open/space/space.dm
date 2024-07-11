@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ///The base color of light space emits
 GLOBAL_VAR_INIT(base_starlight_color, default_starlight_color())
 ///The color of light space is currently emitting
@@ -42,6 +43,9 @@ GLOBAL_VAR_INIT(starlight_power, default_starlight_power())
 
 GLOBAL_LIST_EMPTY(starlight)
 
+=======
+GLOBAL_VAR_INIT(starlight_color, pick(COLOR_TEAL, COLOR_GREEN, COLOR_CYAN, COLOR_ORANGE, COLOR_PURPLE, COLOR_RED, COLOR_BLUE, COLOR_GREEN, COLOR_MAGENTA)) //monkestation addition
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/space
 	icon = 'icons/turf/space.dmi'
 	icon_state = "space"
@@ -65,12 +69,20 @@ GLOBAL_LIST_EMPTY(starlight)
 	run_later = TRUE
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
+<<<<<<< HEAD
 	light_power = 1
 	light_range = 2
 	light_color = COLOR_STARLIGHT
 	light_height = LIGHTING_HEIGHT_SPACE
 	light_on = FALSE
 	space_lit = TRUE
+=======
+	light_power = 0.75
+	light_inner_range = 0.1
+	light_outer_range = 4
+	light_falloff_curve = 5
+	//space_lit = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bullet_bounce_sound = null
 	vis_flags = VIS_INHERIT_ID //when this be added to vis_contents of something it be associated with something on clicking, important for visualisation of turf in openspace and interraction with openspace that show you turf.
 
@@ -81,9 +93,61 @@ GLOBAL_LIST_EMPTY(starlight)
 	//This is used to optimize the map loader
 	return
 
+<<<<<<< HEAD
 /turf/open/space/Destroy()
 	GLOB.starlight -= src
 	return ..()
+=======
+/**
+ * Space Initialize
+ *
+ * Doesn't call parent, see [/atom/proc/Initialize].
+ * When adding new stuff to /atom/Initialize, /turf/Initialize, etc
+ * don't just add it here unless space actually needs it.
+ *
+ * There is a lot of work that is intentionally not done because it is not currently used.
+ * This includes stuff like smoothing, blocking camera visibility, etc.
+ * If you are facing some odd bug with specifically space, check if it's something that was
+ * intentionally ommitted from this implementation.
+ */
+/turf/open/space/Initialize(mapload)
+	SHOULD_CALL_PARENT(FALSE)
+	air = space_gas
+
+	if (PERFORM_ALL_TESTS(focus_only/multiple_space_initialization))
+		if(flags_1 & INITIALIZED_1)
+			stack_trace("Warning: [src]([type]) initialized multiple times!")
+	flags_1 |= INITIALIZED_1
+
+
+	// We make the assumption that the space plane will never be blacklisted, as an optimization
+	if(SSmapping.max_plane_offset)
+		plane = PLANE_SPACE - (PLANE_RANGE * SSmapping.z_level_to_plane_offset[z])
+
+	if(!SSmapping.level_trait(src.z, ZTRAIT_STARLIGHT))
+		space_lit = TRUE
+
+	var/area/our_area = loc
+	if(!our_area.area_has_base_lighting && space_lit) //Only provide your own lighting if the area doesn't for you
+		// Intentionally not add_overlay for performance reasons.
+		// add_overlay does a bunch of generic stuff, like creating a new list for overlays,
+		// queueing compile, cloning appearance, etc etc etc that is not necessary here.
+		overlays += GLOB.fullbright_overlays[GET_TURF_PLANE_OFFSET(src) + 1]
+
+	if (!mapload)
+		if(requires_activation)
+			SSair.add_to_active(src, TRUE)
+
+		if(SSmapping.max_plane_offset)
+			var/turf/T = GET_TURF_ABOVE(src)
+			if(T)
+				T.multiz_turf_new(src, DOWN)
+			T = GET_TURF_BELOW(src)
+			if(T)
+				T.multiz_turf_new(src, UP)
+
+	return INITIALIZE_HINT_NORMAL
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /turf/open/space/attack_ghost(mob/dead/observer/user)
@@ -117,15 +181,23 @@ GLOBAL_LIST_EMPTY(starlight)
 			continue
 		enable_starlight()
 		return TRUE
+<<<<<<< HEAD
 	GLOB.starlight -= src
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_light(l_on = FALSE)
 	return FALSE
 
 /// Turns on the stars, if they aren't already
 /turf/open/space/proc/enable_starlight()
+<<<<<<< HEAD
 	if(!light_on)
 		set_light(l_on = TRUE, l_range = GLOB.starlight_range, l_power = GLOB.starlight_power, l_color = GLOB.starlight_color)
 		GLOB.starlight += src
+=======
+	if(space_lit)
+		set_light(l_color = GLOB.starlight_color, l_on = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /turf/open/space/attack_paw(mob/user, list/modifiers)
 	return attack_hand(user, modifiers)
@@ -219,12 +291,18 @@ GLOBAL_LIST_EMPTY(starlight)
 		else if(the_rcd.rcd_design_path == /obj/structure/lattice/catwalk)
 			var/obj/structure/lattice/lattice = locate(/obj/structure/lattice, src)
 			if(lattice)
+<<<<<<< HEAD
 				return list("delay" = 0, "cost" = 2)
 			else
 				return list("delay" = 0, "cost" = 4)
 		else
 			return FALSE
 
+=======
+				return list("mode" = RCD_CATWALK, "delay" = 0, "cost" = 2)
+			else
+				return list("mode" = RCD_CATWALK, "delay" = 0, "cost" = 4)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /turf/open/space/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)

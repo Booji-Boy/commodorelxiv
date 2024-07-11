@@ -235,10 +235,18 @@
 	icon_state_preview = "prisonsuit"
 	inhand_icon_state = "jumpsuit"
 	greyscale_colors = "#ff8300"
+<<<<<<< HEAD
 	greyscale_config = /datum/greyscale_config/jumpsuit/prison
 	greyscale_config_worn = /datum/greyscale_config/jumpsuit/prison/worn
 	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit/prison/inhand_left
 	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit/prison/inhand_right
+=======
+	greyscale_config = /datum/greyscale_config/jumpsuit_prison
+	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit_prison_inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit_prison_inhand_right
+	greyscale_config_worn = /datum/greyscale_config/jumpsuit_prison_worn
+	greyscale_config_worn_digitigrade = /datum/greyscale_config/jumpsuit_prison_worn/digitigrade
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	has_sensor = LOCKED_SENSORS
 	sensor_mode = SENSOR_COORDS
 	random_sensor = FALSE
@@ -255,10 +263,18 @@
 	icon_preview = 'icons/obj/fluff/previews.dmi'
 	icon_state_preview = "prisonskirt"
 	greyscale_colors = "#ff8300"
+<<<<<<< HEAD
 	greyscale_config = /datum/greyscale_config/jumpsuit/prison
 	greyscale_config_worn = /datum/greyscale_config/jumpsuit/prison/worn
 	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit/prison/inhand_left
 	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit/prison/inhand_right
+=======
+	greyscale_config = /datum/greyscale_config/jumpsuit_prison
+	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit_prison_inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit_prison_inhand_right
+	greyscale_config_worn = /datum/greyscale_config/jumpsuit_prison_worn
+	greyscale_config_worn_digitigrade = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	body_parts_covered = CHEST|GROIN|ARMS
 	dying_key = DYE_REGISTRY_JUMPSKIRT
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY

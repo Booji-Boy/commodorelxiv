@@ -240,7 +240,10 @@
 
 	addtimer(CALLBACK(src, PROC_REF(create_blade)), blade_recharge_time)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/status_effect/caretaker_refuge
 	id = "Caretaker’s Last Refuge"
 	status_type = STATUS_EFFECT_REFRESH
@@ -302,7 +305,10 @@
 	id = "Moon Grasp Hide Identity"
 	status_type = STATUS_EFFECT_REFRESH
 	duration = 15 SECONDS
+<<<<<<< HEAD
 	show_duration = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	alert_type = /atom/movable/screen/alert/status_effect/moon_grasp_hide
 
 /datum/status_effect/moon_grasp_hide/on_apply()

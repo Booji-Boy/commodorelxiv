@@ -19,10 +19,121 @@
 	throw_speed = 3
 	throw_range = 7
 	var/empty = FALSE
+<<<<<<< HEAD
 	/// Defines damage type of the medkit. General ones stay null. Used for medibot healing bonuses
 	var/damagetype_healed
 	/// you just type this in holdables list of medkits instead of copypasting bunch of text.
 	var/static/list/list_of_everything_medkits_can_hold = list(
+=======
+	var/damagetype_healed //defines damage type of the medkit. General ones stay null. Used for medibot healing bonuses
+
+	var/static/list/list_of_everything_medkits_can_hold = list(
+		/obj/item/healthanalyzer,
+		/obj/item/dnainjector,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/cup/beaker,
+		/obj/item/reagent_containers/cup/bottle,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/reagent_containers/medigel,
+		/obj/item/reagent_containers/spray,
+		/obj/item/lighter,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/pill_bottle,
+		/obj/item/stack/medical,
+		/obj/item/flashlight/pen,
+		/obj/item/extinguisher/mini,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/sensor_device,
+		/obj/item/radio,
+		/obj/item/clothing/gloves,
+		/obj/item/lazarus_injector,
+		/obj/item/bikehorn/rubberducky,
+		/obj/item/clothing/mask/surgical,
+		/obj/item/clothing/mask/breath,
+		/obj/item/clothing/mask/breath/medical,
+		/obj/item/surgical_drapes,
+		/obj/item/scalpel,
+		/obj/item/circular_saw,
+		/obj/item/bonesetter,
+		/obj/item/surgicaldrill,
+		/obj/item/retractor,
+		/obj/item/cautery,
+		/obj/item/hemostat,
+		/obj/item/blood_filter,
+		/obj/item/shears,
+		/obj/item/geiger_counter,
+		/obj/item/clothing/neck/stethoscope,
+		/obj/item/stamp,
+		/obj/item/clothing/glasses,
+		/obj/item/wrench/medical,
+		/obj/item/clothing/mask/muzzle,
+		/obj/item/reagent_containers/blood,
+		/obj/item/tank/internals/emergency_oxygen,
+		/obj/item/gun/syringe/syndicate,
+		/obj/item/implantcase,
+		/obj/item/implant,
+		/obj/item/implanter,
+		/obj/item/pinpointer/crew,
+		/obj/item/holosign_creator/medical,
+		/obj/item/stack/sticky_tape,
+	)
+
+/obj/item/storage/medkit/Initialize(mapload)
+	. = ..()
+	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL
+
+/obj/item/storage/medkit/regular
+	icon_state = "medkit"
+	desc = "A first aid kit with the ability to heal common types of injuries."
+
+/obj/item/storage/medkit/regular/suicide_act(mob/living/carbon/user)
+	user.visible_message(span_suicide("[user] begins giving [user.p_them()]self aids with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!"))
+	return BRUTELOSS
+
+/obj/item/storage/medkit/regular/PopulateContents()
+	if(empty)
+		return
+	var/static/items_inside = list(
+		/obj/item/stack/medical/gauze = 1,
+		/obj/item/stack/medical/suture = 2,
+		/obj/item/stack/medical/mesh = 2,
+		/obj/item/reagent_containers/hypospray/medipen = 1,
+		/obj/item/healthanalyzer/simple = 1,
+	)
+	generate_items_inside(items_inside,src)
+
+/obj/item/storage/medkit/emergency
+	icon_state = "medbriefcase"
+	name = "emergency medkit"
+	desc = "A very simple first aid kit meant to secure and stabilize serious wounds for later treatment."
+
+/obj/item/storage/medkit/emergency/PopulateContents()
+	if(empty)
+		return
+	var/static/items_inside = list(
+		/obj/item/healthanalyzer/simple = 1,
+		/obj/item/stack/medical/gauze = 1,
+		/obj/item/stack/medical/suture/emergency = 1,
+		/obj/item/stack/medical/ointment = 1,
+		/obj/item/reagent_containers/hypospray/medipen/ekit = 2,
+		/obj/item/storage/pill_bottle/iron = 1,
+	)
+	generate_items_inside(items_inside,src)
+
+/obj/item/storage/medkit/surgery
+	name = "surgical medkit"
+	icon_state = "medkit_surgery"
+	inhand_icon_state = "medkit"
+	desc = "A high capacity aid kit for doctors, full of medical supplies and basic surgical equipment"
+
+/obj/item/storage/medkit/surgery/Initialize(mapload)
+	. = ..()
+	atom_storage.max_specific_storage = WEIGHT_CLASS_NORMAL //holds the same equipment as a medibelt
+	atom_storage.max_slots = 12
+	atom_storage.max_total_storage = 24
+	atom_storage.set_holdable(list(
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
 		/obj/item/reagent_containers/dropper,
@@ -796,7 +907,13 @@
 	atom_storage.max_slots = 8
 	atom_storage.screen_max_columns = 4
 	atom_storage.screen_max_rows = 2
+<<<<<<< HEAD
 	atom_storage.set_holdable(/obj/item/reagent_containers/cup/tube)
+=======
+	atom_storage.set_holdable(list(
+		/obj/item/reagent_containers/cup/tube,
+	))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/storage/test_tube_rack/attack_self(mob/user)
 	emptyStorage()

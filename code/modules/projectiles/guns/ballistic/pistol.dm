@@ -23,11 +23,13 @@
 	bolt_wording = "slide"
 	suppressor_x_offset = 10
 	suppressor_y_offset = -1
+	gun_flags = GUN_SMOKE_PARTICLES
 
 /obj/item/gun/ballistic/automatic/pistol/no_mag
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/fire_mag
+<<<<<<< HEAD
 	spawn_magazine_type = /obj/item/ammo_box/magazine/m9mm/fire
 
 /obj/item/gun/ballistic/automatic/pistol/contraband
@@ -43,6 +45,9 @@
 	. = ..()
 	pin.pin_removable = FALSE
 
+=======
+	accepted_magazine_type = /obj/item/ammo_box/magazine/m9mm/fire
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/gun/ballistic/automatic/pistol/suppressed/Initialize(mapload)
 	. = ..()

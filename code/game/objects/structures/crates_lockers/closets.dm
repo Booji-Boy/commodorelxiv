@@ -3,7 +3,10 @@
 ///A comprehensive list of all closets (NOT CRATES) in the game world
 GLOBAL_LIST_EMPTY(roundstart_station_closets)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
@@ -15,11 +18,15 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	integrity_failure = 0.25
 	armor_type = /datum/armor/structure_closet
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
+<<<<<<< HEAD
 	/// How close being inside of the thing provides complete pressure safety. Must be between 0 and 1!
 	contents_pressure_protection = 0
 	/// How insulated the thing is, for the purposes of calculating body temperature. Must be between 0 and 1!
 	contents_thermal_insulation = 0
 	pass_flags_self = PASSSTRUCTURE | LETPASSCLICKS
+=======
+	pass_flags_self = LETPASSCLICKS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// The overlay for the closet's door
 	var/obj/effect/overlay/closet_door/door_obj
@@ -110,6 +117,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 /obj/structure/closet/Initialize(mapload)
 	. = ..()
 
+<<<<<<< HEAD
 	var/static/list/closet_paint_jobs
 	if(isnull(closet_paint_jobs))
 		closet_paint_jobs = list(
@@ -140,13 +148,20 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	if(access_choices)
 		access_choices = card_reader_choices
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(is_station_level(z) && mapload)
 		add_to_roundstart_list()
 
 	// if closed, any item at the crate's loc is put in the contents
+<<<<<<< HEAD
 	if (mapload)
 		is_maploaded = TRUE
 	. = INITIALIZE_HINT_LATELOAD
+=======
+	if (mapload && !opened)
+		. = INITIALIZE_HINT_LATELOAD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	populate_contents_immediate()
 	var/static/list/loc_connections = list(
@@ -193,6 +208,10 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	id_card = null
 	QDEL_NULL(internal_air)
 	QDEL_NULL(door_obj)
+<<<<<<< HEAD
+=======
+	QDEL_NULL(electronics)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	GLOB.roundstart_station_closets -= src
 	return ..()
 
@@ -422,9 +441,17 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 		return TRUE
 	if(welded || locked)
 		return FALSE
+<<<<<<< HEAD
 	if(strong_grab)
 		if(user)
 			to_chat(user, span_danger("[pulledby] has an incredibly strong grip on [src], preventing it from opening."))
+=======
+	//MONKESTATION EDIT START - Allow a strong grabber to open their own pulled closet
+	//if(strong_grab) //MONKESTATION EDIT ORIGINAL
+	if(strong_grab && pulledby != user)
+		//MONKESTATION EDIT END
+		to_chat(user, span_danger("[pulledby] has an incredibly strong grip on [src], preventing it from opening."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	var/turf/T = get_turf(src)
 	for(var/mob/living/L in T)
@@ -575,6 +602,9 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
  * Toggles a closet open or closed, to the opposite state. Does not respect locked or welded states, however.
  */
 /obj/structure/closet/proc/toggle(mob/living/user)
+	if(cant_grab)
+		to_chat(user, span_notice("The latches on the cart prevent you from opening or closing this crate."))
+		return FALSE
 	if(opened)
 		return close(user)
 	else
@@ -867,7 +897,13 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 									span_notice("You cut \the [src] apart with \the [weapon]."))
 				deconstruct(TRUE)
 				return
+<<<<<<< HEAD
 		if (user.combat_mode)
+=======
+		if ((user.istate & ISTATE_HARM))
+			return FALSE
+		if(user.transferItemToLoc(W, drop_location())) // so we put in unlit welder too
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 		if(user.transferItemToLoc(weapon, drop_location())) // so we put in unlit welder too
 			return
@@ -886,9 +922,57 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 							span_hear("You hear welding."))
 			user.log_message("[welded ? "welded":"unwelded"] closet [src] with [weapon]", LOG_GAME)
 			update_appearance()
+<<<<<<< HEAD
 
 	else if(!user.combat_mode)
 		var/item_is_id = weapon.GetID()
+=======
+	else if (can_install_electronics && istype(W, /obj/item/electronics/airlock)\
+			&& !secure && !electronics && !locked && (welded || !can_weld_shut) && !broken)
+		user.visible_message(span_notice("[user] installs the electronics into the [src]."),\
+			span_notice("You start to install electronics into the [src]..."))
+		if (!do_after(user, 4 SECONDS, target = src))
+			return FALSE
+		if (electronics || secure)
+			return FALSE
+		if (!user.transferItemToLoc(W, src))
+			return FALSE
+		W.moveToNullspace()
+		to_chat(user, span_notice("You install the electronics."))
+		electronics = W
+		if (electronics.one_access)
+			req_one_access = electronics.accesses
+		else
+			req_access = electronics.accesses
+		secure = TRUE
+		update_appearance()
+	else if (can_install_electronics && W.tool_behaviour == TOOL_SCREWDRIVER\
+			&& (secure || electronics) && !locked && (welded || !can_weld_shut))
+		user.visible_message(span_notice("[user] begins to remove the electronics from the [src]."),\
+			span_notice("You begin to remove the electronics from the [src]..."))
+		var/had_electronics = !!electronics
+		var/was_secure = secure
+		if (!do_after(user, 4 SECONDS, target = src))
+			return FALSE
+		if ((had_electronics && !electronics) || (was_secure && !secure))
+			return FALSE
+		var/obj/item/electronics/airlock/electronics_ref
+		if (!electronics)
+			electronics_ref = new /obj/item/electronics/airlock(loc)
+			if (req_one_access.len)
+				electronics_ref.one_access = 1
+				electronics_ref.accesses = req_one_access
+			else
+				electronics_ref.accesses = req_access
+		else
+			electronics_ref = electronics
+			electronics = null
+			electronics_ref.forceMove(drop_location())
+		secure = FALSE
+		update_appearance()
+	else if(!(user.istate & ISTATE_HARM))
+		var/item_is_id = W.GetID()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(!item_is_id)
 			return FALSE
 		if((item_is_id || !toggle(user)) && !opened)
@@ -1096,6 +1180,7 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 		return allowed(user)
 	return player_id == registered_id
 
+<<<<<<< HEAD
 /obj/structure/closet/proc/togglelock(mob/living/user, silent)
 	if(!secure || broken)
 		return
@@ -1130,6 +1215,8 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	)
 	update_appearance()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/structure/closet/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(secure && !broken)
 		visible_message(span_warning("Sparks fly from [src]!"), blind_message = span_hear("You hear a faint electrical spark."))
@@ -1210,9 +1297,12 @@ GLOBAL_LIST_EMPTY(roundstart_station_closets)
 	locked = FALSE
 	INVOKE_ASYNC(src, PROC_REF(open))
 
+<<<<<<< HEAD
 /obj/structure/closet/preopen
 	opened = TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ///Adds the closet to a global list. Placed in its own proc so that crates may be excluded.
 /obj/structure/closet/proc/add_to_roundstart_list()
 	GLOB.roundstart_station_closets += src

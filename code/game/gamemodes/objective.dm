@@ -18,11 +18,13 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/admin_grantable = FALSE
 
 /datum/objective/New(text)
+	GLOB.objectives += src
 	if(text)
 		explanation_text = text
 
 //Apparently objectives can be qdel'd. Learn a new thing every day
 /datum/objective/Destroy()
+	GLOB.objectives -= src
 	return ..()
 
 /datum/objective/proc/get_owners() // Combine owner and team into a single list.
@@ -98,8 +100,11 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 
 /// Provides a string describing what a good job you did or did not do
 /datum/objective/proc/get_roundend_success_suffix()
+<<<<<<< HEAD
 	if(no_failure)
 		return "" // Just print the objective with no success/fail evaluation, as it has no mechanical backing
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return check_completion() ? span_greentext("Success!") : span_redtext("Fail.")
 
 /datum/objective/proc/is_unique_objective(possible_target, dupe_search_range)
@@ -150,6 +155,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 		var/datum/mind/O = I
 		if(O.late_joiner)
 			try_target_late_joiners = TRUE
+	var/opt_in_disabled = CONFIG_GET(flag/disable_antag_opt_in_preferences)
 	for(var/datum/mind/possible_target in get_crewmember_minds())
 		if(possible_target in owners)
 			continue
@@ -159,6 +165,11 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 			continue
 		if(!is_valid_target(possible_target))
 			continue
+<<<<<<< HEAD
+=======
+		if (!opt_in_disabled && !opt_in_valid(possible_target))
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		possible_targets += possible_target
 	if(try_target_late_joiners)
 		var/list/all_possible_targets = possible_targets.Copy()
@@ -869,7 +880,12 @@ GLOBAL_LIST_EMPTY(possible_items)
 /datum/objective/destroy/find_target(dupe_search_range, list/blacklist)
 	var/list/possible_targets = active_ais(TRUE)
 	possible_targets -= blacklist
-	var/mob/living/silicon/ai/target_ai = pick(possible_targets)
+	var/mob/living/silicon/ai/target_ai
+	var/opt_in_disabled = CONFIG_GET(flag/disable_antag_opt_in_preferences) // NOVA EDIT ADDITION - ANTAG OPT-IN
+	for (var/mob/living/silicon/ai/possible_target as anything in shuffle(possible_targets))
+		if (!opt_in_disabled && !opt_in_valid(possible_target))
+			continue
+		target_ai = possible_target
 	target = target_ai.mind
 	update_explanation_text()
 	return target
@@ -996,6 +1012,9 @@ GLOBAL_LIST_EMPTY(possible_items)
 	var/expl = stripped_input(admin, "Custom objective:", "Objective", explanation_text)
 	if(expl)
 		explanation_text = expl
+
+/datum/objective/custom/get_roundend_success_suffix()
+	return "" // Just print the objective with no success/fail evaluation, as it has no mechanical backing
 
 //Ideally this would be all of them but laziness and unusual subtypes
 /proc/generate_admin_objective_list()

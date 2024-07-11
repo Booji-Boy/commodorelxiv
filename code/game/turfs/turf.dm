@@ -72,7 +72,6 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	var/tmp/datum/lighting_corner/lighting_corner_SW
 	var/tmp/datum/lighting_corner/lighting_corner_NW
 
-
 	///Which directions does this turf block the vision of, taking into account both the turf's opacity and the movable opacity_sources.
 	var/directional_opacity = NONE
 	///Lazylist of movable atoms providing opacity sources.
@@ -166,7 +165,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 	if(requires_activation)
 		CALCULATE_ADJACENT_TURFS(src, KILL_EXCITED)
 
-	if (light_power && light_range)
+	if (light_power && light_outer_range)
 		update_light()
 
 	if (opacity)
@@ -206,7 +205,10 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		for(var/A in B.contents)
 			qdel(A)
 		return
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	LAZYCLEARLIST(blueprint_data)
 	flags_1 &= ~INITIALIZED_1
 	requires_activation = FALSE
@@ -214,6 +216,7 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 	if(length(vis_contents))
 		vis_contents.Cut()
+	SEND_SIGNAL(src, COMSIG_TURF_DESTROY)
 
 /// WARNING WARNING
 /// Turfs DO NOT lose their signals when they get replaced, REMEMBER THIS
@@ -250,9 +253,11 @@ GLOBAL_LIST_EMPTY(station_turfs)
 
 /turf/proc/multiz_turf_del(turf/T, dir)
 	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_DEL, T, dir)
+	reconsider_sunlight() //Monkestation addition
 
 /turf/proc/multiz_turf_new(turf/T, dir)
 	SEND_SIGNAL(src, COMSIG_TURF_MULTIZ_NEW, T, dir)
+	reconsider_sunlight() //Monkestation addition
 
 /**
  * Check whether the specified turf is blocked by something dense inside it with respect to a specific atom.
@@ -439,6 +444,8 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		return FALSE
 	if(!can_pass_self) //Even if mover is unstoppable they need to bump us.
 		first_bump = src
+	if(mover.cant_grab) //This will cause someone nightmares one day, but that someone isn't me
+		return TRUE
 	if(first_bump)
 		mover.Bump(first_bump)
 		return (mover.movement_type & PHASING)
@@ -610,6 +617,14 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		return FALSE
 
 	AddComponent(/datum/component/acid, acidpwr, acid_volume, GLOB.acid_overlay)
+<<<<<<< HEAD
+=======
+	for(var/atom/movable/movable_atom as anything in src)
+		if(underfloor_accessibility < UNDERFLOOR_INTERACTABLE && HAS_TRAIT(movable_atom, TRAIT_T_RAY_VISIBLE))
+			continue
+
+		movable_atom.acid_act(acidpwr, acid_volume)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return . || TRUE
 
@@ -660,11 +675,25 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		throw_up = locate() in src
 	if(isnull(throw_up))
 		return
+<<<<<<< HEAD
 
 	if(!iscarbon(vomiter) || (purge_ratio == 0))
 		return
 
 	clear_reagents_to_vomit_pool(vomiter, throw_up, purge_ratio)
+=======
+	// Apply the proper icon set based on vomit type
+	if(toxvomit == VOMIT_PURPLE)
+		V.icon_state = "vomitpurp_[pick(1,4)]"
+	else if (toxvomit == VOMIT_TOXIC)
+		V.icon_state = "vomittox_[pick(1,4)]"
+	else if (toxvomit == VOMIT_NANITE)
+		V.name = "metallic slurry"
+		V.desc = "A puddle of metallic slurry that looks vaguely like very fine sand. It almost seems like it's moving..."
+		V.icon_state = "vomitnanite_[pick(1,4)]"
+	if (purge_ratio && iscarbon(M))
+		clear_reagents_to_vomit_pool(M, V, purge_ratio)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /proc/clear_reagents_to_vomit_pool(mob/living/carbon/M, obj/effect/decal/cleanable/vomit/V, purge_ratio = 0.1)
 	var/obj/item/organ/internal/stomach/belly = M.get_organ_slot(ORGAN_SLOT_STOMACH)

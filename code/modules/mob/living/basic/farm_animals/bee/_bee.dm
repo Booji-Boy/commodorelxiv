@@ -10,7 +10,11 @@
 	desc = "Buzzy buzzy bee, stingy sti- Ouch!"
 	icon_state = ""
 	icon_living = ""
+<<<<<<< HEAD
 	icon = 'icons/mob/simple/bees.dmi'
+=======
+	icon = 'monkestation/icons/mob/simple/bees.dmi' //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	gender = FEMALE
 	speak_emote = list("buzzes")
 
@@ -25,6 +29,15 @@
 	response_harm_continuous = "squashes"
 	response_harm_simple = "squash"
 
+<<<<<<< HEAD
+=======
+	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/bee = 1 )
+
+	mob_size = MOB_SIZE_LARGE
+	pixel_x = -16
+	base_pixel_x = -16
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	speed = 1
 	maxHealth = 10
 	health = 10
@@ -39,14 +52,19 @@
 	can_be_held = TRUE
 	held_w_class = WEIGHT_CLASS_TINY
 	environment_smash  = ENVIRONMENT_SMASH_NONE
+<<<<<<< HEAD
 	habitable_atmos = null
 	basic_mob_flags = DEL_ON_DEATH
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	ai_controller = /datum/ai_controller/basic_controller/bee
 	///the reagent the bee has
 	var/datum/reagent/beegent = null
 	///the house we live in
 	var/obj/structure/beebox/beehome = null
 	///our icon base
+<<<<<<< HEAD
 	var/icon_base = "bee"
 	///the bee is a queen?
 	var/is_queen = FALSE
@@ -60,6 +78,12 @@
 		/datum/pet_command/point_targeting/attack/swirl,
 		/datum/pet_command/scatter,
 	)
+=======
+	var/icon_base = "angry_bee" //add friendly maint bees
+	var/dead_icon_base = "dead_bee"
+	///the bee is a queen?
+	var/is_queen = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bee/Initialize(mapload)
 	. = ..()
@@ -68,7 +92,10 @@
 	AddElement(/datum/element/simple_flying)
 	AddComponent(/datum/component/clickbox, x_offset = -2, y_offset = -2)
 	AddComponent(/datum/component/swarming)
+<<<<<<< HEAD
 	AddComponent(/datum/component/obeys_commands, pet_commands)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/swabable, CELL_LINE_TABLE_QUEEN_BEE, CELL_VIRUS_TABLE_GENERIC_MOB, 1, 5)
 	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
 
@@ -100,6 +127,7 @@
 	return ..()
 
 /mob/living/basic/bee/death(gibbed)
+<<<<<<< HEAD
 	if(beehome)
 		beehome.bees -= src
 		beehome = null
@@ -118,6 +146,32 @@
 
 	if(istype(target, /obj/machinery/hydroponics))
 		var/obj/machinery/hydroponics/hydro = target
+=======
+	icon_base = dead_icon_base
+	generate_bee_visuals()
+	if(beehome)
+		beehome.bees -= src
+		beehome = null
+	if(flags_1 & HOLOGRAM_1 || gibbed)
+		return ..()
+	var/obj/item/food/pollensac/sac = new(loc) //monkestation edit, bee update
+	sac.pixel_x = pixel_x
+	sac.pixel_y = pixel_y
+	sac.reagents.add_reagent(/datum/reagent/consumable/honey, 2)
+	sac.color = BEE_DEFAULT_COLOUR
+	if(beegent)
+		sac.beegent = beegent
+		sac.reagents.add_reagent(beegent.type, 5)
+		sac.color = beegent.color
+	sac.update_appearance()
+	return ..()
+
+/mob/living/basic/bee/proc/pre_attack(mob/living/puncher, atom/target)
+	SIGNAL_HANDLER
+
+	if(target.GetComponent(/datum/component/plant_growing))
+		var/atom/movable/hydro = target
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		pollinate(hydro)
 		return COMPONENT_HOSTILE_NO_ATTACK
 
@@ -143,7 +197,11 @@
 /mob/living/basic/bee/proc/reagent_incompatible(mob/living/basic/bee/ruler)
 	if(!ruler)
 		return FALSE
+<<<<<<< HEAD
 	if(ruler.beegent?.type != beegent?.type)
+=======
+	if(ruler.beegent != beegent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 	return FALSE
 
@@ -158,13 +216,18 @@
 	add_overlay("[icon_base]_base")
 
 	var/static/mutable_appearance/greyscale_overlay
+<<<<<<< HEAD
 	greyscale_overlay = greyscale_overlay || mutable_appearance('icons/mob/simple/bees.dmi')
+=======
+	greyscale_overlay = greyscale_overlay || mutable_appearance('monkestation/icons/mob/simple/bees.dmi')
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	greyscale_overlay.icon_state = "[icon_base]_grey"
 	greyscale_overlay.color = bee_color
 	add_overlay(greyscale_overlay)
 
 	add_overlay("[icon_base]_wings")
 
+<<<<<<< HEAD
 /mob/living/basic/bee/proc/pollinate(obj/machinery/hydroponics/hydro)
 	if(!hydro.can_bee_pollinate())
 		return FALSE
@@ -184,10 +247,18 @@
 
 	if(beehome)
 		beehome.bee_resources = min(beehome.bee_resources + growth, 100)
+=======
+/mob/living/basic/bee/proc/pollinate(atom/movable/hydro)
+	SEND_SIGNAL(hydro, COMSIG_TRY_POLLINATE)
+
+	if(beehome)
+		beehome.bee_resources = min(beehome.bee_resources + health, 100)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bee/proc/assign_reagent(datum/reagent/toxin)
 	if(!istype(toxin))
 		return
+<<<<<<< HEAD
 	var/static/list/injection_range
 	if(!injection_range)
 		injection_range = string_numbers_list(list(1, 5))
@@ -197,12 +268,25 @@
 	name = "[initial(name)] ([toxin.name])"
 	real_name = name
 	AddElement(/datum/element/venomous, beegent.type, injection_range, thrown_effect = TRUE)
+=======
+	var/static/list/injection_range = list(1, 5)
+	if(beegent) //clear the old since this one is going to have some new value
+		RemoveElement(/datum/element/venomous, beegent.type, injection_range)
+	beegent = toxin
+	name = "[initial(name)] ([toxin.name])"
+	real_name = name
+	AddElement(/datum/element/venomous, beegent.type, injection_range)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	generate_bee_visuals()
 
 /mob/living/basic/bee/queen
 	name = "queen bee"
 	desc = "She's the queen of bees, BZZ BZZ!"
 	icon_base = "queen"
+<<<<<<< HEAD
+=======
+	dead_icon_base = "dead_queen_bee"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	is_queen = TRUE
 	ai_controller = /datum/ai_controller/basic_controller/queen_bee
 
@@ -217,6 +301,7 @@
 	var/datum/reagent/toxin = pick(typesof(/datum/reagent/toxin))
 	assign_reagent(GLOB.chemical_reagents_list[toxin])
 
+<<<<<<< HEAD
 /// A bee which despawns after a short amount of time (beespawns?)
 /mob/living/basic/bee/timed
 	/// How long do we live?
@@ -231,13 +316,25 @@
 
 /mob/living/basic/bee/timed/spawn_corpse()
 	new /obj/effect/temp_visual/despawn_effect(get_turf(src), /* copy_from = */ src)
+=======
+/mob/living/basic/bee/short
+	desc = "These bees seem unstable and won't survive for long."
+
+/mob/living/basic/bee/short/Initialize(mapload, timetolive=50 SECONDS)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(death)), timetolive)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/queen_bee
 	name = "queen bee"
 	desc = "She's the queen of bees, BZZ BZZ!"
 	icon_state = "queen_item"
 	inhand_icon_state = ""
+<<<<<<< HEAD
 	icon = 'icons/mob/simple/bees.dmi'
+=======
+	icon = 'monkestation/icons/mob/simple/bees.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// The actual mob that our bee item corresponds to
 	var/mob/living/basic/bee/queen/queen
 
@@ -275,6 +372,7 @@
 		user.visible_message(span_notice("[user] injects [src] with royal bee jelly, causing it to split into two bees, MORE BEES!"),span_warning("You inject [src] with royal bee jelly, causing it to split into two bees, MORE BEES!"))
 		return
 	var/datum/reagent/chemical = needle.reagents.get_master_reagent()
+<<<<<<< HEAD
 	if(isnull(chemical))
 		return
 	if(!(chemical.chemical_flags & REAGENT_CAN_BE_SYNTHESIZED))
@@ -291,6 +389,15 @@
 	queen.assign_reagent(bee_chem)
 	user.visible_message(span_warning("[user] injects [src]'s genome with [chemical.name], mutating its DNA!"),span_warning("You inject [src]'s genome with [chemical.name], mutating its DNA!"))
 	name = queen.name
+=======
+	if(chemical && needle.reagents.has_reagent(chemical.type, 5))
+		needle.reagents.remove_reagent(chemical.type, 5)
+		queen.assign_reagent(chemical)
+		user.visible_message(span_warning("[user] injects [src]'s genome with [chemical.name], mutating its DNA!"),span_warning("You inject [src]'s genome with [chemical.name], mutating its DNA!"))
+		name = queen.name
+	else
+		to_chat(user, span_warning("You don't have enough units of that chemical to modify the bee's DNA!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/queen_bee/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] eats [src]! It looks like [user.p_theyre()] trying to commit suicide!"))

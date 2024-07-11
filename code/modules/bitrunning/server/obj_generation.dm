@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /// Attempts to spawn a crate twice based on the list of available locations
 /obj/machinery/quantum_server/proc/attempt_spawn_cache(list/possible_turfs)
 	if(!length(possible_turfs))
@@ -35,6 +36,8 @@
 	new /obj/item/storage/lockbox/bitrunning/encrypted(chosen_turf)
 	return chosen_turf
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Generates a new avatar for the bitrunner.
 /obj/machinery/quantum_server/proc/generate_avatar(obj/structure/hololadder/wayout, datum/outfit/netsuit)
 	var/mob/living/carbon/human/avatar = new(wayout.loc)
@@ -43,7 +46,10 @@
 	var/datum/outfit/to_wear = new outfit_path()
 
 	to_wear.belt = /obj/item/bitrunning_host_monitor
+<<<<<<< HEAD
 	to_wear.ears = null
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	to_wear.glasses = null
 	to_wear.gloves = null
 	to_wear.l_pocket = null
@@ -57,11 +63,25 @@
 	if(istype(jumpsuit))
 		jumpsuit.set_armor(/datum/armor/clothing_under)
 
+<<<<<<< HEAD
 	var/obj/item/clothing/head/hat = locate() in avatar.get_equipped_items()
 	if(istype(hat))
 		hat.set_armor(/datum/armor/none)
 
 	for(var/obj/thing in avatar.held_items)
+=======
+	var/obj/item/clothing/head/hat = avatar.get_clothing_on_part(avatar.get_bodypart(BODY_ZONE_HEAD))
+
+	if(istype(hat))
+		hat.set_armor(null)
+
+	var/thing = avatar.get_active_held_item()
+	if(!isnull(thing))
+		qdel(thing)
+
+	thing = avatar.get_inactive_held_item()
+	if(!isnull(thing))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		qdel(thing)
 
 	var/obj/item/storage/backpack/bag = avatar.back
@@ -84,6 +104,7 @@
 
 		SSid_access.apply_trim_to_card(outfit_id, /datum/id_trim/bit_avatar)
 
+<<<<<<< HEAD
 	avatar.AddComponent( \
 		/datum/component/simple_bodycam, \
 		camera_name = "bitrunner bodycam", \
@@ -91,6 +112,8 @@
 		network = BITRUNNER_CAMERA_NET, \
 		emp_proof = TRUE, \
 	)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return avatar
 
 /// Generates a new hololadder for the bitrunner. Effectively a respawn attempt.
@@ -118,6 +141,7 @@
 
 	return wayout
 
+<<<<<<< HEAD
 /// Loads in any mob segments of the map
 /obj/machinery/quantum_server/proc/load_mob_segments()
 	if(!length(generated_domain.mob_modules))
@@ -145,6 +169,8 @@
 
 	return TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Scans over neo's contents for bitrunning tech disks. Loads the items or abilities onto the avatar.
 /obj/machinery/quantum_server/proc/stock_gear(mob/living/carbon/human/avatar, mob/living/carbon/human/neo, datum/lazy_template/virtual_domain/generated_domain)
 	var/domain_forbids_items = generated_domain.forbids_disk_items
@@ -176,11 +202,14 @@
 				continue
 
 			var/datum/action/our_action = new ability_disk.granted_action()
+<<<<<<< HEAD
 
 			if(locate(our_action.type) in avatar.actions)
 				failed = TRUE
 				continue
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			our_action.Grant(avatar)
 			continue
 
@@ -194,6 +223,7 @@
 			avatar.put_in_hands(new item_disk.granted_item())
 
 	if(failed)
+<<<<<<< HEAD
 		to_chat(neo, span_warning("One of your disks failed to load. Check for duplicate or inactive disks."))
 
 	var/obj/item/organ/internal/brain/neo_brain = neo.get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -203,3 +233,6 @@
 		var/obj/item/skillchip/clone_chip = new skill_chip.type
 		avatar.implant_skillchip(clone_chip, force = TRUE)
 		clone_chip.try_activate_skillchip(silent = TRUE, force = TRUE)
+=======
+		to_chat(neo, span_warning("One of your disks failed to load. You must activate them to make a selection."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

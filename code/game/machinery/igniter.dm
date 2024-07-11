@@ -53,11 +53,21 @@
 	loc.balloon_alert(user, "[src] dismantled")
 
 	deconstruct(TRUE)
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/igniter/on_deconstruction(disassembled)
 	new /obj/item/stack/sheet/iron(loc, 5)
 	new /obj/item/assembly/igniter(loc)
+=======
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/igniter/deconstruct(disassembled)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		new /obj/item/stack/sheet/iron(loc, 5)
+		new /obj/item/assembly/igniter(loc)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/igniter/multitool_act(mob/living/user, obj/item/tool)
 	var/change_id = tgui_input_number(user, "Set the igniter controller's ID", "Igniter ID", id, 100)
@@ -66,7 +76,11 @@
 	id = change_id
 	balloon_alert(user, "id set to [id]")
 	to_chat(user, span_notice("You change the ID to [id]."))
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
+=======
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/igniter/incinerator_ordmix
 	id = INCINERATOR_ORDMIX_IGNITER
@@ -113,13 +127,20 @@
 		on = FALSE
 	if(machine_stat & NOPOWER)
 		on = FALSE
+<<<<<<< HEAD
 	if(!use_energy(active_power_usage, force = FALSE)) // Use energy to keep the turf hot. Doesn't necessarily use the correct amount of energy though (this should be changed).
 		on = FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!on)
 		update_appearance()
 		return PROCESS_KILL
 
 	location.hotspot_expose(1000, 500, 1)
+<<<<<<< HEAD
+=======
+	use_power(active_power_usage) //use power to keep the turf hot
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/igniter/update_icon_state()
 	icon_state = "[base_icon_state][on]"
@@ -133,7 +154,11 @@
 /obj/item/wallframe/sparker
 	name = "Sparker WallFrame"
 	desc = "An unmounted sparker. Attach it to a wall to use."
+<<<<<<< HEAD
 	icon = 'icons/obj/wallmounts.dmi'
+=======
+	icon = 'icons/obj/stationobjs.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "migniter"
 	result_path = /obj/machinery/sparker
 	pixel_shift = 26
@@ -161,7 +186,10 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 	spark_system.set_up(2, 1, src)
 	spark_system.attach(src)
 	register_context()
+<<<<<<< HEAD
 	find_and_hang_on_wall()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/sparker/Destroy()
 	QDEL_NULL(spark_system)
@@ -197,10 +225,19 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 	loc.balloon_alert(user, "[src] dismantled")
 
 	deconstruct(TRUE)
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/sparker/on_deconstruction(disassembled)
 	new /obj/item/wallframe/sparker(loc)
+=======
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+/obj/machinery/sparker/deconstruct(disassembled)
+	if(!(flags_1 & NODECONSTRUCT_1))
+		new /obj/item/wallframe/sparker(loc)
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/sparker/multitool_act(mob/living/user, obj/item/tool)
 	var/change_id = tgui_input_number(user, "Set the sparker controller's ID", "Sparker ID", id, 100)
@@ -209,7 +246,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 	id = change_id
 	balloon_alert(user, "id set to [id]")
 	to_chat(user, span_notice("You change the ID to [id]."))
+<<<<<<< HEAD
 	return ITEM_INTERACT_SUCCESS
+=======
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/sparker/update_icon_state()
 	if(disable)
@@ -250,14 +291,21 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/sparker, 26)
 	var/turf/location = loc
 	if(!isturf(location) || !isopenturf(location))
 		return FALSE
+<<<<<<< HEAD
 
 	if(!use_energy(active_power_usage, force = FALSE))
 		return FALSE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	flick("[initial(icon_state)]-spark", src)
 	spark_system.start()
 	last_spark = world.time
 	location.hotspot_expose(1000, 2500, 1)
+<<<<<<< HEAD
+=======
+	use_power(active_power_usage)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return TRUE
 

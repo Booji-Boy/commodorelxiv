@@ -6,8 +6,9 @@
 	always_unpowered = TRUE
 	static_lighting = FALSE
 
-	base_lighting_alpha = 255
-	base_lighting_color = COLOR_STARLIGHT
+	//base_lighting_alpha = 255
+	//base_lighting_color = "#FFFFFF"
+
 	power_light = FALSE
 	power_equip = FALSE
 	power_environ = FALSE
@@ -20,13 +21,23 @@
 	min_ambience_cooldown = 195 SECONDS //length of ambispace.ogg
 	max_ambience_cooldown = 200 SECONDS
 
+
+/area/space/Initialize(mapload)
+	. = ..()
+	if(!SSmapping.level_trait(src.z, ZTRAIT_STARLIGHT))
+		set_base_lighting(GLOB.starlight_color, alpha)
+
+
 /area/space/nearstation
 	icon_state = "space_near"
 	area_flags = UNIQUE_AREA
 	static_lighting = TRUE
+<<<<<<< HEAD
 	base_lighting_alpha = 0
 	base_lighting_color = null
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /area/misc/start
 	name = "start area"
 	icon_state = "start"

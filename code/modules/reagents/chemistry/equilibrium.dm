@@ -65,7 +65,7 @@
 		to_delete = TRUE
 		return
 	LAZYADD(holder.reaction_list, src)
-	SSblackbox.record_feedback("tally", "chemical_reaction", 1, "[reaction.type] attempts")
+	SSblackbox.record_feedback("tally", "chemical_reaction", 1, "[reaction] attempts")
 
 
 /datum/equilibrium/Destroy()
@@ -235,6 +235,41 @@
 	return seconds_per_tick
 
 /*
+<<<<<<< HEAD
+=======
+* Main method of checking for explosive - or failed states
+* Checks overheated() and overly_impure() of a reaction
+* This was moved from the start, to the end - after a reaction, so post reaction temperature changes aren't ignored.
+* overheated() is first - so double explosions can't happen (i.e. explosions that blow up the holder)
+* step_volume_added is how much product (across all products) was added for this single step
+*/
+/datum/equilibrium/proc/check_fail_states(step_volume_added)
+	//Are we overheated?
+	if(reaction.is_cold_recipe)
+		if(holder.chem_temp < reaction.overheat_temp && reaction.overheat_temp != NO_OVERHEAT) //This is before the process - this is here so that overly_impure and overheated() share the same code location (and therefore vars) for calls.
+			SSblackbox.record_feedback("tally", "chemical_reaction", 1, "[reaction] overheated reaction steps")
+			reaction.overheated(holder, src, step_volume_added)
+	else
+		if(holder.chem_temp > reaction.overheat_temp)
+			SSblackbox.record_feedback("tally", "chemical_reaction", 1, "[reaction] overheated reaction steps")
+			reaction.overheated(holder, src, step_volume_added)
+
+	//is our product too impure?
+	for(var/product in reaction.results)
+		var/datum/reagent/reagent = holder.has_reagent(product)
+		if(!reagent) //might be missing from overheat exploding
+			continue
+		if (reagent.purity < reaction.purity_min)//If purity is below the min, call the proc
+			SSblackbox.record_feedback("tally", "chemical_reaction", 1, "[reaction] overly impure reaction steps")
+			reaction.overly_impure(holder, src, step_volume_added)
+
+	//did we explode?
+	if(!holder.my_atom || holder.reagent_list.len == 0)
+		return FALSE
+	return TRUE
+
+/*
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 * Main reaction processor - Increments the reaction by a timestep
 *
 * First checks the holder to make sure it can continue
@@ -264,6 +299,7 @@
 
 	//Begin checks
 	//Calculate DeltapH (Deviation of pH from optimal)
+<<<<<<< HEAD
 	//Within mid range
 	var/acceptable_ph
 	if (cached_ph >= reaction.optimal_ph_min  && cached_ph <= reaction.optimal_ph_max)
@@ -282,6 +318,30 @@
 			delta_ph = 0 //0% purity
 		else  //We're in the deterministic phase
 			delta_ph = ((acceptable_ph - cached_ph) / reaction.determin_ph_range) ** reaction.ph_exponent_factor
+=======
+	if(reaction.reaction_flags & REACTION_USES_PURITY)
+		//Within mid range
+		if (cached_ph >= reaction.optimal_ph_min  && cached_ph <= reaction.optimal_ph_max)
+			delta_ph = 1 //100% purity for this step
+		//Lower range
+		else if (cached_ph < reaction.optimal_ph_min) //If we're outside of the optimal lower bound
+			if (cached_ph < (reaction.optimal_ph_min - reaction.determin_ph_range)) //If we're outside of the deterministic bound
+				delta_ph = 0 //0% purity
+			else //We're in the deterministic phase
+				delta_ph = (((cached_ph - (reaction.optimal_ph_min - reaction.determin_ph_range))**reaction.ph_exponent_factor)/((reaction.determin_ph_range**reaction.ph_exponent_factor))) //main pH calculation
+		//Upper range
+		else if (cached_ph > reaction.optimal_ph_max) //If we're above of the optimal lower bound
+			if (cached_ph > (reaction.optimal_ph_max + reaction.determin_ph_range))  //If we're outside of the deterministic bound
+				delta_ph = 0 //0% purity
+			else  //We're in the deterministic phase
+				delta_ph = (((- cached_ph + (reaction.optimal_ph_max + reaction.determin_ph_range))**reaction.ph_exponent_factor)/(reaction.determin_ph_range**reaction.ph_exponent_factor))//Reverse - to + to prevent math operation failures.
+
+		//This should never proc, but it's a catch incase someone puts in incorrect values
+		else
+			stack_trace("[holder.my_atom] attempted to determine FermiChem pH for '[reaction.type]' which had an invalid pH of [cached_ph] for set recipie pH vars. It's likely the recipe vars are wrong.")
+	else
+		delta_ph = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//Calculate DeltaT (Deviation of T from optimal)
 	if(!reaction.is_cold_recipe)
@@ -387,7 +447,10 @@
 			playsound(get_turf(holder.my_atom), reaction.mix_sound, 80, TRUE)
 
 	//Used for UI output
-	reaction_quality = purity
+	if(reaction.reaction_flags & REACTION_USES_PURITY)
+		reaction_quality = purity
+	else
+		reaction_quality = 1
 
 	//post reaction checks
 	if(!check_fail_states(total_step_added))

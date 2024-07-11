@@ -6,8 +6,12 @@ import { Button, Flex, LabeledList, Section, Table, Tabs } from '../components';
 import { Window } from '../layouts';
 
 export const ShuttleManipulator = (props) => {
+<<<<<<< HEAD
   const [tab, setTab] = useState(1);
 
+=======
+  const [tab, setTab] = useLocalState('tab', 1);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window title="Shuttle Manipulator" width={800} height={600} theme="admin">
       <Window.Content scrollable>
@@ -94,7 +98,12 @@ export const ShuttleManipulatorTemplates = (props) => {
   const { act, data } = useBackend();
   const templateObject = data.templates || {};
   const selected = data.selected || {};
+<<<<<<< HEAD
   const [selectedTemplateId, setSelectedTemplateId] = useState(
+=======
+  const [selectedTemplateId, setSelectedTemplateId] = useLocalState(
+    'templateId',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     Object.keys(templateObject)[0],
   );
   const actualTemplates = templateObject[selectedTemplateId]?.templates || [];

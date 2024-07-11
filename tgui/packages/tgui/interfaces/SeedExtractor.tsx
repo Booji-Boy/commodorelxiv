@@ -1,4 +1,5 @@
 import { sortBy } from 'common/collections';
+<<<<<<< HEAD
 import { classes } from 'common/react';
 import { createSearch } from 'common/string';
 import { useState } from 'react';
@@ -14,6 +15,19 @@ import {
   Section,
   Table,
   Tooltip,
+=======
+import { useBackend, useLocalState } from '../backend';
+import {
+  Input,
+  Tooltip,
+  Box,
+  ProgressBar,
+  Button,
+  Section,
+  Table,
+  NoticeBox,
+  Icon,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 } from '../components';
 import { Window } from '../layouts';
 
@@ -60,9 +74,15 @@ type SeedExtractorData = {
 
 export const SeedExtractor = (props) => {
   const { act, data } = useBackend<SeedExtractorData>();
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
   const [sortField, setSortField] = useState('name');
   const [action, toggleAction] = useState(true);
+=======
+  const [searchText, setSearchText] = useLocalState('searchText', '');
+  const [sortField, setSortField] = useLocalState('sortField', 'name');
+  const [action, toggleAction] = useLocalState('action', true);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const search = createSearch(searchText, (item: SeedData) => item.name);
   const seeds_filtered =
     searchText.length > 0 ? data.seeds.filter(search) : data.seeds;
@@ -90,34 +110,51 @@ export const SeedExtractor = (props) => {
               <Table.Cell collapsing p={1}>
                 <Tooltip
                   content={
+<<<<<<< HEAD
                     'Potency: Determines product mass, reagent volume and strength of effects.'
+=======
+                    'Determines product mass, reagent volume and strength of effects.'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('potency')}
                   >
+<<<<<<< HEAD
                     PTN
+=======
+                    Potency
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell collapsing p={1}>
                 <Tooltip
                   content={
+<<<<<<< HEAD
                     'Yield: The number of products gathered in a single harvest.'
+=======
+                    'The number of products gathered in a single harvest.'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('yield')}
                   >
+<<<<<<< HEAD
                     YLD
+=======
+                    Yield
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell collapsing p={1}>
                 <Tooltip
                   content={
+<<<<<<< HEAD
                     'Instability: The likelihood of the plant to randomize stats or mutate. Affects quality of resulting food & drinks.'
                   }
                 >
@@ -133,52 +170,94 @@ export const SeedExtractor = (props) => {
                 <Tooltip
                   content={
                     'Endurance: The health pool of the plant that delays death. Improves quality of resulting food & drinks.'
+=======
+                    'The health pool of the plant that delays death. Affects fermentation quality.'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   }
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('endurance')}
                   >
+<<<<<<< HEAD
                     END
+=======
+                    Endurance
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell collapsing p={1}>
                 <Tooltip
+<<<<<<< HEAD
                   content={`Lifespan: The age at which the plant starts decaying, in ${data.cycle_seconds} second long cycles. Improves quality of resulting food & drinks.`}
+=======
+                  content={`The age at which the plant starts decaying, in ${data.cycle_seconds} second long cycles. Affects fermentation quality.`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('lifespan')}
                   >
+<<<<<<< HEAD
                     LFS
+=======
+                    Lifespan
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell collapsing p={1}>
                 <Tooltip
+<<<<<<< HEAD
                   content={`Maturation: The age required for the first harvest, in ${data.cycle_seconds} second long cycles.`}
+=======
+                  content={`The age required for the first harvest, in ${data.cycle_seconds} second long cycles.`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('maturation')}
                   >
+<<<<<<< HEAD
                     MTR
+=======
+                    Maturation
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   </Box>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell collapsing p={1}>
                 <Tooltip
+<<<<<<< HEAD
                   content={`Production: The period of product regrowth, in ${data.cycle_seconds} second long cycles.`}
+=======
+                  content={`The period of product regrowth, in ${data.cycle_seconds} second long cycles.`}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 >
                   <Box
                     style={{ cursor: 'pointer' }}
                     onClick={(e) => setSortField('production')}
                   >
+<<<<<<< HEAD
                     PRD
                   </Box>
                 </Tooltip>
               </Table.Cell>
+=======
+                    Production
+                  </Box>
+                </Tooltip>
+              </Table.Cell>
+              <Table.Cell collapsing p={1}>
+                <Box
+                  style={{ cursor: 'pointer' }}
+                  onClick={(e) => setSortField('amount')}
+                >
+                  Amount
+                </Box>
+              </Table.Cell>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Table.Cell collapsing p={1} textAlign="right">
                 {sortField !== 'name' && (
                   <Tooltip content="Reset sorting">
@@ -205,7 +284,11 @@ export const SeedExtractor = (props) => {
               seeds.map((item) => (
                 <Table.Row
                   key={item.key}
+<<<<<<< HEAD
                   style={{ borderTop: '2px solid #222' }}
+=======
+                  style={{ 'border-top': '2px solid #222' }}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                 >
                   <Table.Cell collapsing>
                     <Box
@@ -265,9 +348,6 @@ export const SeedExtractor = (props) => {
                     <Level value={item.yield} max={10} />
                   </Table.Cell>
                   <Table.Cell py={0.5} px={1} collapsing>
-                    <Level value={item.instability} max={100} reverse />
-                  </Table.Cell>
-                  <Table.Cell py={0.5} px={1} collapsing>
                     <Level value={item.endurance} max={100} />
                   </Table.Cell>
                   <Table.Cell py={0.5} px={1} collapsing>
@@ -283,7 +363,11 @@ export const SeedExtractor = (props) => {
                     py={0.5}
                     px={1}
                     collapsing
+<<<<<<< HEAD
                     colSpan={2}
+=======
+                    colspan="2"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                     textAlign="right"
                   >
                     {action ? (
@@ -343,7 +427,11 @@ const Level = (props) => {
     >
       <span
         style={{
+<<<<<<< HEAD
           textShadow: '1px 1px 0 black',
+=======
+          'text-shadow': '1px 1px 0 black',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         }}
       >
         {props.value}

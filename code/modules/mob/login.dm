@@ -38,7 +38,7 @@
 	world.update_status()
 	client.clear_screen() //remove hud items just in case
 	client.images = list()
-	client.set_right_click_menu_mode(shift_to_open_context_menu)
+	client.set_right_click_menu_mode()
 
 	if(!hud_used)
 		create_mob_hud() // creating a hud will add it to the client's screen, which can process a disconnect
@@ -46,6 +46,10 @@
 			return FALSE
 
 	if(hud_used)
+		if (forced_interaction_mode)
+			client.imode.replace(forced_interaction_mode)
+		else
+			client.imode.reload_hud(src)
 		hud_used.show_hud(hud_used.hud_version) // see above, this can process a disconnect
 		if(!client)
 			return FALSE
@@ -124,7 +128,12 @@
 		auto_deadmin_on_login()
 
 	log_message("Client [key_name(src)] has taken ownership of mob [src]([src.type])", LOG_OWNERSHIP)
+<<<<<<< HEAD
 	log_mob_tag("TAG: [tag] NEW OWNER: [key_name(src)]")
+=======
+	SSdemo.write_event_line("setmob [client.ckey] \ref[src]") //Monkestation Edit: REPLAYS
+	log_mob_tag("NEW OWNER: [key_name(src)]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SEND_SIGNAL(src, COMSIG_MOB_CLIENT_LOGIN, client)
 	SEND_SIGNAL(client, COMSIG_CLIENT_MOB_LOGIN, src)
 	client.init_verbs()

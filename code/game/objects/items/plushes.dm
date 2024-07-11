@@ -18,7 +18,7 @@
 	var/obj/item/toy/plush/plush_child
 	var/obj/item/toy/plush/paternal_parent //who initiated creation
 	var/obj/item/toy/plush/maternal_parent //who owns, see love()
-	var/static/list/breeding_blacklist = typecacheof(/obj/item/toy/plush/carpplushie/dehy_carp) // you cannot have sexual relations with this plush
+	var/static/list/breeding_blacklist = typecacheof(/obj/item/toy/plush/carpplushie/dehy_carp)
 	var/list/scorned = list() //who the plush hates
 	var/list/scorned_by = list() //who hates the plush, to remove external references on Destroy()
 	var/heartbroken = FALSE
@@ -511,7 +511,7 @@
 	greyscale_config = /datum/greyscale_config/plush_lizard
 	attack_verb_continuous = list("claws", "hisses", "tail slaps")
 	attack_verb_simple = list("claw", "hiss", "tail slap")
-	squeak_override = list('sound/weapons/slash.ogg' = 1)
+	squeak_override = list('monkestation/sound/voice/weh.ogg' = 1) // Monkestation Edit
 
 /obj/item/toy/plush/lizard_plushie/Initialize(mapload)
 	. = ..()
@@ -545,10 +545,14 @@
 	// space lizards can't hit people with their tail, it's stuck in their suit
 	attack_verb_continuous = list("claws", "hisses", "bops")
 	attack_verb_simple = list("claw", "hiss", "bops")
+<<<<<<< HEAD
 
 /obj/item/toy/plush/lizard_plushie/space/green
 	desc = "An adorable stuffed toy that resembles a very determined spacefaring green lizardperson. To infinity and beyond, little guy. This one fills you with nostalgia and soul."
 	greyscale_colors = "#66ff33#000000"
+=======
+	squeak_override = list('monkestation/sound/voice/weh.ogg' = 1) // Monkestation Edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/toy/plush/snakeplushie
 	name = "snake plushie"
@@ -727,16 +731,41 @@
 	squeak_override = list('sound/voice/moth/scream_moth.ogg'=1)
 ///Used to track how many people killed themselves with item/toy/plush/moth
 	var/suicide_count = 0
+	var/suicide_text = "stares deeply into the eyes of" //for modularizing creepy toys
+	var/creepy_plush_type = "mothperson" //for modularizing creepy toys
+	var/has_creepy_icons = FALSE //for updating icons
+
+	// only used for the base moth plush light
+	light_system = OVERLAY_LIGHT
+	light_outer_range = 4
+	light_power = 1
+
+	/// Is the light turned on or off currently
+	var/on = FALSE
+
+/obj/item/toy/plush/moth/Initialize(mapload)
+	. = ..()
+	if(icon_state == "[initial(icon_state)]-on")
+		on = TRUE
+	update_brightness()
+
+/obj/item/toy/plush/moth/attack_self(mob/user)
+	. = ..()
+	toggle_light()
 
 /obj/item/toy/plush/moth/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] stares deeply into the eyes of [src] and it begins consuming [user.p_them()]!  It looks like [user.p_theyre()] trying to commit suicide!"))
 	suicide_count++
 	if(suicide_count < 3)
-		desc = "A plushie depicting an unsettling mothperson. After killing [suicide_count] [suicide_count == 1 ? "person" : "people"] it's not looking so huggable now..."
+		desc = "An unsettling [creepy_plush_type] plushy. After killing [suicide_count] [suicide_count == 1 ? "person" : "people"] it's not looking so huggable now..."
+		if(has_creepy_icons)
+			icon_state = "[initial(icon_state)]_1"
 	else
-		desc = "A plushie depicting a creepy mothperson. It's killed [suicide_count] people! I don't think I want to hug it any more!"
+		desc = "A creepy [creepy_plush_type] plushy. It has killed [suicide_count] people! I don't think I want to hug it any more!"
 		divine = TRUE
 		resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | ACID_PROOF | LAVA_PROOF
+		if(has_creepy_icons)
+			icon_state = "[initial(icon_state)]_2"
 	playsound(src, 'sound/hallucinations/wail.ogg', 50, TRUE, -1)
 	var/list/available_spots = get_adjacent_open_turfs(loc)
 	if(available_spots.len) //If the user is in a confined space the plushie will drop normally as the user dies, but in the open the plush is placed one tile away from the user to prevent squeak spam
@@ -744,6 +773,25 @@
 		forceMove(random_open_spot)
 	user.dust(just_ash = FALSE, drop_items = TRUE)
 	return MANUAL_SUICIDE
+
+/obj/item/toy/plush/moth/proc/update_brightness()
+	if(on)
+		icon_state = "[initial(icon_state)]_on"
+	else
+		icon_state = initial(icon_state)
+
+
+/obj/item/toy/plush/moth/proc/toggle_light()
+	if (icon_state == "moffplush_on" || icon_state == "moffplush")
+		on = !on
+		update_brightness()
+
+		set_light_on(on)
+		if(light_system == COMPLEX_LIGHT)
+			update_light()
+
+		return TRUE
+	return FALSE
 
 /obj/item/toy/plush/pkplush
 	name = "peacekeeper plushie"

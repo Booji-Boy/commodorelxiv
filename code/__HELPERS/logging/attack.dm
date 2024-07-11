@@ -1,6 +1,10 @@
 /// Generic attack logging
 /proc/log_attack(text, list/data)
+<<<<<<< HEAD
 	logger.Log(LOG_CATEGORY_ATTACK, text, data)
+=======
+	logger.Log(LOG_CATEGORY_ATTACK, text)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Log a combat message in the attack log
@@ -30,7 +34,6 @@
 
 	var/message = "[what_done] [starget][postfix]"
 	user.log_message(message, LOG_ATTACK, color="red")
-
 	if(user != target)
 		var/reverse_message = "was [what_done] by [ssource][postfix]"
 		target.log_message(reverse_message, LOG_VICTIM, color="orange", log_globally=FALSE)
@@ -68,6 +71,8 @@
 
 	victim.log_message(message, LOG_ATTACK, color="blue")
 
+
+/* //MONKESTATION REMOVAL START - `/proc/log_bomber` has been relocated to `code/__HELPERS/~monkestation-helpers/logging.dm`
 /// Logging for bombs detonating
 /proc/log_bomber(atom/user, details, atom/bomb, additional_details, message_admins = TRUE)
 	var/bomb_message = "[details][bomb ? " [bomb.name] at [AREACOORD(bomb)]": ""][additional_details ? " [additional_details]" : ""]."
@@ -82,3 +87,4 @@
 	var/area/bomb_area = get_area(bomb)
 	if(message_admins && !(bomb_area.area_flags & QUIET_LOGS)) // Don't spam the logs with deathmatch bombs
 		message_admins("[user ? "[ADMIN_LOOKUPFLW(user)] at [ADMIN_VERBOSEJMP(user)] " : ""][details][bomb ? " [bomb.name] at [ADMIN_VERBOSEJMP(bomb)]": ""][additional_details ? " [additional_details]" : ""].")
+*/ //MONKESTATION REMOVAL END

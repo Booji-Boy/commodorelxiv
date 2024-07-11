@@ -2,13 +2,13 @@
 
 /obj/item/organ/internal/heart/gland/heal
 	abductor_hint = "organic replicator. Forcibly ejects damaged and robotic organs from the abductee and regenerates them. Additionally, forcibly removes reagents (via vomit) from the abductee if they have moderate toxin damage or poison within the bloodstream, and regenerates blood to a healthy threshold if too low. The abductee will also reject implants such as mindshields."
-	cooldown_low = 200
-	cooldown_high = 400
+	cooldown_low = 20 SECONDS
+	cooldown_high = 40 SECONDS
 	uses = -1
 	human_only = TRUE
 	icon_state = "health"
 	mind_control_uses = 3
-	mind_control_duration = 3000
+	mind_control_duration = 5 MINUTES
 
 /obj/item/organ/internal/heart/gland/heal/activate()
 	if(!(owner.mob_biotypes & MOB_ORGANIC))
@@ -177,7 +177,11 @@
 	else
 		to_chat(owner, span_warning("You feel a weird tingle in your [parse_zone(body_zone)]... even if you don't have one."))
 
+<<<<<<< HEAD
 	addtimer(CALLBACK(src, PROC_REF(finish_replace_limb), body_zone), rand(15 SECONDS, 30 SECONDS))
+=======
+	addtimer(CALLBACK(src, PROC_REF(finish_replace_limb), body_zone), rand(150 SECONDS, 30 SECONDS))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/organ/internal/heart/gland/heal/proc/finish_replace_limb(body_zone)
 	owner.visible_message(span_warning("With a loud snap, [owner]'s [parse_zone(body_zone)] rapidly grows back from [owner.p_their()] body!"),

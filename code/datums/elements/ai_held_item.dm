@@ -26,7 +26,7 @@
 /datum/element/ai_held_item/proc/on_click(mob/living/source, mob/living/user)
 	SIGNAL_HANDLER
 
-	if (user.combat_mode)
+	if ((user.istate & ISTATE_HARM))
 		return
 
 	if (!(user in source.ai_controller.blackboard[BB_FRIENDS_LIST]))

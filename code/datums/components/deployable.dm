@@ -26,7 +26,11 @@
 	/// Used in getting the name of the deployed object
 	var/deployed_name
 
+<<<<<<< HEAD
 /datum/component/deployable/Initialize(deploy_time = 5 SECONDS, thing_to_be_deployed, multiple_deployments = FALSE, deployments = 1, add_description_hint = TRUE, direction_setting = TRUE)
+=======
+/datum/component/deployable/Initialize(deploy_time, thing_to_be_deployed, delete_on_use = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
@@ -38,8 +42,12 @@
 	src.deployments = deployments
 	src.multiple_deployments = multiple_deployments
 
+<<<<<<< HEAD
 	if(add_description_hint)
 		RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
+=======
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(examine))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, PROC_REF(on_attack_hand))
 
 	var/obj/item/typecast = thing_to_be_deployed

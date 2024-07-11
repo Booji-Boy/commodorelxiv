@@ -5,11 +5,18 @@
 /turf/open/floor/plastic,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "aw" = (
+<<<<<<< HEAD
+=======
+/obj/structure/table/reinforced,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
+<<<<<<< HEAD
 /obj/effect/landmark/bitrunning/mob_segment,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "aN" = (
@@ -26,14 +33,43 @@
 /obj/item/stack/sheet/glass/fifty,
 /obj/item/stack/rods/fifty,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "aO" = (
 /obj/machinery/recharge_station,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+"bh" = (
+/turf/open/floor/carpet/royalblack,
+/area/ruin/space/has_grav/powered/virtual_domain)
+=======
+"aZ" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 4
+	},
+/mob/living/basic/trooper/syndicate/ranged/shotgun/space/stormtrooper,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "bh" = (
 /turf/open/floor/carpet/royalblack,
 /area/ruin/space/has_grav/powered/virtual_domain)
+"bo" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "bD" = (
 /obj/structure/table/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -44,7 +80,11 @@
 /area/ruin/space/has_grav/powered/virtual_domain)
 "bG" = (
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "cc" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -55,7 +95,11 @@
 "cj" = (
 /obj/structure/transit_tube/crossing,
 /turf/closed/wall/r_wall/syndicate,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ct" = (
 /obj/structure/closet/syndicate{
 	anchored = 1;
@@ -112,10 +156,22 @@
 /area/ruin/space/has_grav/powered/virtual_domain)
 "cZ" = (
 /obj/structure/table/reinforced,
+<<<<<<< HEAD
 /obj/item/gun/ballistic/automatic/l6_saw/unrestricted,
 /obj/item/ammo_box/magazine/m7mm,
 /turf/open/floor/mineral/plastitanium,
 /area/virtual_domain/protected_space)
+=======
+/obj/item/gun/ballistic/automatic/l6_saw/unrestricted{
+	pixel_y = 10
+	},
+/obj/item/ammo_box/magazine/mm712x82{
+	pixel_y = -4;
+	pixel_x = 3
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "da" = (
 /obj/machinery/stasis,
 /turf/open/floor/plastic,
@@ -132,9 +188,12 @@
 /obj/item/paper/fluff/ruins/forgottenship/powerissues,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "dp" = (
 /turf/open/floor/mineral/plastitanium,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "dw" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/mineral/plastitanium,
@@ -167,11 +226,19 @@
 /obj/item/card/id/advanced/black/syndicate_command/crew_id,
 /obj/item/card/id/advanced/black/syndicate_command/crew_id,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
 "fd" = (
 /obj/structure/transit_tube/crossing,
 /turf/open/space/basic,
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+"fd" = (
+/obj/structure/transit_tube/crossing,
+/turf/open/space/basic,
+/area/space)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "fG" = (
 /obj/structure/toilet{
 	dir = 1
@@ -183,12 +250,25 @@
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"fM" = (
+/obj/machinery/computer/crew/syndie{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "fV" = (
 /obj/machinery/atmospherics/components/unary/vent_pump,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "gD" = (
+<<<<<<< HEAD
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
+=======
+/obj/effect/mob_spawn/ghost_role/human/syndicatespace,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "hg" = (
@@ -214,7 +294,11 @@
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "ip" = (
+<<<<<<< HEAD
 /obj/effect/landmark/bitrunning/mob_segment,
+=======
+/mob/living/basic/trooper/syndicate/melee/sword/space/stormtrooper,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/plastic,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "iB" = (
@@ -224,7 +308,11 @@
 "iL" = (
 /obj/structure/sign/departments/cargo,
 /turf/closed/wall/r_wall/syndicate,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "iU" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -232,7 +320,11 @@
 /obj/item/melee/energy/sword/saber/red,
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "iW" = (
 /obj/structure/table/reinforced,
 /obj/machinery/button/door{
@@ -252,10 +344,19 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 4
 	},
+<<<<<<< HEAD
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "ja" = (
 /obj/machinery/door/window/left/directional/north{
+=======
+/mob/living/basic/trooper/syndicate/ranged/smg/space/stormtrooper,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+"ja" = (
+/obj/machinery/door/window{
+	dir = 1;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "Spare Equipment";
 	req_access = list("syndicate")
 	},
@@ -312,9 +413,13 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "kJ" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "shuttle_space"
 	},
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "li" = (
@@ -322,7 +427,11 @@
 	dir = 4
 	},
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "ln" = (
 /obj/machinery/turretid{
 	control_area = "/area/ruin/space/has_grav/syndicate_forgotten_ship";
@@ -353,10 +462,13 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "mA" = (
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/mineral/plastitanium,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "mD" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 10
@@ -364,19 +476,25 @@
 /obj/item/wrench,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "mL" = (
 /obj/structure/tank_dispenser/oxygen,
 /turf/open/floor/mineral/plastitanium,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "nk" = (
 /obj/machinery/power/apc/auto_name/directional/north,
 /obj/effect/mapping_helpers/apc/syndicate_access,
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "nn" = (
 /turf/closed/mineral/random,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "nB" = (
 /turf/closed/mineral/random,
 /area/space)
@@ -384,6 +502,17 @@
 /obj/machinery/light/directional/south,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"nO" = (
+/obj/machinery/mineral/ore_redemption{
+	name = "Syndicate ore redemption machine";
+	ore_multiplier = 4;
+	req_access = list("syndicate")
+	},
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "nU" = (
 /obj/structure/sign/poster/contraband/syndicate_pistol,
 /turf/closed/wall/r_wall/syndicate,
@@ -392,6 +521,13 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"oZ" = (
+/mob/living/basic/trooper/syndicate/melee/sword/space/stormtrooper,
+/turf/open/floor/carpet/royalblack,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "pl" = (
 /obj/machinery/atmospherics/components/tank/air{
 	dir = 8
@@ -442,10 +578,16 @@
 "qU" = (
 /obj/structure/sign/poster/contraband/c20r,
 /turf/closed/wall/r_wall/syndicate,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
 "qY" = (
 /obj/machinery/light/small/directional/south,
 /obj/effect/landmark/bitrunning/cache_spawn,
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+"qY" = (
+/obj/machinery/light/small/directional/south,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "rm" = (
@@ -476,16 +618,27 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "rP" = (
+<<<<<<< HEAD
 /obj/machinery/light/small/directional/south,
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
+=======
+/obj/effect/mob_spawn/ghost_role/human/syndicatespace,
+/obj/machinery/light/small/directional/south,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "sg" = (
 /obj/machinery/ore_silo,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
 "sq" = (
 /obj/machinery/door/window/left/directional/south{
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+"sq" = (
+/obj/machinery/door/window{
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "Control Room";
 	req_access = list("syndicate")
 	},
@@ -515,7 +668,11 @@
 	amount = 15
 	},
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "sL" = (
 /obj/structure/chair/comfy,
 /turf/open/floor/mineral/plastitanium,
@@ -587,7 +744,11 @@
 /obj/item/storage/medkit/regular,
 /obj/machinery/light/small/directional/north,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "xJ" = (
 /obj/structure/closet/syndicate{
 	anchored = 1;
@@ -600,6 +761,15 @@
 /obj/item/ammo_box/c9mm,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"xZ" = (
+/obj/machinery/computer/camera_advanced/syndie{
+	dir = 8
+	},
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yl" = (
 /obj/machinery/door/airlock/grunge{
 	name = "Captain's Room"
@@ -612,6 +782,13 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"yD" = (
+/mob/living/basic/trooper/syndicate/ranged/smg/space/stormtrooper,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "yJ" = (
 /obj/structure/table/reinforced,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/layer2,
@@ -652,17 +829,34 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "zN" = (
 /turf/closed/wall/r_wall/syndicate,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Aa" = (
 /obj/structure/chair/comfy/shuttle,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+"Bm" = (
+/obj/effect/baseturf_helper/virtual_domain,
+/turf/closed/indestructible/syndicate,
+/area/virtual_domain/protected_space)
+=======
+"AN" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/mob/living/basic/trooper/syndicate/ranged/smg/space/stormtrooper,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Bm" = (
 /obj/effect/baseturf_helper/virtual_domain,
 /turf/closed/indestructible/syndicate,
-/area/virtual_domain/protected_space)
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "BK" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/cable,
@@ -734,7 +928,11 @@
 /obj/item/ammo_box/magazine/smgm45,
 /obj/item/gun/ballistic/automatic/c20r/unrestricted,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "DA" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -751,6 +949,13 @@
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
+=======
+"EX" = (
+/mob/living/basic/trooper/syndicate/ranged/shotgun/space/stormtrooper,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Fp" = (
 /obj/structure/tank_dispenser/oxygen,
 /turf/open/floor/mineral/plastitanium,
@@ -807,7 +1012,11 @@
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Ia" = (
+<<<<<<< HEAD
 /obj/effect/mob_spawn/ghost_role/human/virtual_domain/syndie,
+=======
+/obj/effect/mob_spawn/ghost_role/human/syndicatespace/captain,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/carpet/royalblack,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Id" = (
@@ -823,7 +1032,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 9
 	},
+<<<<<<< HEAD
 /obj/effect/landmark/bitrunning/mob_segment,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Ig" = (
@@ -858,7 +1070,11 @@
 /obj/structure/cable,
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "IV" = (
 /obj/machinery/door/airlock/grunge{
 	name = "Syndicate Ship Airlock"
@@ -902,19 +1118,30 @@
 "Lk" = (
 /obj/structure/transit_tube/crossing,
 /turf/closed/mineral/random,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
 "Lo" = (
 /obj/structure/filingcabinet,
 /obj/machinery/door/window/left/directional/west{
+=======
+/area/space)
+"Lo" = (
+/obj/structure/filingcabinet,
+/obj/machinery/door/window{
+	dir = 8;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "Syndicate Interior Door";
 	req_access = list("syndicate")
 	},
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "LB" = (
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Mc" = (
 /obj/structure/closet/syndicate{
 	anchored = 1;
@@ -959,7 +1186,11 @@
 	req_access = list("syndicate")
 	},
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Nr" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -972,14 +1203,27 @@
 	},
 /obj/machinery/light/small/directional/south,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+"Nt" = (
+/obj/structure/table/reinforced,
+/obj/machinery/atmospherics/components/unary/vent_pump,
+/turf/open/floor/mineral/plastitanium,
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Of" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
 	},
 /obj/item/disk/surgery/forgottenship,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Ox" = (
 /obj/machinery/atmospherics/components/unary/vent_pump,
 /turf/open/floor/mineral/plastitanium,
@@ -990,7 +1234,11 @@
 /obj/item/storage/toolbox/syndicate,
 /obj/item/storage/toolbox/syndicate,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "OI" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
@@ -1009,7 +1257,11 @@
 	},
 /obj/effect/mapping_helpers/airlock/access/all/syndicate/general,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Qg" = (
 /obj/machinery/suit_storage_unit/syndicate{
 	helmet_type = /obj/item/clothing/head/helmet/space/syndicate/black;
@@ -1030,13 +1282,21 @@
 /obj/item/dualsaber/green,
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "QG" = (
 /obj/structure/tank_dispenser/oxygen,
 /turf/closed/mineral/random,
 /area/space)
 "QX" = (
+<<<<<<< HEAD
 /obj/effect/landmark/bitrunning/mob_segment,
+=======
+/mob/living/basic/trooper/syndicate/ranged/space/stormtrooper,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/powered/virtual_domain)
 "Ra" = (
@@ -1054,7 +1314,11 @@
 "RU" = (
 /obj/machinery/suit_storage_unit/syndicate,
 /turf/open/floor/mineral/plastitanium,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Sc" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -1099,14 +1363,21 @@
 /area/ruin/space/has_grav/powered/virtual_domain)
 "TB" = (
 /turf/closed/indestructible/syndicate,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "UQ" = (
 /obj/structure/sign/poster/contraband/syndicate_recruitment,
 /turf/closed/wall/r_wall/syndicate,
 /area/ruin/space/has_grav/powered/virtual_domain)
+<<<<<<< HEAD
 "Vg" = (
 /turf/open/space/basic,
 /area/virtual_domain/protected_space)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Vk" = (
 /obj/machinery/porta_turret/syndicate/energy{
 	dir = 4;
@@ -1125,7 +1396,11 @@
 "Wd" = (
 /obj/structure/sign/poster/contraband/tools,
 /turf/closed/wall/r_wall/syndicate,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Wy" = (
 /obj/structure/closet/crate/secure/gear{
 	req_access = list("syndicate")
@@ -1156,7 +1431,11 @@
 /obj/item/clothing/head/helmet/space/syndicate/black/engie,
 /obj/item/clothing/suit/space/syndicate/black/engie,
 /turf/open/floor/pod/dark,
+<<<<<<< HEAD
 /area/virtual_domain/protected_space)
+=======
+/area/ruin/space/has_grav/powered/virtual_domain)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "Yi" = (
 /obj/effect/landmark/bitrunning/cache_spawn,
 /turf/open/floor/plastic,
@@ -1978,14 +2257,23 @@ ru
 Sv
 vD
 uP
+<<<<<<< HEAD
 Io
+=======
+uP
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Yj
 vD
 uP
 Wy
 DA
+<<<<<<< HEAD
 Io
 uP
+=======
+uP
+QX
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 vD
 cc
 ru
@@ -2044,9 +2332,15 @@ uP
 uP
 lN
 uP
+<<<<<<< HEAD
 QX
 uP
 Io
+=======
+uP
+uP
+uP
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 hA
 qx
 qx
@@ -2217,8 +2511,13 @@ sz
 Kz
 ru
 Mc
+<<<<<<< HEAD
 uP
 uP
+=======
+gD
+yD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 uP
 rP
 ru
@@ -2267,7 +2566,11 @@ ru
 sH
 Kz
 yl
+<<<<<<< HEAD
 bh
+=======
+oZ
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 bh
 Yk
 pS
@@ -2276,7 +2579,11 @@ Jz
 vK
 uP
 uP
+<<<<<<< HEAD
 Io
+=======
+uP
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sL
 hy
 ru
@@ -2334,7 +2641,11 @@ pM
 vK
 uP
 uP
+<<<<<<< HEAD
 QX
+=======
+EX
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sL
 Im
 ru
@@ -2391,7 +2702,11 @@ JN
 MR
 ru
 Sd
+<<<<<<< HEAD
 uP
+=======
+gD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 uP
 uP
 gD
@@ -2635,6 +2950,7 @@ qx
 nB
 nB
 we
+<<<<<<< HEAD
 zN
 zN
 dp
@@ -2650,6 +2966,23 @@ Vg
 Vg
 Vg
 Vg
+=======
+ru
+ru
+uP
+sg
+ru
+ru
+nB
+nB
+nB
+nB
+qx
+qx
+qx
+qx
+qx
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -2694,9 +3027,15 @@ qx
 nB
 nB
 qU
+<<<<<<< HEAD
 mL
 dp
 dp
+=======
+Fp
+uP
+uP
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 li
 cj
 Lk
@@ -2751,6 +3090,7 @@ qx
 qx
 nB
 nB
+<<<<<<< HEAD
 zN
 eB
 dp
@@ -2766,6 +3106,23 @@ Vg
 Vg
 Vg
 Vg
+=======
+ru
+eB
+uP
+nO
+uP
+ru
+nB
+qx
+qx
+qx
+qx
+qx
+qx
+qx
+qx
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 sM
 sM
 sM
@@ -2809,12 +3166,21 @@ qx
 qx
 qx
 nB
+<<<<<<< HEAD
 zN
 wL
 LB
 dp
 mA
 zN
+=======
+ru
+wL
+oM
+uP
+dw
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 yZ
 nB
 nB
@@ -2849,7 +3215,11 @@ dw
 ru
 rH
 uP
+<<<<<<< HEAD
 JA
+=======
+AN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 JA
 iX
 JA
@@ -2869,10 +3239,17 @@ qx
 qx
 Wd
 OH
+<<<<<<< HEAD
 LB
 dp
 RU
 zN
+=======
+oM
+uP
+RU
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 we
 nB
 nB
@@ -2926,11 +3303,19 @@ BK
 BK
 BK
 IH
+<<<<<<< HEAD
 LB
 LB
 dp
 RU
 zN
+=======
+oM
+oM
+uP
+RU
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 nB
 nB
 qx
@@ -2964,6 +3349,7 @@ uP
 uP
 dd
 uP
+<<<<<<< HEAD
 uP
 uP
 Ox
@@ -2971,6 +3357,15 @@ aw
 uP
 uP
 uP
+=======
+Aa
+hD
+Nt
+aw
+hD
+hD
+bo
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 uP
 dd
 uP
@@ -2985,10 +3380,17 @@ qx
 qx
 iL
 cZ
+<<<<<<< HEAD
 dp
 dp
 RU
 zN
+=======
+uP
+uP
+RU
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 nB
 nB
 qx
@@ -3024,9 +3426,15 @@ ru
 XS
 uP
 uP
+<<<<<<< HEAD
 uP
 FN
 uP
+=======
+hD
+aZ
+hD
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 uP
 uP
 Cf
@@ -3041,12 +3449,21 @@ qx
 qx
 qx
 nB
+<<<<<<< HEAD
 zN
 zN
 Dj
 QF
 zN
 zN
+=======
+ru
+ru
+Dj
+QF
+ru
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 nB
 nB
 qx
@@ -3100,10 +3517,17 @@ qx
 nB
 nB
 nB
+<<<<<<< HEAD
 zN
 zN
 zN
 zN
+=======
+ru
+ru
+ru
+ru
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 nB
 nB
 we
@@ -3428,6 +3852,7 @@ ru
 Kz
 ru
 Kz
+<<<<<<< HEAD
 Kz
 Kz
 pz
@@ -3436,6 +3861,16 @@ kI
 Kz
 Kz
 Kz
+=======
+pz
+Kz
+xZ
+Kz
+fM
+Kz
+kI
+Kz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ru
 Mm
 ru
@@ -3493,7 +3928,11 @@ Kz
 Kz
 Kz
 Kz
+<<<<<<< HEAD
 dz
+=======
+Kz
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 ru
 ru
 ru

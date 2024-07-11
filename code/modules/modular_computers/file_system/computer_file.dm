@@ -19,7 +19,11 @@
 /datum/computer_file/New()
 	..()
 	uid = file_uid++
+<<<<<<< HEAD
 	RegisterSignal(src, COMSIG_COMPUTER_FILE_STORE, PROC_REF(on_install))
+=======
+	RegisterSignal(src, COMSIG_MODULAR_COMPUTER_FILE_STORE, PROC_REF(on_install))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/computer_file/Destroy(force)
 	if(computer)
@@ -52,7 +56,10 @@
 ///Called post-installation of an application in a computer, after 'computer' var is set.
 /datum/computer_file/proc/on_install(datum/computer_file/source, obj/item/modular_computer/computer_installing)
 	SIGNAL_HANDLER
+<<<<<<< HEAD
 	SHOULD_CALL_PARENT(TRUE)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	computer_installing.stored_files.Add(src)
 
 /**
@@ -87,8 +94,11 @@
  * * background - Whether the app is running in the background.
  */
 /datum/computer_file/program/proc/event_powerfailure()
+<<<<<<< HEAD
 	if(program_flags & PROGRAM_RUNS_WITHOUT_POWER)
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	kill_program()
 
 /**

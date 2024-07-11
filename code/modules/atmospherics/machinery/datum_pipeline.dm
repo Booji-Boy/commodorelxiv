@@ -110,10 +110,10 @@
 				if(item.parent)
 					var/static/pipenetwarnings = 10
 					if(pipenetwarnings > 0)
-						log_mapping("build_pipeline(): [item.type] added to a pipenet while still having one. (pipes leading to the same spot stacking in one turf) around [AREACOORD(item)].")
+						log_mapping("build_pipeline_blocking(): [item.type] added to a pipenet while still having one. (pipes leading to the same spot stacking in one turf) around [AREACOORD(item)].")
 						pipenetwarnings--
 						if(pipenetwarnings == 0)
-							log_mapping("build_pipeline(): further messages about pipenets will be suppressed")
+							log_mapping("build_pipeline_blocking(): further messages about pipenets will be suppressed")
 
 				members += item
 				possible_expansions += item
@@ -191,7 +191,7 @@
 	return
 
 /obj/machinery/atmospherics/pipe/add_member(obj/machinery/atmospherics/considered_device)
-	parent.add_member(considered_device, src)
+	parent?.add_member(considered_device, src)
 
 /obj/machinery/atmospherics/components/add_member(obj/machinery/atmospherics/considered_device)
 	var/datum/pipeline/device_pipeline = return_pipenet(considered_device)
@@ -294,6 +294,7 @@
 	//Update individual gas_mixtures by volume ratio
 	for(var/datum/gas_mixture/gas_mixture as anything in gas_mixture_list)
 		gas_mixture.copy_from_ratio(total_gas_mixture, gas_mixture.volume / volume_sum)
+<<<<<<< HEAD
 
 //--------------------
 // GAS VISUALS STUFF
@@ -372,3 +373,5 @@
 		// Called before init
 		return
 	animate(color_filter, time=5, color=new_color)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

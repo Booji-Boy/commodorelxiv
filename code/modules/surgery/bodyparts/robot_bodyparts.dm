@@ -41,7 +41,11 @@
 
 	biological_state = (BIO_ROBOTIC|BIO_JOINTED)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	disabling_threshold_percentage = 1
 	bodypart_flags = BODYPART_UNHUSKABLE
 
@@ -64,7 +68,10 @@
 
 	brute_modifier = 0.8
 	burn_modifier = 0.8
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	disabling_threshold_percentage = 1
 
 	light_brute_msg = ROBOTIC_LIGHT_BRUTE_MSG
@@ -77,8 +84,12 @@
 
 	biological_state = (BIO_ROBOTIC|BIO_JOINTED)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
 	bodypart_flags = BODYPART_UNHUSKABLE
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/leg/left/robot
 	name = "cyborg left leg"
@@ -99,7 +110,10 @@
 
 	brute_modifier = 0.8
 	burn_modifier = 0.8
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	disabling_threshold_percentage = 1
 
 	light_brute_msg = ROBOTIC_LIGHT_BRUTE_MSG
@@ -112,6 +126,7 @@
 
 	biological_state = (BIO_ROBOTIC|BIO_JOINTED)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
 	bodypart_flags = BODYPART_UNHUSKABLE
 
@@ -128,6 +143,9 @@
 		return FALSE
 	to_chat(owner, span_danger("As your [plaintext_zone] unexpectedly malfunctions, it causes you to fall to the ground!"))
 	return
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/leg/right/robot
 	name = "cyborg right leg"
@@ -148,7 +166,10 @@
 
 	brute_modifier = 0.8
 	burn_modifier = 0.8
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	disabling_threshold_percentage = 1
 
 	light_brute_msg = ROBOTIC_LIGHT_BRUTE_MSG
@@ -161,6 +182,7 @@
 
 	biological_state = (BIO_ROBOTIC|BIO_JOINTED)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
 	bodypart_flags = BODYPART_UNHUSKABLE
 
@@ -177,6 +199,9 @@
 		return FALSE
 	to_chat(owner, span_danger("As your [plaintext_zone] unexpectedly malfunctions, it causes you to fall to the ground!"))
 	return
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/chest/robot
 	name = "cyborg torso"
@@ -207,12 +232,16 @@
 
 	biological_state = (BIO_ROBOTIC)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
 	bodypart_flags = BODYPART_UNHUSKABLE
 
 	robotic_emp_paralyze_damage_percent_threshold = 0.6
 
 	wing_types = list(/obj/item/organ/external/wings/functional/robotic)
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/wired = FALSE
 	var/obj/item/stock_parts/cell/cell = null
@@ -383,14 +412,19 @@
 
 	biological_state = (BIO_ROBOTIC)
 
+<<<<<<< HEAD
 	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT)
 
 	head_flags = HEAD_EYESPRITES
 	bodypart_flags = BODYPART_UNHUSKABLE
+=======
+	damage_examines = list(BRUTE = ROBOTIC_BRUTE_EXAMINE_TEXT, BURN = ROBOTIC_BURN_EXAMINE_TEXT, CLONE = DEFAULT_CLONE_EXAMINE_TEXT)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/obj/item/assembly/flash/handheld/flash1 = null
 	var/obj/item/assembly/flash/handheld/flash2 = null
 
+<<<<<<< HEAD
 #define EMP_GLITCH "EMP_GLITCH"
 
 /obj/item/bodypart/head/robot/emp_effect(severity, protection)
@@ -411,6 +445,8 @@
 
 #undef EMP_GLITCH
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/bodypart/head/robot/Exited(atom/movable/gone, direction)
 	. = ..()
 	if(gone == flash1)
@@ -475,8 +511,15 @@
 	return ..()
 
 // Prosthetics - Cheap, mediocre, and worse than organic limbs
+<<<<<<< HEAD
 // Actively make you less healthy by being on your body, contributing a whopping 250% to overall health at only 20 max health
 // They also suck to punch with.
+=======
+// The fact they dont have a internal biotype means theyre a lot weaker defensively,
+// since they skip slash and go right to blunt
+// They are VERY easy to delimb as a result
+// HP is also reduced just in case this isnt enough
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/bodypart/arm/left/robot/surplus
 	name = "surplus prosthetic left arm"
@@ -485,11 +528,17 @@
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	burn_modifier = 1
 	brute_modifier = 1
+<<<<<<< HEAD
 	unarmed_damage_low = 1
 	unarmed_damage_high = 5
 	unarmed_effectiveness = 0 //Bro, you look huge.
 	max_damage = LIMB_MAX_HP_PROSTHESIS
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_PROSTHESIS
+
+	biological_state = (BIO_METAL|BIO_JOINTED)
+=======
+	max_damage = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	biological_state = (BIO_METAL|BIO_JOINTED)
 
@@ -500,11 +549,17 @@
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	burn_modifier = 1
 	brute_modifier = 1
+<<<<<<< HEAD
 	unarmed_damage_low = 1
 	unarmed_damage_high = 5
 	unarmed_effectiveness = 0
 	max_damage = LIMB_MAX_HP_PROSTHESIS
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_PROSTHESIS
+
+	biological_state = (BIO_METAL|BIO_JOINTED)
+=======
+	max_damage = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	biological_state = (BIO_METAL|BIO_JOINTED)
 
@@ -515,11 +570,17 @@
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
+<<<<<<< HEAD
 	unarmed_damage_low = 2
 	unarmed_damage_high = 10
 	unarmed_effectiveness = 0
 	max_damage = LIMB_MAX_HP_PROSTHESIS
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_PROSTHESIS
+
+	biological_state = (BIO_METAL|BIO_JOINTED)
+=======
+	max_damage = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	biological_state = (BIO_METAL|BIO_JOINTED)
 
@@ -530,6 +591,7 @@
 	icon = 'icons/mob/augmentation/surplus_augments.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
+<<<<<<< HEAD
 	unarmed_damage_low = 2
 	unarmed_damage_high = 10
 	unarmed_effectiveness = 0
@@ -583,6 +645,11 @@
 	unarmed_effectiveness = 20
 	max_damage = LIMB_MAX_HP_ADVANCED
 	body_damage_coeff = LIMB_BODY_DAMAGE_COEFFICIENT_ADVANCED
+=======
+	max_damage = 20
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+
+	biological_state = (BIO_METAL|BIO_JOINTED)
 
 #undef ROBOTIC_LIGHT_BRUTE_MSG
 #undef ROBOTIC_MEDIUM_BRUTE_MSG

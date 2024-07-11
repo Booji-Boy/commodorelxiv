@@ -28,7 +28,12 @@
 	slot_flags = ITEM_SLOT_BELT
 	has_ammobar = TRUE
 	ammo_sections = 6
+<<<<<<< HEAD
 	banned_upgrades = RCD_ALL_UPGRADES & ~RCD_UPGRADE_SILO_LINK
+=======
+	///it does not make sense why any of these should be installed
+	banned_upgrades = RCD_UPGRADE_FRAMES | RCD_UPGRADE_SIMPLE_CIRCUITS | RCD_UPGRADE_FURNISHING | RCD_UPGRADE_ANTI_INTERRUPT | RCD_UPGRADE_NO_FREQUENT_USE_COOLDOWN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	/// mode of operation see above defines
 	var/mode = LIGHT_MODE
@@ -69,7 +74,7 @@
 			mode = GLOW_MODE
 			to_chat(user, span_notice("You change RLD's mode to 'Light Launcher'."))
 		if("Color Pick")
-			var/new_choice = input(user,"","Choose Color",color_choice) as color
+			var/new_choice = tgui_color_picker(user, "", "Choose Color", color_choice)
 			if(new_choice == null)
 				return
 

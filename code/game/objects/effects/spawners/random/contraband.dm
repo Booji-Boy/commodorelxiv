@@ -132,6 +132,8 @@
 
 /obj/effect/spawner/random/contraband/landmine
 	name = "landmine spawner"
+	icon = 'icons/obj/weapons/grenade.dmi' //MONKESTATION EDIT: because a certain person shoved a landmine in atmos
+	icon_state = "uglymine"
 	loot = list(
 		/obj/effect/mine/explosive/light = 10,
 		/obj/effect/mine/explosive/flame = 10,
@@ -141,6 +143,7 @@
 		/obj/effect/mine/shrapnel = 5,
 	)
 
+<<<<<<< HEAD
 /obj/effect/spawner/random/contraband/qm_rocket
 	name = "QMs dud rocket spawner"
 	loot = list(
@@ -202,4 +205,18 @@
 		/obj/item/grenade/spawnergrenade/cat = 1,
 		/obj/item/grenade/frag = 1,
 		/obj/item/grenade/chem_grenade/bioterrorfoam = 1,
+=======
+/obj/effect/spawner/random/contraband/plus
+	name = "contraband loot spawner plus"
+	desc = "Where'd ya find this?"
+	loot = list(
+		/obj/item/clothing/under/syndicate = 20,
+		/obj/item/reagent_containers/cup/bottle/thermite = 20,
+		/obj/item/restraints/legcuffs/beartrap = 10,
+		/obj/item/food/drug/saturnx = 5,
+		/obj/item/reagent_containers/cup/blastoff_ampoule = 5,
+		/obj/item/food/drug/moon_rock = 5,
+		/obj/item/grenade/empgrenade = 5,
+		/obj/effect/spawner/random/contraband/armory = 1,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)

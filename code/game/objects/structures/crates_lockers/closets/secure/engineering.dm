@@ -23,7 +23,12 @@
 	. = ..()
 
 	// Traitor steal objective
+<<<<<<< HEAD
 	new /obj/item/blueprints(src)
+=======
+	new /obj/item/areaeditor/blueprints(src)
+	new /obj/item/gun/ballistic/SRN_rocketlauncher(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	new /obj/item/pipe_dispenser(src)
 
 /obj/structure/closet/secure_closet/engineering_electrical

@@ -14,6 +14,7 @@ import { Window } from '../layouts';
 
 export const Photocopier = (props) => {
   const { data } = useBackend();
+<<<<<<< HEAD
   const {
     isAI,
     has_toner,
@@ -22,6 +23,9 @@ export const Photocopier = (props) => {
     paper_count,
     copies_left,
   } = data;
+=======
+  const { isAI, has_toner, has_item, forms_exist } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window title="Photocopier" width={320} height={512}>
@@ -63,7 +67,11 @@ export const Photocopier = (props) => {
 
 const Toner = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const { max_toner, current_toner } = data;
+=======
+  const { has_toner, max_toner, current_toner } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const average_toner = max_toner * 0.66;
   const bad_toner = max_toner * 0.33;
@@ -72,7 +80,15 @@ const Toner = (props) => {
     <Section
       title="Toner"
       buttons={
+<<<<<<< HEAD
         <Button onClick={() => act('remove_toner')} icon="eject">
+=======
+        <Button
+          disabled={!has_toner}
+          onClick={() => act('remove_toner')}
+          icon="eject"
+        >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           Eject
         </Button>
       }
@@ -93,7 +109,11 @@ const Toner = (props) => {
 
 const Options = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const { color_mode, is_photo, num_copies } = data;
+=======
+  const { color_mode, is_photo, num_copies, has_enough_toner } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Section title="Options">
@@ -123,6 +143,10 @@ const Options = (props) => {
             ml={0.2}
             icon="copy"
             textAlign="center"
+<<<<<<< HEAD
+=======
+            disabled={!has_enough_toner}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             onClick={() => act('make_copy')}
           >
             Copy
@@ -176,7 +200,11 @@ const Options = (props) => {
 
 const Blanks = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const { blanks, categories, category } = data;
+=======
+  const { blanks, category, has_toner } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const sortedBlanks = sortBy(blanks || [], (blank) => blank.name);
 

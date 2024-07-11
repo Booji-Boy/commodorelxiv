@@ -16,6 +16,10 @@
 				/obj/item/kitchen/rollingpin = 2,
 				/obj/item/kitchen/tongs = 2,
 				/obj/item/knife/kitchen = 2,
+<<<<<<< HEAD
+=======
+				/obj/item/storage/fancy/popsiclestick_pack = 2 //Monkestation edit: part of "The Corndog Update" - Not adding too many popsicle stick packs so le botany gets 'interaction'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			),
 		),
 		list(

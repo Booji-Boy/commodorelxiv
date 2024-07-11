@@ -12,7 +12,7 @@
 	)
 
 /datum/buildmode_mode/proccall/change_settings(client/target_client)
-	if(!check_rights_for(target_client, R_DEBUG))
+	if(!check_rights_for(target_client, R_ADMIN))
 		return
 
 	proc_name = input("Proc name, eg: fake_blood", "Proc:", null) as text|null

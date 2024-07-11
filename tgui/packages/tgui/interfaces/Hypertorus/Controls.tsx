@@ -1,3 +1,19 @@
+<<<<<<< HEAD
+=======
+import {
+  Box,
+  Button,
+  Icon,
+  Knob,
+  LabeledControls,
+  LabeledList,
+  NumberInput,
+  Section,
+  Tooltip,
+} from 'tgui/components';
+import { HelpDummy, HoverHelp } from './helpers';
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { BooleanLike } from 'common/react';
 import { useBackend } from 'tgui/backend';
 import {

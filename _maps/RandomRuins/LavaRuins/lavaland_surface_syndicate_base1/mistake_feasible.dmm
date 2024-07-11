@@ -167,6 +167,7 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/testlab)
+<<<<<<< HEAD
 "av" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/box/monkeycubes/syndicate,
@@ -175,6 +176,11 @@
 /turf/open/floor/iron/dark,
 /area/ruin/syndicate_lava_base/testlab)
 "aw" = (
+=======
+"w" = (
+/obj/machinery/airalarm/directional/south,
+/obj/effect/mapping_helpers/airalarm/syndicate_access,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer4{
 	dir = 4
 	},

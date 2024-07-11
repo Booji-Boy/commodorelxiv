@@ -95,7 +95,7 @@
 
 	for(var/i in 1 to 6)
 		addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(playsound), src, 'sound/items/basketball_bounce.ogg', 75, FALSE), 0.25 SECONDS * i)
-	addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living/carbon/, adjustStaminaLoss), STAMINA_COST_SPINNING), 1.5 SECONDS)
+	user.stamina.adjust(-STAMINA_COST_SPINNING)
 
 /// Used to calculate our disarm chance based on stamina, direction, and spinning
 /// Note - monkeys use attack_paw() and never trigger this signal (so they always have 100% disarm)
@@ -105,12 +105,12 @@
 	// spinning gives you a lower disarm chance but it drains stamina
 	var/disarm_chance = HAS_TRAIT(baller, TRAIT_SPINNING) ? 35 : 50
 	// ballers stamina results in lower disarm, stealer stamina results in higher disarm
-	disarm_chance += (baller.getStaminaLoss() - stealer.getStaminaLoss()) / 2
+	disarm_chance += (baller.stamina.current - stealer.stamina.current) / 2
 	// the lowest chance for disarm is 25% and the highest is 75%
 	disarm_chance = clamp(disarm_chance, MIN_DISARM_CHANCE, MAX_DISARM_CHANCE)
 
 	// getting disarmed or shoved while holding the ball drains stamina
-	baller.adjustStaminaLoss(STAMINA_COST_DISARMING)
+	baller.stamina.adjust(-STAMINA_COST_DISARMING)
 
 	if(!prob(disarm_chance))
 		return // the disarm failed
@@ -151,7 +151,7 @@
 	user.balloon_alert_to_viewers("fumbles the ball")
 
 /obj/item/toy/basketball/attack(mob/living/carbon/target, mob/living/user, params)
-	if(!iscarbon(target) || user.combat_mode)
+	if(!iscarbon(target) || (user.istate & ISTATE_HARM))
 		return ..()
 
 	playsound(src, 'sound/items/basketball_bounce.ogg', 75, FALSE)
@@ -173,8 +173,15 @@
 	user.swap_hand(user.get_held_index_of_item(src))
 	playsound(src, 'sound/items/basketball_bounce.ogg', 75, FALSE)
 
+<<<<<<< HEAD
 /obj/item/toy/basketball/ranged_interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	return interact_with_atom(interacting_with, user, modifiers)
+=======
+/obj/item/toy/basketball/afterattack(atom/target, mob/living/user)
+	. = ..()
+	if(!(user.istate & ISTATE_HARM))
+		user.throw_item(target)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/toy/basketball/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.combat_mode)
@@ -189,7 +196,7 @@
 	if(istype(interacting_with, /obj/structure/hoop) && baller.Adjacent(interacting_with))
 		return NONE // Do hoop stuff
 
-	baller.adjustStaminaLoss(STAMINA_COST_SHOOTING)
+	baller.stamina.adjust(-STAMINA_COST_SHOOTING)
 
 	var/dunk_dir = get_dir(baller, interacting_with)
 	var/dunk_pixel_y = dunk_dir & SOUTH ? -16 : 16

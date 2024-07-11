@@ -6,7 +6,11 @@ import { DIRECTIVE_COMPREHENSION, DIRECTIVE_ORDER } from './constants';
 import { PaiData } from './types';
 
 /** Shows the hardcoded PAI info along with any supplied orders. */
+<<<<<<< HEAD
 export function DirectiveDisplay(props) {
+=======
+export const DirectiveDisplay = (props) => {
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { data } = useBackend<PaiData>();
   const { directives = [], master_name } = data;
   const displayedLaw = directives?.length

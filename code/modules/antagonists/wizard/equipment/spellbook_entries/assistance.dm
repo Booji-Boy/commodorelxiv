@@ -71,7 +71,11 @@
 	desc = "A deck of guardian tarot cards, capable of binding a personal guardian to your body. There are multiple types of guardian available, but all of them will transfer some amount of damage to you. \
 	It would be wise to avoid buying these with anything capable of causing you to swap bodies with others."
 	item_path = /obj/item/guardian_creator/wizard
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_ASSISTANCE
+=======
+	category = "Assistance"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/item/bloodbottle
 	name = "Bottle of Blood"

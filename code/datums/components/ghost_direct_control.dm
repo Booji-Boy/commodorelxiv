@@ -16,11 +16,16 @@
 /datum/component/ghost_direct_control/Initialize(
 	ban_type = ROLE_SENTIENCE,
 	role_name = null,
+<<<<<<< HEAD
 	poll_question = null,
 	poll_candidates = TRUE,
 	poll_announce_chosen = TRUE,
 	poll_length = 10 SECONDS,
 	poll_chat_border_icon = null,
+=======
+	poll_candidates = TRUE,
+	poll_length = 10 SECONDS,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	poll_ignore_key = POLL_IGNORE_SENTIENCE_POTION,
 	assumed_control_message = null,
 	datum/callback/extra_control_checks,
@@ -33,18 +38,27 @@
 	src.ban_type = ban_type
 	src.assumed_control_message = assumed_control_message || "You are [parent]!"
 	src.extra_control_checks = extra_control_checks
+<<<<<<< HEAD
 	src.after_assumed_control = after_assumed_control
+=======
+	src.after_assumed_control= after_assumed_control
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mob/mob_parent = parent
 	LAZYADD(GLOB.joinable_mobs[format_text("[initial(mob_parent.name)]")], mob_parent)
 
 	if (poll_candidates)
+<<<<<<< HEAD
 		INVOKE_ASYNC(src, PROC_REF(request_ghost_control), poll_question, role_name || "[parent]", poll_length, poll_ignore_key, poll_announce_chosen, poll_chat_border_icon)
+=======
+		INVOKE_ASYNC(src, PROC_REF(request_ghost_control), role_name || "[parent]", poll_length, poll_ignore_key)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/ghost_direct_control/RegisterWithParent()
 	. = ..()
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_GHOST, PROC_REF(on_ghost_clicked))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examined))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_MOB_LOGIN, PROC_REF(on_login))
 
 /datum/component/ghost_direct_control/UnregisterFromParent()
@@ -52,6 +66,14 @@
 	return ..()
 
 /datum/component/ghost_direct_control/Destroy(force)
+=======
+
+/datum/component/ghost_direct_control/UnregisterFromParent()
+	UnregisterSignal(parent, list(COMSIG_ATOM_ATTACK_GHOST, COMSIG_ATOM_EXAMINE))
+	return ..()
+
+/datum/component/ghost_direct_control/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	extra_control_checks = null
 	after_assumed_control = null
 
@@ -73,6 +95,7 @@
 	examine_text += span_boldnotice("You could take control of this mob by clicking on it.")
 
 /// Send out a request for a brain
+<<<<<<< HEAD
 /datum/component/ghost_direct_control/proc/request_ghost_control(poll_question, role_name, poll_length, poll_ignore_key, poll_announce_chosen, poll_chat_border_icon)
 	if(!(GLOB.ghost_role_flags & GHOSTROLE_SPAWNER))
 		return
@@ -93,6 +116,25 @@
 	if(isnull(chosen_one))
 		return
 	assume_direct_control(chosen_one)
+=======
+/datum/component/ghost_direct_control/proc/request_ghost_control(role_name, poll_length, poll_ignore_key)
+	if (!(GLOB.ghost_role_flags & GHOSTROLE_SPAWNER))
+		return
+	awaiting_ghosts = TRUE
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(
+		question = "Do you want to play as [role_name]?",
+		check_jobban = ban_type,
+		role = ban_type,
+		poll_time = poll_length,
+		ignore_category = poll_ignore_key,
+		pic_source = parent,
+		role_name_text = role_name,
+	)
+	awaiting_ghosts = FALSE
+	if (!LAZYLEN(candidates))
+		return
+	assume_direct_control(pick(candidates))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// A ghost clicked on us, they want to get in this body
 /datum/component/ghost_direct_control/proc/on_ghost_clicked(mob/our_mob, mob/dead/observer/hopeful_ghost)
@@ -147,8 +189,11 @@
 	to_chat(new_body, span_boldnotice(assumed_control_message))
 	after_assumed_control?.Invoke(harbinger)
 	qdel(src)
+<<<<<<< HEAD
 
 /// When someone else assumes control via some other means, get rid of our component
 /datum/component/ghost_direct_control/proc/on_login()
 	SIGNAL_HANDLER
 	qdel(src)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

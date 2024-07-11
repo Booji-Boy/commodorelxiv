@@ -2,6 +2,7 @@
 	name = "minebot melee upgrade"
 	desc = "A minebot upgrade."
 	icon_state = "door_electronics"
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
 	item_flags = NOBLUDGEON
 
@@ -10,6 +11,15 @@
 		return NONE
 	upgrade_bot(interacting_with, user)
 	return ITEM_INTERACT_SUCCESS
+=======
+	icon = 'icons/obj/assemblies/module.dmi'
+
+/obj/item/mine_bot_upgrade/afterattack(mob/living/basic/mining_drone/minebot, mob/user, proximity)
+	. = ..()
+	if(!istype(minebot) || !proximity)
+		return
+	upgrade_bot(minebot, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/mine_bot_upgrade/proc/upgrade_bot(mob/living/basic/mining_drone/minebot, mob/user)
 	if(minebot.melee_damage_upper != initial(minebot.melee_damage_upper))
@@ -40,7 +50,11 @@
 	name = "minebot AI upgrade"
 	desc = "Can be used to grant sentience to minebots. It's incompatible with minebot armor and melee upgrades, and will override them."
 	icon_state = "door_electronics"
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/circuitry_n_data.dmi'
+=======
+	icon = 'icons/obj/assemblies/module.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sentience_type = SENTIENCE_MINEBOT
 	///health boost to add
 	var/base_health_add = 5
@@ -59,6 +73,7 @@
 	minebot.melee_damage_lower = initial(minebot.melee_damage_lower) + base_damage_add
 	minebot.melee_damage_upper = initial(minebot.melee_damage_upper) + base_damage_add
 	minebot.stored_gun?.recharge_time += base_cooldown_add
+<<<<<<< HEAD
 
 /obj/item/mine_bot_upgrade/regnerative_shield
 	name = "regenerative shield"
@@ -90,3 +105,5 @@
 	icon = 'icons/mob/silicon/aibots.dmi'
 	icon_state = "minebot_shield_bottom_layer"
 	layer = BELOW_MOB_LAYER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

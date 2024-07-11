@@ -83,6 +83,7 @@
 		pin = new pin(src)
 
 	add_seclight_point()
+	give_manufacturer_examine()
 
 /obj/item/gun/Destroy()
 	if(isobj(pin)) //Can still be the initial path, then we skip
@@ -152,11 +153,11 @@
 		. += "It has a <b>bayonet</b> lug on it."
 
 //called after the gun has successfully fired its chambered ammo.
-/obj/item/gun/proc/process_chamber(empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
-	handle_chamber(empty_chamber, from_firing, chamber_next_round)
+/obj/item/gun/proc/process_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
+	handle_chamber(user, empty_chamber, from_firing, chamber_next_round)
 	SEND_SIGNAL(src, COMSIG_GUN_CHAMBER_PROCESSED)
 
-/obj/item/gun/proc/handle_chamber(empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
+/obj/item/gun/proc/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	return
 
 //check if there's enough ammo/energy/whatever to shoot one time
@@ -207,6 +208,14 @@
 						vision_distance = COMBAT_MESSAGE_RANGE,
 						ignored_mobs = user
 				)
+	if(CHECK_BITFIELD(gun_flags, GUN_SMOKE_PARTICLES))
+		var/x_component = sin((get_angle(user, pbtarget))) * 40
+		var/y_component = cos((get_angle(user, pbtarget))) * 40
+		var/obj/effect/abstract/particle_holder/gun_smoke = new(get_turf(src), /particles/firing_smoke)
+		gun_smoke.particles.velocity = list(x_component, y_component)
+		addtimer(VARSET_CALLBACK(gun_smoke.particles, count, 0), 5)
+		addtimer(VARSET_CALLBACK(gun_smoke.particles, drift, 0), 3)
+		QDEL_IN(gun_smoke, 0.6 SECONDS)
 
 /obj/item/gun/emp_act(severity)
 	. = ..()
@@ -319,7 +328,7 @@
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || user.combat_mode) //melee attack
+		if(!ismob(target) || (user.istate & ISTATE_HARM)) //melee attack
 			return
 		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
 			return
@@ -354,8 +363,14 @@
 	//DUAL (or more!) WIELDING
 	var/bonus_spread = 0
 	var/loop_counter = 0
+<<<<<<< HEAD
 	if(user.combat_mode && !HAS_TRAIT(user, TRAIT_NO_GUN_AKIMBO))
 		for(var/obj/item/gun/gun in user.held_items)
+=======
+	if(ishuman(user) && (user.istate & ISTATE_HARM))
+		var/mob/living/carbon/human/H = user
+		for(var/obj/item/gun/gun in H.held_items)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(gun == src || gun.weapon_weight >= WEAPON_MEDIUM)
 				continue
 			else if(gun.can_trigger_gun(user, akimbo_usage = TRUE))
@@ -435,7 +450,7 @@
 		shoot_with_empty_chamber(user)
 		firing_burst = FALSE
 		return FALSE
-	process_chamber()
+	process_chamber(user = user)
 	update_appearance()
 	return TRUE
 
@@ -488,20 +503,56 @@
 		else
 			shoot_with_empty_chamber(user)
 			return
-		process_chamber()
+		process_chamber(user = user)
 		update_appearance()
 		semicd = TRUE
 		addtimer(CALLBACK(src, PROC_REF(reset_semicd)), modified_delay)
 
 	if(user)
 		user.update_held_items()
-	SSblackbox.record_feedback("tally", "gun_fired", 1, type)
+	SSblackbox.record_feedback("tally", "gun_fired", 1, initial(name))
 
 	return TRUE
 
 /obj/item/gun/proc/reset_semicd()
 	semicd = FALSE
 
+<<<<<<< HEAD
+=======
+/obj/item/gun/attack(mob/M, mob/living/user)
+	if((user.istate & ISTATE_HARM)) //Flogging
+		if(bayonet)
+			M.attackby(bayonet, user)
+			return
+		else
+			return ..()
+	return
+
+/obj/item/gun/attack_atom(obj/O, mob/living/user, params)
+	if((user.istate & ISTATE_HARM))
+		if(bayonet)
+			O.attackby(bayonet, user)
+			return
+	return ..()
+
+/obj/item/gun/attackby(obj/item/I, mob/living/user, params)
+	if((user.istate & ISTATE_HARM))
+		return ..()
+
+	else if(istype(I, /obj/item/knife))
+		var/obj/item/knife/K = I
+		if(!can_bayonet || !K.bayonet || bayonet) //ensure the gun has an attachment point available, and that the knife is compatible with it.
+			return ..()
+		if(!user.transferItemToLoc(I, src))
+			return
+		to_chat(user, span_notice("You attach [K] to [src]'s bayonet lug."))
+		bayonet = K
+		update_appearance()
+
+	else
+		return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/gun/screwdriver_act(mob/living/user, obj/item/I)
 	. = ..()
 	if(.)

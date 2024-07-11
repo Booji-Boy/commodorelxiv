@@ -10,10 +10,17 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	var/datum/radial_menu/parent
 
 /atom/movable/screen/radial/proc/set_parent(new_value)
+<<<<<<< HEAD
 	if(parent)
 		UnregisterSignal(parent, COMSIG_QDELETING)
 	parent = new_value
 	if(parent)
+=======
+	if(!QDELETED(parent))
+		UnregisterSignal(parent, COMSIG_QDELETING)
+	parent = new_value
+	if(!QDELETED(parent))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(handle_parent_del))
 
 /atom/movable/screen/radial/proc/handle_parent_del()
@@ -28,12 +35,12 @@ GLOBAL_LIST_EMPTY(radial_menus)
 
 /atom/movable/screen/radial/slice/set_parent(new_value)
 	. = ..()
-	if(parent)
+	if(!QDELETED(parent))
 		icon_state = parent.radial_slice_icon
 
 /atom/movable/screen/radial/slice/MouseEntered(location, control, params)
 	. = ..()
-	if(next_page || !parent)
+	if(next_page || QDELETED(parent))
 		icon_state = "radial_slice_focus"
 	else
 		icon_state = "[parent.radial_slice_icon]_focus"
@@ -42,7 +49,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 
 /atom/movable/screen/radial/slice/MouseExited(location, control, params)
 	. = ..()
-	if(next_page || !parent)
+	if(next_page || QDELETED(parent))
 		icon_state = "radial_slice"
 	else
 		icon_state = parent.radial_slice_icon
@@ -50,6 +57,8 @@ GLOBAL_LIST_EMPTY(radial_menus)
 		closeToolTip(usr)
 
 /atom/movable/screen/radial/slice/Click(location, control, params)
+	if(QDELETED(parent))
+		return
 	if(usr.client == parent.current_user)
 		if(next_page)
 			parent.next_page()
@@ -69,6 +78,8 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	icon_state = "radial_center"
 
 /atom/movable/screen/radial/center/Click(location, control, params)
+	if(QDELETED(parent))
+		return
 	if(usr.client == parent.current_user)
 		parent.finished = TRUE
 
@@ -312,6 +323,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 	if(!M.client || !anchor)
 		return
 	current_user = M.client
+	RegisterSignal(current_user, COMSIG_QDELETING, PROC_REF(cleanup_on_logout))
 	//Blank
 	menu_holder = image(icon='icons/effects/effects.dmi',loc=anchor,icon_state="nothing", layer = RADIAL_BACKGROUND_LAYER)
 	SET_PLANE_EXPLICIT(menu_holder, ABOVE_HUD_PLANE, M)
@@ -321,6 +333,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 
 /datum/radial_menu/proc/hide()
 	if(current_user)
+		UnregisterSignal(current_user, COMSIG_QDELETING)
 		current_user.images -= menu_holder
 
 /datum/radial_menu/proc/wait(atom/user, atom/anchor, require_near = FALSE)
@@ -333,6 +346,13 @@ GLOBAL_LIST_EMPTY(radial_menus)
 			else
 				next_check = world.time + check_delay
 		stoplag(1)
+
+/datum/radial_menu/proc/cleanup_on_logout(client/source)
+	SIGNAL_HANDLER
+	if(!QDELETED(source))
+		UnregisterSignal(source, COMSIG_QDELETING)
+	if(QDELETED(current_user) || source == current_user)
+		qdel(src)
 
 /datum/radial_menu/Destroy()
 	Reset()

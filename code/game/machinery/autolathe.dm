@@ -39,7 +39,10 @@
 		container_signals = list(COMSIG_MATCONTAINER_ITEM_CONSUMED = TYPE_PROC_REF(/obj/machinery/autolathe, AfterMaterialInsert)) \
 	)
 	. = ..()
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_wires(new /datum/wires/autolathe(src))
 	if(!GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe])
 		GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe] = new /datum/techweb/autounlocking/autolathe
@@ -426,6 +429,12 @@
 		wires.interact(user)
 		return TRUE
 
+<<<<<<< HEAD
+=======
+	if((user.istate & ISTATE_HARM)) //so we can hit the machine
+		return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(machine_stat)
 		return TRUE
 
@@ -456,6 +465,62 @@
 
 	return ..()
 
+<<<<<<< HEAD
+=======
+/obj/machinery/autolathe/attackby_secondary(obj/item/weapon, mob/living/user, params)
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(busy)
+		balloon_alert(user, "it's busy!")
+		return
+
+	if(default_deconstruction_screwdriver(user, "autolathe_t", "autolathe", weapon))
+		return
+
+	if(machine_stat)
+		return SECONDARY_ATTACK_CALL_NORMAL
+
+	if(panel_open)
+		balloon_alert(user, "close the panel first!")
+		return
+
+	return SECONDARY_ATTACK_CALL_NORMAL
+
+/obj/machinery/autolathe/proc/AfterMaterialInsert(obj/item/item_inserted, id_inserted, amount_inserted)
+	if(istype(item_inserted, /obj/item/stack/ore/bluespace_crystal))
+		use_power(SHEET_MATERIAL_AMOUNT / 10)
+	else if(item_inserted.has_material_type(/datum/material/glass))
+		flick("autolathe_r", src)//plays glass insertion animation by default otherwise
+	else
+		flick("autolathe_o", src)//plays metal insertion animation
+
+		use_power(min(active_power_usage * 0.25, amount_inserted / 100))
+
+/obj/machinery/autolathe/proc/make_item(power, list/materials_used, list/picked_materials, multiplier, coeff, is_stack, mob/user)
+	var/datum/component/material_container/materials = GetComponent(/datum/component/material_container)
+	var/atom/A = drop_location()
+	use_power(power)
+
+	materials.use_materials(materials_used)
+
+	if(is_stack)
+		var/obj/item/stack/N = new being_built.build_path(A, multiplier, FALSE)
+		N.update_appearance()
+	else
+		for(var/i in 1 to multiplier)
+			var/obj/item/new_item = new being_built.build_path(A)
+
+			if(length(picked_materials))
+				new_item.set_custom_materials(picked_materials, 1 / multiplier) //Ensure we get the non multiplied amount
+				for(var/x in picked_materials)
+					var/datum/material/M = x
+					if(!istype(M, /datum/material/glass) && !istype(M, /datum/material/iron))
+						user.client.give_award(/datum/award/achievement/misc/getting_an_upgrade, user)
+
+
+	icon_state = "autolathe"
+	busy = FALSE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/autolathe/RefreshParts()
 	. = ..()
 	var/mat_capacity = 0

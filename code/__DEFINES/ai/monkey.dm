@@ -15,5 +15,8 @@
 #define BB_MONKEY_TARGET_MONKEYS "BB_monkey_target_monkeys"
 #define BB_MONKEY_DISPOSING "BB_monkey_disposing"
 #define BB_MONKEY_RECRUIT_COOLDOWN "BB_monkey_recruit_cooldown"
+<<<<<<< HEAD
 #define BB_RESISTING "BB_resisting"
 #define BB_MONKEY_POOPING "BB_monkey_pooping"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

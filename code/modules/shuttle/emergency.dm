@@ -186,9 +186,6 @@
 
 /obj/machinery/computer/emergency_shuttle/proc/increase_hijack_stage()
 	var/obj/docking_port/mobile/emergency/shuttle = SSshuttle.emergency
-	// Begin loading this early, prevents a delay when the shuttle goes to land
-	INVOKE_ASYNC(SSmapping, TYPE_PROC_REF(/datum/controller/subsystem/mapping, lazy_load_template), LAZY_TEMPLATE_KEY_NUKIEBASE)
-
 	shuttle.hijack_status++
 	if(hijack_announce)
 		announce_hijack_stage()
@@ -549,6 +546,10 @@
 					color_override = "orange",
 				)
 				INVOKE_ASYNC(SSticker, TYPE_PROC_REF(/datum/controller/subsystem/ticker, poll_hearts))
+				//Tell the events we're starting, so they can time their spawns or do some other stuff
+				for(var/datum/shuttle_event/event as anything in event_list)
+					event.start_up_event(SSshuttle.emergency_escape_time * engine_coeff)
+
 				SSmapping.mapvote() //If no map vote has been run yet, start one.
 
 				if(!is_reserved_level(z))
@@ -595,7 +596,6 @@
 				var/destination_dock = "emergency_away"
 				if(is_hijacked() || elimination_hijack())
 					// just double check
-					SSmapping.lazy_load_template(LAZY_TEMPLATE_KEY_NUKIEBASE)
 					destination_dock = "emergency_syndicate"
 					minor_announce("Corruption detected in \
 						shuttle navigation protocols. Please contact your \

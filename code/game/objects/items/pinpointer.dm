@@ -39,6 +39,10 @@
 
 /obj/item/pinpointer/examine(mob/user)
 	. = ..()
+	// MONKESTATION ADDITION START -- CONTRACTORS -- USED BY /obj/item/pinpointer/area_pinpointer
+	if(special_examine) // need it here else it would say "it is current tracking the floor". Technically correct but not really
+		return
+	// MONKESTATION ADDITION END
 	if(target)
 		. += "It is currently tracking [target]."
 
@@ -78,7 +82,7 @@
 
 ///Called by update_icon after sanity. There is a target
 /obj/item/pinpointer/proc/get_direction_icon(here, there)
-	if(get_dist_euclidian(here,there) <= minimum_range)
+	if(get_dist_euclidean(here,there) <= minimum_range)
 		return "pinon[alert ? "alert" : ""]direct[icon_suffix]"
 	else
 		setDir(get_dir(here, there))
@@ -105,6 +109,8 @@
 	var/turf/here = get_turf(src)
 	var/turf/there = get_turf(H)
 	if(here && there && (there.z == here.z || (is_station_level(here.z) && is_station_level(there.z)))) // Device and target should be on the same level or different levels of the same station
+		if (H in GLOB.nanite_sensors_list)
+			return TRUE
 		if (istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/U = H.w_uniform
 			if(U.has_sensor && (U.sensor_mode >= SENSOR_COORDS || ignore_suit_sensor_level)) // Suit sensors must be on maximum or a contractor pinpointer

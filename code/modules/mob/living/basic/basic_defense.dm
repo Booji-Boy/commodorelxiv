@@ -3,6 +3,7 @@
 	if (..())
 		return TRUE
 
+<<<<<<< HEAD
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		user.disarm(src)
 		return TRUE
@@ -16,6 +17,49 @@
 			)
 			to_chat(user, span_notice("You [response_help_simple] [src]."))
 			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+=======
+	if((user.istate & ISTATE_SECONDARY))
+		if(user.move_force < move_resist)
+			return
+		user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
+		playsound(src, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+		var/shove_dir = get_dir(user, src)
+		if(!Move(get_step(src, shove_dir), shove_dir))
+			log_combat(user, src, "shoved", "failing to move it")
+			user.visible_message(span_danger("[user.name] [response_disarm_continuous] [src]!"),
+				span_danger("You [response_disarm_simple] [src]!"), span_hear("You hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, list(src))
+			to_chat(src, span_userdanger("You're shoved by [user.name]!"))
+			return TRUE
+		log_combat(user, src, "shoved", "pushing it")
+		user.visible_message(span_danger("[user.name] [response_disarm_continuous] [src], pushing [p_them()]!"),
+			span_danger("You [response_disarm_simple] [src], pushing [p_them()]!"), span_hear("You hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, list(src))
+		to_chat(src, span_userdanger("You're pushed by [user.name]!"))
+		return TRUE
+
+	if(!(user.istate & ISTATE_HARM))
+		if (stat == DEAD)
+			return
+		visible_message(span_notice("[user] [response_help_continuous] [src]."), \
+						span_notice("[user] [response_help_continuous] you."), null, null, user)
+		to_chat(user, span_notice("You [response_help_simple] [src]."))
+		playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, TRUE, -1)
+		SEND_SIGNAL(src, COMSIG_EMOTION_STORE, user, EMOTION_HAPPY, "[response_help_continuous] me.")
+	else
+		if(HAS_TRAIT(user, TRAIT_PACIFISM))
+			to_chat(user, span_warning("You don't want to hurt [src]!"))
+			return
+		user.do_attack_animation(src, ATTACK_EFFECT_PUNCH)
+		visible_message(span_danger("[user] [response_harm_continuous] [src]!"),\
+						span_userdanger("[user] [response_harm_continuous] you!"), null, COMBAT_MESSAGE_RANGE, user)
+		to_chat(user, span_danger("You [response_harm_simple] [src]!"))
+		playsound(loc, attacked_sound, 25, TRUE, -1)
+		var/obj/item/bodypart/arm/active_arm = user.get_active_hand()
+		var/damage = (basic_mob_flags & IMMUNE_TO_FISTS) ? 0 : rand(active_arm.unarmed_damage_low, active_arm.unarmed_damage_high)
+
+		attack_threshold_check(damage)
+		log_combat(user, src, "attacked")
+		updatehealth()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
@@ -65,9 +109,16 @@
 /mob/living/basic/attack_paw(mob/living/carbon/human/user, list/modifiers)
 	if(..()) //successful monkey bite.
 		if(stat != DEAD)
+<<<<<<< HEAD
 			return apply_damage(rand(1, 3))
 
 	if (!user.combat_mode)
+=======
+			var/damage = rand(1, 3)
+			attack_threshold_check(damage)
+			return 1
+	if (!(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if (health > 0)
 			visible_message(span_notice("[user.name] [response_help_continuous] [src]."), \
 							span_notice("[user.name] [response_help_continuous] you."), null, COMBAT_MESSAGE_RANGE, user)
@@ -79,7 +130,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+	if((istate & ISTATE_SECONDARY))
 		playsound(loc, 'sound/weapons/pierce.ogg', 25, TRUE, -1)
 		visible_message(span_danger("[user] [response_disarm_continuous] [name]!"), \
 			span_userdanger("[user] [response_disarm_continuous] you!"), null, COMBAT_MESSAGE_RANGE, user)
@@ -101,13 +152,28 @@
 		if(damage_done > 0)
 			attacking_larva.amount_grown = min(attacking_larva.amount_grown + damage_done, attacking_larva.max_grown)
 
+<<<<<<< HEAD
 /mob/living/basic/attack_drone(mob/living/basic/drone/attacking_drone)
 	if(attacking_drone.combat_mode) //No kicking dogs even as a rogue drone. Use a weapon.
+=======
+/mob/living/basic/attack_animal(mob/living/simple_animal/user, list/modifiers)
+	. = ..()
+	if(.)
+		var/damage = rand(user.melee_damage_lower, user.melee_damage_upper)
+		return attack_threshold_check(damage, user.melee_damage_type)
+
+/mob/living/basic/attack_drone(mob/living/basic/drone/attacking_drone)
+	if(attacking_drone.istate & ISTATE_HARM) //No kicking dogs even as a rogue drone. Use a weapon.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	return ..()
 
 /mob/living/basic/attack_drone_secondary(mob/living/basic/drone/attacking_drone)
+<<<<<<< HEAD
 	if(attacking_drone.combat_mode)
+=======
+	if(attacking_drone.istate & ISTATE_HARM)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	return ..()
 

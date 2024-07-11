@@ -21,7 +21,10 @@
 /// Logging for wizard powers learned
 /proc/log_spellbook(text, list/data)
 	logger.Log(LOG_CATEGORY_UPLINK_SPELL, text, data)
+<<<<<<< HEAD
 
 /// Logs bounties completed by spies and their rewards
 /proc/log_spy(text, list/data)
 	logger.Log(LOG_CATEGORY_UPLINK_SPY, text, data)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

@@ -18,7 +18,8 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	"[FREQ_CTF_RED]" = "redteamradio",
 	"[FREQ_CTF_BLUE]" = "blueteamradio",
 	"[FREQ_CTF_GREEN]" = "greenteamradio",
-	"[FREQ_CTF_YELLOW]" = "yellowteamradio"
+	"[FREQ_CTF_YELLOW]" = "yellowteamradio",
+	"[FREQ_RADIO]" = "radioradio"
 	))
 
 /**
@@ -69,7 +70,14 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	SEND_SIGNAL(src, COMSIG_MOVABLE_HEAR, args)
 	return TRUE
 
-
+//MONKESTATION EDIT
+/mob/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, list/message_mods = list())
+	. = ..()
+	if(client && radio_freq)
+		var/atom/movable/virtualspeaker/V = speaker
+		if(isAI(V.source))
+			playsound_local(get_turf(src), 'goon/sounds/radio_ai.ogg', 170, 1, 0, 0, pressure_affected = FALSE, use_reverb = FALSE, mixer_channel = CHANNEL_MOB_SOUNDS)
+//MONKESTATION EDIT END
 /**
  * Checks if our movable can speak the provided message, passing it through filters
  * and spam detection. Does not call can_speak. CAN include feedback messages about
@@ -121,6 +129,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 		if(!found_client && length(hearing_movable.client_mobs_in_contents))
 			found_client = TRUE
 
+<<<<<<< HEAD
 	var/tts_message_to_use = tts_message
 	if(!tts_message_to_use)
 		tts_message_to_use = message
@@ -137,6 +146,10 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), visible_name = FALSE)
 	//This proc uses [] because it is faster than continually appending strings. Thanks BYOND.
+=======
+/atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, list/message_mods = list(), face_name = FALSE, visible_name = FALSE)
+	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//Basic span
 	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "game say"]'>"
 	//Start name span.
@@ -144,11 +157,21 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	//Radio freq/name display
 	var/freqpart = radio_freq ? "\[[get_radio_name(radio_freq)]\] " : ""
 	//Speaker name
+<<<<<<< HEAD
 	var/namepart
 	var/list/stored_name = list(null)
 	SEND_SIGNAL(speaker, COMSIG_MOVABLE_MESSAGE_GET_NAME_PART, stored_name, visible_name)
 	namepart = stored_name[NAME_PART_INDEX] || "[speaker.GetVoice()]"
 
+=======
+	var/namepart = "[speaker.GetVoice()][speaker.get_alt_name()]"
+	if(face_name && ishuman(speaker))
+		var/mob/living/carbon/human/H = speaker
+		namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
+	else if(visible_name && ishuman(speaker))
+		var/mob/living/carbon/human/human_speaker = speaker
+		namepart = "[human_speaker.get_visible_name()]"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//End name span.
 	var/endspanpart = "</span>"
 

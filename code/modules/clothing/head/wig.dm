@@ -25,7 +25,11 @@
 	item_flags &= ~EXAMINE_SKIP
 
 /obj/item/clothing/head/wig/update_icon_state()
+<<<<<<< HEAD
 	var/datum/sprite_accessory/hair/hair_style = SSaccessories.hairstyles_list[hairstyle]
+=======
+	var/datum/sprite_accessory/hair_style = GLOB.roundstart_hairstyles_list[hairstyle]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(hair_style)
 		icon = hair_style.icon
 		icon_state = hair_style.icon_state
@@ -36,7 +40,11 @@
 	if(isinhands)
 		return
 
+<<<<<<< HEAD
 	var/datum/sprite_accessory/hair/hair = SSaccessories.hairstyles_list[hairstyle]
+=======
+	var/datum/sprite_accessory/hair = GLOB.roundstart_hairstyles_list[hairstyle]
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!hair)
 		return
 
@@ -49,8 +57,13 @@
 	hair_overlay.overlays += emissive_blocker(hair_overlay.icon, hair_overlay.icon_state, src, alpha = hair_overlay.alpha)
 
 /obj/item/clothing/head/wig/attack_self(mob/user)
+<<<<<<< HEAD
 	var/new_style = tgui_input_list(user, "Select a hairstyle", "Wig Styling", SSaccessories.hairstyles_list - "Bald")
 	var/newcolor = adjustablecolor ? input(usr,"","Choose Color",color) as color|null : null
+=======
+	var/new_style = tgui_input_list(user, "Select a hairstyle", "Wig Styling", GLOB.roundstart_hairstyles_list - "Bald")
+	var/newcolor = adjustablecolor ? tgui_color_picker(usr, "", "Choose Color", color) : null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!user.can_perform_action(src))
 		return
 	if(new_style && new_style != hairstyle)
@@ -95,7 +108,11 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/wig/random/Initialize(mapload)
+<<<<<<< HEAD
 	hairstyle = pick(SSaccessories.hairstyles_list - "Bald") //Don't want invisible wig
+=======
+	hairstyle = pick(GLOB.roundstart_hairstyles_list - "Bald") //Don't want invisible wig
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	add_atom_colour("#[random_short_color()]", FIXED_COLOUR_PRIORITY)
 	. = ..()
 
@@ -107,7 +124,11 @@
 	custom_price = PAYCHECK_COMMAND
 
 /obj/item/clothing/head/wig/natural/Initialize(mapload)
+<<<<<<< HEAD
 	hairstyle = pick(SSaccessories.hairstyles_list - "Bald")
+=======
+	hairstyle = pick(GLOB.roundstart_hairstyles_list - "Bald")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 
 /obj/item/clothing/head/wig/natural/visual_equipped(mob/living/carbon/human/user, slot)

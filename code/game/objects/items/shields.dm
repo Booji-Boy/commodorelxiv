@@ -285,6 +285,11 @@
 	throw_speed = 3
 	breakable_by_damage = FALSE
 	block_sound = 'sound/weapons/block_blade.ogg'
+<<<<<<< HEAD
+=======
+	/// Whether the shield is currently extended and protecting the user.
+	var/enabled = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Force of the shield when active.
 	var/active_force = 10
 	/// Throwforce of the shield when active.
@@ -322,7 +327,11 @@
 	return ..()
 
 /obj/item/shield/energy/IsReflect()
+<<<<<<< HEAD
 	return HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE) && prob(reflection_probability)
+=======
+	return HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
  * Signal proc for [COMSIG_TRANSFORMING_ON_TRANSFORM].
@@ -376,11 +385,18 @@
 		attack_verb_continuous_on = list("smacks", "strikes", "cracks", "beats"), \
 		attack_verb_simple_on = list("smack", "strike", "crack", "beat"), \
 	)
+<<<<<<< HEAD
 
 	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
 	RegisterSignal(src, COMSIG_ITEM_CAN_DISARM_ATTACK, PROC_REF(can_disarm_attack))
 
 /obj/item/shield/riot/tele/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
+=======
+
+	RegisterSignal(src, COMSIG_TRANSFORMING_ON_TRANSFORM, PROC_REF(on_transform))
+
+/obj/item/shield/riot/tele/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(HAS_TRAIT(src, TRAIT_TRANSFORM_ACTIVE))
 		return ..()
 	return FALSE

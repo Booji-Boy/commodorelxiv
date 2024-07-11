@@ -70,11 +70,19 @@
 	var/brute_heal = 1
 	var/burn_heal = 0
 
+<<<<<<< HEAD
 /datum/reagent/consumable/nutriment/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_plant_health(round(volume * 0.2))
 
 /datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+=======
+/datum/reagent/consumable/nutriment/feed_interaction(mob/living/basic/chicken/target, volume, mob/user)
+	. = ..()
+	target.fertility_boosting += min(25, volume * 0.5)
+
+/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SPT_PROB(30, seconds_per_tick))
 		if(affected_mob.heal_bodypart_damage(brute = brute_heal * REM * seconds_per_tick, burn = burn_heal * REM * seconds_per_tick, updating_health = FALSE, required_bodytype = BODYTYPE_ORGANIC))
 			return UPDATE_MOB_HEALTH
@@ -150,7 +158,12 @@
 	burn_heal = 1
 	nutriment_factor = 18 // Twice as nutritious compared to protein and carbohydrates
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+<<<<<<< HEAD
 	var/fry_temperature = 450 //Around ~350 F (117 C) which deep fryers operate around in the real world
+=======
+	default_container = /obj/item/reagent_containers/condiment/cooking_oil
+	turf_exposure = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/consumable/nutriment/fat/expose_obj(obj/exposed_obj, reac_volume)
 	. = ..()
@@ -288,6 +301,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	default_container = /obj/item/reagent_containers/condiment/sugar
 
+<<<<<<< HEAD
 // Plants should not have sugar, they can't use it and it prevents them getting water/ nutients, it is good for mold though...
 /datum/reagent/consumable/sugar/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_weedlevel(rand(1, 2))
@@ -297,6 +311,12 @@
 	. = ..()
 	to_chat(affected_mob, span_userdanger("You go into hyperglycemic shock! Lay off the twinkies!"))
 	affected_mob.AdjustSleeping(20 SECONDS)
+=======
+
+/datum/reagent/consumable/sugar/feed_interaction(mob/living/basic/chicken/target, volume, mob/user)
+	.=..()
+	target.adjust_happiness(0.1*volume, user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/consumable/sugar/overdose_process(mob/living/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -310,10 +330,13 @@
 	taste_description = "watery milk"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 // Compost for EVERYTHING
 /datum/reagent/consumable/virus_food/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_plant_health(-round(volume * 0.5))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/reagent/consumable/soysauce
 	name = "Soysauce"
 	description = "A salty sauce made from the soy plant."
@@ -366,6 +389,8 @@
 	///40 joules per unit.
 	specific_heat = 40
 	default_container = /obj/item/reagent_containers/cup/bottle/frostoil
+	bypass_restriction = TRUE
+	turf_exposure = TRUE
 
 /datum/reagent/consumable/frostoil/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -500,6 +525,40 @@
 	flesh_healing -= max(VALUE_PER(5, 30) * reac_volume, 0)
 	to_chat(victim, span_notice("The salt bits seep in and stick to [LOWER_TEXT(src)], painfully irritating the skin! After a few moments, it feels marginally better."))
 
+/datum/reagent/consumable/salt/expose_mob(mob/living/exposed_mob, methods, reac_volume)
+	. = ..()
+	var/mob/living/carbon/carbies = exposed_mob
+	if(!(methods & (PATCH|TOUCH|VAPOR)))
+		return
+	for(var/datum/wound/iter_wound as anything in carbies.all_wounds)
+		iter_wound.on_salt(reac_volume, carbies)
+
+// Salt can help with wounds by soaking up fluid, but undiluted salt will also cause irritation from the loose crystals, and it might soak up the body's water as well!
+// A saltwater mixture would be best, but we're making improvised chems here, not real ones.
+/datum/wound/proc/on_salt(reac_volume, mob/living/carbon/carbies)
+	return
+
+/datum/wound/pierce/bleed/on_salt(reac_volume, mob/living/carbon/carbies)
+	adjust_blood_flow(-0.06 * reac_volume, initial_flow * 0.6) // 20u of a salt shacker * 0.1 = -1.6~ blood flow, but is always clamped to, at best, third blood loss from that wound.
+	// Crystal irritation worsening recovery.
+	gauzed_clot_rate *= 0.65
+	to_chat(carbies, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin but soaking up most of the blood."))
+
+/datum/wound/slash/flesh/on_salt(reac_volume, mob/living/carbon/carbies)
+	adjust_blood_flow(-0.1 * reac_volume, initial_flow * 0.5) // 20u of a salt shacker * 0.1 = -2~ blood flow, but is always clamped to, at best, halve blood loss from that wound.
+	// Crystal irritation worsening recovery.
+	clot_rate *= 0.75
+	to_chat(carbies, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin but soaking up most of the blood."))
+
+/datum/wound/burn/flesh/on_salt(reac_volume)
+	// Slightly sanitizes and disinfects, but also increases infestation rate (some bacteria are aided by salt), and decreases flesh healing (can damage the skin from moisture absorption)
+	sanitization += VALUE_PER(0.4, 30) * reac_volume
+	infestation -= max(VALUE_PER(0.3, 30) * reac_volume, 0)
+	infestation_rate += VALUE_PER(0.12, 30) * reac_volume
+	flesh_healing -= max(VALUE_PER(5, 30) * reac_volume, 0)
+	to_chat(victim, span_notice("The salt bits seep in and stick to [lowertext(src)], painfully irritating the skin! After a few moments, it feels marginally better."))
+
+
 /datum/reagent/consumable/blackpepper
 	name = "Black Pepper"
 	description = "A powder ground from peppercorns. *AAAACHOOO*"
@@ -527,6 +586,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	added_traits = list(TRAIT_GARLIC_BREATH)
 
+<<<<<<< HEAD
 /datum/reagent/consumable/garlic/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(isvampire(affected_mob)) //incapacitating but not lethal. Unfortunately, vampires cannot vomit.
@@ -537,6 +597,14 @@
 				to_chat(affected_mob, span_danger("You can't get the scent of garlic out of your nose! You can barely think..."))
 			affected_mob.Paralyze(10)
 			affected_mob.set_jitter_if_lower(20 SECONDS)
+=======
+/datum/reagent/consumable/garlic/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
+	if(isvampire(M)) //incapacitating but not lethal. Unfortunately, vampires cannot vomit.
+		if(SPT_PROB(min(current_cycle/2, 12.5), seconds_per_tick))
+			to_chat(M, span_danger("You can't get the scent of garlic out of your nose! You can barely think..."))
+			M.Paralyze(10)
+			M.set_jitter_if_lower(20 SECONDS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		var/obj/item/organ/internal/liver/liver = affected_mob.get_organ_slot(ORGAN_SLOT_LIVER)
 		if(liver && HAS_TRAIT(liver, TRAIT_CULINARY_METABOLISM))
@@ -571,7 +639,28 @@
 	taste_description = "childhood whimsy"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
+<<<<<<< HEAD
 /datum/reagent/consumable/sprinkles/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
+=======
+/datum/reagent/consumable/sprinkles/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
+	var/obj/item/organ/internal/liver/liver = M.get_organ_slot(ORGAN_SLOT_LIVER)
+	if(liver && HAS_TRAIT(liver, TRAIT_LAW_ENFORCEMENT_METABOLISM))
+		M.heal_bodypart_damage(1 * REM * seconds_per_tick, 1 * REM * seconds_per_tick, 0)
+		. = TRUE
+	..()
+
+/datum/reagent/consumable/cornoil
+	name = "Corn Oil"
+	description = "An oil derived from various types of corn."
+	nutriment_factor = 20 * REAGENTS_METABOLISM
+	color = "#302000" // rgb: 48, 32, 0
+	taste_description = "slime"
+	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+	default_container = /obj/item/reagent_containers/condiment/cooking_oil
+	turf_exposure = TRUE
+
+/datum/reagent/consumable/cornoil/expose_turf(turf/open/exposed_turf, reac_volume)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	var/obj/item/organ/internal/liver/liver = affected_mob.get_organ_slot(ORGAN_SLOT_LIVER)
 	if(liver && HAS_TRAIT(liver, TRAIT_LAW_ENFORCEMENT_METABOLISM))
@@ -639,8 +728,11 @@
 
 /datum/reagent/consumable/flour/expose_mob(mob/living/exposed_mob, methods, reac_volume)
 	. = ..()
+<<<<<<< HEAD
 	if(!iscarbon(exposed_mob))
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/carbon/carbies = exposed_mob
 	if(!(methods & (PATCH|TOUCH|VAPOR)))
 		return
@@ -652,18 +744,30 @@
 
 /datum/wound/pierce/bleed/on_flour(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.015 * reac_volume) // 30u of a flour sack * 0.015 = -0.45~ blood flow, prettay good
+<<<<<<< HEAD
 	to_chat(carbies, span_notice("The flour seeps into [LOWER_TEXT(src)], painfully drying it up and absorbing some of the blood."))
+=======
+	to_chat(carbies, span_notice("The flour seeps into [lowertext(src)], painfully drying it up and absorbing some of the blood."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// When some nerd adds infection for wounds, make this increase the infection
 
 /datum/wound/slash/flesh/on_flour(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.04 * reac_volume) // 30u of a flour sack * 0.04 = -1.25~ blood flow, pretty good!
+<<<<<<< HEAD
 	to_chat(carbies, span_notice("The flour seeps into [LOWER_TEXT(src)], painfully drying some of it up and absorbing a little blood."))
+=======
+	to_chat(carbies, span_notice("The flour seeps into [lowertext(src)], painfully drying some of it up and absorbing a little blood."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// When some nerd adds infection for wounds, make this increase the infection
 
 // Don't pour flour onto burn wounds, it increases infection risk! Very unwise. Backed up by REAL info from REAL professionals.
 // https://www.reuters.com/article/uk-factcheck-flour-burn-idUSKCN26F2N3
 /datum/wound/burn/flesh/on_flour(reac_volume)
+<<<<<<< HEAD
 	to_chat(victim, span_notice("The flour seeps into [LOWER_TEXT(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+=======
+	to_chat(victim, span_notice("The flour seeps into [lowertext(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sanitization -= min(0, 1)
 	infestation += 0.2
 	return
@@ -745,8 +849,11 @@
 // Starch has similar absorbing properties to flour (Stronger here because it's rarer)
 /datum/reagent/consumable/corn_starch/expose_mob(mob/living/exposed_mob, methods, reac_volume)
 	. = ..()
+<<<<<<< HEAD
 	if(!iscarbon(exposed_mob))
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/carbon/carbies = exposed_mob
 	if(!(methods & (PATCH|TOUCH|VAPOR)))
 		return
@@ -758,18 +865,30 @@
 
 /datum/wound/pierce/bleed/on_starch(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.03 * reac_volume)
+<<<<<<< HEAD
 	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], painfully drying some of it up and absorbing a little blood."))
+=======
+	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], painfully drying some of it up and absorbing a little blood."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// When some nerd adds infection for wounds, make this increase the infection
 	return
 
 /datum/wound/slash/flesh/on_starch(reac_volume, mob/living/carbon/carbies)
 	adjust_blood_flow(-0.06 * reac_volume)
+<<<<<<< HEAD
 	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], painfully drying it up and absorbing some of the blood."))
+=======
+	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], painfully drying it up and absorbing some of the blood."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// When some nerd adds infection for wounds, make this increase the infection
 	return
 
 /datum/wound/burn/flesh/on_starch(reac_volume, mob/living/carbon/carbies)
+<<<<<<< HEAD
 	to_chat(carbies, span_notice("The slimey starch seeps into [LOWER_TEXT(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+=======
+	to_chat(carbies, span_notice("The slimey starch seeps into [lowertext(src)], spiking you with intense pain! That probably wasn't a good idea..."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	sanitization -= min(0, 0.5)
 	infestation += 0.1
 	return
@@ -796,6 +915,7 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	default_container = /obj/item/reagent_containers/condiment/honey
 
+<<<<<<< HEAD
 // On the other hand, honey has been known to carry pollen with it rarely. Can be used to take in a lot of plant qualities all at once, or harm the plant.
 /datum/reagent/consumable/honey/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	if(!isnull(mytray.myseed) && prob(20))
@@ -807,6 +927,9 @@
 
 /datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+=======
+/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	holder.add_reagent(/datum/reagent/consumable/sugar, 3 * REM * seconds_per_tick)
 	var/need_mob_update
 	if(SPT_PROB(33, seconds_per_tick))
@@ -878,6 +1001,7 @@
 	if(current_cycle > 10)
 		affected_mob.Unconscious(40 * REM * seconds_per_tick, FALSE)
 	if(SPT_PROB(10, seconds_per_tick))
+<<<<<<< HEAD
 		affected_mob.losebreath += 4
 		affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM, 150, affected_biotype)
 		affected_mob.adjustToxLoss(3*REM, updating_health = FALSE, required_biotype = affected_biotype)
@@ -886,6 +1010,16 @@
 		need_mob_update = TRUE
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
+=======
+		M.losebreath += 4
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM, 150, affected_biotype)
+		M.adjustToxLoss(3*REM, FALSE, required_biotype = affected_biotype)
+		M.stamina.adjust(-10*REM, FALSE)
+		M.set_eye_blur_if_lower(10 SECONDS)
+		. = TRUE
+	..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/consumable/tinlux
 	name = "Tinea Luxor"
@@ -904,9 +1038,31 @@
 		if(duration > 1 SECONDS)
 			exposed_mob.adjust_timed_status_effect(duration, /datum/status_effect/tinlux_light)
 
+<<<<<<< HEAD
 /datum/reagent/consumable/tinlux/on_mob_add(mob/living/living_mob)
 	. = ..()
 	living_mob.apply_status_effect(/datum/status_effect/tinlux_light) //infinite duration
+=======
+/datum/reagent/consumable/tinlux/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	remove_reagent_light(M)
+
+/datum/reagent/consumable/tinlux/proc/on_living_holder_deletion(mob/living/source)
+	SIGNAL_HANDLER
+	remove_reagent_light(source)
+
+/datum/reagent/consumable/tinlux/proc/add_reagent_light(mob/living/living_holder)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = living_holder.mob_light(2)
+	LAZYSET(mobs_affected, living_holder, mob_light_obj)
+	RegisterSignal(living_holder, COMSIG_QDELETING, PROC_REF(on_living_holder_deletion))
+
+/datum/reagent/consumable/tinlux/proc/remove_reagent_light(mob/living/living_holder)
+	UnregisterSignal(living_holder, COMSIG_QDELETING)
+	var/obj/effect/dummy/lighting_obj/moblight/mob_light_obj = LAZYACCESS(mobs_affected, living_holder)
+	LAZYREMOVE(mobs_affected, living_holder)
+	if(mob_light_obj)
+		qdel(mob_light_obj)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/consumable/tinlux/on_mob_delete(mob/living/living_mob)
 	. = ..()
@@ -938,10 +1094,7 @@
 	taste_description = "pure electricity"
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
-/datum/reagent/consumable/liquidelectricity/enriched
-	name = "Enriched Liquid Electricity"
-
-/datum/reagent/consumable/liquidelectricity/enriched/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume) //can't be on life because of the way blood works.
+/datum/reagent/consumable/liquidelectricity/expose_mob(mob/living/exposed_mob, methods=TOUCH, reac_volume) //can't be on life because of the way blood works.
 	. = ..()
 	if(!(methods & (INGEST|INJECT|PATCH)) || !iscarbon(exposed_mob))
 		return
@@ -951,10 +1104,16 @@
 	if(istype(stomach))
 		stomach.adjust_charge(reac_volume * 0.03 * STANDARD_CELL_CHARGE)
 
+<<<<<<< HEAD
 /datum/reagent/consumable/liquidelectricity/enriched/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	if(isethereal(affected_mob))
 		affected_mob.blood_volume += 1 * seconds_per_tick
+=======
+/datum/reagent/consumable/liquidelectricity/on_mob_life(mob/living/carbon/M, seconds_per_tick, times_fired)
+	if(isethereal(M))
+		M.blood_volume += 1 * seconds_per_tick
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(SPT_PROB(10, seconds_per_tick)) //lmao at the newbs who eat energy bars
 		affected_mob.electrocute_act(rand(5,10), "Liquid Electricity in their body", 1, SHOCK_NOGLOVES) //the shock is coming from inside the house
 		playsound(affected_mob, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
@@ -1207,6 +1366,10 @@
 	if(HAS_TRAIT(affected_mob, TRAIT_FAT))
 		affected_mob.investigate_log("has been gibbed by consuming [src] while fat.", INVESTIGATE_DEATHS)
 		affected_mob.inflate_gib()
+<<<<<<< HEAD
+=======
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/consumable/worcestershire
 	name = "Worcestershire Sauce"

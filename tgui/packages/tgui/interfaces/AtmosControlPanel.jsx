@@ -6,8 +6,13 @@ import { Window } from '../layouts';
 
 export const AtmosControlPanel = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const groups = sortBy(
     map(data.excited_groups, (group, i) => ({
+=======
+  const groups = flow([
+    map((group, i) => ({
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       ...group,
       // Generate a unique id
       id: group.area + i,

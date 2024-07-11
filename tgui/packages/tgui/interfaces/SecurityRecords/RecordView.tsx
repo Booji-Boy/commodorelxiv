@@ -9,7 +9,10 @@ import {
   Stack,
   Table,
 } from 'tgui/components';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { CharacterPreview } from '../common/CharacterPreview';
 import { EditableText } from '../common/EditableText';
 import { CRIMESTATUS2COLOR, CRIMESTATUS2DESC } from './constants';
@@ -103,6 +106,10 @@ const RecordInfo = (props) => {
               {name}
             </Table.Cell>
           }
+<<<<<<< HEAD
+=======
+          wrap
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <LabeledList>
             <LabeledList.Item

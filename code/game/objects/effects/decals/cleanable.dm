@@ -16,6 +16,7 @@
 	///The amount of reagent this decal holds, if decal_reagent is defined
 	var/reagent_amount = 0
 
+<<<<<<< HEAD
 /// Creates a cleanable decal on a turf
 /// Use this if your decal is one of one, and thus we should not spawn it if it's there already
 /// Returns either the existing cleanable, the one we created, or null if we can't spawn on that turf
@@ -25,6 +26,9 @@
 	if(existing)
 		return existing
 	return new cleanable_type(src)
+=======
+	var/list/diseases = list()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/effect/decal/cleanable/Initialize(mapload, list/datum/disease/diseases)
 	. = ..()
@@ -41,13 +45,17 @@
 					return INITIALIZE_HINT_QDEL
 
 	if(LAZYLEN(diseases))
+
 		var/list/datum/disease/diseases_to_add = list()
 		for(var/datum/disease/D in diseases)
-			if(D.spread_flags & DISEASE_SPREAD_CONTACT_FLUIDS)
+			if(D.spread_flags & (DISEASE_SPREAD_CONTACT_FLUIDS))
 				diseases_to_add += D
 		if(LAZYLEN(diseases_to_add))
 			AddComponent(/datum/component/infective, diseases_to_add)
-
+		for(var/datum/disease/D in diseases)
+			if(D.spread_flags & (DISEASE_SPREAD_BLOOD))
+				src.diseases |= D
+				
 	AddElement(/datum/element/beauty, beauty)
 
 	var/turf/T = get_turf(src)

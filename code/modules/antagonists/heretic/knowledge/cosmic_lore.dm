@@ -41,8 +41,12 @@
 
 /datum/heretic_knowledge/cosmic_grasp
 	name = "Grasp of Cosmos"
+<<<<<<< HEAD
 	desc = "Your Mansus Grasp will give people a star mark (cosmic ring) and create a cosmic field where you stand. \
 		People with a star mark can not pass cosmic fields."
+=======
+	desc = "Your Mansus Grasp will give people a star mark (cosmic ring) and create a cosmic field where you stand."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	gain_text = "Some stars dimmed, others' magnitude increased. \
 		With newfound strength I could channel the nebula's power into myself."
 	next_knowledge = list(/datum/heretic_knowledge/spell/cosmic_runes)
@@ -70,6 +74,10 @@
 		However, people with a star mark will get transported along with another person using the rune."
 	gain_text = "The distant stars crept into my dreams, roaring and screaming without reason. \
 		I spoke, and heard my own words echoed back."
+<<<<<<< HEAD
+=======
+	adds_sidepath_points = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	next_knowledge = list(
 		/datum/heretic_knowledge/summon/fire_shark,
 		/datum/heretic_knowledge/mark/cosmic_mark,
@@ -110,9 +118,16 @@
 
 /datum/heretic_knowledge/spell/star_blast
 	name = "Star Blast"
+<<<<<<< HEAD
 	desc = "Fires a projectile that moves very slowly, raising a short-lived wall of cosmic fields where it goes. \
 		Anyone hit by the projectile will receive burn damage, a knockdown, and give people in a three tile range a star mark."
 	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
+=======
+	desc = "Fires a projectile that moves very slowly and creates cosmic fields on impact. \
+		Anyone hit by the projectile will recieve burn damage, a knockdown, and give people in a three tile range a star mark."
+	gain_text = "The Beast was behind me now at all times, with each sacrifice words of affirmation coursed through me."
+	adds_sidepath_points = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	next_knowledge = list(
 		/datum/heretic_knowledge/blade_upgrade/cosmic,
 		/datum/heretic_knowledge/reroll_targets,
@@ -226,6 +241,10 @@
 	desc = "Grants you Cosmic Expansion, a spell that creates a 3x3 area of cosmic fields around you. \
 		Nearby beings will also receive a star mark."
 	gain_text = "The ground now shook beneath me. The Beast inhabited me, and their voice was intoxicating."
+<<<<<<< HEAD
+=======
+	adds_sidepath_points = 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	next_knowledge = list(
 		/datum/heretic_knowledge/ultimate/cosmic_final,
 		/datum/heretic_knowledge/eldritch_coin,
@@ -243,8 +262,12 @@
 		You can also give it commands through speech. \
 		The Star Gazer is a strong ally who can even break down reinforced walls. \
 		The Star Gazer has an aura that will heal you and damage opponents. \
+<<<<<<< HEAD
 		Star Touch can now teleport you to the Star Gazer when activated in your hand. \
 		Your cosmic expansion spell and your blades also become greatly empowered."
+=======
+		Star Touch can now teleport you to the Star Gazer when activated in your hand."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	gain_text = "The Beast held out its hand, I grabbed hold and they pulled me to them. Their body was towering, but it seemed so small and feeble after all their tales compiled in my head. \
 		I clung on to them, they would protect me, and I would protect it. \
 		I closed my eyes with my head laid against their form. I was safe. \
@@ -254,6 +277,7 @@
 	var/static/list/star_gazer_commands = list(
 		/datum/pet_command/idle,
 		/datum/pet_command/free,
+		/datum/pet_command/protect_owner, // monkestation edit: allow star gazers to passively protect their summoner
 		/datum/pet_command/follow,
 		/datum/pet_command/point_targeting/attack/star_gazer
 	)
@@ -270,7 +294,11 @@
 	priority_announce(
 		text = "[generate_heretic_text()] A Star Gazer has arrived into the station, [user.real_name] has ascended! This station is the domain of the Cosmos! [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
+<<<<<<< HEAD
 		sound = 'sound/ambience/antag/heretic/ascend_cosmic.ogg',
+=======
+		sound = 'monkestation/sound/ambience/antag/heretic/ascend_cosmic.ogg',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		color_override = "pink",
 	)
 	var/mob/living/basic/heretic_summon/star_gazer/star_gazer_mob = new /mob/living/basic/heretic_summon/star_gazer(loc)

@@ -12,6 +12,10 @@ import {
 import { Window } from '../layouts';
 
 export const DopplerArray = (props) => {
+<<<<<<< HEAD
+=======
+  const { act, data } = useBackend();
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window width={650} height={320} resizable>
       <Window.Content>

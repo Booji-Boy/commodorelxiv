@@ -179,7 +179,7 @@
 	desc = "Something about this grass makes you want to frolic. Or get high."
 	icon_state = "fairygrass"
 	floor_tile = /obj/item/stack/tile/fairygrass
-	light_range = 2
+	light_outer_range = 2
 	light_power = 0.80
 	light_color = COLOR_BLUE_LIGHT
 

@@ -10,6 +10,13 @@
 		return ELEMENT_INCOMPATIBLE // Incompatible with the carbon typepath because that already has its own hand handling and doesn't need hand holding
 
 	var/mob/living/mob_parent = target
+<<<<<<< HEAD
+=======
+	if(isbasicmob(mob_parent))
+		var/mob/living/basic/basic = target
+		basic.dexterous = TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_available_hands(mob_parent, hands_count)
 	mob_parent.set_hud_used(new hud_type(target))
 	mob_parent.hud_used.show_hud(mob_parent.hud_used.hud_version)
@@ -21,6 +28,13 @@
 /datum/element/dextrous/Detach(datum/source)
 	. = ..()
 	var/mob/living/mob_parent = source
+<<<<<<< HEAD
+=======
+	if(isbasicmob(mob_parent))
+		var/mob/living/basic/basic = mob_parent
+		basic.dexterous = FALSE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_available_hands(mob_parent, initial(mob_parent.default_num_hands))
 	var/initial_hud = initial(mob_parent.hud_type)
 	mob_parent.set_hud_used(new initial_hud(source))
@@ -54,9 +68,15 @@
 		var/obj/item/obj_item = target
 		if (istype(obj_item) && !obj_item.atom_storage && !(obj_item.item_flags & IN_STORAGE))
 			return NONE
+<<<<<<< HEAD
 	if (!isitem(target) && hand_haver.combat_mode)
 		return NONE
 	if (LAZYACCESS(modifiers, RIGHT_CLICK))
+=======
+	if (!isitem(target) && (hand_haver.istate & ISTATE_HARM))
+		return
+	if (hand_haver.istate & ISTATE_SECONDARY)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		INVOKE_ASYNC(target, TYPE_PROC_REF(/atom, attack_hand_secondary), hand_haver, modifiers)
 	else
 		INVOKE_ASYNC(target, TYPE_PROC_REF(/atom, attack_hand), hand_haver, modifiers)

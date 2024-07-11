@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+/* monkestation removal: get rid of the abductor batong recall
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Tests that abductors get their baton recall spell when being equipped
 /datum/unit_test/abductor_baton_spell
 
@@ -17,3 +21,7 @@
 	var/datum/action/cooldown/spell/summonitem/abductor/summon_two = locate() in ayy_two.actions
 	TEST_ASSERT_NOTNULL(summon_two, "Abductor solo agent does not have summon item spell.")
 	TEST_ASSERT(istype(summon_two.marked_item, /obj/item/melee/baton/abductor), "Abductor solo agent's summon item spell did not mark their baton.")
+<<<<<<< HEAD
+=======
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

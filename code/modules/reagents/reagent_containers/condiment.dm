@@ -272,6 +272,7 @@
 	list_reagents = list(/datum/reagent/consumable/vinegar = 50)
 	fill_icon_thresholds = null
 
+<<<<<<< HEAD
 /obj/item/reagent_containers/condiment/vegetable_oil
 	name = "cooking oil"
 	desc = "For all your deep-frying needs."
@@ -280,6 +281,16 @@
 	fill_icon_thresholds = null
 
 /obj/item/reagent_containers/condiment/olive_oil
+=======
+/obj/item/reagent_containers/condiment/cooking_oil
+	name = "cooking oil"
+	desc = "For all your deep-frying needs."
+	icon_state = "cooking_oil"
+	list_reagents = list(/datum/reagent/consumable/cooking_oil = 50)
+	fill_icon_thresholds = null
+
+/obj/item/reagent_containers/condiment/quality_oil
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	name = "quality oil"
 	desc = "For the fancy chef inside everyone."
 	icon_state = "oliveoil"

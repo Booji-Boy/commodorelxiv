@@ -94,7 +94,11 @@
 	new_link.Grant(to_link)
 
 	linked_mobs[to_link] = new_link
+<<<<<<< HEAD
 	RegisterSignals(to_link, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING), PROC_REF(sig_unlink_mob))
+=======
+	RegisterSignals(to_link, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING, COMSIG_MINDSHIELD_IMPLANTED), PROC_REF(unlink_mob))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return TRUE
 
@@ -115,7 +119,11 @@
 
 	post_unlink_callback?.Invoke(to_unlink)
 
+<<<<<<< HEAD
 	UnregisterSignal(to_unlink, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING))
+=======
+	UnregisterSignal(to_unlink, list(COMSIG_LIVING_DEATH, COMSIG_QDELETING, COMSIG_MINDSHIELD_IMPLANTED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/datum/action/innate/linked_speech/old_link = linked_mobs[to_unlink]
 	linked_mobs -= to_unlink
@@ -239,7 +247,6 @@
 	return ..() && (owner.stat != DEAD)
 
 /datum/action/innate/linked_speech/Activate()
-
 	var/datum/component/mind_linker/linker = target
 	var/mob/living/linker_parent = linker.parent
 
@@ -257,7 +264,8 @@
 	var/list/all_who_can_hear = assoc_to_keys(linker.linked_mobs) + linker_parent
 
 	for(var/mob/living/recipient as anything in all_who_can_hear)
-		to_chat(recipient, formatted_message)
+		var/avoid_highlighting = (recipient == owner) || (recipient == linker_parent)
+		to_chat(recipient, formatted_message, type = MESSAGE_TYPE_RADIO, avoid_highlighting = avoid_highlighting)
 
 	for(var/mob/recipient as anything in GLOB.dead_mob_list)
-		to_chat(recipient, "[FOLLOW_LINK(recipient, owner)] [formatted_message]")
+		to_chat(recipient, "[FOLLOW_LINK(recipient, owner)] [formatted_message]", type = MESSAGE_TYPE_RADIO)

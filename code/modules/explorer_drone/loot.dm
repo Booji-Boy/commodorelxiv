@@ -96,10 +96,17 @@ GLOBAL_LIST_INIT(adventure_loot_generator_index,generate_generator_index())
 	id = "pets"
 	var/carrier_type = /obj/item/pet_carrier/biopod
 	var/list/possible_pets = list(
+<<<<<<< HEAD
 		/mob/living/basic/pet/cat/space,
 		/mob/living/basic/pet/dog/corgi,
 		/mob/living/basic/pet/dog/pug,
 		/mob/living/basic/pet/penguin/baby,
+=======
+		/mob/living/basic/pet/dog/corgi,
+		/mob/living/basic/pet/dog/pug,
+		/mob/living/basic/pet/penguin/baby,
+		/mob/living/simple_animal/pet/cat/space,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/adventure_loot_generator/pet/generate()
@@ -160,7 +167,7 @@ GLOBAL_LIST_INIT(adventure_loot_generator_index,generate_generator_index())
 	AddComponent(/datum/component/two_handed)
 
 /obj/item/firelance/attack(mob/living/M, mob/living/user, params)
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		return
 	. = ..()
 

@@ -6,7 +6,10 @@ GLOBAL_LIST_INIT(command_strings, list(
 	"home" = "RETURN HOME",
 ))
 
+<<<<<<< HEAD
 #define SENTIENT_BOT_RESET_TIMER 45 SECONDS
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot
 	icon = 'icons/mob/silicon/aibots.dmi'
@@ -14,6 +17,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 	gender = NEUTER
 	mob_biotypes = MOB_ROBOTIC
 	basic_mob_flags = DEL_ON_DEATH
+<<<<<<< HEAD
 	density = FALSE
 
 	icon = 'icons/mob/silicon/aibots.dmi'
@@ -33,10 +37,27 @@ GLOBAL_LIST_INIT(command_strings, list(
 	ai_controller = /datum/ai_controller/basic_controller/bot
 	pass_flags = PASSFLAPS | PASSMOB
 
+=======
+	icon = 'icons/mob/silicon/aibots.dmi'
+	icon_state = "medibot0"
+	base_icon_state = "medibot"
+	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, CLONE = 0, STAMINA = 0, OXY = 0)
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+	hud_possible = list(DIAG_STAT_HUD, DIAG_BOT_HUD, DIAG_HUD, DIAG_BATT_HUD, DIAG_PATH_HUD = HUD_LIST_LIST)
+	maximum_survivable_temperature = INFINITY
+	minimum_survivable_temperature = 0
+	has_unlimited_silicon_privilege = TRUE
+	sentience_type = SENTIENCE_ARTIFICIAL
+	status_flags = NONE //no default canpush
+	faction = list(FACTION_MINING)
+	ai_controller = /datum/ai_controller/basic_controller/bot
+	pass_flags = PASSFLAPS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	verb_say = "states"
 	verb_ask = "queries"
 	verb_exclaim = "declares"
 	verb_yell = "alarms"
+<<<<<<< HEAD
 
 	initial_language_holder = /datum/language_holder/synthetic
 	bubble_icon = "machine"
@@ -50,6 +71,18 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 	req_one_access = list(ACCESS_ROBOTICS)
 	interaction_flags_click = ALLOW_SILICON_REACH
+=======
+	initial_language_holder = /datum/language_holder/synthetic
+	bubble_icon = "machine"
+	speech_span = SPAN_ROBOT
+	faction = list(FACTION_NEUTRAL, FACTION_SILICON, FACTION_TURRET)
+	light_system = OVERLAY_LIGHT
+	light_outer_range = 3
+	light_power = 0.9
+	speed = 3
+	///Access required to access this Bot's maintenance protocols
+	var/maints_access_required = list(ACCESS_ROBOTICS)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///The Robot arm attached to this robot - has a 50% chance to drop on death.
 	var/robot_arm = /obj/item/bodypart/arm/right/robot
 	///The inserted (if any) pAI in this bot.
@@ -59,9 +92,15 @@ GLOBAL_LIST_INIT(command_strings, list(
 	///All initial access this bot started with.
 	var/list/initial_access = list()
 	///Bot-related mode flags on the Bot indicating how they will act. BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
+<<<<<<< HEAD
 	var/bot_mode_flags = BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED | BOT_MODE_CAN_BE_SAPIENT | BOT_MODE_ROUNDSTART_POSSESSION
 	///Bot-related cover flags on the Bot to deal with what has been done to their cover, including emagging. BOT_COVER_MAINTS_OPEN | BOT_COVER_LOCKED | BOT_COVER_EMAGGED | BOT_COVER_HACKED
 	var/bot_access_flags = BOT_COVER_LOCKED
+=======
+	var/bot_mode_flags = BOT_MODE_ON | BOT_MODE_REMOTE_ENABLED | BOT_MODE_GHOST_CONTROLLABLE | BOT_MODE_ROUNDSTART_POSSESSION
+	///Bot-related cover flags on the Bot to deal with what has been done to their cover, including emagging. BOT_MAINTS_PANEL_OPEN | BOT_CONTROL_PANEL_OPEN | BOT_COVER_EMAGGED | BOT_COVER_HACKED
+	var/bot_access_flags = NONE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///Small name of what the bot gets messed with when getting hacked/emagged.
 	var/hackables = "system circuits"
 	///Standardizes the vars that indicate the bot is busy with its function.
@@ -83,7 +122,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	///state of the path icon
 	var/path_image_icon_state = "path_indicator"
 	///what color this path icon will use
+<<<<<<< HEAD
 	var/path_image_color = COLOR_WHITE
+=======
+	var/path_image_color = "#FFFFFF"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///list of all layed path icons
 	var/list/current_pathed_turfs = list()
 
@@ -109,7 +152,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 /mob/living/basic/bot/Initialize(mapload)
 	. = ..()
 
+<<<<<<< HEAD
 	AddElement(/datum/element/ai_retaliate)
+=======
+	AddElement(/datum/element/relay_attackers)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(handle_loop_movement))
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(after_attacked))
 	RegisterSignal(src, COMSIG_MOB_TRIED_ACCESS, PROC_REF(attempt_access))
@@ -145,7 +192,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_BOTS_GLITCHED))
 		randomize_language_if_on_station()
 
+<<<<<<< HEAD
 	if(mapload && is_station_level(z) && (bot_mode_flags & BOT_MODE_CAN_BE_SAPIENT) && (bot_mode_flags & BOT_MODE_ROUNDSTART_POSSESSION))
+=======
+	if(mapload && is_station_level(z) && (bot_mode_flags & BOT_MODE_GHOST_CONTROLLABLE) && (bot_mode_flags & BOT_MODE_ROUNDSTART_POSSESSION))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		enable_possession(mapload = mapload)
 
 	pa_system = (isnull(announcement_type)) ? new(src, automated_announcements = generate_speak_list()) : new announcement_type(src, automated_announcements = generate_speak_list())
@@ -279,10 +330,33 @@ GLOBAL_LIST_INIT(command_strings, list(
 			return
 	fully_replace_character_name(real_name, new_name)
 
+<<<<<<< HEAD
 /mob/living/basic/bot/allowed(mob/living/user)
 	if(!(bot_access_flags & BOT_COVER_LOCKED)) // Unlocked.
 		return TRUE
 	return ..()
+=======
+/mob/living/basic/bot/proc/check_access(mob/living/user, obj/item/card/id)
+	if(user.has_unlimited_silicon_privilege || isAdminGhostAI(user)) // Silicon and Admins always have access.
+		return TRUE
+	if(!istype(user)) // Non-living mobs shouldn't be manipulating bots (like observes using the botkeeper UI).
+		return FALSE
+	if(!length(maints_access_required)) // No requirements to access it.
+		return TRUE
+	if(bot_access_flags & BOT_CONTROL_PANEL_OPEN) // Unlocked.
+		return TRUE
+
+	var/obj/item/card/id/used_id = id || user.get_idcard(TRUE)
+
+	if(!used_id || !used_id.access)
+		return FALSE
+
+	for(var/requested_access in maints_access_required)
+		if(requested_access in used_id.access)
+			return TRUE
+
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/bee_friendly()
 	return TRUE
@@ -302,6 +376,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /mob/living/basic/bot/emag_act(mob/user, obj/item/card/emag/emag_card)
 	. = ..()
+<<<<<<< HEAD
 	if(bot_access_flags & BOT_COVER_LOCKED) //First emag application unlocks the bot's interface. Apply a screwdriver to use the emag again.
 		bot_access_flags &= ~BOT_COVER_LOCKED
 		balloon_alert(user, "cover unlocked")
@@ -311,6 +386,17 @@ GLOBAL_LIST_INIT(command_strings, list(
 		return FALSE
 	bot_access_flags |= BOT_COVER_EMAGGED
 	bot_access_flags |= BOT_COVER_LOCKED
+=======
+	if(!(bot_access_flags & BOT_CONTROL_PANEL_OPEN)) //First emag application unlocks the bot's interface. Apply a screwdriver to use the emag again.
+		bot_access_flags |= BOT_CONTROL_PANEL_OPEN
+		balloon_alert(user, "cover unlocked")
+		return TRUE
+	if(!(bot_access_flags & BOT_CONTROL_PANEL_OPEN) || !(bot_access_flags & BOT_MAINTS_PANEL_OPEN)) //Bot panel is unlocked by ID or emag, and the panel is screwed open. Ready for emagging.
+		balloon_alert(user, "open maintenance panel first!")
+		return FALSE
+	bot_access_flags |= BOT_COVER_EMAGGED
+	bot_access_flags &= ~BOT_CONTROL_PANEL_OPEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	bot_mode_flags &= ~BOT_MODE_REMOTE_ENABLED //Manually emagging the bot also locks the AI from controlling it.
 	bot_reset()
 	turn_on() //The bot automatically turns on when emagged, unless recently hit with EMP.
@@ -330,6 +416,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 	else
 		. += "[src] is in pristine condition."
 
+<<<<<<< HEAD
 	. += span_notice("Its maintenance panel is [bot_access_flags & BOT_COVER_MAINTS_OPEN ? "open" : "closed"].")
 	. += span_info("You can use a <b>screwdriver</b> to [bot_access_flags & BOT_COVER_MAINTS_OPEN ? "close" : "open"] it.")
 
@@ -341,6 +428,19 @@ GLOBAL_LIST_INIT(command_strings, list(
 		return
 	. += span_notice("It has a pAI device installed.")
 	if(!(bot_access_flags & BOT_COVER_MAINTS_OPEN))
+=======
+	. += span_notice("Its maintenance panel is [bot_access_flags & BOT_MAINTS_PANEL_OPEN ? "open" : "closed"].")
+	. += span_info("You can use a <b>screwdriver</b> to [bot_access_flags & BOT_MAINTS_PANEL_OPEN ? "close" : "open"] it.")
+
+	if(bot_access_flags & BOT_MAINTS_PANEL_OPEN)
+		. += span_notice("Its control panel is [bot_access_flags & BOT_CONTROL_PANEL_OPEN ? "unlocked" : "locked"].")
+		if(!(bot_access_flags & BOT_COVER_EMAGGED) && (issilicon(user) || user.Adjacent(src)))
+			. += span_info("Alt-click [issilicon(user) ? "" : "or use your ID on "]it to [bot_access_flags & BOT_CONTROL_PANEL_OPEN ? "" : "un"]lock its control panel.")
+	if(isnull(paicard))
+		return
+	. += span_notice("It has a pAI device installed.")
+	if(!(bot_access_flags & BOT_MAINTS_PANEL_OPEN))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		. += span_info("You can use a <b>hemostat</b> to remove it.")
 
 /mob/living/basic/bot/updatehealth()
@@ -354,7 +454,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	return //we use a different hud
 
 /mob/living/basic/bot/attack_hand(mob/living/carbon/human/user, list/modifiers)
+<<<<<<< HEAD
 	if(!user.combat_mode)
+=======
+	if(!(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		ui_interact(user)
 		return
 	return ..()
@@ -371,14 +475,25 @@ GLOBAL_LIST_INIT(command_strings, list(
 		ui = new(user, src, "SimpleBot", name)
 		ui.open()
 
+<<<<<<< HEAD
 /mob/living/basic/bot/click_alt(mob/user)
 	unlock_with_id(user)
 	return CLICK_ACTION_SUCCESS
+=======
+/mob/living/basic/bot/AltClick(mob/user)
+	. = ..()
+	if(!can_interact(user))
+		return
+	if(!user.can_perform_action(src, ALLOW_SILICON_REACH))
+		return
+	unlock_with_id(user)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/proc/unlock_with_id(mob/living/user)
 	if(bot_access_flags & BOT_COVER_EMAGGED)
 		balloon_alert(user, "error!")
 		return
+<<<<<<< HEAD
 	if(bot_access_flags & BOT_COVER_MAINTS_OPEN)
 		balloon_alert(user, "access panel must be closed!")
 		return
@@ -392,10 +507,26 @@ GLOBAL_LIST_INIT(command_strings, list(
 /mob/living/basic/bot/screwdriver_act(mob/living/user, obj/item/tool)
 	. = ITEM_INTERACT_SUCCESS
 	if(bot_access_flags & BOT_COVER_LOCKED)
+=======
+	if(bot_access_flags & BOT_MAINTS_PANEL_OPEN)
+		balloon_alert(user, "access panel must be closed!")
+		return
+	if(!check_access(user))
+		balloon_alert(user, "no access")
+		return
+	bot_access_flags ^= BOT_CONTROL_PANEL_OPEN
+	to_chat(user, span_notice("Controls are now [bot_access_flags & BOT_CONTROL_PANEL_OPEN ? "unlocked" : "locked"]."))
+	return TRUE
+
+/mob/living/basic/bot/screwdriver_act(mob/living/user, obj/item/tool)
+	. = TOOL_ACT_TOOLTYPE_SUCCESS
+	if(!(bot_access_flags & BOT_CONTROL_PANEL_OPEN))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		to_chat(user, span_warning("The maintenance panel is locked!"))
 		return
 
 	tool.play_tool_sound(src)
+<<<<<<< HEAD
 	bot_access_flags ^= BOT_COVER_MAINTS_OPEN
 	to_chat(user, span_notice("The maintenance panel is now [bot_access_flags & BOT_COVER_MAINTS_OPEN ? "opened" : "closed"]."))
 
@@ -405,12 +536,27 @@ GLOBAL_LIST_INIT(command_strings, list(
 		return FALSE
 
 	. = ITEM_INTERACT_SUCCESS
+=======
+	bot_access_flags ^= BOT_MAINTS_PANEL_OPEN
+	to_chat(user, span_notice("The maintenance panel is now [bot_access_flags & BOT_MAINTS_PANEL_OPEN ? "opened" : "closed"]."))
+
+/mob/living/basic/bot/welder_act(mob/living/user, obj/item/tool)
+	user.changeNext_move(CLICK_CD_MELEE)
+	if(user.istate & ISTATE_HARM)
+		return FALSE
+
+	. = TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(health >= maxHealth)
 		user.balloon_alert(user, "no repairs needed!")
 		return
 
+<<<<<<< HEAD
 	if(!(bot_access_flags & BOT_COVER_MAINTS_OPEN))
+=======
+	if(!(bot_access_flags & BOT_MAINTS_PANEL_OPEN))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		user.balloon_alert(user, "maintenance panel closed!")
 		return
 
@@ -432,7 +578,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	if(attacking_item.tool_behaviour != TOOL_HEMOSTAT || !paicard)
 		return ..()
 
+<<<<<<< HEAD
 	if(bot_access_flags & BOT_COVER_MAINTS_OPEN)
+=======
+	if(bot_access_flags & BOT_MAINTS_PANEL_OPEN)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "open the access panel!")
 		return
 
@@ -445,8 +595,13 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 	ejectpai(user)
 
+<<<<<<< HEAD
 /mob/living/basic/bot/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
 	if(damage_done > 0 && attacking_item.damtype != STAMINA && stat != DEAD)
+=======
+/mob/living/basic/bot/attacked_by(obj/item/I, mob/living/user)
+	if(I.force > 0 && I.damtype != STAMINA && stat != DEAD)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		do_sparks(5, TRUE, src)
 		. = TRUE
 	return ..() || .
@@ -466,7 +621,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	if(. & EMP_PROTECT_SELF)
 		return
 	new /obj/effect/temp_visual/emp(loc)
+<<<<<<< HEAD
 	if(paicard)
+=======
+	if(!QDELETED(paicard))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		paicard.emp_act(severity)
 		src.visible_message(span_notice("[paicard] flies out of [initial(src.name)]!"), span_warning("You are forcefully ejected from [initial(src.name)]!"))
 		ejectpai()
@@ -479,11 +638,19 @@ GLOBAL_LIST_INIT(command_strings, list(
 	else
 		addtimer(CALLBACK(src, PROC_REF(turn_on)), severity * 30 SECONDS)
 
+<<<<<<< HEAD
+=======
+	/*
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!prob(70/severity) || !length(GLOB.uncommon_roundstart_languages))
 		return
 
 	remove_all_languages(source = LANGUAGE_EMP)
 	grant_random_uncommon_language(source = LANGUAGE_EMP)
+<<<<<<< HEAD
+=======
+	*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Pass a message to have the bot say() it, passing through our announcement action to potentially also play a sound.
@@ -535,7 +702,14 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /mob/living/basic/bot/proc/bot_reset(bypass_ai_reset = FALSE)
 	SEND_SIGNAL(src, COMSIG_BOT_RESET)
+<<<<<<< HEAD
 	access_card.set_access(initial_access)
+=======
+	if(length(initial_access))
+		if(QDELETED(access_card))
+			access_card = new /obj/item/card/id/advanced/simple_bot(src)
+		access_card.set_access(initial_access)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	diag_hud_set_botstat()
 	diag_hud_set_botmode()
 	clear_path_hud()
@@ -573,6 +747,7 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /mob/living/basic/bot/ui_data(mob/user)
 	var/list/data = list()
+<<<<<<< HEAD
 	data["can_hack"] = HAS_SILICON_ACCESS(user)
 	data["custom_controls"] = list()
 	data["emagged"] = bot_access_flags & BOT_COVER_EMAGGED
@@ -585,6 +760,20 @@ GLOBAL_LIST_INIT(command_strings, list(
 		data["settings"]["possession_enabled"] = can_be_possessed
 		data["settings"]["airplane_mode"] = !(bot_mode_flags & BOT_MODE_REMOTE_ENABLED)
 		data["settings"]["maintenance_lock"] = !(bot_access_flags & BOT_COVER_MAINTS_OPEN)
+=======
+	data["can_hack"] = (issilicon(user) || isAdminGhostAI(user))
+	data["custom_controls"] = list()
+	data["emagged"] = bot_access_flags & BOT_COVER_EMAGGED
+	data["has_access"] = check_access(user)
+	data["locked"] = !(bot_access_flags & BOT_CONTROL_PANEL_OPEN)
+	data["settings"] = list()
+	if((bot_access_flags & BOT_CONTROL_PANEL_OPEN) || issilicon(user) || isAdminGhostAI(user))
+		data["settings"]["pai_inserted"] = !isnull(paicard)
+		data["settings"]["allow_possession"] = bot_mode_flags & BOT_MODE_GHOST_CONTROLLABLE
+		data["settings"]["possession_enabled"] = can_be_possessed
+		data["settings"]["airplane_mode"] = !(bot_mode_flags & BOT_MODE_REMOTE_ENABLED)
+		data["settings"]["maintenance_lock"] = !(bot_access_flags & BOT_MAINTS_PANEL_OPEN)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		data["settings"]["power"] = bot_mode_flags & BOT_MODE_ON
 		data["settings"]["patrol_station"] = bot_mode_flags & BOT_MODE_AUTOPATROL
 	return data
@@ -595,12 +784,20 @@ GLOBAL_LIST_INIT(command_strings, list(
 	if(.)
 		return
 	var/mob/the_user = ui.user
+<<<<<<< HEAD
 	if(!allowed(the_user))
+=======
+	if(!check_access(the_user))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(the_user, "access denied!")
 		return
 
 	if(action == "lock")
+<<<<<<< HEAD
 		bot_access_flags ^= BOT_COVER_LOCKED
+=======
+		bot_access_flags ^= BOT_CONTROL_PANEL_OPEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	switch(action)
 		if("power")
@@ -609,17 +806,29 @@ GLOBAL_LIST_INIT(command_strings, list(
 			else
 				turn_on()
 		if("maintenance")
+<<<<<<< HEAD
 			bot_access_flags ^= BOT_COVER_MAINTS_OPEN
+=======
+			bot_access_flags ^= BOT_MAINTS_PANEL_OPEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if("patrol")
 			bot_mode_flags ^= BOT_MODE_AUTOPATROL
 			bot_reset()
 		if("airplane")
 			bot_mode_flags ^= BOT_MODE_REMOTE_ENABLED
 		if("hack")
+<<<<<<< HEAD
 			if(!HAS_SILICON_ACCESS(the_user))
 				return
 			if(!(bot_access_flags & BOT_COVER_EMAGGED))
 				bot_access_flags |= (BOT_COVER_LOCKED|BOT_COVER_EMAGGED|BOT_COVER_HACKED)
+=======
+			if(!(issilicon(the_user) || isAdminGhostAI(the_user)))
+				return
+			if(!(bot_access_flags & BOT_COVER_EMAGGED))
+				bot_access_flags |= (BOT_COVER_EMAGGED|BOT_COVER_HACKED)
+				bot_access_flags &= ~BOT_CONTROL_PANEL_OPEN
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				to_chat(the_user, span_warning("You overload [src]'s [hackables]."))
 				message_admins("Safety lock of [ADMIN_LOOKUPFLW(src)] was disabled by [ADMIN_LOOKUPFLW(the_user)] in [ADMIN_VERBOSEJMP(the_user)]")
 				the_user.log_message("disabled safety lock of [the_user]", LOG_GAME)
@@ -662,23 +871,38 @@ GLOBAL_LIST_INIT(command_strings, list(
 		return FALSE
 	if(!(bot_access_flags & BOT_COVER_HACKED)) //Manually emagged by a human - access denied to all.
 		return TRUE
+<<<<<<< HEAD
 	if(!HAS_SILICON_ACCESS(user)) //Bot is hacked, so only silicons and admins are allowed access.
+=======
+	if(!issilicon(user) && !isAdminGhostAI(user)) //Bot is hacked, so only silicons and admins are allowed access.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return TRUE
 
 	return FALSE
 
 /// Places a pAI in control of this mob
 /mob/living/basic/bot/proc/insertpai(mob/user, obj/item/pai_card/card)
+<<<<<<< HEAD
 	if(paicard)
+=======
+	if(!QDELETED(paicard))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "slot occupied!")
 		return
 	if(key)
 		balloon_alert(user, "personality already present!")
 		return
+<<<<<<< HEAD
 	if(!(bot_access_flags & BOT_COVER_MAINTS_OPEN))
 		balloon_alert(user, "slot inaccessible!")
 		return
 	if(!(bot_mode_flags & BOT_MODE_CAN_BE_SAPIENT))
+=======
+	if(!(bot_access_flags & BOT_COVER_OPEN))
+		balloon_alert(user, "slot inaccessible!")
+		return
+	if(!(bot_mode_flags & BOT_MODE_GHOST_CONTROLLABLE))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		balloon_alert(user, "incompatible firmware!")
 		return
 	if(isnull(card.pai?.mind))
@@ -690,7 +914,12 @@ GLOBAL_LIST_INIT(command_strings, list(
 	disable_possession()
 	paicard.pai.fold_in()
 	copy_languages(paicard.pai, source_override = LANGUAGE_PAI)
+<<<<<<< HEAD
 	set_active_language(paicard.pai.get_selected_language())
+=======
+	var/datum/language_holder/source_holder = get_language_holder()
+	source_holder?.selected_language = paicard.pai.get_selected_language()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	user.visible_message(span_notice("[user] inserts [card] into [src]!"), span_notice("You insert [card] into [src]."))
 	paicard.pai.mind.transfer_to(src)
 	to_chat(src, span_notice("You sense your form change as you are uploaded into [src]."))
@@ -707,10 +936,17 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /// Ejects a pAI from this bot
 /mob/living/basic/bot/proc/ejectpai(mob/user = null, announce = TRUE)
+<<<<<<< HEAD
 	if(isnull(paicard))
 		return
 
 	if(paicard.pai)
+=======
+	if(QDELETED(paicard))
+		return
+
+	if(!QDELETED(paicard.pai))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(isnull(mind))
 			mind.transfer_to(paicard.pai)
 		else
@@ -732,7 +968,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /// Ejects the pAI remotely.
 /mob/living/basic/bot/proc/eject_pai_remote(mob/user)
+<<<<<<< HEAD
 	if(!allowed(user) || !paicard)
+=======
+	if(!check_access(user) || !paicard)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	speak("Ejecting personality chip.", radio_channel)
 	ejectpai(user)
@@ -741,17 +981,23 @@ GLOBAL_LIST_INIT(command_strings, list(
 	. = ..()
 	if(!. || isnull(client))
 		return FALSE
+<<<<<<< HEAD
 	REMOVE_TRAIT(src, TRAIT_NO_GLIDE, INNATE_TRAIT)
 	speed = 2
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	diag_hud_set_botmode()
 	clear_path_hud()
 
 /mob/living/basic/bot/Logout()
 	. = ..()
 	bot_reset()
+<<<<<<< HEAD
 	speed = initial(speed)
 	ADD_TRAIT(src, TRAIT_NO_GLIDE, INNATE_TRAIT)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
@@ -765,7 +1011,13 @@ GLOBAL_LIST_INIT(command_strings, list(
 /mob/living/basic/bot/proc/attempt_access(mob/bot, obj/door_attempt)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	return (door_attempt.check_access(access_card) ? ACCESS_ALLOWED : ACCESS_DISALLOWED)
+=======
+	if(door_attempt.check_access(access_card))
+		return ACCESS_ALLOWED
+	return ACCESS_DISALLOWED
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/bot/proc/generate_speak_list()
 	return null
@@ -788,8 +1040,11 @@ GLOBAL_LIST_INIT(command_strings, list(
 	access_card.set_access(access_to_grant)
 	speak("Responding.", radio_channel)
 	update_bot_mode(new_mode = BOT_SUMMON)
+<<<<<<< HEAD
 	if(client) //if we're sentient, we reset ourselves after a short period
 		addtimer(CALLBACK(src, PROC_REF(bot_reset)), SENTIENT_BOT_RESET_TIMER)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return TRUE
 
 /mob/living/basic/bot/proc/set_ai_caller(mob/living/caller)
@@ -816,5 +1071,8 @@ GLOBAL_LIST_INIT(command_strings, list(
 
 /mob/living/basic/bot/proc/on_bot_movement(atom/movable/source, atom/oldloc, dir, forced)
 	return
+<<<<<<< HEAD
 
 #undef SENTIENT_BOT_RESET_TIMER
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

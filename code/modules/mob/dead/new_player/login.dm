@@ -14,12 +14,19 @@
 		mind.active = TRUE
 		mind.set_current(src)
 
+	if((client.player_age != -1) && client.player_age <= CONFIG_GET(number/minimum_age) && !(client.ckey in GLOB.interviews.approved_ckeys))
+		client.interviewee = TRUE
+
 	// Check if user should be added to interview queue
 	if (!client.holder && CONFIG_GET(flag/panic_bunker) && CONFIG_GET(flag/panic_bunker_interview) && !(client.ckey in GLOB.interviews.approved_ckeys))
 		var/required_living_minutes = CONFIG_GET(number/panic_bunker_living)
 		var/living_minutes = client.get_exp_living(TRUE)
-		if (required_living_minutes >= living_minutes)
-			client.interviewee = TRUE
+		if(!CONFIG_GET(flag/minimum_account_age))
+			if (required_living_minutes >= living_minutes)
+				client.interviewee = TRUE
+		else
+			if(client.account_age <= CONFIG_GET(number/minimum_age))
+				client.interviewee = TRUE
 
 	. = ..()
 	if(!. || !client)
@@ -38,7 +45,10 @@
 
 	add_sight(SEE_TURFS)
 
-	client.playtitlemusic()
+	if(!client.media)
+		client.media = new /datum/media_manager(client)
+		client.media.open()
+		client.media.update_music()
 
 	var/datum/asset/asset_datum = get_asset_datum(/datum/asset/simple/lobby)
 	asset_datum.send(client)
@@ -48,6 +58,10 @@
 	// The parent call for Login() may do a bunch of stuff, like add verbs.
 	// Delaying the register_for_interview until the very end makes sure it can clean everything up
 	// and set the player's client up for interview.
+
+	///guh
+	client.check_overwatch()
+
 	if(client.interviewee)
 		register_for_interview()
 		return
@@ -57,3 +71,4 @@
 		to_chat(src, "Please set up your character and select \"Ready\". The game will start [tl > 0 ? "in about [DisplayTimeText(tl)]" : "soon"].")
 
 
+	addtimer(CALLBACK(client, TYPE_PROC_REF(/client, playtitlemusic)), 4 SECONDS, TIMER_DELETE_ME)

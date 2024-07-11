@@ -56,6 +56,7 @@
 /datum/antagonist/survivalist/magic/on_removal()
 	REMOVE_TRAIT(owner, TRAIT_MAGICALLY_GIFTED, REF(src))
 	return..()
+<<<<<<< HEAD
 
 /// Applied by the battle royale objective
 /datum/antagonist/survivalist/battle_royale
@@ -105,3 +106,5 @@
 /datum/mood_event/royale_survivor
 	description = "I made it out of Rumble Royale with my life."
 	mood_change = 4
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

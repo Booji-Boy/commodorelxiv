@@ -17,7 +17,11 @@
 	///Boolean on whether or not the app will make noise when flipping around the channels.
 	var/spying = FALSE
 
+<<<<<<< HEAD
 	var/list/network = list(CAMERANET_NETWORK_SS13)
+=======
+	var/list/network = list("ss13")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	///List of weakrefs of all users watching the program.
 	var/list/concurrent_users = list()
 
@@ -39,6 +43,7 @@
 	filename = "syndeye"
 	filedesc = "SyndEye"
 	extended_desc = "This program allows for illegal access to security camera networks."
+<<<<<<< HEAD
 	download_access = list()
 	can_run_on_flags = PROGRAM_ALL
 	program_flags = PROGRAM_ON_SYNDINET_STORE | PROGRAM_UNIQUE_COPY
@@ -59,6 +64,15 @@
 	run_access = list(ACCESS_MINISAT)
 	can_run_on_flags = PROGRAM_PDA
 	program_flags = PROGRAM_UNIQUE_COPY
+=======
+	transfer_access = list()
+	available_on_ntnet = FALSE
+	available_on_syndinet = TRUE
+	requires_ntnet = FALSE
+	usage_flags = PROGRAM_ALL
+	unique_copy = TRUE
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	network = list("ss13", "mine", "rd", "labor", "ordnance", "minisat")
 	spying = TRUE
 
@@ -118,7 +132,11 @@
 		data["activeCamera"] = list(
 			name = active_camera.c_tag,
 			ref = REF(active_camera),
+<<<<<<< HEAD
 			status = active_camera.camera_enabled,
+=======
+			status = active_camera.status,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 	return data
 
@@ -150,7 +168,11 @@
 			else
 				camera_ref = null
 			if(!spying)
+<<<<<<< HEAD
 				playsound(computer, SFX_TERMINAL_TYPE, 25, FALSE)
+=======
+				playsound(computer, get_sfx(SFX_TERMINAL_TYPE), 25, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			if(isnull(camera_ref))
 				return TRUE
 			if(internal_tracker)

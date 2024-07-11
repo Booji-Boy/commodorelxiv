@@ -29,6 +29,7 @@
 /obj/item/wallframe/apc/screwdriver_act(mob/living/user, obj/item/tool)
 	//overriding the wallframe parent screwdriver act with this one which allows applying to existing apc frames.
 
+<<<<<<< HEAD
 	var/turf/turf = get_step(get_turf(user), user.dir)
 	if(iswallturf(turf))
 		if(locate(/obj/machinery/power/apc) in get_turf(user))
@@ -37,3 +38,14 @@
 			return ITEM_INTERACT_SUCCESS
 		turf.attackby(src, user)
 	return ITEM_INTERACT_SUCCESS
+=======
+	var/turf/T = get_step(get_turf(user), user.dir)
+	if(iswallturf(T))
+		if(locate(/obj/machinery/power/apc) in get_turf(user))
+			var/obj/machinery/power/apc/mounted_apc = locate(/obj/machinery/power/apc) in get_turf(user)
+			mounted_apc.attackby(src, user)
+			return TOOL_ACT_TOOLTYPE_SUCCESS
+		T.attackby(src, user)
+	return TOOL_ACT_TOOLTYPE_SUCCESS
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

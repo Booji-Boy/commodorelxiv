@@ -56,13 +56,15 @@
 		return
 
 	// note that these are fed into an exponent, so these are magnified
+	// monkestation edit: balance out TRAIT_EASILY_WOUNDED and TRAIT_HARDLY_WOUNDED
 	if(HAS_TRAIT(owner, TRAIT_EASILY_WOUNDED))
-		damage *= 1.5
+		if(!HAS_TRAIT(owner, TRAIT_HARDLY_WOUNDED))
+			damage *= 1.5
+	else if(HAS_TRAIT(owner, TRAIT_HARDLY_WOUNDED))
+		damage *= 0.85
 	else
 		damage = min(damage, WOUND_MAX_CONSIDERED_DAMAGE)
-
-	if(HAS_TRAIT(owner,TRAIT_HARDLY_WOUNDED))
-		damage *= 0.85
+	// monkestation end
 
 	if(HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
 		damage *= 1.1
@@ -75,7 +77,11 @@
 	injury_roll += check_woundings_mods(woundtype, damage, wound_bonus, bare_wound_bonus)
 	var/list/series_wounding_mods = check_series_wounding_mods()
 
+<<<<<<< HEAD
 	if(injury_roll > WOUND_DISMEMBER_OUTRIGHT_THRESH && prob(get_damage() / max_damage * 100) && can_dismember())
+=======
+	if(injury_roll > WOUND_DISMEMBER_OUTRIGHT_THRESH && prob(get_damage() / max_damage * 100))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		var/datum/wound/loss/dismembering = new
 		dismembering.apply_dismember(src, woundtype, outright = TRUE, attack_direction = attack_direction)
 		return
@@ -123,6 +129,7 @@
 						possible_wounds -= other_path
 						continue
 
+<<<<<<< HEAD
 	while (TRUE)
 		var/datum/wound/possible_wound = pick_weight(possible_wounds)
 		if (isnull(possible_wound))
@@ -130,6 +137,12 @@
 
 		possible_wounds -= possible_wound
 		var/datum/wound_pregen_data/possible_pregen_data = GLOB.all_wound_pregen_data[possible_wound]
+=======
+	while (length(possible_wounds))
+		var/datum/wound/possible_wound = pick_weight(possible_wounds)
+		var/datum/wound_pregen_data/possible_pregen_data = GLOB.all_wound_pregen_data[possible_wound]
+		possible_wounds -= possible_wound
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 		var/datum/wound/replaced_wound
 		for(var/datum/wound/existing_wound as anything in wounds)

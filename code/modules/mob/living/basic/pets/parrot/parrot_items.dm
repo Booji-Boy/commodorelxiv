@@ -2,7 +2,11 @@
 	key = STRIPPABLE_ITEM_PARROT_HEADSET
 
 /datum/strippable_item/parrot_headset/get_item(atom/source)
+<<<<<<< HEAD
 	var/mob/living/basic/parrot/parrot_source = source
+=======
+	var/mob/living/basic/parrot/poly/parrot_source = source
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return istype(parrot_source) ? parrot_source.ears : null
 
 /datum/strippable_item/parrot_headset/try_equip(atom/source, obj/item/equipping, mob/user)

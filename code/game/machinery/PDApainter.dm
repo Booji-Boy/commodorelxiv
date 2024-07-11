@@ -111,8 +111,13 @@
 
 /obj/machinery/pdapainter/attackby(obj/item/O, mob/living/user, params)
 	if(machine_stat & BROKEN)
+<<<<<<< HEAD
 		if(O.tool_behaviour == TOOL_WELDER && !user.combat_mode)
 			if(!O.tool_start_check(user, amount=1))
+=======
+		if(O.tool_behaviour == TOOL_WELDER && !(user.istate & ISTATE_HARM))
+			if(!O.tool_start_check(user, amount=0))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
 			user.visible_message(span_notice("[user] is repairing [src]."), \
 							span_notice("You begin repairing [src]..."), \

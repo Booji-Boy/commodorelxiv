@@ -98,7 +98,10 @@
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(on_parent_deleted))
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_HIT_BY_SABOTEUR, PROC_REF(on_saboteur))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/component/seclite_attachable/UnregisterFromParent()
 	UnregisterSignal(parent, list(

@@ -596,9 +596,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	update_use_power(total_users > 0 ? ACTIVE_POWER_USE : IDLE_POWER_USE)
 	update_mode_power_usage(ACTIVE_POWER_USE, initial(active_power_usage) + HOLOPAD_PASSIVE_POWER_USAGE + (HOLOGRAM_POWER_USAGE * total_users))
 	if(total_users || replay_mode)
-		set_light(2)
+		set_light(l_outer_range = 2)
 	else
-		set_light(0)
+		set_light(l_outer_range = 2)
 	update_appearance()
 
 /obj/machinery/holopad/update_icon_state()
@@ -694,7 +694,11 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	if(!LAZYLEN(masters) || !masters[owner])
 		return TRUE
 	var/obj/effect/overlay/holo_pad_hologram/holo = masters[owner]
+<<<<<<< HEAD
 	var/transferred = FALSE
+=======
+	var/transfered = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!validate_location(new_turf))
 		if(!transfer_to_nearby_pad(new_turf, owner))
 			return FALSE
@@ -703,7 +707,11 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	//All is good.
 	holo.abstract_move(new_turf)
 	SET_PLANE(holo, ABOVE_GAME_PLANE, new_turf)
+<<<<<<< HEAD
 	if(!transferred)
+=======
+	if(!transfered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		update_holoray(owner, new_turf)
 	return TRUE
 

@@ -18,6 +18,7 @@ GLOBAL_LIST_INIT(clown_mask_options, list(
 	armor_type = /datum/armor/mask_gas
 	flags_cover = MASKCOVERSEYES | MASKCOVERSMOUTH | PEPPERPROOF
 	resistance_flags = NONE
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
 	///Max numbers of installable filters
 	var/max_filters = 1
 	///List to keep track of each filter
@@ -25,10 +26,16 @@ GLOBAL_LIST_INIT(clown_mask_options, list(
 	///Type of filter that spawns on roundstart
 	var/starting_filter_type = /obj/item/gas_filter
 	///Does the mask have an FOV?
+<<<<<<< HEAD
 	var/has_fov = TRUE
 	///Cigarette in the mask
 	var/obj/item/clothing/mask/cigarette/cig
 	voice_filter = "lowpass=f=750,volume=2"
+=======
+	var/has_fov = FALSE
+	///Cigarette in the mask
+	var/obj/item/clothing/mask/cigarette/cig
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/armor/mask_gas
 	bio = 100
@@ -57,11 +64,19 @@ GLOBAL_LIST_INIT(clown_mask_options, list(
 	cig?.equipped(equipee, slot)
 	return ..()
 
+<<<<<<< HEAD
 /obj/item/clothing/mask/gas/adjust_visor(mob/living/user)
 	if(!isnull(cig))
 		balloon_alert(user, "cig in the way!")
 		return FALSE
 	return ..()
+=======
+/obj/item/clothing/mask/gas/adjustmask(mob/living/carbon/user)
+	if(isnull(cig))
+		return ..()
+	balloon_alert(user, "there's a cig in the way!")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/clothing/mask/gas/examine(mob/user)
 	. = ..()

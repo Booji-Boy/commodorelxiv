@@ -1,11 +1,20 @@
 import { useBackend } from '../../backend';
+<<<<<<< HEAD
 import { Dropdown, NumberInput, Stack } from '../../components';
+=======
+import { NumberInput, Dropdown, Stack } from '../../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   GeneratorProps,
   GeneratorTypes,
   GeneratorTypesNoVectors,
+<<<<<<< HEAD
   P_DATA_GENERATOR,
   ParticleUIData,
+=======
+  ParticleUIData,
+  P_DATA_GENERATOR,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   RandToNumber,
   RandTypes,
 } from './data';

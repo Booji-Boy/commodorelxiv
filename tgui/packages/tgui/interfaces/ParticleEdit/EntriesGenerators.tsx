@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
+<<<<<<< HEAD
 import { useContext } from 'react';
 
 import { useBackend } from '../../backend';
@@ -25,6 +26,31 @@ import { isStringArray } from './helpers';
 export const FloatGenerator = (props: FloatGeneratorProps) => {
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+import { useBackend, useLocalState } from '../../backend';
+import {
+  Button,
+  LabeledList,
+  NumberInput,
+  ColorBox,
+  Input,
+  Stack,
+} from '../../components';
+import {
+  EntryGeneratorNumbersListProps,
+  FloatGeneratorColorProps,
+  FloatGeneratorProps,
+  ParticleUIData,
+  P_DATA_GENERATOR,
+  RandToNumber,
+} from './data';
+import { isStringArray } from './helpers';
+import { GeneratorListEntry } from './Generators';
+
+export const FloatGenerator = (props: FloatGeneratorProps) => {
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, float } = props;
   return (
     <LabeledList.Item label={name}>
@@ -76,8 +102,13 @@ export const FloatGenerator = (props: FloatGeneratorProps) => {
 };
 
 export const FloatGeneratorColor = (props: FloatGeneratorColorProps) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, float } = props;
   return (
     <LabeledList.Item label={name}>
@@ -132,8 +163,13 @@ export const FloatGeneratorColor = (props: FloatGeneratorColorProps) => {
 export const EntryGeneratorNumbersList = (
   props: EntryGeneratorNumbersListProps,
 ) => {
+<<<<<<< HEAD
   const { act } = useBackend<ParticleUIData>();
   const { setDesc } = useContext(ParticleContext);
+=======
+  const { act, data } = useBackend<ParticleUIData>();
+  const [desc, setdesc] = useLocalState('desc', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const { name, var_name, allow_z, input } = props;
   return (
     <LabeledList.Item label={name}>

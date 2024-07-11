@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   Box,
   Button,
@@ -10,6 +11,30 @@ import {
 
 import { useBackend } from '../../backend';
 import { CharacterPreview } from '../common/CharacterPreview';
+=======
+import { NoteKeeper } from './NoteKeeper';
+import {
+  Stack,
+  Section,
+  NoticeBox,
+  Box,
+  LabeledList,
+  Button,
+  RestrictedInput,
+} from 'tgui/components';
+import { CharacterPreview } from '../common/CharacterPreview';
+import { getMedicalRecord, getQuirkStrings } from './helpers';
+import { useBackend } from '../../backend';
+import {
+  PHYSICALSTATUS2COLOR,
+  PHYSICALSTATUS2DESC,
+  PHYSICALSTATUS2ICON,
+  MENTALSTATUS2COLOR,
+  MENTALSTATUS2DESC,
+  MENTALSTATUS2ICON,
+} from './constants';
+import { MedicalRecordData } from './types';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { EditableText } from '../common/EditableText';
 import {
   MENTALSTATUS2COLOR,
@@ -79,6 +104,10 @@ export const MedicalRecordView = (props) => {
           fill
           scrollable
           title={name}
+<<<<<<< HEAD
+=======
+          wrap
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         >
           <LabeledList>
             <LabeledList.Item label="Name">

@@ -37,7 +37,7 @@
 	no_low_power = TRUE
 
 /obj/machinery/light/red/dim
-	brightness = 4
+	bulb_inner_range = 4
 	bulb_power = 0.7
 	fire_brightness = 4.5
 
@@ -56,10 +56,19 @@
 	icon_state = "bulb"
 	base_state = "bulb"
 	fitting = "bulb"
+<<<<<<< HEAD
 	brightness = 4
 	nightshift_brightness = 4
 	fire_brightness = 4.5
 	bulb_colour = LIGHT_COLOR_TUNGSTEN
+=======
+	bulb_inner_range = 1
+	bulb_outer_range = 5
+	nightshift_inner_range = 0.5
+	nightshift_outer_range = 4
+	fire_brightness = 3
+	bulb_colour = "#FFD6AA"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	fire_colour = "#bd3f46"
 	desc = "A small lighting fixture."
 	light_type = /obj/item/light/bulb
@@ -83,16 +92,27 @@
 	fire_colour = "#ff1100"
 
 /obj/machinery/light/small/red/dim
-	brightness = 2
+	bulb_inner_range = 2
 	bulb_power = 0.8
 	fire_brightness = 2.5
 
 /obj/machinery/light/small/blacklight
 	bulb_colour = "#A700FF"
 	nightshift_allowed = FALSE
+<<<<<<< HEAD
 	brightness = 4
 	fire_brightness = 4.5
+=======
+	bulb_inner_range = 4
+	fire_brightness = 3
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	fire_colour = "#d400ff"
+
+/obj/machinery/light/small/maintenance
+	color = "#FFCC66"
+	bulb_colour = "#e0a142"
+	nightshift_allowed = FALSE
+	bulb_power = 0.8
 
 // -------- Directional presets
 // The directions are backwards on the lights we have now
@@ -163,3 +183,6 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/light/small/red/dim, 0)
 
 // ---- Blacklight bulbs
 MAPPING_DIRECTIONAL_HELPERS(/obj/machinery/light/small/blacklight, 0)
+
+// ---- Maintenance bulbs
+MAPPING_DIRECTIONAL_HELPERS_ROBUST(/obj/machinery/light/small/maintenance, 21, 0, 10, -10)

@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Dropdown,
+<<<<<<< HEAD
   Flex,
   Input,
   LabeledList,
@@ -15,6 +16,16 @@ import {
   NumberInput,
   Section,
   Stack,
+=======
+  Input,
+  Modal,
+  NoticeBox,
+  NumberInput,
+  LabeledList,
+  Section,
+  Stack,
+  Flex,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   Table,
 } from '../components';
 import { Window } from '../layouts';
@@ -135,8 +146,13 @@ export const Inventory = (props) => {
 
 export const InventoryDetails = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const inventory = sortBy(
     map(data.inventory, (book, i) => ({
+=======
+  const inventory = flow([
+    map((book, i) => ({
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       ...book,
       // Generate a unique id
       key: i,
@@ -260,12 +276,18 @@ export const CheckoutEntries = (props) => {
 
 const CheckoutModal = (props) => {
   const { act, data } = useBackend();
+<<<<<<< HEAD
   const inventory = sortBy(
     map(data.inventory, (book, i) => ({
+=======
+  const inventory = flow([
+    map((book, i) => ({
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       ...book,
       // Generate a unique id
       key: i,
     })),
+<<<<<<< HEAD
     (book) => book.key,
   );
 
@@ -273,6 +295,21 @@ const CheckoutModal = (props) => {
   const [bookName, setBookName] = useState('Insert Book name...');
   const [checkoutee, setCheckoutee] = useState('Recipient');
   const [checkoutPeriod, setCheckoutPeriod] = useState(5);
+=======
+    sortBy((book) => book.key),
+  ])(data.inventory);
+
+  const [checkoutBook, setCheckoutBook] = useLocalState('CheckoutBook', false);
+  const [bookName, setBookName] = useLocalState(
+    'CheckoutBookName',
+    'Insert Book name...',
+  );
+  const [checkoutee, setCheckoutee] = useLocalState('Checkoutee', 'Recipient');
+  const [checkoutPeriod, setCheckoutPeriod] = useLocalState(
+    'CheckoutPeriod',
+    5,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Modal width="500px">
       <Box fontSize="20px" pb={1}>
@@ -282,7 +319,11 @@ const CheckoutModal = (props) => {
         over
         mb={1.7}
         width="100%"
+<<<<<<< HEAD
         selected={bookName}
+=======
+        displayText={bookName}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         options={inventory.map((book) => book.title)}
         value={bookName}
         onSelected={(e) => setBookName(e)}
@@ -640,7 +681,11 @@ const UploadModal = (props) => {
 
   const { upload_categories, default_category, can_db_request } = data;
   const [uploadToDB, setUploadToDB] = useLocalState('UploadDB', false);
+<<<<<<< HEAD
   const [uploadCategory, setUploadCategory] = useState('');
+=======
+  const [uploadCategory, setUploadCategory] = useLocalState('ModalUpload', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const display_category = uploadCategory || default_category;
   return (
@@ -692,7 +737,14 @@ const UploadModal = (props) => {
 export const Print = (props) => {
   const { act, data } = useBackend();
   const { deity, religion, bible_name, bible_sprite, posters } = data;
+<<<<<<< HEAD
   const [selectedPoster, setSelectedPoster] = useState(posters[0]);
+=======
+  const [selectedPoster, setSelectedPoster] = useLocalState(
+    'selected_poster',
+    posters[0],
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Stack vertical fill>

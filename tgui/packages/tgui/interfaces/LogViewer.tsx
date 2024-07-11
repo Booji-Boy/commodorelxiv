@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 
 import { useBackend } from '../backend';
+=======
+import { useBackend, useLocalState } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   Collapsible,
@@ -42,7 +46,14 @@ const CATEGORY_ALL = 'all';
 export const LogViewer = (_: any) => {
   const { data, act } = useBackend<LogViewerData>();
 
+<<<<<<< HEAD
   const [activeCategory, setActiveCategory] = useState('');
+=======
+  const [activeCategory, setActiveCategory] = useLocalState(
+    'activeCategory',
+    '',
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   let viewerData: LogViewerCategoryData = {
     entry_count: 0,
@@ -89,7 +100,14 @@ type CategoryBarProps = {
 
 const CategoryBar = (props: CategoryBarProps) => {
   const sorted = [...props.options].sort();
+<<<<<<< HEAD
   const [categorySearch, setCategorySearch] = useState('');
+=======
+  const [categorySearch, setCategorySearch] = useLocalState(
+    'categorySearch',
+    '',
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Section
@@ -97,6 +115,7 @@ const CategoryBar = (props: CategoryBarProps) => {
       scrollableHorizontal
       buttons={
         <Input
+<<<<<<< HEAD
           placeholder="Search"
           value={categorySearch}
           onChange={(_, value) => setCategorySearch(value)}
@@ -131,6 +150,45 @@ const CategoryBar = (props: CategoryBarProps) => {
               {category}
             </Button>
           ))}
+=======
+          grow
+          placeholder="Search"
+          value={categorySearch}
+          onChange={(_: any, value: string) => setCategorySearch(value)}
+        />
+      }
+    >
+      <Stack scrollableHorizontal>
+        {/** these are not in stack items to have them directly next to eachother */}
+        <Button
+          textAlign="left"
+          content="None"
+          selected={props.active === ''}
+          onClick={() => props.setActive('')}
+        />
+        <Button
+          textAlign="left"
+          content="All"
+          tooltip="This can be slow!"
+          selected={props.active === CATEGORY_ALL}
+          onClick={() => props.setActive(CATEGORY_ALL)}
+        />
+        {sorted.map((category) => {
+          if (!category.toLowerCase().includes(categorySearch.toLowerCase())) {
+            return null;
+          }
+          return (
+            <Stack.Item key={category}>
+              <Button
+                textAlign="left"
+                content={category}
+                selected={category === props.active}
+                onClick={() => props.setActive(category)}
+              />
+            </Stack.Item>
+          );
+        })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
       </Stack>
     </Section>
   );
@@ -151,9 +209,15 @@ const validateRegExp = (str: string) => {
 };
 
 const CategoryViewer = (props: CategoryViewerProps) => {
+<<<<<<< HEAD
   const [search, setSearch] = useState('');
   let [searchRegex, setSearchRegex] = useState(false);
   let [caseSensitive, setCaseSensitive] = useState(false);
+=======
+  const [search, setSearch] = useLocalState('search', '');
+  let [searchRegex, setSearchRegex] = useLocalState('searchRegex', false);
+  let [caseSensitive, setCaseSensitive] = useLocalState('caseSensitive', false);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   if (!search && searchRegex) {
     setSearchRegex(false);
     searchRegex = false;
@@ -173,18 +237,33 @@ const CategoryViewer = (props: CategoryViewerProps) => {
       buttons={
         <>
           <Input
+<<<<<<< HEAD
             placeholder="Search"
             value={search}
             onInput={(_, value) => setSearch(value)}
           />
           <Button
             icon="code"
+=======
+            grow
+            fill
+            placeholder="Search"
+            value={search}
+            onChange={(_: any, value: string) => setSearch(value)}
+          />
+          <Button
+            icon={'code'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             tooltip="RegEx Search"
             selected={searchRegex}
             onClick={() => setSearchRegex(!searchRegex)}
           />
           <Button
+<<<<<<< HEAD
             icon="font"
+=======
+            icon={'font'}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             selected={caseSensitive}
             tooltip="Case Sensitive"
             onClick={() => setCaseSensitive(!caseSensitive)}
@@ -227,7 +306,15 @@ const CategoryViewer = (props: CategoryViewerProps) => {
 
             return (
               <Stack.Item key={entry.id}>
+<<<<<<< HEAD
                 <Collapsible title={`[${entry.id}] - ${entry.message}`}>
+=======
+                <Collapsible
+                  fitted
+                  tooltip={entry.timestamp}
+                  title={`[${entry.id}] - ${entry.message}`}
+                >
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                   <Stack vertical fill>
                     <Stack.Item>
                       <p font-family="Courier">{entry.message}</p>

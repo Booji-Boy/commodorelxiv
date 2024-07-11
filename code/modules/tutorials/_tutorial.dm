@@ -14,7 +14,12 @@
 /datum/tutorial/New(mob/user)
 	src.user = user
 
+<<<<<<< HEAD
 	RegisterSignals(user, list(COMSIG_QDELETING, COMSIG_MOB_LOGOUT), PROC_REF(destroy_self))
+=======
+	RegisterSignal(user, COMSIG_QDELETING, PROC_REF(destroy_self))
+	RegisterSignal(user.client, COMSIG_QDELETING, PROC_REF(destroy_self))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/tutorial/Destroy(force)
 	user.client?.screen -= instruction_screen

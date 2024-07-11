@@ -50,7 +50,11 @@
 		return FALSE
 	var/mob/living/living_target = target
 	if(bane_applier)
+<<<<<<< HEAD
 		if(requires_combat_mode && !bane_applier.combat_mode)
+=======
+		if(requires_combat_mode && !(bane_applier.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return FALSE
 	var/is_correct_biotype = living_target.mob_biotypes & mob_biotypes
 	if(mob_biotypes && !(is_correct_biotype))

@@ -51,6 +51,11 @@
 	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/m10mm
 	/// Whether the gun will spawn loaded with a magazine
 	var/spawnwithmagazine = TRUE
+<<<<<<< HEAD
+=======
+	/// What type (includes subtypes) of magazine will this gun accept being put into it
+	var/obj/item/ammo_box/magazine/accepted_magazine_type = /obj/item/ammo_box/magazine/m10mm
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Change this if the gun should spawn with a different magazine type to what accepted_magazine_type defines. Will create errors if not a type or subtype of accepted magazine.
 	var/obj/item/ammo_box/magazine/spawn_magazine_type
 	///Whether the sprite has a visible magazine or not
@@ -146,8 +151,11 @@
 		return
 	if (!magazine)
 		magazine = new spawn_magazine_type(src)
+<<<<<<< HEAD
 		if(!istype(magazine, accepted_magazine_type))
 			CRASH("[src] spawned with a magazine type that isn't allowed by its accepted_magazine_type!")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(bolt_type == BOLT_TYPE_STANDARD || internal_magazine) //Internal magazines shouldn't get magazine + 1.
 		chamber_round()
 	else
@@ -285,7 +293,7 @@
 	update_appearance()
 	update_item_action_buttons()
 
-/obj/item/gun/ballistic/handle_chamber(empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
+/obj/item/gun/ballistic/handle_chamber(mob/living/user, empty_chamber = TRUE, from_firing = TRUE, chamber_next_round = TRUE)
 	if(!semi_auto && from_firing)
 		return
 	var/obj/item/ammo_casing/casing = chambered //Find chambered round
@@ -294,9 +302,20 @@
 			stack_trace("Trying to move a qdeleted casing of type [casing.type]!")
 			chambered = null
 		else if(casing_ejector || !from_firing)
+<<<<<<< HEAD
 			casing.forceMove(drop_location()) //Eject casing onto ground.
 			if(!QDELETED(casing))
 				casing.bounce_away(TRUE)
+=======
+			chambered = null
+			casing.forceMove(drop_location()) //Eject casing onto ground.
+			if(!QDELETED(casing))
+				var/bounce_angle
+				if(user)
+					var/sign_x = (istype(user) && !(user.get_held_index_of_item(src) % RIGHT_HANDS)) ? 1 : -1
+					bounce_angle = SIMPLIFY_DEGREES(dir2angle(user.dir) + (sign_x * 90) + rand(-45, 45))
+				casing.bounce_away(bounce_angle = bounce_angle, still_warm = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				SEND_SIGNAL(casing, COMSIG_CASING_EJECTED)
 		else if(empty_chamber)
 			clear_chambered()
@@ -333,12 +352,13 @@
 		bolt_locked = FALSE
 	if (user)
 		balloon_alert(user, "[bolt_wording] racked")
-	process_chamber(!chambered, FALSE)
+	process_chamber(user = user, empty_chamber = !chambered, from_firing = FALSE)
 	if (bolt_type == BOLT_TYPE_LOCKING && !chambered)
 		bolt_locked = TRUE
 		playsound(src, lock_back_sound, lock_back_sound_volume, lock_back_sound_vary)
 	else
 		playsound(src, rack_sound, rack_sound_volume, rack_sound_vary)
+	SEND_SIGNAL(src, COMSIG_GUN_RACKED, user)
 	update_appearance()
 
 ///Drops the bolt from a locked position
@@ -538,13 +558,23 @@
 			return
 	if(bolt_type == BOLT_TYPE_NO_BOLT)
 		var/num_unloaded = 0
+<<<<<<< HEAD
 		for(var/obj/item/ammo_casing/CB as anything in get_ammo_list(FALSE))
 			CB.forceMove(drop_location())
 			CB.bounce_away(FALSE, NONE)
+=======
+		for(var/obj/item/ammo_casing/casing in get_ammo_list(FALSE, TRUE))
+			casing.forceMove(drop_location())
+			var/bounce_angle
+			if(user)
+				var/sign_x = (istype(user) && !(user.get_held_index_of_item(src) % RIGHT_HANDS)) ? 1 : -1
+				bounce_angle = SIMPLIFY_DEGREES(dir2angle(user.dir) + (sign_x * 90) + rand(-45, 45))
+			casing.bounce_away(bounce_angle = bounce_angle, still_warm = FALSE, sound_delay = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			num_unloaded++
-			var/turf/T = get_turf(drop_location())
-			if(T && is_station_level(T.z))
-				SSblackbox.record_feedback("tally", "station_mess_created", 1, CB.name)
+			var/turf/our_turf = get_turf(drop_location())
+			if(our_turf && is_station_level(our_turf.z))
+				SSblackbox.record_feedback("tally", "station_mess_created", 1, casing.name)
 		if (num_unloaded)
 			balloon_alert(user, "[num_unloaded] [cartridge_wording]\s unloaded")
 			playsound(user, eject_sound, eject_sound_volume, eject_sound_vary)
@@ -727,9 +757,15 @@ GLOBAL_LIST_INIT(gun_saw_types, typecacheof(list(
 	if(magazine)
 		magazine.top_off()
 	else
+<<<<<<< HEAD
 		if(!spawn_magazine_type)
 			return
 		magazine = new spawn_magazine_type(src)
+=======
+		if(!accepted_magazine_type)
+			return
+		magazine = new accepted_magazine_type(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	chamber_round()
 	update_appearance()
 

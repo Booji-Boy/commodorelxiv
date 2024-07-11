@@ -3,7 +3,11 @@
 	icon_state = "seedling"
 	damage = 10
 	damage_type = BURN
+<<<<<<< HEAD
 	light_range = 2
+=======
+	light_outer_range = 2
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	armor_flag = ENERGY
 	light_color = LIGHT_COLOR_DIM_YELLOW
 	speed = 1.6

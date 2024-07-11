@@ -31,6 +31,7 @@
 	light_color = LIGHT_COLOR_DIM_YELLOW
 	light_power = 3
 	anchored_tabletop_offset = 6
+<<<<<<< HEAD
 	interaction_flags_click = ALLOW_SILICON_REACH
 	/// Is its function wire cut?
 	var/wire_disabled = FALSE
@@ -38,6 +39,9 @@
 	var/wire_mode_swap = FALSE
 	/// Fail due to inserted PDA
 	var/pda_failure = FALSE
+=======
+	var/wire_disabled = FALSE // is its internal wire cut?
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/operating = FALSE
 	/// How dirty is it?
 	var/dirty = 0
@@ -90,7 +94,11 @@
 
 /obj/machinery/microwave/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	register_context()
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_wires(new /datum/wires/microwave(src))
 	create_reagents(100)
 	soundloop = new(src, FALSE)
@@ -118,6 +126,7 @@
 		QDEL_NULL(cell)
 	return ..()
 
+<<<<<<< HEAD
 /obj/machinery/microwave/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(cell_powered)
@@ -149,6 +158,8 @@
 
 	return CONTEXTUAL_SCREENTIP_SET
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/microwave/RefreshParts()
 	. = ..()
 	efficiency = 0
@@ -413,6 +424,7 @@
 			return TRUE
 		return ..()
 
+<<<<<<< HEAD
 	if(vampire_charging_capable && istype(item, /obj/item/modular_computer) && ingredients.len > 0)
 		balloon_alert(user, "max 1 device!")
 		return FALSE
@@ -429,6 +441,20 @@
 
 		for(var/obj/tray_item in tray.contents)
 			if(!IS_EDIBLE(tray_item))
+=======
+	if(istype(O, /obj/item/storage))
+		var/obj/item/storage/T = O
+		var/loaded = 0
+
+		if(!istype(O, /obj/item/storage/bag/tray))
+			// Non-tray dumping requires a do_after
+			to_chat(user, span_notice("You start dumping out the contents of [O] into [src]..."))
+			if(!do_after(user, 2 SECONDS, target = T))
+				return
+
+		for(var/obj/S in T.contents)
+			if(!IS_EDIBLE(S))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				continue
 			if(ingredients.len >= max_n_of_items)
 				balloon_alert(user, "it's full!")
@@ -442,7 +468,11 @@
 			update_appearance()
 		return
 
+<<<<<<< HEAD
 	if(item.w_class <= WEIGHT_CLASS_NORMAL && !istype(item, /obj/item/storage) && !user.combat_mode)
+=======
+	if(O.w_class <= WEIGHT_CLASS_NORMAL && !istype(O, /obj/item/storage) && !(user.istate & ISTATE_HARM))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		if(ingredients.len >= max_n_of_items)
 			balloon_alert(user, "it's full!")
 			return TRUE
@@ -760,6 +790,7 @@
 	open = FALSE
 	update_appearance()
 
+<<<<<<< HEAD
 /**
  * The start of the charge loop
  *
@@ -861,6 +892,8 @@
 	// playsound(src, 'sound/machines/chime.ogg', 50, FALSE)
 	after_finish_loop()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Type of microwave that automatically turns it self on erratically. Probably don't use this outside of the holodeck program "Microwave Paradise".
 /// You could also live your life with a microwave that will continously run in the background of everything while also not having any power draw. I think the former makes more sense.
 /obj/machinery/microwave/hell

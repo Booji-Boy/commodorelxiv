@@ -154,6 +154,7 @@
 		if(HDD_OVERLOADED)
 			. += "The front panel is dangling open. The hdd inside is destroyed and the wires are all burned."
 
+<<<<<<< HEAD
 /obj/machinery/rnd/server/master/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!tool.tool_behaviour)
 		return NONE
@@ -164,6 +165,18 @@
 		balloon_alert(user, "you can't find an obvious maintenance hatch!")
 		return ITEM_INTERACT_BLOCKING
 	return NONE
+=======
+/obj/machinery/rnd/server/master/tool_act(mob/living/user, obj/item/tool, tool_type, is_right_clicking)
+	// Only antags are given the training and knowledge to disassemble this thing.
+	if(is_special_character(user))
+		return ..()
+
+	if((user.istate & ISTATE_HARM))
+		return FALSE
+
+	balloon_alert(user, "you can't find an obvious maintenance hatch!")
+	return TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/rnd/server/master/attackby(obj/item/attacking_item, mob/user, params)
 	if(istype(attacking_item, /obj/item/computer_disk/hdd_theft))
@@ -186,7 +199,7 @@
 	return ..()
 
 /obj/machinery/rnd/server/master/screwdriver_act(mob/living/user, obj/item/tool)
-	if(deconstruction_state != HDD_PANEL_CLOSED || user.combat_mode)
+	if(deconstruction_state != HDD_PANEL_CLOSED || (user.istate & ISTATE_HARM))
 		return FALSE
 
 	to_chat(user, span_notice("You can see [front_panel_screws] screw\s. You start unscrewing [front_panel_screws == 1 ? "it" : "them"]..."))
@@ -202,7 +215,7 @@
 	return TRUE
 
 /obj/machinery/rnd/server/master/crowbar_act(mob/living/user, obj/item/tool)
-	if(deconstruction_state != HDD_PANEL_OPEN || user.combat_mode)
+	if(deconstruction_state != HDD_PANEL_OPEN || (user.istate & ISTATE_HARM))
 		return FALSE
 
 	to_chat(user, span_notice("You can see [source_code_hdd] in a secure housing behind the front panel. You begin to pry it loose..."))
@@ -212,7 +225,7 @@
 	return TRUE
 
 /obj/machinery/rnd/server/master/wirecutter_act(mob/living/user, obj/item/tool)
-	if(deconstruction_state != HDD_PRIED || user.combat_mode)
+	if(deconstruction_state != HDD_PRIED || (user.istate & ISTATE_HARM))
 		return FALSE
 
 	to_chat(user, span_notice("There are [hdd_wires] wire\s connected to [source_code_hdd]. You start cutting [hdd_wires == 1 ? "it" : "them"]..."))

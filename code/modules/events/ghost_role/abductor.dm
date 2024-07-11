@@ -4,7 +4,7 @@
 	weight = 10
 	max_occurrences = 1
 	min_players = 20
-	dynamic_should_hijack = TRUE
+	//dynamic_should_hijack = TRUE
 	category = EVENT_CATEGORY_INVASION
 	description = "One or more abductor teams spawns, and they plan to experiment on the crew."
 
@@ -14,7 +14,11 @@
 	fakeable = FALSE //Nothing to fake here
 
 /datum/round_event/ghost_role/abductor/spawn_role()
+<<<<<<< HEAD
 	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_ABDUCTOR, role = ROLE_ABDUCTOR, alert_pic = /obj/item/melee/baton/abductor, role_name_text = role_name, amount_to_pick = 2)
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates(check_jobban = ROLE_ABDUCTOR, role = ROLE_ABDUCTOR, pic_source = /obj/item/melee/baton/abductor, role_name_text = role_name)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(length(candidates) < 2)
 		return NOT_ENOUGH_PLAYERS

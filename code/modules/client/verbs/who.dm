@@ -11,7 +11,7 @@
 	var/columns_per_row = DEFAULT_WHO_CELLS_PER_ROW
 
 	if(holder)
-		if (check_rights(R_ADMIN,0) && isobserver(src.mob))//If they have +ADMIN and are a ghost they can see players IC names and statuses.
+		if (check_rights(R_ADMIN, FALSE) && isobserver(src.mob))//If they have +ADMIN and are a ghost they can see players IC names and statuses.
 			columns_per_row = 1
 			var/mob/dead/observer/G = src.mob
 			if(!G.started_as_observer)//If you aghost to do this, KorPhaeron will deadmin you in your sleep.
@@ -67,7 +67,7 @@
 	msg += "</tr></table>"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
-	to_chat(src, "<span class='infoplain'>[msg]</span>")
+	to_chat(src, examine_block(span_infoplain(msg)))
 
 /client/verb/adminwho()
 	set category = "Admin"
@@ -75,6 +75,7 @@
 
 	var/list/lines = list()
 	var/payload_string = generate_adminwho_string()
+<<<<<<< HEAD
 	var/header
 
 	if(payload_string == NO_ADMINS_ONLINE_MESSAGE)
@@ -109,6 +110,56 @@
 	var/returnable_list = list()
 
 	for(var/client/admin in GLOB.admins)
+=======
+	var/header = (payload_string == NO_ADMINS_ONLINE_MESSAGE) ? "No Admins Currently Online" : "Current Admins:"
+
+	lines += span_bold(header)
+	lines += payload_string
+
+	var/codermonkey_string = generate_codemonkey_string()
+	if(!isnull(codermonkey_string))
+		lines += span_bold("Current Non-Admin Staff:")
+		lines += span_boldnotice("Non-admin staff are unable to handle adminhelp tickets.")
+		lines += codermonkey_string
+
+	var/finalized_string = examine_block(jointext(lines, "\n"))
+	to_chat(src, finalized_string)
+
+/// Proc that generates the applicable string to dispatch to the client for adminwho.
+/client/proc/generate_adminwho_string()
+	var/list/list_of_admins = get_list_of_admins()
+	if(isnull(list_of_admins))
+		return NO_ADMINS_ONLINE_MESSAGE
+
+	var/list/message_strings = list()
+	if(isnull(holder))
+		message_strings += get_general_adminwho_information(list_of_admins)
+		message_strings += NO_ADMINS_ONLINE_MESSAGE
+	else
+		message_strings += get_sensitive_adminwho_information(list_of_admins)
+
+	return jointext(message_strings, "\n")
+
+/// Proc that generates the applicable string to dispatch to the client for adminwho,
+/// but only for maintainers/debuggers/etc without R_ADMIN.
+/client/proc/generate_codemonkey_string()
+	var/list/list_of_admins = get_list_of_admins(coders = TRUE)
+	if(isnull(list_of_admins))
+		return
+	return jointext(get_codermonkey_adminwho_information(list_of_admins), "\n")
+
+/// Proc that returns a list of cliented admins. Remember that this list can contain nulls!
+/// Also, will return null if we don't have any admins.
+/proc/get_list_of_admins(coders = FALSE)
+	var/returnable_list = list()
+
+	for(var/client/admin in GLOB.admins)
+		var/okay = check_rights_for(admin, R_ADMIN)
+		if(coders)
+			okay = !okay
+		if(!okay)
+			continue
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		returnable_list += admin
 
 	if(length(returnable_list) == 0)
@@ -134,6 +185,21 @@
 
 	return returnable_list
 
+<<<<<<< HEAD
+=======
+/// Proc that gathers adminwho information for a general player, but only returns "adminless" admins, usually coders/debuggers and such.
+/proc/get_codermonkey_adminwho_information(list/checkable_admins)
+	var/returnable_list = list()
+
+	for(var/client/admin in checkable_admins)
+		if(check_rights_for(admin, R_ADMIN))
+			continue //Don't show afk or fakekeyed admins to adminwho
+
+		returnable_list += "• [admin] is a [admin.holder.rank_names()]"
+
+	return returnable_list
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Proc that gathers adminwho information for admins, which will contain information on if the admin is AFK, readied to join, etc. Only arg is a list of clients to use.
 /// Will return a list of strings.
 /proc/get_sensitive_adminwho_information(list/checkable_admins)

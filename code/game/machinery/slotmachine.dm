@@ -130,6 +130,7 @@
 			balloon_alert(user, "coins only!")
 		return ITEM_INTERACT_BLOCKING
 
+<<<<<<< HEAD
 	return NONE
 
 /obj/machinery/computer/slot_machine/multitool_act(mob/living/user, obj/item/tool)
@@ -145,6 +146,8 @@
 		balloon_alert(user, "now using holochips")
 	return ITEM_INTERACT_SUCCESS
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/machinery/computer/slot_machine/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)
 		return FALSE

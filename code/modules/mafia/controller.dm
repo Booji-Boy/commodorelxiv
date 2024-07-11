@@ -412,9 +412,13 @@ GLOBAL_LIST_INIT(mafia_role_by_alignment, setup_mafia_role_by_alignment())
 			roles.mafia_alert.update_text("[message]")
 		roles.reveal_role(src)
 	phase = MAFIA_PHASE_VICTORY_LAP
+<<<<<<< HEAD
 #ifndef UNIT_TESTS
 	next_phase_timer = QDEL_IN_STOPPABLE(src, VICTORY_LAP_PERIOD_LENGTH)
 #endif
+=======
+	next_phase_timer = QDEL_IN_STOPPABLE(src, VICTORY_LAP_PERIOD_LENGTH)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * Cleans up the game, resetting variables back to the beginning and removing the map with the generator.

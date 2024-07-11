@@ -550,7 +550,11 @@
 
 /obj/item/reagent_containers/cup/glass/bottle/wine_voltaic
 	name = "Voltaic Yellow Wine"
+<<<<<<< HEAD
 	desc = "Electrically infused wine! Recharges ethereals, safe for consumption."
+=======
+	desc = "Electrically infused wine! Recharges etherials, safe for consumption."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	custom_price = PAYCHECK_CREW
 	icon_state = "wine_voltaic_bottle"
 	list_reagents = list(/datum/reagent/consumable/ethanol/wine_voltaic = 100)

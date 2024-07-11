@@ -35,12 +35,19 @@
 	icon_file = 'icons/mob/simple/garden_gnome.dmi'
 	json_config = 'code/datums/greyscale/json_configs/garden_gnome.json'
 
+<<<<<<< HEAD
 /datum/greyscale_config/pony
 	name = "Pony"
 	icon_file = 'icons/mob/simple/animal.dmi'
 	json_config = 'code/datums/greyscale/json_configs/pony.json'
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/greyscale_config/gutlunch
 	name = "Gutlunch"
 	icon_file = 'icons/mob/simple/lavaland/lavaland_monsters.dmi'
 	json_config = 'code/datums/greyscale/json_configs/gutlunch.json'
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

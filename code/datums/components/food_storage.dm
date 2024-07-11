@@ -18,7 +18,11 @@
 
 /datum/component/food_storage/Initialize(_minimum_weight_class = WEIGHT_CLASS_SMALL, _bad_chance = 0, _good_chance = 100)
 
+<<<<<<< HEAD
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY_SECONDARY, PROC_REF(try_inserting_item))
+=======
+	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(try_inserting_item))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(try_removing_item))
 	RegisterSignal(parent, COMSIG_FOOD_EATEN, PROC_REF(consume_food_storage))
 	RegisterSignal(parent, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
@@ -56,7 +60,7 @@
 		return
 
 	//Harm intent will bypass inserting for injecting food with syringes and such
-	if(user.combat_mode)
+	if((user.istate & ISTATE_HARM))
 		return
 
 	if(inserted_item.w_class > minimum_weight_class)

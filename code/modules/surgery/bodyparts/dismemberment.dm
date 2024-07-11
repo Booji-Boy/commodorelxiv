@@ -26,7 +26,11 @@
 	if (wounding_type)
 		LAZYSET(limb_owner.body_zone_dismembered_by, body_zone, wounding_type)
 
+<<<<<<< HEAD
 	drop_limb(dismembered = TRUE)
+=======
+	drop_limb()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	limb_owner.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
 	var/turf/owner_location = limb_owner.loc
@@ -130,6 +134,7 @@
 		qdel(src)
 		return
 
+<<<<<<< HEAD
 	if(move_to_floor)
 		if(!drop_loc) // drop_loc = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 			qdel(src)
@@ -137,6 +142,17 @@
 		forceMove(drop_loc)
 
 	SEND_SIGNAL(phantom_owner, COMSIG_CARBON_POST_REMOVE_LIMB, src, special, dismembered)
+=======
+	if(limb_id == SPECIES_OOZELING)
+		to_chat(phantom_owner, span_warning("Your [src] splatters with an unnerving squelch!"))
+		playsound(phantom_owner, 'sound/effects/blobattack.ogg', 60, TRUE)
+		phantom_owner.blood_volume -= 60 //Makes for 120 when you regenerate it.
+		qdel(src)
+		return
+
+	forceMove(drop_loc)
+	SEND_SIGNAL(phantom_owner, COMSIG_CARBON_POST_REMOVE_LIMB, src, dismembered)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /**
  * get_mangled_state() is relevant for flesh and bone bodyparts, and returns whether this bodypart has mangled skin, mangled bone, or both (or neither i guess)
@@ -285,6 +301,8 @@
 
 	LAZYREMOVE(new_limb_owner.body_zone_dismembered_by, body_zone)
 
+	LAZYREMOVE(new_limb_owner.body_zone_dismembered_by, body_zone)
+
 	if(special) //non conventional limb attachment
 		for(var/datum/surgery/attach_surgery as anything in new_limb_owner.surgeries) //if we had an ongoing surgery to attach a new limb, we stop it.
 			var/surgery_zone = check_zone(attach_surgery.location)
@@ -373,7 +391,11 @@
 
 /mob/living/carbon/proc/regenerate_limbs(list/excluded_zones = list())
 	SEND_SIGNAL(src, COMSIG_CARBON_REGENERATE_LIMBS, excluded_zones)
+<<<<<<< HEAD
 	var/list/zone_list = GLOB.all_body_zones.Copy()
+=======
+	var/list/zone_list = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/dismembered_by_copy = body_zone_dismembered_by?.Copy()
 

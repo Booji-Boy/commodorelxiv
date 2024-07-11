@@ -13,7 +13,10 @@
 	var/error
 
 /datum/computer_file/program/filemanager/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("PRG_deletefile")
 			var/datum/computer_file/file = computer.find_file_by_name(params["name"])

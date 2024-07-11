@@ -1,4 +1,5 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { Component, Fragment } from 'react';
 
 import { resolveAsset } from '../../assets';
@@ -23,6 +24,26 @@ import {
 import { GenericUplink, Item } from './GenericUplink';
 import { Objective, ObjectiveMenu } from './ObjectiveMenu';
 import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
+=======
+import {
+  Box,
+  Tabs,
+  Button,
+  Stack,
+  Section,
+  Tooltip,
+  Dimmer,
+} from '../../components';
+import { PrimaryObjectiveMenu } from './PrimaryObjectiveMenu';
+import { Objective, ObjectiveMenu } from './ObjectiveMenu';
+import { ContractorItem, ContractorMenu } from './ContractorMenu';
+import {
+  calculateProgression,
+  calculateDangerLevel,
+  dangerDefault,
+  dangerLevelsTooltip,
+} from './calculateDangerLevel';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type UplinkItem = {
   id: string;
@@ -74,6 +95,13 @@ type UplinkData = {
   purchased_items: number;
   shop_locked: BooleanLike;
   can_renegotiate: BooleanLike;
+<<<<<<< HEAD
+=======
+  locked_entries: string[];
+  is_contractor: BooleanLike;
+  contractor_items: ContractorItem[];
+  contractor_rep: number;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 };
 
 type UplinkState = {
@@ -196,6 +224,10 @@ export class Uplink extends Component<{}, UplinkState> {
       lockable,
       purchased_items,
       shop_locked,
+      locked_entries,
+      is_contractor,
+      contractor_items,
+      contractor_rep,
     } = data;
     const { allItems, allCategories, currentTab } = this.state as UplinkState;
 
@@ -210,8 +242,6 @@ export class Uplink extends Component<{}, UplinkState> {
     }
     for (let i = 0; i < itemsToAdd.length; i++) {
       const item = itemsToAdd[i];
-      const hasEnoughProgression =
-        progression_points >= item.progression_minimum;
 
       let stock: number | null = current_stock[item.stock_key];
       if (item.ref) {
@@ -221,6 +251,7 @@ export class Uplink extends Component<{}, UplinkState> {
         stock = null;
       }
       const canBuy = telecrystals >= item.cost && (stock === null || stock > 0);
+      const locked = locked_entries.includes(item.id);
       items.push({
         id: item.id,
         name: item.name,
@@ -255,8 +286,9 @@ export class Uplink extends Component<{}, UplinkState> {
         ),
         disabled:
           !canBuy ||
-          (has_progression && !hasEnoughProgression) ||
-          (item.lock_other_purchases && purchased_items > 0),
+          (item.lock_other_purchases && purchased_items > 0) ||
+          locked,
+        is_locked: locked,
         extraData: {
           ref: item.ref,
         },
@@ -381,9 +413,22 @@ export class Uplink extends Component<{}, UplinkState> {
                           </Tabs.Tab>
                         </>
                       )}
+                      {!!is_contractor && (
+                        <Tabs.Tab
+                          selected={currentTab === 2}
+                          onClick={() => this.setState({ currentTab: 2 })}
+                        >
+                          Contractor Market
+                        </Tabs.Tab>
+                      )}
                       <Tabs.Tab
+<<<<<<< HEAD
                         selected={currentTab === 2 || !has_objectives}
                         onClick={() => this.setState({ currentTab: 2 })}
+=======
+                        selected={currentTab === 3 || !has_objectives}
+                        onClick={() => this.setState({ currentTab: 3 })}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
                       >
                         Market
                       </Tabs.Tab>
@@ -442,6 +487,12 @@ export class Uplink extends Component<{}, UplinkState> {
                       })
                     }
                     handleRequestObjectives={() => act('regenerate_objectives')}
+                  />
+                )) ||
+                (currentTab === 2 && is_contractor && (
+                  <ContractorMenu
+                    items={contractor_items}
+                    rep={contractor_rep}
                   />
                 )) || (
                   <Section>

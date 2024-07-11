@@ -54,5 +54,11 @@
 		TEST_FAIL("The dummy still had toxins damage after a fully heal!")
 	if(dummy.getOxyLoss())
 		TEST_FAIL("The dummy still had oxy damage after a fully heal!")
+<<<<<<< HEAD
 	if(dummy.getStaminaLoss())
+=======
+	if(dummy.getCloneLoss())
+		TEST_FAIL("The dummy still had clone damage after a fully heal!")
+	if(dummy.stamina.loss)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		TEST_FAIL("The dummy still had stamina damage after a fully heal!")

@@ -32,7 +32,7 @@
 		return
 
 	set_light_color(LAZYLEN(SSmapping.nuke_threats) ? LIGHT_COLOR_INTENSE_RED : initial(light_color))
-	set_light(2, 1.5)
+	set_light(l_outer_range = 2, l_power = 1.5)
 
 /turf/open/floor/circuit/update_icon_state()
 	icon_state = on ? (LAZYLEN(SSmapping.nuke_threats) ? "rcircuitanim" : icon_normal) : "[icon_normal]off"
@@ -271,6 +271,7 @@
 		out of. It only makes sense in the context of space because you're trying to keep a freezing vacuum out. Is anyone following me on this? \
 		The idea of a \"rudimentary\" iron wall makes no sense at all! Is anything i'm even saying here true? Someone's gotta fact check this!"
 	icon_state = "stone_floor"
+	floor_tile = /obj/item/stack/tile/stone // MONKESTATION EDIT: Add a floor tile so xenobio doesn't get screwed by crowbars.
 
 /turf/open/floor/vault
 	name = "strange floor"

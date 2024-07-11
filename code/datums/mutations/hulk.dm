@@ -36,12 +36,26 @@
 /datum/mutation/human/hulk/proc/on_attack_hand(mob/living/carbon/human/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(!source.combat_mode || !proximity || LAZYACCESS(modifiers, RIGHT_CLICK))
 		return NONE
 	if(!source.can_unarmed_attack())
 		return COMPONENT_SKIP_ATTACK
 	if(!target.attack_hulk(owner))
 		return NONE
+=======
+	if(!proximity)
+		return
+	if(!(source.istate & ISTATE_HARM) || (source.istate & ISTATE_SECONDARY))
+		return
+	if(target.attack_hulk(owner))
+		if(world.time > (last_scream + scream_delay))
+			last_scream = world.time
+			INVOKE_ASYNC(src, PROC_REF(scream_attack), source)
+		log_combat(source, target, "punched", "hulk powers")
+		source.do_attack_animation(target, ATTACK_EFFECT_SMASH)
+		source.changeNext_move(CLICK_CD_MELEE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(world.time > (last_scream + scream_delay))
 		last_scream = world.time
@@ -277,6 +291,7 @@
 		TRAIT_STUNIMMUNE,
 	) // no chunk
 
+<<<<<<< HEAD
 /datum/mutation/human/hulk/superhuman
 	health_req = 0
 	instability = 0
@@ -295,4 +310,6 @@
 /datum/mutation/human/hulk/superhuman/on_life(seconds_per_tick, times_fired)
 	return
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef HULK_TAILTHROW_STEPS

@@ -22,7 +22,11 @@
 	health = 10
 	minimum_survivable_temperature = TCMB
 	maximum_survivable_temperature = T0C + 1250
+<<<<<<< HEAD
 	habitable_atmos = null
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	death_message = "falls to the ground, its shard dulling to a miserable grey!"
 
 	faction = list(FACTION_HOSTILE)

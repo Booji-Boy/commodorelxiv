@@ -1,6 +1,13 @@
 /datum/log_category/debug
 	category = LOG_CATEGORY_DEBUG
 
+<<<<<<< HEAD
+=======
+/datum/log_category/debug_tgui
+	category = LOG_CATEGORY_DEBUG_TGUI
+	master_category = /datum/log_category/debug
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/log_category/debug_sql
 	category = LOG_CATEGORY_DEBUG_SQL
 	master_category = /datum/log_category/debug
@@ -9,9 +16,20 @@
 	category = LOG_CATEGORY_DEBUG_LUA
 	master_category = /datum/log_category/debug
 
+<<<<<<< HEAD
 // This is not in the debug master category on purpose, do not add it
 /datum/log_category/debug_runtime
 	category = LOG_CATEGORY_RUNTIME
+=======
+/datum/log_category/debug_href
+	category = LOG_CATEGORY_DEBUG_HREF
+	master_category = /datum/log_category/debug
+
+// This is not in the debug master category on purpose, do not add it
+/datum/log_category/debug_runtime
+	category = LOG_CATEGORY_RUNTIME
+	internal_formatting = FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/log_category/debug_mapping
 	category = LOG_CATEGORY_DEBUG_MAPPING
@@ -30,3 +48,10 @@
 	category = LOG_CATEGORY_DEBUG_ASSET
 	config_flag = /datum/config_entry/flag/log_asset
 	master_category = /datum/log_category/debug
+<<<<<<< HEAD
+=======
+
+/datum/log_category/debug_qdel
+	category = LOG_CATEGORY_DEBUG_QDEL
+	master_category = /datum/log_category/debug
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

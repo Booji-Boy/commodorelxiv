@@ -1,8 +1,13 @@
 /* eslint-disable react/no-deprecated */
 // TODO: Rewrite as an FC, remove this lint disable
 import { createPopper, Placement, VirtualElement } from '@popperjs/core';
+<<<<<<< HEAD
 import { Component, ReactNode } from 'react';
 import { findDOMNode, render } from 'react-dom';
+=======
+import { Component, findDOMFromVNode, render } from 'inferno';
+import type { InfernoNode } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type TooltipProps = {
   children?: ReactNode;
@@ -60,9 +65,13 @@ export class Tooltip extends Component<TooltipProps, TooltipState> {
     // but this made consuming use too unwieldly.
     // Because this component is written in TypeScript, we will know
     // immediately if this internal variable is removed.
+<<<<<<< HEAD
     //
     // eslint-disable-next-line react/no-find-dom-node
     return findDOMNode(this) as Element;
+=======
+    return findDOMFromVNode(this.$LI, true);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   }
 
   componentDidMount() {

@@ -74,7 +74,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(!(get_chat_toggles(src) & CHAT_OOC))
 		to_chat(src, span_danger("You have OOC muted."))
 		return
-
 	mob.log_talk(raw_msg, LOG_OOC)
 
 	var/keyname = key
@@ -84,6 +83,15 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(prefs.hearted)
 		var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
 		keyname = "[sheet.icon_tag("emoji-heart")][keyname]"
+
+	if(patreon.access_rank > 0)
+		var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
+		keyname = "[sheet.icon_tag("patreon")][keyname]"
+
+	if(twitch.access_rank > 0)
+		var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
+		keyname = "[sheet.icon_tag("twitch")][keyname]"
+
 	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
 	for(var/client/receiver as anything in GLOB.clients)
 		if(!receiver.prefs) // Client being created or deleted. Despite all, this can be null.
@@ -112,7 +120,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 			else
 				to_chat(receiver, span_ooc(span_prefix("OOC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]")), avoid_highlighting = avoid_highlight)
 
-
 /proc/toggle_ooc(toggle = null)
 	if(toggle != null) //if we're specifically en/disabling ooc
 		if(toggle != GLOB.ooc_allowed)
@@ -139,9 +146,13 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	set category = "Server"
 	if(IsAdminAdvancedProcCall())
 		return
+<<<<<<< HEAD
 
 ADMIN_VERB(set_ooc_color, R_FUN, "Set Player OOC Color", "Modifies the global OOC color.", ADMIN_CATEGORY_SERVER)
 	var/newColor = input(user, "Please select the new player OOC color.", "OOC color") as color|null
+=======
+	var/newColor = tgui_color_picker(src, "Please select the new player OOC color.", "OOC color")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(isnull(newColor))
 		return
 	var/new_color = sanitize_color(newColor)

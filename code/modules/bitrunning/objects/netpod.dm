@@ -11,12 +11,19 @@
 	max_integrity = 300
 	obj_flags = BLOCKS_CONSTRUCTION
 	state_open = TRUE
+<<<<<<< HEAD
 	interaction_flags_mouse_drop = NEED_HANDS | NEED_DEXTERITY
 
 	/// Whether we have an ongoing connection
 	var/connected = FALSE
 	/// A player selected outfit by clicking the netpod
 	var/datum/outfit/netsuit = /datum/outfit/job/bitrunner
+=======
+	/// Whether we have an ongoing connection
+	var/connected = FALSE
+	/// A player selected outfit by clicking the netpod
+	var/datum/outfit/netsuit = /datum/outfit/job/prisoner
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Holds this to see if it needs to generate a new one
 	var/datum/weakref/avatar_ref
 	/// The linked quantum server
@@ -26,12 +33,25 @@
 	/// Static list of outfits to select from
 	var/list/cached_outfits = list()
 
+<<<<<<< HEAD
 /obj/machinery/netpod/post_machine_initialize()
+=======
+/obj/machinery/netpod/Initialize(mapload)
+	. = ..()
+
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/netpod/LateInitialize()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 
 	disconnect_damage = BASE_DISCONNECT_DAMAGE
 	find_server()
 
+<<<<<<< HEAD
+=======
+	RegisterSignal(src, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(src, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_damage_taken))
 	RegisterSignal(src, COMSIG_MACHINERY_POWER_LOST, PROC_REF(on_power_loss))
 	RegisterSignals(src, list(COMSIG_QDELETING,	COMSIG_MACHINERY_BROKEN),PROC_REF(on_broken))
@@ -41,6 +61,7 @@
 
 /obj/machinery/netpod/Destroy()
 	. = ..()
+<<<<<<< HEAD
 
 	QDEL_LIST(cached_outfits)
 
@@ -62,6 +83,9 @@
 
 	. += span_notice("It is currently occupied by [occupant].")
 	. += span_notice("It can be pried open with a crowbar, but its safety mechanisms will alert the occupant.")
+=======
+	cached_outfits.Cut()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/netpod/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
@@ -95,35 +119,65 @@
 
 	return ..()
 
+<<<<<<< HEAD
 /obj/machinery/netpod/mouse_drop_receive(mob/target, mob/user, params)
 	var/mob/living/carbon/player = user
 
 	if(!iscarbon(player) || !is_operational || !state_open || player.buckled)
+=======
+/obj/machinery/netpod/MouseDrop_T(mob/target, mob/user)
+	var/mob/living/carbon/player = user
+	if(!iscarbon(player) || !Adjacent(player) || !ISADVANCEDTOOLUSER(player) || !is_operational || !state_open)
+		return
+
+	if(player.buckled || HAS_TRAIT(player, TRAIT_HANDS_BLOCKED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 
 	close_machine(target)
 
 /obj/machinery/netpod/crowbar_act(mob/living/user, obj/item/tool)
+<<<<<<< HEAD
 	if(user.combat_mode)
 		attack_hand(user)
 		return ITEM_INTERACT_SUCCESS
 
 	if(default_pry_open(tool, user) || default_deconstruction_crowbar(tool))
 		return ITEM_INTERACT_SUCCESS
+=======
+	if(user.istate & ISTATE_HARM)
+		attack_hand(user)
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+
+	if(default_pry_open(tool, user) || default_deconstruction_crowbar(tool))
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/netpod/screwdriver_act(mob/living/user, obj/item/tool)
 	if(occupant)
 		balloon_alert(user, "in use!")
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
 
 	if(state_open)
 		balloon_alert(user, "close first.")
 		return ITEM_INTERACT_SUCCESS
+=======
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+
+	if(state_open)
+		balloon_alert(user, "close first.")
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", "[base_icon_state]_closed", tool))
 		update_appearance() // sometimes icon doesnt properly update during flick()
 		ui_close(user)
+<<<<<<< HEAD
 		return ITEM_INTERACT_SUCCESS
+=======
+		return TOOL_ACT_TOOLTYPE_SUCCESS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/netpod/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
@@ -263,7 +317,11 @@
 		open_machine()
 		return
 
+<<<<<<< HEAD
 	mob_occupant.playsound_local(src, 'sound/magic/blink.ogg', 25, TRUE)
+=======
+	mob_occupant.playsound_local(src, "sound/magic/blink.ogg", 25, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	mob_occupant.set_static_vision(2 SECONDS)
 	mob_occupant.set_temp_blindness(1 SECONDS)
 	mob_occupant.Paralyze(2 SECONDS)
@@ -415,6 +473,29 @@
 
 	QDEL_NULL(avatar)
 
+<<<<<<< HEAD
+=======
+/// User inspects the machine
+/obj/machinery/netpod/proc/on_examine(datum/source, mob/examiner, list/examine_text)
+	SIGNAL_HANDLER
+
+	if(isnull(server_ref?.resolve()))
+		examine_text += span_infoplain("It's not connected to anything.")
+		examine_text += span_infoplain("Netpods must be built within 4 tiles of a server.")
+		return
+
+	examine_text += span_infoplain("Drag yourself into the pod to engage the link.")
+	examine_text += span_infoplain("It has limited resuscitation capabilities. Remaining in the pod can heal some injuries.")
+	examine_text += span_infoplain("It has a security system that will alert the occupant if it is tampered with.")
+
+	if(isnull(occupant))
+		examine_text += span_notice("It is currently unoccupied.")
+		return
+
+	examine_text += span_notice("It is currently occupied by [occupant].")
+	examine_text += span_notice("It can be pried open with a crowbar, but its safety mechanisms will alert the occupant.")
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Boots out anyone in the machine && opens it
 /obj/machinery/netpod/proc/on_power_loss(datum/source)
 	SIGNAL_HANDLER
@@ -438,6 +519,7 @@
 /// Resolves a path to an outfit.
 /obj/machinery/netpod/proc/resolve_outfit(text)
 	var/path = text2path(text)
+<<<<<<< HEAD
 	if(!ispath(path, /datum/outfit))
 		return
 
@@ -448,6 +530,10 @@
 
 	message_admins("[usr]:[usr.ckey] attempted to select an unavailable outfit from a netpod")
 	return
+=======
+	if(ispath(path, /datum/outfit))
+		return path
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Severs the connection with the current avatar
 /obj/machinery/netpod/proc/sever_connection()

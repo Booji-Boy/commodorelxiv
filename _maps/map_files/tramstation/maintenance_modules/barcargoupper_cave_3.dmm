@@ -79,6 +79,10 @@
 /obj/item/clothing/head/utility/hardhat,
 /turf/open/misc/asteroid,
 /area/station/asteroid)
+"r" = (
+/obj/item/gps/mining,
+/turf/open/misc/asteroid/dug,
+/area/station/asteroid)
 "s" = (
 /obj/machinery/conveyor{
 	id = "tram_mining"
@@ -113,10 +117,13 @@
 /obj/effect/turf_decal/sand/plating,
 /turf/open/floor/plating,
 /area/station/maintenance/department/cargo)
+<<<<<<< HEAD
 "y" = (
 /obj/item/gps/mining,
 /turf/open/misc/asteroid/dug,
 /area/station/asteroid)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "z" = (
 /obj/item/storage/bag/ore{
 	pixel_x = 6;
@@ -128,10 +135,6 @@
 "B" = (
 /obj/item/assembly/signaler,
 /turf/open/misc/asteroid,
-/area/station/asteroid)
-"D" = (
-/obj/item/relic,
-/turf/open/misc/asteroid/dug,
 /area/station/asteroid)
 "F" = (
 /turf/closed/wall,
@@ -1048,7 +1051,11 @@ b
 i
 i
 I
+<<<<<<< HEAD
 y
+=======
+r
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 Y
 i
 Y
@@ -1073,7 +1080,7 @@ Y
 Y
 u
 P
-D
+I
 P
 I
 i

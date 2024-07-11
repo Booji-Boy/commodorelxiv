@@ -11,11 +11,14 @@
 	melee_damage_upper = 15
 	speed = 0.7
 
+<<<<<<< HEAD
 /mob/living/basic/spider/growing/young/guard/Initialize(mapload)
 	. = ..()
 
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/average_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will differentiate into the "ambush" giant spider.
 /mob/living/basic/spider/growing/young/ambush
 	grow_as = /mob/living/basic/spider/giant/ambush
@@ -32,9 +35,14 @@
 
 /mob/living/basic/spider/growing/young/ambush/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 
 	GRANT_ACTION(/datum/action/cooldown/mob_cooldown/sneak/spider)
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/slow_web)
+=======
+	var/datum/action/cooldown/sneak/spider/sneak_web = new(src)
+	sneak_web.Grant(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// Will differentiate into the "scout" giant spider.
 /mob/living/basic/spider/growing/young/scout
@@ -72,11 +80,14 @@
 	speed = 0.5
 	poison_per_bite = 2
 
+<<<<<<< HEAD
 /mob/living/basic/spider/growing/young/Initialize(mapload)
 	. = ..()
 
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/fast_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will differentiate into the "nurse" giant spider.
 /mob/living/basic/spider/growing/young/nurse
 	grow_as = /mob/living/basic/spider/giant/nurse
@@ -109,8 +120,11 @@
 		complete_text = "%SOURCE% wraps the wounds of %TARGET%.",\
 	)
 
+<<<<<<< HEAD
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/average_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will differentiate into the "tangle" giant spider.
 /mob/living/basic/spider/growing/young/tangle
 	grow_as = /mob/living/basic/spider/giant/tangle
@@ -135,7 +149,10 @@
 		heal_brute = 10,\
 		heal_burn = 10,\
 		heal_time = 3 SECONDS,\
+<<<<<<< HEAD
 		self_targeting = HEALING_TOUCH_SELF_ONLY,\
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		interaction_key = DOAFTER_SOURCE_SPIDER,\
 		valid_targets_typecache = typecacheof(list(/mob/living/basic/spider/growing/young/tangle, /mob/living/basic/spider/giant/tangle)),\
 		extra_checks = CALLBACK(src, PROC_REF(can_mend)),\
@@ -143,8 +160,11 @@
 		complete_text = "%SOURCE%'s wounds mend together.",\
 	)
 
+<<<<<<< HEAD
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/average_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Prevent you from healing other tangle spiders, or healing when on fire
 /mob/living/basic/spider/growing/young/tangle/proc/can_mend(mob/living/source, mob/living/target)
 	if (on_fire)
@@ -152,6 +172,7 @@
 		return FALSE
 	return TRUE
 
+<<<<<<< HEAD
 
 /// Will differentiate into the "tank" giant spider.
 /mob/living/basic/spider/growing/young/tank
@@ -210,6 +231,8 @@
 
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/below_average_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will differentiate into the "midwife" giant spider.
 /mob/living/basic/spider/growing/young/midwife
 	grow_as = /mob/living/basic/spider/giant/midwife
@@ -226,11 +249,14 @@
 	web_speed = 0.5
 	web_type = /datum/action/cooldown/mob_cooldown/lay_web/sealer
 
+<<<<<<< HEAD
 /mob/living/basic/spider/growing/young/midwife/Initialize(mapload)
 	. = ..()
 
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/average_web)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Will differentiate into the "viper" giant spider.
 /mob/living/basic/spider/growing/young/viper
 	grow_as = /mob/living/basic/spider/giant/viper
@@ -261,8 +287,11 @@
 	melee_damage_upper = 25
 	speed = 1
 	obj_damage = 40
+<<<<<<< HEAD
 
 /mob/living/basic/spider/growing/young/tarantula/Initialize(mapload)
 	. = ..()
 
 	AddElement(/datum/element/web_walker, /datum/movespeed_modifier/slow_web)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

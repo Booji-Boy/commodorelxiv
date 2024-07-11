@@ -4,7 +4,11 @@
 	icon_state = "joy"
 	clothing_flags = MASKINTERNALS
 	flags_inv = HIDESNOUT
+<<<<<<< HEAD
 	obj_flags = parent_type::obj_flags | INFINITE_RESKIN
+=======
+	supports_variations_flags = CLOTHING_SNOUTED_VARIATION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	unique_reskin = list(
 			"Joy" = "joy",
 			"Flushed" = "flushed",

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+<<<<<<< HEAD
 import { useBackend } from '../../backend';
 import {
   Button,
@@ -18,6 +19,19 @@ import { ModulesPane } from './ModulesPane';
 
 export const Mecha = (props) => {
   const { data } = useBackend<MainData>();
+=======
+export const Mecha = (props) => {
+  const { data } = useBackend<MainData>();
+  if (data.isoperator) {
+    return (
+      <Window theme={'ntos'}>
+        <Window.Content>
+          <OperatorMode />
+        </Window.Content>
+      </Window>
+    );
+  }
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   return (
     <Window theme={data.ui_theme} width={800} height={560}>
       <Window.Content>

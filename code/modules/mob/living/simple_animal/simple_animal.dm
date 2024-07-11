@@ -214,7 +214,7 @@
 /mob/living/simple_animal/Life(seconds_per_tick = SSMOBS_DT, times_fired)
 	. = ..()
 	if(staminaloss > 0)
-		adjustStaminaLoss(-stamina_recovery * seconds_per_tick, FALSE, TRUE)
+		stamina.adjust(stamina_recovery * seconds_per_tick, FALSE, TRUE)
 
 /mob/living/simple_animal/Destroy()
 	QDEL_NULL(access_card)
@@ -249,9 +249,13 @@
  * Updates the speed and staminaloss of a given simplemob.
  * Reduces the stamina loss by stamina_recovery
  */
+<<<<<<< HEAD
 /mob/living/simple_animal/update_stamina()
 	if(damage_coeff[STAMINA] <= 0) //we shouldn't reset our speed to its initial value if we don't need to, as that can mess with things like mulebot motor wires
 		return
+=======
+/mob/living/simple_animal/on_stamina_update()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	set_varspeed(initial(speed) + (staminaloss * 0.06))
 
 /mob/living/simple_animal/proc/handle_automated_action()
@@ -358,7 +362,6 @@
 /mob/living/simple_animal/get_status_tab_items()
 	. = ..()
 	. += "Health: [round((health / maxHealth) * 100)]%"
-	. += "Combat Mode: [combat_mode ? "On" : "Off"]"
 
 /mob/living/simple_animal/proc/drop_loot()
 	if(loot.len)
@@ -373,6 +376,7 @@
 		//a manner as to cause a call to death() again //Pain
 		del_on_death = FALSE
 		qdel(src)
+<<<<<<< HEAD
 		return
 
 	health = 0
@@ -381,6 +385,15 @@
 		transform = transform.Turn(180)
 	ADD_TRAIT(src, TRAIT_UNDENSE, BASIC_MOB_DEATH_TRAIT)
 	return ..()
+=======
+	else
+		health = 0
+		icon_state = icon_dead
+		if(flip_on_death)
+			transform = transform.Turn(180)
+		ADD_TRAIT(src, TRAIT_UNDENSE, BASIC_MOB_DEATH_TRAIT)
+		..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/simple_animal/proc/CanAttack(atom/the_target)
 	if(!isatom(the_target)) // no

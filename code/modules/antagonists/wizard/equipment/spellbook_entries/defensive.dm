@@ -119,7 +119,12 @@
 	desc = "A collection of wands that allow for a wide variety of utility. \
 		Wands have a limited number of charges, so be conservative with their use. Comes in a handy belt."
 	item_path = /obj/item/storage/belt/wands/full
+<<<<<<< HEAD
 	category = SPELLBOOK_CATEGORY_DEFENSIVE
+=======
+	category = "Defensive"
+	cost = 3 //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/spellbook_entry/item/wands/try_equip_item(mob/living/carbon/human/user, obj/item/to_equip)
 	var/was_equipped = user.equip_to_slot_if_possible(to_equip, ITEM_SLOT_BELT, disable_warning = TRUE)
@@ -150,7 +155,7 @@
 
 /datum/spellbook_entry/item/battlemage_charge
 	name = "Battlemage Armour Charges"
-	desc = "A powerful defensive rune, it will grant eight additional charges to a battlemage shield."
+	desc = "A powerful defensive rune, it will grant twelve additional charges to a battlemage shield." //monkestation edit: reaplced eight with twelve
 	item_path = /obj/item/wizard_armour_charge
 	category = SPELLBOOK_CATEGORY_DEFENSIVE
 	cost = 1

@@ -75,10 +75,11 @@
 	icon_state = "[base_state][density ? null : "open"]"
 
 	if(hasPower() && unres_sides)
-		set_light(l_range = 2, l_power = 1)
+		set_light(l_outer_range = 2, l_power = 1)
 		return
 
-	set_light(l_range = 0)
+	set_light(l_outer_range = 0)
+	SSdemo.mark_dirty(src) //Monkestation Edit: REPLAYS
 
 /obj/machinery/door/window/update_overlays()
 	. = ..()
@@ -436,7 +437,11 @@
 /obj/machinery/door/window/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
 		if(RCD_DECONSTRUCT)
+<<<<<<< HEAD
 			return list("delay" = 5 SECONDS, "cost" = 32)
+=======
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 5 SECONDS, "cost" = 32)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return FALSE
 
 /obj/machinery/door/window/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, list/rcd_data)

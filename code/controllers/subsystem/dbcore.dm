@@ -499,11 +499,19 @@ Ignore_errors instructes mysql to continue inserting rows if some of them have e
 	ASSERT(fexists(daemon), "Configured db_daemon doesn't exist")
 
 	var/list/result = world.shelleo("echo \"Starting ezdb daemon, do not close this window\" && [daemon]")
+<<<<<<< HEAD
 	var/result_code = result[1]
 	if (!result_code || result_code == 1)
 		return
 
 	stack_trace("Failed to start DB daemon: [result_code]\n[result[3]]")
+=======
+	var/error_code = result[1]
+	if (!error_code)
+		return
+
+	stack_trace("Failed to start DB daemon: [error_code]\n[result[3]]")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/controller/subsystem/dbcore/proc/stop_db_daemon()
 	set waitfor = FALSE

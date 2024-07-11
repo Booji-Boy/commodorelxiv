@@ -29,7 +29,11 @@
 	AddElement(/datum/element/floor_loving)
 	AddComponent(/datum/component/spawner, spawn_types = list(spawned_effect), max_spawned = max_spawned, spawn_time = spawn_interval)
 	src.target = target
+<<<<<<< HEAD
 	movement = GLOB.move_manager.move_towards(src, chasing = target, delay = move_speed, home = homing, timeout = duration, flags = MOVEMENT_LOOP_START_FAST)
+=======
+	movement = SSmove_manager.move_towards(src, chasing = target, delay = move_speed, home = homing, timeout = duration, flags = MOVEMENT_LOOP_START_FAST)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(on_target_invalid))
 	if (isliving(target))

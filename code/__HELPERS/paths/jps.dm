@@ -34,11 +34,19 @@
 		previous_node = incoming_previous_node
 		number_tiles = previous_node.number_tiles + jumps
 		node_goal = previous_node.node_goal
+<<<<<<< HEAD
 		heuristic = get_dist(tile, node_goal)
 		f_value = number_tiles + heuristic
 	// otherwise, no parent node means this is from a subscan lateral scan, so we just need the tile for now until we call [datum/jps/proc/update_parent] on it
 
 /datum/jps_node/Destroy(force)
+=======
+		heuristic = get_dist_euclidean(tile, node_goal)
+		f_value = number_tiles + heuristic
+	// otherwise, no parent node means this is from a subscan lateral scan, so we just need the tile for now until we call [datum/jps/proc/update_parent] on it
+
+/datum/jps_node/Destroy(force, ...)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	previous_node = null
 	return ..()
 
@@ -47,9 +55,16 @@
 	node_goal = previous_node.node_goal
 	jumps = get_dist(tile, previous_node.tile)
 	number_tiles = previous_node.number_tiles + jumps
+<<<<<<< HEAD
 	heuristic = get_dist(tile, node_goal)
 	f_value = number_tiles + heuristic
 
+=======
+	heuristic = get_dist_euclidean(tile, node_goal)
+	f_value = number_tiles + heuristic
+
+/// TODO: Macro this to reduce proc overhead
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /proc/HeapPathWeightCompare(datum/jps_node/a, datum/jps_node/b)
 	return b.f_value - a.f_value
 

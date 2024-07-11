@@ -28,6 +28,7 @@
 /obj/structure/grille/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/atmos_sensitive, mapload)
+	update_appearance()
 
 /obj/structure/grille/Destroy()
 	update_cable_icons_on_turf(get_turf(src))
@@ -45,9 +46,11 @@
 	if((updates & UPDATE_SMOOTHING) && (smoothing_flags & (SMOOTH_CORNERS|SMOOTH_BITMASK)))
 		QUEUE_SMOOTH(src)
 
+/* monkestation removal
 /obj/structure/grille/update_icon_state()
 	icon_state = "[base_icon_state][((atom_integrity / max_integrity) <= 0.5) ? "50_[rand(0, 3)]" : null]"
 	return ..()
+*/
 
 /obj/structure/grille/examine(mob/user)
 	. = ..()
@@ -60,6 +63,7 @@
 /obj/structure/grille/rcd_vals(mob/user, obj/item/construction/rcd/the_rcd)
 	switch(the_rcd.mode)
 		if(RCD_DECONSTRUCT)
+<<<<<<< HEAD
 			return list("delay" = 2 SECONDS, "cost" = 5)
 		if(RCD_WINDOWGRILLE)
 			var/cost = 0
@@ -75,6 +79,16 @@
 				cost = 8
 				delay = 3 SECONDS
 			else if(the_rcd.rcd_design_path  == /obj/structure/window/reinforced/fulltile)
+=======
+			return list("mode" = RCD_DECONSTRUCT, "delay" = 2 SECONDS, "cost" = 5)
+		if(RCD_WINDOWGRILLE)
+			var/cost = 0
+			var/delay = 0
+			if(the_rcd.window_type  == /obj/structure/window/fulltile)
+				cost = 8
+				delay = 3 SECONDS
+			else if(the_rcd.window_type  == /obj/structure/window/reinforced/fulltile)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				cost = 12
 				delay = 4 SECONDS
 			if(!cost)
@@ -104,6 +118,7 @@
 			var/obj/structure/window/window_path = rcd_data["[RCD_DESIGN_PATH]"]
 			if(!ispath(window_path))
 				CRASH("Invalid window path type in RCD: [window_path]")
+<<<<<<< HEAD
 
 			//checks if its a valid build direction
 			if(!initial(window_path.fulltile))
@@ -112,6 +127,11 @@
 					return FALSE
 
 			var/obj/structure/window/WD = new window_path(T, user.dir)
+=======
+			if(!initial(window_path.fulltile)) //only fulltile windows can be built here
+				return FALSE
+			var/obj/structure/window/WD = new the_rcd.window_type(T, user.dir)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			WD.set_anchored(TRUE)
 			return TRUE
 	return FALSE
@@ -366,6 +386,10 @@
 	return null
 
 /obj/structure/grille/broken // Pre-broken grilles for map placement
+	icon = 'icons/obj/structures.dmi'
+	canSmoothWith =  null
+	smoothing_flags = null
+	smoothing_groups = null
 	icon_state = "brokengrille"
 	density = FALSE
 	broken = TRUE

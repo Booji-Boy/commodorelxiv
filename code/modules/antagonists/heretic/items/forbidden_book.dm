@@ -39,11 +39,24 @@
 	if(book_open)
 		close_animation()
 		RemoveElement(/datum/element/heretic_focus)
+<<<<<<< HEAD
 		update_weight_class(WEIGHT_CLASS_SMALL)
 	else
 		open_animation()
 		AddElement(/datum/element/heretic_focus)
 		update_weight_class(WEIGHT_CLASS_NORMAL)
+=======
+		w_class = WEIGHT_CLASS_SMALL
+	else
+		open_animation()
+		AddElement(/datum/element/heretic_focus)
+		w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/codex_cicatrix/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	. = ..()
+	if(!proximity_flag)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/codex_cicatrix/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	var/datum/antagonist/heretic/heretic_datum = IS_HERETIC(user)
@@ -56,14 +69,28 @@
 		return ITEM_INTERACT_BLOCKING
 	return NONE
 
+<<<<<<< HEAD
 /// Plays a little animation that shows the book opening and closing.
+=======
+	if(isopenturf(target))
+		var/obj/effect/heretic_influence/influence = locate(/obj/effect/heretic_influence) in target
+		if(!influence?.drain_influence_with_codex(user, src))
+			heretic_datum.try_draw_rune(user, target, drawing_time = 8 SECONDS)
+		return TRUE
+
+/*
+ * Plays a little animation that shows the book opening and closing.
+ */
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /obj/item/codex_cicatrix/proc/open_animation()
+	book_open = TRUE
 	icon_state = "[base_icon_state]_open"
 	flick("[base_icon_state]_opening", src)
 	book_open = TRUE
 
 /// Plays a closing animation and resets the icon state.
 /obj/item/codex_cicatrix/proc/close_animation()
+	book_open = FALSE
 	icon_state = base_icon_state
 	flick("[base_icon_state]_closing", src)
 	book_open = FALSE

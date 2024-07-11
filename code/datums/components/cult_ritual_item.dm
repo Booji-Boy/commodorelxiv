@@ -377,12 +377,16 @@
 	for(var/shielded_turf in spiral_range_turfs(1, cultist, 1))
 		LAZYADD(shields, new /obj/structure/emergency_shield/cult/narsie(shielded_turf))
 
+<<<<<<< HEAD
 	notify_ghosts(
 		"[cultist] has begun scribing a Nar'Sie rune!",
 		source = cultist,
 		header = "Maranax Infirmux!",
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 	)
+=======
+	notify_ghosts("[cultist] has begun scribing a Nar'Sie rune!", source = cultist, action = NOTIFY_ORBIT, header = "Maranax Infirmux!")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return TRUE
 

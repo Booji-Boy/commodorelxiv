@@ -18,7 +18,11 @@
 		if(icon_state != initial(icon_state) + "_working") //threw it here instead of update icon since it only has two states
 			icon_state = initial(icon_state) + "_working"
 		reagents.remove_all(disposal_rate * seconds_per_tick)
+<<<<<<< HEAD
 		use_energy(active_power_usage * seconds_per_tick)
+=======
+		use_power(active_power_usage * seconds_per_tick)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else
 		if(icon_state != initial(icon_state))
 			icon_state = initial(icon_state)

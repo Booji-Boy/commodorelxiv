@@ -27,7 +27,7 @@
 	return
 
 /obj/structure/barricade/attackby(obj/item/I, mob/living/user, params)
-	if(I.tool_behaviour == TOOL_WELDER && !user.combat_mode && bar_material == METAL)
+	if(I.tool_behaviour == TOOL_WELDER && !(user.istate & ISTATE_HARM) && bar_material == METAL)
 		if(atom_integrity < max_integrity)
 			if(!I.tool_start_check(user, amount=1))
 				return
@@ -78,8 +78,12 @@
 		else
 			to_chat(user, span_notice("You start adding [I] to [src]..."))
 			playsound(src, 'sound/items/hammering_wood.ogg', 50, vary = TRUE)
+<<<<<<< HEAD
 			if(do_after(user, 5 SECONDS, target=src))
 				W.use(5)
+=======
+			if(do_after(user, 50, target=src) && W.use(5))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				var/turf/T = get_turf(src)
 				T.place_on_top(/turf/closed/wall/mineral/wood/nonmetal)
 				qdel(src)
@@ -87,12 +91,12 @@
 	return ..()
 
 /obj/structure/barricade/wooden/crowbar_act(mob/living/user, obj/item/tool)
-	balloon_alert(user, "deconstructing barricade...")
+	loc.balloon_alert(user, "deconstructing barricade...")
 	if(!tool.use_tool(src, user, 2 SECONDS, volume=50))
 		return
-	balloon_alert(user, "barricade deconstructed")
+	loc.balloon_alert(user, "barricade deconstructed")
 	tool.play_tool_sound(src)
-	new /obj/item/stack/sheet/mineral/wood(get_turf(src), drop_amount)
+	new /obj/item/stack/sheet/mineral/wood(drop_location(), drop_amount)
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
 

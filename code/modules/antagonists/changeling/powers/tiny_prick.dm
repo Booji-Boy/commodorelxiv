@@ -77,8 +77,11 @@
 	VAR_FINAL/datum/changeling_profile/selected_dna
 	/// Duration of the sting
 	var/sting_duration = 8 MINUTES
+<<<<<<< HEAD
 	/// Set this to false via VV to allow golem, plasmaman, or monkey changelings to turn other people into golems, plasmamen, or monkeys
 	var/verify_valid_species = TRUE
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/changeling/sting/transformation/Grant(mob/grant_to)
 	. = ..()
@@ -95,15 +98,22 @@
 
 /datum/action/changeling/sting/transformation/set_sting(mob/user)
 	selected_dna = null
+<<<<<<< HEAD
 	var/datum/antagonist/changeling/changeling = IS_CHANGELING(user)
+=======
+	var/datum/antagonist/changeling/changeling = user.mind.has_antag_datum(/datum/antagonist/changeling)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/changeling_profile/new_selected_dna = changeling.select_dna()
 	if(QDELETED(src) || QDELETED(changeling) || QDELETED(user))
 		return
 	if(!new_selected_dna || changeling.chosen_sting || selected_dna) // selected other sting or other DNA while sleeping
 		return
+<<<<<<< HEAD
 	if(verify_valid_species && (TRAIT_NO_DNA_COPY in new_selected_dna.dna.species.inherent_traits))
 		user.balloon_alert(user, "dna incompatible!")
 		return
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	selected_dna = new_selected_dna
 	return ..()
 
@@ -131,6 +141,16 @@
 	if(ismonkey(target))
 		final_duration = INFINITY
 		final_message = span_warning("Our genes cry out as we transform the lesser form of [target] into [selected_dna.dna.real_name] permanently!")
+<<<<<<< HEAD
+=======
+
+	if(target.apply_status_effect(/datum/status_effect/temporary_transformation/trans_sting, final_duration, selected_dna.dna))
+		..()
+		log_combat(user, target, "stung", "transformation sting", " new identity is '[selected_dna.dna.real_name]'")
+		to_chat(user, final_message)
+		return TRUE
+	return FALSE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(target.apply_status_effect(/datum/status_effect/temporary_transformation/trans_sting, final_duration, selected_dna.dna))
 		..()

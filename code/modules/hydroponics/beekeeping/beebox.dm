@@ -260,6 +260,10 @@
 		if(frame.loc == src)
 			frame.forceMove(get_turf(src))
 		honey_frames -= frame
+<<<<<<< HEAD
+=======
+	qdel(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/beebox/unwrenched
 	anchored = FALSE

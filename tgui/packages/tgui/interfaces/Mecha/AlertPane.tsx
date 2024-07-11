@@ -1,4 +1,5 @@
 import { useBackend } from '../../backend';
+<<<<<<< HEAD
 import { Box, Button, Dimmer, Icon, Section, Stack } from '../../components';
 import { MainData } from './data';
 
@@ -57,12 +58,42 @@ export const AlertPane = (props) => {
                 : 'Overclock'}
             </Button>
             {!!overclock_safety_available && (
+=======
+import { Stack, Button, Box } from '../../components';
+import {
+  OperatorData,
+  InternalDamageToDamagedDesc,
+  InternalDamageToNormalDesc,
+} from './data';
+
+export const AlertPane = (props) => {
+  const { act, data } = useBackend<OperatorData>();
+  const { internal_damage, internal_damage_keys } = data;
+  return (
+    <Stack fill vertical>
+      {Object.keys(internal_damage_keys).map((t) => (
+        <Stack.Item key={t}>
+          <Stack justify="space-between">
+            <Stack.Item>
+              <Box
+                color={
+                  internal_damage & internal_damage_keys[t] ? 'red' : 'green'
+                }
+              >
+                {internal_damage & internal_damage_keys[t]
+                  ? InternalDamageToDamagedDesc[t]
+                  : InternalDamageToNormalDesc[t]}
+              </Box>
+            </Stack.Item>
+            <Stack.Item>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Button
                 icon={
                   overclock_safety
                     ? 'temperature-arrow-down'
                     : 'temperature-arrow-up'
                 }
+<<<<<<< HEAD
                 onClick={() => act('toggle_overclock_safety')}
                 color={overclock_safety ? 'good' : 'bad'}
                 tooltip={
@@ -122,6 +153,13 @@ export const AlertPane = (props) => {
                   </Stack.Item>
                 )}
               </Stack>
+=======
+                color={'red'}
+                disabled={!(internal_damage & internal_damage_keys[t])}
+              >
+                Repair
+              </Button>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             </Stack.Item>
           ))
         )}

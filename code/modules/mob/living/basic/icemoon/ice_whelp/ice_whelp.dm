@@ -40,6 +40,7 @@
 /mob/living/basic/mining/ice_whelp/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NO_GLIDE, INNATE_TRAIT)
+<<<<<<< HEAD
 
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY)
 	AddComponent(/datum/component/basic_mob_ability_telegraph)
@@ -54,6 +55,19 @@
 
 	grant_actions_by_list(innate_actions)
 
+=======
+	AddElement(/datum/element/footstep, FOOTSTEP_MOB_HEAVY)
+	AddComponent(/datum/component/basic_mob_ability_telegraph)
+	AddComponent(/datum/component/basic_mob_attack_telegraph, telegraph_duration = 0.6 SECONDS)
+	var/datum/action/cooldown/mob_cooldown/fire_breath/ice/flamethrower = new(src)
+	flamethrower.Grant(src)
+	ai_controller.set_blackboard_key(BB_WHELP_STRAIGHTLINE_FIRE, flamethrower)
+	var/datum/action/cooldown/mob_cooldown/fire_breath/ice/cross/wide_flames = new(src)
+	wide_flames.Grant(src)
+	ai_controller.set_blackboard_key(BB_WHELP_WIDESPREAD_FIRE, wide_flames)
+	RegisterSignal(src, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(pre_attack))
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/basic/mining/ice_whelp/proc/pre_attack(mob/living/sculptor, atom/target)
 	SIGNAL_HANDLER
@@ -90,5 +104,9 @@
 	balloon_alert(src, "devouring...")
 	if(!do_after(src, 5 SECONDS, target))
 		return
+<<<<<<< HEAD
 	target.gib(DROP_ALL_REMAINS)
+=======
+	target.gib()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	adjustBruteLoss(-1 * heal_on_cannibalize)

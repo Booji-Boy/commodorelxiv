@@ -1,3 +1,5 @@
+//MONKESTATIONFILE REMOVAL, CHECK THE FILE IN THE MODULAR DIRECTORY
+/*
 /datum/traitor_objective/target_player/kidnapping
 	name = "Kidnap %TARGET% the %JOB TITLE% and deliver them to %AREA%"
 	description = "%TARGET% holds extremely important information regarding secret NT projects - and you'll need to kidnap and deliver them to %AREA%, where our transport pod will be waiting. \
@@ -37,7 +39,7 @@
 	progression_minimum = 0 MINUTES
 	progression_maximum = 30 MINUTES
 	progression_reward = list(2 MINUTES, 4 MINUTES)
-	telecrystal_reward = list(1, 2)
+	telecrystal_reward = list(4, 5)
 	target_jobs = list(
 		// Cargo
 		/datum/job/cargo_technician,
@@ -80,7 +82,11 @@
 
 	target_jobs = list(
 		// Cargo
+<<<<<<< HEAD
 		/datum/job/bitrunner,
+=======
+		/datum/job/quartermaster,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/datum/job/shaft_miner,
 		// Medical
 		/datum/job/paramedic,
@@ -100,7 +106,6 @@
 		/datum/job/chief_medical_officer,
 		/datum/job/head_of_personnel,
 		/datum/job/research_director,
-		/datum/job/quartermaster,
 		// Security
 		/datum/job/detective,
 		/datum/job/security_officer,
@@ -160,7 +165,11 @@
 		return FALSE
 
 	var/datum/mind/target_mind = pick(possible_targets)
+<<<<<<< HEAD
 	set_target(target_mind.current)
+=======
+	target = target_mind.current
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddComponent(/datum/component/traitor_objective_register, target, fail_signals = list(COMSIG_QDELETING))
 	var/list/possible_areas = GLOB.the_station_areas.Copy()
 	for(var/area/possible_area as anything in possible_areas)
@@ -297,3 +306,16 @@
 	sent_mob.adjust_dizzy(10 SECONDS)
 	sent_mob.set_eye_blur_if_lower(100 SECONDS)
 	sent_mob.dna.species.give_important_for_life(sent_mob) // so plasmamen do not get left for dead
+<<<<<<< HEAD
+=======
+
+	new /obj/effect/pod_landingzone(pick(possible_turfs), return_pod)
+
+/// Returns a list of things that the provided mob has which we would rather that they do not have
+/datum/traitor_objective/target_player/kidnapping/proc/gather_belongings(mob/living/carbon/human/kidnapee)
+	var/list/belongings = kidnapee.get_all_gear()
+	for (var/obj/item/implant/storage/internal_bag in kidnapee.implants)
+		belongings += internal_bag.contents
+	return belongings
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

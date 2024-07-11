@@ -22,6 +22,7 @@ GLOBAL_VAR_INIT(refid_filter, TYPEID(filter(type="angular_blur")))
 
 #define isgenerator(A) (istype(A, /generator))
 
+#define isimage(A) (istype(A, /image))
 //Turfs
 //#define isturf(A) (istype(A, /turf)) This is actually a byond built-in. Added here for completeness sake.
 
@@ -73,6 +74,7 @@ GLOBAL_LIST_INIT(turfs_openspace, typecacheof(list(
 
 #define iscliffturf(A) (istype(A, /turf/open/cliff))
 
+<<<<<<< HEAD
 #define iswaterturf(A) (istype(A, /turf/open/water))
 
 GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
@@ -84,6 +86,8 @@ GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
 
 #define ispassmeteorturf(A) (is_type_in_typecache(A, GLOB.turfs_pass_meteor))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 //Mobs
 #define isliving(A) (istype(A, /mob/living))
 
@@ -102,20 +106,25 @@ GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
 #define islizard(A) (is_species(A, /datum/species/lizard))
 #define isashwalker(A) (is_species(A, /datum/species/lizard/ashwalker))
 #define isplasmaman(A) (is_species(A, /datum/species/plasmaman))
+#define issimian(A) (is_species(A, /datum/species/simian)) //Monkestation Addition
 #define ispodperson(A) (is_species(A, /datum/species/pod))
 #define isflyperson(A) (is_species(A, /datum/species/fly))
 #define isjellyperson(A) (is_species(A, /datum/species/jelly))
 #define isslimeperson(A) (is_species(A, /datum/species/jelly/slime))
+#define isoozeling(A) (is_species(A, /datum/species/oozeling))
 #define iszombie(A) (is_species(A, /datum/species/zombie))
 #define isskeleton(A) (is_species(A, /datum/species/skeleton))
 #define ismoth(A) (is_species(A, /datum/species/moth))
-#define isfelinid(A) (is_species(A, /datum/species/human/felinid))
 #define isethereal(A) (is_species(A, /datum/species/ethereal))
 #define isvampire(A) (is_species(A,/datum/species/vampire))
 #define isdullahan(A) (is_species(A, /datum/species/dullahan))
 #define ismonkey(A) (is_species(A, /datum/species/monkey))
 #define isandroid(A) (is_species(A, /datum/species/android))
 #define isnightmare(A) (is_species(A, /datum/species/shadow/nightmare))
+#define isipc(A) (is_species(A, /datum/species/ipc))
+#define isgoblin(A) (is_species(A, /datum/species/goblin)) //Monkestation Addition
+#define isfloran(A) (is_species(A, /datum/species/floran)) //Monkestation Addition
+#define isarachnid(A) (is_species(A, /datum/species/arachnid)) //Monkestation Addition
 
 
 //More carbon mobs
@@ -200,7 +209,11 @@ GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
 
 #define isclown(A) (istype(A, /mob/living/basic/clown))
 
+<<<<<<< HEAD
 #define isspider(A) (istype(A, /mob/living/basic/spider))
+=======
+#define isspider(A) (istype(A, /mob/living/basic/spider/giant))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 
 //Misc mobs
@@ -243,8 +256,11 @@ GLOBAL_LIST_INIT(turfs_pass_meteor, typecacheof(list(
 
 #define ismachinery(A) (istype(A, /obj/machinery))
 
+<<<<<<< HEAD
 #define istramwall(A) (istype(A, /obj/structure/tram))
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #define isvendor(A) (istype(A, /obj/machinery/vending))
 
 #define isvehicle(A) (istype(A, /obj/vehicle))
@@ -327,3 +343,6 @@ GLOBAL_LIST_INIT(book_types, typecacheof(list(
 
 #define isprojectilespell(thing) (istype(thing, /datum/action/cooldown/spell/pointed/projectile))
 #define is_multi_tile_object(atom) (atom.bound_width > world.icon_size || atom.bound_height > world.icon_size)
+
+#define isartifact(thing) (istype(thing, /obj/structure/artifact) || istype(thing, /obj/item/melee/artifact) || istype(thing, /obj/item/gun/magic/artifact) || istype(thing, /obj/item/stock_parts/cell/artifact))
+#define iswater(A) (istype(A, /turf/open/water))

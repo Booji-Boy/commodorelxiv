@@ -67,6 +67,7 @@
 	if (check_blacklisted_turf(next_turf))
 		return
 
+
 	current_turf = next_turf
 
 	RegisterSignals(current_turf, list(
@@ -74,7 +75,7 @@
 		COMSIG_ATOM_ATTACK_HAND_SECONDARY,
 		COMSIG_ATOM_ATTACK_ROBOT,
 		COMSIG_ATOM_ATTACK_ROBOT_SECONDARY,
-	), PROC_REF(on_attack_hand))
+	), PROC_REF(on_attack_hand), override = TRUE)
 
 	if (!isnull(screentip_texts))
 		current_turf.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
@@ -94,7 +95,7 @@
 		COMSIG_ATOM_ATTACK_ROBOT_SECONDARY,
 	))
 
-/datum/component/redirect_attack_hand_from_turf/proc/on_attack_hand(turf/source, mob/user, list/modifiers)
+/datum/component/redirect_attack_hand_from_turf/proc/on_attack_hand(turf/source, mob/user)
 	SIGNAL_HANDLER
 	PRIVATE_PROC(TRUE)
 
@@ -105,7 +106,7 @@
 	if (!isnull(interact_check) && !interact_check.Invoke(user))
 		return NONE
 
-	INVOKE_ASYNC(user, TYPE_PROC_REF(/mob, UnarmedAttack), parent, proximity_flag = TRUE, modifiers = modifiers)
+	INVOKE_ASYNC(user, TYPE_PROC_REF(/mob, UnarmedAttack), parent, proximity_flag = TRUE)
 
 	return COMPONENT_CANCEL_ATTACK_CHAIN
 

@@ -31,11 +31,14 @@
 	/// If TRUE, this style allows you to punch people despite being a pacifist (IE: Boxing, which does no damage)
 	var/pacifist_style = FALSE
 
+<<<<<<< HEAD
 /datum/martial_art/Destroy()
 	if(!isnull(holder))
 		remove(holder)
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/martial_art/serialize_list(list/options, list/semvers)
 	. = ..()
 
@@ -46,6 +49,7 @@
 	SET_SERIALIZATION_SEMVER(semvers, "1.0.0")
 	return .
 
+<<<<<<< HEAD
 /// Signal proc for [COMSIG_LIVING_UNARMED_ATTACK] to hook into the appropriate proc
 /datum/martial_art/proc/unarmed_strike(mob/living/source, atom/attack_target, proximity, modifiers)
 	SIGNAL_HANDLER
@@ -103,6 +107,8 @@
  * * MARTIAL_ATTACK_FAIL - The attack is valid, but failed. No followup attack is made.
  * * MARTIAL_ATTACK_SUCCESS - The attack is valid, and succeeded. No followup attack is made.
  */
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/martial_art/proc/help_act(mob/living/attacker, mob/living/defender)
 	SHOULD_CALL_PARENT(FALSE)
 	PROTECTED_PROC(TRUE)
@@ -296,6 +302,7 @@
 		unstore_martial_art()
 	holder = null
 
+<<<<<<< HEAD
 /**
  * A helper proc to remove the martial art from the passed mob fully, e
  * ven if stored in another martial art's base.
@@ -360,3 +367,9 @@
 
 	on_remove(old_body) // on_remove rather than remove, because by this point the mind is already in the new body, which remove handles.
 	teach(new_body)
+=======
+/datum/martial_art/proc/on_remove(mob/living/holder_living)
+	if(help_verb)
+		remove_verb(holder_living, help_verb)
+	return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

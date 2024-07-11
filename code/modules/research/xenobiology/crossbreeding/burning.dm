@@ -32,11 +32,18 @@ Burning extracts:
 	effect_desc = "Creates a hungry and speedy slime that will love you forever."
 
 /obj/item/slimecross/burning/grey/do_effect(mob/user)
+<<<<<<< HEAD
 	var/mob/living/basic/slime/new_slime = new(get_turf(user),/datum/slime_type/grey)
 	new_slime.visible_message(span_danger("A baby slime emerges from [src], and it nuzzles [user] before burbling hungrily!"))
 	new_slime.befriend(user) //Gas, gas, gas
 	new_slime.bodytemperature = T0C + 400 //We gonna step on the gas.
 	new_slime.set_nutrition(SLIME_HUNGER_NUTRITION) //Tonight, we fight!
+=======
+	var/mob/living/basic/slime/S = new(get_turf(user))
+	S.visible_message(span_danger("A baby slime emerges from [src], and it nuzzles [user] before burbling hungrily!"))
+	SEND_SIGNAL(S, COMSIG_FRIENDSHIP_CHANGE, user, 110)
+	S.bodytemperature = T0C + 400 //We gonna step on the gas.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	..()
 
 /obj/item/slimecross/burning/orange
@@ -81,7 +88,13 @@ Burning extracts:
 	effect_desc = "Instantly destroys walls around you."
 
 /obj/item/slimecross/burning/metal/do_effect(mob/user)
-	for(var/turf/closed/wall/W in range(1,get_turf(user)))
+//monkestation edit start
+	var/turf/our_turf = get_turf(src)
+	if(GLOB.clock_ark && on_reebe(our_turf) && get_dist(our_turf, GLOB.clock_ark) <= ARK_TURF_DESTRUCTION_BLOCK_RANGE)
+		balloon_alert(user, "a near by energy source is stopping \the [src] from activating!")
+		return FALSE
+//monkestation edit end
+	for(var/turf/closed/wall/W in range(1, our_turf)) //monkestation edit: replaces get_turf(src) with our_turf
 		W.dismantle_wall(1)
 		playsound(W, 'sound/effects/break_stone.ogg', 50, TRUE)
 	user.visible_message(span_danger("[src] pulses violently, and shatters the walls around it!"))
@@ -198,12 +211,26 @@ Burning extracts:
 
 /obj/item/slimecross/burning/red/do_effect(mob/user)
 	user.visible_message(span_danger("[src] pulses a hazy red aura for a moment, which wraps around [user]!"))
+<<<<<<< HEAD
 	for(var/mob/living/basic/slime/slime_in_view in view(7, get_turf(user)))
 		var/list/mob/living/friends = slime_in_view.ai_controller?.blackboard[BB_FRIENDS_LIST] - user
 		for(var/list/mob/living/ex_friend in friends)
 			slime_in_view.unfriend(ex_friend)
 		slime_in_view.set_enraged_behaviour()
 		slime_in_view.visible_message(span_danger("The [slime_in_view] is driven into a dangerous frenzy!"))
+=======
+	for(var/mob/living/basic/slime/S in view(7, get_turf(user)))
+		/*
+		if(user in S.Friends)
+			var/friendliness = S.Friends[user]
+			S.clear_friends()
+			S.set_friendship(user, friendliness)
+		else
+			S.clear_friends()
+		*/
+		ADD_TRAIT(S, TRAIT_SLIME_RABID, "burning-red")
+		S.visible_message(span_danger("The [S] is driven into a dangerous frenzy!"))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	..()
 
 /obj/item/slimecross/burning/green
@@ -270,17 +297,26 @@ Burning extracts:
 	qdel(src)
 
 /obj/item/slimecross/burning/black
+<<<<<<< HEAD
 	colour = SLIME_TYPE_BLACK
 	effect_desc = "Transforms the user into a slime. They can transform back at will and do not lose any items."
+=======
+	colour = "black"
+	effect_desc = "Gives the user a one-time use slime transformation ability. They can transform back at will and do not lose any items." // monkestation edit: same here
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/slimecross/burning/black/do_effect(mob/user)
 	if(!isliving(user))
 		return
-	user.visible_message(span_danger("[src] absorbs [user], transforming [user.p_them()] into a slime!"))
+	user.visible_message(span_danger("[user] absorbs \the [src]!")) // monkestation edit: slight change to reflect the cast removal
 	var/datum/action/cooldown/spell/shapeshift/slime_form/transform = new(user.mind || user)
 	transform.remove_on_restore = TRUE
 	transform.Grant(user)
+<<<<<<< HEAD
 	transform.Activate(user)
+=======
+	//transform.cast(user) // monkestation removal: embrace the choice (it was broken anyway for whatever reason)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /obj/item/slimecross/burning/lightpink

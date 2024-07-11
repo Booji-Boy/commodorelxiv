@@ -1,8 +1,12 @@
 /datum/round_event_control/brain_trauma
 	name = "Spontaneous Brain Trauma"
 	typepath = /datum/round_event/brain_trauma
+<<<<<<< HEAD
 	weight = 25
 	min_players = 13
+=======
+	weight = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	category = EVENT_CATEGORY_HEALTH
 	description = "A crewmember gains a random trauma."
 	min_wizard_trigger_potency = 2

@@ -8,14 +8,22 @@
 	icon_state = "morph"
 	icon_living = "morph"
 	icon_dead = "morph_dead"
+<<<<<<< HEAD
 	combat_mode = TRUE
+=======
+	istate = ISTATE_HARM | ISTATE_BLOCKING
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	mob_biotypes = MOB_BEAST
 	pass_flags = PASSTABLE
 
 	maxHealth = 150
 	health = 150
+<<<<<<< HEAD
 	habitable_atmos = null
+=======
+	habitable_atmos = list("min_oxy" = 0, "max_oxy" = 0, "min_plas" = 0, "max_plas" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	minimum_survivable_temperature = TCMB
 
 	obj_damage = 50
@@ -58,6 +66,10 @@
 
 	AddElement(/datum/element/ai_retaliate)
 	AddElement(/datum/element/content_barfer)
+<<<<<<< HEAD
+=======
+	AddElement(/datum/element/prevent_attacking_of_types, GLOB.typecache_general_bad_hostile_attack_targets, "this tastes awful!") // MONKESTATION ADDITION
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	disguise_ability = new(src)
 	disguise_ability.Grant(src)

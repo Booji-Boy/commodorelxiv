@@ -160,31 +160,38 @@
 		to_chat(src,span_userdanger("ERROR: Lockdown is engaged. Please disengage lockdown to pick module."))
 		return
 
-	var/list/model_list = list(
-		"Engineering" = /obj/item/robot_model/engineering,
-		"Medical" = /obj/item/robot_model/medical,
-		"Miner" = /obj/item/robot_model/miner,
-		"Janitor" = /obj/item/robot_model/janitor,
-		"Service" = /obj/item/robot_model/service,
-	)
-	if(!CONFIG_GET(flag/disable_peaceborg))
-		model_list["Peacekeeper"] = /obj/item/robot_model/peacekeeper
-	if(!CONFIG_GET(flag/disable_secborg))
-		model_list["Security"] = /obj/item/robot_model/security
+	if(!length(GLOB.cyborg_model_list))
+		GLOB.cyborg_model_list = list(
+			"Engineering" = /obj/item/robot_model/engineering,
+			"Medical" = /obj/item/robot_model/medical,
+			"Cargo" = /obj/item/robot_model/cargo, //monkestation edit
+			"Miner" = /obj/item/robot_model/miner,
+			"Janitor" = /obj/item/robot_model/janitor,
+			"Service" = /obj/item/robot_model/service,
+		)
+		if(!CONFIG_GET(flag/disable_peaceborg))
+			GLOB.cyborg_model_list["Peacekeeper"] = /obj/item/robot_model/peacekeeper
+		if(!CONFIG_GET(flag/disable_secborg))
+			GLOB.cyborg_model_list["Security"] = /obj/item/robot_model/security
+
+	//monkestation edit start
+	for(var/model in GLOB.cyborg_model_list)
+		// Creating the lists here since we know all the model icons will need them right after.
+		GLOB.cyborg_all_models_icon_list[model] = list()
 
 	// Create radial menu for choosing borg model
-	var/list/model_icons = list()
-	for(var/option in model_list)
-		var/obj/item/robot_model/model = model_list[option]
-		var/model_icon = initial(model.cyborg_base_icon)
-		model_icons[option] = image(icon = 'icons/mob/silicon/robots.dmi', icon_state = model_icon)
+	if(!length(GLOB.cyborg_base_models_icon_list))
+		for(var/option in GLOB.cyborg_model_list)
+			var/obj/item/robot_model/model = GLOB.cyborg_model_list[option]
+			var/model_icon = initial(model.cyborg_base_icon)
+			GLOB.cyborg_base_models_icon_list[option] = image(icon = 'monkestation/icons/mob/robots.dmi', icon_state = model_icon)
 
-	var/input_model = show_radial_menu(src, src, model_icons, radius = 42)
+	var/input_model = show_radial_menu(src, src, GLOB.cyborg_base_models_icon_list, radius = 42)
 	if(!input_model || model.type != /obj/item/robot_model)
 		return
 
-	model.transform_to(model_list[input_model])
-
+	model.transform_to(GLOB.cyborg_model_list[input_model])
+	//monkestation edit end
 
 /// Used to setup the a basic and (somewhat) unique name for the robot.
 /mob/living/silicon/robot/proc/setup_default_name()
@@ -740,6 +747,15 @@
 		hat = null
 		if(!QDELETED(src)) //Don't update icons if we are deleted.
 			update_icons()
+<<<<<<< HEAD
+=======
+
+	if(gone == cell)
+		cell = null
+
+	if(gone == mmi)
+		mmi = null
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(gone == cell)
 		cell = null
@@ -807,6 +823,7 @@
 	braintype = "AI Shell"
 	name = "Empty AI Shell-[ident]"
 	real_name = name
+	update_name_tag() // monkestation edit: name tags
 	GLOB.available_ai_shells |= src
 	if(!QDELETED(builtInCamera))
 		builtInCamera.c_tag = real_name //update the camera name too
@@ -826,6 +843,7 @@
 	GLOB.available_ai_shells -= src
 	name = "Unformatted Cyborg-[ident]"
 	real_name = name
+	update_name_tag() // monkestation edit: name tags
 	if(!QDELETED(builtInCamera))
 		builtInCamera.c_tag = real_name
 	diag_hud_set_aishell()
@@ -839,6 +857,7 @@
 /mob/living/silicon/robot/proc/deploy_init(mob/living/silicon/ai/AI)
 	real_name = "[AI.real_name] [designation] Shell-[ident]"
 	name = real_name
+	update_name_tag() // monkestation edit: name tags
 	if(!QDELETED(builtInCamera))
 		builtInCamera.c_tag = real_name //update the camera name too
 	mainframe = AI
@@ -902,7 +921,7 @@
 
 /mob/living/silicon/robot/mouse_buckle_handling(mob/living/M, mob/living/user)
 	//Don't try buckling on INTENT_HARM so that silicons can search people's inventories without loading them
-	if(can_buckle && isliving(user) && isliving(M) && !(M in buckled_mobs) && ((user != src) || (!combat_mode)))
+	if(can_buckle && isliving(user) && isliving(M) && !(M in buckled_mobs) && ((user != src) || (!(istate & ISTATE_HARM))))
 		return user_buckle_mob(M, user, check_loc = FALSE)
 
 /mob/living/silicon/robot/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE, buckle_mob_flags= RIDER_NEEDS_ARM)

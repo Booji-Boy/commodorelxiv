@@ -89,7 +89,11 @@
 		data["activeCamera"] = list(
 			name = active_camera.c_tag,
 			ref = REF(active_camera),
+<<<<<<< HEAD
 			status = active_camera.camera_enabled,
+=======
+			status = active_camera.status,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		)
 	return data
 

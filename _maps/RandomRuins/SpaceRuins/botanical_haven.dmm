@@ -16,11 +16,16 @@
 /area/ruin/space/has_grav/powered/botanical_haven)
 "e" = (
 /obj/structure/flora/bush/flowers_br/style_random,
+<<<<<<< HEAD
 /obj/machinery/hydroponics/soil,
+=======
+/obj/machinery/light/warm/directional/east,
+/obj/machinery/growing/soil,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/open/misc/grass,
 /area/ruin/space/has_grav/powered/botanical_haven)
 "g" = (
-/obj/machinery/hydroponics/soil,
+/obj/machinery/growing/soil,
 /turf/open/misc/grass,
 /area/ruin/space/has_grav/powered/botanical_haven)
 "h" = (

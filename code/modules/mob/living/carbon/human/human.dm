@@ -288,7 +288,14 @@
 					if(!target_record || !crime_name || !allowed_access || !human_user.canUseHUD() || !HAS_TRAIT(human_user, TRAIT_SECURITY_HUD))
 						return
 
+<<<<<<< HEAD
 					var/datum/crime/new_crime = new(name = crime_name, author = allowed_access)
+=======
+				target_record.citations += new_citation
+				new_citation.alert_owner(usr, src, target_record.name, "You have been fined [fine] credits for '[citation_name]'. Fines may be paid at security.")
+				investigate_log("New Citation: <strong>[citation_name]</strong> Fine: [fine] | Added to [target_record.name] by [key_name(human_user)]", INVESTIGATE_RECORDS)
+				SSblackbox.ReportCitation(REF(new_citation), human_user.ckey, human_user.real_name, target_record.name, citation_name, fine)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 					target_record.crimes += new_crime
 					investigate_log("New Crime: <strong>[crime_name]</strong> | Added to [target_record.name] by [key_name(human_user)]", INVESTIGATE_RECORDS)
@@ -341,10 +348,13 @@
 		var/obj/item/bodypart/the_part = isbodypart(target_zone) ? target_zone : get_bodypart(check_zone(target_zone)) //keep these synced
 		to_chat(user, span_alert("There is no exposed flesh or thin material on [p_their()] [the_part.name]."))
 
+<<<<<<< HEAD
 /mob/living/carbon/human/get_butt_sprite()
 	var/obj/item/bodypart/chest/chest = get_bodypart(BODY_ZONE_CHEST)
 	return chest?.get_butt_sprite()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/get_footprint_sprite()
 	var/obj/item/bodypart/leg/L = get_bodypart(BODY_ZONE_R_LEG) || get_bodypart(BODY_ZONE_L_LEG)
 	return shoes?.footprint_sprite || L?.footprint_sprite
@@ -756,9 +766,12 @@
 	VV_DROPDOWN_OPTION(VV_HK_MOD_MUTATIONS, "Add/Remove Mutation")
 	VV_DROPDOWN_OPTION(VV_HK_MOD_QUIRKS, "Add/Remove Quirks")
 	VV_DROPDOWN_OPTION(VV_HK_SET_SPECIES, "Set Species")
+<<<<<<< HEAD
 	VV_DROPDOWN_OPTION(VV_HK_PURRBATION, "Toggle Purrbation")
 	VV_DROPDOWN_OPTION(VV_HK_APPLY_DNA_INFUSION, "Apply DNA Infusion")
 	VV_DROPDOWN_OPTION(VV_HK_TURN_INTO_MMI, "Turn into MMI")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/carbon/human/vv_do_topic(list/href_list)
 	. = ..()
@@ -820,6 +833,7 @@
 			var/newtype = GLOB.species_list[result]
 			admin_ticket_log("[key_name_admin(usr)] has modified the bodyparts of [src] to [result]")
 			set_species(newtype)
+<<<<<<< HEAD
 
 	if(href_list[VV_HK_PURRBATION])
 		if(!check_rights(R_SPAWN))
@@ -840,6 +854,8 @@
 			var/msg = span_notice("[key_name_admin(usr)] has removed [key_name(src)] from purrbation.")
 			message_admins(msg)
 			admin_ticket_log(src, msg)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(href_list[VV_HK_APPLY_DNA_INFUSION])
 		if(!check_rights(R_SPAWN))
@@ -988,6 +1004,24 @@
 		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
 		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying)
 
+<<<<<<< HEAD
+=======
+/mob/living/carbon/human/pre_stamina_change(diff as num, forced)
+	if(diff < 0) //Taking damage, not healing
+		return diff * physiology.stamina_mod
+	return diff
+
+/mob/living/carbon/human/adjust_nutrition(change) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
+		return FALSE
+	return ..()
+
+/mob/living/carbon/human/set_nutrition(change) //Seriously fuck you oldcoders.
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
+		return FALSE
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/is_bleeding()
 	if(HAS_TRAIT(src, TRAIT_NOBLOOD))
 		return FALSE
@@ -1030,15 +1064,90 @@
 /mob/living/carbon/human/species/dullahan
 	race = /datum/species/dullahan
 
-/mob/living/carbon/human/species/felinid
-	race = /datum/species/human/felinid
-
 /mob/living/carbon/human/species/fly
 	race = /datum/species/fly
 
 /mob/living/carbon/human/species/golem
 	race = /datum/species/golem
 
+<<<<<<< HEAD
+=======
+/mob/living/carbon/human/species/golem/adamantine
+	race = /datum/species/golem/adamantine
+
+/mob/living/carbon/human/species/golem/plasma
+	race = /datum/species/golem/plasma
+
+/mob/living/carbon/human/species/golem/diamond
+	race = /datum/species/golem/diamond
+
+/mob/living/carbon/human/species/golem/gold
+	race = /datum/species/golem/gold
+
+/mob/living/carbon/human/species/golem/silver
+	race = /datum/species/golem/silver
+
+/mob/living/carbon/human/species/golem/plasteel
+	race = /datum/species/golem/plasteel
+
+/mob/living/carbon/human/species/golem/titanium
+	race = /datum/species/golem/titanium
+
+/mob/living/carbon/human/species/golem/plastitanium
+	race = /datum/species/golem/plastitanium
+
+/mob/living/carbon/human/species/golem/alien_alloy
+	race = /datum/species/golem/alloy
+
+/mob/living/carbon/human/species/golem/wood
+	race = /datum/species/golem/wood
+
+/mob/living/carbon/human/species/golem/uranium
+	race = /datum/species/golem/uranium
+
+/mob/living/carbon/human/species/golem/sand
+	race = /datum/species/golem/sand
+
+/mob/living/carbon/human/species/golem/glass
+	race = /datum/species/golem/glass
+
+/mob/living/carbon/human/species/golem/bluespace
+	race = /datum/species/golem/bluespace
+
+/mob/living/carbon/human/species/golem/bananium
+	race = /datum/species/golem/bananium
+
+/mob/living/carbon/human/species/golem/blood_cult
+	race = /datum/species/golem/runic
+
+/mob/living/carbon/human/species/golem/cloth
+	race = /datum/species/golem/cloth
+
+/mob/living/carbon/human/species/golem/plastic
+	race = /datum/species/golem/plastic
+
+/mob/living/carbon/human/species/golem/bronze
+	race = /datum/species/golem/bronze
+
+/mob/living/carbon/human/species/golem/cardboard
+	race = /datum/species/golem/cardboard
+
+/mob/living/carbon/human/species/golem/leather
+	race = /datum/species/golem/leather
+
+/mob/living/carbon/human/species/golem/bone
+	race = /datum/species/golem/bone
+
+/mob/living/carbon/human/species/golem/durathread
+	race = /datum/species/golem/durathread
+
+/mob/living/carbon/human/species/golem/snow
+	race = /datum/species/golem/snow
+
+/mob/living/carbon/human/species/oozeling
+	race = /datum/species/oozeling
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/carbon/human/species/jelly
 	race = /datum/species/jelly
 

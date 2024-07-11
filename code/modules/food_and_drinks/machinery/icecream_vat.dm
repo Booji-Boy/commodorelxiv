@@ -85,8 +85,36 @@
 
 /obj/machinery/icecream_vat/Exited(atom/movable/gone, direction)
 	. = ..()
+<<<<<<< HEAD
 	if(gone == custom_ice_cream_beaker)
 		custom_ice_cream_beaker = null
+=======
+	var/dat
+	dat += "<b>ICE CREAM</b><br><div class='statusDisplay'>"
+	dat += "<b>Dispensing: [selected_flavour] icecream </b> <br><br>"
+	for(var/flavour in GLOB.ice_cream_flavours)
+		if(GLOB.ice_cream_flavours[flavour].hidden)
+			continue
+		dat += "<b>[capitalize(flavour)] ice cream:</b> <a href='?src=[REF(src)];select=[flavour]'><b>Select</b></a> <a href='?src=[REF(src)];make=[flavour];amount=1'><b>Make</b></a> <a href='?src=[REF(src)];make=[flavour];amount=5'><b>x5</b></a> [product_types[flavour]] scoops left[GLOB.ice_cream_flavours[flavour].ingredients_text].<br>"
+	dat += "<br><b>CONES</b><br><div class='statusDisplay'>"
+	for(var/cone in cone_prototypes)
+		dat += "<b>[capitalize(cone_prototypes[cone].name)]s:</b> <a href='?src=[REF(src)];cone=[cone]'><b>Dispense</b></a> <a href='?src=[REF(src)];make_cone=[cone];amount=1'><b>Make</b></a> <a href='?src=[REF(src)];make_cone=[cone];amount=5'><b>x5</b></a> [product_types[cone]] cones left[cone_prototypes[cone].ingredients_text].<br>"
+	dat += "<br>"
+	if(beaker)
+		dat += "<b>BEAKER CONTENT</b><br><div class='statusDisplay'>"
+		for(var/datum/reagent/R in beaker.reagents.reagent_list)
+			var/chem_name = R.name
+			if(istype(R, /datum/reagent/ammonia/urine) && user.client?.prefs.read_preference(/datum/preference/toggle/prude_mode))
+				chem_name = "Ammonia?"
+			dat += "[chem_name]: [R.volume]u<br>"
+		dat += "<a href='?src=[REF(src)];refill=1'><b>Refill from beaker</b></a></div>"
+	dat += "<br>"
+	dat += "<b>VAT CONTENT</b><br>"
+	for(var/datum/reagent/R in reagents.reagent_list)
+		dat += "[R.name]: [R.volume]"
+		dat += "<A href='?src=[REF(src)];disposeI=[R.type]'>Purge</A><BR>"
+	dat += "<a href='?src=[REF(src)];refresh=1'>Refresh</a> <a href='?src=[REF(src)];close=1'>Close</a>"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/machinery/icecream_vat/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	if(held_item)

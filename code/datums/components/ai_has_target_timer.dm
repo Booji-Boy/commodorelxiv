@@ -33,7 +33,11 @@
 	REMOVE_TRAIT(parent, TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM, type)
 	return ..()
 
+<<<<<<< HEAD
 /datum/component/ai_target_timer/Destroy(force)
+=======
+/datum/component/ai_target_timer/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	finalise_losing_target()
 	return ..()
 

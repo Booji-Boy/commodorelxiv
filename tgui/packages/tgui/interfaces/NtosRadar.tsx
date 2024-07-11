@@ -46,8 +46,13 @@ export const NtosRadarContent = (props) => {
         style={{
           backgroundImage:
             'url("' + resolveAsset('ntosradarbackground.png') + '")',
+<<<<<<< HEAD
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+=======
+          'background-position': 'center',
+          'background-repeat': 'no-repeat',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           top: '20px',
         }}
         position="relative"

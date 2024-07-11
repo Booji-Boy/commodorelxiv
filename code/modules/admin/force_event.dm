@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+///Allows an admin to force an event
+/*
+/client/proc/forceEvent()
+	set name = "Trigger Event"
+	set category = "Admin.Events"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ADMIN_VERB(force_event, R_FUN, "Trigger Event", "Forces an event to occur.", ADMIN_CATEGORY_EVENTS)
 	user.holder.forceEvent()
@@ -9,7 +17,7 @@ ADMIN_VERB(force_event, R_FUN, "Trigger Event", "Forces an event to occur.", ADM
 
 	var/datum/force_event/ui = new(usr)
 	ui.ui_interact(usr)
-
+*/
 /// Force Event Panel
 /datum/force_event
 

@@ -203,6 +203,16 @@
 /obj/item/vending_refill/snack,
 /turf/open/floor/wood,
 /area/shuttle/transport)
+<<<<<<< HEAD
+=======
+"bd" = (
+/obj/item/kirbyplants/random/dead{
+	desc = "It doesn't look very healthy...";
+	name = "potted plant"
+	},
+/turf/open/floor/wood,
+/area/shuttle/transport)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "be" = (
 /obj/machinery/conveyor{
 	dir = 4;

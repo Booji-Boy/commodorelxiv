@@ -55,6 +55,14 @@
 		if(microwaver && microwaver.mind)
 			ADD_TRAIT(result, TRAIT_FOOD_CHEF_MADE, REF(microwaver.mind))
 
+<<<<<<< HEAD
+=======
+		result.reagents?.multiply_reagents(efficiency * CRAFTED_FOOD_BASE_REAGENT_MODIFIER)
+		source.reagents?.trans_to(result, source.reagents.total_volume)
+
+		BLACKBOX_LOG_FOOD_MADE(result)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	qdel(source)
 
 	var/recipe_result = COMPONENT_MICROWAVE_SUCCESS

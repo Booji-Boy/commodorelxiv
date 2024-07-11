@@ -5,6 +5,7 @@
  */
 
 import {
+<<<<<<< HEAD
   addHighlightSetting,
   changeSettingsTab,
   loadSettings,
@@ -15,6 +16,17 @@ import {
   updateSettings,
 } from './actions';
 import { FONTS, MAX_HIGHLIGHT_SETTINGS, SETTINGS_TABS } from './constants';
+=======
+  changeSettingsTab,
+  loadSettings,
+  openChatSettings,
+  toggleSettings,
+  updateSettings,
+  addHighlightSetting,
+  removeHighlightSetting,
+  updateHighlightSetting,
+} from './actions';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { createDefaultHighlightSetting } from './model';
 
 const defaultHighlightSetting = createDefaultHighlightSetting();
@@ -74,6 +86,12 @@ export const settingsReducer = (state = initialState, action) => {
       nextState.highlightSettingById[defaultHighlightSetting.id] =
         defaultHighlightSetting;
     }
+    // Migrate old highlights to include enabled: true
+    Object.keys(nextState.highlightSettingById).forEach((key) => {
+      if (nextState.highlightSettingById[key].enabled === undefined) {
+        nextState.highlightSettingById[key].enabled = true;
+      }
+    });
     // Update the highlight settings for default highlight
     // settings compatibility
     const highlightSetting =

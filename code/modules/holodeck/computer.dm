@@ -283,7 +283,10 @@ GLOBAL_LIST_INIT(typecache_holodeck_linked_floorcheck_ok, typecacheof(list(/turf
 			RegisterSignal(holo_effect_product, COMSIG_QDELETING, PROC_REF(remove_from_holo_lists))
 		if(islist(holo_effect_product))
 			for(var/atom/atom_product as anything in holo_effect_product)
+<<<<<<< HEAD
 				spawned += atom_product
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				RegisterSignal(atom_product, COMSIG_QDELETING, PROC_REF(remove_from_holo_lists))
 		return
 
@@ -292,12 +295,20 @@ GLOBAL_LIST_INIT(typecache_holodeck_linked_floorcheck_ok, typecacheof(list(/turf
 		holo_object.resistance_flags = LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 		if(isstructure(holo_object))
+<<<<<<< HEAD
 			holo_object.obj_flags |= NO_DEBRIS_AFTER_DECONSTRUCTION
+=======
+			holo_object.flags_1 |= NODECONSTRUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 
 		if(ismachinery(holo_object))
 			var/obj/machinery/holo_machine = holo_object
+<<<<<<< HEAD
 			holo_machine.obj_flags |= NO_DEBRIS_AFTER_DECONSTRUCTION
+=======
+			holo_machine.flags_1 |= NODECONSTRUCT_1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			holo_machine.power_change()
 
 			if(istype(holo_machine, /obj/machinery/button))

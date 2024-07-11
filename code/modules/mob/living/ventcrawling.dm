@@ -58,6 +58,11 @@
 	if(HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING) && istype(loc, /obj/machinery/atmospherics) && movement_type & VENTCRAWLING)
 		to_chat(src, span_notice("You begin climbing out from the ventilation system..."))
 		if(has_client && isnull(client))
+<<<<<<< HEAD
+=======
+			return
+		if(!do_after(src, 1 SECONDS, target = ventcrawl_target))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			return
 		if(!do_after(src, 1 SECONDS, target = ventcrawl_target))
 			return
@@ -78,9 +83,12 @@
 			if(!do_after(src, 2.5 SECONDS, target = ventcrawl_target, extra_checks = CALLBACK(src, PROC_REF(can_enter_vent), ventcrawl_target)))
 				return
 			if(has_client && isnull(client))
+<<<<<<< HEAD
 				return
 			if(ventcrawl_target.welded) // in case it got welded during our sleep
 				to_chat(src, span_warning("You can't crawl around a welded vent!"))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
 			ventcrawl_target.flick_overlay_static(image('icons/effects/vent_indicator.dmi', "insert", ABOVE_MOB_LAYER), 1 SECONDS)
 			visible_message(span_notice("[src] scrambles into the ventilation ducts!"), span_notice("You climb into the ventilation ducts."))
@@ -88,6 +96,7 @@
 		else
 			to_chat(src, span_warning("This ventilation duct is not connected to anything!"))
 
+<<<<<<< HEAD
 /mob/living/basic/slime/can_enter_vent(obj/machinery/atmospherics/components/ventcrawl_target, provide_feedback = TRUE)
 	if(buckled)
 		if(provide_feedback)
@@ -95,6 +104,8 @@
 		return
 	return ..()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /**
  * Moves living mob directly into the vent as a ventcrawler
  *
@@ -115,7 +126,10 @@
 /mob/living/proc/update_pipe_vision(full_refresh = FALSE)
 	if(!isnull(ai_controller) && isnull(client)) // we don't care about pipe vision if we have an AI controller with no client (typically means we are clientless).
 		return
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	// Take away all the pipe images if we're not doing anything with em
 	if(isnull(client) || !HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING) || !istype(loc, /obj/machinery/atmospherics) || !(movement_type & VENTCRAWLING))
 		for(var/image/current_image in pipes_shown)

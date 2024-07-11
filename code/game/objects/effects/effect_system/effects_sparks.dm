@@ -17,8 +17,13 @@
 	icon_state = "sparks"
 	anchored = TRUE
 	light_system = OVERLAY_LIGHT
+<<<<<<< HEAD
 	light_range = 1.5
 	light_power = 0.8
+=======
+	light_outer_range = 2
+	light_power = 0.5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	light_color = LIGHT_COLOR_FIRE
 
 /obj/effect/particle_effect/sparks/Initialize(mapload)

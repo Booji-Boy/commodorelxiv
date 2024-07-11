@@ -1,4 +1,9 @@
 import './styles/main.scss';
+<<<<<<< HEAD
+=======
+import { createRenderer } from 'tgui/renderer';
+import { TguiSay } from './TguiSay';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 import { createRoot, Root } from 'react-dom/client';
 

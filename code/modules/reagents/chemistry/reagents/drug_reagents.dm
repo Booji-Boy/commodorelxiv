@@ -18,6 +18,14 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/hallucinogens = 10) //4 per 2 seconds
 
+/datum/reagent/drug/space_drugs/generate_infusion_values(datum/reagents/chems)
+	. = ..()
+	if(chems.has_reagent(src.type, 1))
+		var/list/generated_values = list()
+		var/amount = chems.get_reagent_amount(src.type)
+		generated_values["endurance_change"] = (amount * (rand(1, 3) * 0.1))
+		generated_values["damage"] = (amount * (rand(3, 7) * 0.1))
+
 /datum/reagent/drug/space_drugs/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
 	affected_mob.set_drugginess(30 SECONDS * REM * seconds_per_tick)
@@ -75,10 +83,13 @@
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/nicotine = 15) // 6 per 2 seconds
 
+<<<<<<< HEAD
 	//Nicotine is used as a pesticide IRL.
 /datum/reagent/drug/nicotine/on_hydroponics_apply(obj/machinery/hydroponics/mytray, mob/user)
 	mytray.adjust_toxic(round(volume))
 	mytray.adjust_pestlevel(-rand(1, 2))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/drug/nicotine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -161,9 +172,19 @@
 	var/effective_impurity = min(1, (1 - creation_purity)/0.5)
 	color = BlendRGB(initial(color), "#FAFAFA", effective_impurity)
 
+<<<<<<< HEAD
 /datum/reagent/drug/methamphetamine/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 	affected_mob.add_movespeed_modifier(/datum/movespeed_modifier/reagent/methamphetamine)
+=======
+/datum/reagent/drug/methamphetamine/feed_interaction(mob/living/basic/chicken/target, volume, mob/user)
+	.=..()
+	target.adjust_happiness(0.5*volume, user)
+
+/datum/reagent/drug/methamphetamine/on_mob_metabolize(mob/living/L)
+	..()
+	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/methamphetamine)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/drug/methamphetamine/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -174,6 +195,7 @@
 	var/high_message = pick("You feel hyper.", "You feel like you need to go faster.", "You feel like you can run the world.")
 	if(SPT_PROB(2.5, seconds_per_tick))
 		to_chat(affected_mob, span_notice("[high_message]"))
+<<<<<<< HEAD
 	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium)
 	affected_mob.AdjustAllImmobility(-40 * REM * seconds_per_tick)
 	var/need_mob_update
@@ -182,6 +204,18 @@
 	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(1, 4) * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
+=======
+	affected_mob.add_mood_event("tweaking", /datum/mood_event/stimulant_medium, name)
+	affected_mob.AdjustStun(-40 * REM * seconds_per_tick)
+	affected_mob.AdjustKnockdown(-40 * REM * seconds_per_tick)
+	affected_mob.AdjustUnconscious(-40 * REM * seconds_per_tick)
+	affected_mob.AdjustParalyzed(-40 * REM * seconds_per_tick)
+	affected_mob.AdjustImmobilized(-40 * REM * seconds_per_tick)
+	affected_mob.stamina.adjust(2 * REM * seconds_per_tick, TRUE)
+	affected_mob.set_jitter_if_lower(4 SECONDS * REM * seconds_per_tick)
+	if(!safe || overdosed) // MONKESTATION EDIT: Makes Unknown Methamphetamine Isomer actually safe. "safe" is false by default.
+		affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(1, 4) * REM * seconds_per_tick, required_organtype = affected_organtype)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SPT_PROB(2.5, seconds_per_tick))
 		affected_mob.emote(pick("twitch", "shiver"))
 
@@ -211,7 +245,11 @@
 	addiction_types = list(/datum/addiction/stimulants = 25)  //8 per 2 seconds
 	ph = 8.2
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
+<<<<<<< HEAD
 	metabolized_traits = list(TRAIT_STUNIMMUNE, TRAIT_SLEEPIMMUNE, TRAIT_ANALGESIA, TRAIT_STIMULATED)
+=======
+	metabolized_traits = list(TRAIT_STUNIMMUNE, TRAIT_SLEEPIMMUNE, TRAIT_ANALGESIA)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/datum/brain_trauma/special/psychotic_brawling/bath_salts/rage
 
 /datum/reagent/drug/bath_salts/on_mob_metabolize(mob/living/affected_mob)
@@ -231,10 +269,16 @@
 	var/high_message = pick("You feel amped up.", "You feel ready.", "You feel like you can push it to the limit.")
 	if(SPT_PROB(2.5, seconds_per_tick))
 		to_chat(affected_mob, span_notice("[high_message]"))
+<<<<<<< HEAD
 	affected_mob.add_mood_event("salted", /datum/mood_event/stimulant_heavy)
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustStaminaLoss(-6 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	need_mob_update += affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 4 * REM * seconds_per_tick, required_organ_flag = affected_organ_flags)
+=======
+	affected_mob.add_mood_event("salted", /datum/mood_event/stimulant_heavy, name)
+	affected_mob.stamina.adjust(5 * REM * seconds_per_tick, TRUE)
+	affected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 4 * REM * seconds_per_tick, required_organtype = affected_organtype)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	affected_mob.adjust_hallucinations(10 SECONDS * REM * seconds_per_tick)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
@@ -267,9 +311,14 @@
 	var/high_message = pick("You feel amped up.", "You feel ready.", "You feel like you can push it to the limit.")
 	if(SPT_PROB(2.5, seconds_per_tick))
 		to_chat(affected_mob, span_notice("[high_message]"))
+<<<<<<< HEAD
 	var/need_mob_update
 	need_mob_update = affected_mob.adjustStaminaLoss(-18 * REM * seconds_per_tick, updating_stamina = FALSE, required_biotype = affected_biotype)
 	need_mob_update += affected_mob.adjustToxLoss(0.5 * REM * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype)
+=======
+	affected_mob.stamina.adjust(18 * REM * seconds_per_tick, TRUE)
+	affected_mob.adjustToxLoss(0.5 * REM * seconds_per_tick, FALSE, required_biotype = affected_biotype)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SPT_PROB(30, seconds_per_tick))
 		affected_mob.losebreath++
 		need_mob_update += affected_mob.adjustOxyLoss(1, FALSE, required_biotype = affected_biotype, required_respiration_type = affected_respiration_type)
@@ -287,6 +336,7 @@
 	addiction_types = list(/datum/addiction/hallucinogens = 18)
 	metabolized_traits = list(TRAIT_FEARLESS, TRAIT_ANALGESIA)
 
+<<<<<<< HEAD
 /datum/reagent/drug/happiness/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
 	affected_mob.add_mood_event("happiness_drug", /datum/mood_event/happiness_drug)
@@ -294,6 +344,15 @@
 /datum/reagent/drug/happiness/on_mob_delete(mob/living/affected_mob)
 	. = ..()
 	affected_mob.clear_mood_event("happiness_drug")
+=======
+/datum/reagent/drug/happiness/on_mob_metabolize(mob/living/L)
+	..()
+	L.add_mood_event("happiness_drug", /datum/mood_event/happiness_drug)
+
+/datum/reagent/drug/happiness/on_mob_delete(mob/living/L)
+	L.clear_mood_event("happiness_drug")
+	..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/drug/happiness/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -329,6 +388,7 @@
 	overdose_threshold = 30
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/stimulants = 6) //2.6 per 2 seconds
+<<<<<<< HEAD
 	metabolized_traits = list(TRAIT_BATON_RESISTANCE, TRAIT_ANALGESIA, TRAIT_STIMULATED)
 
 /datum/reagent/drug/pumpup/on_mob_metabolize(mob/living/carbon/affected_mob)
@@ -337,6 +397,9 @@
 	if(liver && HAS_TRAIT(liver, TRAIT_MAINTENANCE_METABOLISM))
 		affected_mob.add_mood_event("maintenance_fun", /datum/mood_event/maintenance_high)
 		metabolization_rate *= 0.8
+=======
+	metabolized_traits = list(TRAIT_BATON_RESISTANCE, TRAIT_ANALGESIA)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/drug/pumpup/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -363,8 +426,12 @@
 		affected_mob.emote(pick("twitch","drool"))
 	if(SPT_PROB(10, seconds_per_tick))
 		affected_mob.losebreath++
+<<<<<<< HEAD
 		affected_mob.adjustStaminaLoss(4, updating_stamina = FALSE, required_biotype = affected_biotype)
 		need_mob_update = TRUE
+=======
+		affected_mob.stamina.adjust(-4, FALSE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SPT_PROB(7.5, seconds_per_tick))
 		need_mob_update += affected_mob.adjustToxLoss(2, updating_health = FALSE, required_biotype = affected_biotype)
 	if(need_mob_update)
@@ -426,8 +493,12 @@
 
 /datum/reagent/drug/maint/sludge/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
+<<<<<<< HEAD
 	if(affected_mob.adjustToxLoss(0.5 * REM * seconds_per_tick, required_biotype = affected_biotype))
 		return UPDATE_MOB_HEALTH
+=======
+	affected_mob.adjustToxLoss(0.5 * REM * seconds_per_tick, required_biotype = affected_biotype)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/reagent/drug/maint/sludge/overdose_process(mob/living/affected_mob, seconds_per_tick, times_fired)
 	. = ..()
@@ -476,6 +547,16 @@
 	overdose_threshold = 30
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 	addiction_types = list(/datum/addiction/hallucinogens = 12)
+
+/datum/reagent/drug/mushroomhallucinogen/generate_infusion_values(datum/reagents/chems)
+	. = ..()
+	if(chems.has_reagent(src.type, 1))
+		var/list/generated_values = list()
+		var/amount = chems.get_reagent_amount(src.type)
+		generated_values["damage"] = (amount * rand(4, 9) * 0.1)
+		generated_values["endurance_change"] = (amount * rand(3, 7) * 0.1)
+		generated_values["lifespan_change"] = (amount * rand(2, 5) * 0.1)
+		return generated_values
 
 /datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/psychonaut, seconds_per_tick, times_fired)
 	. = ..()
@@ -707,12 +788,6 @@
 		animate(color = col_filter_half, time = 24 SECONDS, easing = CIRCULAR_EASING|EASE_IN)
 		animate(color = col_filter_twothird, time = 12 SECONDS, easing = LINEAR_EASING)
 
-	game_plane_master_controller.add_filter("saturnx_blur", 1, list("type" = "radial_blur", "size" = 0))
-
-	for(var/filter in game_plane_master_controller.get_filters("saturnx_blur"))
-		animate(filter, loop = -1, size = 0.04, time = 2 SECONDS, easing = ELASTIC_EASING|EASE_OUT, flags = ANIMATION_PARALLEL)
-		animate(size = 0, time = 6 SECONDS, easing = CIRCULAR_EASING|EASE_IN)
-
 ///This proc turns the living mob passed as the arg "invisible_man"s invisible by giving him the invisible man trait and updating his body, this changes the sprite of all his organic limbs to a 1 alpha version.
 /datum/reagent/drug/saturnx/proc/turn_man_invisible(mob/living/carbon/invisible_man, requires_liver = TRUE)
 	if(requires_liver)
@@ -747,7 +822,6 @@
 
 	var/atom/movable/plane_master_controller/game_plane_master_controller = invisible_man.hud_used.plane_master_controllers[PLANE_MASTERS_GAME]
 	game_plane_master_controller.remove_filter("saturnx_filter")
-	game_plane_master_controller.remove_filter("saturnx_blur")
 
 /datum/reagent/drug/saturnx/overdose_process(mob/living/invisible_man, seconds_per_tick, times_fired)
 	. = ..()
@@ -811,8 +885,12 @@
 	if(!iscarbon(kronkaine_receptacle))
 		return
 	var/mob/living/carbon/druggo = kronkaine_receptacle
+<<<<<<< HEAD
 	if(druggo.adjustStaminaLoss(-6 * trans_volume, updating_stamina = FALSE))
 		return UPDATE_MOB_HEALTH
+=======
+	druggo.stamina.adjust(4 * trans_volume, TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	//I wish i could give it some kind of bonus when smoked, but we don't have an INHALE method.
 
 /datum/reagent/drug/kronkaine/on_mob_life(mob/living/carbon/kronkaine_fiend, seconds_per_tick, times_fired)
@@ -827,7 +905,7 @@
 		return
 	for(var/possible_purger in kronkaine_fiend.reagents.reagent_list)
 		if(istype(possible_purger, /datum/reagent/medicine/c2/multiver) || istype(possible_purger, /datum/reagent/medicine/haloperidol))
-			kronkaine_fiend.ForceContractDisease(new /datum/disease/adrenal_crisis(), FALSE, TRUE) //We punish players for purging, since unchecked purging would allow players to reap the stamina healing benefits without any drawbacks. This also has the benefit of making haloperidol a counter, like it is supposed to be.
+			kronkaine_fiend.infect_disease_predefined(DISEASE_TRAUMA, TRUE, "[ROUND_TIME()] Infected From Krokaine")
 			break
 
 /datum/reagent/drug/kronkaine/overdose_process(mob/living/kronkaine_fiend, seconds_per_tick, times_fired)

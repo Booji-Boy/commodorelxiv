@@ -66,6 +66,10 @@
 	var/mod = CONFIG_GET(number/movedelay/run_delay)
 	multiplicative_slowdown = isnum(mod)? mod : initial(multiplicative_slowdown)
 
+/datum/movespeed_modifier/config_walk_run/sprint/sync()
+	var/mod = CONFIG_GET(number/movedelay/sprint_delay)
+	multiplicative_slowdown = isnum(mod)? mod : initial(multiplicative_slowdown)
+
 /datum/movespeed_modifier/turf_slowdown
 	movetypes = GROUND
 	blacklisted_movetypes = (FLYING|FLOATING)
@@ -108,9 +112,12 @@
 /datum/movespeed_modifier/average_web
 	multiplicative_slowdown = 1.2
 
+<<<<<<< HEAD
 /datum/movespeed_modifier/below_average_web
 	multiplicative_slowdown = 2.5
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/movespeed_modifier/slow_web
 	multiplicative_slowdown = 5
 
@@ -129,6 +136,9 @@
 /datum/movespeed_modifier/carbon_crawling
 	multiplicative_slowdown = CRAWLING_ADD_SLOWDOWN
 	flags = IGNORE_NOSLOW
+
+/datum/movespeed_modifier/belly_slide
+	multiplicative_slowdown = -0.5
 
 /datum/movespeed_modifier/mob_config_speedmod
 	variable = TRUE
@@ -155,18 +165,24 @@
 /datum/movespeed_modifier/health_scaling_speed_buff
 	variable = TRUE
 
+<<<<<<< HEAD
 /datum/movespeed_modifier/alien_speed
 	variable = TRUE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/movespeed_modifier/grown_killer_tomato
 	variable = TRUE
 
 /datum/movespeed_modifier/goliath_mount
 	multiplicative_slowdown = -26
 
+<<<<<<< HEAD
 /datum/movespeed_modifier/settler
 	multiplicative_slowdown = 0.2
 	blacklisted_movetypes = FLOATING|FLYING
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/movespeed_modifier/basilisk_overheat
 	multiplicative_slowdown = -18

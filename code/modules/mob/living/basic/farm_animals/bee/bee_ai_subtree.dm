@@ -9,6 +9,7 @@
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
+<<<<<<< HEAD
 		/datum/ai_planning_subtree/pet_planning,
 		/datum/ai_planning_subtree/find_valid_home,
 		/datum/ai_planning_subtree/enter_exit_home,
@@ -23,6 +24,15 @@
 		return SUBTREE_RETURN_FINISH_PLANNING
 	return ..()
 
+=======
+		/datum/ai_planning_subtree/find_valid_home,
+		/datum/ai_planning_subtree/enter_exit_home,
+		/datum/ai_planning_subtree/simple_find_target,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree,
+		/datum/ai_planning_subtree/find_and_hunt_target/pollinate,
+	)
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/ai_controller/basic_controller/queen_bee
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic/bee,
@@ -76,7 +86,11 @@
 	if(!SPT_PROB(action_prob, seconds_per_tick))
 		return
 
+<<<<<<< HEAD
 	controller.queue_behavior(/datum/ai_behavior/enter_exit_hive, BB_CURRENT_HOME, BB_BASIC_MOB_CURRENT_TARGET)
+=======
+	controller.queue_behavior(/datum/ai_behavior/enter_exit_hive, BB_CURRENT_HOME)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return SUBTREE_RETURN_FINISH_PLANNING
 
 //the queen spend more time in the hive
@@ -88,6 +102,10 @@
 	target_key = BB_TARGET_HYDRO
 	hunting_behavior = /datum/ai_behavior/hunt_target/pollinate
 	finding_behavior = /datum/ai_behavior/find_hunt_target/pollinate
+<<<<<<< HEAD
 	hunt_targets = list(/obj/machinery/hydroponics)
+=======
+	hunt_targets = list(/obj/machinery/growing)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	hunt_range = 10
 	hunt_chance = 85

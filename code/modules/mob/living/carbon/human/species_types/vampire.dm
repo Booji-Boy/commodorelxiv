@@ -13,8 +13,13 @@
 		TRAIT_DRINKS_BLOOD,
 		TRAIT_NOBREATH,
 		TRAIT_NOHUNGER,
+<<<<<<< HEAD
 		TRAIT_USES_SKINTONES,
 		TRAIT_NO_MIRROR_REFLECTION,
+=======
+		TRAIT_NO_MIRROR_REFLECTION,
+		/*TRAIT_USES_SKINTONES,*/ //monkestation temp removal, we dont have this refactor yet
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 	inherent_biotypes = MOB_UNDEAD|MOB_HUMANOID
 	mutant_bodyparts = list("wings" = "None")
@@ -39,6 +44,10 @@
 	to_chat(new_vampire, "[info_text]")
 	new_vampire.skin_tone = "albino"
 	new_vampire.update_body(0)
+<<<<<<< HEAD
+=======
+	new_vampire.set_safe_hunger_level()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignal(new_vampire, COMSIG_MOB_APPLY_DAMAGE_MODIFIERS, PROC_REF(damage_weakness))
 
 /datum/species/vampire/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
@@ -72,20 +81,16 @@
 
 	if(istype(attacking_item, /obj/item/nullrod/whip))
 		damage_mods += 2
+<<<<<<< HEAD
 
 /datum/species/vampire/get_physical_attributes()
 	return "Vampires are afflicted with the Thirst, needing to sate it by draining the blood out of another living creature. However, they do not need to breathe or eat normally. \
 		They will instantly turn into dust if they run out of blood or enter a holy area. However, coffins stabilize and heal them, and they can transform into bats!"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/species/vampire/get_species_description()
 	return "A classy Vampire! They descend upon Space Station Thirteen Every year to spook the crew! \"Bleeg!!\""
-
-/datum/species/vampire/get_species_lore()
-	return list(
-		"Vampires are unholy beings blessed and cursed with The Thirst. \
-		The Thirst requires them to feast on blood to stay alive, and in return it gives them many bonuses. \
-		Because of this, Vampires have split into two clans, one that embraces their powers as a blessing and one that rejects it.",
-	)
 
 /datum/species/vampire/create_pref_unique_perks()
 	var/list/to_add = list()

@@ -13,7 +13,11 @@
 /obj/item/multitool
 	name = "multitool"
 	desc = "Used for pulsing wires to test which to cut. Not recommended by doctors."
+<<<<<<< HEAD
 	icon = 'icons/obj/devices/tool.dmi'
+=======
+	icon = 'monkestation/icons/obj/device.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "multitool"
 	inhand_icon_state = "multitool"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
@@ -32,6 +36,8 @@
 	usesound = 'sound/weapons/empty.ogg'
 	var/datum/buffer // simple machine buffer for device linkage
 	var/mode = 0
+	///the component buffer
+	var/obj/item/mcobject/component_buffer
 
 /obj/item/multitool/examine(mob/user)
 	. = ..()

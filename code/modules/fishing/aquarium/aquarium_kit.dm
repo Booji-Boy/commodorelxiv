@@ -2,7 +2,11 @@
 /obj/item/fish_feed
 	name = "fish feed can"
 	desc = "A refillable can that dispenses nutritious fish feed."
+<<<<<<< HEAD
 	icon = 'icons/obj/aquarium/supplies.dmi'
+=======
+	icon = 'icons/obj/aquarium.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "fish_feed"
 	w_class = WEIGHT_CLASS_TINY
 
@@ -35,7 +39,10 @@
 	var/fish_type = get_fish_type()
 	if(fish_type)
 		var/obj/item/fish/spawned_fish = new fish_type(null)
+<<<<<<< HEAD
 		ADD_TRAIT(spawned_fish, TRAIT_FISH_FROM_CASE, TRAIT_GENERIC)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		spawned_fish.forceMove(src) // trigger storage.handle_entered
 
 /obj/item/storage/fish_case/proc/get_fish_type()
@@ -58,7 +65,11 @@
 	name = "ominous fish case"
 
 /obj/item/storage/fish_case/syndicate/get_fish_type()
+<<<<<<< HEAD
 	return pick(/obj/item/fish/donkfish, /obj/item/fish/emulsijack, /obj/item/fish/jumpercable)
+=======
+	return pick(/obj/item/fish/donkfish, /obj/item/fish/emulsijack)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/storage/fish_case/tiziran
 	name = "imported fish case"
@@ -76,7 +87,10 @@
 		/obj/item/fish/boned = 1,
 		/obj/item/fish/clownfish/lube = 3,
 		/obj/item/fish/emulsijack = 1,
+<<<<<<< HEAD
 		/obj/item/fish/jumpercable = 1,
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/item/fish/sludgefish/purple = 1,
 		/obj/item/fish/pufferfish = 3,
 		/obj/item/fish/slimefish = 2,
@@ -86,7 +100,11 @@
 	)
 	return pick_weight(weighted_list)
 
+<<<<<<< HEAD
 /obj/item/storage/fish_case/blackmarket/Initialize(mapload)
+=======
+/obj/item/storage/fish_cas/blackmarket/Initialize(mapload)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	. = ..()
 	for(var/obj/item/fish/fish as anything in contents)
 		fish.set_status(FISH_DEAD)
@@ -100,7 +118,11 @@
 
 /obj/item/aquarium_kit/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	AddComponent(/datum/component/slapcrafting, /datum/crafting_recipe/aquarium)
+=======
+	to_chat(user,span_notice("There's instruction and tools necessary to build aquarium inside. All you need is to start crafting."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/aquarium_prop
 	name = "generic aquarium prop"

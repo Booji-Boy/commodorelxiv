@@ -42,16 +42,30 @@ export const SelectEquipment = (props) => {
   ]);
   const [tab] = useOutfitTabs(categories);
 
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
+=======
+  const [searchText, setSearchText] = useLocalState('searchText', '');
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   const searchFilter = createSearch(
     searchText,
     (entry) => entry.name + entry.path,
   );
 
+<<<<<<< HEAD
   const visibleOutfits = sortBy(
     filter(
       filter(outfits, (entry) => entry.category === tab),
       searchFilter,
+=======
+  const visibleOutfits = flow([
+    filter((entry) => entry.category === tab),
+    filter(searchFilter),
+    sortBy(
+      (entry) => !entry.favorite,
+      (entry) => !entry.priority,
+      (entry) => entry.name,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     ),
     (entry) => !entry.favorite,
     (entry) => !entry.priority,
@@ -197,8 +211,13 @@ const CurrentlySelectedDisplay = (props) => {
           title={entry?.path}
           style={{
             overflow: 'hidden',
+<<<<<<< HEAD
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
+=======
+            'white-space': 'nowrap',
+            'text-overflow': 'ellipsis',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           {entry?.name}

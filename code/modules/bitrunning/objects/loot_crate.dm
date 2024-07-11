@@ -11,12 +11,16 @@
 /obj/structure/closet/crate/secure/bitrunning // Base class. Do not spawn this.
 	name = "base class cache"
 	desc = "Talk to a coder."
+<<<<<<< HEAD
 	icon_state = "bitrunning"
 	base_icon_state = "bitrunning"
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// The virtual domain - side of the bitrunning crate. Deliver to the send location.
 /obj/structure/closet/crate/secure/bitrunning/encrypted
 	name = "encrypted cache"
+<<<<<<< HEAD
 	desc = "Needs to be decrypted at the safehouse to be opened."
 	locked = TRUE
 	damage_deflection = 30
@@ -24,6 +28,10 @@
 
 /obj/structure/closet/crate/secure/bitrunning/encrypted/can_unlock(mob/living/user, obj/item/card/id/player_id, obj/item/card/id/registered_id)
 	return FALSE
+=======
+	desc = "Needs decrypted at the safehouse to be opened."
+	locked = TRUE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// The bitrunner den - side of the bitrunning crate. Appears in the receive location.
 /obj/structure/closet/crate/secure/bitrunning/decrypted
@@ -42,11 +50,19 @@
 	if(isnull(completed_domain))
 		return
 
+<<<<<<< HEAD
 	PopulateContents(completed_domain.reward_points, completed_domain.completion_loot, rewards_multiplier)
 
 /obj/structure/closet/crate/secure/bitrunning/decrypted/PopulateContents(reward_points, list/completion_loot, rewards_multiplier)
 	. = ..()
 	spawn_loot(completion_loot)
+=======
+	PopulateContents(completed_domain.reward_points, completed_domain.extra_loot, rewards_multiplier)
+
+/obj/structure/closet/crate/secure/bitrunning/decrypted/PopulateContents(reward_points, list/extra_loot, rewards_multiplier)
+	. = ..()
+	spawn_loot(extra_loot)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	new /obj/item/stack/ore/iron(src, calculate_loot(reward_points, rewards_multiplier, ORE_MULTIPLIER_IRON))
 	new /obj/item/stack/ore/glass(src, calculate_loot(reward_points, rewards_multiplier, ORE_MULTIPLIER_GLASS))
@@ -70,6 +86,7 @@
 	var/random_sum = (rand() + 0.5) * base
 	return ROUND_UP(random_sum * ore_multiplier)
 
+<<<<<<< HEAD
 /// Handles spawning completion loot. This tries to handle bad flat and assoc lists
 /obj/structure/closet/crate/secure/bitrunning/decrypted/proc/spawn_loot(list/completion_loot)
 	for(var/path in completion_loot)
@@ -80,6 +97,18 @@
 			return FALSE
 
 		for(var/i in 1 to completion_loot[path])
+=======
+/// Handles spawning extra loot. This tries to handle bad flat and assoc lists
+/obj/structure/closet/crate/secure/bitrunning/decrypted/proc/spawn_loot(list/extra_loot)
+	for(var/path in extra_loot)
+		if(!ispath(path))
+			continue
+
+		if(isnull(extra_loot[path]))
+			return FALSE
+
+		for(var/i in 1 to extra_loot[path])
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			new path(src)
 
 	return TRUE

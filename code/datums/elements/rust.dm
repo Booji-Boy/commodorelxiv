@@ -17,7 +17,10 @@
 	ADD_TRAIT(target, TRAIT_RUSTY, ELEMENT_TRAIT(type))
 	RegisterSignal(target, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(apply_rust_overlay))
 	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(handle_examine))
+<<<<<<< HEAD
 	RegisterSignal (target, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_interaction))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	RegisterSignals(target, list(COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_WELDER), COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_RUSTSCRAPER)), PROC_REF(secondary_tool_act))
 	// Unfortunately registering with parent sometimes doesn't cause an overlay update
 	target.update_appearance()
@@ -26,7 +29,10 @@
 	. = ..()
 	UnregisterSignal(source, COMSIG_ATOM_UPDATE_OVERLAYS)
 	UnregisterSignal(source, COMSIG_ATOM_EXAMINE)
+<<<<<<< HEAD
 	UnregisterSignal(source, COMSIG_ATOM_ITEM_INTERACTION)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	UnregisterSignal(source, list(COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_WELDER), COMSIG_ATOM_SECONDARY_TOOL_ACT(TOOL_RUSTSCRAPER)))
 	REMOVE_TRAIT(source, TRAIT_RUSTY, ELEMENT_TRAIT(type))
 	source.update_appearance()

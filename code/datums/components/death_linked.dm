@@ -27,4 +27,8 @@
 /datum/component/death_linked/proc/on_death(mob/living/target, gibbed)
 	SIGNAL_HANDLER
 	var/mob/living/linked_mob_resolved = linked_mob?.resolve()
+<<<<<<< HEAD
 	linked_mob_resolved?.gib(DROP_ALL_REMAINS)
+=======
+	linked_mob_resolved?.gib()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

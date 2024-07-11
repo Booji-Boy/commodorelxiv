@@ -22,7 +22,11 @@
 	src.on_picked_callback = on_picked_callback
 	build_radial_list()
 
+<<<<<<< HEAD
 /datum/component/subtype_picker/Destroy(force)
+=======
+/datum/component/subtype_picker/Destroy(force, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	on_picked_callback = null
 	return ..()
 

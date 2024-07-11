@@ -184,7 +184,11 @@ export const RecipeLookup = (props) => {
           height="50px"
           position="relative"
           style={{
+<<<<<<< HEAD
             backgroundColor: 'black',
+=======
+            'background-color': 'black',
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           }}
         >
           <Chart.Line

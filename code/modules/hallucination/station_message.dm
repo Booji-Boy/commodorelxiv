@@ -9,8 +9,14 @@
 /datum/hallucination/station_message/blob_alert
 
 /datum/hallucination/station_message/blob_alert/start()
+<<<<<<< HEAD
 	priority_announce("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", \
 		"Biohazard Alert", ANNOUNCER_OUTBREAK5, players = list(hallucinator))
+=======
+	to_chat(hallucinator, span_priorityannounce("Biohazard Alert"))
+	to_chat(hallucinator, span_priorityalert("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak."))
+	SEND_SOUND(hallucinator, sound(SSstation.announcer.event_sounds[ANNOUNCER_OUTBREAK5]))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/hallucination/station_message/shuttle_dock
@@ -32,14 +38,21 @@
 	if(!(locate(/mob/living/silicon/ai) in GLOB.silicon_mobs))
 		return FALSE
 
+<<<<<<< HEAD
 	priority_announce("Hostile runtimes detected in all station systems, please deactivate your AI to prevent possible damage to its morality core.", \
 		"Anomaly Alert", ANNOUNCER_AIMALF, players = list(hallucinator))
+=======
+	to_chat(hallucinator, span_priorityannounce("Anomaly Alert"))
+	to_chat(hallucinator, span_priorityalert("Hostile runtimes detected in all station systems, please deactivate your AI to prevent possible damage to its morality core."))
+	SEND_SOUND(hallucinator, sound(SSstation.announcer.event_sounds[ANNOUNCER_AIMALF]))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/hallucination/station_message/heretic
 	/// This is gross and will probably easily be outdated in some time but c'est la vie.
 	/// Maybe if someone datumizes heretic paths or something this can be improved
 	var/static/list/ascension_bodies = list(
+<<<<<<< HEAD
 		list(
 			"text" = "Fear the blaze, for the Ashlord, %FAKENAME% has ascended! The flames shall consume all!",
 			"sound" = 'sound/ambience/antag/heretic/ascend_blade.ogg',
@@ -60,6 +73,13 @@
 			"text" = "The nobleman of void %FAKENAME% has arrived, stepping along the Waltz that ends worlds!",
 			"sound" = 'sound/ambience/antag/heretic/ascend_void.ogg',
 		)
+=======
+		list("Fear the blaze, for the Ashlord, %FAKENAME% has ascended! The flames shall consume all!", 'monkestation/sound/ambience/antag/heretic/ascend_ash.ogg'),
+		list("Master of blades, the Torn Champion's disciple, %FAKENAME% has ascended! Their steel is that which will cut reality in a maelstom of silver!", 'monkestation/sound/ambience/antag/heretic/ascend_blade.ogg'),
+		list("Ever coiling vortex. Reality unfolded. ARMS OUTREACHED, THE LORD OF THE NIGHT, %FAKENAME% has ascended! Fear the ever twisting hand!", 'monkestation/sound/ambience/antag/heretic/ascend_flesh.ogg'),
+		list("Fear the decay, for the Rustbringer, %FAKENAME% has ascended! None shall escape the corrosion!", 'monkestation/sound/ambience/antag/heretic/ascend_rust.ogg'),
+		list("The nobleman of void %FAKENAME% has arrived, stepping along the Waltz that ends worlds!", 'monkestation/sound/ambience/antag/heretic/ascend_void.ogg')
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	)
 
 /datum/hallucination/station_message/heretic/start()
@@ -69,11 +89,19 @@
 		return FALSE
 
 	var/list/fake_ascension = pick(ascension_bodies)
+<<<<<<< HEAD
 	var/announcement_text = replacetext(fake_ascension["text"], "%FAKENAME%", totally_real_heretic.real_name)
 	priority_announce(
 		text = "[generate_heretic_text()] [announcement_text] [generate_heretic_text()]",
 		title = "[generate_heretic_text()]",
 		sound = fake_ascension["sound"],
+=======
+	var/message_with_name = replacetext(fake_ascension[1], "%FAKENAME%", totally_real_heretic.real_name)
+	priority_announce(
+		text = "[generate_heretic_text()] [message_with_name] [generate_heretic_text()]",
+		title = "[generate_heretic_text()]",
+		sound = fake_ascension[2],
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		players = list(hallucinator),
 		color_override = "pink",
 	)
@@ -105,7 +133,13 @@
 	random_hallucination_weight = 2
 
 /datum/hallucination/station_message/meteors/start()
+<<<<<<< HEAD
 	priority_announce("Meteors have been detected on collision course with the station.", "Meteor Alert", ANNOUNCER_METEORS, players = list(hallucinator))
+=======
+	to_chat(hallucinator, span_priorityannounce("Meteor Alert"))
+	to_chat(hallucinator, span_priorityalert("Meteors have been detected on collision course with the station."))
+	SEND_SOUND(hallucinator, sound(SSstation.announcer.event_sounds[ANNOUNCER_METEORS]))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	return ..()
 
 /datum/hallucination/station_message/supermatter_delam

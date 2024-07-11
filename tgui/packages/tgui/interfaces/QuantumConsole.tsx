@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 import { BooleanLike } from 'common/react';
 
 import { useBackend, useSharedState } from '../backend';
+=======
+import { Window } from '../layouts';
+import { useBackend } from '../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Button,
   Collapsible,
@@ -10,12 +15,20 @@ import {
   Section,
   Stack,
   Table,
+<<<<<<< HEAD
   Tabs,
   Tooltip,
 } from '../components';
 import { TableCell, TableRow } from '../components/Table';
 import { Window } from '../layouts';
 import { LoadingScreen } from './common/LoadingToolbox';
+=======
+  Tooltip,
+} from '../components';
+import { BooleanLike } from 'common/react';
+import { LoadingScreen } from './common/LoadingToolbox';
+import { TableCell, TableRow } from '../components/Table';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type Data =
   | {
@@ -29,8 +42,11 @@ type Data =
       ready: BooleanLike;
       retries_left: number;
       scanner_tier: number;
+<<<<<<< HEAD
       broadcasting: BooleanLike;
       broadcasting_on_cd: BooleanLike;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
     }
   | {
       connected: 0;
@@ -51,8 +67,11 @@ type Domain = {
   desc: string;
   difficulty: number;
   id: string;
+<<<<<<< HEAD
   is_modular: BooleanLike;
   has_secondary_objectives: BooleanLike;
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   name: string;
   reward: number | string;
 };
@@ -86,7 +105,11 @@ const getColor = (difficulty: number) => {
     case Difficulty.High:
       return 'bad';
     default:
+<<<<<<< HEAD
       return 'green';
+=======
+      return '';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   }
 };
 
@@ -105,14 +128,21 @@ export const QuantumConsole = (props) => {
 
 const AccessView = (props) => {
   const { act, data } = useBackend<Data>();
+<<<<<<< HEAD
   const [tab, setTab] = useSharedState('tab', 0);
 
   if (!isConnected(data)) {
     return <NoticeBox danger>No server connected!</NoticeBox>;
+=======
+
+  if (!isConnected(data)) {
+    return <NoticeBox error>No server connected!</NoticeBox>;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   }
 
   const {
     available_domains = [],
+<<<<<<< HEAD
     broadcasting,
     broadcasting_on_cd,
     generated_domain,
@@ -120,10 +150,17 @@ const AccessView = (props) => {
     points,
     randomized,
     ready,
+=======
+    generated_domain,
+    ready,
+    occupants,
+    points,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   } = data;
 
   const sorted = available_domains.sort((a, b) => a.cost - b.cost);
 
+<<<<<<< HEAD
   const filtered = sorted.filter((domain) => {
     return domain.difficulty === tab;
   });
@@ -136,6 +173,9 @@ const AccessView = (props) => {
   } else {
     selected = 'Nothing loaded';
   }
+=======
+  const selected = sorted.find(({ id }) => id === generated_domain);
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Stack fill vertical>
@@ -143,6 +183,7 @@ const AccessView = (props) => {
         <Section
           buttons={
             <>
+<<<<<<< HEAD
               <Button.Checkbox
                 checked={broadcasting}
                 disabled={broadcasting_on_cd}
@@ -152,6 +193,8 @@ const AccessView = (props) => {
               >
                 Broadcast
               </Button.Checkbox>
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               <Button
                 disabled={
                   !ready || occupants > 0 || points < 1 || !!generated_domain
@@ -159,8 +202,12 @@ const AccessView = (props) => {
                 icon="random"
                 onClick={() => act('random_domain')}
                 mr={1}
+<<<<<<< HEAD
                 tooltip="Get a random domain for more rewards.
                   Weighted towards your current points. Minimum: 1 point."
+=======
+                tooltip="Get a random domain for more rewards. Weighted towards your current points. Minimum: 1 point."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
               >
                 Randomize
               </Button>
@@ -174,6 +221,7 @@ const AccessView = (props) => {
           scrollable
           title="Virtual Domains"
         >
+<<<<<<< HEAD
           <Tabs fluid>
             <Tabs.Tab
               backgroundColor={getColor(Difficulty.None)}
@@ -213,6 +261,9 @@ const AccessView = (props) => {
             </Tabs.Tab>
           </Tabs>
           {filtered.map((domain) => (
+=======
+          {sorted.map((domain) => (
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             <DomainEntry key={domain.id} domain={domain} />
           ))}
         </Section>
@@ -224,7 +275,13 @@ const AccessView = (props) => {
         <Section>
           <Stack fill>
             <Stack.Item grow>
+<<<<<<< HEAD
               <NoticeBox info={!!generated_domain}>{selected}</NoticeBox>
+=======
+              <NoticeBox info={!!generated_domain}>
+                {selected?.name ?? 'Nothing loaded'}
+              </NoticeBox>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             </Stack.Item>
             <Stack.Item>
               <Button.Confirm
@@ -243,6 +300,7 @@ const AccessView = (props) => {
 
 const DomainEntry = (props: DomainEntryProps) => {
   const {
+<<<<<<< HEAD
     domain: {
       cost,
       desc,
@@ -253,6 +311,9 @@ const DomainEntry = (props: DomainEntryProps) => {
       name,
       reward,
     },
+=======
+    domain: { cost, desc, difficulty, id, name, reward },
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   } = props;
   const { act, data } = useBackend<Data>();
   if (!isConnected(data)) {
@@ -291,23 +352,31 @@ const DomainEntry = (props: DomainEntryProps) => {
       title={
         <>
           {name}
+<<<<<<< HEAD
           {!!is_modular && name !== '???' && <Icon name="cubes" ml={1} />}
           {!!has_secondary_objectives && name !== '???' && (
             <Icon name="gem" ml={1} />
           )}
+=======
+          {difficulty === Difficulty.High && <Icon name="skull" ml={1} />}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </>
       }
     >
       <Stack height={5}>
         <Stack.Item color="label" grow={4}>
           {desc}
+<<<<<<< HEAD
           {!!is_modular && ' (Modular)'}
           {!!has_secondary_objectives && ' (Secondary Objective Available)'}
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         </Stack.Item>
         <Stack.Divider />
         <Stack.Item grow>
           <Table>
             <TableRow>
+<<<<<<< HEAD
               <Tooltip content="Points cost for deploying domain.">
                 <DisplayDetails amount={cost} color="pink" icon="star" />
               </Tooltip>
@@ -316,6 +385,15 @@ const DomainEntry = (props: DomainEntryProps) => {
               <Tooltip content="Reward for competing domain.">
                 <DisplayDetails amount={reward} color="gold" icon="coins" />
               </Tooltip>
+=======
+              <DisplayDetails amount={cost} color="pink" icon="star" />
+            </TableRow>
+            <TableRow>
+              <DisplayDetails amount={difficulty} color="white" icon="skull" />
+            </TableRow>
+            <TableRow>
+              <DisplayDetails amount={reward} color="gold" icon="coins" />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
             </TableRow>
           </Table>
         </Stack.Item>
@@ -414,7 +492,11 @@ const DisplayDetails = (props: DisplayDetailsProps) => {
   const { amount = 0, color, icon = 'star' } = props;
 
   if (amount === 0) {
+<<<<<<< HEAD
     return <TableCell color="label">None</TableCell>;
+=======
+    return <TableCell color="label">No bandwidth</TableCell>;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   }
 
   if (typeof amount === 'string') {
@@ -438,8 +520,13 @@ const DisplayDetails = (props: DisplayDetailsProps) => {
     <TableCell>
       <Stack>
         {Array.from({ length: amount }, (_, index) => (
+<<<<<<< HEAD
           <Stack.Item key={index}>
             <Icon color={color} name={icon} />
+=======
+          <Stack.Item>
+            <Icon color={color} key={index} name={icon} />
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           </Stack.Item>
         ))}
       </Stack>

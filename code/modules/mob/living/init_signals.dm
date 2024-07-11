@@ -87,7 +87,11 @@
 	SIGNAL_HANDLER
 	REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, TRAIT_DEATHCOMA)
 
+<<<<<<< HEAD
 /// Updates medhud when receiving relevant signals.
+=======
+/// Updates medhud when recieving relevant signals.
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/proc/update_medhud_on_signal(datum/source)
 	SIGNAL_HANDLER
 	med_hud_set_health()
@@ -260,6 +264,7 @@
 	SIGNAL_HANDLER
 	refresh_gravity()
 
+<<<<<<< HEAD
 /// Called in [/datum/element/immerse/apply_filter]
 /mob/living/proc/edit_immerse_overlay(datum/source, atom/movable/immerse_overlay/vis_overlay)
 	SIGNAL_HANDLER
@@ -268,6 +273,8 @@
 	vis_overlay.transform = vis_overlay.transform.Turn(-lying_angle)
 	vis_overlay.adjust_living_overlay_offset(src)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /// Called when [TRAIT_UNDENSE] is gained or lost
 /mob/living/proc/undense_changed(datum/source)
 	SIGNAL_HANDLER

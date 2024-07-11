@@ -18,8 +18,11 @@
 	drag_slowdown = 0
 	door_anim_time = 0 // no animation
 	pass_flags_self = PASSSTRUCTURE | LETPASSTHROW
+<<<<<<< HEAD
 	x_shake_pixel_shift = 1
 	y_shake_pixel_shift = 2
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	/// Mobs standing on it are nudged up by this amount.
 	var/elevation = 14
 	/// The same, but when the crate is open
@@ -42,6 +45,7 @@
 	if(elevation)
 		AddElement(/datum/element/elevation, pixel_shift = elevation)
 	. = ..()
+<<<<<<< HEAD
 
 	var/static/list/crate_paint_jobs
 	if(isnull(crate_paint_jobs))
@@ -62,6 +66,16 @@
 		)
 	if(paint_jobs)
 		paint_jobs = crate_paint_jobs
+=======
+	if(icon_state == "[initial(icon_state)]open")
+		opened = TRUE
+		AddElement(/datum/element/climbable, climb_time = crate_climb_time * 0.5, climb_stun = 0)
+	else
+		AddElement(/datum/element/climbable, climb_time = crate_climb_time, climb_stun = 0)
+	if(elevation)
+		AddElement(/datum/element/elevation, pixel_shift = elevation)
+	update_appearance()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/closet/crate/Destroy()
 	QDEL_NULL(manifest)
@@ -117,7 +131,26 @@
 			RemoveElement(/datum/element/elevation, pixel_shift = elevation)
 		if(elevation_open)
 			AddElement(/datum/element/elevation, pixel_shift = elevation_open)
+<<<<<<< HEAD
 	if(!QDELETED(manifest))
+=======
+
+/obj/structure/closet/crate/after_close(mob/living/user, force)
+	. = ..()
+	RemoveElement(/datum/element/climbable, climb_time = crate_climb_time * 0.5, climb_stun = 0)
+	AddElement(/datum/element/climbable, climb_time = crate_climb_time, climb_stun = 0)
+	if(elevation != elevation_open)
+		if(elevation_open)
+			RemoveElement(/datum/element/elevation, pixel_shift = elevation_open)
+		if(elevation)
+			AddElement(/datum/element/elevation, pixel_shift = elevation)
+
+
+/obj/structure/closet/crate/open(mob/living/user, force = FALSE)
+	. = ..()
+	if(. && !QDELETED(manifest))
+		to_chat(user, span_notice("The manifest is torn off [src]."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		playsound(src, 'sound/items/poster_ripped.ogg', 75, TRUE)
 		manifest.forceMove(get_turf(src))
 		manifest = null
@@ -213,7 +246,28 @@
 	desc = "An internals crate."
 	name = "internals crate"
 	icon_state = "o2crate"
+<<<<<<< HEAD
 	base_icon_state = "o2crate"
+=======
+
+/obj/structure/closet/crate/trashcart //please make this a generic cart path later after things calm down a little
+	desc = "A heavy, metal trashcart with wheels."
+	name = "trash cart"
+	icon_state = "trashcart"
+	can_install_electronics = FALSE
+
+/obj/structure/closet/crate/trashcart/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
+	. = ..()
+	if(has_gravity())
+		playsound(src, 'sound/effects/roll.ogg', 100, TRUE)
+
+/obj/structure/closet/crate/trashcart/laundry
+	name = "laundry cart"
+	desc = "A large cart for hauling around large amounts of laundry."
+	icon_state = "laundry"
+	elevation = 14
+	elevation_open = 14
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/closet/crate/medical
 	desc = "A medical crate."

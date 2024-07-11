@@ -441,9 +441,39 @@
 		shade_datum = shade.mind.add_antag_datum(/datum/antagonist/shade_minion)
 	shade_datum.update_master(user.real_name)
 
+<<<<<<< HEAD
 /// Called when a ghost is chosen to become a shade.
 /obj/item/soulstone/proc/on_poll_concluded(mob/living/master, mob/living/victim, mob/dead/observer/ghost)
 	if(isnull(victim) || master.incapacitated() || !master.is_holding(src) || !master.CanReach(victim, src))
+=======
+/**
+ * Gets a ghost from dead chat to replace a missing player when a shade is created.
+ *
+ * Gets ran if a soulstone is used on a body that has no client to take over the shade.
+ *
+ * victim - the body that's being shaded
+ * user - the mob shading the body
+ *
+ * Returns FALSE if no ghosts are available or the replacement fails.
+ * Returns TRUE otherwise.
+ */
+/obj/item/soulstone/proc/get_ghost_to_replace_shade(mob/living/carbon/victim, mob/user)
+	var/mob/dead/observer/chosen_ghost
+	var/list/mob/dead/observer/consenting_candidates = SSpolling.poll_ghost_candidates_for_mob(
+		"Do you want to play as a Shade?",
+		check_jobban = ROLE_CULTIST,
+		role = ROLE_CULTIST,
+		poll_time = 5 SECONDS,
+		target_mob = victim,
+		ignore_category = POLL_IGNORE_SHADE,
+		pic_source = /mob/living/basic/shade,
+		role_name_text = "shade"
+	)
+	if(length(consenting_candidates))
+		chosen_ghost = pick(consenting_candidates)
+
+	if(!victim || user.incapacitated() || !user.is_holding(src) || !user.CanReach(victim, src))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 	if(isnull(ghost?.client))
 		to_chat(master, span_danger("There were no spirits willing to become a shade."))
@@ -461,7 +491,10 @@
 		if(CONSTRUCT_JUGGERNAUT)
 			if(IS_CULTIST(creator))
 				make_new_construct(/mob/living/basic/construct/juggernaut, target, creator, cultoverride, loc_override) // ignore themes, the actual giving of cult info is in the make_new_construct proc
+<<<<<<< HEAD
 				SSblackbox.record_feedback("tally", "cult_shade_to_jugger", 1)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
 			switch(theme)
 				if(THEME_WIZARD)
@@ -473,7 +506,10 @@
 		if(CONSTRUCT_WRAITH)
 			if(IS_CULTIST(creator))
 				make_new_construct(/mob/living/basic/construct/wraith, target, creator, cultoverride, loc_override) // ignore themes, the actual giving of cult info is in the make_new_construct proc
+<<<<<<< HEAD
 				SSblackbox.record_feedback("tally", "cult_shade_to_wraith", 1)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
 			switch(theme)
 				if(THEME_WIZARD)
@@ -485,7 +521,10 @@
 		if(CONSTRUCT_ARTIFICER)
 			if(IS_CULTIST(creator))
 				make_new_construct(/mob/living/basic/construct/artificer, target, creator, cultoverride, loc_override) // ignore themes, the actual giving of cult info is in the make_new_construct proc
+<<<<<<< HEAD
 				SSblackbox.record_feedback("tally", "cult_shade_to_arti", 1)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 				return
 			switch(theme)
 				if(THEME_WIZARD)
@@ -508,16 +547,24 @@
 		newstruct.master = stoner
 		var/datum/action/innate/seek_master/seek_master = new
 		seek_master.Grant(newstruct)
+<<<<<<< HEAD
 
 	if (isnull(target.mind))
 		newstruct.key = target.key
 	else
 		target.mind.transfer_to(newstruct, force_key_move = TRUE)
+=======
+	target.mind?.transfer_to(newstruct, force_key_move = TRUE)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/atom/movable/screen/alert/bloodsense/sense_alert
 	if(newstruct.mind && !IS_CULTIST(newstruct) && ((stoner && IS_CULTIST(stoner)) || cultoverride) && SSticker.HasRoundStarted())
 		newstruct.mind.add_antag_datum(/datum/antagonist/cult/construct)
 	if(IS_CULTIST(stoner) || cultoverride)
+<<<<<<< HEAD
 		to_chat(newstruct, span_cult_bold("You are still bound to serve the cult[stoner ? " and [stoner]" : ""], follow [stoner?.p_their() || "their"] orders and help [stoner?.p_them() || "them"] complete [stoner?.p_their() || "their"] goals at all costs."))
+=======
+		to_chat(newstruct, span_cultbold("You are still bound to serve the cult[stoner ? " and [stoner]" : ""], follow [stoner?.p_their() || "their"] orders and help [stoner?.p_them() || "them"] complete [stoner?.p_their() || "their"] goals at all costs."))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	else if(stoner)
 		to_chat(newstruct, span_boldwarning("You are still bound to serve your creator, [stoner], follow [stoner.p_their()] orders and help [stoner.p_them()] complete [stoner.p_their()] goals at all costs."))
 	newstruct.clear_alert("bloodsense")

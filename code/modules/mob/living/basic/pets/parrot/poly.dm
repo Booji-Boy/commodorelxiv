@@ -31,11 +31,16 @@
 
 /mob/living/basic/parrot/poly/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
+=======
+	REGISTER_REQUIRED_MAP_ITEM(1, 1)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(!memory_saved)
 		roundend_callback = CALLBACK(src, PROC_REF(Write_Memory))
 		SSticker.OnRoundend(roundend_callback)
 
+<<<<<<< HEAD
 	REGISTER_REQUIRED_MAP_ITEM(1, 1) // every map needs a poly!
 	update_appearance()
 
@@ -51,6 +56,10 @@
 	else
 		voice_filter = "rubberband=pitch=1.5" // Use the filter to pitch up if we can't naturally pitch up.
 
+=======
+	update_appearance()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/basic/parrot/poly/Destroy()
 	LAZYREMOVE(SSticker.round_end_events, roundend_callback) // we do the memory writing stuff on death, but this is important to yeet as fast as we can if we need to destroy
 	roundend_callback = null
@@ -180,7 +189,14 @@
 			file_data["longestsurvival"] = longest_survival
 		file_data["longestdeathstreak"] = longest_deathstreak
 
+<<<<<<< HEAD
 	rustg_file_write(json_encode(file_data, JSON_PRETTY_PRINT), file_path)
+=======
+	var/formatted_data
+	formatted_data = json_encode(file_data, JSON_PRETTY_PRINT)
+
+	rustg_file_write(formatted_data, file_path)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	memory_saved = TRUE
 	return TRUE
 
@@ -236,10 +252,13 @@
 		animate(filter, alpha = 200, time = 2 SECONDS, loop = -1)
 		animate(alpha = 60, time = 2 SECONDS)
 
+<<<<<<< HEAD
 	var/datum/disease/parrot_possession/on_possession = new /datum/disease/parrot_possession
 	on_possession.set_parrot(src)
 	possessed_human.ForceContractDisease(on_possession, make_copy = FALSE, del_on_fail = TRUE)
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #undef POLY_DEFAULT
 #undef POLY_LONGEST_SURVIVAL
 #undef POLY_BEATING_DEATHSTREAK

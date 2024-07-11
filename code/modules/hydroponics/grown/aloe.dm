@@ -9,9 +9,9 @@
 	product = /obj/item/food/grown/aloe
 	lifespan = 60
 	endurance = 25
-	maturation = 4
-	production = 4
-	yield = 6
+	maturation = 12
+	production = 12
+	yield = 60
 	growthstages = 5
 	growing_icon = 'icons/obj/service/hydroponics/growing_vegetables.dmi'
 	reagents_add = list(/datum/reagent/consumable/nutriment/vitamin = 0.05, /datum/reagent/consumable/nutriment = 0.05)

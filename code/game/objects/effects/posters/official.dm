@@ -253,7 +253,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/the_owl, 32)
 
 /obj/structure/sign/poster/official/no_erp
 	name = "No ERP"
+<<<<<<< HEAD
 	desc = "This poster reminds the crew that Eroticism, Rape and Pornography are banned on Nanotrasen stations."
+=======
+	desc = "This poster reminds the crew that Extreme Role-Playing is banned on Nanotrasen stations."
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "no_erp"
 
 MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sign/poster/official/no_erp, 32)

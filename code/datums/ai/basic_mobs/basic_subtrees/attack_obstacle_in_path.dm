@@ -31,7 +31,12 @@
 	var/atom/target = controller.blackboard[target_key]
 
 	if (QDELETED(target))
+<<<<<<< HEAD
 		return AI_BEHAVIOR_DELAY | AI_BEHAVIOR_FAILED
+=======
+		finish_action(controller, succeeded = FALSE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/turf/next_step = get_step_towards(basic_mob, target)
 	var/dir_to_next_step = get_dir(basic_mob, next_step)

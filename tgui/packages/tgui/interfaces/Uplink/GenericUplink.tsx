@@ -1,18 +1,32 @@
 import { BooleanLike } from 'common/react';
+<<<<<<< HEAD
 import { useState } from 'react';
 
+=======
+import { useLocalState, useSharedState } from '../../backend';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import {
   Box,
   Button,
   Input,
+<<<<<<< HEAD
   NoticeBox,
   Section,
   Stack,
   Tabs,
 } from '../../components';
+=======
+  Section,
+  Tabs,
+  NoticeBox,
+  Stack,
+  Dimmer,
+} from '../../components';
+import type { InfernoNode } from 'inferno';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 type GenericUplinkProps = {
-  currency?: string | JSX.Element;
+  currency?: string | InfernoNode;
   categories: string[];
   items: Item[];
   handleBuy: (item: Item) => void;
@@ -25,9 +39,21 @@ export const GenericUplink = (props: GenericUplinkProps) => {
 
     handleBuy,
   } = props;
+<<<<<<< HEAD
   const [searchText, setSearchText] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [compactMode, setCompactMode] = useState(false);
+=======
+  const [searchText, setSearchText] = useLocalState('searchText', '');
+  const [selectedCategory, setSelectedCategory] = useLocalState(
+    'category',
+    categories[0],
+  );
+  const [compactMode, setCompactMode] = useSharedState(
+    'compactModeUplink',
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
   let items = props.items.filter((value) => {
     if (searchText.length === 0) {
       return value.category === selectedCategory;
@@ -95,9 +121,14 @@ export type Item = {
   id: string | number;
   name: string;
   category: string;
-  cost: JSX.Element | string;
-  desc: JSX.Element | string;
+  cost: InfernoNode | string;
+  desc: InfernoNode | string;
   disabled: BooleanLike;
+<<<<<<< HEAD
+=======
+  is_locked: BooleanLike;
+  extraData?: ItemData;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 };
 
 export type ItemListProps = {
@@ -113,6 +144,7 @@ const ItemList = (props: ItemListProps) => {
     <Stack vertical>
       {items.map((item, index) => (
         <Stack.Item key={index}>
+<<<<<<< HEAD
           <Section
             key={item.name}
             title={item.name}
@@ -125,6 +157,36 @@ const ItemList = (props: ItemListProps) => {
             }
           >
             {compactMode ? null : item.desc}
+=======
+          <Section>
+            <Section
+              key={item.name}
+              title={item.name}
+              buttons={
+                <Button
+                  content={item.cost}
+                  disabled={item.disabled}
+                  onClick={(e) => handleBuy(item)}
+                />
+              }
+            >
+              {compactMode ? null : item.desc}
+            </Section>
+            {(item.is_locked && (
+              <Dimmer>
+                <Box
+                  color="red"
+                  fontFamily={'Bahnschrift'}
+                  fontSize={2}
+                  align={'top'}
+                  as="span"
+                >
+                  ENTRY LOCKED
+                </Box>
+              </Dimmer>
+            )) ||
+              null}
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
           </Section>
         </Stack.Item>
       ))}

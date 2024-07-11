@@ -8,8 +8,13 @@
 ///// Repair puncture wounds
 /datum/surgery/repair_puncture
 	name = "Repair puncture"
+<<<<<<< HEAD
 	surgery_flags = SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
 	targetable_wound = /datum/wound/pierce/bleed
+=======
+	surgery_flags =  SURGERY_SELF_OPERABLE | SURGERY_REQUIRE_RESTING | SURGERY_REQUIRE_LIMB | SURGERY_REQUIRES_REAL_LIMB
+	targetable_wound = /datum/wound/pierce
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	target_mobtypes = list(/mob/living/carbon)
 	possible_locs = list(
 		BODY_ZONE_R_ARM,
@@ -28,12 +33,19 @@
 
 /datum/surgery/repair_puncture/can_start(mob/living/user, mob/living/carbon/target)
 	. = ..()
+<<<<<<< HEAD
 	if(!.)
 		return .
 
 	var/datum/wound/pierce/bleed/pierce_wound = target.get_bodypart(user.zone_selected).get_wound_type(targetable_wound)
 	ASSERT(pierce_wound, "[type] on [target] has no pierce wound when it should have been guaranteed to have one by can_start")
 	return pierce_wound.blood_flow > 0
+=======
+	if(.)
+		var/obj/item/bodypart/targeted_bodypart = target.get_bodypart(user.zone_selected)
+		var/datum/wound/burn/flesh/pierce_wound = targeted_bodypart.get_wound_type(targetable_wound)
+		return(pierce_wound && pierce_wound.blood_flow > 0)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //SURGERY STEPS
 
@@ -81,7 +93,7 @@
 		span_notice("[user] successfully realigns some of the blood vessels in [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 		span_notice("[user] successfully realigns some of the blood vessels in  [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 	)
-	log_combat(user, target, "excised infected flesh in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+	log_combat(user, target, "excised infected flesh in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 	surgery.operated_bodypart.receive_damage(brute=3, wound_bonus=CANT_WOUND)
 	pierce_wound.adjust_blood_flow(-0.25)
 	return ..()
@@ -142,7 +154,7 @@
 		span_notice("[user] successfully melds some of the split blood vessels in [target]'s [target.parse_zone_with_bodypart(target_zone)] with [tool]!"),
 		span_notice("[user] successfully melds some of the split blood vessels in [target]'s [target.parse_zone_with_bodypart(target_zone)]!"),
 	)
-	log_combat(user, target, "dressed burns in", addition="COMBAT MODE: [uppertext(user.combat_mode)]")
+	log_combat(user, target, "dressed burns in", addition="COMBAT MODE: [uppertext((user.istate & ISTATE_HARM))]")
 	pierce_wound.adjust_blood_flow(-0.5)
 	if(pierce_wound.blood_flow > 0)
 		surgery.status = REALIGN_INNARDS

@@ -16,10 +16,25 @@
 	var/efficiency = 20
 	///Is this machine on or off
 	var/on = FALSE
+<<<<<<< HEAD
 	///Higher values mean larger smoke pufs but also more power & reagents consumed
 	var/setting = 1
 	///Max setting acheived from upgraded capacitors
 	var/max_range = 3
+=======
+	var/cooldown = 0
+	var/screen = "home"
+	var/useramount = 30 // Last used amount
+	var/setting = 1 // displayed range is 3 * setting
+	var/max_range = 3 // displayed max range is 3 * max range
+
+/datum/effect_system/fluid_spread/smoke/chem/smoke_machine/set_up(range = 1, amount = DIAMOND_AREA(range), atom/holder, atom/location = null, datum/reagents/carry = null, efficiency = 10, silent=FALSE)
+	src.holder = holder
+	src.location = get_turf(location)
+	src.amount = amount
+	carry?.copy_to(chemholder, 20)
+	carry?.remove_all(amount / efficiency)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /// A factory which produces clouds of smoke for the smoke machine.
 /datum/effect_system/fluid_spread/smoke/chem/smoke_machine
@@ -177,7 +192,28 @@
 		ui.open()
 
 /obj/machinery/smoke_machine/ui_data(mob/user)
+<<<<<<< HEAD
 	. = list()
+=======
+	var/data = list()
+	var/TankContents[0]
+	var/TankCurrentVolume = 0
+	for(var/datum/reagent/R in reagents.reagent_list)
+		var/chem_name = R.name
+		if(istype(R, /datum/reagent/ammonia/urine) && user.client?.prefs.read_preference(/datum/preference/toggle/prude_mode))
+			chem_name = "Ammonia?"
+		TankContents.Add(list(list("name" = chem_name, "volume" = R.volume))) // list in a list because Byond merges the first list...
+		TankCurrentVolume += R.volume
+	data["TankContents"] = TankContents
+	data["isTankLoaded"] = reagents.total_volume ? TRUE : FALSE
+	data["TankCurrentVolume"] = reagents.total_volume ? reagents.total_volume : null
+	data["TankMaxVolume"] = reagents.maximum_volume
+	data["active"] = on
+	data["setting"] = setting
+	data["screen"] = screen
+	data["maxSetting"] = max_range
+	return data
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/tank_data = list()
 	tank_data["maxVolume"] = reagents.maximum_volume

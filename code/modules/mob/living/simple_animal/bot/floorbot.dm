@@ -396,8 +396,13 @@
 	new /obj/item/stack/tile/iron/base(Tsec, 1)
 	return ..()
 
+<<<<<<< HEAD
 /mob/living/simple_animal/bot/floorbot/UnarmedAttack(atom/A, proximity_flag, list/modifiers)
 	if(!can_unarmed_attack())
+=======
+/mob/living/simple_animal/bot/floorbot/UnarmedAttack(atom/A, proximity_flag)
+	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return
 	if(isturf(A))
 		repair(A)

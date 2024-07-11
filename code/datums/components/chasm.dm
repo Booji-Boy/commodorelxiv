@@ -11,7 +11,12 @@
 		/obj/docking_port,
 		/obj/effect/abstract,
 		/obj/effect/collapse,
+<<<<<<< HEAD
 		/obj/effect/constructing_effect,
+=======
+		/obj/effect/particle_effect/ion_trails,
+		/obj/effect/particle_effect/sparks,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		/obj/effect/dummy/phased_mob,
 		/obj/effect/ebeam,
 		/obj/effect/fishing_lure,
@@ -107,11 +112,16 @@
 		return CHASM_NOT_DROPPING
 	if(is_type_in_typecache(dropped_thing, forbidden_types) || (!isliving(dropped_thing) && !isobj(dropped_thing)))
 		return CHASM_NOT_DROPPING
+<<<<<<< HEAD
 	if(dropped_thing.throwing || (dropped_thing.movement_type & MOVETYPES_NOT_TOUCHING_GROUND))
 		return CHASM_REGISTER_SIGNALS
 	for(var/atom/thing_to_check as anything in parent)
 		if(HAS_TRAIT(thing_to_check, TRAIT_CHASM_STOPPER))
 			return CHASM_NOT_DROPPING
+=======
+	if(dropped_thing.throwing || (dropped_thing.movement_type & (FLOATING|FLYING)))
+		return CHASM_REGISTER_SIGNALS
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	//Flies right over the chasm
 	if(ismob(dropped_thing))

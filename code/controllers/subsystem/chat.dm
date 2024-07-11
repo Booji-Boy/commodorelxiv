@@ -61,6 +61,10 @@ SUBSYSTEM_DEF(chat)
 
 /datum/controller/subsystem/chat/proc/queue(queue_target, list/message_data)
 	var/list/targets = islist(queue_target) ? queue_target : list(queue_target)
+<<<<<<< HEAD
+=======
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	for(var/target in targets)
 		var/client/client = CLIENT_FROM_VAR(target)
 		if(isnull(client))

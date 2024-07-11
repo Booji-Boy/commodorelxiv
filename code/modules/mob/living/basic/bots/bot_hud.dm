@@ -50,7 +50,11 @@
 	clear_path_hud()
 
 	var/list/path_images = active_hud_list[DIAG_PATH_HUD]
+<<<<<<< HEAD
 	LAZYCLEARLIST(path_images)
+=======
+	QDEL_LIST(path_images)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/list/path_huds_watching_me = list(GLOB.huds[DATA_HUD_DIAGNOSTIC_ADVANCED])
 

@@ -161,6 +161,10 @@
 
 /obj/machinery/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
+=======
+	GLOB.machines += src
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	SSmachines.register_machine(src)
 
 	if(ispath(circuit, /obj/item/circuitboard))
@@ -184,6 +188,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/LateInitialize()
+<<<<<<< HEAD
 	SHOULD_NOT_OVERRIDE(TRUE)
 	post_machine_initialize()
 
@@ -209,6 +214,43 @@
 		return
 	update_current_power_usage()
 	setup_area_power_relationship()
+
+=======
+	. = ..()
+	post_machine_initialize()
+
+/obj/machinery/Destroy()
+	GLOB.machines.Remove(src)
+	SSmachines.unregister_machine(src)
+	end_processing()
+	dump_inventory_contents()
+
+	if (!isnull(component_parts))
+		// Don't delete the stock part singletons
+		for (var/atom/atom_part in component_parts)
+			qdel(atom_part)
+		component_parts.Cut()
+		component_parts = null
+
+	QDEL_NULL(circuit)
+	unset_static_power()
+	return ..()
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
+/**
+ * Called in LateInitialize meant to be the machine replacement to it
+ * This sets up power for the machine and requires parent be called,
+ * ensuring power works on all machines unless exempted with NO_POWER_USE.
+ * This is the proc to override if you want to do anything in LateInitialize.
+ */
+/obj/machinery/proc/post_machine_initialize()
+	SHOULD_CALL_PARENT(TRUE)
+	power_change()
+	if(use_power == NO_POWER_USE)
+		return
+	update_current_power_usage()
+	setup_area_power_relationship()
+
 
 /**
  * proc to call when the machine starts to require power after a duration of not requiring power
@@ -603,7 +645,11 @@
 	if(!isliving(user))
 		return FALSE //no ghosts allowed, sorry
 
+<<<<<<< HEAD
 	if(!HAS_SILICON_ACCESS(user) && !user.can_hold_items())
+=======
+	if(!issilicon(user) && !user.can_hold_items())
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE //spiders gtfo
 
 	if(HAS_SILICON_ACCESS(user)) // If we are a silicon, make sure the machine allows silicons to interact with it
@@ -691,7 +737,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/attack_paw(mob/living/user, list/modifiers)
-	if(!user.combat_mode)
+	if(!(user.istate & ISTATE_HARM))
 		return attack_hand(user)
 
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -766,7 +812,11 @@
 		return
 	update_last_used(user)
 
+<<<<<<< HEAD
 /obj/machinery/base_item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+=======
+/obj/machinery/tool_act(mob/living/user, obj/item/tool, tool_type, is_right_clicking)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(SEND_SIGNAL(user, COMSIG_TRY_USE_MACHINE, src) & COMPONENT_CANT_USE_MACHINE_TOOLS)
 		return ITEM_INTERACT_BLOCKING
 
@@ -789,6 +839,7 @@
 /obj/machinery/proc/RefreshParts()
 	SHOULD_CALL_PARENT(TRUE)
 	//reset to baseline
+	/*
 	idle_power_usage = initial(idle_power_usage)
 	active_power_usage = initial(active_power_usage)
 	if(!component_parts || !component_parts.len)
@@ -803,11 +854,18 @@
 
 	idle_power_usage = initial(idle_power_usage) * (1 + parts_energy_rating)
 	active_power_usage = initial(active_power_usage) * (1 + parts_energy_rating)
+	*/
 	update_current_power_usage()
 	SEND_SIGNAL(src, COMSIG_MACHINERY_REFRESH_PARTS)
 
 /obj/machinery/proc/default_pry_open(obj/item/crowbar, close_after_pry = FALSE, open_density = FALSE, closed_density = TRUE)
+<<<<<<< HEAD
 	. = !(state_open || panel_open || is_operational) && crowbar.tool_behaviour == TOOL_CROWBAR
+=======
+	if(ismob(crowbar)) // monkestation edit: make certain issues clearer with an explicit runtime
+		CRASH("The user should not be passed to /obj/machinery/proc/default_pry_open, only the tool being used.")
+	. = !(state_open || panel_open || is_operational || (flags_1 & NODECONSTRUCT_1)) && crowbar.tool_behaviour == TOOL_CROWBAR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!.)
 		return
 	crowbar.play_tool_sound(src, 50)
@@ -817,7 +875,13 @@
 		close_machine(density_to_set = closed_density)
 
 /obj/machinery/proc/default_deconstruction_crowbar(obj/item/crowbar, ignore_panel = 0, custom_deconstruct = FALSE)
+<<<<<<< HEAD
 	. = (panel_open || ignore_panel) && crowbar.tool_behaviour == TOOL_CROWBAR
+=======
+	if(ismob(crowbar)) // monkestation edit: make certain issues clearer with an explicit runtime
+		CRASH("The user should not be passed to /obj/machinery/proc/default_deconstruction_crowbar, only the tool being used.")
+	. = (panel_open || ignore_panel) && !(flags_1 & NODECONSTRUCT_1) && crowbar.tool_behaviour == TOOL_CROWBAR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(!. || custom_deconstruct)
 		return
 	crowbar.play_tool_sound(src, 50)

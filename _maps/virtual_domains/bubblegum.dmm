@@ -69,9 +69,13 @@
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "T" = (
+<<<<<<< HEAD
 /obj/modular_map_root/safehouse{
 	key = "lavaland_boss"
 	},
+=======
+/obj/effect/landmark/bitrunning/safehouse_spawn,
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /turf/template_noop,
 /area/virtual_domain/safehouse)
 "W" = (

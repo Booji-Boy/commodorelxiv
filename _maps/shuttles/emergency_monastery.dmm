@@ -178,11 +178,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"bK" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/watermelon/holy,
-/turf/open/floor/grass,
-/area/shuttle/escape)
 "bT" = (
 /obj/structure/window/reinforced/spawner/directional/east,
 /obj/structure/window/reinforced/spawner/directional/south,
@@ -855,10 +850,9 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"mQ" = (
-/obj/machinery/hydroponics/soil,
-/obj/machinery/light/small/directional/north,
-/obj/item/seeds/watermelon/holy,
+"mR" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/carrot,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "nb" = (
@@ -938,6 +932,12 @@
 	},
 /turf/open/space,
 /area/shuttle/escape)
+"on" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/sugarcane,
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/grass,
+/area/shuttle/escape)
 "ov" = (
 /obj/machinery/light/small/directional/east,
 /obj/machinery/camera/directional/east{
@@ -981,11 +981,14 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
+<<<<<<< HEAD
 "oI" = (
 /obj/machinery/airalarm/directional/north,
 /obj/effect/mapping_helpers/airalarm/unlocked,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 "oS" = (
 /obj/structure/chair/wood{
 	dir = 1
@@ -1491,6 +1494,12 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
+"wf" = (
+/obj/machinery/growing/soil,
+/obj/machinery/light/small/directional/south,
+/obj/item/seeds/poppy,
+/turf/open/floor/grass,
+/area/shuttle/escape)
 "wp" = (
 /turf/open/floor/iron/chapel{
 	dir = 4
@@ -1499,6 +1508,11 @@
 "wt" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on,
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"wL" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/wheat,
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "wS" = (
 /obj/machinery/camera/directional/east{
@@ -1648,6 +1662,12 @@
 	},
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"yY" = (
+/obj/machinery/growing/soil,
+/obj/machinery/light/small/directional/north,
+/obj/item/seeds/watermelon/holy,
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "yZ" = (
 /obj/machinery/light/small/directional/south,
@@ -1878,6 +1898,11 @@
 /obj/effect/turf_decal/tile/red/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
+"BH" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/sugarcane,
+/turf/open/floor/grass,
+/area/shuttle/escape)
 "BQ" = (
 /obj/machinery/door/airlock{
 	id_tag = "Cell1";
@@ -2100,21 +2125,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"EL" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/carrot,
-/turf/open/floor/grass,
-/area/shuttle/escape)
 "ET" = (
 /obj/structure/flora/bush/flowers_pp/style_random,
 /obj/structure/flora/bush/flowers_br/style_random,
 /obj/structure/flora/bush/sparsegrass/style_random,
-/turf/open/floor/grass,
-/area/shuttle/escape)
-"EU" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/wheat,
-/obj/machinery/light/small/directional/west,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "Fa" = (
@@ -2154,6 +2168,11 @@
 /obj/structure/table,
 /obj/machinery/reagentgrinder,
 /turf/open/floor/iron,
+/area/shuttle/escape)
+"Fu" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/poppy,
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "Fx" = (
 /obj/structure/table,
@@ -2223,8 +2242,8 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"Gk" = (
-/obj/machinery/hydroponics/soil,
+"Gp" = (
+/obj/machinery/growing/soil,
 /obj/item/seeds/harebell,
 /turf/open/floor/grass,
 /area/shuttle/escape)
@@ -2259,6 +2278,12 @@
 /area/shuttle/escape)
 "GN" = (
 /obj/structure/flora/bush/flowers_yw/style_random,
+/turf/open/floor/grass,
+/area/shuttle/escape)
+"GQ" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/wheat,
+/obj/machinery/light/small/directional/west,
 /turf/open/floor/grass,
 /area/shuttle/escape)
 "GU" = (
@@ -2304,11 +2329,6 @@
 /area/shuttle/escape)
 "HD" = (
 /turf/open/floor/iron/chapel,
-/area/shuttle/escape)
-"HL" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/poppy,
-/turf/open/floor/grass,
 /area/shuttle/escape)
 "HS" = (
 /obj/structure/flora/bush/sparsegrass/style_random,
@@ -2579,6 +2599,11 @@
 "Li" = (
 /obj/structure/bookcase/random/adult,
 /obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"Lj" = (
+/obj/machinery/airalarm/directional/north,
+/obj/effect/mapping_helpers/airalarm/unlocked,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
 "Ll" = (
@@ -2912,11 +2937,6 @@
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/shuttle/escape)
-"Py" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/sugarcane,
-/turf/open/floor/grass,
-/area/shuttle/escape)
 "Pz" = (
 /obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/carpet,
@@ -3045,12 +3065,6 @@
 	},
 /turf/open/floor/carpet,
 /area/shuttle/escape)
-"Rd" = (
-/obj/machinery/hydroponics/soil,
-/obj/machinery/light/small/directional/south,
-/obj/item/seeds/poppy,
-/turf/open/floor/grass,
-/area/shuttle/escape)
 "Rg" = (
 /obj/structure/bed,
 /obj/item/bedsheet/yellow,
@@ -3133,12 +3147,6 @@
 "RQ" = (
 /obj/machinery/vending/hydronutrients,
 /turf/open/floor/iron,
-/area/shuttle/escape)
-"RZ" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/sugarcane,
-/obj/machinery/light/small/directional/east,
-/turf/open/floor/grass,
 /area/shuttle/escape)
 "Sb" = (
 /obj/effect/decal/cleanable/dirt,
@@ -3413,11 +3421,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
-/area/shuttle/escape)
-"UC" = (
-/obj/machinery/hydroponics/soil,
-/obj/item/seeds/wheat,
-/turf/open/floor/grass,
 /area/shuttle/escape)
 "UJ" = (
 /obj/machinery/light/small/directional/west,
@@ -3741,6 +3744,11 @@
 	dir = 8
 	},
 /turf/open/floor/iron/dark,
+/area/shuttle/escape)
+"YL" = (
+/obj/machinery/growing/soil,
+/obj/item/seeds/watermelon/holy,
+/turf/open/floor/grass,
 /area/shuttle/escape)
 "YO" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -4275,7 +4283,7 @@ jx
 kM
 lP
 nr
-oI
+Lj
 zb
 YE
 BG
@@ -5518,9 +5526,9 @@ zB
 it
 Dc
 DY
-EU
-Gk
-HL
+GQ
+Gp
+Fu
 Kg
 oc
 hY
@@ -5682,9 +5690,9 @@ Rz
 AM
 GN
 Vi
-UC
-Gk
-Rd
+wL
+Gp
+wf
 nr
 oc
 hQ
@@ -5924,9 +5932,9 @@ yc
 AG
 oc
 nr
-mQ
-EL
-Py
+yY
+mR
+BH
 OM
 Vi
 GU
@@ -6088,9 +6096,9 @@ yc
 qC
 oc
 Kg
-bK
-EL
-RZ
+YL
+mR
+on
 Vi
 Ff
 zX

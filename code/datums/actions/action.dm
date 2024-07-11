@@ -50,9 +50,12 @@
 	/// full key we are bound to
 	var/full_key
 
+<<<<<<< HEAD
 	/// Toggles whether this action is usable or not
 	var/action_disabled = FALSE
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /datum/action/New(Target)
 	link_to(Target)
 
@@ -218,7 +221,7 @@
  * force - whether we're forcing a full update
  */
 /datum/action/proc/build_button_icon(atom/movable/screen/movable/action_button/button, update_flags = ALL, force = FALSE)
-	if(!button)
+	if(QDELETED(button)) // monkestation edit: more elaborate check
 		return
 
 	if(update_flags & UPDATE_BUTTON_NAME)
@@ -243,9 +246,9 @@
  * force - whether an update is forced regardless of existing status
  */
 /datum/action/proc/update_button_name(atom/movable/screen/movable/action_button/button, force = FALSE)
-	button.name = name
+	button?.name = name
 	if(desc)
-		button.desc = desc
+		button?.desc = desc
 
 /**
  * Creates the background underlay for the button
@@ -254,7 +257,7 @@
  * force - whether an update is forced regardless of existing status
  */
 /datum/action/proc/apply_button_background(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(!background_icon || !background_icon_state || (current_button.active_underlay_icon_state == background_icon_state && !force))
+	if(QDELETED(current_button) || !background_icon || !background_icon_state || (current_button.active_underlay_icon_state == background_icon_state && !force))
 		return
 
 	// What icons we use for our background
@@ -286,7 +289,7 @@
  * force - whether an update is forced regardless of existing status
  */
 /datum/action/proc/apply_button_icon(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-	if(!button_icon || !button_icon_state || (current_button.icon_state == button_icon_state && !force))
+	if(QDELETED(current_button) || !button_icon || !button_icon_state || (current_button.icon_state == button_icon_state && !force))
 		return
 
 	current_button.icon = button_icon
@@ -299,10 +302,9 @@
  * force - whether an update is forced regardless of existing status
  */
 /datum/action/proc/apply_button_overlay(atom/movable/screen/movable/action_button/current_button, force = FALSE)
-
 	SEND_SIGNAL(src, COMSIG_ACTION_OVERLAY_APPLY, current_button, force)
 
-	if(!overlay_icon || !overlay_icon_state || (current_button.active_overlay_icon_state == overlay_icon_state && !force))
+	if(QDELETED(current_button) || !overlay_icon || !overlay_icon_state || (current_button.active_overlay_icon_state == overlay_icon_state && !force))
 		return
 
 	current_button.cut_overlay(current_button.button_overlay)
@@ -320,9 +322,9 @@
 /datum/action/proc/update_button_status(atom/movable/screen/movable/action_button/current_button, force = FALSE)
 	current_button.update_keybind_maptext(full_key)
 	if(IsAvailable())
-		current_button.color = rgb(255,255,255,255)
+		current_button?.color = rgb(255,255,255,255)
 	else
-		current_button.color = transparent_when_unavailable ? rgb(128,0,0,128) : rgb(128,0,0)
+		current_button?.color = transparent_when_unavailable ? rgb(128,0,0,128) : rgb(128,0,0)
 
 /// Gives our action to the passed viewer.
 /// Puts our action in their actions list and shows them the button.
@@ -337,7 +339,7 @@
 /// Adds our action button to the screen of the passed viewer.
 /datum/action/proc/ShowTo(mob/viewer)
 	var/datum/hud/our_hud = viewer.hud_used
-	if(!our_hud || viewers[our_hud]) // There's no point in this if you have no hud in the first place
+	if(QDELETED(our_hud) || viewers[our_hud]) // There's no point in this if you have no hud in the first place
 		return
 
 	var/atom/movable/screen/movable/action_button/button = create_button()
@@ -372,7 +374,9 @@
 	for(var/datum/action/action in owner.actions)
 		if(action == src) // This could be us, which is dumb
 			continue
-		var/atom/movable/screen/movable/action_button/button = action.viewers[owner.hud_used]
+		var/atom/movable/screen/movable/action_button/button = action?.viewers[owner?.hud_used]
+		if(QDELETED(button)) // monkestation edit: fix runtime error
+			continue
 		if(action.name == name && button.id)
 			bitfield |= button.id
 

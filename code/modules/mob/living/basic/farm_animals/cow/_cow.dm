@@ -47,7 +47,11 @@
 	setup_udder()
 	setup_eating()
 	. = ..()
+<<<<<<< HEAD
 	ai_controller.set_blackboard_key(BB_BASIC_FOODS, typecacheof(food_types))
+=======
+	ai_controller.set_blackboard_key(BB_BASIC_FOODS, food_types)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 ///wrapper for the udder component addition so you can have uniquely uddered cow subtypes
 /mob/living/basic/cow/proc/setup_udder()
@@ -63,7 +67,11 @@
 	var/static/list/food_types
 	if(!food_types)
 		food_types = src.food_types.Copy()
+<<<<<<< HEAD
 	AddComponent(/datum/component/tameable, food_types = food_types, tame_chance = 25, bonus_tame_chance = 15)
+=======
+	AddComponent(/datum/component/tameable, food_types = food_types, tame_chance = 25, bonus_tame_chance = 15, after_tame = CALLBACK(src, PROC_REF(tamed)))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	AddElement(/datum/element/basic_eating, food_types = food_types)
 
 /mob/living/basic/cow/tamed(mob/living/tamer, atom/food)

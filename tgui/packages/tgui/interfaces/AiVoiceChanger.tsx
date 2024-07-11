@@ -13,9 +13,15 @@ type Data = {
   voices: string[];
 };
 
+<<<<<<< HEAD
 export function AiVoiceChanger(props) {
   const { act, data } = useBackend<Data>();
   const { loud, name, on, say_verb, voices, selected } = data;
+=======
+export const AiVoiceChanger = (props) => {
+  const { act, data } = useBackend<Data>();
+  const { loud, name, on, say_verb, voices } = data;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Window title="Voice changer settings" width={400} height={200}>

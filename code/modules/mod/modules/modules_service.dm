@@ -34,7 +34,11 @@
 	icon_state = "microwave_beam"
 	module_type = MODULE_ACTIVE
 	complexity = 1
+<<<<<<< HEAD
 	use_energy_cost = DEFAULT_CHARGE_DRAIN * 5
+=======
+	use_power_cost = DEFAULT_CHARGE_DRAIN * 5
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	incompatible_modules = list(/obj/item/mod/module/microwave_beam, /obj/item/mod/module/organ_thrower)
 	cooldown_time = 10 SECONDS
 	required_slots = list(ITEM_SLOT_GLOVES)

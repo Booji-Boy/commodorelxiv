@@ -176,6 +176,11 @@
 		var/close_enough = replacer.works_from_distance || user.Adjacent(src)
 		if(!close_enough)
 			return FALSE
+<<<<<<< HEAD
+=======
+	if((user.istate & ISTATE_HARM))
+		return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(install_board(user, target_board, by_hand = FALSE))
 		// After installing, attempts to follow up by inserting parts

@@ -38,9 +38,15 @@ GLOBAL_VAR_INIT(message_delay, FALSE)
 	if(original && ("compression" in signal.data))
 		original.data["compression"] = signal.data["compression"]
 
+<<<<<<< HEAD
 	var/turf/current_turf = get_turf(src)
 	if (current_turf)
 		signal.levels |= SSmapping.get_connected_levels(current_turf)
+=======
+	var/turf/T = get_turf(src)
+	if (T)
+		signal.levels |= SSmapping.get_connected_levels(T)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	GLOB.recent_messages.Add(signal_message)
 

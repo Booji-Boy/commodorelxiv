@@ -86,7 +86,12 @@
 	animate(src, transform = matrix(), time = SHUTTER_MOVEMENT_DURATION, easing = CUBIC_EASING|EASE_OUT)
 
 /atom/movable/screen/lobby/background
+<<<<<<< HEAD
 	icon = 'icons/hud/lobby/background.dmi'
+=======
+	layer = LOBBY_BACKGROUND_LAYER
+	icon = 'icons/hud/lobby/background_monke.dmi'
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon_state = "background"
 	screen_loc = "TOP,CENTER:-61"
 
@@ -155,8 +160,12 @@
 
 ///Prefs menu
 /atom/movable/screen/lobby/button/character_setup
+<<<<<<< HEAD
 	name = "View Character Setup"
 	screen_loc = "TOP:-70,CENTER:-54"
+=======
+	screen_loc = "TOP:-87,CENTER:+100"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon = 'icons/hud/lobby/character_setup.dmi'
 	icon_state = "character_setup"
 	base_icon_state = "character_setup"
@@ -173,8 +182,12 @@
 
 ///Button that appears before the game has started
 /atom/movable/screen/lobby/button/ready
+<<<<<<< HEAD
 	name = "Toggle Readiness"
 	screen_loc = "TOP:-8,CENTER:-65"
+=======
+	screen_loc = "TOP:-54,CENTER:-35"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon = 'icons/hud/lobby/ready.dmi'
 	icon_state = "not_ready"
 	base_icon_state = "not_ready"
@@ -213,6 +226,10 @@
 	if(ready)
 		new_player.ready = PLAYER_READY_TO_PLAY
 		base_icon_state = "ready"
+		if(!new_player.client.readied_store)
+			new_player.client.readied_store = new(new_player)
+		else
+			new_player.client.readied_store.ui_interact(new_player)
 	else
 		new_player.ready = PLAYER_NOT_READY
 		base_icon_state = "not_ready"
@@ -221,8 +238,12 @@
 
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
+<<<<<<< HEAD
 	name = "Join Game"
 	screen_loc = "TOP:-13,CENTER:-58"
+=======
+	screen_loc = "TOP:-54,CENTER:-35"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon = 'icons/hud/lobby/join.dmi'
 	icon_state = "" //Default to not visible
 	base_icon_state = "join_game"
@@ -292,8 +313,12 @@
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(show_join_button))
 
 /atom/movable/screen/lobby/button/observe
+<<<<<<< HEAD
 	name = "Observe"
 	screen_loc = "TOP:-40,CENTER:-54"
+=======
+	screen_loc = "TOP:-54,CENTER:+82"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon = 'icons/hud/lobby/observe.dmi'
 	icon_state = "observe_disabled"
 	base_icon_state = "observe"
@@ -319,16 +344,77 @@
 	set_button_status(TRUE)
 	UnregisterSignal(SSticker, COMSIG_TICKER_ENTER_PREGAME)
 
+<<<<<<< HEAD
 //Subtype the bottom buttons away so the collapse/expand shutter goes behind them
 /atom/movable/screen/lobby/button/bottom
 	layer = LOBBY_BOTTOM_BUTTON_LAYER
+=======
+/atom/movable/screen/lobby/button/patreon_link
+	icon = 'icons/hud/lobby/bottom_buttons.dmi'
+	icon_state = "patreon"
+	base_icon_state = "patreon"
+	screen_loc = "TOP:-126,CENTER:86"
+
+/atom/movable/screen/lobby/button/patreon_link/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+	if(!CONFIG_GET(string/patreon_link_website))
+		return
+	hud.mymob.client << link("[CONFIG_GET(string/patreon_link_website)]?ckey=[hud.mymob.client.ckey]")
+
+/atom/movable/screen/lobby/button/intents
+	icon = 'icons/hud/lobby/bottom_buttons.dmi'
+	icon_state = "intents"
+	base_icon_state = "intents"
+	screen_loc = "TOP:-126,CENTER:62"
+
+/atom/movable/screen/lobby/button/intents/Click(location, control, params)
+	. = ..()
+	if(!hud.mymob.client.challenge_menu)
+		var/datum/challenge_selector/new_tgui = new(hud.mymob)
+		new_tgui.ui_interact(hud.mymob)
+	else
+		hud.mymob.client.challenge_menu.ui_interact(hud.mymob)
+/atom/movable/screen/lobby/button/discord
+	icon = 'icons/hud/lobby/bottom_buttons.dmi'
+	icon_state = "discord"
+	base_icon_state = "discord"
+	screen_loc = "TOP:-126,CENTER:38"
+
+/atom/movable/screen/lobby/button/discord/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+	hud.mymob.client << link("https://discord.gg/monkestation")
+
+/atom/movable/screen/lobby/button/twitch
+	icon = 'icons/hud/lobby/bottom_buttons.dmi'
+	icon_state = "info"
+	base_icon_state = "info"
+	screen_loc = "TOP:-126,CENTER:14"
+
+/atom/movable/screen/lobby/button/twitch/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+	if(!CONFIG_GET(string/twitch_link_website))
+		return
+	hud.mymob.client << link("[CONFIG_GET(string/twitch_link_website)]?ckey=[hud.mymob.client.ckey]")
+
+/atom/movable/screen/lobby/button/settings
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	icon = 'icons/hud/lobby/bottom_buttons.dmi'
 
 /atom/movable/screen/lobby/button/bottom/settings
 	name = "View Game Preferences"
 	icon_state = "settings"
 	base_icon_state = "settings"
+<<<<<<< HEAD
 	screen_loc = "TOP:-122,CENTER:+29"
+=======
+	screen_loc = "TOP:-126,CENTER:-10"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/screen/lobby/button/bottom/settings/Click(location, control, params)
 	. = ..()
@@ -340,21 +426,53 @@
 	preferences.update_static_data(usr)
 	preferences.ui_interact(usr)
 
+<<<<<<< HEAD
 /atom/movable/screen/lobby/button/bottom/changelog_button
 	name = "View Changelog"
 	icon_state = "changelog"
 	base_icon_state = "changelog"
 	screen_loc ="TOP:-122,CENTER:+57"
+=======
+/atom/movable/screen/lobby/button/volume
+	icon = 'icons/hud/lobby/bottom_buttons.dmi'
+	icon_state = "volume"
+	base_icon_state = "volume"
+	screen_loc = "TOP:-126,CENTER:-34"
+
+/atom/movable/screen/lobby/button/volume/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+
+	var/datum/preferences/preferences = hud.mymob.client.prefs
+	if(!preferences.pref_mixer)
+		preferences.pref_mixer = new
+	preferences.pref_mixer.open_ui(hud.mymob)
+
+/atom/movable/screen/lobby/button/changelog_button
+	icon = 'icons/hud/lobby/changelog.dmi'
+	icon_state = "changelog"
+	base_icon_state = "changelog"
+	screen_loc ="TOP:-98,CENTER:+45"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/screen/lobby/button/bottom/changelog_button/Click(location, control, params)
 	. = ..()
 	usr.client?.changelog()
 
+<<<<<<< HEAD
 /atom/movable/screen/lobby/button/bottom/crew_manifest
 	name = "View Crew Manifest"
 	icon_state = "crew_manifest"
 	base_icon_state = "crew_manifest"
 	screen_loc = "TOP:-122,CENTER:+2"
+=======
+/atom/movable/screen/lobby/button/crew_manifest
+	icon = 'icons/hud/lobby/manifest.dmi'
+	icon_state = "manifest"
+	base_icon_state = "manifest"
+	screen_loc = "TOP:-98,CENTER:-9"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /atom/movable/screen/lobby/button/bottom/crew_manifest/Click(location, control, params)
 	. = ..()
@@ -363,12 +481,25 @@
 	var/mob/dead/new_player/new_player = hud.mymob
 	new_player.ViewManifest()
 
+<<<<<<< HEAD
 /atom/movable/screen/lobby/button/bottom/poll
 	name = "View Available Polls"
 	icon_state = "poll"
 	base_icon_state = "poll"
 	screen_loc = "TOP:-122,CENTER:-26"
 	///Whether the button should have a New Poll notification overlay
+=======
+/atom/movable/screen/lobby/button/changelog_button/Click(location, control, params)
+	. = ..()
+	usr.client?.changelog()
+
+/atom/movable/screen/lobby/button/poll
+	icon = 'icons/hud/lobby/poll.dmi'
+	icon_state = "poll"
+	base_icon_state = "poll"
+	screen_loc = "TOP:-98,CENTER:-40"
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/new_poll = FALSE
 
 /atom/movable/screen/lobby/button/bottom/poll/SlowInit(mapload)

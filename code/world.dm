@@ -15,10 +15,13 @@
 	view = "15x15"
 	hub = "Exadv1.spacestation13"
 	hub_password = "kMZy3U5jJHSiBQjr"
-	name = "/tg/ Station 13"
+	name = "MonkeStation 2.0" // monkestation edit: rebranding
 	fps = 20
+<<<<<<< HEAD
 	cache_lifespan = 0
 	map_format = SIDE_MAP
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 #ifdef FIND_REF_NO_CHECK_TICK
 	loop_checks = FALSE
 #endif

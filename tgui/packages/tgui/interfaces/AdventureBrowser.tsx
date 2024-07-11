@@ -1,6 +1,17 @@
 import { useBackend, useLocalState } from '../backend';
+<<<<<<< HEAD
 import { Box, Button, NoticeBox, Section, Table } from '../components';
 import { formatTime } from '../format';
+=======
+import {
+  Button,
+  LabeledList,
+  Section,
+  Box,
+  NoticeBox,
+  Table,
+} from '../components';
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 import { Window } from '../layouts';
 import { AdventureDataProvider, AdventureScreen } from './ExodroneConsole';
 
@@ -23,6 +34,69 @@ type AdventureBrowserData = AdventureDataProvider & {
   delay_message: string;
 };
 
+<<<<<<< HEAD
+=======
+const AdventureEntry = (props) => {
+  const { data, act } = useBackend<AdventureBrowserData>();
+  const { entry_ref, close }: { entry_ref: string; close: () => void } = props;
+  const entry = data.adventures.find((x) => x.ref === entry_ref);
+
+  if (!entry) {
+    return null;
+  }
+
+  return (
+    <Section>
+      <LabeledList>
+        <LabeledList.Item label="ID">{entry.id}</LabeledList.Item>
+        <LabeledList.Item label="Name">{entry.name}</LabeledList.Item>
+        <LabeledList.Item label="JSON Version">
+          {entry.version}
+        </LabeledList.Item>
+        <LabeledList.Item label="Uploader">{entry.uploader}</LabeledList.Item>
+        <LabeledList.Item label="Last Update">
+          {entry.timestamp}
+        </LabeledList.Item>
+        <LabeledList.Item label="Approved">
+          <Button.Checkbox
+            checked={entry.approved}
+            onClick={() => act('approve', { ref: entry.ref })}
+          />
+        </LabeledList.Item>
+        <LabeledList.Item label="JSON">
+          {entry.json_status}
+          <Button
+            onClick={() => act('upload', { ref: entry.ref })}
+            content="Upload"
+          />
+          <Button
+            onClick={() => act('download', { ref: entry.ref })}
+            content="Download"
+          />
+        </LabeledList.Item>
+      </LabeledList>
+      <Button.Confirm
+        onClick={() => {
+          close();
+          act('delete', { ref: entry.ref });
+        }}
+        content="Delete"
+      />
+      <Button onClick={() => act('play', { ref: entry.ref })} content="Play" />
+      <Button
+        onClick={() => act('refresh', { ref: entry.ref })}
+        content="Refresh"
+      />
+      <Button.Confirm
+        onClick={() => act('save', { ref: entry.ref })}
+        content="Save"
+      />
+      <Button onClick={close} content="Close" />
+    </Section>
+  );
+};
+
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 const AdventureList = (props) => {
   const { data, act } = useBackend<AdventureBrowserData>();
   const [openAdventure, setOpenAdventure] = useLocalState<string | null>(

@@ -51,7 +51,11 @@ const LABEL_FORMAT = (value: number) => formatSiUnit(value, 0);
  * fifty sheets.
  */
 export const MaterialAccessBar = (props: MaterialAccessBarProps) => {
+<<<<<<< HEAD
   const { availableMaterials, SHEET_MATERIAL_AMOUNT, onEjectRequested } = props;
+=======
+  const { availableMaterials, onEjectRequested } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Flex wrap>
@@ -79,9 +83,18 @@ type MaterialCounterProps = {
 };
 
 const MaterialCounter = (props: MaterialCounterProps) => {
+<<<<<<< HEAD
   const { material, onEjectRequested, SHEET_MATERIAL_AMOUNT } = props;
 
   const [hovering, setHovering] = useState(false);
+=======
+  const { material, onEjectRequested } = props;
+
+  const [hovering, setHovering] = useLocalState(
+    `MaterialCounter__${material.name}`,
+    false,
+  );
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   const sheets = material.amount / SHEET_MATERIAL_AMOUNT;
 
@@ -92,10 +105,17 @@ const MaterialCounter = (props: MaterialCounterProps) => {
       className={classes([
         'MaterialDock',
         hovering && 'MaterialDock--active',
+<<<<<<< HEAD
         sheets < 1 && 'MaterialDock--disabled',
       ])}
     >
       <Flex direction="column-reverse">
+=======
+        !canEject && 'MaterialDock--disabled',
+      ])}
+    >
+      <Stack vertial direction={'column-reverse'}>
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
         <Flex
           direction="column"
           textAlign="center"
@@ -147,7 +167,11 @@ type EjectButtonProps = {
 };
 
 const EjectButton = (props: EjectButtonProps) => {
+<<<<<<< HEAD
   const { amount, sheets, onEject } = props;
+=======
+  const { amount, available, material, onEject } = props;
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
   return (
     <Button

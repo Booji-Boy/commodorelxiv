@@ -43,7 +43,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 			to_chat(user, span_warning("You can't reach the wiring!"))
 		return
 
-	if((W.slot_flags & ITEM_SLOT_HEAD) && hat_offset != INFINITY && !user.combat_mode && !is_type_in_typecache(W, GLOB.blacklisted_borg_hats))
+	if((W.slot_flags & ITEM_SLOT_HEAD) && hat_offset != INFINITY && !(user.istate & ISTATE_HARM) && !is_type_in_typecache(W, GLOB.blacklisted_borg_hats))
 		if(user == src)
 			to_chat(user,  span_notice("You can't seem to manage to place [W] on your head by yourself!") )
 			return
@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 				place_on_head(W)
 		return
 
-	if(istype(W, /obj/item/defibrillator) && !user.combat_mode)
+	if(istype(W, /obj/item/defibrillator) && !(user.istate & ISTATE_HARM))
 		if(!opened)
 			to_chat(user, span_warning("You must access the cyborg's internals!"))
 			return
@@ -187,7 +187,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	return ..()
 
 /mob/living/silicon/robot/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
-	if (LAZYACCESS(modifiers, RIGHT_CLICK))
+	if((user.istate & ISTATE_SECONDARY))
 		if(body_position == STANDING_UP)
 			user.do_attack_animation(src, ATTACK_EFFECT_DISARM)
 			var/obj/item/I = get_active_held_item()
@@ -217,7 +217,10 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		cell.update_appearance()
 		cell.add_fingerprint(user)
 		to_chat(user, span_notice("You remove \the [cell]."))
+<<<<<<< HEAD
 		user.put_in_active_hand(cell)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		update_icons()
 		diag_hud_set_borgcell()
 
@@ -235,7 +238,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		. &= ~(SHOVE_CAN_MOVE|SHOVE_CAN_HIT_SOMETHING)
 
 /mob/living/silicon/robot/welder_act(mob/living/user, obj/item/tool)
-	if(user.combat_mode && usr != src)
+	if((user.istate & ISTATE_HARM) && usr != src)
 		return FALSE
 	. = TRUE
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -313,6 +316,7 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		if(2)
 			emp_knockout(6 SECONDS)
 
+<<<<<<< HEAD
 /mob/living/silicon/robot/proc/emp_knockout(deciseconds)
 	set_stat(UNCONSCIOUS)
 	addtimer(CALLBACK(src, PROC_REF(wake_from_emp)), deciseconds, TIMER_UNIQUE | TIMER_OVERRIDE | TIMER_DELETE_ME)
@@ -321,6 +325,8 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	set_stat(CONSCIOUS)
 	update_stat()
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 /mob/living/silicon/robot/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(user == src)//To prevent syndieborgs from emagging themselves
 		return FALSE
@@ -350,6 +356,15 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 		to_chat(connected_ai, span_danger("ALERT: Cyborg unit \[[src]\] successfully defended against subversion."))
 		log_silicon("EMAG: [key_name(user)] attempted to emag cyborg [key_name(src)], but they were slaved to traitor AI [connected_ai].")
 		return TRUE // emag succeeded, it was just counteracted
+<<<<<<< HEAD
+=======
+//monkestation edit start
+	if(IS_CLOCK(src)) //cant emag clock borgs
+		to_chat(src, span_brass("The light of Rat'var protects you from subversion!"))
+		log_silicon("EMAG: [key_name(user)] attempted to emag cyborg [key_name(src)], but they were a clockwork borg.")
+		return TRUE // emag succeeded, it was just counteracted
+//monkestation edit end
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(shell) //AI shells cannot be emagged, so we try to make it look like a standard reset. Smart players may see through this, however.
 		to_chat(user, span_danger("[src] is remotely controlled! Your emag attempt has triggered a system reset instead!"))
@@ -431,9 +446,12 @@ GLOBAL_LIST_INIT(blacklisted_borg_hats, typecacheof(list( //Hats that don't real
 	if(!hitting_projectile.is_hostile_projectile() || hitting_projectile.damage <= 0)
 		return
 	spark_system.start()
+<<<<<<< HEAD
 
 /mob/living/silicon/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	. = ..()
 	if (. || AM.throwforce < CYBORG_THROW_SLOWDOWN_THRESHOLD)
 		return
 	apply_status_effect(/datum/status_effect/borg_throw_slow)
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

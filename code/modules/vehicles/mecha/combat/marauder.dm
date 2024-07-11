@@ -9,6 +9,8 @@
 	max_temperature = 60000
 	destruction_sleep_duration = 40
 	exit_delay = 40
+	encumbrance_gap = 3
+	internal_damage_threshold = 25
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	accesses = list(ACCESS_CENT_SPECOPS)
 	wreckage = /obj/structure/mecha_wreckage/marauder
@@ -92,7 +94,11 @@
 	accesses = list(ACCESS_CENT_SPECOPS)
 	movedelay = 3
 	max_integrity = 550
+<<<<<<< HEAD
 	armor_type = /datum/armor/mecha_seraph
+=======
+	encumbrance_gap = 4
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	wreckage = /obj/structure/mecha_wreckage/seraph
 	force = 55
 	max_equip_by_category = list(

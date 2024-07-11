@@ -19,6 +19,10 @@
 	desc = "Not a very dangerous insect, but they do give off a better image than, say, flies or cockroaches."//is that a motherfucking worm reference
 	contraband = TRUE
 	cost = CARGO_CRATE_VALUE * 5
+<<<<<<< HEAD
+=======
+	access_view = ACCESS_THEATRE
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	contains = list(/mob/living/basic/butterfly)
 	crate_name = "entomology samples crate"
 
@@ -31,11 +35,18 @@
 	name = "Cat Crate"
 	desc = "The cat goes meow! Comes with a collar and a nice cat toy! Cheeseburger not included."//i can't believe im making this reference
 	cost = CARGO_CRATE_VALUE * 10 //Cats are worth as much as corgis.
+<<<<<<< HEAD
 	contains = list(
 		/mob/living/basic/pet/cat,
 		/obj/item/clothing/neck/petcollar,
 		/obj/item/toy/cattoy,
 	)
+=======
+	contains = list(/mob/living/simple_animal/pet/cat,
+					/obj/item/clothing/neck/petcollar,
+					/obj/item/toy/cattoy,
+				)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	crate_name = "cat crate"
 
 /datum/supply_pack/critter/cat/generate()
@@ -52,7 +63,12 @@
 	name = "Chicken Crate"
 	desc = "The chicken goes bwaak!"
 	cost = CARGO_CRATE_VALUE * 4
+<<<<<<< HEAD
 	contains = list(/mob/living/basic/chick)
+=======
+	contains = list(/mob/living/basic/chicken,
+					/mob/living/basic/chicken)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	crate_name = "chicken crate"
 
 /datum/supply_pack/critter/corgi
@@ -212,6 +228,10 @@
 	name = "Lizard Crate"
 	desc = "Hisss! Containssss a friendly lizard. Not to be confusssed with a lizardperssson."
 	cost = CARGO_CRATE_VALUE * 4
+<<<<<<< HEAD
+=======
+	access_view = ACCESS_JANITOR
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	contains = list(/mob/living/basic/lizard)
 	crate_name = "lizard crate"
 

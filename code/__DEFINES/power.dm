@@ -5,6 +5,11 @@
 	#define CABLE_LAYER_2_NAME "Yellow Power Line"
 #define CABLE_LAYER_3 (1<<2)
 	#define CABLE_LAYER_3_NAME "Blue Power Line"
+<<<<<<< HEAD
+=======
+
+#define MACHINERY_LAYER_1 1
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 #define SOLAR_TRACK_OFF 0
 #define SOLAR_TRACK_TIMED 1

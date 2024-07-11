@@ -76,6 +76,28 @@
 /obj/item/stack/medical/proc/can_heal(mob/living/patient, mob/user)
 	return patient.try_inject(user, injection_flags = INJECT_TRY_SHOW_ERROR_MESSAGE)
 
+/obj/item/stack/medical/apply_fantasy_bonuses(bonus)
+	. = ..()
+	if(heal_brute)
+		heal_brute = modify_fantasy_variable("heal_brute", heal_brute, bonus)
+	if(heal_burn)
+		heal_burn = modify_fantasy_variable("heal_burn", heal_burn, bonus)
+	if(stop_bleeding)
+		stop_bleeding = modify_fantasy_variable("stop_bleeding", stop_bleeding, bonus/10)
+	if(sanitization)
+		sanitization = modify_fantasy_variable("sanitization", sanitization, bonus/10)
+	if(flesh_regeneration)
+		flesh_regeneration = modify_fantasy_variable("flesh_regeneration", flesh_regeneration, bonus/10)
+
+/obj/item/stack/medical/remove_fantasy_bonuses(bonus)
+	heal_brute = reset_fantasy_variable("heal_brute", heal_brute)
+	heal_burn = reset_fantasy_variable("heal_burn", heal_burn)
+	stop_bleeding = reset_fantasy_variable("stop_bleeding", stop_bleeding)
+	sanitization = reset_fantasy_variable("sanitization", sanitization)
+	flesh_regeneration = reset_fantasy_variable("flesh_regeneration", flesh_regeneration)
+	return ..()
+
+
 /// In which we print the message that we're starting to heal someone, then we try healing them. Does the do_after whether or not it can actually succeed on a targeted mob
 /obj/item/stack/medical/proc/try_heal(mob/living/patient, mob/user, silent = FALSE, looping = FALSE)
 	if(!try_heal_checks(patient, user, heal_brute, heal_burn, looping))
@@ -240,7 +262,11 @@
 	gauzed_bodypart = null
 
 // gauze is only relevant for wounds, which are handled in the wounds themselves
+<<<<<<< HEAD
 /obj/item/stack/medical/gauze/try_heal(mob/living/patient, mob/user, silent, looping)
+=======
+/obj/item/stack/medical/gauze/try_heal(mob/living/patient, mob/user, silent)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/treatment_delay = (user == patient ? self_delay : other_delay)
 
@@ -340,7 +366,7 @@
 	repeating = TRUE
 	heal_brute = 10
 	stop_bleeding = 0.6
-	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
+	grind_results = list(/datum/reagent/medicine/antipathogenic/spaceacillin = 2)
 	merge_type = /obj/item/stack/medical/suture
 
 /obj/item/stack/medical/suture/emergency
@@ -399,7 +425,7 @@
 	flesh_regeneration = 3
 
 	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
-	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
+	grind_results = list(/datum/reagent/medicine/antipathogenic/spaceacillin = 2)
 	merge_type = /obj/item/stack/medical/mesh
 
 /obj/item/stack/medical/mesh/Initialize(mapload, new_amount, merge = TRUE, list/mat_override=null, mat_amt=1)

@@ -100,13 +100,19 @@
 		)
 		data["cyborgs"] += list(cyborg_data)
 		data["DL_progress"] = DL_progress
+<<<<<<< HEAD
 
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	data["borglog"] = loglist
 
 	return data
 
 /datum/computer_file/program/borg_monitor/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+<<<<<<< HEAD
 	. = ..()
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	switch(action)
 		if("messagebot")
 			var/mob/living/silicon/robot/robot = locate(params["ref"]) in GLOB.silicon_mobs

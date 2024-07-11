@@ -21,9 +21,15 @@
 
 	var/list/using_materials
 	var/starting_amount = 0
+<<<<<<< HEAD
 	var/iron_cost = HALF_SHEET_MATERIAL_AMOUNT
 	var/glass_cost = HALF_SHEET_MATERIAL_AMOUNT
 	var/energy_used = 1 KILO JOULES
+=======
+	var/iron_cost =HALF_SHEET_MATERIAL_AMOUNT
+	var/glass_cost =HALF_SHEET_MATERIAL_AMOUNT
+	var/power_used = 1000
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	var/mode = DRONE_READY
 	var/timer
@@ -52,6 +58,7 @@
 
 /obj/machinery/drone_dispenser/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	materials = AddComponent( \
 		/datum/component/material_container, \
 		list(/datum/material/iron, /datum/material/glass), \
@@ -59,6 +66,9 @@
 		MATCONTAINER_EXAMINE, \
 		allowed_items = /obj/item/stack \
 	)
+=======
+	var/datum/component/material_container/materials = AddComponent(/datum/component/material_container, list(/datum/material/iron, /datum/material/glass), SHEET_MATERIAL_AMOUNT * MAX_STACK_SIZE * 2, MATCONTAINER_EXAMINE|BREAKDOWN_FLAGS_DRONE_DISPENSER, allowed_items=/obj/item/stack)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	materials.insert_amount_mat(starting_amount)
 	materials.precise_insertion = TRUE
 	using_materials = list(/datum/material/iron = iron_cost, /datum/material/glass = glass_cost)
@@ -93,10 +103,17 @@
 	dispense_type = /obj/effect/mob_spawn/ghost_role/drone/snowflake
 	end_create_message = "dispenses a snowflake drone shell."
 	// Those holoprojectors aren't cheap
+<<<<<<< HEAD
 	iron_cost = SHEET_MATERIAL_AMOUNT
 	glass_cost = SHEET_MATERIAL_AMOUNT
 	energy_used = 2 KILO JOULES
 	starting_amount = SHEET_MATERIAL_AMOUNT * 5
+=======
+	iron_cost =SHEET_MATERIAL_AMOUNT
+	glass_cost =SHEET_MATERIAL_AMOUNT
+	power_used = 2000
+	starting_amount = 10000
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 // If the derelict gets lonely, make more friends.
 /obj/machinery/drone_dispenser/derelict

@@ -61,6 +61,12 @@
 		handle_gravity(seconds_per_tick, times_fired)
 
 	handle_wounds(seconds_per_tick, times_fired)
+<<<<<<< HEAD
+=======
+
+	if(machine)
+		machine.check_eye(src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	if(stat != DEAD)
 		return 1

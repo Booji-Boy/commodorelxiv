@@ -423,6 +423,7 @@
 	color = RUNE_COLOR_RED
 	invocation = "Fuu ma'jin!"
 
+<<<<<<< HEAD
 /obj/item/melee/blood_magic/stun/cast_spell(mob/living/target, mob/living/carbon/user)
 	if(!istype(target) || IS_CULTIST(target))
 		return
@@ -458,6 +459,50 @@
 			carbon_target.set_jitter_if_lower(30 SECONDS * effect_coef)
 	uses--
 	return ..()
+=======
+/* overriden in monkestation/code/modules/antagonists/cult/blood_magic.dm
+/obj/item/melee/blood_magic/stun/afterattack(mob/living/target, mob/living/carbon/user, proximity)
+	if(!isliving(target) || !proximity)
+		return
+	if(IS_CULTIST(target))
+		return
+	if(IS_CULTIST(user))
+		user.visible_message(span_warning("[user] holds up [user.p_their()] hand, which explodes in a flash of red light!"), \
+							span_cultitalic("You attempt to stun [target] with the spell!"))
+		user.mob_light(range = 3, color = LIGHT_COLOR_BLOOD_MAGIC, duration = 0.2 SECONDS)
+		if(IS_HERETIC(target))
+			to_chat(user, span_warning("Some force greater than you intervenes! [target] is protected by the Forgotten Gods!"))
+			to_chat(target, span_warning("You are protected by your faith to the Forgotten Gods!"))
+			var/old_color = target.color
+			target.color = rgb(0, 128, 0)
+			animate(target, color = old_color, time = 1 SECONDS, easing = EASE_IN)
+		// MONKESTATION EDIT START
+		else if(IS_CLOCK(target))
+			to_chat(user, span_warning("Some force greater than you intervenes! [target] is protected by the heretic Ratvar!"))
+			to_chat(target, span_warning("You are protected by your faith to Ratvar!"))
+			var/old_color = target.color
+			target.color = rgb(190, 135, 0)
+			animate(target, color = old_color, time = 1 SECONDS, easing = EASE_IN)
+		// MONKESTATION EDIT END
+		else if(target.can_block_magic())
+			to_chat(user, span_warning("The spell had no effect!"))
+		else
+			to_chat(user, span_cultitalic("In a brilliant flash of red, [target] falls to the ground!"))
+			target.Paralyze(16 SECONDS)
+			target.flash_act(1, TRUE)
+			if(issilicon(target))
+				var/mob/living/silicon/silicon_target = target
+				silicon_target.emp_act(EMP_HEAVY)
+			else if(iscarbon(target))
+				var/mob/living/carbon/carbon_target = target
+				carbon_target.adjust_silence(12 SECONDS)
+				carbon_target.adjust_stutter(30 SECONDS)
+				carbon_target.adjust_timed_status_effect(30 SECONDS, /datum/status_effect/speech/slurring/cult)
+				carbon_target.set_jitter_if_lower(30 SECONDS)
+		uses--
+	..()
+*/
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //Teleportation
 /obj/item/melee/blood_magic/teleport
@@ -594,6 +639,7 @@
 		if(!candidate.use(IRON_TO_CONSTRUCT_SHELL_CONVERSION))
 			to_chat(user, span_warning("You need [IRON_TO_CONSTRUCT_SHELL_CONVERSION] iron to produce a construct shell!"))
 			return
+<<<<<<< HEAD
 		uses--
 		to_chat(user, span_warning("A dark cloud emanates from your hand and swirls around the iron, twisting it into a construct shell!"))
 		new /obj/structure/constructshell(T)
@@ -615,6 +661,62 @@
 	if(istype(target,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/candidate = target
 		if(candidate.mmi || candidate.shell)
+=======
+		. |= AFTERATTACK_PROCESSED_ITEM
+		var/turf/T = get_turf(target)
+		if(istype(target, /obj/item/stack/sheet/iron))
+			var/obj/item/stack/sheet/candidate = target
+			if(candidate.use(IRON_TO_CONSTRUCT_SHELL_CONVERSION))
+				uses--
+				to_chat(user, span_warning("A dark cloud emanates from your hand and swirls around the iron, twisting it into a construct shell!"))
+				new /obj/structure/constructshell(T)
+				SEND_SOUND(user, sound('sound/effects/magic.ogg',0,1,25))
+			else
+				to_chat(user, span_warning("You need [IRON_TO_CONSTRUCT_SHELL_CONVERSION] iron to produce a construct shell!"))
+				return
+		else if(istype(target, /obj/item/stack/sheet/plasteel))
+			var/obj/item/stack/sheet/plasteel/candidate = target
+			var/quantity = candidate.amount
+			if(candidate.use(quantity))
+				uses --
+				new /obj/item/stack/sheet/runed_metal(T,quantity)
+				to_chat(user, span_warning("A dark cloud emanates from you hand and swirls around the plasteel, transforming it into runed metal!"))
+				SEND_SOUND(user, sound('sound/effects/magic.ogg',0,1,25))
+		else if(istype(target,/mob/living/silicon/robot))
+			var/mob/living/silicon/robot/candidate = target
+			if(candidate.mmi || candidate.shell)
+				channeling = TRUE
+				user.visible_message(span_danger("A dark cloud emanates from [user]'s hand and swirls around [candidate]!"))
+				playsound(T, 'sound/machines/airlock_alien_prying.ogg', 80, TRUE)
+				var/prev_color = candidate.color
+				candidate.color = "black"
+				if(do_after(user, 90, target = candidate))
+					candidate.undeploy()
+					candidate.emp_act(EMP_HEAVY)
+					var/construct_class = show_radial_menu(user, src, GLOB.construct_radial_images, custom_check = CALLBACK(src, PROC_REF(check_menu), user), require_near = TRUE, tooltips = TRUE)
+					if(!check_menu(user))
+						return
+					if(QDELETED(candidate))
+						channeling = FALSE
+						return
+					candidate.grab_ghost()
+					user.visible_message(span_danger("The dark cloud recedes from what was formerly [candidate], revealing a\n [construct_class]!"))
+					make_new_construct_from_class(construct_class, THEME_CULT, candidate, user, FALSE, T)
+					uses--
+					qdel(candidate)
+					channeling = FALSE
+				else
+					channeling = FALSE
+					candidate.color = prev_color
+					return
+			else
+				uses--
+				to_chat(user, span_warning("A dark cloud emanates from you hand and swirls around [candidate] - twisting it into a construct shell!"))
+				new /obj/structure/constructshell(T)
+				SEND_SOUND(user, sound('sound/effects/magic.ogg',0,1,25))
+				qdel(candidate)
+		else if(istype(target,/obj/machinery/door/airlock))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			channeling = TRUE
 			user.visible_message(span_danger("A dark cloud emanates from [user]'s hand and swirls around [candidate]!"))
 			playsound(T, 'sound/machines/airlock_alien_prying.ogg', 80, TRUE)

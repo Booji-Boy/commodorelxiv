@@ -11,7 +11,7 @@
 	supervisors = SUPERVISOR_CAPTAIN
 	req_admin_notify = 1
 	minimal_player_age = 7
-	exp_requirements = 180
+	exp_requirements = 600
 	exp_required_type = EXP_TYPE_CREW
 	exp_required_type_department = EXP_TYPE_ENGINEERING
 	exp_granted_type = EXP_TYPE_CREW
@@ -83,6 +83,7 @@
 	box = /obj/item/storage/box/survival/engineer
 	chameleon_extras = /obj/item/stamp/head/ce
 	skillchips = list(/obj/item/skillchip/job/engineer)
+	implants = list(/obj/item/implant/mindshield)
 	pda_slot = ITEM_SLOT_LPOCKET
 
 /datum/outfit/job/ce/mod

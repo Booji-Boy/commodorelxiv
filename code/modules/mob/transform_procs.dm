@@ -101,7 +101,7 @@
 		landmark_loc += loc
 
 	if(client)
-		stop_sound_channel(CHANNEL_LOBBYMUSIC)
+		client.media.stop_music()
 
 	var/mob/living/silicon/ai/our_AI = new /mob/living/silicon/ai(pick(landmark_loc), null, src)
 	. = our_AI
@@ -185,10 +185,18 @@
 	to_chat(src, "<b>You are job banned from cyborg! Appeal your job ban if you want to avoid this in the future!</b>")
 	ghostize(FALSE)
 
+<<<<<<< HEAD
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to play as [span_notice(name)]?", check_jobban = JOB_CYBORG, poll_time = 5 SECONDS, checked_target = src, alert_pic = src, role_name_text = "cyborg")
 	if(chosen_one)
 		message_admins("[key_name_admin(chosen_one)] has taken control of ([key_name_admin(src)]) to replace a jobbanned player.")
 		key = chosen_one.key
+=======
+	var/list/mob/dead/observer/candidates = SSpolling.poll_ghost_candidates_for_mob("Do you want to play as [src]?", check_jobban = JOB_CYBORG, poll_time = 5 SECONDS, target_mob = src, pic_source = src, role_name_text = "cyborg")
+	if(LAZYLEN(candidates))
+		var/mob/dead/observer/chosen_candidate = pick(candidates)
+		message_admins("[key_name_admin(chosen_candidate)] has taken control of ([key_name_admin(src)]) to replace a jobbanned player.")
+		key = chosen_candidate.key
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 //human -> alien
 /mob/living/carbon/human/proc/Alienize()
@@ -240,7 +248,10 @@
 		var/list/babies = list()
 		for(var/i in 1 to number)
 			var/mob/living/basic/slime/M = new/mob/living/basic/slime(loc)
+<<<<<<< HEAD
 			M.set_nutrition(round(nutrition/number))
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 			step_away(M,src)
 			babies += M
 		new_slime = pick(babies)
@@ -280,6 +291,7 @@
 	to_chat(new_corgi, span_boldnotice("You are now a Corgi. Yap Yap!"))
 	qdel(src)
 	return new_corgi
+<<<<<<< HEAD
 
 /**
  * Turns the source atom into a crab crab, the peak of evolutionary design.
@@ -303,6 +315,8 @@
 	to_chat(new_crab, span_boldnotice("You have evolved into a crab!"))
 	qdel(src)
 	return new_crab
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /mob/living/carbon/proc/gorillize()
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -319,7 +333,11 @@
 
 	regenerate_icons()
 	icon = null
+<<<<<<< HEAD
 	SetInvisibility(INVISIBILITY_MAXIMUM)
+=======
+	invisibility = INVISIBILITY_MAXIMUM
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	var/mob/living/basic/gorilla/new_gorilla = new (get_turf(src))
 	new_gorilla.set_combat_mode(TRUE)
 	if(mind)

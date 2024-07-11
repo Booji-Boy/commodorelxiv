@@ -344,15 +344,24 @@ Doesn't work on other aliens/AI.*/
 	new choice_path(owner.loc)
 	return TRUE
 
+<<<<<<< HEAD
 /datum/action/cooldown/mob_cooldown/sneak/alien
 	name = "Alien Sentinel Sneak"
 	panel = "Alien"
+=======
+/datum/action/cooldown/sneak/alien
+	name = "Sneak"
+	panel = "alien"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	desc = "Blend into the shadows to stalk your prey."
 	button_icon = 'icons/mob/actions/actions_xeno.dmi'
 	button_icon_state = "alien_sneak"
 	background_icon_state = "bg_alien"
 	overlay_icon_state = "bg_alien_border"
+<<<<<<< HEAD
 	sneak_alpha = 25
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /datum/action/cooldown/alien/regurgitate
 	name = "Regurgitate"

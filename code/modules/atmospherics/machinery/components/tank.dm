@@ -463,6 +463,10 @@
 	if(disassembled)
 		for(var/datum/material/mat as anything in custom_materials)
 			new mat.sheet_type(drop_location(), custom_materials[mat] / SHEET_MATERIAL_AMOUNT)
+<<<<<<< HEAD
+=======
+	return ..()
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/structure/tank_frame/update_icon(updates)
 	. = ..()

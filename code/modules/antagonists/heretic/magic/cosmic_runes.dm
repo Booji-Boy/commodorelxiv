@@ -65,7 +65,11 @@
 
 /obj/effect/cosmic_rune/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/image/silicon_image = image(icon = 'icons/obj/service/hand_of_god_structures.dmi', icon_state = null, loc = src)
+=======
+	var/image/silicon_image = image(icon = 'icons/obj/hand_of_god_structures.dmi', icon_state = null, loc = src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	silicon_image.override = TRUE
 	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/silicons, "cosmic", silicon_image)
 
@@ -139,7 +143,11 @@
 
 /obj/effect/temp_visual/cosmic_rune_fade/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/image/silicon_image = image(icon = 'icons/obj/service/hand_of_god_structures.dmi', icon_state = null, loc = src)
+=======
+	var/image/silicon_image = image(icon = 'icons/obj/hand_of_god_structures.dmi', icon_state = null, loc = src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	silicon_image.override = TRUE
 	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/silicons, "cosmic", silicon_image)
 
@@ -153,6 +161,10 @@
 
 /obj/effect/temp_visual/rune_light/Initialize(mapload)
 	. = ..()
+<<<<<<< HEAD
 	var/image/silicon_image = image(icon = 'icons/obj/service/hand_of_god_structures.dmi', icon_state = null, loc = src)
+=======
+	var/image/silicon_image = image(icon = 'icons/obj/hand_of_god_structures.dmi', icon_state = null, loc = src)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	silicon_image.override = TRUE
 	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/silicons, "cosmic", silicon_image)

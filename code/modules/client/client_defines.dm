@@ -72,6 +72,10 @@
 		/////////
 	///Player preferences datum for the client
 	var/datum/preferences/prefs = null
+	/// Player interaction mode, set by preferences.
+	var/datum/interaction_mode/imode
+	///Cache for the prefence value of [/datum/preference/toggle/context_menu_requires_shift]
+	var/context_menu_requires_shift = FALSE
 	///Move delay of controlled mob, any keypresses inside this period will persist until the next proper move
 	var/move_delay = 0
 	///The visual delay to use for the current client.Move(), mostly used for making a client based move look like it came from some other slower source
@@ -266,5 +270,10 @@
 	/// Does this client have typing indicators enabled?
 	var/typing_indicators = FALSE
 
+<<<<<<< HEAD
 	/// Loot panel for the client
 	var/datum/lootpanel/loot_panel
+=======
+	/// used for rewarding players monkecoins at round end
+	var/reward_this_person = 0
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9

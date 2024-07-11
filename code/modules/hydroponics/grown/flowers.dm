@@ -8,15 +8,14 @@
 	product = /obj/item/food/grown/poppy
 	endurance = 10
 	maturation = 8
-	yield = 6
+	yield = 60
 	potency = 20
-	instability = 1 //Flowers have 1 instability, if you want to breed out instability, crossbreed with flowers.
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "poppy-grow"
 	icon_dead = "poppy-dead"
 	genes = list(/datum/plant_gene/trait/preserved)
-	mutatelist = list(/obj/item/seeds/poppy/geranium, /obj/item/seeds/poppy/lily)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/geranium, /datum/hydroponics/plant_mutation/lily)
 	reagents_add = list(/datum/reagent/medicine/c2/libital = 0.2, /datum/reagent/consumable/nutriment = 0.05)
 
 /obj/item/food/grown/poppy
@@ -37,12 +36,21 @@
 	icon_state = "seed-lily"
 	species = "lily"
 	plantname = "Lily Plants"
+	growthstages = 3
+	growing_icon = 'icons/obj/hydroponics/growing_flowers.dmi'
+	icon_grow = "poppy-grow"
+	icon_dead = "poppy-dead"
+	icon_harvest = null
 	product = /obj/item/food/grown/poppy/lily
+<<<<<<< HEAD
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "lily-grow"
 	icon_dead = "lily-dead"
 	mutatelist = list(/obj/item/seeds/poppy/lily/trumpet)
+=======
+	possible_mutations = list(/datum/hydroponics/plant_mutation/trumpet)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/grown/poppy/lily
 	seed = /obj/item/seeds/poppy/lily
@@ -62,7 +70,7 @@
 	production = 5
 	endurance = 10
 	maturation = 12
-	yield = 4
+	yield = 40
 	potency = 20
 	growthstages = 4
 	weed_rate = 2
@@ -70,7 +78,7 @@
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "spacemanstrumpet-grow"
 	icon_dead = "spacemanstrumpet-dead"
-	mutatelist = null
+	possible_mutations = list()
 	genes = list(/datum/plant_gene/reagent/preset/polypyr, /datum/plant_gene/trait/preserved)
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05)
 	rarity = 30
@@ -92,11 +100,15 @@
 	species = "geranium"
 	plantname = "Geranium Plants"
 	product = /obj/item/food/grown/poppy/geranium
+<<<<<<< HEAD
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "geranium-grow"
 	icon_dead = "geranium-dead"
 	mutatelist = list(/obj/item/seeds/poppy/geranium/fraxinella)
+=======
+	possible_mutations = list(/datum/hydroponics/plant_mutation/fraxinella) //monkestation edit
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/grown/poppy/geranium
 	seed = /obj/item/seeds/poppy/geranium
@@ -112,7 +124,7 @@
 	species = "fraxinella"
 	plantname = "Fraxinella Plants"
 	product = /obj/item/food/grown/poppy/geranium/fraxinella
-	mutatelist = null
+	possible_mutations = list()
 	rarity = 15
 	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/fuel/oil = 0.05)
 	graft_gene = /datum/plant_gene/trait/preserved
@@ -141,9 +153,8 @@
 	endurance = 20
 	maturation = 7
 	production = 1
-	yield = 2
+	yield = 20
 	potency = 30
-	instability = 1
 	growthstages = 4
 	genes = list(/datum/plant_gene/trait/plant_type/weed_hardy, /datum/plant_gene/trait/preserved)
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
@@ -171,14 +182,18 @@
 	genes = list(/datum/plant_gene/trait/attack/sunflower_attack, /datum/plant_gene/trait/preserved)
 	endurance = 20
 	production = 2
-	yield = 2
-	instability = 1
+	yield = 20
 	growthstages = 3
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "sunflower-grow"
 	icon_dead = "sunflower-dead"
+<<<<<<< HEAD
 	mutatelist = list(/obj/item/seeds/sunflower/moonflower, /obj/item/seeds/sunflower/novaflower)
 	reagents_add = list(/datum/reagent/consumable/nutriment/fat/oil = 0.08, /datum/reagent/consumable/nutriment = 0.04)
+=======
+	possible_mutations = list(/datum/hydroponics/plant_mutation/moon_flower, /datum/hydroponics/plant_mutation/nova_flower)
+	reagents_add = list(/datum/reagent/consumable/cornoil = 0.08, /datum/reagent/consumable/nutriment = 0.04)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/food/grown/sunflower // FLOWER POWER!
 	seed = /obj/item/seeds/sunflower
@@ -214,7 +229,7 @@
 	icon_dead = "sunflower-dead"
 	product = /obj/item/food/grown/moonflower
 	genes = list(/datum/plant_gene/trait/glow/purple, /datum/plant_gene/trait/preserved)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/ethanol/moonshine = 0.2, /datum/reagent/consumable/nutriment/vitamin = 0.02, /datum/reagent/consumable/nutriment = 0.02)
 	rarity = 15
 	graft_gene = /datum/plant_gene/trait/glow/purple
@@ -240,7 +255,7 @@
 	icon_dead = "sunflower-dead"
 	product = /obj/item/grown/novaflower
 	genes = list(/datum/plant_gene/trait/backfire/novaflower_heat, /datum/plant_gene/trait/attack/novaflower_attack, /datum/plant_gene/trait/preserved)
-	mutatelist = null
+	possible_mutations = list()
 	reagents_add = list(/datum/reagent/consumable/condensedcapsaicin = 0.25, /datum/reagent/consumable/capsaicin = 0.3, /datum/reagent/consumable/nutriment = 0, /datum/reagent/toxin/acid = 0.05)
 	rarity = PLANT_MODERATELY_RARE
 
@@ -275,15 +290,13 @@
 	endurance = 12
 	yield = 6
 	potency = 15
-	instability = 20 //Roses crossbreed easily, and there's many many species of them.
 	growthstages = 3
 	genes = list(/datum/plant_gene/trait/repeated_harvest, /datum/plant_gene/trait/backfire/rose_thorns, /datum/plant_gene/trait/preserved)
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
 	icon_grow = "rose-grow"
 	icon_dead = "rose-dead"
-	mutatelist = list(/obj/item/seeds/carbon_rose)
-	//Roses are commonly used as herbal medicines (diarrhodons) and for their 'rose oil'.
-	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/medicine/granibitaluri = 0.1, /datum/reagent/fuel/oil = 0.05)
+	possible_mutations = list(/datum/hydroponics/plant_mutation/rose_carbon)
+	reagents_add = list(/datum/reagent/consumable/nutriment = 0.05, /datum/reagent/medicine/granibitaluri = 0.1)
 
 /obj/item/food/grown/rose
 	seed = /obj/item/seeds/rose
@@ -316,11 +329,10 @@
 	icon_state = "seed-carbonrose"
 	species = "carbonrose"
 	plantname = "Carbon Rose Flower"
-	product = /obj/item/grown/carbon_rose
+	product = /obj/item/food/grown/carbon_rose
 	endurance = 12
 	yield = 6
 	potency = 15
-	instability = 3
 	growthstages = 3
 	genes = list(/datum/plant_gene/reagent/preset/carbon, /datum/plant_gene/trait/preserved)
 	growing_icon = 'icons/obj/service/hydroponics/growing_flowers.dmi'
@@ -330,16 +342,14 @@
 	rarity = 10
 	graft_gene = /datum/plant_gene/reagent/preset/carbon
 
-/obj/item/grown/carbon_rose
+/obj/item/food/grown/carbon_rose
 	seed = /obj/item/seeds/carbon_rose
 	name = "carbon rose"
 	desc = "The all new fleur d'amour gris - the flower of love, modernized, with no harsh thorns."
 	icon_state = "carbonrose"
 	lefthand_file = 'icons/mob/inhands/weapons/plants_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/plants_righthand.dmi'
-	force = 0
-	throwforce = 0
 	slot_flags = ITEM_SLOT_HEAD
 	alternate_worn_layer = ABOVE_BODY_FRONT_HEAD_LAYER
-	throw_speed = 1
-	throw_range = 3
+	bite_consumption_mod = 2
+	foodtypes = VEGETABLES | GROSS

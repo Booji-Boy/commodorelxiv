@@ -61,9 +61,15 @@
 /datum/wound/blunt/bone/set_victim(new_victim)
 
 	if (victim)
+<<<<<<< HEAD
 		UnregisterSignal(victim, COMSIG_LIVING_UNARMED_ATTACK)
 	if (new_victim)
 		RegisterSignal(new_victim, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(attack_with_hurt_hand))
+=======
+		UnregisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK)
+	if (new_victim)
+		RegisterSignal(new_victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, PROC_REF(attack_with_hurt_hand))
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	return ..()
 
@@ -99,7 +105,7 @@
 
 	if(!is_bone_limb && SPT_PROB(severity * 1.5, seconds_per_tick))
 		victim.take_bodypart_damage(rand(1, severity * 2), wound_bonus=CANT_WOUND)
-		victim.adjustStaminaLoss(rand(2, severity * 2.5))
+		victim.stamina.adjust(-rand(2, severity * 2.5))
 		if(prob(33))
 			to_chat(victim, span_danger("You feel a sharp pain in your body as your bones are reforming!"))
 
@@ -114,8 +120,13 @@
 /datum/wound/blunt/bone/proc/attack_with_hurt_hand(mob/M, atom/target, proximity)
 	SIGNAL_HANDLER
 
+<<<<<<< HEAD
 	if(victim.get_active_hand() != limb || !proximity || !victim.combat_mode || !ismob(target) || severity <= WOUND_SEVERITY_MODERATE)
 		return NONE
+=======
+	if(victim.get_active_hand() != limb || !(victim.istate & ISTATE_HARM) || !ismob(target) || severity <= WOUND_SEVERITY_MODERATE)
+		return
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 	// With a severe or critical wound, you have a 15% or 30% chance to proc pain on hit
 	if(prob((severity - 1) * 15))
@@ -151,12 +162,12 @@
 				victim.bleed(blood_bled, TRUE)
 			if(14 to 19)
 				victim.visible_message("<span class='smalldanger'>Blood spews out of [victim]'s mouth from the blow to [victim.p_their()] chest!</span>", span_danger("You spit out a string of blood from the blow to your chest!"), vision_distance=COMBAT_MESSAGE_RANGE)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir, COLOR_DARK_RED)
 				victim.bleed(blood_bled)
 			if(20 to INFINITY)
 				victim.visible_message(span_danger("Blood spurts out of [victim]'s mouth from the blow to [victim.p_their()] chest!"), span_danger("<b>You choke up on a spray of blood from the blow to your chest!</b>"), vision_distance=COMBAT_MESSAGE_RANGE)
 				victim.bleed(blood_bled)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
+				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir, COLOR_DARK_RED)
 				victim.add_splatter_floor(get_step(victim.loc, victim.dir))
 
 /datum/wound/blunt/bone/modify_desc_before_span(desc)
@@ -167,9 +178,12 @@
 			. += ", [span_notice("and appears to be reforming itself under some surgical tape!")]"
 		else if(gelled)
 			. += ", [span_notice("with fizzing flecks of blue bone gel sparking off the bone!")]"
+<<<<<<< HEAD
 
 /datum/wound/blunt/get_limb_examine_description()
 	return span_warning("The bones in this limb appear badly cracked.")
+=======
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /*
 	New common procs for /datum/wound/blunt/bone/
@@ -233,10 +247,15 @@
 		victim.visible_message(span_danger("[victim]'s dislocated [limb.plaintext_zone] pops back into place!"), span_userdanger("Your dislocated [limb.plaintext_zone] pops back into place! Ow!"))
 		remove_wound()
 
+<<<<<<< HEAD
 /datum/wound/blunt/bone/moderate/try_handling(mob/living/user)
 	if(user.usable_hands <= 0 || user.pulling != victim)
 		return FALSE
 	if(!isnull(user.hud_used?.zone_select) && user.zone_selected != limb.body_zone)
+=======
+/datum/wound/blunt/bone/moderate/try_handling(mob/living/carbon/human/user)
+	if(user.pulling != victim || user.zone_selected != limb.body_zone)
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 		return FALSE
 
 	if(user.grab_state == GRAB_PASSIVE)
@@ -246,7 +265,7 @@
 	if(user.grab_state >= GRAB_AGGRESSIVE)
 		user.visible_message(span_danger("[user] begins twisting and straining [victim]'s dislocated [limb.plaintext_zone]!"), span_notice("You begin twisting and straining [victim]'s dislocated [limb.plaintext_zone]..."), ignored_mobs=victim)
 		to_chat(victim, span_userdanger("[user] begins twisting and straining your dislocated [limb.plaintext_zone]!"))
-		if(!user.combat_mode)
+		if(!(user.istate & ISTATE_HARM))
 			chiropractice(user)
 		else
 			malpractice(user)
@@ -388,7 +407,11 @@
 	threshold_minimum = 115
 
 // doesn't make much sense for "a" bone to stick out of your head
+<<<<<<< HEAD
 /datum/wound/blunt/bone/critical/apply_wound(obj/item/bodypart/L, silent = FALSE, datum/wound/old_wound = null, smited = FALSE, attack_direction = null, wound_source = "Unknown", replacing = FALSE)
+=======
+/datum/wound/blunt/bone/critical/apply_wound(obj/item/bodypart/L, silent = FALSE, datum/wound/old_wound = null, smited = FALSE, attack_direction = null, wound_source = "Unknown")
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 	if(L.body_zone == BODY_ZONE_HEAD)
 		occur_text = "splits open, exposing a bare, cracked skull through the flesh and blood"
 		examine_desc = "has an unsettling indent, with bits of skull poking out"
@@ -423,7 +446,7 @@
 		victim.visible_message(span_notice("[victim] finishes applying [I] to [victim.p_their()] [limb.plaintext_zone], grimacing from the pain!"), span_notice("You finish applying [I] to your [limb.plaintext_zone], and your bones explode in pain!"))
 
 	limb.receive_damage(25, wound_bonus=CANT_WOUND)
-	victim.adjustStaminaLoss(100)
+	victim.stamina.adjust(-100)
 	gelled = TRUE
 	return TRUE
 

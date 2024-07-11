@@ -255,12 +255,21 @@ If you create T5+ please take a pass at mech_fabricator.dm. The parts being good
 	icon_state = "scan_module"
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*0.5, /datum/material/glass=SMALL_MATERIAL_AMOUNT*0.2)
 
+<<<<<<< HEAD
 /obj/item/stock_parts/servo
 	name = "micro-servo"
 	desc = "A tiny little servo motor used in the construction of certain devices."
 	icon_state = "micro_servo"
 	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*0.3)
 	base_name = "servo"
+=======
+/obj/item/stock_parts/manipulator
+	name = "micro-manipulator"
+	desc = "A tiny little manipulator used in the construction of certain devices."
+	icon_state = "micro_mani"
+	custom_materials = list(/datum/material/iron=SMALL_MATERIAL_AMOUNT*0.3)
+	base_name = "manipulator"
+>>>>>>> d5bf95a382412b82273dae5d98e31f790db351f9
 
 /obj/item/stock_parts/micro_laser
 	name = "micro-laser"
